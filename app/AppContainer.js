@@ -2,10 +2,13 @@ import React, { Component } from 'react'
 import { Drawer } from 'native-base'
 import { View, Navigator } from 'react-native'
 
-import DrawerMenu from './components/DrawerMenu'
 import SettingsStore from './stores/SettingsStore'
 import AuthStore from './stores/AuthStore'
+
+import DrawerMenu from './components/DrawerMenu'
 import SplashScene from './scenes/SplashScene'
+import LoginScene from './scenes/LoginScene'
+
 import theme from './theme/base-theme'
 
 const settings = new SettingsStore()
@@ -38,6 +41,9 @@ export default class AppContainer extends Component {
 		switch(route.title) {
 			case 'Splash': {
 				return <SplashScene {...route.passProps} navigator={navigator} />
+			}
+			case 'Login': {
+				return <LoginScene {...route.passProps} navigator={navigator} />
 			}
 			default: {
 				return null

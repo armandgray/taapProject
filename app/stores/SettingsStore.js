@@ -14,8 +14,10 @@ export default class SettingsStore {
 
 		this.splashTime = 1500
 		this.splashImg = require('../../images/splash.jpg')
+		this.loginBG = require('../../images/login.jpg')
 	}
 
+	get LoginBG() { return this.loginBG }
 	get SplashTime() { return this.splashTime }
 	get SplashImg() { return this.splashImg }
 }
