@@ -19,13 +19,11 @@ export default class LoginScene extends Component {
 		return(
 			<Container theme={theme}>
 				<View>
-					 <Content scrollEnabled={false}> 
-					 	<Image source={stores.settings.LoginBG}>
-					 		<View>
-					 			<Login {...this.props} />
-				 			</View>
-			 			</Image>
-					</Content>
+				 	<Image source={stores.settings.LoginBG}>
+				 		<View>
+				 			<Login {...this.props} />
+			 			</View>
+		 			</Image>
 			 	</View>
 		 	</Container>
 		)

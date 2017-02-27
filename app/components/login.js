@@ -45,14 +45,12 @@ export default class Login extends Component {
 		return (
 			<View theme={this.props.theme}>
 				<InputGroup style={{ marginBottom: 10 }} boarderType='round' >
-					<Icon style={{ color: '#fff' }} name='person-outline' />
 					<Input style = {{ color: '#fff' }}
 						placeholder = 'Please Enter Email'
 						placeholderTextColor = '#fff'
 						onChangeText = {(email) => {this.updateEmail(email)}} />
 				</InputGroup>
 				<InputGroup style={{ marginBottom: 10 }} boarderType='round' >
-					<Icon style={{ color: '#fff' }} name='lock-open' />
 					<Input style = {{ color: '#fff' }}
 						placeholder = 'Please Enter Password'
 						placeholderTextColor = '#fff'
