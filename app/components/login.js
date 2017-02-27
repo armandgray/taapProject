@@ -9,7 +9,7 @@ import {
 } from 'native-base'
 import { observer } from 'mobx-react/native'
 
-@observe
+@observer
 export default class Login extends Component {
 	constructor(props) {
 		super(props)
@@ -62,7 +62,6 @@ export default class Login extends Component {
 				<Button rounded block 
 					style = {{ marginBottom: 10 }} 
 					onPress = {this.signIn.bind(this)} >
-					{'Login'}
 				</Button>
 			</View>
 		)

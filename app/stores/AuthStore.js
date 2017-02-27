@@ -5,7 +5,7 @@ export default class AuthStore {
 	@observable authUser = null
 
 	constructor() {
-		firebase.auth().onAuthStateChanged((User) => {
+		firebase.auth().onAuthStateChanged((user) => {
 			this.authUser = user;
 		})
 	}

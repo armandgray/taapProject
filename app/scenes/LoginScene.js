@@ -4,7 +4,7 @@ import {
 	Content,
 	View
 } from 'native-base'
-import { image } from 'react-native'
+import { Image } from 'react-native'
 import Login from '../components/login'
 import { observer } from 'mobx-react/native'
 
@@ -25,7 +25,7 @@ export default class LoginScene extends Component {
 					 			<Login {...this.props} />
 				 			</View>
 			 			</Image>
-					 </Content>
+					</Content>
 			 	</View>
 		 	</Container>
 		)
