@@ -41,7 +41,10 @@ export default class AppContainer extends Component {
 				content = { <View style = {{ backgroundColor: '#000', height: 1000 }} /> }
 				onClose = {this.closeDrawer.bind(this)}
 				onOpen = {this.openDrawer.bind(this)}
-				openDrawerOffset = {0.2}>
+				openDrawerOffset = {0.2}
+		        closedDrawerOffset={0}
+		        panOpenMask={0.2}
+				>
 
 				<Navigator 
 					ref = {(ref) => this._navigator = ref}
