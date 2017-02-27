@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Drawer } from 'native-base'
 import { View, Navigator } from 'react-native'
 
+import DrawerMenu from './components/DrawerMenu'
+
 export default class AppContainer extends Component {
 	constructor(props) {
 		super(props)
@@ -38,7 +40,7 @@ export default class AppContainer extends Component {
 			<Drawer
 				ref = {(ref) => this._drawer = ref}
 				type = 'displace'
-				content = { <View style = {{ backgroundColor: '#000', height: 1000 }} /> }
+				content = { <DrawerMenu navigator={this._navigator} theme={this.state.theme} /> }
 				onClose = {this.closeDrawer.bind(this)}
 				onOpen = {this.openDrawer.bind(this)}
 				openDrawerOffset = {0.2}
