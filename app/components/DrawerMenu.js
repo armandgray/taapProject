@@ -13,7 +13,6 @@ import {
 export default class DrawerMenu extends Component {
 	constructor(props) {
 		super(props)
-
 	}
 	render() {
 		let list = [{
