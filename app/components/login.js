@@ -22,7 +22,7 @@ export default class Login extends Component {
 	}
 
 	updateEmail(email) { this.setState({email}) }
-	updatePasword(password) { this.setState({password}) }
+	updatePassword(password) { this.setState({password}) }
 
 	signIn() {
 		const { auth } = this.props.stores

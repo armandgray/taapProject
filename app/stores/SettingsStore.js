@@ -12,7 +12,7 @@ export default class SettingsStore {
 	constructor() {
 		firebase.initializeApp(config)
 
-		this.splashTime = 1500
+		this.splashTime = 1000
 		this.splashImg = require('../../images/splash.jpg')
 		this.loginBG = require('../../images/login.jpg')
 	}
