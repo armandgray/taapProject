@@ -10,7 +10,7 @@ export default class SplashScreen extends Component {
 		const { stores } = this.props
 		setTimeout(() => {
 			this.props.navigator.replace({
-				title: 'Login', 
+				title: 'Match', 
 				passProps: this.props})
 		}, stores.settings.SplashTime)
 	}
