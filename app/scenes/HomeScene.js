@@ -9,6 +9,7 @@ import {
 	Title
 } from 'native-base'
 import { Image } from 'react-native'
+import FooterNav from '../components/footer'
 
 export default class HomeScene extends Component {
 	constructor(props) {
@@ -16,7 +17,7 @@ export default class HomeScene extends Component {
 	}
 	postScene() {
 		this.props.navigator.push({
-			title: 'History',
+			title: 'Profile',
 			passProps: this.props
 		})
 	}
@@ -28,13 +29,15 @@ export default class HomeScene extends Component {
 		        	<Title style={{ color: '#FFFFFF' }}>
 		        		Home
 	        		</Title>
-	        		<Button transparent
+	        		<Button transparent>
 						<Image style={{width: 30, height: 30}}
 				        	source={require('../../images/ic_playlist_plus_white_48dp.png')} />
 		        	</Button>
 	        	</Header>
-	        	<View>
+	        	<View style={{ flex: 1 }}>
 	        		<Text>This is the Home Scene</Text>
+	        		<View style={{ flex: 11 }}/>
+					<FooterNav style={{ justifyContent: 'flex-end' }} navigator={this.props.navigator} />
         		</View>
     		</Container>
 		)

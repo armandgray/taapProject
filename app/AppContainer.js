@@ -24,16 +24,19 @@ export default class AppContainer extends Component {
 
 	renderScene(route, navigator) {
 		switch(route.title) {
-			case 'Splash': {
-				return <SplashScene {...route.passProps} navigator={navigator} />
-			}
-			case 'Login': {
-				return <LoginScene {...route.passProps} navigator={navigator} />
-			}
 			case 'Home': {
 				return <HomeScene {...route.passProps} navigator={navigator} />
 			}
-			case 'History': {
+			case 'Profile': {
+				return <HistoryScene {...route.passProps} navigator={navigator} />
+			}
+			case 'Training': {
+				return <HistoryScene {...route.passProps} navigator={navigator} />
+			}
+			case 'Logs': {
+				return <HistoryScene {...route.passProps} navigator={navigator} />
+			}
+			case 'Profile': {
 				return <HistoryScene {...route.passProps} navigator={navigator} />
 			}
 			default: {
@@ -59,7 +62,6 @@ export default class AppContainer extends Component {
 							theme: this.state.theme
 						}
 					}} />
-				<FooterNav style={{ justifyContent: 'flex-end' }} navigator={this._navigator} />
 			</Container>
 		)
 	}
