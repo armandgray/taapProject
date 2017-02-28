@@ -3,12 +3,21 @@ import { Container, Content, Footer, FooterTab, Button, Text } from 'native-base
 import { Image } from 'react-native'
 
 export default class FooterNav extends Component {
+	constructor(props) {
+		super(props)
+	}
+	postScene() {
+		this.props.navigator.push({
+			title: 'History',
+			passProps: this.props
+		})
+	}
 	render() {
 		return (
 			<Container>
 				<Footer>
 					<FooterTab>
-						<Button>
+						<Button onPress={this.postScene.bind(this)}>
 							<Image style={styleImage}
 					        	source={require('../../images/ic_home_white_48dp.png')} />
 							<Text style={styleText}>Home</Text>
@@ -18,7 +27,7 @@ export default class FooterNav extends Component {
 					        	source={require('../../images/ic_clipboard_account_white_48dp.png')} />
 							<Text style={styleText}>Training</Text>
 						</Button>
-						<Button active>
+						<Button>
 							<Image style={styleImage}
 					        	source={require('../../images/ic_dribbble_white_48dp.png')} />
 							<Text style={styleText}>Drills</Text>

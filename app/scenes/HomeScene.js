@@ -29,7 +29,6 @@ export default class HomeScene extends Component {
 		        		Home
 	        		</Title>
 	        		<Button transparent
-						onPress={this.props.toggleDrawer}>
 						<Image style={{width: 30, height: 30}}
 				        	source={require('../../images/ic_playlist_plus_white_48dp.png')} />
 		        	</Button>

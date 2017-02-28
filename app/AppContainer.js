@@ -59,7 +59,7 @@ export default class AppContainer extends Component {
 							theme: this.state.theme
 						}
 					}} />
-				<FooterNav style={{ justifyContent: 'flex-end' }} />
+				<FooterNav style={{ justifyContent: 'flex-end' }} navigator={this._navigator} />
 			</Container>
 		)
 	}
