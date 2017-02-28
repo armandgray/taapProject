@@ -3,6 +3,7 @@ import { Drawer } from 'native-base'
 import { View, Navigator } from 'react-native'
 
 import DrawerMenu from './components/DrawerMenu'
+import FooterNav from './components/footer'
 
 import SettingsStore from './stores/SettingsStore'
 import AuthStore from './stores/AuthStore'
@@ -88,6 +89,7 @@ export default class AppContainer extends Component {
 							theme: this.state.theme
 						}
 					}} />
+				<FooterNav />
 			</Drawer>
 		)
 	}
