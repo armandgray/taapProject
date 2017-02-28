@@ -5,9 +5,6 @@ import { View, Navigator } from 'react-native'
 import DrawerMenu from './components/DrawerMenu'
 import FooterNav from './components/footer'
 
-import SettingsStore from './stores/SettingsStore'
-import AuthStore from './stores/AuthStore'
-
 import SplashScene from './scenes/SplashScene'
 import LoginScene from './scenes/LoginScene'
 import HomeScene from './scenes/HomeScene'
@@ -15,18 +12,12 @@ import HistoryScene from './scenes/HistoryScene'
 
 import theme from './theme/base-theme'
 
-const settings = new SettingsStore()
-const authStore = new AuthStore()
-
 export default class AppContainer extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
 			toggled: false,
-			store: {
-				settings: settings,
-				auth: authStore
-			},
+			store: this.props.store,
 			theme: theme
 		}
 	}
@@ -82,7 +73,7 @@ export default class AppContainer extends Component {
 					configureScene = {this.configureScene.bind(this)}
 					renderScene = {this.renderScene.bind(this)}
 					initialRoute =  {{
-						title: 'Splash',
+						title: 'Home',
 						passProps: {
 							stores: this.state.store,
 							toggleDrawer: this.toggleDrawer.bind(this),

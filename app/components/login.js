@@ -32,7 +32,7 @@ export default class Login extends Component {
 			auth.signIn({email, password})
 				.then(() => {
 					this.props.navigator.replace({
-						title: 'Home',
+						title: 'App',
 						passProps: this.props
 					})
 				})
