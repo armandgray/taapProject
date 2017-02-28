@@ -9,27 +9,27 @@ export default class FooterNav extends Component {
 				<Footer>
 					<FooterTab>
 						<Button>
-							<Image style={{ width: 18, height: 18, tintColor: '#949494' }}
+							<Image style={styleImage}
 					        	source={require('../../images/ic_home_white_48dp.png')} />
 							<Text style={styleText}>Home</Text>
 						</Button>
 						<Button>
-							<Image style={{ width: 20, height: 20, tintColor: '#949494' }}
+							<Image style={styleImage}
 					        	source={require('../../images/ic_clipboard_account_white_48dp.png')} />
 							<Text style={styleText}>Training</Text>
 						</Button>
 						<Button active>
-							<Image style={{ width: 20, height: 20, tintColor: '#949494' }}
+							<Image style={styleImage}
 					        	source={require('../../images/ic_dribbble_white_48dp.png')} />
 							<Text style={styleText}>Drills</Text>
 						</Button>
 						<Button>
-							<Image style={{ width: 15, height: 15, tintColor: '#949494' }}
+							<Image style={styleImage}
 					        	source={require('../../images/calendar_variantxxxhdpi.png')} />
 							<Text style={styleText}>Logs</Text>
 						</Button>
 						<Button>
-							<Image style={{ width: 20, height: 20, tintColor: '#949494' }}
+							<Image style={styleImage}
 					        	source={require('../../images/ic_account_outline_white_48dp.png')} />
 							<Text style={styleText}>Profile</Text>
 						</Button>
@@ -41,6 +41,12 @@ export default class FooterNav extends Component {
 }
 
 const styleText = {
-	color: '#949494',
-	fontSize: 10
+	color: '#333333',
+	fontSize: 8
+}
+
+const styleImage = {
+	width: 17, 
+	height: 17, 
+	tintColor: '#949494'
 }
