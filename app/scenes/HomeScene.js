@@ -10,7 +10,7 @@ import {
 } from 'native-base'
 import { Image } from 'react-native'
 
-export default class MatchScene extends Component {
+export default class HomeScene extends Component {
 	constructor(props) {
 		super(props)
 	}

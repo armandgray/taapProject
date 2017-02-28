@@ -16,7 +16,7 @@ export default class HistoryScene extends Component {
 	}
 	postScene() {
 		this.props.navigator.push({
-			title: 'Match',
+			title: 'Home',
 			passProps: this.props
 		})
 	}

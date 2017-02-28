@@ -16,10 +16,10 @@ export default class DrawerMenu extends Component {
 	}
 	render() {
 		let list = [{
-			title: 'Match',
+			title: 'Home',
 			onPress: () => {
 				this.props.navigator.replace({
-					title: 'Match',
+					title: 'Home',
 					passProps: this.props
 				})
 			}

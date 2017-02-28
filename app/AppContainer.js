@@ -10,7 +10,7 @@ import AuthStore from './stores/AuthStore'
 
 import SplashScene from './scenes/SplashScene'
 import LoginScene from './scenes/LoginScene'
-import MatchScene from './scenes/MatchScene'
+import HomeScene from './scenes/HomeScene'
 import HistoryScene from './scenes/HistoryScene'
 
 import theme from './theme/base-theme'
@@ -49,8 +49,8 @@ export default class AppContainer extends Component {
 			case 'Login': {
 				return <LoginScene {...route.passProps} navigator={navigator} />
 			}
-			case 'Match': {
-				return <MatchScene {...route.passProps} navigator={navigator} />
+			case 'Home': {
+				return <HomeScene {...route.passProps} navigator={navigator} />
 			}
 			case 'History': {
 				return <HistoryScene {...route.passProps} navigator={navigator} />
