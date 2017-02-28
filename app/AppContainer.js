@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Drawer } from 'native-base'
+import { Drawer, Container } from 'native-base'
 import { View, Navigator } from 'react-native'
 
 import DrawerMenu from './components/DrawerMenu'
@@ -20,16 +20,6 @@ export default class AppContainer extends Component {
 			store: this.props.store,
 			theme: theme
 		}
-	}
-
-	toggleDrawer() {
-		this.state.toggled ? this._drawer.close() : this._drawer.open()
-	}
-	openDrawer() {
-		this.setState({toggled: true})
-	}
-	closeDrawer() {
-		this.setState({toggled: false})
 	}
 
 	renderScene(route, navigator) {
@@ -57,17 +47,7 @@ export default class AppContainer extends Component {
 
 	render() {
 		return (
-			<Drawer
-				ref = {(ref) => this._drawer = ref}
-				type = 'displace'
-				content = { <DrawerMenu navigator={this._navigator} theme={this.state.theme} /> }
-				onClose = {this.closeDrawer.bind(this)}
-				onOpen = {this.openDrawer.bind(this)}
-				openDrawerOffset = {0.2}
-		        closedDrawerOffset={0}
-		        panOpenMask={0.2}
-				>
-
+			<Container>
 				<Navigator 
 					ref = {(ref) => this._navigator = ref}
 					configureScene = {this.configureScene.bind(this)}
@@ -81,7 +61,7 @@ export default class AppContainer extends Component {
 						}
 					}} />
 				<FooterNav />
-			</Drawer>
+			</Container>
 		)
 	}
 }
