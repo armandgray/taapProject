@@ -46,7 +46,7 @@ const styleText = {
 }
 
 const styleImage = {
-	width: 17, 
-	height: 17, 
+	width: 18, 
+	height: 18, 
 	tintColor: '#949494'
 }

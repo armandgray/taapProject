@@ -47,8 +47,8 @@ export default class AppContainer extends Component {
 
 	render() {
 		return (
-			<Container>
-				<Navigator 
+			<Container style={{ flex: 1, flexDirection: 'column' }}>
+				<Navigator style={{ flex: 11 }}
 					ref = {(ref) => this._navigator = ref}
 					configureScene = {this.configureScene.bind(this)}
 					renderScene = {this.renderScene.bind(this)}
@@ -56,11 +56,10 @@ export default class AppContainer extends Component {
 						title: 'Home',
 						passProps: {
 							stores: this.state.store,
-							toggleDrawer: this.toggleDrawer.bind(this),
 							theme: this.state.theme
 						}
 					}} />
-				<FooterNav />
+				<FooterNav style={{ justifyContent: 'flex-end' }} />
 			</Container>
 		)
 	}

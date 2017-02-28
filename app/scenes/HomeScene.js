@@ -24,22 +24,18 @@ export default class HomeScene extends Component {
 		return(
 			<Container theme={this.props.theme}>
 				<Header style={styleHeader}>
-					<Button transparent
+					<Text style={{ color: '#FFFFFF', fontWeight: '900' }}>TAAP</Text>
+		        	<Title style={{ color: '#FFFFFF' }}>
+		        		Home
+	        		</Title>
+	        		<Button transparent
 						onPress={this.props.toggleDrawer}>
 						<Image style={{width: 30, height: 30}}
 				        	source={require('../../images/ic_playlist_plus_white_48dp.png')} />
 		        	</Button>
-		        	<Title style={{ color: '#FFFFFF' }}>
-		        		Matches
-	        		</Title>
-	        		<Button transparent
-						onPress={this.postScene.bind(this)}>
-						<Image style={{width: 30, height: 30}}
-				        	source={require('../../images/ic_dots_vertical_white_48dp.png')} />
-		        	</Button>
 	        	</Header>
 	        	<View>
-	        		<Text>This is the Match Scene</Text>
+	        		<Text>This is the Home Scene</Text>
         		</View>
     		</Container>
 		)
