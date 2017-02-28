@@ -3,10 +3,11 @@ import {
 	Button, 
 	InputGroup,
 	Input,
-	Icon,
 	View,
+	Text,
 	Spinner
 } from 'native-base'
+import { Image } from 'react-native'
 import { observer } from 'mobx-react/native'
 
 @observer
@@ -45,12 +46,16 @@ export default class Login extends Component {
 		return (
 			<View theme={this.props.theme}>
 				<InputGroup style={{ marginBottom: 10 }} boarderType='round' >
+					<Image style={{width: 30, height: 30}}
+				          source={require('../../images/ic_account_outline_white_48dp.png')} />
 					<Input style = {{ color: '#fff' }}
 						placeholder = 'Please Enter Email'
 						placeholderTextColor = '#fff'
 						onChangeText = {(email) => {this.updateEmail(email)}} />
 				</InputGroup>
 				<InputGroup style={{ marginBottom: 10 }} boarderType='round' >
+					<Image style={{width: 30, height: 30}}
+				          source={require('../../images/ic_lock_open_outline_white_48dp.png')} />
 					<Input style = {{ color: '#fff' }}
 						placeholder = 'Please Enter Password'
 						placeholderTextColor = '#fff'
@@ -60,6 +65,7 @@ export default class Login extends Component {
 				<Button rounded block 
 					style = {{ marginBottom: 10 }} 
 					onPress = {this.signIn.bind(this)} >
+					<Text>{'Login'}</Text>
 				</Button>
 			</View>
 		)
