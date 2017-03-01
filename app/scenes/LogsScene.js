@@ -10,6 +10,7 @@ import {
 } from 'native-base'
 import { Image } from 'react-native'
 import FooterNav from '../components/footer'
+import Calendar from '../components/calendar'
 
 export default class LogsScene extends Component {
 	constructor(props) {
@@ -35,7 +36,8 @@ export default class LogsScene extends Component {
 		        	</Button>
 	        	</Header>
 	        	<View style={{ flex: 1 }}>
-	        		<View style={{ flex: 11 }}/>
+	        		<Calendar style={{ flex: 1 }}/>
+							<View style={{ flex: 3 }}/>
 					<FooterNav style={{ justifyContent: 'flex-end' }} navigator={this.props.navigator} />
         		</View>
     		</Container>

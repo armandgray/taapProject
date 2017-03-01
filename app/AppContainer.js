@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Drawer, Container } from 'native-base'
 import { View, Navigator } from 'react-native'
 
-import DrawerMenu from './components/DrawerMenu'
 import FooterNav from './components/footer'
 
 import LoginScene from './scenes/LoginScene'
