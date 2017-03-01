@@ -5,10 +5,12 @@ import { View, Navigator } from 'react-native'
 import DrawerMenu from './components/DrawerMenu'
 import FooterNav from './components/footer'
 
-import SplashScene from './scenes/SplashScene'
 import LoginScene from './scenes/LoginScene'
 import HomeScene from './scenes/HomeScene'
-import HistoryScene from './scenes/HistoryScene'
+import TrainingScene from './scenes/TrainingScene'
+import DrillsScene from './scenes/DrillsScene'
+import LogsScene from './scenes/LogsScene'
+import ProfileScene from './scenes/ProfileScene'
 
 import theme from './theme/base-theme'
 
@@ -27,17 +29,17 @@ export default class AppContainer extends Component {
 			case 'Home': {
 				return <HomeScene {...route.passProps} navigator={navigator} />
 			}
-			case 'Profile': {
-				return <HistoryScene {...route.passProps} navigator={navigator} />
-			}
 			case 'Training': {
-				return <HistoryScene {...route.passProps} navigator={navigator} />
+				return <TrainingScene {...route.passProps} navigator={navigator} />
+			}
+			case 'Drills': {
+				return <DrillsScene {...route.passProps} navigator={navigator} />
 			}
 			case 'Logs': {
-				return <HistoryScene {...route.passProps} navigator={navigator} />
+				return <LogsScene {...route.passProps} navigator={navigator} />
 			}
 			case 'Profile': {
-				return <HistoryScene {...route.passProps} navigator={navigator} />
+				return <ProfileScene {...route.passProps} navigator={navigator} />
 			}
 			default: {
 				return null
