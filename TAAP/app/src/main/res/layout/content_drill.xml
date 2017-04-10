@@ -15,4 +15,12 @@
         android:gravity="center"
         android:inputType="textCapSentences"/>
 
+    <Button
+        android:id="@+id/greetButton"
+        android:text="@string/greet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/greetEditText"
+        android:layout_centerHorizontal="true" />
+
 </android.support.constraint.ConstraintLayout>
