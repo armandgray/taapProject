@@ -22,6 +22,13 @@ import static org.robolectric.Shadows.shadowOf;
 public class DrillActivityTest {
 
     @Test
+    public void testContainsView_ToolBar() throws Exception {
+        Activity activity = Robolectric.buildActivity(DrillActivity.class).create().visible().get();
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        assertNotNull(toolbar);
+    }
+
+    @Test
     public void testContainsView_ToolBarSpinner() throws Exception {
         Activity activity = Robolectric.buildActivity(DrillActivity.class).create().visible().get();
         Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
