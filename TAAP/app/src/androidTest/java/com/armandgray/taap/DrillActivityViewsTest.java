@@ -20,7 +20,7 @@ public class DrillActivityViewsTest {
             new ActivityTestRule<>(DrillActivity.class);
 
     @Test
-    public void viewExistsTest_ContainsFab_ReturnsTrue() throws Exception {
+    public void testViewExists_ContainsFab() throws Exception {
         onView(withId(R.id.fab)).check(matches(isDisplayed()));
     }
 }
