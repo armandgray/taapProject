@@ -2,6 +2,7 @@ package com.armandgray.taap;
 
 import android.app.Activity;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.RecyclerView;
 import android.widget.Spinner;
 
 import org.junit.Test;
@@ -17,7 +18,16 @@ import static junit.framework.Assert.assertNotNull;
 public class DrillActivityTest {
 
     @Test
-    public void testViewExists_ContainsFab() throws Exception {
+    public void testContainsView_ToolBarSpinner() throws Exception {
+        Activity activity = Robolectric.buildActivity(DrillActivity.class).create().visible().get();
+        assertNotNull(activity);
+
+        Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
+        assertNotNull(spinner);
+    }
+
+    @Test
+    public void testContainsView_Fab() throws Exception {
         Activity activity = Robolectric.buildActivity(DrillActivity.class).create().visible().get();
         assertNotNull(activity);
 
@@ -26,12 +36,12 @@ public class DrillActivityTest {
     }
 
     @Test
-    public void testViewExists_ActionBarContainsSpinner() throws Exception {
+    public void testContainsView_RvDrills() throws Exception {
         Activity activity = Robolectric.buildActivity(DrillActivity.class).create().visible().get();
         assertNotNull(activity);
 
-        Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
-        assertNotNull(spinner);
+        RecyclerView rvDrills = (RecyclerView) activity.findViewById(R.id.rvDrills);
+        assertNotNull(rvDrills);
     }
 
 }
