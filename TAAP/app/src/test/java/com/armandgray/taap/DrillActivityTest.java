@@ -3,6 +3,8 @@ package com.armandgray.taap;
 import android.app.Activity;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.widget.Spinner;
 
 import org.junit.Test;
@@ -13,6 +15,7 @@ import org.robolectric.annotation.Config;
 
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
+import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -23,6 +26,16 @@ public class DrillActivityTest {
         Activity activity = Robolectric.buildActivity(DrillActivity.class).create().visible().get();
         Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
         assertNotNull(spinner);
+    }
+
+    @Test
+    public void testContainsView_ToolBarSearch() throws Exception {
+        Activity activity = Robolectric.buildActivity(DrillActivity.class).create().visible().get();
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
+        Menu optionsMenu = shadowOf(activity).getOptionsMenu();
+        assertNotNull(optionsMenu);
+        assertNotNull(optionsMenu.findItem(R.id.action_settings));
     }
 
     @Test
