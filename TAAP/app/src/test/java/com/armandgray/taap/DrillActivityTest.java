@@ -4,6 +4,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -61,7 +62,7 @@ public class DrillActivityTest {
 
     @Test
     public void testExistsRes_SpinnerLayout() throws Exception {
-        TextView tvSpinnerLayout = (TextView) activity.getResources().getLayout(R.layout.spinner_drills_text_layout);
+        TextView tvSpinnerLayout = (TextView) View.inflate(activity, R.layout.spinner_drills_text_layout, null);
         assertNotNull(tvSpinnerLayout);
     }
 
