@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import org.junit.After;
 import org.junit.Before;
@@ -60,7 +61,8 @@ public class DrillActivityTest {
 
     @Test
     public void testExistsRes_SpinnerLayout() throws Exception {
-        assertNotNull(activity.getResources().getLayout(R.layout.spinner_drills_text_layout));
+        TextView tvSpinnerLayout = (TextView) activity.getResources().getLayout(R.layout.spinner_drills_text_layout);
+        assertNotNull(tvSpinnerLayout);
     }
 
     @Test
