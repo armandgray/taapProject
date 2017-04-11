@@ -49,8 +49,7 @@ public class DrillActivityTest {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         Menu optionsMenu = shadowOf(activity).getOptionsMenu();
-        assertNotNull(optionsMenu);
-        assertNotNull(optionsMenu.findItem(R.id.action_settings));
+        assertNotNull(optionsMenu.findItem(R.id.action_search));
     }
 
     @Test
