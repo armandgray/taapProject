@@ -59,6 +59,11 @@ public class DrillActivityTest {
     }
 
     @Test
+    public void testExistsRes_SpinnerLayout() throws Exception {
+        assertNotNull(activity.getResources().getLayout(R.layout.spinner_drills_text_layout));
+    }
+
+    @Test
     public void testSpinnerHasEntries_ToolBarSpinner() throws Exception {
         Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
         assertNotNull(spinner);
