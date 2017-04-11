@@ -2,6 +2,7 @@ package com.armandgray.taap;
 
 import android.app.Activity;
 import android.support.design.widget.FloatingActionButton;
+import android.widget.Spinner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +23,15 @@ public class DrillActivityTest {
 
         FloatingActionButton fab = (FloatingActionButton) activity.findViewById(R.id.fab);
         assertNotNull(fab);
+    }
+
+    @Test
+    public void testViewExists_ActionBarContainsSpinner() throws Exception {
+        Activity activity = Robolectric.buildActivity(DrillActivity.class).create().visible().get();
+        assertNotNull(activity);
+
+        Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
+        assertNotNull(spinner);
     }
 
 }
