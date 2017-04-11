@@ -23,4 +23,9 @@ public class DrillActivityViewsTest {
     public void testViewExists_ContainsFab() throws Exception {
         onView(withId(R.id.fab)).check(matches(isDisplayed()));
     }
+
+    @Test
+    public void testViewExists_ActionBarContainsSpinner() throws Exception {
+        onView(withId(R.id.spDrillsSort)).check(matches(isDisplayed()));
+    }
 }
