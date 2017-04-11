@@ -2,7 +2,9 @@
     <string name="app_name">TAAP</string>
     <string name="action_settings">Settings</string>
     <string name="greet">Greet</string>
+    <string name="search">Search</string>
     <string-array name="drills_array">
+        <item>All</item>
         <item>Shooting</item>
         <item>Ball Handling</item>
         <item>Passing</item>
