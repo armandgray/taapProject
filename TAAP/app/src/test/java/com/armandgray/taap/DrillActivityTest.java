@@ -26,6 +26,13 @@ public class DrillActivityTest {
     }
 
     @Test
+    public void testExistsRes_SpinnerEntries() throws Exception {
+        Activity activity = Robolectric.buildActivity(DrillActivity.class).create().visible().get();
+        String[] drillsArray = activity.getResources().getStringArray(R.array.drills_array);
+        assertTrue(drillsArray.length > 0);
+    }
+
+    @Test
     public void testSpinnerHasEntries_ToolBarSpinner() throws Exception {
         Activity activity = Robolectric.buildActivity(DrillActivity.class).create().visible().get();
         Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
