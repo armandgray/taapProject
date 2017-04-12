@@ -52,6 +52,6 @@ public class DrillActivity extends AppCompatActivity {
     }
 
     private ArrayAdapter<String> createSpinnerAdapter() {
-        return null;
+        return new ArrayAdapter<>(this, R.layout.spinner_drills_text_layout);
     }
 }
