@@ -83,6 +83,7 @@ public class DrillActivityViewsTest {
     public void tearDown() {
         System.out.println("Running TearDown!");
         activity = null;
+        toolbar = null;
     }
 
 }

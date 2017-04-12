@@ -1,5 +1,7 @@
 package com.armandgray.taap;
 
+import android.support.v7.widget.Toolbar;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +11,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
@@ -28,6 +31,13 @@ public class DrillActivityLifeCycleTest {
     @Test
     public void canGetContentView_TestOnCreate() throws Exception {
         assertEquals(R.id.activityDrillLayout, shadowOf(activity).getContentView().getId());
+    }
+
+    @Test
+    public void canGetToolbar_TestOnCreate() throws Exception {
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        assertNotNull(toolbar);
+        assertNotNull(activity.getSupportActionBar());
     }
 
     @After
