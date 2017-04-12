@@ -22,7 +22,7 @@ import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
-public class DrillActivityTest {
+public class DrillActivityViewsTest {
 
     private static DrillActivity activity;
 
