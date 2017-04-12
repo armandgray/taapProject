@@ -17,10 +17,10 @@ public class DrillActivityTest {
 
     @Test
     public void canCreateSpinnerAdapter() throws Exception {
-        Method createSpinnerAdapter = DrillActivity.class.getDeclaredMethod("createSpinnerAdapter", (Class<?>) null);
+        Method createSpinnerAdapter = DrillActivity.class.getDeclaredMethod("createSpinnerAdapter");
         createSpinnerAdapter.setAccessible(true);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context, 0);
-        createSpinnerAdapter.invoke(adapter, (Object) null);
+        adapter = adapter.getClass().cast(createSpinnerAdapter.invoke(new DrillActivity()));
         assertNotNull(adapter);
     }
 }
