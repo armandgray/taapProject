@@ -8,7 +8,8 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertEquals;
+import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -26,7 +27,7 @@ public class DrillActivityLifeCycleTest {
 
     @Test
     public void canGetContentView_TestOnCreate() throws Exception {
-        assertNotNull(null);
+        assertEquals(R.id.activityDrillLayout, shadowOf(activity).getContentView().getId());
     }
 
     @After
