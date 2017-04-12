@@ -1,6 +1,5 @@
 package com.armandgray.taap;
 
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -65,12 +64,6 @@ public class DrillActivityViewsTest {
         Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
         assertNotNull(spinner);
         assertTrue(spinner.getCount() > 0);
-    }
-
-    @Test
-    public void testContainsView_Fab() throws Exception {
-        FloatingActionButton fab = (FloatingActionButton) activity.findViewById(R.id.fab);
-        assertNotNull(fab);
     }
 
     @Test

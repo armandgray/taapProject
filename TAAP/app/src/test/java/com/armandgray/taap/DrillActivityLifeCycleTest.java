@@ -1,5 +1,6 @@
 package com.armandgray.taap;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 
 import org.junit.After;
@@ -38,6 +39,12 @@ public class DrillActivityLifeCycleTest {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         assertNotNull(toolbar);
         assertNotNull(activity.getSupportActionBar());
+    }
+
+    @Test
+    public void canGetFab_TestOnCreate() throws Exception {
+        FloatingActionButton fab = (FloatingActionButton) activity.findViewById(R.id.fab);
+        assertNotNull(fab);
     }
 
     @After
