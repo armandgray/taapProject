@@ -25,19 +25,13 @@ import static org.robolectric.Shadows.shadowOf;
 public class DrillActivityViewsTest {
 
     private static DrillActivity activity;
+    private Toolbar toolbar;
 
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
-        if (activity == null) {
-            activity = Robolectric.buildActivity(DrillActivity.class).create().visible().get();
-        }
-    }
-
-    @Test
-    public void testContainsView_ToolBar() throws Exception {
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        assertNotNull(toolbar);
+        activity = Robolectric.buildActivity(DrillActivity.class).create().visible().get();
+        toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
     }
 
     @Test
