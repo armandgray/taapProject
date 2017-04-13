@@ -3,6 +3,7 @@ package com.armandgray.taap;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -59,6 +60,22 @@ public class DrillActivityLifeCycleTest {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         assertNotNull(shadowOf(activity).getOptionsMenu());
+    }
+
+    @Test
+    public void canSelectOptionsMenuItem_Search_OpenSearchWindow() throws Exception {
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
+        Menu optionsMenu = shadowOf(activity).getOptionsMenu();
+        assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_search)));
+    }
+
+    @Test
+    public void canSelectOptionsMenuItem_Log_StartLogActivity() throws Exception {
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
+        Menu optionsMenu = shadowOf(activity).getOptionsMenu();
+        assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_log)));
     }
 
     @Test

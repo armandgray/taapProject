@@ -17,7 +17,6 @@ import org.robolectric.annotation.Config;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
@@ -69,16 +68,6 @@ public class DrillActivityViewsTest {
     @Test
     public void hasOptionsMenuItem_Log() throws Exception {
         assertNotNull(optionsMenu.findItem(R.id.action_log));
-    }
-
-    @Test
-    public void canSelectOptionsMenuItem_Search() throws Exception {
-        assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_search)));
-    }
-
-    @Test
-    public void canSelectOptionsMenuItem_Log() throws Exception {
-        assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_log)));
     }
 
     @Test
