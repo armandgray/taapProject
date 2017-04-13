@@ -2,8 +2,10 @@ package com.armandgray.taap;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -71,6 +73,12 @@ public class DrillActivityTest {
     }
 
     @Test
+    public void doesHideSearchView_TestOnCreate() throws Exception {
+        SearchView searchView = (SearchView) activity.findViewById(R.id.searchView);
+        assertEquals(View.GONE, searchView.getVisibility());
+    }
+
+    @Test
     public void canSelectOptionsMenuItem_Log() throws Exception {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
@@ -79,7 +87,7 @@ public class DrillActivityTest {
     }
 
     @Test
-    public void canStartLogActivityFromMenuItem() throws Exception {
+    public void canStartLogActivityOnMenuItemClick() throws Exception {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         Menu optionsMenu = shadowOf(activity).getOptionsMenu();
