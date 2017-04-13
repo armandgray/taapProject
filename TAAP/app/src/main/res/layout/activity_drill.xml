@@ -40,8 +40,23 @@
                 android:background="@null"
                 android:gravity="center"
                 android:spinnerMode="dropdown" />
-
         </android.support.v7.widget.Toolbar>
+
+        <RelativeLayout
+            android:id="@+id/searchContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar"
+            android:background="@color/colorPrimary"
+            android:padding="@dimen/activity_horizontal_margin">
+
+            <android.support.v7.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/search_view_background"
+                app:queryHint="@string/search" />
+        </RelativeLayout>
 
     </android.support.design.widget.AppBarLayout>
 
