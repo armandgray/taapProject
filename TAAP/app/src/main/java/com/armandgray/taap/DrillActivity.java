@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,6 +43,9 @@ public class DrillActivity extends AppCompatActivity {
 
         Spinner spinner = (Spinner) findViewById(R.id.spDrillsSort);
         spinner.setAdapter(createSpinnerAdapter());
+
+        SearchView searchView = (SearchView) findViewById(R.id.searchView);
+        searchView.setVisibility(View.GONE);
     }
 
     @Override
