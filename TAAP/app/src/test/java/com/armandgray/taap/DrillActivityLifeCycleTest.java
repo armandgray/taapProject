@@ -2,6 +2,7 @@ package com.armandgray.taap;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
+import android.widget.Spinner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -15,6 +16,7 @@ import java.lang.reflect.Field;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
@@ -61,6 +63,13 @@ public class DrillActivityLifeCycleTest {
     public void canGetFab_TestOnCreate() throws Exception {
         FloatingActionButton fab = (FloatingActionButton) activity.findViewById(R.id.fab);
         assertNotNull(fab);
+    }
+
+    @Test
+    public void testSpinnerHasEntries_ToolBarSpinner() throws Exception {
+        Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
+        assertNotNull(spinner);
+        assertTrue(spinner.getCount() > 0);
     }
 
     @After

@@ -43,22 +43,9 @@ public class DrillActivityViewsTest {
     }
 
     @Test
-    public void testExistsRes_SpinnerEntries() throws Exception {
-        String[] drillsArray = {};
-        assertTrue(drillsArray.length > 0);
-    }
-
-    @Test
-    public void testExistsRes_SpinnerLayout() throws Exception {
+    public void existsRes_SpinnerLayout() throws Exception {
         TextView tvSpinnerLayout = (TextView) View.inflate(activity, R.layout.spinner_drills_text_layout, null);
         assertNotNull(tvSpinnerLayout);
-    }
-
-    @Test
-    public void testSpinnerHasEntries_ToolBarSpinner() throws Exception {
-        Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
-        assertNotNull(spinner);
-        assertTrue(spinner.getCount() > 0);
     }
 
     @Test
