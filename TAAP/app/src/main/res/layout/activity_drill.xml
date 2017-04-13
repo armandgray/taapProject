@@ -19,6 +19,18 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
+            <TextView
+                android:id="@+id/tvToolbarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_gravity="start"
+                android:gravity="start"
+                android:textColor="@android:color/white"
+                android:drawableLeft="@drawable/ic_arrow_drop_down_white_24dp"
+                android:drawableStart="@drawable/ic_arrow_drop_down_white_24dp" />
+
             <Spinner
                 android:id="@+id/spDrillsSort"
                 android:layout_width="wrap_content"

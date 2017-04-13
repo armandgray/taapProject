@@ -44,7 +44,7 @@ public class DrillActivityViewsTest {
 
     @Test
     public void hasView_ToolBarCustomTitleView() throws Exception {
-        TextView tvToolbarTitle = activity.findViewById(R.id.tvToolbarTitle);
+        TextView tvToolbarTitle = (TextView) activity.findViewById(R.id.tvToolbarTitle);
         assertNotNull(tvToolbarTitle);
     }
 
