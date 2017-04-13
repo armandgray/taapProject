@@ -56,6 +56,7 @@ public class DrillActivity extends AppCompatActivity {
             case R.id.action_search:
                 return true;
             case R.id.action_log:
+                startActivity(new Intent(this, LogActivity.class));
                 return true;
         }
 

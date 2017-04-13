@@ -85,7 +85,8 @@ public class DrillActivityLifeCycleTest {
         Menu optionsMenu = shadowOf(activity).getOptionsMenu();
         assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_log)));
         Intent expectedIntent = new Intent(activity, LogActivity.class);
-        assertEquals(expectedIntent, shadowOf(activity).getNextStartedActivity());
+        assertEquals(expectedIntent.toString(),
+                shadowOf(activity).getNextStartedActivity().toString());
     }
 
     @Test
