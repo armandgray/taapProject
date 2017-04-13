@@ -17,7 +17,6 @@ import org.robolectric.annotation.Config;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
 
@@ -40,7 +39,7 @@ public class DrillActivityViewsTest {
 
     @Test
     public void hasView_ToolBarTitleNull() throws Exception {
-        assertNull(toolbar.getTitle());
+        assertEquals("", toolbar.getTitle());
     }
 
     @Test
