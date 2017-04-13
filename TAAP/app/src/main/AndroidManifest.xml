@@ -28,6 +28,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.armandgray.taap.DrillActivity" />
         </activity>
+        <activity
+            android:name=".LogActivity"
+            android:label="@string/title_activity_log"
+            android:parentActivityName=".DrillActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.armandgray.taap.DrillActivity" />
+        </activity>
     </application>
 
 </manifest>

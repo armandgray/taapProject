@@ -63,7 +63,7 @@ public class DrillActivityLifeCycleTest {
     }
 
     @Test
-    public void canSelectOptionsMenuItem_Search_OpenSearchWindow() throws Exception {
+    public void canSelectOptionsMenuItem_Search() throws Exception {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         Menu optionsMenu = shadowOf(activity).getOptionsMenu();
@@ -71,11 +71,21 @@ public class DrillActivityLifeCycleTest {
     }
 
     @Test
-    public void canSelectOptionsMenuItem_Log_StartLogActivity() throws Exception {
+    public void canSelectOptionsMenuItem_Log() throws Exception {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         Menu optionsMenu = shadowOf(activity).getOptionsMenu();
         assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_log)));
+    }
+
+    @Test
+    public void canStartLogActivityFromMenuItem() throws Exception {
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
+        Menu optionsMenu = shadowOf(activity).getOptionsMenu();
+        assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_log)));
+        Intent expectedIntent = new Intent(activity, LogActivity.class);
+        assertEquals(expectedIntent, shadowOf(activity).getNextStartedActivity());
     }
 
     @Test
