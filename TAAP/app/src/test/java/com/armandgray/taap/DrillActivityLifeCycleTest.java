@@ -72,7 +72,8 @@ public class DrillActivityLifeCycleTest {
         TextView tvToolBarTitle = (TextView) activity.findViewById(R.id.tvToolbarTitle);
         tvToolBarTitle.performClick();
         Intent expectedIntent = new Intent(activity.getApplicationContext(), ProfileActivity.class);
-        assertEquals(expectedIntent, shadowOf(activity).getNextStartedActivity());
+        assertEquals(expectedIntent.toString(),
+                shadowOf(activity).getNextStartedActivity().toString());
     }
 
     @Test

@@ -36,7 +36,7 @@ public class DrillActivity extends AppCompatActivity {
         tvToolbarTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent());
+                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
             }
         });
 
