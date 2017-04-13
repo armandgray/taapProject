@@ -53,6 +53,6 @@ public class DrillActivity extends AppCompatActivity {
 
     private ArrayAdapter<String> createSpinnerAdapter() {
         return new ArrayAdapter<>(this,
-                R.layout.spinner_drills_text_layout, R.id.tvSpinnerDrill);
+                R.layout.spinner_drills_text_layout, R.id.tvSpinnerDrill, drillsArray);
     }
 }
