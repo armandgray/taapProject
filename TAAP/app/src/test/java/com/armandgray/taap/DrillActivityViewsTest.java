@@ -16,6 +16,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
 
@@ -34,6 +35,11 @@ public class DrillActivityViewsTest {
         toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         optionsMenu = shadowOf(activity).getOptionsMenu();
+    }
+
+    @Test
+    public void hasView_ToolBarTitleNull() throws Exception {
+        assertNull(toolbar.getTitle());
     }
 
     @Test
