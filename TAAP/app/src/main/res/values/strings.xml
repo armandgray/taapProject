@@ -5,4 +5,5 @@
     <string name="search">Search</string>
     <string name="log">Log</string>
     <string name="taap">TAAP</string>
+    <string name="title_activity_profile">ProfileActivity</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.armandgray.taap;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class DrillActivity extends AppCompatActivity {
 
@@ -27,6 +29,14 @@ public class DrillActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // TODO Add onClick action to fab
+            }
+        });
+
+        TextView tvToolbarTitle = (TextView) findViewById(R.id.tvToolbarTitle);
+        tvToolbarTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent());
             }
         });
 

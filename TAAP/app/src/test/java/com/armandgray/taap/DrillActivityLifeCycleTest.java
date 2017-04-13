@@ -71,7 +71,7 @@ public class DrillActivityLifeCycleTest {
     public void canStartProfileActivityOnTitleClick_TestOnCreate() throws Exception {
         TextView tvToolBarTitle = (TextView) activity.findViewById(R.id.tvToolbarTitle);
         tvToolBarTitle.performClick();
-        Intent expectedIntent = new Intent();
+        Intent expectedIntent = new Intent(activity.getApplicationContext(), ProfileActivity.class);
         assertEquals(expectedIntent, shadowOf(activity).getNextStartedActivity());
     }
 
