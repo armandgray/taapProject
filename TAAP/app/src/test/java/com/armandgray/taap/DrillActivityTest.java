@@ -73,13 +73,25 @@ public class DrillActivityTest {
     }
 
     @Test
-    public void canDisplaySearchUILayoutOnMenuItemClick() throws Exception {
+    public void canShowSearchViewOnMenuItemClick() throws Exception {
         SearchView searchView = (SearchView) activity.findViewById(R.id.searchView);
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         Menu optionsMenu = shadowOf(activity).getOptionsMenu();
         assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_search)));
         assertEquals(View.VISIBLE, searchView.getVisibility());
+    }
+
+    @Test
+    public void canHideSpinnerAndFabOnMenuItemClick() throws Exception {
+        Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
+        FloatingActionButton fab = (FloatingActionButton) activity.findViewById(R.id.fab);
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
+        Menu optionsMenu = shadowOf(activity).getOptionsMenu();
+        assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_search)));
+        assertEquals(View.GONE, spinner.getVisibility());
+        assertEquals(View.GONE, fab.getVisibility());
     }
 
     @Test
