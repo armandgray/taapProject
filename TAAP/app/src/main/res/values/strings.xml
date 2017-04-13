@@ -4,11 +4,4 @@
     <string name="greet">Greet</string>
     <string name="search">Search</string>
     <string name="log">Log</string>
-    <string-array name="drills_array">
-        <item>All</item>
-        <item>Shooting</item>
-        <item>Ball Handling</item>
-        <item>Passing</item>
-        <item>Fundamentals</item>
-    </string-array>
 </resources>

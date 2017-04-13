@@ -12,6 +12,8 @@ import android.widget.Spinner;
 
 public class DrillActivity extends AppCompatActivity {
 
+    String[] drillsArray = {"All", "Shooting", "Ball Handling", "Passing", "Fundamentals"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -25,7 +25,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@null"
-                android:entries="@array/drills_array"
                 android:spinnerMode="dropdown" />
 
         </android.support.v7.widget.Toolbar>

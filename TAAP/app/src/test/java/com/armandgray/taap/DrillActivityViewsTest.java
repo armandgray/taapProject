@@ -44,7 +44,7 @@ public class DrillActivityViewsTest {
 
     @Test
     public void testExistsRes_SpinnerEntries() throws Exception {
-        String[] drillsArray = activity.getResources().getStringArray(R.array.drills_array);
+        String[] drillsArray = {};
         assertTrue(drillsArray.length > 0);
     }
 
