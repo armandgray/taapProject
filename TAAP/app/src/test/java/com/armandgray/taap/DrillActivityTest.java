@@ -73,9 +73,13 @@ public class DrillActivityTest {
     }
 
     @Test
-    public void doesHideSearchView_TestOnCreate() throws Exception {
+    public void canDisplaySearchUILayoutOnMenuItemClick() throws Exception {
         SearchView searchView = (SearchView) activity.findViewById(R.id.searchView);
-        assertEquals(View.GONE, searchView.getVisibility());
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
+        Menu optionsMenu = shadowOf(activity).getOptionsMenu();
+        assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_search)));
+        assertEquals(View.VISIBLE, searchView.getVisibility());
     }
 
     @Test
@@ -117,6 +121,12 @@ public class DrillActivityTest {
         Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
         assertNotNull(spinner);
         assertTrue(spinner.getCount() > 0);
+    }
+
+    @Test
+    public void doesHideSearchView_TestOnCreate() throws Exception {
+        SearchView searchView = (SearchView) activity.findViewById(R.id.searchView);
+        assertEquals(View.GONE, searchView.getVisibility());
     }
 
     @After
