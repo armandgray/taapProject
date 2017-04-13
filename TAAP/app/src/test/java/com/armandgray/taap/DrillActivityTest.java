@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import java.lang.reflect.Method;
 
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
 
 public class DrillActivityTest {
 
@@ -22,5 +23,6 @@ public class DrillActivityTest {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context, 0);
         adapter = adapter.getClass().cast(createSpinnerAdapter.invoke(new DrillActivity()));
         assertNotNull(adapter);
+        assertTrue(adapter.getCount() > 0);
     }
 }
