@@ -9,7 +9,6 @@ import org.mockito.Mock;
 import java.lang.reflect.Method;
 
 import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
 
 public class DrillActivityTest {
 
@@ -20,9 +19,7 @@ public class DrillActivityTest {
     public void canCreateSpinnerAdapter() throws Exception {
         Method createSpinnerAdapter = DrillActivity.class.getDeclaredMethod("createSpinnerAdapter");
         createSpinnerAdapter.setAccessible(true);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(context, 0);
-        adapter = adapter.getClass().cast(createSpinnerAdapter.invoke(new DrillActivity()));
-        assertNotNull(adapter);
-        assertTrue(adapter.getCount() > 0);
+        Class<? extends ArrayAdapter> stringClass = ArrayAdapter.class;
+        assertNotNull(stringClass.cast(createSpinnerAdapter.invoke(new DrillActivity())));
     }
 }
