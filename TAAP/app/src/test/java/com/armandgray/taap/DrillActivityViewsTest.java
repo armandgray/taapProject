@@ -67,6 +67,11 @@ public class DrillActivityViewsTest {
     }
 
     @Test
+    public void testContainsView_ToolBarLog() throws Exception {
+        assertNotNull(optionsMenu.findItem(R.id.action_log));
+    }
+
+    @Test
     public void canSelectOptionsMenuItem_Search() throws Exception {
         assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_search)));
     }
