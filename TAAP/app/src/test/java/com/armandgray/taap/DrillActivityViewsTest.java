@@ -2,6 +2,7 @@ package com.armandgray.taap;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -16,17 +17,34 @@ import org.robolectric.annotation.Config;
 
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
+import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
 public class DrillActivityViewsTest {
 
     private static DrillActivity activity;
+    private Toolbar toolbar;
 
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
         activity = Robolectric.buildActivity(DrillActivity.class).create().visible().get();
+        toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+    }
+
+    @Test
+    public void testContainsView_ToolBarSpinner() throws Exception {
+        Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
+        assertNotNull(spinner);
+    }
+
+    @Test
+    public void testContainsView_ToolBarSearch() throws Exception {
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
+        Menu optionsMenu = shadowOf(activity).getOptionsMenu();
+        assertNotNull(optionsMenu.findItem(R.id.action_search));
     }
 
     @Test
@@ -58,6 +76,7 @@ public class DrillActivityViewsTest {
     public void tearDown() {
         System.out.println("Running TearDown!");
         activity = null;
+        toolbar = null;
     }
 
 }
