@@ -37,7 +37,7 @@ public class DrillActivityViewsTest {
     }
 
     @Test
-    public void testContainsView_ToolBarSpinner() throws Exception {
+    public void hasView_ToolBarSpinner() throws Exception {
         Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
         assertNotNull(spinner);
     }
@@ -62,12 +62,12 @@ public class DrillActivityViewsTest {
     }
 
     @Test
-    public void testContainsOptionsMenuItem_Search() throws Exception {
+    public void hasOptionsMenuItem_Search() throws Exception {
         assertNotNull(optionsMenu.findItem(R.id.action_search));
     }
 
     @Test
-    public void testContainsView_Log() throws Exception {
+    public void hasView_Log() throws Exception {
         assertNotNull(optionsMenu.findItem(R.id.action_log));
     }
 
@@ -82,7 +82,7 @@ public class DrillActivityViewsTest {
     }
 
     @Test
-    public void testContainsView_RvDrills() throws Exception {
+    public void hasView_RvDrills() throws Exception {
         RecyclerView rvDrills = (RecyclerView) activity.findViewById(R.id.rvDrills);
         assertNotNull(rvDrills);
     }
