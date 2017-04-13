@@ -16,6 +16,7 @@ import android.widget.TextView;
 public class DrillActivity extends AppCompatActivity {
 
     String[] drillsArray = {"All", "Shooting", "Ball Handling", "Passing", "Fundamentals"};
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class DrillActivity extends AppCompatActivity {
         Spinner spinner = (Spinner) findViewById(R.id.spDrillsSort);
         spinner.setAdapter(createSpinnerAdapter());
 
-        SearchView searchView = (SearchView) findViewById(R.id.searchView);
+        searchView = (SearchView) findViewById(R.id.searchView);
         searchView.setVisibility(View.GONE);
     }
 
@@ -58,6 +59,7 @@ public class DrillActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_search:
+                searchView.setVisibility(View.VISIBLE);
                 return true;
             case R.id.action_log:
                 startActivity(new Intent(this, LogActivity.class));
