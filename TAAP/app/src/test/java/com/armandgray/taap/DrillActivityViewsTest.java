@@ -67,7 +67,7 @@ public class DrillActivityViewsTest {
     }
 
     @Test
-    public void hasView_Log() throws Exception {
+    public void hasOptionsMenuItem_Log() throws Exception {
         assertNotNull(optionsMenu.findItem(R.id.action_log));
     }
 
