@@ -25,26 +25,21 @@ public class DrillActivityViewsTest {
 
     private static DrillActivity activity;
     private Toolbar toolbar;
+    private Menu optionsMenu;
 
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
         activity = Robolectric.buildActivity(DrillActivity.class).create().visible().get();
         toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
+        optionsMenu = shadowOf(activity).getOptionsMenu();
     }
 
     @Test
     public void testContainsView_ToolBarSpinner() throws Exception {
         Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
         assertNotNull(spinner);
-    }
-
-    @Test
-    public void testContainsView_ToolBarSearch() throws Exception {
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
-        Menu optionsMenu = shadowOf(activity).getOptionsMenu();
-        assertNotNull(optionsMenu.findItem(R.id.action_search));
     }
 
     @Test
@@ -67,6 +62,16 @@ public class DrillActivityViewsTest {
     }
 
     @Test
+    public void testContainsView_ToolBarSearch() throws Exception {
+        assertNotNull(optionsMenu.findItem(R.id.action_search));
+    }
+
+    @Test
+    public void canSelectOptionsMenuItem_Search() throws Exception {
+        assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_search)));
+    }
+
+    @Test
     public void testContainsView_RvDrills() throws Exception {
         RecyclerView rvDrills = (RecyclerView) activity.findViewById(R.id.rvDrills);
         assertNotNull(rvDrills);
@@ -77,6 +82,7 @@ public class DrillActivityViewsTest {
         System.out.println("Running TearDown!");
         activity = null;
         toolbar = null;
+        optionsMenu = null;
     }
 
 }
