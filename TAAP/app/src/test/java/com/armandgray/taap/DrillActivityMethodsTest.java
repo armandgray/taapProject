@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
 
 import static junit.framework.Assert.assertNotNull;
 
-public class DrillActivityTest {
+public class DrillActivityMethodsTest {
 
     @Mock
     private Context context;

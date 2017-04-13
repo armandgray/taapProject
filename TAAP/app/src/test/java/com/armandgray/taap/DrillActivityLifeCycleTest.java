@@ -1,8 +1,10 @@
 package com.armandgray.taap;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import org.junit.After;
 import org.junit.Before;
@@ -60,9 +62,17 @@ public class DrillActivityLifeCycleTest {
     }
 
     @Test
-    public void canGetFab_TestOnCreate() throws Exception {
+    public void hasViewFab_TestOnCreate() throws Exception {
         FloatingActionButton fab = (FloatingActionButton) activity.findViewById(R.id.fab);
         assertNotNull(fab);
+    }
+
+    @Test
+    public void canStartProfileActivityOnTitleClick_TestOnCreate() throws Exception {
+        TextView tvToolBarTitle = (TextView) activity.findViewById(R.id.tvToolbarTitle);
+        tvToolBarTitle.performClick();
+        Intent expectedIntent = new Intent();
+        assertEquals(expectedIntent, shadowOf(activity).getNextStartedActivity());
     }
 
     @Test
