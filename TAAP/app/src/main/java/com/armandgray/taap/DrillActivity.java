@@ -17,6 +17,8 @@ public class DrillActivity extends AppCompatActivity {
 
     String[] drillsArray = {"All", "Shooting", "Ball Handling", "Passing", "Fundamentals"};
     private SearchView searchView;
+    private FloatingActionButton fab;
+    private Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +28,7 @@ public class DrillActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,7 +44,7 @@ public class DrillActivity extends AppCompatActivity {
             }
         });
 
-        Spinner spinner = (Spinner) findViewById(R.id.spDrillsSort);
+        spinner = (Spinner) findViewById(R.id.spDrillsSort);
         spinner.setAdapter(createSpinnerAdapter());
 
         searchView = (SearchView) findViewById(R.id.searchView);
@@ -60,6 +62,8 @@ public class DrillActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_search:
                 searchView.setVisibility(View.VISIBLE);
+                fab.setVisibility(View.GONE);
+                spinner.setVisibility(View.GONE);
                 return true;
             case R.id.action_log:
                 startActivity(new Intent(this, LogActivity.class));
