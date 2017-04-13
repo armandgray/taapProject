@@ -22,13 +22,11 @@ import static junit.framework.Assert.assertTrue;
 public class DrillActivityViewsTest {
 
     private static DrillActivity activity;
-    private Toolbar toolbar;
 
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
         activity = Robolectric.buildActivity(DrillActivity.class).create().visible().get();
-        toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
     }
 
     @Test
@@ -60,7 +58,6 @@ public class DrillActivityViewsTest {
     public void tearDown() {
         System.out.println("Running TearDown!");
         activity = null;
-        toolbar = null;
     }
 
 }

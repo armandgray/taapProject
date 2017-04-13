@@ -44,13 +44,20 @@ public class DrillActivityLifeCycleTest {
     }
 
     @Test
-    public void testContainsView_ToolBarSpinner() throws Exception {
+    public void testContainsView_ToolBarSpinner_TestOnCreate() throws Exception {
         Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
         assertNotNull(spinner);
     }
 
     @Test
-    public void testContainsView_OptionsMenuSearch() throws Exception {
+    public void canGetOptionsMenu_TestOnCreate() throws Exception {
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
+        assertNotNull(shadowOf(activity).getOptionsMenu());
+    }
+
+    @Test
+    public void testContainsView_OptionsMenuSearch_TestOnCreate() throws Exception {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         Menu optionsMenu = shadowOf(activity).getOptionsMenu();
