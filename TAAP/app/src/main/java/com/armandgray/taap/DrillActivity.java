@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 public class DrillActivity extends AppCompatActivity {
 
@@ -25,6 +26,9 @@ public class DrillActivity extends AppCompatActivity {
                 // TODO Add onClick action to fab
             }
         });
+
+        Spinner spinner = (Spinner) findViewById(R.id.spDrillsSort);
+        spinner.setAdapter(createSpinnerAdapter());
     }
 
     @Override
@@ -46,6 +50,7 @@ public class DrillActivity extends AppCompatActivity {
     }
 
     private ArrayAdapter<String> createSpinnerAdapter() {
-        return new ArrayAdapter<>(this, R.layout.spinner_drills_text_layout);
+        return new ArrayAdapter<>(this,
+                R.layout.spinner_drills_text_layout);
     }
 }
