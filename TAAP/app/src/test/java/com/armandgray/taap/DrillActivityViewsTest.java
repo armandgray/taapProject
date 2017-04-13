@@ -1,6 +1,7 @@
 package com.armandgray.taap;
 
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
@@ -68,6 +69,12 @@ public class DrillActivityViewsTest {
     @Test
     public void hasOptionsMenuItem_Log() throws Exception {
         assertNotNull(optionsMenu.findItem(R.id.action_log));
+    }
+
+    @Test
+    public void hasView_SearchView() throws Exception {
+        SearchView searchView = (SearchView) activity.findViewById(R.id.searchView);
+        assertNotNull(searchView);
     }
 
     @Test
