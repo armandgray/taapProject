@@ -16,8 +16,6 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-import java.lang.reflect.Field;
-
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
@@ -35,13 +33,6 @@ public class MainActivityTest {
         if (activity == null) {
             activity = Robolectric.buildActivity(MainActivity.class).create().visible().get();
         }
-    }
-
-    @Test
-    public void hasField_DrillsArray() throws Exception {
-        Field field = MainActivity.class.getDeclaredField("drillsArray");
-        field.setAccessible(true);
-        assertNotNull(field);
     }
 
     @Test
