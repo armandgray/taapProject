@@ -25,21 +25,21 @@ import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
-public class DrillActivityTest {
+public class MainActivityTest {
 
-    private static DrillActivity activity;
+    private static MainActivity activity;
 
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
         if (activity == null) {
-            activity = Robolectric.buildActivity(DrillActivity.class).create().visible().get();
+            activity = Robolectric.buildActivity(MainActivity.class).create().visible().get();
         }
     }
 
     @Test
     public void hasField_DrillsArray() throws Exception {
-        Field field = DrillActivity.class.getDeclaredField("drillsArray");
+        Field field = MainActivity.class.getDeclaredField("drillsArray");
         field.setAccessible(true);
         assertNotNull(field);
     }
@@ -102,7 +102,7 @@ public class DrillActivityTest {
     }
 
     @Test
-    public void canStartLogActivityOnMenuItemClick() throws Exception {
+    public void canStartActivityOnLogMenuItemClick() throws Exception {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         Menu optionsMenu = shadowOf(activity).getOptionsMenu();

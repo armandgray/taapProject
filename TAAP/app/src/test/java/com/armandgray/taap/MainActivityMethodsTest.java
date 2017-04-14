@@ -10,16 +10,16 @@ import java.lang.reflect.Method;
 
 import static junit.framework.Assert.assertNotNull;
 
-public class DrillActivityMethodsTest {
+public class MainActivityMethodsTest {
 
     @Mock
     private Context context;
 
     @Test
     public void canCreateSpinnerAdapter() throws Exception {
-        Method createSpinnerAdapter = DrillActivity.class.getDeclaredMethod("createSpinnerAdapter");
+        Method createSpinnerAdapter = MainActivity.class.getDeclaredMethod("createSpinnerAdapter");
         createSpinnerAdapter.setAccessible(true);
         Class<? extends ArrayAdapter> stringClass = ArrayAdapter.class;
-        assertNotNull(stringClass.cast(createSpinnerAdapter.invoke(new DrillActivity())));
+        assertNotNull(stringClass.cast(createSpinnerAdapter.invoke(new MainActivity())));
     }
 }

@@ -22,16 +22,16 @@ import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
-public class DrillActivityViewsTest {
+public class MainActivityViewsTest {
 
-    private static DrillActivity activity;
+    private static MainActivity activity;
     private Toolbar toolbar;
     private Menu optionsMenu;
 
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
-        activity = Robolectric.buildActivity(DrillActivity.class).create().visible().get();
+        activity = Robolectric.buildActivity(MainActivity.class).create().visible().get();
         toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         optionsMenu = shadowOf(activity).getOptionsMenu();

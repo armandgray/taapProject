@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.armandgray.taap.DrillActivity"
-    tools:showIn="@layout/activity_drill">
+    tools:context="com.armandgray.taap.MainActivity"
+    tools:showIn="@layout/activity_main">
 
     <Spinner
         android:id="@+id/spDrillsSort"

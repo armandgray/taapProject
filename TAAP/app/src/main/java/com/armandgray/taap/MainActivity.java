@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-public class DrillActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     public MainActivityController controller;
 
@@ -24,7 +24,7 @@ public class DrillActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_drill);
+        setContentView(R.layout.activity_main);
 
         controller = new MainActivityController();
 
