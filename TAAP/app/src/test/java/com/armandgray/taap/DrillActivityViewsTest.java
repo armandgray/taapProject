@@ -43,13 +43,6 @@ public class DrillActivityViewsTest {
     }
 
     @Test
-    public void hasView_ToolBarCustomTitleView() throws Exception {
-        TextView tvToolbarTitle = (TextView) activity.findViewById(R.id.tvToolbarTitle);
-        assertNotNull(tvToolbarTitle);
-        assertEquals("TAAP", tvToolbarTitle.getText());
-    }
-
-    @Test
     public void hasView_ToolBarSpinner() throws Exception {
         Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
         assertNotNull(spinner);
