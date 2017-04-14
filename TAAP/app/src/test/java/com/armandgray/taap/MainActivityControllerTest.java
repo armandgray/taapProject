@@ -16,15 +16,18 @@ import static org.robolectric.Shadows.shadowOf;
 public class MainActivityControllerTest {
 
     private MainActivity activity;
+    private MainActivityController controller;
 
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
         activity = Robolectric.buildActivity(MainActivity.class).create().visible().get();
+        controller = activity.controller;
     }
 
     @Test
     public void doesSetContentView_TestConstructor() throws Exception {
+        controller.setupActivityInitialState();
         assertEquals(R.id.activityMainLayout, shadowOf(activity).getContentView().getId());
     }
 
@@ -32,6 +35,7 @@ public class MainActivityControllerTest {
     public void tearDown() {
         System.out.println("Running TearDown!");
         activity = null;
+        controller = null;
     }
 
 }
