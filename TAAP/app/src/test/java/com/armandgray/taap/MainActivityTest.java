@@ -45,11 +45,6 @@ public class MainActivityTest {
     }
 
     @Test
-    public void canGetContentView_TestOnCreate() throws Exception {
-        assertEquals(R.id.activityDrillLayout, shadowOf(activity).getContentView().getId());
-    }
-
-    @Test
     public void canGetToolbar_TestOnCreate() throws Exception {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         assertNotNull(toolbar);
