@@ -3,6 +3,7 @@
     <string name="action_settings">Settings</string>
     <string name="greet">Greet</string>
     <string name="search">Search</string>
+    <string name="sort_drills">Sort Drills</string>
     <string name="log">Log</string>
     <string name="taap">TAAP</string>
     <string name="title_activity_profile">ProfileActivity</string>
