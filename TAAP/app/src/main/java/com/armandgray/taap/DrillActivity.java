@@ -14,6 +14,8 @@ import android.widget.Spinner;
 
 public class DrillActivity extends AppCompatActivity {
 
+    public Object controller;
+
     String[] drillsArray = {"All", "Shooting", "Ball Handling", "Passing", "Fundamentals"};
     private SearchView searchView;
     private FloatingActionButton fab;

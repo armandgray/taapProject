@@ -131,6 +131,11 @@ public class DrillActivityTest {
         assertEquals(View.GONE, searchView.getVisibility());
     }
 
+    @Test
+    public void createsDrillActivityController_TestOnCreate() throws Exception {
+        assertNotNull(activity.controller);
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
