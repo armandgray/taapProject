@@ -8,16 +8,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 class MainActivityController {
+
     MainActivity activity;
+    MainActivityViews views;
 
     private String[] drillsArray = {"All", "Shooting", "Ball Handling", "Passing", "Fundamentals"};
-
     SearchView searchView;
     FloatingActionButton fab;
     Spinner spinner;
 
     MainActivityController(MainActivity activity) {
         this.activity = activity;
+        this.views = new MainActivityViews();
         setupActivityInitialState();
     }
 
