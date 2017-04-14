@@ -122,7 +122,7 @@ public class MainActivityViewsTest {
     }
 
     @Test
-    public void doesHideSearchView_TestOnCreate() throws Exception {
+    public void doesHideSearchView_MethodTest_SetupSortAndSearch() throws Exception {
         SearchView searchView = (SearchView) activity.findViewById(R.id.searchView);
         assertEquals(View.GONE, searchView.getVisibility());
     }
