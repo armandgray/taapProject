@@ -25,6 +25,7 @@ import static org.robolectric.Shadows.shadowOf;
 public class MainActivityViewsTest {
 
     private MainActivity activity;
+    private MainActivityViews views;
     private Toolbar toolbar;
     private Menu optionsMenu;
 
@@ -32,6 +33,7 @@ public class MainActivityViewsTest {
     public void setUp() {
         System.out.println("Running Set Up!");
         activity = Robolectric.buildActivity(MainActivity.class).create().visible().get();
+        views = activity.controller.views;
         toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         optionsMenu = shadowOf(activity).getOptionsMenu();
@@ -39,7 +41,7 @@ public class MainActivityViewsTest {
 
     @Test
     public void activityInstanceOfMainActivity_TestConstructor() throws Exception {
-        assertEquals("MainActivity", activity.controller.views.activity.getLocalClassName());
+        assertEquals("MainActivity", views.activity.getLocalClassName());
     }
 
     @Test
