@@ -61,7 +61,7 @@ public class DrillActivity extends AppCompatActivity {
                 spinner.setVisibility(View.GONE);
                 return true;
             case R.id.action_log:
-                startActivity(new Intent(this, LogActivity.class));
+                startActivity(new Intent());
                 return true;
         }
 

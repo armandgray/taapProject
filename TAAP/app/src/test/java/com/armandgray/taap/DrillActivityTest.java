@@ -107,7 +107,7 @@ public class DrillActivityTest {
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         Menu optionsMenu = shadowOf(activity).getOptionsMenu();
         assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_log)));
-        Intent expectedIntent = new Intent(activity, LogActivity.class);
+        Intent expectedIntent = new Intent();
         assertEquals(expectedIntent.toString(),
                 shadowOf(activity).getNextStartedActivity().toString());
     }
