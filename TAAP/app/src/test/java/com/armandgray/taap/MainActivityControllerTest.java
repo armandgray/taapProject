@@ -27,7 +27,6 @@ public class MainActivityControllerTest {
 
     @Test
     public void doesSetContentView_TestConstructor() throws Exception {
-        controller.setupActivityInitialState();
         assertEquals(R.id.activityMainLayout, shadowOf(activity).getContentView().getId());
     }
 
