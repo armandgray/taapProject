@@ -38,6 +38,11 @@ public class MainActivityViewsTest {
     }
 
     @Test
+    public void activityInstanceOfMainActivity_TestConstructor() throws Exception {
+        assertEquals("MainActivity", activity.controller.views.activity.getLocalClassName());
+    }
+
+    @Test
     public void hasText_ToolBarTitle() throws Exception {
         assertEquals("TAAP", toolbar.getTitle());
     }

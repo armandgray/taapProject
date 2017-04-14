@@ -19,11 +19,11 @@ class MainActivityController {
 
     MainActivityController(MainActivity activity) {
         this.activity = activity;
-        this.views = new MainActivityViews();
+        this.views = new MainActivityViews(activity);
         setupActivityInitialState();
     }
 
-    void setupActivityInitialState() {
+    private void setupActivityInitialState() {
         activity.setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         activity.setSupportActionBar(toolbar);
