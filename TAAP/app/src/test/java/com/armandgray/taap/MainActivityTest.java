@@ -27,7 +27,7 @@ import static org.robolectric.Shadows.shadowOf;
 @Config(constants = BuildConfig.class)
 public class MainActivityTest {
 
-    private static MainActivity activity;
+    private MainActivity activity;
 
     @Before
     public void setUp() {

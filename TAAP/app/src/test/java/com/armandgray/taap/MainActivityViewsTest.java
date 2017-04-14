@@ -24,7 +24,7 @@ import static org.robolectric.Shadows.shadowOf;
 @Config(constants = BuildConfig.class)
 public class MainActivityViewsTest {
 
-    private static MainActivity activity;
+    private MainActivity activity;
     private Toolbar toolbar;
     private Menu optionsMenu;
 
