@@ -1,5 +1,7 @@
 package com.armandgray.taap;
 
+import android.support.v7.widget.Toolbar;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,6 +35,13 @@ public class MainActivityControllerTest {
     @Test
     public void doesCreateViewsHandler_TestConstructor() throws Exception {
         assertNotNull(controller.views);
+    }
+
+    @Test
+    public void doesSetupInitialActivityState_TestConstructor() throws Exception {
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        assertNotNull(toolbar);
+        assertNotNull(activity.getSupportActionBar());
     }
 
     @After
