@@ -41,12 +41,12 @@ public class MainActivityViewsTest {
     }
 
     @Test
-    public void doesSetContentView_TestConstructor() throws Exception {
+    public void doesSetContentView_MethodTest_SetupActivityInitialState() throws Exception {
         assertEquals(R.id.activityMainLayout, shadowOf(activity).getContentView().getId());
     }
 
     @Test
-    public void canGetToolbar_TestOnCreate() throws Exception {
+    public void canGetToolbar__MethodTest_SetupToolbar() throws Exception {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         assertNotNull(toolbar);
         assertNotNull(activity.getSupportActionBar());
@@ -109,13 +109,13 @@ public class MainActivityViewsTest {
     }
 
     @Test
-    public void hasViewFab_TestOnCreate() throws Exception {
+    public void hasViewFab_MethodTest_SetupFabClickListener() throws Exception {
         FloatingActionButton fab = (FloatingActionButton) activity.findViewById(R.id.fab);
         assertNotNull(fab);
     }
 
     @Test
-    public void testSpinnerHasEntries_ToolBarSpinner() throws Exception {
+    public void testSpinnerHasEntries_MethodTest_SetupSortAndSearch() throws Exception {
         Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
         assertNotNull(spinner);
         assertTrue(spinner.getCount() > 0);

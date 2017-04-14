@@ -31,7 +31,7 @@ public class MainActivityControllerTest {
     }
 
     @Test
-    public void doesCreateViews_TestConstructor() throws Exception {
+    public void doesCreateViewsHandler_TestConstructor() throws Exception {
         assertNotNull(controller.views);
     }
 

@@ -29,9 +29,10 @@ class MainActivityViews {
         setupSortAndSearch();
     }
 
-    private void setupSortAndSearch() {
-        spinner.setAdapter(createSpinnerAdapter());
-        searchView.setVisibility(View.GONE);
+    private void assignGlobalViews() {
+        fab = (FloatingActionButton) activity.findViewById(R.id.fab);
+        spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
+        searchView = (SearchView) activity.findViewById(R.id.searchView);
     }
 
     private void setupToolbar() {
@@ -48,10 +49,9 @@ class MainActivityViews {
         });
     }
 
-    private void assignGlobalViews() {
-        fab = (FloatingActionButton) activity.findViewById(R.id.fab);
-        spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
-        searchView = (SearchView) activity.findViewById(R.id.searchView);
+    private void setupSortAndSearch() {
+        spinner.setAdapter(createSpinnerAdapter());
+        searchView.setVisibility(View.GONE);
     }
 
     private ArrayAdapter<String> createSpinnerAdapter() {
