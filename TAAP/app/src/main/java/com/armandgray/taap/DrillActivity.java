@@ -12,11 +12,9 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import com.armandgray.taap.drills.DrillActivityController;
-
 public class DrillActivity extends AppCompatActivity {
 
-    public DrillActivityController controller;
+    public MainActivityController controller;
 
     String[] drillsArray = {"All", "Shooting", "Ball Handling", "Passing", "Fundamentals"};
     private SearchView searchView;
@@ -28,7 +26,7 @@ public class DrillActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drill);
 
-        controller = new DrillActivityController();
+        controller = new MainActivityController();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
