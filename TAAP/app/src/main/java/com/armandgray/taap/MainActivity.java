@@ -28,9 +28,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_search:
-                controller.searchView.setVisibility(View.VISIBLE);
-                controller.fab.setVisibility(View.GONE);
-                controller.spinner.setVisibility(View.GONE);
+                controller.views.searchView.setVisibility(View.VISIBLE);
+                controller.views.fab.setVisibility(View.GONE);
+                controller.views.spinner.setVisibility(View.GONE);
                 return true;
             case R.id.action_log:
                 startActivity(new Intent());
