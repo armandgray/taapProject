@@ -41,6 +41,11 @@ public class MainActivityControllerTest {
     }
 
     @Test
+    public void doesCreateViewClass_TestConstructor() throws Exception {
+        assertNotNull(controller.views);
+    }
+
+    @Test
     public void doesSetContentView_TestConstructor() throws Exception {
         assertEquals(R.id.activityMainLayout, shadowOf(activity).getContentView().getId());
     }
