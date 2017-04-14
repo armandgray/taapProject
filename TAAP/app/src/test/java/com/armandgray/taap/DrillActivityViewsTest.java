@@ -38,8 +38,8 @@ public class DrillActivityViewsTest {
     }
 
     @Test
-    public void hasView_ToolBarTitleNull() throws Exception {
-        assertEquals("", toolbar.getTitle());
+    public void hasText_ToolBarTitle() throws Exception {
+        assertEquals("TAAP", toolbar.getTitle());
     }
 
     @Test
