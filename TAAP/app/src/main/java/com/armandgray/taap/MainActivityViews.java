@@ -20,24 +20,38 @@ class MainActivityViews {
         this.activity = activity;
     }
 
-    public void setupActivityInitialState() {
+    void setupActivityInitialState() {
         activity.setContentView(R.layout.activity_main);
+
+        assignGlobalViews();
+        setupToolbar();
+        setupFabClickListener();
+        setupSortAndSearch();
+    }
+
+    private void setupSortAndSearch() {
+        spinner.setAdapter(createSpinnerAdapter());
+        searchView.setVisibility(View.GONE);
+    }
+
+    private void setupToolbar() {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         activity.setSupportActionBar(toolbar);
+    }
 
-        fab = (FloatingActionButton) activity.findViewById(R.id.fab);
+    private void setupFabClickListener() {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // TODO Add onClick action to fab
             }
         });
+    }
 
+    private void assignGlobalViews() {
+        fab = (FloatingActionButton) activity.findViewById(R.id.fab);
         spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
-        spinner.setAdapter(createSpinnerAdapter());
-
         searchView = (SearchView) activity.findViewById(R.id.searchView);
-        searchView.setVisibility(View.GONE);
     }
 
     private ArrayAdapter<String> createSpinnerAdapter() {
