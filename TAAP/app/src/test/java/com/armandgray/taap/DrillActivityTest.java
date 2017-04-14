@@ -7,7 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import org.junit.After;
 import org.junit.Before;

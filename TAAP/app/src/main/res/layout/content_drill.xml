@@ -8,12 +8,22 @@
     tools:context="com.armandgray.taap.DrillActivity"
     tools:showIn="@layout/activity_drill">
 
+    <Spinner
+        android:id="@+id/spDrillsSort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@null"
+        android:gravity="center"
+        android:spinnerMode="dropdown" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvDrills"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/spDrillsSort"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
-
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
