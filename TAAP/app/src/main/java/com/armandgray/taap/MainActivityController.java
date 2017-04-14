@@ -1,11 +1,9 @@
 package com.armandgray.taap;
 
-import android.app.Activity;
-
 class MainActivityController {
-    Activity activity;
+    MainActivity activity;
 
-    MainActivityController(Activity activity) {
+    MainActivityController(MainActivity activity) {
         this.activity = activity;
         setupActivityInitialState();
     }

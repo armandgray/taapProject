@@ -9,6 +9,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
@@ -23,6 +24,12 @@ public class MainActivityControllerTest {
         System.out.println("Running Set Up!");
         activity = Robolectric.buildActivity(MainActivity.class).create().visible().get();
         controller = activity.controller;
+    }
+
+    @Test
+    public void activityInstanceOfAppCompatActivity_TestConstructor() throws Exception {
+        assertTrue(controller.activity instanceof MainActivity);
+        assertEquals("MainActivity", controller.activity.getLocalClassName());
     }
 
     @Test
