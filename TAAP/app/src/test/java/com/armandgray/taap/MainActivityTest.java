@@ -134,6 +134,7 @@ public class MainActivityTest {
     @Test
     public void createsDrillActivityController_TestOnCreate() throws Exception {
         assertNotNull(activity.controller);
+        assertNotNull(activity.controller.activity);
     }
 
     @After
