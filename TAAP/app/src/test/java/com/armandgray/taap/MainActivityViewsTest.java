@@ -109,20 +109,20 @@ public class MainActivityViewsTest {
     }
 
     @Test
-    public void hasViewFab_MethodTest_SetupFabClickListener() throws Exception {
+    public void doesSetupFabClickListener_MethodTest() throws Exception {
         FloatingActionButton fab = (FloatingActionButton) activity.findViewById(R.id.fab);
         assertNotNull(fab);
     }
 
     @Test
-    public void testSpinnerHasEntries_MethodTest_SetupSortAndSearch() throws Exception {
+    public void doesSetupSortAndSearch_SpinnerHasEntries_MethodTest() throws Exception {
         Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
         assertNotNull(spinner);
         assertTrue(spinner.getCount() > 0);
     }
 
     @Test
-    public void doesHideSearchView_MethodTest_SetupSortAndSearch() throws Exception {
+    public void doesSetupSortAndSearch_HideSearchView_MethodTest() throws Exception {
         SearchView searchView = (SearchView) activity.findViewById(R.id.searchView);
         assertEquals(View.GONE, searchView.getVisibility());
     }
