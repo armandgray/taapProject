@@ -5,6 +5,8 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -63,6 +65,13 @@ public class MainActivityResTest {
     @Test
     public void hasOptionsMenuItem_Log() throws Exception {
         assertNotNull(optionsMenu.findItem(R.id.action_log));
+    }
+
+    @Test
+    public void existsRes_SpinnerContainer() throws Exception {
+        RelativeLayout contentMain = (RelativeLayout) View.inflate(activity, R.layout.content_main, null);
+        LinearLayout spinnerContainer = contentMain.findViewById(R.id.spinnerContainer);
+        assertNotNull(spinnerContainer);
     }
 
     @Test
