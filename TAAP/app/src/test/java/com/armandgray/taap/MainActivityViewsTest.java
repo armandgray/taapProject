@@ -67,7 +67,7 @@ public class MainActivityViewsTest {
     }
 
     @Test
-    public void canStartSettingsActivityOnMenuItemClick() throws Exception {
+    public void canStartSettingsActivityOnSettingsMenuItemClick() throws Exception {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         Menu optionsMenu = shadowOf(activity).getOptionsMenu();
@@ -86,12 +86,12 @@ public class MainActivityViewsTest {
     }
 
     @Test
-    public void canStartActivityOnLogMenuItemClick() throws Exception {
+    public void canStartLogActivityOnLogMenuItemClick() throws Exception {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         Menu optionsMenu = shadowOf(activity).getOptionsMenu();
         assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_log)));
-        Intent expectedIntent = new Intent();
+        Intent expectedIntent = new Intent(activity, LogActivity.class);
         assertEquals(expectedIntent.toString(),
                 shadowOf(activity).getNextStartedActivity().toString());
     }
