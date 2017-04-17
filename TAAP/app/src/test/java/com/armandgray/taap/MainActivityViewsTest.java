@@ -72,7 +72,7 @@ public class MainActivityViewsTest {
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         Menu optionsMenu = shadowOf(activity).getOptionsMenu();
         assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_settings)));
-        Intent expectedIntent = new Intent();
+        Intent expectedIntent = new Intent(activity, SettingsActivity.class);
         assertEquals(expectedIntent.toString(),
                 shadowOf(activity).getNextStartedActivity().toString());
     }
