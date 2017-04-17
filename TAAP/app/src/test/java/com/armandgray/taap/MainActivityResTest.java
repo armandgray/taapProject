@@ -5,6 +5,7 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -20,6 +21,7 @@ import org.robolectric.annotation.Config;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
@@ -72,6 +74,13 @@ public class MainActivityResTest {
         RelativeLayout contentMain = (RelativeLayout) View.inflate(activity, R.layout.content_main, null);
         LinearLayout sortContainer = (LinearLayout) contentMain.findViewById(R.id.sortContainer);
         assertNotNull(sortContainer);
+    }
+
+    @Test
+    public void existsView_SortContainer_FirstChildIcSort() throws Exception {
+        LinearLayout sortContainer = (LinearLayout) View.inflate(activity, R.layout.sort_container_layout, null);
+        assertNotNull(sortContainer.getChildAt(0));
+        assertTrue(sortContainer.getChildAt(0) instanceof ImageView);
     }
 
     @Test
