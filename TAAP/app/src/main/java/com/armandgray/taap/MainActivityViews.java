@@ -5,6 +5,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 class MainActivityViews {
@@ -15,6 +16,7 @@ class MainActivityViews {
     EditText etSearch;
     FloatingActionButton fab;
     Spinner spinner;
+    private ImageButton ibSearch;
 
     MainActivityViews(MainActivity activity) {
         this.activity = activity;
@@ -27,12 +29,14 @@ class MainActivityViews {
         setupToolbar();
         setupFabClickListener();
         setupSortAndSearch();
+        setupSearchClickListener();
     }
 
     private void assignGlobalViews() {
         fab = (FloatingActionButton) activity.findViewById(R.id.fab);
         spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
         etSearch = (EditText) activity.findViewById(R.id.etSearch);
+        ibSearch = (ImageButton) activity.findViewById(R.id.ibSearch);
     }
 
     private void setupToolbar() {
@@ -52,6 +56,15 @@ class MainActivityViews {
     private void setupSortAndSearch() {
         spinner.setAdapter(createSpinnerAdapter());
         etSearch.setVisibility(View.GONE);
+    }
+
+    private void setupSearchClickListener() {
+        ibSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etSearch.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     private ArrayAdapter<String> createSpinnerAdapter() {
