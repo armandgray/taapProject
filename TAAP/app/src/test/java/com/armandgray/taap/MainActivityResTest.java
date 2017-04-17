@@ -70,7 +70,7 @@ public class MainActivityResTest {
     @Test
     public void existsRes_SpinnerContainer() throws Exception {
         RelativeLayout contentMain = (RelativeLayout) View.inflate(activity, R.layout.content_main, null);
-        LinearLayout spinnerContainer = contentMain.findViewById(R.id.spinnerContainer);
+        LinearLayout spinnerContainer = (LinearLayout) contentMain.findViewById(R.id.spinnerContainer);
         assertNotNull(spinnerContainer);
     }
 
