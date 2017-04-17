@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,9 +27,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
-                controller.views.etSearch.setVisibility(View.VISIBLE);
-                controller.views.fab.setVisibility(View.GONE);
-                controller.views.spinner.setVisibility(View.GONE);
+                startActivity(new Intent());
                 return true;
             case R.id.action_log:
                 startActivity(new Intent());
