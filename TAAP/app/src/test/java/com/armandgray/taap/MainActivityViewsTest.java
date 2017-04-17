@@ -78,16 +78,6 @@ public class MainActivityViewsTest {
     }
 
     @Test
-    public void canHideSpinnerAndFabOnIbSearchClick() throws Exception {
-        Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
-        FloatingActionButton fab = (FloatingActionButton) activity.findViewById(R.id.fab);
-        ImageButton ibSearch = (ImageButton) activity.findViewById(R.id.ibSearch);
-        ibSearch.performClick();
-        assertEquals(View.GONE, spinner.getVisibility());
-        assertEquals(View.GONE, fab.getVisibility());
-    }
-
-    @Test
     public void canSelectOptionsMenuItem_Log() throws Exception {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
@@ -131,6 +121,16 @@ public class MainActivityViewsTest {
         ibSearch.performClick();
         EditText etSearch = (EditText) activity.findViewById(R.id.etSearch);
         assertEquals(View.VISIBLE, etSearch.getVisibility());
+    }
+
+    @Test
+    public void canHideSpinnerAndFabOnIbSearchClick() throws Exception {
+        Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
+        FloatingActionButton fab = (FloatingActionButton) activity.findViewById(R.id.fab);
+        ImageButton ibSearch = (ImageButton) activity.findViewById(R.id.ibSearch);
+        ibSearch.performClick();
+        assertEquals(View.GONE, spinner.getVisibility());
+        assertEquals(View.GONE, fab.getVisibility());
     }
 
     @After

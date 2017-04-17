@@ -63,6 +63,8 @@ class MainActivityViews {
             @Override
             public void onClick(View v) {
                 etSearch.setVisibility(View.VISIBLE);
+                spinner.setVisibility(View.GONE);
+                fab.setVisibility(View.GONE);
             }
         });
     }
