@@ -9,4 +9,5 @@
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_log">LogActivity</string>
     <string name="icon_sort_button">icon sort button</string>
+    <string name="icon_search_button">icon search button</string>
 </resources>
