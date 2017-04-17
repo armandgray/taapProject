@@ -60,7 +60,7 @@ public class MainActivityResTest {
 
     @Test
     public void hasOptionsMenuItem_Search() throws Exception {
-        assertNotNull(optionsMenu.findItem(R.id.action_search));
+        assertNotNull(optionsMenu.findItem(R.id.action_settings));
     }
 
     @Test

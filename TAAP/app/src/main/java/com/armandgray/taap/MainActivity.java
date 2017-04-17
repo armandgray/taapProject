@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_search:
+            case R.id.action_settings:
                 controller.views.etSearch.setVisibility(View.VISIBLE);
                 controller.views.fab.setVisibility(View.GONE);
                 controller.views.spinner.setVisibility(View.GONE);

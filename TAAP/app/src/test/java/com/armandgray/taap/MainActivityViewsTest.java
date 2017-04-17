@@ -62,7 +62,7 @@ public class MainActivityViewsTest {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         Menu optionsMenu = shadowOf(activity).getOptionsMenu();
-        assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_search)));
+        assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_settings)));
     }
 
     @Test
@@ -71,7 +71,7 @@ public class MainActivityViewsTest {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         Menu optionsMenu = shadowOf(activity).getOptionsMenu();
-        assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_search)));
+        assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_settings)));
         assertEquals(View.VISIBLE, etSearch.getVisibility());
     }
 
@@ -82,7 +82,7 @@ public class MainActivityViewsTest {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         Menu optionsMenu = shadowOf(activity).getOptionsMenu();
-        assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_search)));
+        assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_settings)));
         assertEquals(View.GONE, spinner.getVisibility());
         assertEquals(View.GONE, fab.getVisibility());
     }

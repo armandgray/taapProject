@@ -3,16 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.armandgray.taap.MainActivity">
     <item
-        android:id="@+id/action_search"
-        android:orderInCategory="100"
-        android:icon="@drawable/ic_search_white_24dp"
-        android:title="@string/search"
-        app:showAsAction="never" />
-
-    <item
         android:id="@+id/action_log"
-        android:orderInCategory="101"
+        android:orderInCategory="100"
         android:icon="@drawable/ic_trending_up_white_24dp"
         android:title="@string/log"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="101"
+        android:icon="@drawable/ic_settings_white_24dp"
+        android:title="@string/settings"
         app:showAsAction="ifRoom" />
 </menu>
