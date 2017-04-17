@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, SettingsActivity.class));
                 return true;
             case R.id.action_log:
-                startActivity(new Intent());
+                startActivity(new Intent(this, LogActivity.class));
                 return true;
         }
 
