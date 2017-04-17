@@ -68,10 +68,16 @@ public class MainActivityResTest {
     }
 
     @Test
-    public void existsRes_SpinnerContainer() throws Exception {
+    public void existsRes_SortContainer() throws Exception {
         RelativeLayout contentMain = (RelativeLayout) View.inflate(activity, R.layout.content_main, null);
-        LinearLayout spinnerContainer = (LinearLayout) contentMain.findViewById(R.id.spinnerContainer);
-        assertNotNull(spinnerContainer);
+        LinearLayout sortContainer = (LinearLayout) contentMain.findViewById(R.id.sortContainer);
+        assertNotNull(sortContainer);
+    }
+
+    @Test
+    public void existsView_SortContainer_Spinner() throws Exception {
+        LinearLayout sortContainer = (LinearLayout) View.inflate(activity, R.layout.sort_container_layout, null);
+        assertNotNull(sortContainer.findViewById(R.id.spDrillsSort));
     }
 
     @Test
