@@ -59,7 +59,7 @@ public class MainActivityResTest {
     }
 
     @Test
-    public void hasOptionsMenuItem_Search() throws Exception {
+    public void hasOptionsMenuItem_Settings() throws Exception {
         assertNotNull(optionsMenu.findItem(R.id.action_settings));
     }
 

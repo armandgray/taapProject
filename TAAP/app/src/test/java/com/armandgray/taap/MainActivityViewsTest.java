@@ -58,7 +58,7 @@ public class MainActivityViewsTest {
     }
 
     @Test
-    public void canSelectOptionsMenuItem_Search() throws Exception {
+    public void canSelectOptionsMenuItem_Settings() throws Exception {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         Menu optionsMenu = shadowOf(activity).getOptionsMenu();
@@ -66,13 +66,12 @@ public class MainActivityViewsTest {
     }
 
     @Test
-    public void canShowSearchViewOnMenuItemClick() throws Exception {
-        EditText etSearch = (EditText) activity.findViewById(R.id.etSearch);
+    public void canStartSettingsActivityOnMenuItemClick() throws Exception {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         Menu optionsMenu = shadowOf(activity).getOptionsMenu();
         assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_settings)));
-        assertEquals(View.VISIBLE, etSearch.getVisibility());
+        assertEquals(View.VISIBLE, -1);
     }
 
     @Test
