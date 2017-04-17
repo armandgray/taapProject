@@ -71,7 +71,9 @@ public class MainActivityViewsTest {
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         Menu optionsMenu = shadowOf(activity).getOptionsMenu();
         assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_settings)));
-        assertEquals(View.VISIBLE, -1);
+        Intent expectedIntent = new Intent();
+        assertEquals(expectedIntent.toString(),
+                shadowOf(activity).getNextStartedActivity().toString());
     }
 
     @Test
