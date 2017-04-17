@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import org.junit.After;
@@ -77,13 +78,11 @@ public class MainActivityViewsTest {
     }
 
     @Test
-    public void canHideSpinnerAndFabOnMenuItemClick() throws Exception {
+    public void canHideSpinnerAndFabOnIbSearchClick() throws Exception {
         Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
         FloatingActionButton fab = (FloatingActionButton) activity.findViewById(R.id.fab);
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
-        Menu optionsMenu = shadowOf(activity).getOptionsMenu();
-        assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_settings)));
+        ImageButton ibSearch = (ImageButton) activity.findViewById(R.id.ibSearch);
+        ibSearch.performClick();
         assertEquals(View.GONE, spinner.getVisibility());
         assertEquals(View.GONE, fab.getVisibility());
     }
