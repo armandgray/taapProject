@@ -2,10 +2,10 @@ package com.armandgray.taap;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import org.junit.After;
@@ -67,12 +67,12 @@ public class MainActivityViewsTest {
 
     @Test
     public void canShowSearchViewOnMenuItemClick() throws Exception {
-        SearchView searchView = (SearchView) activity.findViewById(R.id.searchView);
+        EditText etSearch = (EditText) activity.findViewById(R.id.etSearch);
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         Menu optionsMenu = shadowOf(activity).getOptionsMenu();
         assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_search)));
-        assertEquals(View.VISIBLE, searchView.getVisibility());
+        assertEquals(View.VISIBLE, etSearch.getVisibility());
     }
 
     @Test
@@ -121,8 +121,8 @@ public class MainActivityViewsTest {
 
     @Test
     public void doesSetupSortAndSearch_HideSearchView_MethodTest() throws Exception {
-        SearchView searchView = (SearchView) activity.findViewById(R.id.searchView);
-        assertEquals(View.GONE, searchView.getVisibility());
+        EditText etSearch = (EditText) activity.findViewById(R.id.etSearch);
+        assertEquals(View.GONE, etSearch.getVisibility());
     }
 
     @After

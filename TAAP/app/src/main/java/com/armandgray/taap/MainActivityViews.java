@@ -1,10 +1,10 @@
 package com.armandgray.taap;
 
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 class MainActivityViews {
@@ -12,7 +12,7 @@ class MainActivityViews {
     MainActivity activity;
 
     private String[] drillsArray = {"All", "Shooting", "Ball Handling", "Passing", "Fundamentals"};
-    SearchView searchView;
+    EditText etSearch;
     FloatingActionButton fab;
     Spinner spinner;
 
@@ -32,7 +32,7 @@ class MainActivityViews {
     private void assignGlobalViews() {
         fab = (FloatingActionButton) activity.findViewById(R.id.fab);
         spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
-        searchView = (SearchView) activity.findViewById(R.id.searchView);
+        etSearch = (EditText) activity.findViewById(R.id.etSearch);
     }
 
     private void setupToolbar() {
@@ -51,7 +51,7 @@ class MainActivityViews {
 
     private void setupSortAndSearch() {
         spinner.setAdapter(createSpinnerAdapter());
-        searchView.setVisibility(View.GONE);
+        etSearch.setVisibility(View.GONE);
     }
 
     private ArrayAdapter<String> createSpinnerAdapter() {

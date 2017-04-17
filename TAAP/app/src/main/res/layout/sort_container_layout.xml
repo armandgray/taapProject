@@ -30,6 +30,16 @@
         android:prompt="@string/sort_drills"
         android:spinnerMode="dropdown" />
 
+    <EditText
+        android:id="@+id/etSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_toEndOf="@+id/ibSort"
+        android:layout_toLeftOf="@+id/ibSearch"
+        android:layout_toRightOf="@+id/ibSort"
+        android:layout_toStartOf="@+id/ibSearch" />
+
     <ImageButton
         android:id="@+id/ibSearch"
         android:layout_width="wrap_content"
