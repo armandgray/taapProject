@@ -125,6 +125,14 @@ public class MainActivityViewsTest {
         assertEquals(View.GONE, etSearch.getVisibility());
     }
 
+    @Test
+    public void canShowEditTextOnIbSearchClick_MethodTest() throws Exception {
+        ImageButton ibSearch = (ImageButton) activity.findViewById(R.id.ibSearch);
+        ibSearch.performClick();
+        EditText etSearch = (EditText) activity.findViewById(R.id.etSearch);
+        assertEquals(View.VISIBLE, etSearch.getVisibility());
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
