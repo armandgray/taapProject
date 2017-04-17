@@ -90,6 +90,13 @@ public class MainActivityResTest {
     }
 
     @Test
+    public void existsView_SortContainer_LastChildIcSearch() throws Exception {
+        LinearLayout sortContainer = (LinearLayout) View.inflate(activity, R.layout.sort_container_layout, null);
+        assertNotNull(sortContainer.getChildAt(sortContainer.getChildCount() - 1));
+        assertTrue(sortContainer.getChildAt(sortContainer.getChildCount() - 1) instanceof ImageView);
+    }
+
+    @Test
     public void hasView_SearchView() throws Exception {
         SearchView searchView = (SearchView) activity.findViewById(R.id.searchView);
         assertNotNull(searchView);
