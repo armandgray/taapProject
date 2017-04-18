@@ -83,6 +83,14 @@ public class SettingsActivityViewsTest {
         assertEquals(activity.getResources().getDrawable(R.drawable.about_item_background), textView.getBackground());
     }
 
+    @Test
+    public void hasDrawable_AboutTextDrawableRight() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_settings, null);
+        TextView textView = (TextView) container.findViewById(R.id.tvRateThisApp);
+        assertEquals(activity.getResources().getDrawable(R.drawable.about_item_background),
+                textView.getCompoundDrawables()[2]);
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
