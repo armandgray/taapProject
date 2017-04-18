@@ -67,6 +67,14 @@ class SettingsActivityViews {
                 listener.onTvTermsConditionsClick();
             }
         });
+
+        TextView tvSoftwareLicenses = (TextView) activity.findViewById(R.id.tvSoftwareLicenses);
+        tvSoftwareLicenses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onTvSoftwareLicensesClick();
+            }
+        });
     }
 
     interface SettingsViewsListener {
@@ -74,5 +82,6 @@ class SettingsActivityViews {
         void onTvRateThisAppClick();
         void onTvCopyrightClick();
         void onTvTermsConditionsClick();
+        void onTvSoftwareLicensesClick();
     }
 }

@@ -46,4 +46,11 @@ class SettingsActivityController implements SettingsActivityViews.SettingsViewsL
         intent.putExtra(SELECTED_ITEM, TERMS_AND_CONDITIONS);
         activity.startActivity(intent);
     }
+
+    @Override
+    public void onTvSoftwareLicensesClick() {
+        Intent intent = new Intent(activity, SettingsDetailActivity.class);
+        intent.putExtra(SELECTED_ITEM, SOFTWARE_LICENSES);
+        activity.startActivity(intent);
+    }
 }

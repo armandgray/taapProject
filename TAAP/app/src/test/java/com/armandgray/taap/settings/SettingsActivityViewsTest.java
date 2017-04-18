@@ -107,8 +107,8 @@ public class SettingsActivityViewsTest {
 
     @Test
     public void doesSetupSoftwareLicensesClickListener_MethodTest_SetupActivityInitialState() throws Exception {
-        TextView tvTermsConditions = (TextView) activity.findViewById(R.id.tvTermsConditions);
-        tvTermsConditions.performClick();
+        TextView tvSoftwareLicenses = (TextView) activity.findViewById(R.id.tvSoftwareLicenses);
+        tvSoftwareLicenses.performClick();
         Intent expectedIntent = (new Intent(activity, SettingsDetailActivity.class))
                 .putExtra(SELECTED_ITEM, SOFTWARE_LICENSES);
         Intent actualIntent = shadowOf(activity).getNextStartedActivity();
