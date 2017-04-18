@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.armandgray.taap.settings.SettingsActivity"
@@ -13,6 +15,20 @@
         android:id="@+id/tvRateThisApp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:text="@string/rate_me_in_the_app_store"/>
+        android:gravity="center_vertical"
+        android:paddingBottom="2dp"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingTop="2dp"
+        android:text="@string/rate_me_in_the_app_store"
+        android:textSize="@dimen/settings_text_size" />
+
+    <TextView
+        android:id="@+id/tvSeeMore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/rate_me_in_the_app_store"
+        android:textSize="@dimen/settings_text_size" />
 </LinearLayout>
