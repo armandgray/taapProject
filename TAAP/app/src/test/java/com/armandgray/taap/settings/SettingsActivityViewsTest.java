@@ -69,6 +69,12 @@ public class SettingsActivityViewsTest {
         assertNotNull(container.findViewById(R.id.tvRateThisApp));
     }
 
+    @Test
+    public void hasView_AboutContainer_TvSeeMore() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_settings, null);
+        assertNotNull(container.findViewById(R.id.tvSeeMore));
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
