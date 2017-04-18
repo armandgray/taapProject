@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
@@ -73,6 +74,13 @@ public class SettingsActivityViewsTest {
     public void hasView_AboutContainer_TvSeeMore() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_settings, null);
         assertNotNull(container.findViewById(R.id.tvSeeMore));
+    }
+
+    @Test
+    public void hasDrawable_AboutTextBackground() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_settings, null);
+        TextView textView = (TextView) container.findViewById(R.id.tvRateThisApp);
+        assertEquals(activity.getResources().getDrawable(R.drawable.about_text_background), textView.getBackground());
     }
 
     @After
