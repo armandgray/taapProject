@@ -11,22 +11,23 @@ class SettingsActivityViews {
     static final String ARMANDGRAY_COM = "http://armandgray.com";
 
     SettingsActivity activity;
+    SettingsViewsListener listener;
 
-    SettingsActivityViews(SettingsActivity activity) {
+    SettingsActivityViews(SettingsActivity activity, SettingsViewsListener listener) {
         this.activity = activity;
+        this.listener = listener;
     }
 
     void setupActivityInitialState() {
         activity.setContentView(R.layout.activity_settings);
         setupToolbar();
         setupToolbarHomeButton();
-        TextView tvSeeMore = (TextView) activity.findViewById(R.id.tvSeeMore);
-        tvSeeMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                
-            }
-        });
+        setupOnClickListeners();
+    }
+
+    private void setupToolbar() {
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        activity.setSupportActionBar(toolbar);
     }
 
     private void setupToolbarHomeButton() {
@@ -36,8 +37,17 @@ class SettingsActivityViews {
         }
     }
 
-    private void setupToolbar() {
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        activity.setSupportActionBar(toolbar);
+    private void setupOnClickListeners() {
+        TextView tvSeeMore = (TextView) activity.findViewById(R.id.tvSeeMore);
+        tvSeeMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onTvSeeMoreClick();
+            }
+        });
+    }
+
+    interface SettingsViewsListener {
+        void onTvSeeMoreClick();
     }
 }
