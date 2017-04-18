@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
 import static junit.framework.Assert.assertNotNull;
@@ -14,13 +15,15 @@ import static junit.framework.Assert.assertNotNull;
 @Config(constants = BuildConfig.class)
 public class MainActivityTest {
 
+    private ActivityController<MainActivity> activityController;
     private MainActivity activity;
 
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
         if (activity == null) {
-            activity = Robolectric.buildActivity(MainActivity.class).create().visible().get();
+            activityController = Robolectric.buildActivity(MainActivity.class);
+            activity = activityController.create().visible().get();
         }
     }
 
@@ -33,6 +36,8 @@ public class MainActivityTest {
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
+        activityController.pause().stop().destroy();
+        activityController = null;
         activity = null;
     }
 
