@@ -20,6 +20,11 @@ class SettingsActivityController implements SettingsActivityViews.SettingsViewsL
     }
 
     @Override
+    public void onTvRateThisAppClick() {
+        activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(GOOGLE_PLAY_STORE_TAAP)));
+    }
+
+    @Override
     public void onTvSeeMoreClick() {
         activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(ARMANDGRAY_COM)));
     }

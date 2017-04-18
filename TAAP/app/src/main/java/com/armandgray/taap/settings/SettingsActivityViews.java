@@ -36,6 +36,14 @@ class SettingsActivityViews {
     }
 
     private void setupOnClickListeners() {
+        TextView tvRateThisApp = (TextView) activity.findViewById(R.id.tvRateThisApp);
+        tvRateThisApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onTvRateThisAppClick();
+            }
+        });
+
         TextView tvSeeMore = (TextView) activity.findViewById(R.id.tvSeeMore);
         tvSeeMore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,5 +55,6 @@ class SettingsActivityViews {
 
     interface SettingsViewsListener {
         void onTvSeeMoreClick();
+        void onTvRateThisAppClick();
     }
 }
