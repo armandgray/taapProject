@@ -51,6 +51,24 @@ public class SettingsActivityResTest {
     }
 
     @Test
+    public void hasView_AboutContainer_CopyRight() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_settings, null);
+        assertNotNull(container.findViewById(R.id.tvCopyright));
+    }
+
+    @Test
+    public void hasView_AboutContainer_TermsAndConditions() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_settings, null);
+        assertNotNull(container.findViewById(R.id.tvTermsConditions));
+    }
+
+    @Test
+    public void hasView_AboutContainer_SoftwareLicenses() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_settings, null);
+        assertNotNull(container.findViewById(R.id.tvSoftwareLicenses));
+    }
+
+    @Test
     public void hasDrawable_AboutTextBackground() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_settings, null);
         TextView textView = (TextView) container.findViewById(R.id.tvRateThisApp);
