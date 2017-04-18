@@ -1,7 +1,10 @@
 package com.armandgray.taap.settings;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
@@ -15,6 +18,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
+import static com.armandgray.taap.settings.SettingsActivityViews.ARMANDGRAY_COM;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
@@ -54,6 +58,15 @@ public class SettingsActivityViewsTest {
         final int displayOptions = activity.getSupportActionBar().getDisplayOptions();
         assertTrue((displayOptions & ActionBar.DISPLAY_SHOW_HOME) != 0);
         assertTrue((displayOptions & ActionBar.DISPLAY_HOME_AS_UP) != 0);
+    }
+
+    @Test
+    public void doesSetupSeeMoreClickListener_MethodTest_SetupActivityInitialState() throws Exception {
+        TextView tvSeeMore = (TextView) activity.findViewById(R.id.tvSeeMore);
+        tvSeeMore.performClick();
+        Intent expectedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(ARMANDGRAY_COM));
+        assertEquals(expectedIntent.toString(),
+                shadowOf(activity).getNextStartedActivity().toString());
     }
 
     @After

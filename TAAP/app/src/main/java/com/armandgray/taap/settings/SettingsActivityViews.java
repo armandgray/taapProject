@@ -6,6 +6,8 @@ import com.armandgray.taap.R;
 
 class SettingsActivityViews {
 
+    static final String ARMANDGRAY_COM = "http://armandgray.com";
+
     SettingsActivity activity;
 
     SettingsActivityViews(SettingsActivity activity) {
