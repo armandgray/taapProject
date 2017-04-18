@@ -19,6 +19,7 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
 import static com.armandgray.taap.settings.SettingsActivityController.ARMANDGRAY_COM;
+import static com.armandgray.taap.settings.SettingsActivityController.GOOGLE_PLAY_STORE_TAAP;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
@@ -58,6 +59,15 @@ public class SettingsActivityViewsTest {
         final int displayOptions = activity.getSupportActionBar().getDisplayOptions();
         assertTrue((displayOptions & ActionBar.DISPLAY_SHOW_HOME) != 0);
         assertTrue((displayOptions & ActionBar.DISPLAY_HOME_AS_UP) != 0);
+    }
+
+    @Test
+    public void doesSetupRateThisAppClickListener_MethodTest_SetupActivityInitialState() throws Exception {
+        TextView tvRateThisApp = (TextView) activity.findViewById(R.id.tvRateThisApp);
+        tvRateThisApp.performClick();
+        Intent expectedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(GOOGLE_PLAY_STORE_TAAP));
+        assertEquals(expectedIntent.toString(),
+                shadowOf(activity).getNextStartedActivity().toString());
     }
 
     @Test
