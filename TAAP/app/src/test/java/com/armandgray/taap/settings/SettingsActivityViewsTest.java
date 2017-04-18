@@ -1,5 +1,6 @@
 package com.armandgray.taap.settings;
 
+import android.os.Build;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -81,14 +82,6 @@ public class SettingsActivityViewsTest {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_settings, null);
         TextView textView = (TextView) container.findViewById(R.id.tvRateThisApp);
         assertEquals(activity.getResources().getDrawable(R.drawable.about_item_background), textView.getBackground());
-    }
-
-    @Test
-    public void hasDrawable_AboutTextDrawableRight() throws Exception {
-        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_settings, null);
-        TextView textView = (TextView) container.findViewById(R.id.tvRateThisApp);
-        assertEquals(activity.getResources().getDrawable(R.drawable.about_item_background),
-                textView.getCompoundDrawables()[2]);
     }
 
     @After
