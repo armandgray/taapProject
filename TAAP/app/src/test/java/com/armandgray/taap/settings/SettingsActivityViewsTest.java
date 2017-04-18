@@ -56,6 +56,11 @@ public class SettingsActivityViewsTest {
         assertTrue((displayOptions & ActionBar.DISPLAY_HOME_AS_UP) != 0);
     }
 
+    @Test
+    public void hasLayout_AboutContainer() throws Exception {
+        assertNotNull(activity.findViewById(R.id.aboutContainer));
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
