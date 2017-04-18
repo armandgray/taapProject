@@ -12,6 +12,7 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -32,6 +33,11 @@ public class SettingsActivityControllerTest {
     @Test
     public void activityInstanceOfAppCompatActivity_TestConstructor() throws Exception {
         assertEquals("settings.SettingsActivity", controller.activity.getLocalClassName());
+    }
+
+    @Test
+    public void doesCreateViewsHandler_TestConstructor() throws Exception {
+        assertNotNull(controller.views);
     }
 
     @After
