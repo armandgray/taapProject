@@ -115,4 +115,18 @@
         android:popupBackground="#333333"
         android:text="@string/app_info"
         android:textAllCaps="true" />
+
+    <TextView
+        android:id="@+id/tvVersionHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/version"
+        android:textColor="@color/colorDarkGray"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvVersionNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/version_number" />
 </LinearLayout>

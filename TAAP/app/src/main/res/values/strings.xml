@@ -19,4 +19,6 @@
     <string name="copyright">Copyright</string>
     <string name="legal">Legal</string>
     <string name="app_info">App Info</string>
+    <string name="version">Version</string>
+    <string name="version_number">1.0.0</string>
 </resources>
