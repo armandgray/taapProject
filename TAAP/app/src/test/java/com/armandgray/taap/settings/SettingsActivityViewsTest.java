@@ -1,6 +1,7 @@
 package com.armandgray.taap.settings;
 
 import com.armandgray.taap.BuildConfig;
+import com.armandgray.taap.R;
 
 import org.junit.After;
 import org.junit.Before;
@@ -12,6 +13,7 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
 import static junit.framework.Assert.assertEquals;
+import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -32,6 +34,11 @@ public class SettingsActivityViewsTest {
     @Test
     public void activityInstanceOfMainActivity_TestConstructor() throws Exception {
         assertEquals("settings.SettingsActivity", views.activity.getLocalClassName());
+    }
+
+    @Test
+    public void doesSetContentView_MethodTest_SetupActivityInitialState() throws Exception {
+        assertEquals(R.id.activitySettingsLayout, shadowOf(activity).getContentView().getId());
     }
 
     @After

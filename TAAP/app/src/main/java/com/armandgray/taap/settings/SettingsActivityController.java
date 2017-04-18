@@ -8,5 +8,7 @@ class SettingsActivityController {
     public SettingsActivityController(SettingsActivity activity) {
         this.activity = activity;
         this.views = new SettingsActivityViews(activity);
+
+        views.setupActivityInitialState();
     }
 }
