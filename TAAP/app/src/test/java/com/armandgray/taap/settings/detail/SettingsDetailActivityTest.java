@@ -1,7 +1,7 @@
 package com.armandgray.taap.settings.detail;
 
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
@@ -33,7 +33,7 @@ public class SettingsDetailActivityTest {
 
     @Test
     public void hasView_TvContents() throws Exception {
-        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_settings_detail, null);
+        ScrollView container = (ScrollView) View.inflate(activity, R.layout.content_settings_detail, null);
         assertNotNull(container.findViewById(R.id.tvContents));
     }
 
