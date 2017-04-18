@@ -1,5 +1,7 @@
 package com.armandgray.taap.settings;
 
+import android.support.v7.app.ActionBar;
+
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
 
@@ -14,6 +16,7 @@ import org.robolectric.annotation.Config;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
@@ -44,7 +47,9 @@ public class SettingsActivityViewsTest {
 
     @Test
     public void doesSetHomeAsUpEnabled_MethodTest_SetupActivityInitialState() throws Exception {
-        assertNotNull(null);
+        assertNotNull(activity.getSupportActionBar());
+        final int displayOptions = activity.getSupportActionBar().getDisplayOptions();
+        assertTrue((displayOptions & ActionBar.DISPLAY_HOME_AS_UP) != 0);
     }
 
     @After
