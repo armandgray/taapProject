@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
 import static junit.framework.Assert.assertEquals;
@@ -27,6 +28,7 @@ import static org.robolectric.Shadows.shadowOf;
 @Config(constants = BuildConfig.class)
 public class MainActivityResTest {
 
+    private ActivityController<MainActivity> activityController;
     private MainActivity activity;
     private MainActivityViews views;
     private Toolbar toolbar;
@@ -35,7 +37,8 @@ public class MainActivityResTest {
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
-        activity = Robolectric.buildActivity(MainActivity.class).create().visible().get();
+        activityController = Robolectric.buildActivity(MainActivity.class);
+        activity = activityController.create().visible().get();
         toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         optionsMenu = shadowOf(activity).getOptionsMenu();
@@ -110,6 +113,7 @@ public class MainActivityResTest {
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
+        activityController.pause().stop().destroy();
         activity = null;
         toolbar = null;
         optionsMenu = null;
