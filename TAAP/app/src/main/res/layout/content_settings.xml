@@ -11,6 +11,12 @@
     tools:context="com.armandgray.taap.settings.SettingsActivity"
     tools:showIn="@layout/activity_settings">
 
+    <View
+        android:id="@+id/firstTopBorder"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGray" />
+
     <TextView
         android:id="@+id/tvRateThisApp"
         android:layout_width="match_parent"
@@ -45,15 +51,27 @@
         android:text="@string/see_more_from_the_developer"
         android:textSize="@dimen/settings_text_size" />
 
+
     <TextView
         android:id="@+id/tvLegalHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/header_top_padding"
+
         android:popupBackground="#333333"
         android:text="@string/legal"
         android:textAllCaps="true" />
+
+    <View
+        android:id="@+id/secondTopBorder"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGray" />
 
     <TextView
         android:id="@+id/tvCopyright"
@@ -111,6 +129,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/header_top_padding"
         android:popupBackground="#333333"
         android:text="@string/app_info"
@@ -120,6 +142,10 @@
         android:id="@+id/tvVersionHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin"
         android:text="@string/version"
         android:textColor="@color/colorDarkGray"
         android:textStyle="bold" />
@@ -128,5 +154,9 @@
         android:id="@+id/tvVersionNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin"
         android:text="@string/version_number" />
 </LinearLayout>
