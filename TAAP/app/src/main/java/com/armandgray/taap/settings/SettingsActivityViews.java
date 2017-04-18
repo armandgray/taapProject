@@ -51,10 +51,19 @@ class SettingsActivityViews {
                 listener.onTvSeeMoreClick();
             }
         });
+
+        TextView tvCopyright = (TextView) activity.findViewById(R.id.tvCopyright);
+        tvCopyright.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onTvCopyrightClick();
+            }
+        });
     }
 
     interface SettingsViewsListener {
         void onTvSeeMoreClick();
         void onTvRateThisAppClick();
+        void onTvCopyrightClick();
     }
 }

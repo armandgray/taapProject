@@ -19,7 +19,9 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
 import static com.armandgray.taap.settings.SettingsActivityController.ARMANDGRAY_COM;
+import static com.armandgray.taap.settings.SettingsActivityController.COPYRIGHT;
 import static com.armandgray.taap.settings.SettingsActivityController.GOOGLE_PLAY_STORE_TAAP;
+import static com.armandgray.taap.settings.SettingsActivityController.SELECTED_ITEM;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
@@ -86,6 +88,8 @@ public class SettingsActivityViewsTest {
         Intent expectedIntent = new Intent(activity, SettingsDetailActivity.class);
         assertEquals(expectedIntent.toString(),
                 shadowOf(activity).getNextStartedActivity().toString());
+        assertEquals(COPYRIGHT,
+                shadowOf(activity).getNextStartedActivity().getStringExtra(SELECTED_ITEM));
     }
 
     @After
