@@ -80,7 +80,7 @@ public class SettingsActivityViewsTest {
     public void hasDrawable_AboutTextBackground() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_settings, null);
         TextView textView = (TextView) container.findViewById(R.id.tvRateThisApp);
-        assertEquals(activity.getResources().getDrawable(R.drawable.about_text_background), textView.getBackground());
+        assertEquals(activity.getResources().getDrawable(R.drawable.about_item_background), textView.getBackground());
     }
 
     @After
