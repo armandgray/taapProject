@@ -59,11 +59,20 @@ class SettingsActivityViews {
                 listener.onTvCopyrightClick();
             }
         });
+
+        TextView tvTermsConditions = (TextView) activity.findViewById(R.id.tvTermsConditions);
+        tvTermsConditions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onTvTermsConditionsClick();
+            }
+        });
     }
 
     interface SettingsViewsListener {
         void onTvSeeMoreClick();
         void onTvRateThisAppClick();
         void onTvCopyrightClick();
+        void onTvTermsConditionsClick();
     }
 }
