@@ -1,6 +1,8 @@
 package com.armandgray.taap.settings;
 
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.TextView;
 
 import com.armandgray.taap.R;
 
@@ -17,10 +19,17 @@ class SettingsActivityViews {
     void setupActivityInitialState() {
         activity.setContentView(R.layout.activity_settings);
         setupToolbar();
-        setupToolbarHomebutton();
+        setupToolbarHomeButton();
+        TextView tvSeeMore = (TextView) activity.findViewById(R.id.tvSeeMore);
+        tvSeeMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
     }
 
-    private void setupToolbarHomebutton() {
+    private void setupToolbarHomeButton() {
         if (activity.getSupportActionBar() != null) {
             activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
