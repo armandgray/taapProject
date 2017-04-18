@@ -16,12 +16,19 @@ class SettingsActivityViews {
 
     void setupActivityInitialState() {
         activity.setContentView(R.layout.activity_settings);
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        activity.setSupportActionBar(toolbar);
-        
+        setupToolbar();
+        setupToolbarHomebutton();
+    }
+
+    private void setupToolbarHomebutton() {
         if (activity.getSupportActionBar() != null) {
             activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+    }
+
+    private void setupToolbar() {
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        activity.setSupportActionBar(toolbar);
     }
 }
