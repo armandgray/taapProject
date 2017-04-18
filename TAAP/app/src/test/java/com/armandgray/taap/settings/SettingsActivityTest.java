@@ -1,6 +1,6 @@
-package com.armandgray.taap;
+package com.armandgray.taap.settings;
 
-import com.armandgray.taap.settings.SettingsActivity;
+import com.armandgray.taap.BuildConfig;
 
 import org.junit.After;
 import org.junit.Before;
@@ -30,7 +30,7 @@ public class SettingsActivityTest {
     }
 
     @Test
-    public void createsDrillActivityController_TestOnCreate() throws Exception {
+    public void createsSettingsActivityController_TestOnCreate() throws Exception {
         assertNotNull(activity.controller);
         assertNotNull(activity.controller.activity);
     }
