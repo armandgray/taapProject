@@ -18,7 +18,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
-import static com.armandgray.taap.settings.SettingsActivityViews.ARMANDGRAY_COM;
+import static com.armandgray.taap.settings.SettingsActivityController.ARMANDGRAY_COM;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
