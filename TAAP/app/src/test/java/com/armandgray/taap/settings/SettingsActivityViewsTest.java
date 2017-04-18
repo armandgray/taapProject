@@ -22,6 +22,7 @@ import static com.armandgray.taap.settings.SettingsActivityController.ARMANDGRAY
 import static com.armandgray.taap.settings.SettingsActivityController.COPYRIGHT;
 import static com.armandgray.taap.settings.SettingsActivityController.GOOGLE_PLAY_STORE_TAAP;
 import static com.armandgray.taap.settings.SettingsActivityController.SELECTED_ITEM;
+import static com.armandgray.taap.settings.SettingsActivityController.TERMS_AND_CONDITIONS;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
@@ -90,6 +91,17 @@ public class SettingsActivityViewsTest {
         Intent actualIntent = shadowOf(activity).getNextStartedActivity();
         assertEquals(expectedIntent.toString(), actualIntent.toString());
         assertEquals(COPYRIGHT, actualIntent.getStringExtra(SELECTED_ITEM));
+    }
+
+    @Test
+    public void doesSetupTermsAndConditionsClickListener_MethodTest_SetupActivityInitialState() throws Exception {
+        TextView tvTermsConditions = (TextView) activity.findViewById(R.id.tvTermsConditions);
+        tvTermsConditions.performClick();
+        Intent expectedIntent = (new Intent(activity, SettingsDetailActivity.class))
+                .putExtra(SELECTED_ITEM, TERMS_AND_CONDITIONS);
+        Intent actualIntent = shadowOf(activity).getNextStartedActivity();
+        assertEquals(expectedIntent.toString(), actualIntent.toString());
+        assertEquals(TERMS_AND_CONDITIONS, actualIntent.getStringExtra(SELECTED_ITEM));
     }
 
     @After
