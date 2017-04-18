@@ -38,6 +38,7 @@ public class SettingsActivityControllerTest {
     @Test
     public void doesCreateViewsHandler_TestConstructor() throws Exception {
         assertNotNull(controller.views);
+        assertNotNull(controller.views.activity);
     }
 
     @After

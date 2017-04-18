@@ -2,7 +2,7 @@ package com.armandgray.taap.settings;
 
 class SettingsActivityViews {
 
-    private SettingsActivity activity;
+    SettingsActivity activity;
 
     SettingsActivityViews(SettingsActivity activity) {
         this.activity = activity;
