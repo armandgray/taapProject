@@ -37,6 +37,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.armandgray.taap.MainActivity" />
         </activity>
+        <activity
+            android:name=".settings.SettingsDetailActivity"
+            android:label="@string/title_activity_settings_detail"
+            android:parentActivityName=".settings.SettingsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.armandgray.taap.settings.SettingsActivity" />
+        </activity>
     </application>
 
 </manifest>
