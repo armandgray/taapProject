@@ -9,5 +9,10 @@
     tools:context="com.armandgray.taap.settings.SettingsActivity"
     tools:showIn="@layout/activity_settings">
 
-
+    <TextView
+        android:id="@+id/tvRateThisApp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="@string/rate_me_in_the_app_store"/>
 </LinearLayout>
