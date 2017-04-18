@@ -14,4 +14,7 @@
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="rate_me_in_the_app_store">Rate me in the App Store</string>
     <string name="see_more_from_the_developer">See more from the developer</string>
+    <string name="software_licenses">Software Licenses</string>
+    <string name="terms_conditions"><![CDATA[Terms & Conditions]]></string>
+    <string name="copyright">Copyright</string>
 </resources>

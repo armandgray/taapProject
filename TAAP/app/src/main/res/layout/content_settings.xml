@@ -44,4 +44,55 @@
         android:paddingTop="@dimen/about_text_padding_vertical"
         android:text="@string/see_more_from_the_developer"
         android:textSize="@dimen/settings_text_size" />
+
+    <TextView
+        android:id="@+id/tvCopyright"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/about_item_background"
+        android:drawableEnd="@drawable/ic_chevron_right_gray_24dp"
+        android:drawableRight="@drawable/ic_chevron_right_gray_24dp"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/about_text_padding_vertical"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/about_text_padding_vertical"
+        android:text="@string/copyright"
+        android:textSize="@dimen/settings_text_size" />
+
+    <TextView
+        android:id="@+id/tvTermsConditions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/about_item_background"
+        android:drawableEnd="@drawable/ic_chevron_right_gray_24dp"
+        android:drawableRight="@drawable/ic_chevron_right_gray_24dp"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/about_text_padding_vertical"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/about_text_padding_vertical"
+        android:text="@string/terms_conditions"
+        android:textSize="@dimen/settings_text_size" />
+
+    <TextView
+        android:id="@+id/tvSoftwareLicenses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/about_item_background"
+        android:drawableEnd="@drawable/ic_chevron_right_gray_24dp"
+        android:drawableRight="@drawable/ic_chevron_right_gray_24dp"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/about_text_padding_vertical"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/about_text_padding_vertical"
+        android:text="@string/software_licenses"
+        android:textSize="@dimen/settings_text_size" />
 </LinearLayout>
