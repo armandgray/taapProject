@@ -79,6 +79,15 @@ public class SettingsActivityViewsTest {
                 shadowOf(activity).getNextStartedActivity().toString());
     }
 
+    @Test
+    public void doesSetupCopyrightClickListener_MethodTest_SetupActivityInitialState() throws Exception {
+        TextView tvCopyright = (TextView) activity.findViewById(R.id.tvCopyright);
+        tvCopyright.performClick();
+        Intent expectedIntent = new Intent(activity, SettingsDetailActivity.class);
+        assertEquals(expectedIntent.toString(),
+                shadowOf(activity).getNextStartedActivity().toString());
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
