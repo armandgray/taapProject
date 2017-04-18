@@ -87,6 +87,13 @@ public class SettingsActivityResTest {
         assertNotNull(container.findViewById(R.id.tvAppInfo));
     }
 
+    @Test
+    public void hasView_AboutContainer_VersionNumber() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_settings, null);
+        assertNotNull(container.findViewById(R.id.tvVersionHeader));
+        assertNotNull(container.findViewById(R.id.tvVersionNumber));
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
