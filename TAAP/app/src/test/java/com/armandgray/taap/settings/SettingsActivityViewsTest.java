@@ -49,6 +49,7 @@ public class SettingsActivityViewsTest {
     public void doesSetHomeAsUpEnabled_MethodTest_SetupActivityInitialState() throws Exception {
         assertNotNull(activity.getSupportActionBar());
         final int displayOptions = activity.getSupportActionBar().getDisplayOptions();
+        assertTrue((displayOptions & ActionBar.DISPLAY_SHOW_HOME) != 0);
         assertTrue((displayOptions & ActionBar.DISPLAY_HOME_AS_UP) != 0);
     }
 

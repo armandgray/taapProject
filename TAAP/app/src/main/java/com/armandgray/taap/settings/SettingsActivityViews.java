@@ -12,5 +12,9 @@ class SettingsActivityViews {
 
     void setupActivityInitialState() {
         activity.setContentView(R.layout.activity_settings);
+        if (activity.getSupportActionBar() != null) {
+            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
     }
 }
