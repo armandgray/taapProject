@@ -4,11 +4,14 @@ import com.armandgray.taap.BuildConfig;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
+
+import static junit.framework.Assert.assertEquals;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -25,6 +28,12 @@ public class SettingsActivityControllerTest {
         activity = activityController.create().visible().get();
         controller = activity.controller;
     }
+
+    @Test
+    public void activityInstanceOfAppCompatActivity_TestConstructor() throws Exception {
+        assertEquals("SettingsActivity", controller.activity.getLocalClassName());
+    }
+
 
     @After
     public void tearDown() {
