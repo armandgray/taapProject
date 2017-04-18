@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
+import com.armandgray.taap.settings.SettingsActivity;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
