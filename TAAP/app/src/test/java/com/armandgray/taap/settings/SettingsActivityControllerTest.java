@@ -31,9 +31,8 @@ public class SettingsActivityControllerTest {
 
     @Test
     public void activityInstanceOfAppCompatActivity_TestConstructor() throws Exception {
-        assertEquals("SettingsActivity", controller.activity.getLocalClassName());
+        assertEquals("settings.SettingsActivity", controller.activity.getLocalClassName());
     }
-
 
     @After
     public void tearDown() {
