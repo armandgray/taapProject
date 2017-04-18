@@ -1,5 +1,6 @@
 package com.armandgray.taap.settings.detail;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.widget.ScrollView;
@@ -13,10 +14,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
 import static com.armandgray.taap.settings.SettingsActivityController.COPYRIGHT;
+import static com.armandgray.taap.settings.SettingsActivityController.SELECTED_ITEM;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
@@ -31,7 +34,9 @@ public class SettingsDetailActivityTest {
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
-        activityController = Robolectric.buildActivity(SettingsDetailActivity.class);
+        Intent intent = new Intent(RuntimeEnvironment.application, SettingsDetailActivity.class);
+        intent.putExtra(SELECTED_ITEM, COPYRIGHT);
+        activityController = Robolectric.buildActivity(SettingsDetailActivity.class).withIntent(intent);
         activity = activityController.create().visible().get();
     }
 

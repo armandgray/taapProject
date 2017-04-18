@@ -6,6 +6,8 @@ import android.support.v7.widget.Toolbar;
 
 import com.armandgray.taap.R;
 
+import static com.armandgray.taap.settings.SettingsActivityController.SELECTED_ITEM;
+
 public class SettingsDetailActivity extends AppCompatActivity {
 
     @Override
@@ -13,6 +15,7 @@ public class SettingsDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(getIntent().getStringExtra(SELECTED_ITEM));
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
