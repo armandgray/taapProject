@@ -18,4 +18,5 @@
     <string name="terms_conditions"><![CDATA[Terms & Conditions]]></string>
     <string name="copyright">Copyright</string>
     <string name="legal">Legal</string>
+    <string name="app_info">App Info</string>
 </resources>
