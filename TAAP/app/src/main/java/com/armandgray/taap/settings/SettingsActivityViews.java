@@ -1,5 +1,7 @@
 package com.armandgray.taap.settings;
 
+import android.support.v7.widget.Toolbar;
+
 import com.armandgray.taap.R;
 
 class SettingsActivityViews {
@@ -12,6 +14,9 @@ class SettingsActivityViews {
 
     void setupActivityInitialState() {
         activity.setContentView(R.layout.activity_settings);
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        activity.setSupportActionBar(toolbar);
+        
         if (activity.getSupportActionBar() != null) {
             activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             activity.getSupportActionBar().setDisplayShowHomeEnabled(true);

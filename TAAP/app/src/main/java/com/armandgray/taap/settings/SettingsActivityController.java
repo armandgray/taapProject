@@ -5,7 +5,7 @@ class SettingsActivityController {
     SettingsActivity activity;
     SettingsActivityViews views;
 
-    public SettingsActivityController(SettingsActivity activity) {
+    SettingsActivityController(SettingsActivity activity) {
         this.activity = activity;
         this.views = new SettingsActivityViews(activity);
 
