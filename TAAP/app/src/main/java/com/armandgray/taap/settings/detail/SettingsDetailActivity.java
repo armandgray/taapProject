@@ -1,4 +1,4 @@
-package com.armandgray.taap.settings;
+package com.armandgray.taap.settings.detail;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +14,9 @@ public class SettingsDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
 }

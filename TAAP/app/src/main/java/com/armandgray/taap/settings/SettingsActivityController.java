@@ -3,6 +3,8 @@ package com.armandgray.taap.settings;
 import android.content.Intent;
 import android.net.Uri;
 
+import com.armandgray.taap.settings.detail.SettingsDetailActivity;
+
 class SettingsActivityController implements SettingsActivityViews.SettingsViewsListener {
 
     static final String ARMANDGRAY_COM = "http://armandgray.com";

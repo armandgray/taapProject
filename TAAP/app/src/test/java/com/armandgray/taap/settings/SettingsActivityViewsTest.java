@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
+import com.armandgray.taap.settings.detail.SettingsDetailActivity;
 
 import org.junit.After;
 import org.junit.Before;

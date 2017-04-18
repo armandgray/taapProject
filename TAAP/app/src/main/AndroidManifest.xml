@@ -38,7 +38,7 @@
                 android:value="com.armandgray.taap.MainActivity" />
         </activity>
         <activity
-            android:name=".settings.SettingsDetailActivity"
+            android:name=".settings.detail.SettingsDetailActivity"
             android:label="@string/title_activity_settings_detail"
             android:parentActivityName=".settings.SettingsActivity"
             android:theme="@style/AppTheme.NoActionBar">
