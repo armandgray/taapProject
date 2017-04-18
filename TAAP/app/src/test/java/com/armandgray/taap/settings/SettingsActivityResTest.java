@@ -45,6 +45,13 @@ public class SettingsActivityResTest {
     }
 
     @Test
+    public void hasDrawable_AboutTextBackground() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_settings, null);
+        TextView textView = (TextView) container.findViewById(R.id.tvRateThisApp);
+        assertEquals(activity.getResources().getDrawable(R.drawable.about_item_background), textView.getBackground());
+    }
+
+    @Test
     public void hasView_AboutContainer_TvSeeMore() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_settings, null);
         assertNotNull(container.findViewById(R.id.tvSeeMore));
@@ -75,10 +82,9 @@ public class SettingsActivityResTest {
     }
 
     @Test
-    public void hasDrawable_AboutTextBackground() throws Exception {
+    public void hasView_AboutContainer_AppInfoHeader() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_settings, null);
-        TextView textView = (TextView) container.findViewById(R.id.tvRateThisApp);
-        assertEquals(activity.getResources().getDrawable(R.drawable.about_item_background), textView.getBackground());
+        assertNotNull(container.findViewById(R.id.tvAppInfo));
     }
 
     @After
