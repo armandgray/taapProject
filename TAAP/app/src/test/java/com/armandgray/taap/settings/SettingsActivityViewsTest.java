@@ -3,6 +3,7 @@ package com.armandgray.taap.settings;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
@@ -60,6 +61,12 @@ public class SettingsActivityViewsTest {
     @Test
     public void hasLayout_AboutContainer() throws Exception {
         assertNotNull(View.inflate(activity, R.layout.content_main, null));
+    }
+
+    @Test
+    public void hasView_AboutContainer_TvRateThisApp() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_main, null);
+        assertNotNull(container.findViewById(R.id.tvRateThisApp));
     }
 
     @After
