@@ -16,6 +16,8 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
+import static com.armandgray.taap.settings.SettingsActivityController.COPYRIGHT;
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
@@ -49,10 +51,11 @@ public class SettingsDetailActivityTest {
 
     @Test
     public void doesSetupTitle() throws Exception {
-        assertNotNull(activity.getSupportActionBar());
+        ActionBar actionBar = activity.getSupportActionBar();
+        assertNotNull(actionBar);
         final int displayOptions = activity.getSupportActionBar().getDisplayOptions();
         assertTrue((displayOptions & ActionBar.DISPLAY_SHOW_TITLE) != 0);
-
+        assertEquals(COPYRIGHT, actionBar.getTitle());
     }
 
     @After
