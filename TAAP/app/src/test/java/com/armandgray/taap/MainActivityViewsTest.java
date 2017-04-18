@@ -31,6 +31,7 @@ public class MainActivityViewsTest {
 
     private ActivityController<MainActivity> activityController;
     private MainActivity activity;
+    private Toolbar toolbar;
     private MainActivityViews views;
 
     @Before
@@ -38,6 +39,7 @@ public class MainActivityViewsTest {
         System.out.println("Running Set Up!");
         activityController = Robolectric.buildActivity(MainActivity.class);
         activity = activityController.create().visible().get();
+        toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         views = activity.controller.views;
     }
 
@@ -52,20 +54,13 @@ public class MainActivityViewsTest {
     }
 
     @Test
-    public void canGetToolbar__MethodTest_SetupToolbar() throws Exception {
-
-    }
-
-    @Test
     public void canGetOptionsMenu_TestOnCreate() throws Exception {
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         assertNotNull(shadowOf(activity).getOptionsMenu());
     }
 
     @Test
     public void canSelectOptionsMenuItem_Settings() throws Exception {
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         Menu optionsMenu = shadowOf(activity).getOptionsMenu();
         assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_settings)));
@@ -73,7 +68,6 @@ public class MainActivityViewsTest {
 
     @Test
     public void canStartSettingsActivityOnSettingsMenuItemClick() throws Exception {
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         Menu optionsMenu = shadowOf(activity).getOptionsMenu();
         assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_settings)));
@@ -84,7 +78,6 @@ public class MainActivityViewsTest {
 
     @Test
     public void canSelectOptionsMenuItem_Log() throws Exception {
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         Menu optionsMenu = shadowOf(activity).getOptionsMenu();
         assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_log)));
@@ -92,7 +85,6 @@ public class MainActivityViewsTest {
 
     @Test
     public void canStartLogActivityOnLogMenuItemClick() throws Exception {
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         Menu optionsMenu = shadowOf(activity).getOptionsMenu();
         assertTrue(activity.onOptionsItemSelected(optionsMenu.findItem(R.id.action_log)));
@@ -143,6 +135,7 @@ public class MainActivityViewsTest {
         System.out.println("Running TearDown!");
         activityController.pause().stop().destroy();
         activity = null;
+        toolbar = null;
         views = null;
     }
 
