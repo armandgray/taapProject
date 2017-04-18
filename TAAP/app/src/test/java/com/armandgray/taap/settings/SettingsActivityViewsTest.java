@@ -13,6 +13,7 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
@@ -39,6 +40,11 @@ public class SettingsActivityViewsTest {
     @Test
     public void doesSetContentView_MethodTest_SetupActivityInitialState() throws Exception {
         assertEquals(R.id.activitySettingsLayout, shadowOf(activity).getContentView().getId());
+    }
+
+    @Test
+    public void doesSetHomeAsUpEnabled_MethodTest_SetupActivityInitialState() throws Exception {
+        assertNotNull(null);
     }
 
     @After
