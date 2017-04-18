@@ -36,6 +36,7 @@ class SettingsActivityController implements SettingsActivityViews.SettingsViewsL
     @Override
     public void onTvCopyrightClick() {
         Intent intent = new Intent(activity, SettingsDetailActivity.class);
+        intent.putExtra(SELECTED_ITEM, COPYRIGHT);
         activity.startActivity(intent);
     }
 }
