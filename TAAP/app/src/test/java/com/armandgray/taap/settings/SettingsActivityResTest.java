@@ -39,6 +39,12 @@ public class SettingsActivityResTest {
     }
 
     @Test
+    public void hasView_AboutContainer_FirstTopBorder() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_settings, null);
+        assertNotNull(container.findViewById(R.id.firstTopBorder));
+    }
+
+    @Test
     public void hasView_AboutContainer_TvRateThisApp() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_settings, null);
         assertNotNull(container.findViewById(R.id.tvRateThisApp));
@@ -61,6 +67,12 @@ public class SettingsActivityResTest {
     public void hasView_AboutContainer_LegalHeader() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_settings, null);
         assertNotNull(container.findViewById(R.id.tvLegalHeader));
+    }
+
+    @Test
+    public void hasView_AboutContainer_SecondTopBorder() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_settings, null);
+        assertNotNull(container.findViewById(R.id.secondTopBorder));
     }
 
     @Test
