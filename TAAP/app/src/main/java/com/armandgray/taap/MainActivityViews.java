@@ -63,11 +63,6 @@ class MainActivityViews {
         ivSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                etSearch.setVisibility(View.VISIBLE);
-                spinner.setVisibility(View.GONE);
-                fab.setVisibility(View.GONE);
-
-                etSearch.requestFocusFromTouch();
                 listener.onSearchClick();
             }
         });
