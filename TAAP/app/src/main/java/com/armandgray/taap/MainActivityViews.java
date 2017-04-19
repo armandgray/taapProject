@@ -4,7 +4,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 class MainActivityViews {
@@ -15,7 +15,7 @@ class MainActivityViews {
     EditText etSearch;
     FloatingActionButton fab;
     Spinner spinner;
-    private ImageButton ibSearch;
+    private ImageView ivSearch;
 
     MainActivityViews(MainActivity activity) {
         this.activity = activity;
@@ -35,7 +35,7 @@ class MainActivityViews {
         fab = (FloatingActionButton) activity.findViewById(R.id.fab);
         spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
         etSearch = (EditText) activity.findViewById(R.id.etSearch);
-        ibSearch = (ImageButton) activity.findViewById(R.id.ibSearch);
+        ivSearch = (ImageView) activity.findViewById(R.id.ivSearch);
     }
 
     private void setupToolbar() {
@@ -58,7 +58,7 @@ class MainActivityViews {
     }
 
     private void setupSearchClickListener() {
-        ibSearch.setOnClickListener(new View.OnClickListener() {
+        ivSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 etSearch.setVisibility(View.VISIBLE);

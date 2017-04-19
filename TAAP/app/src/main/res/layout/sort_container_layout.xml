@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="@dimen/activity_horizontal_margin"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:showIn="@layout/content_main">
 
-    <ImageButton
-        android:id="@+id/ibSort"
+    <ImageView
+        android:id="@+id/ivSort"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         android:contentDescription="@string/icon_sort_button"
+        android:tint="@color/colorDarkGray"
         app:srcCompat="@drawable/ic_compare_arrows_white_24dp" />
 
     <Spinner
@@ -21,10 +23,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_toEndOf="@+id/ibSort"
-        android:layout_toLeftOf="@+id/ibSearch"
-        android:layout_toRightOf="@+id/ibSort"
-        android:layout_toStartOf="@+id/ibSearch"
+        android:layout_toEndOf="@+id/ivSort"
+        android:layout_toLeftOf="@+id/ivSearch"
+        android:layout_toRightOf="@+id/ivSort"
+        android:layout_toStartOf="@+id/ivSearch"
         android:background="@null"
         android:entries="@array/drill_types"
         android:gravity="center"
@@ -35,15 +37,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_toEndOf="@+id/ibSort"
-        android:layout_toLeftOf="@+id/ibSearch"
-        android:layout_toRightOf="@+id/ibSort"
-        android:layout_toStartOf="@+id/ibSearch"
+        android:layout_toEndOf="@+id/ivSort"
+        android:layout_toLeftOf="@+id/ivSearch"
+        android:layout_toRightOf="@+id/ivSort"
+        android:layout_toStartOf="@+id/ivSearch"
         android:hint="@string/please_enter_drill"
         android:inputType="textShortMessage" />
 
-    <ImageButton
-        android:id="@+id/ibSearch"
+    <ImageView
+        android:id="@+id/ivSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -51,5 +53,6 @@
         android:layout_centerVertical="true"
         android:contentDescription="@string/icon_search_button"
         android:gravity="end"
+        android:tint="@color/colorDarkGray"
         app:srcCompat="@drawable/ic_search_white_24dp" />
 </RelativeLayout>

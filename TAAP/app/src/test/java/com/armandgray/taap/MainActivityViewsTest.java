@@ -107,7 +107,7 @@ public class MainActivityViewsTest {
 
     @Test
     public void canFocusEditTextOnIbSearchClick_MethodTest() throws Exception {
-        ImageButton ibSearch = (ImageButton) activity.findViewById(R.id.ibSearch);
+        ImageButton ibSearch = (ImageButton) activity.findViewById(R.id.ivSearch);
         ibSearch.performClick();
         EditText etSearch = (EditText) activity.findViewById(R.id.etSearch);
         assertEquals(View.VISIBLE, etSearch.getVisibility());
@@ -119,7 +119,7 @@ public class MainActivityViewsTest {
     public void canHideSpinnerAndFabOnIbSearchClick() throws Exception {
         Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
         FloatingActionButton fab = (FloatingActionButton) activity.findViewById(R.id.fab);
-        ImageButton ibSearch = (ImageButton) activity.findViewById(R.id.ibSearch);
+        ImageButton ibSearch = (ImageButton) activity.findViewById(R.id.ivSearch);
         ibSearch.performClick();
         assertEquals(View.GONE, spinner.getVisibility());
         assertEquals(View.GONE, fab.getVisibility());
