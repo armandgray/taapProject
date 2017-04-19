@@ -26,6 +26,7 @@
         android:layout_toRightOf="@+id/ibSort"
         android:layout_toStartOf="@+id/ibSearch"
         android:background="@null"
+        android:entries="@array/drill_types"
         android:gravity="center"
         android:spinnerMode="dropdown" />
 
