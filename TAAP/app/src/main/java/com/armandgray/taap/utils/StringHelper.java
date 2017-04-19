@@ -6,15 +6,15 @@ import android.text.style.StyleSpan;
 
 public class StringHelper {
 
-    public static String getFormattedHeaderTextString(String[] headers, String[] text) {
-        String content = "";
+    public static SpannableStringBuilder getFormattedHeaderTextString(String[] headers, String[] text) {
+        SpannableStringBuilder contentsStringBuilder = new SpannableStringBuilder();
         for (int i = 0; i < headers.length; i++) {
-            content += "\n\n";
             SpannableStringBuilder stringBuilder = new SpannableStringBuilder(headers[i] + "\n\n" + text[i]);
             StyleSpan boldStyleSpan = new StyleSpan(android.graphics.Typeface.BOLD);
-            stringBuilder.setSpan(boldStyleSpan, 0, headers[0].length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-            content += stringBuilder.toString();
+            stringBuilder.setSpan(boldStyleSpan, 0, headers[i].length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+            contentsStringBuilder.append(stringBuilder);
+            contentsStringBuilder.append("\n\n");
         }
-        return content;
+        return contentsStringBuilder;
     }
 }
