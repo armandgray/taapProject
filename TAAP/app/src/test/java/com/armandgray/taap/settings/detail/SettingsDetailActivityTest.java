@@ -3,7 +3,6 @@ package com.armandgray.taap.settings.detail;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -70,6 +69,13 @@ public class SettingsDetailActivityTest {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         TextView tvTitle = (TextView) toolbar.findViewById(R.id.tvTitle);
         assertNotNull(tvTitle);
+    }
+
+    @Test
+    public void doesSetCustomToolbarTitleText() throws Exception {
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        TextView tvTitle = (TextView) toolbar.findViewById(R.id.tvTitle);
+        assertEquals(COPYRIGHT, tvTitle.getText());
     }
 
     @After
