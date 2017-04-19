@@ -100,14 +100,7 @@ public class MainActivityViewsTest {
     }
 
     @Test
-    public void doesSetupSortAndSearch_SpinnerHasEntries_MethodTest() throws Exception {
-        Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
-        assertNotNull(spinner);
-        assertTrue(spinner.getCount() > 0);
-    }
-
-    @Test
-    public void doesSetupSortAndSearch_HideSearchView_MethodTest() throws Exception {
+    public void doesSetupSearchVisibility_HideSearchView_MethodTest() throws Exception {
         EditText etSearch = (EditText) activity.findViewById(R.id.etSearch);
         assertEquals(View.GONE, etSearch.getVisibility());
     }
