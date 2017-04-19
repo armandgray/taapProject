@@ -29,7 +29,6 @@
         android:layout_toStartOf="@+id/ivSearch"
         android:background="@null"
         android:entries="@array/drill_types"
-        android:gravity="center"
         android:spinnerMode="dropdown" />
 
     <EditText
