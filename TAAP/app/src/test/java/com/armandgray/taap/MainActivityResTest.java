@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import org.junit.After;
 import org.junit.Before;
@@ -83,6 +82,8 @@ public class MainActivityResTest {
     public void existsView_SortContainer_Spinner() throws Exception {
         RelativeLayout sortContainer = (RelativeLayout) View.inflate(activity, R.layout.sort_container_layout, null);
         assertNotNull(sortContainer.findViewById(R.id.spDrillsSort));
+        assertTrue(((Spinner) sortContainer.findViewById(R.id.spDrillsSort))
+                .getCount() > 0);
     }
 
     @Test
