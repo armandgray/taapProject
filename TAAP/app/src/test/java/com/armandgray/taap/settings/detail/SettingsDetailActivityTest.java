@@ -70,6 +70,7 @@ public class SettingsDetailActivityTest {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         TextView tvTitle = (TextView) toolbar.findViewById(R.id.tvTitle);
         assertNotNull(tvTitle);
+        assertEquals(Gravity.CENTER, tvTitle.getGravity());
     }
 
     @After
