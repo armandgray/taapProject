@@ -85,7 +85,7 @@ public class SettingsActivityViewsTest {
     public void doesSetCustomToolbarTitleText_MethodTest_SetupActivityInitialState() throws Exception {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         TextView tvTitle = (TextView) toolbar.findViewById(R.id.tvTitle);
-        assertEquals(COPYRIGHT, tvTitle.getText());
+        assertEquals("Settings", tvTitle.getText());
     }
 
     @Test

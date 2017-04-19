@@ -8,7 +8,6 @@ import com.armandgray.taap.R;
 
 class SettingsActivityViews {
 
-    public static final String SETTINGS = "Settings";
     SettingsActivity activity;
     SettingsViewsListener listener;
 
