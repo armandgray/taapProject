@@ -3,7 +3,6 @@ package com.armandgray.taap;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -28,7 +27,7 @@ class MainActivityViews {
         assignGlobalViews();
         setupToolbar();
         setupFabClickListener();
-        setupSortAndSearch();
+        setupSearchVisibility();
         setupSearchClickListener();
     }
 
@@ -53,8 +52,7 @@ class MainActivityViews {
         });
     }
 
-    private void setupSortAndSearch() {
-        spinner.setAdapter(createSpinnerAdapter());
+    private void setupSearchVisibility() {
         etSearch.setVisibility(View.GONE);
     }
 
@@ -67,10 +65,5 @@ class MainActivityViews {
                 fab.setVisibility(View.GONE);
             }
         });
-    }
-
-    private ArrayAdapter<String> createSpinnerAdapter() {
-        return new ArrayAdapter<>(activity,
-                R.layout.spinner_drills_text_layout, R.id.tvSpinnerDrill, drillsArray);
     }
 }

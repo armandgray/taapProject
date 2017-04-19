@@ -27,7 +27,6 @@
         android:layout_toStartOf="@+id/ibSearch"
         android:background="@null"
         android:gravity="center"
-        android:prompt="@string/sort_drills"
         android:spinnerMode="dropdown" />
 
     <EditText

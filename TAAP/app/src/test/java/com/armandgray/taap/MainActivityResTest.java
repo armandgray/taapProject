@@ -56,12 +56,6 @@ public class MainActivityResTest {
     }
 
     @Test
-    public void existsRes_SpinnerLayout() throws Exception {
-        TextView tvSpinnerLayout = (TextView) View.inflate(activity, R.layout.spinner_drills_text_layout, null);
-        assertNotNull(tvSpinnerLayout);
-    }
-
-    @Test
     public void hasOptionsMenuItem_Settings() throws Exception {
         assertNotNull(optionsMenu.findItem(R.id.action_settings));
     }
