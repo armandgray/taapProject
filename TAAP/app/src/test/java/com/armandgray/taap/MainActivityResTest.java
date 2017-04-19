@@ -79,6 +79,11 @@ public class MainActivityResTest {
     }
 
     @Test
+    public void existsRes_ArrayStrings_DrillTypesArray() throws Exception {
+        assertNotNull(activity.getResources().getStringArray(R.arrays.drill_types));
+    }
+
+    @Test
     public void existsView_SortContainer_Spinner() throws Exception {
         RelativeLayout sortContainer = (RelativeLayout) View.inflate(activity, R.layout.sort_container_layout, null);
         assertNotNull(sortContainer.findViewById(R.id.spDrillsSort));
