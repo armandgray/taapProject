@@ -67,6 +67,28 @@ public class SettingsActivityViewsTest {
     }
 
     @Test
+    public void doesSetupHideToolbarTitle_MethodTest_SetupActivityInitialState() throws Exception {
+        ActionBar actionBar = activity.getSupportActionBar();
+        assertNotNull(actionBar);
+        final int displayOptions = activity.getSupportActionBar().getDisplayOptions();
+        assertTrue((displayOptions & ActionBar.DISPLAY_SHOW_TITLE) == 0);
+    }
+
+    @Test
+    public void hasCustomToolbarTitle() throws Exception {
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        TextView tvTitle = (TextView) toolbar.findViewById(R.id.tvTitle);
+        assertNotNull(tvTitle);
+    }
+
+    @Test
+    public void doesSetCustomToolbarTitleText_MethodTest_SetupActivityInitialState() throws Exception {
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        TextView tvTitle = (TextView) toolbar.findViewById(R.id.tvTitle);
+        assertEquals(COPYRIGHT, tvTitle.getText());
+    }
+
+    @Test
     public void doesSetupRateThisAppClickListener_MethodTest_SetupActivityInitialState() throws Exception {
         TextView tvRateThisApp = (TextView) activity.findViewById(R.id.tvRateThisApp);
         tvRateThisApp.performClick();
