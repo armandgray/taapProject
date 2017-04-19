@@ -18,6 +18,7 @@ public class SettingsDetailActivity extends AppCompatActivity {
         toolbar.setTitle(getIntent().getStringExtra(SELECTED_ITEM));
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
