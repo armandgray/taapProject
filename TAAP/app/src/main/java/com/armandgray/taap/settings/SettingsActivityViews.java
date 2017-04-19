@@ -8,6 +8,7 @@ import com.armandgray.taap.R;
 
 class SettingsActivityViews {
 
+    public static final String SETTINGS = "Settings";
     SettingsActivity activity;
     SettingsViewsListener listener;
 
@@ -19,20 +20,22 @@ class SettingsActivityViews {
     void setupActivityInitialState() {
         activity.setContentView(R.layout.activity_settings);
         setupToolbar();
-        setupToolbarHomeButton();
         setupOnClickListeners();
     }
 
     private void setupToolbar() {
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        activity.setSupportActionBar(toolbar);
+        setSupportActionBarAsToolbar();
+        if (activity.getSupportActionBar() != null) {
+            activity.getSupportActionBar().setDisplayShowTitleEnabled(false);
+            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
-    private void setupToolbarHomeButton() {
-        if (activity.getSupportActionBar() != null) {
-            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
-        }
+    private void setSupportActionBarAsToolbar() {
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        ((TextView) toolbar.findViewById(R.id.tvTitle))
+                .setText(SETTINGS);
+        activity.setSupportActionBar(toolbar);
     }
 
     private void setupOnClickListeners() {
