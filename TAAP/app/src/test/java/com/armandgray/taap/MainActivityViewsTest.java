@@ -6,7 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.armandgray.taap.settings.SettingsActivity;
@@ -107,8 +107,8 @@ public class MainActivityViewsTest {
 
     @Test
     public void canFocusEditTextOnIbSearchClick_MethodTest() throws Exception {
-        ImageButton ibSearch = (ImageButton) activity.findViewById(R.id.ivSearch);
-        ibSearch.performClick();
+        ImageView ivSearch = (ImageView) activity.findViewById(R.id.ivSearch);
+        ivSearch.performClick();
         EditText etSearch = (EditText) activity.findViewById(R.id.etSearch);
         assertEquals(View.VISIBLE, etSearch.getVisibility());
         assertTrue(etSearch.isFocusable());
@@ -119,8 +119,8 @@ public class MainActivityViewsTest {
     public void canHideSpinnerAndFabOnIbSearchClick() throws Exception {
         Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
         FloatingActionButton fab = (FloatingActionButton) activity.findViewById(R.id.fab);
-        ImageButton ibSearch = (ImageButton) activity.findViewById(R.id.ivSearch);
-        ibSearch.performClick();
+        ImageView ivSearch = (ImageView) activity.findViewById(R.id.ivSearch);
+        ivSearch.performClick();
         assertEquals(View.GONE, spinner.getVisibility());
         assertEquals(View.GONE, fab.getVisibility());
     }
