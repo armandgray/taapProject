@@ -94,9 +94,16 @@ public class MainActivityViewsTest {
     }
 
     @Test
-    public void doesSetupFabClickListener_MethodTest() throws Exception {
+    public void doesSetupFABClickListener_MethodTest() throws Exception {
         FloatingActionButton fab = (FloatingActionButton) activity.findViewById(R.id.fab);
         assertNotNull(fab);
+    }
+
+    @Test
+    public void doesSetupSortClickListener_MethodTest() throws Exception {
+        ImageView ivSort = (ImageView) activity.findViewById(R.id.ivSort);
+        ivSort.performClick();
+        assertNotNull(ivSort);
     }
 
     @Test
