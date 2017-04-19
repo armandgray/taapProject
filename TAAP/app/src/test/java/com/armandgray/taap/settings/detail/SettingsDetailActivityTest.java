@@ -78,6 +78,12 @@ public class SettingsDetailActivityTest {
         assertEquals(COPYRIGHT, tvTitle.getText());
     }
 
+    @Test
+    public void doesSetTvContentText() throws Exception {
+        TextView tvContents = (TextView) activity.findViewById(R.id.tvContents);
+        assertTrue(tvContents.getText() != "");
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
