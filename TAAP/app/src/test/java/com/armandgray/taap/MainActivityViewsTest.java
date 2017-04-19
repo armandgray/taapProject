@@ -100,10 +100,13 @@ public class MainActivityViewsTest {
     }
 
     @Test
-    public void doesSetupSortClickListener_MethodTest() throws Exception {
+    public void canFocusSpinnerOnSortClick_MethodTest() throws Exception {
         ImageView ivSort = (ImageView) activity.findViewById(R.id.ivSort);
         ivSort.performClick();
-        assertNotNull(ivSort);
+        Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
+        assertEquals(View.VISIBLE, spinner.getVisibility());
+        assertTrue(spinner.isFocusable());
+        assertTrue(spinner.isFocused());
     }
 
     @Test
