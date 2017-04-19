@@ -3,6 +3,7 @@ package com.armandgray.taap.settings.detail;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 import com.armandgray.taap.R;
 
@@ -15,7 +16,8 @@ public class SettingsDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(getIntent().getStringExtra(SELECTED_ITEM));
+        ((TextView) toolbar.findViewById(R.id.tvTitle))
+                .setText(getIntent().getStringExtra(SELECTED_ITEM));
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
