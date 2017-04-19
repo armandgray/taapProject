@@ -16,6 +16,7 @@ class MainActivityViews {
     EditText etSearch;
     FloatingActionButton fab;
     Spinner spinner;
+    private ImageView ivSort;
     private ImageView ivSearch;
 
     MainActivityViews(MainActivity activity, MainViewsListener listener) {
@@ -37,6 +38,7 @@ class MainActivityViews {
         fab = (FloatingActionButton) activity.findViewById(R.id.fab);
         spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
         etSearch = (EditText) activity.findViewById(R.id.etSearch);
+        ivSort = (ImageView) activity.findViewById(R.id.ivSort);
         ivSearch = (ImageView) activity.findViewById(R.id.ivSearch);
     }
 
@@ -50,6 +52,15 @@ class MainActivityViews {
             @Override
             public void onClick(View view) {
                 listener.onFabClick();
+            }
+        });
+    }
+
+    private void setupSortClickListener() {
+        ivSort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onSortClick();
             }
         });
     }
@@ -70,6 +81,7 @@ class MainActivityViews {
 
     interface MainViewsListener {
         void onFabClick();
+        void onSortClick();
         void onSearchClick();
     }
 }

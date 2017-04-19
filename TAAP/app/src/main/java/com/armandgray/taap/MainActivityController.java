@@ -20,6 +20,11 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
     }
 
     @Override
+    public void onSortClick() {
+        // TODO
+    }
+
+    @Override
     public void onSearchClick() {
         views.etSearch.setVisibility(View.VISIBLE);
         views.spinner.setVisibility(View.GONE);
