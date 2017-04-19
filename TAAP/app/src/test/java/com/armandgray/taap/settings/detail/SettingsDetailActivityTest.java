@@ -2,8 +2,10 @@ package com.armandgray.taap.settings.detail;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
@@ -54,11 +56,18 @@ public class SettingsDetailActivityTest {
     }
 
     @Test
-    public void doesSetupCustomTitle() throws Exception {
+    public void doesSetupHideToolbarTitle() throws Exception {
         ActionBar actionBar = activity.getSupportActionBar();
         assertNotNull(actionBar);
         final int displayOptions = activity.getSupportActionBar().getDisplayOptions();
         assertTrue((displayOptions & ActionBar.DISPLAY_SHOW_TITLE) == 0);
+    }
+
+    @Test
+    public void hasCustomToolbarTitle() throws Exception {
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        TextView tvTitle = toolbar.findViewById(R.id.tvTitle);
+        assertNotNull(tvTitle);
     }
 
     @After
