@@ -100,12 +100,12 @@ public class MainActivityViewsTest {
     }
 
     @Test
-    public void canFocusSpinnerOnSortClick_MethodTest() throws Exception {
-        ImageView ivSort = (ImageView) activity.findViewById(R.id.ivSort);
-        ivSort.performClick();
+    public void canClickSpinnerOnSortClick_MethodTest() throws Exception {
+        activity.findViewById(R.id.ivSearch).performClick();
+        activity.findViewById(R.id.ivSort).performClick();
         Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
         assertEquals(View.VISIBLE, spinner.getVisibility());
-        assertTrue(spinner.isFocusable());
+        assertTrue(spinner.isClickable());
         assertTrue(spinner.isFocused());
     }
 
@@ -116,7 +116,7 @@ public class MainActivityViewsTest {
     }
 
     @Test
-    public void canFocusEditTextOnIbSearchClick_MethodTest() throws Exception {
+    public void canFocusEditTextOnIvSearchClick_MethodTest() throws Exception {
         ImageView ivSearch = (ImageView) activity.findViewById(R.id.ivSearch);
         ivSearch.performClick();
         EditText etSearch = (EditText) activity.findViewById(R.id.etSearch);
@@ -126,7 +126,7 @@ public class MainActivityViewsTest {
     }
 
     @Test
-    public void canHideSpinnerAndFabOnIbSearchClick() throws Exception {
+    public void canHideSpinnerAndFabOnIvSearchClick() throws Exception {
         Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
         FloatingActionButton fab = (FloatingActionButton) activity.findViewById(R.id.fab);
         ImageView ivSearch = (ImageView) activity.findViewById(R.id.ivSearch);
