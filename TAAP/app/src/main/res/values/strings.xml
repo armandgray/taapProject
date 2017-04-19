@@ -23,4 +23,12 @@
     <string name="version_number">1.0.0</string>
     <string name="title_activity_settings_detail">SettingsDetailActivity</string>
     <string name="settingsdetailactivity">SettingsDetailActivity</string>
+
+    <string-array name="drill_types">
+        <item>Sort Drills (All)</item>
+        <item>Shooting</item>
+        <item>Ball Handling</item>
+        <item>Passing</item>
+        <item>Fundamentals</item>
+    </string-array>
 </resources>

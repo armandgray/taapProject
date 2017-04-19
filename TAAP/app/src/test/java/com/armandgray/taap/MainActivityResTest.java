@@ -80,7 +80,7 @@ public class MainActivityResTest {
 
     @Test
     public void existsRes_ArrayStrings_DrillTypesArray() throws Exception {
-        assertNotNull(activity.getResources().getStringArray(R.arrays.drill_types));
+        assertNotNull(activity.getResources().getStringArray(R.array.drill_types));
     }
 
     @Test
