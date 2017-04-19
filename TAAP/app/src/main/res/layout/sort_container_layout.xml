@@ -38,7 +38,9 @@
         android:layout_toEndOf="@+id/ibSort"
         android:layout_toLeftOf="@+id/ibSearch"
         android:layout_toRightOf="@+id/ibSort"
-        android:layout_toStartOf="@+id/ibSearch" />
+        android:layout_toStartOf="@+id/ibSearch"
+        android:hint="@string/please_enter_drill"
+        android:inputType="textShortMessage" />
 
     <ImageButton
         android:id="@+id/ibSearch"

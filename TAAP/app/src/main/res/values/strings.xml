@@ -23,6 +23,7 @@
     <string name="version_number">1.0.0</string>
     <string name="title_activity_settings_detail">SettingsDetailActivity</string>
     <string name="settingsdetailactivity">SettingsDetailActivity</string>
+    <string name="please_enter_drill">Please Enter Drill</string>
 
     <string-array name="drill_types">
         <item>Sort Drills (All)</item>

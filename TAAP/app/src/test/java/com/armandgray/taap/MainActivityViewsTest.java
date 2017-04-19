@@ -106,11 +106,13 @@ public class MainActivityViewsTest {
     }
 
     @Test
-    public void canShowEditTextOnIbSearchClick_MethodTest() throws Exception {
+    public void canFocusEditTextOnIbSearchClick_MethodTest() throws Exception {
         ImageButton ibSearch = (ImageButton) activity.findViewById(R.id.ibSearch);
         ibSearch.performClick();
         EditText etSearch = (EditText) activity.findViewById(R.id.etSearch);
         assertEquals(View.VISIBLE, etSearch.getVisibility());
+        assertTrue(etSearch.isFocusable());
+        assertTrue(etSearch.isFocused());
     }
 
     @Test
