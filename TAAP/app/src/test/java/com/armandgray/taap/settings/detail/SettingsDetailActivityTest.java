@@ -3,6 +3,7 @@ package com.armandgray.taap.settings.detail;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import org.robolectric.annotation.Config;
 
 import static com.armandgray.taap.settings.SettingsActivityController.COPYRIGHT;
 import static com.armandgray.taap.settings.SettingsActivityController.SELECTED_ITEM;
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
@@ -66,7 +68,7 @@ public class SettingsDetailActivityTest {
     @Test
     public void hasCustomToolbarTitle() throws Exception {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        TextView tvTitle = toolbar.findViewById(R.id.tvTitle);
+        TextView tvTitle = (TextView) toolbar.findViewById(R.id.tvTitle);
         assertNotNull(tvTitle);
     }
 
