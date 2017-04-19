@@ -53,6 +53,7 @@ class MainActivityViews {
     }
 
     private void setupSearchVisibility() {
+        etSearch.setFocusable(true);
         etSearch.setVisibility(View.GONE);
     }
 
@@ -63,6 +64,8 @@ class MainActivityViews {
                 etSearch.setVisibility(View.VISIBLE);
                 spinner.setVisibility(View.GONE);
                 fab.setVisibility(View.GONE);
+
+                etSearch.requestFocusFromTouch();
             }
         });
     }
