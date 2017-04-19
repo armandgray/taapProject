@@ -12,7 +12,7 @@ public class SettingsActivityController implements SettingsActivityViews.Setting
     static final String GOOGLE_PLAY_STORE_TAAP = "https://play.google.com/store/apps/details?id=com.armandgray.seeme&hl=en";
     public static final String COPYRIGHT = "Copyright";
     public static final String SELECTED_ITEM = "SELECTED_ITEM";
-    public static final String TERMS_AND_CONDITIONS = "Terms &amp; Conditions";
+    public static final String TERMS_AND_CONDITIONS = "Terms & Conditions";
     public static final String SOFTWARE_LICENSES = "Software Licenses";
 
     SettingsActivity activity;
