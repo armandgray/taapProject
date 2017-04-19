@@ -10,6 +10,7 @@ import android.widget.Spinner;
 class MainActivityViews {
 
     MainActivity activity;
+    MainViewsListener listener;
 
     private String[] drillsArray = {"All", "Shooting", "Ball Handling", "Passing", "Fundamentals"};
     EditText etSearch;
@@ -17,8 +18,9 @@ class MainActivityViews {
     Spinner spinner;
     private ImageView ivSearch;
 
-    MainActivityViews(MainActivity activity) {
+    MainActivityViews(MainActivity activity, MainViewsListener listener) {
         this.activity = activity;
+        this.listener = listener;
     }
 
     void setupActivityInitialState() {
@@ -47,7 +49,7 @@ class MainActivityViews {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO Add onClick action to fab
+                listener.onFabClick();
             }
         });
     }
@@ -66,7 +68,13 @@ class MainActivityViews {
                 fab.setVisibility(View.GONE);
 
                 etSearch.requestFocusFromTouch();
+                listener.onSearchClick();
             }
         });
+    }
+
+    interface MainViewsListener {
+        void onFabClick();
+        void onSearchClick();
     }
 }
