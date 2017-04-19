@@ -24,18 +24,12 @@ class SettingsActivityViews {
     }
 
     private void setupToolbar() {
-        setSupportActionBarAsToolbar();
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        activity.setSupportActionBar(toolbar);
         if (activity.getSupportActionBar() != null) {
             activity.getSupportActionBar().setDisplayShowTitleEnabled(false);
             activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-    }
-
-    private void setSupportActionBarAsToolbar() {
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        ((TextView) toolbar.findViewById(R.id.tvTitle))
-                .setText(SETTINGS);
-        activity.setSupportActionBar(toolbar);
     }
 
     private void setupOnClickListeners() {
