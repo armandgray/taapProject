@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNull;
 import static org.mockito.Mockito.mock;
 
 @RunWith(RobolectricTestRunner.class)
@@ -53,6 +54,13 @@ public class DrillsRvAdapterTest {
         adapter = new DrillsRvAdapter(new ArrayList<>(Arrays.asList(firstDrill, secondDrill)));
         assertEquals(firstDrill, adapter.getItemAtPosition(0));
         assertEquals(secondDrill, adapter.getItemAtPosition(1));
+        assertNull(adapter.getItemAtPosition(2));
+    }
+
+    @Test
+    public void canGetItemAtPosition_NullDrillList() {
+        adapter = new DrillsRvAdapter(null);
+        assertNull(adapter.getItemAtPosition(0));
     }
 
     @After
