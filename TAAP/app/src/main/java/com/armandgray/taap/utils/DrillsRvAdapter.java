@@ -39,8 +39,14 @@ public class DrillsRvAdapter {
         return drillList.get(position);
     }
 
-    public void onBindViewHolder(DrillViewHolder holder, int position) {
+    public void onBindViewHolder(DrillViewHolder viewHolder, int position) {
+        final Drill drill = getItemAtPosition(position);
 
+        ImageView ivImage = viewHolder.ivImage;
+        TextView tvTitle = viewHolder.tvTitle;
+
+        ivImage.setImageResource(drill.getImageId());
+        tvTitle.setText(drill.getTitle());
     }
 
     static class DrillViewHolder extends RecyclerView.ViewHolder {
