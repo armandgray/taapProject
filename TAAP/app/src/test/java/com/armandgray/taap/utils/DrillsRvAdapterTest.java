@@ -42,7 +42,7 @@ public class DrillsRvAdapterTest {
     }
 
     @Test
-    public void onCreateViewHolder_returnsNewDrillViewHolderOfCorrectLayout() {
+    public void onCreateViewHolder_ReturnsNewDrillViewHolderOfCorrectLayout() {
         TestableDrillsRvAdapter testableAdapter = new TestableDrillsRvAdapter();
         testableAdapter.setMockView(mockView);
         DrillsRvAdapter.DrillViewHolder drillViewHolder = testableAdapter
@@ -51,7 +51,7 @@ public class DrillsRvAdapterTest {
     }
 
     @Test
-    public void onBindViewHolder_setsTextAndClickEventForDrillItemView() {
+    public void onBindViewHolder_DoesSetViewsForDrillItem() {
         adapter = new DrillsRvAdapter(new ArrayList<>(Collections.singletonList(
                 new Drill("1-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp))));
 
@@ -59,7 +59,7 @@ public class DrillsRvAdapterTest {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         holder = new DrillsRvAdapter.DrillViewHolder(
                 inflater.inflate(R.layout.drill_listitem, null, false));
-        
+        adapter.onBindViewHolder(holder, 0);
         assertEquals("1-Ball Pound Dribble", holder.tvTitle.getText());
         assertEquals(R.drawable.ic_fitness_center_white_24dp, holder.ivImage.getId());
     }
