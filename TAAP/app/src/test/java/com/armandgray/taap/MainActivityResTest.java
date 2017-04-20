@@ -110,6 +110,12 @@ public class MainActivityResTest {
         assertNotNull(rvDrills);
     }
 
+    @Test
+    public void existsLayout_DrillListItem() throws Exception {
+        RelativeLayout drillItemContainer = (RelativeLayout) View.inflate(activity, R.layout.drill_listitem, null);
+        assertNotNull(drillItemContainer);
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
