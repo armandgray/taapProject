@@ -24,7 +24,7 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
     @Override
     public void onSortClick() {
         views.spinner.performClick();
-        views.spinner.requestFocus();
+        views.spinner.requestFocusFromTouch();
     }
 
     @Override
