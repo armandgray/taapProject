@@ -135,6 +135,18 @@ public class MainActivityViewsTest {
         assertEquals(View.GONE, fab.getVisibility());
     }
 
+    @Test
+    public void canRestoreInitialUIOnIvSearchLoseFocus() throws Exception {
+        Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
+        FloatingActionButton fab = (FloatingActionButton) activity.findViewById(R.id.fab);
+        ImageView ivSearch = (ImageView) activity.findViewById(R.id.ivSearch);
+        ivSearch.performClick();
+        ivSearch.clearFocus();
+        assertEquals(View.GONE, ivSearch.getVisibility());
+        assertEquals(View.VISIBLE, spinner.getVisibility());
+        assertEquals(View.VISIBLE, fab.getVisibility());
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");

@@ -1,6 +1,8 @@
 package com.armandgray.taap;
 
+import android.app.Service;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 class MainActivityController implements MainActivityViews.MainViewsListener {
 
@@ -34,5 +36,7 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
         views.spinner.setVisibility(View.GONE);
         views.fab.setVisibility(View.GONE);
         views.etSearch.requestFocusFromTouch();
+        ((InputMethodManager) activity.getSystemService(Service.INPUT_METHOD_SERVICE))
+                .showSoftInput(views.etSearch, 0);
     }
 }
