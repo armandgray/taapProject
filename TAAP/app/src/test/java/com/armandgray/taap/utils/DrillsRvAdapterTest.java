@@ -15,6 +15,7 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNull;
@@ -61,6 +62,12 @@ public class DrillsRvAdapterTest {
     public void canGetItemAtPosition_NullDrillList() {
         adapter = new DrillsRvAdapter(null);
         assertNull(adapter.getItemAtPosition(0));
+    }
+
+    @Test
+    public void canGetItemAtPosition_IndexOutOfBounds() {
+        adapter = new DrillsRvAdapter(new ArrayList<>(Collections.singletonList(new Drill("", 0))));
+        assertNull(adapter.getItemAtPosition(1));
     }
 
     @After
