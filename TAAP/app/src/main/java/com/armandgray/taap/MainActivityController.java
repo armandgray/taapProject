@@ -23,9 +23,6 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
 
     @Override
     public void onSortClick() {
-        views.etSearch.setVisibility(View.GONE);
-        views.spinner.setVisibility(View.VISIBLE);
-        views.fab.setVisibility(View.VISIBLE);
         views.spinner.performClick();
         views.spinner.requestFocus();
     }
@@ -38,5 +35,16 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
         views.etSearch.requestFocusFromTouch();
         ((InputMethodManager) activity.getSystemService(Service.INPUT_METHOD_SERVICE))
                 .showSoftInput(views.etSearch, 0);
+    }
+
+    @Override
+    public void onEtSearchFocusChange(View v, boolean hasFocus) {
+        if (!hasFocus) {
+            views.etSearch.setVisibility(View.GONE);
+            views.spinner.setVisibility(View.VISIBLE);
+            views.fab.setVisibility(View.VISIBLE);
+            ((InputMethodManager) activity.getSystemService(Service.INPUT_METHOD_SERVICE))
+                    .hideSoftInputFromWindow(views.etSearch.getWindowToken(), 0);
+        }
     }
 }

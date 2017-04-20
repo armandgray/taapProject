@@ -78,11 +78,18 @@ class MainActivityViews {
                 listener.onSearchClick();
             }
         });
+        etSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                listener.onEtSearchFocusChange(v, hasFocus);
+            }
+        });
     }
 
     interface MainViewsListener {
         void onFabClick();
         void onSortClick();
         void onSearchClick();
+        void onEtSearchFocusChange(View v, boolean hasFocus);
     }
 }

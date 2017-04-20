@@ -136,13 +136,13 @@ public class MainActivityViewsTest {
     }
 
     @Test
-    public void canRestoreInitialUIOnIvSearchLoseFocus() throws Exception {
+    public void canRestoreInitialUIOnEtSearchLoseFocus() throws Exception {
         Spinner spinner = (Spinner) activity.findViewById(R.id.spDrillsSort);
         FloatingActionButton fab = (FloatingActionButton) activity.findViewById(R.id.fab);
-        ImageView ivSearch = (ImageView) activity.findViewById(R.id.ivSearch);
-        ivSearch.performClick();
-        ivSearch.clearFocus();
-        assertEquals(View.GONE, ivSearch.getVisibility());
+        activity.findViewById(R.id.ivSearch).performClick();
+        EditText etSearch = (EditText) activity.findViewById(R.id.etSearch);
+        etSearch.clearFocus();
+        assertEquals(View.GONE, etSearch.getVisibility());
         assertEquals(View.VISIBLE, spinner.getVisibility());
         assertEquals(View.VISIBLE, fab.getVisibility());
     }
