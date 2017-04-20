@@ -1,6 +1,7 @@
 package com.armandgray.taap.utils;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -22,11 +23,15 @@ public class DrillsRvAdapter {
     }
 
     public DrillViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        return new DrillViewHolder(getLayout(parent));
     }
 
     public int getItemCount() {
         return drillList.size();
+    }
+
+    private View getLayout(ViewGroup parent) {
+        return LayoutInflater.from(parent.getContext()).inflate(R.layout.drill_listitem, null);
     }
 
     Drill getItemAtPosition(int position) {
