@@ -47,7 +47,18 @@ public class DrillsRvAdapterTest {
         assertEquals(mockView, drillViewHolder.itemView);
     }
 
-    
+    static class TestableDrillsRvAdapter extends DrillsRvAdapter {
+        View mockView;
+
+        void setMockView(View mockView) {
+            this.mockView = mockView;
+        }
+
+        @Override
+        public View getLayout(ViewGroup parent) {
+            return mockView;
+        }
+    }
 
     @Test
     public void canGetItemCount() throws Exception {
