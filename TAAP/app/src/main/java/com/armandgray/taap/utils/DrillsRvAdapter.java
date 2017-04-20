@@ -12,7 +12,7 @@ import com.armandgray.taap.models.Drill;
 
 import java.util.ArrayList;
 
-public class DrillsRvAdapter {
+public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillViewHolder> {
 
     private ArrayList<Drill> drillList;
 
@@ -22,10 +22,23 @@ public class DrillsRvAdapter {
         this.drillList = drillList;
     }
 
+    @Override
     public DrillViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new DrillViewHolder(getLayout(parent));
     }
 
+    @Override
+    public void onBindViewHolder(DrillViewHolder viewHolder, int position) {
+        final Drill drill = getItemAtPosition(position);
+
+        ImageView ivImage = viewHolder.ivImage;
+        TextView tvTitle = viewHolder.tvTitle;
+
+        ivImage.setImageResource(drill.getImageId());
+        tvTitle.setText(drill.getTitle());
+    }
+
+    @Override
     public int getItemCount() {
         return drillList.size();
     }
@@ -37,16 +50,6 @@ public class DrillsRvAdapter {
     Drill getItemAtPosition(int position) {
         if (drillList == null || drillList.size() <= position) { return null; }
         return drillList.get(position);
-    }
-
-    public void onBindViewHolder(DrillViewHolder viewHolder, int position) {
-        final Drill drill = getItemAtPosition(position);
-
-        ImageView ivImage = viewHolder.ivImage;
-        TextView tvTitle = viewHolder.tvTitle;
-
-        ivImage.setImageResource(drill.getImageId());
-        tvTitle.setText(drill.getTitle());
     }
 
     static class DrillViewHolder extends RecyclerView.ViewHolder {
