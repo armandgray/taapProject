@@ -25,6 +25,7 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
         views.spinner.setVisibility(View.VISIBLE);
         views.fab.setVisibility(View.VISIBLE);
         views.spinner.performClick();
+        views.spinner.requestFocus();
     }
 
     @Override

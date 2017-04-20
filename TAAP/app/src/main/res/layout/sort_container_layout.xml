@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="@dimen/activity_horizontal_margin"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="@dimen/activity_horizontal_margin"
     tools:showIn="@layout/content_main">
 
     <ImageView
@@ -36,12 +36,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_toEndOf="@+id/ivSort"
         android:layout_toLeftOf="@+id/ivSearch"
         android:layout_toRightOf="@+id/ivSort"
         android:layout_toStartOf="@+id/ivSearch"
         android:hint="@string/please_enter_drill"
-        android:inputType="textShortMessage" />
+        android:inputType="textShortMessage"
+        android:textSize="14sp" />
 
     <ImageView
         android:id="@+id/ivSearch"
