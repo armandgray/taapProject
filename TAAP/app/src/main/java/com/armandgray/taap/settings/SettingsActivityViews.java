@@ -1,5 +1,7 @@
 package com.armandgray.taap.settings;
 
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
@@ -28,7 +30,15 @@ class SettingsActivityViews {
         if (activity.getSupportActionBar() != null) {
             activity.getSupportActionBar().setDisplayShowTitleEnabled(false);
             activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            setHomeAsUpIndicatorColor();
         }
+    }
+
+    private void setHomeAsUpIndicatorColor() {
+        final Drawable upArrow = activity.getResources().getDrawable(R.drawable.abc_ic_ab_back_material);
+        upArrow.setColorFilter(activity.getResources().getColor(R.color.colorDarkGray), PorterDuff.Mode.SRC_ATOP);
+        if (activity.getSupportActionBar() == null) { return; }
+        activity.getSupportActionBar().setHomeAsUpIndicator(upArrow);
     }
 
     private void setupOnClickListeners() {
