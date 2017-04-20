@@ -17,6 +17,7 @@ public class DrillsRvAdapter {
     }
 
     public Drill getItemAtPosition(int position) {
+        if (drillList == null || drillList.size() <= position) { return null; }
         return drillList.get(position);
     }
 }

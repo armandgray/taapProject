@@ -47,7 +47,7 @@ public class DrillsRvAdapterTest {
     }
 
     @Test
-    public void canGetItemAtPosition() {
+    public void canGetItemAtPosition() throws Exception {
         Drill firstDrill =
                 new Drill("1-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp);
         Drill secondDrill =
@@ -59,13 +59,13 @@ public class DrillsRvAdapterTest {
     }
 
     @Test
-    public void canGetItemAtPosition_NullDrillList() {
+    public void canGetItemAtPosition_NullDrillList() throws Exception {
         adapter = new DrillsRvAdapter(null);
         assertNull(adapter.getItemAtPosition(0));
     }
 
     @Test
-    public void canGetItemAtPosition_IndexOutOfBounds() {
+    public void canGetItemAtPosition_IndexOutOfBounds() throws Exception {
         adapter = new DrillsRvAdapter(new ArrayList<>(Collections.singletonList(new Drill("", 0))));
         assertNull(adapter.getItemAtPosition(1));
     }
