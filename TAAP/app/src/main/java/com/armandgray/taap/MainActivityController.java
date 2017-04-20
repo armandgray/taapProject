@@ -1,8 +1,11 @@
 package com.armandgray.taap;
 
 import android.app.Service;
+import android.graphics.Rect;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 class MainActivityController implements MainActivityViews.MainViewsListener {
 
@@ -43,8 +46,21 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
             views.etSearch.setVisibility(View.GONE);
             views.spinner.setVisibility(View.VISIBLE);
             views.fab.setVisibility(View.VISIBLE);
-            ((InputMethodManager) activity.getSystemService(Service.INPUT_METHOD_SERVICE))
-                    .hideSoftInputFromWindow(views.etSearch.getWindowToken(), 0);
+        }
+    }
+
+    void dispatchTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = activity.getCurrentFocus();
+            if ( v instanceof EditText) {
+                Rect outRect = new Rect();
+                v.getGlobalVisibleRect(outRect);
+                if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
+                    v.clearFocus();
+                    ((InputMethodManager) activity.getSystemService(Service.INPUT_METHOD_SERVICE))
+                            .hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
         }
     }
 }
