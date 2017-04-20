@@ -1,5 +1,7 @@
 package com.armandgray.taap.utils;
 
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -52,6 +54,12 @@ public class DrillsRvAdapterTest {
     public void onBindViewHolder_setsTextAndClickEventForDrillItemView() {
         adapter = new DrillsRvAdapter(new ArrayList<>(Collections.singletonList(
                 new Drill("1-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp))));
+
+        LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        holder = new DrillsRvAdapter.DrillViewHolder(
+                inflater.inflate(R.layout.drill_listitem, null, false));
+        
         assertEquals("1-Ball Pound Dribble", holder.tvTitle.getText());
         assertEquals(R.drawable.ic_fitness_center_white_24dp, holder.ivImage.getId());
     }
