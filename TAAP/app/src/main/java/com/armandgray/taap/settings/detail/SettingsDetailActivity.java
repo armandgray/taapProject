@@ -1,5 +1,7 @@
 package com.armandgray.taap.settings.detail;
 
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -28,6 +30,7 @@ public class SettingsDetailActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            setHomeAsUpIndicatorColor();
         }
     }
 
@@ -36,6 +39,13 @@ public class SettingsDetailActivity extends AppCompatActivity {
         ((TextView) toolbar.findViewById(R.id.tvTitle))
                 .setText(getIntent().getStringExtra(SELECTED_ITEM));
         setSupportActionBar(toolbar);
+    }
+
+    private void setHomeAsUpIndicatorColor() {
+        final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_material);
+        upArrow.setColorFilter(getResources().getColor(R.color.colorDarkGray), PorterDuff.Mode.SRC_ATOP);
+        if (getSupportActionBar() == null) { return; }
+        getSupportActionBar().setHomeAsUpIndicator(upArrow);
     }
 
     private void setTvContentsText() {
