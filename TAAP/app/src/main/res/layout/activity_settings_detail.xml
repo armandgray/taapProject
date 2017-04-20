@@ -15,8 +15,9 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+            android:background="@android:color/white"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextColor="@color/colorDarkGray">
 
             <TextView
                 android:id="@+id/tvTitle"
@@ -24,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/settingsdetailactivity"
-                android:textColor="@android:color/white"
+                android:textColor="@color/colorDarkGray"
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </android.support.v7.widget.Toolbar>

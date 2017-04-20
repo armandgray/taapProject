@@ -79,6 +79,11 @@ public class SettingsDetailActivityTest {
     }
 
     @Test
+    public void doesSetCustomToolbarUpArrow_MethodTest_SetupActivityInitialState() throws Exception {
+        // TODO add test
+    }
+
+    @Test
     public void doesSetTvContentText() throws Exception {
         TextView tvContents = (TextView) activity.findViewById(R.id.tvContents);
         assertTrue(tvContents.getText() != "");
