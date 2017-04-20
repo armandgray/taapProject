@@ -30,7 +30,7 @@ public class DrillsRvAdapter {
         return drillList.size();
     }
 
-    private View getLayout(ViewGroup parent) {
+    View getLayout(ViewGroup parent) {
         return LayoutInflater.from(parent.getContext()).inflate(R.layout.drill_listitem, null);
     }
 

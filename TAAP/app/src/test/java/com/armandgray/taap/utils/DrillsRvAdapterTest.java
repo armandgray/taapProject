@@ -55,7 +55,7 @@ public class DrillsRvAdapterTest {
         }
 
         @Override
-        public View getLayout(ViewGroup parent) {
+        View getLayout(ViewGroup parent) {
             return mockView;
         }
     }
