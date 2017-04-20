@@ -6,11 +6,13 @@ import java.util.ArrayList;
 
 public class DrillsRvAdapter {
 
-    public DrillsRvAdapter(ArrayList<Drill> drillList) {
+    private ArrayList<Drill> drillList;
 
+    public DrillsRvAdapter(ArrayList<Drill> drillList) {
+        this.drillList = drillList;
     }
 
     public int getItemCount() {
-        return 0;
+        return drillList.size();
     }
 }
