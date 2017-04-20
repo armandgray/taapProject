@@ -89,6 +89,11 @@ public class SettingsActivityViewsTest {
     }
 
     @Test
+    public void doesSetCustomToolbarUpArrow_MethodTest_SetupActivityInitialState() throws Exception {
+        // TODO add test
+    }
+
+    @Test
     public void doesSetupRateThisAppClickListener_MethodTest_SetupActivityInitialState() throws Exception {
         TextView tvRateThisApp = (TextView) activity.findViewById(R.id.tvRateThisApp);
         tvRateThisApp.performClick();
