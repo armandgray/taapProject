@@ -8,7 +8,10 @@ public class DrillTest {
 
     @Test
     public void canCreateDrill() throws Exception {
-        assertNotNull(new Drill());
+        Drill drill = new Drill();
+        assertNotNull(drill);
+        assertNotNull(drill.getTitle());
+        assertNotNull(drill.getImage());
     }
 
 }
