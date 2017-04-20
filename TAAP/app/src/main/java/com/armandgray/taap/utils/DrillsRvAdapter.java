@@ -8,6 +8,8 @@ public class DrillsRvAdapter {
 
     private ArrayList<Drill> drillList;
 
+    public DrillsRvAdapter() {}
+
     public DrillsRvAdapter(ArrayList<Drill> drillList) {
         this.drillList = drillList;
     }

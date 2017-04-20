@@ -1,6 +1,8 @@
 package com.armandgray.taap.utils;
 
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
@@ -11,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
@@ -34,6 +37,17 @@ public class DrillsRvAdapterTest {
         adapter = new DrillsRvAdapter(null);
         mockView = mock(View.class);
     }
+
+    @Test
+    public void onCreateViewHolder_returnsNewDrillViewHolderOfCorrectLayout() {
+        TestableDrillsRvAdapter testableAdapter = new TestableDrillsRvAdapter();
+        testableAdapter.setMockView(mockView);
+        DrillsRvAdapter.DrillViewHolder drillViewHolder = testableAdapter
+                .onCreateViewHolder(new FrameLayout(RuntimeEnvironment.application), 0);
+        assertEquals(mockView, drillViewHolder.itemView);
+    }
+
+    
 
     @Test
     public void canGetItemCount() throws Exception {
