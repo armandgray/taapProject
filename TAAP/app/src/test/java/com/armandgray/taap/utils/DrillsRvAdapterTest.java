@@ -14,6 +14,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -41,6 +42,17 @@ public class DrillsRvAdapterTest {
         drillList.add(drill);
         adapter = new DrillsRvAdapter(drillList);
         assertEquals(3, adapter.getItemCount());
+    }
+
+    @Test
+    public void canGetItemAtPosition() {
+        Drill firstDrill =
+                new Drill("1-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp);
+        Drill secondDrill =
+                new Drill("2-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp);
+        adapter = new DrillsRvAdapter(new ArrayList<>(Arrays.asList(firstDrill, secondDrill)));
+        assertEquals(firstDrill, adapter.getItemAtPosition(0));
+        assertEquals(secondDrill, adapter.getItemAtPosition(1));
     }
 
     @After
