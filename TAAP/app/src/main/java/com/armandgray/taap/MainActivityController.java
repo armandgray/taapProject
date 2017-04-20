@@ -21,7 +21,10 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
 
     @Override
     public void onSortClick() {
-        // TODO
+        views.etSearch.setVisibility(View.GONE);
+        views.spinner.setVisibility(View.VISIBLE);
+        views.fab.setVisibility(View.VISIBLE);
+        views.spinner.performClick();
     }
 
     @Override
@@ -29,7 +32,6 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
         views.etSearch.setVisibility(View.VISIBLE);
         views.spinner.setVisibility(View.GONE);
         views.fab.setVisibility(View.GONE);
-
         views.etSearch.requestFocusFromTouch();
     }
 }

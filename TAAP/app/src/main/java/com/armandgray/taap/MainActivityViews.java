@@ -30,6 +30,7 @@ class MainActivityViews {
         assignGlobalViews();
         setupToolbar();
         setupFabClickListener();
+        setupSortClickListener();
         setupSearchVisibility();
         setupSearchClickListener();
     }
