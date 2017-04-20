@@ -1,17 +1,20 @@
 package com.armandgray.taap.models;
 
-import android.graphics.drawable.Drawable;
-
 public class Drill {
 
     private String title;
-    private Drawable image;
+    private int imageId;
+
+    public Drill(String title, int imageId) {
+        this.title = title;
+        this.imageId = imageId;
+    }
 
     public String getTitle() {
         return title;
     }
 
-    public Drawable getImage() {
-        return image;
+    public int getImageId() {
+        return imageId;
     }
 }

@@ -13,7 +13,7 @@ public class DrillTest {
         Drill drill = new Drill("2-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp);
         assertNotNull(drill);
         assertNotNull(drill.getTitle());
-        assertNotNull(drill.getImage());
+        assertNotNull(drill.getImageId());
     }
 
 }
