@@ -38,8 +38,8 @@ public class DrillsRvAdapter {
             super(itemView);
 
             this.itemView = itemView;
-            ivImage = itemView.findViewById(R.id.ivImage);
-            tvTitle = itemView.findViewById(R.id.tvTitle);
+            ivImage = (ImageView) itemView.findViewById(R.id.ivImage);
+            tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
         }
     }
 }

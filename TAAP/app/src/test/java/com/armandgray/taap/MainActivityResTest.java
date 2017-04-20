@@ -112,8 +112,8 @@ public class MainActivityResTest {
 
     @Test
     public void existsLayout_DrillListItem() throws Exception {
-        RelativeLayout drillItemContainer = (RelativeLayout) View.inflate(activity, R.layout.drill_listitem, null);
-        assertNotNull(drillItemContainer);
+        RelativeLayout drillListItem = (RelativeLayout) View.inflate(activity, R.layout.drill_listitem, null);
+        assertNotNull(drillListItem);
     }
 
     @After
