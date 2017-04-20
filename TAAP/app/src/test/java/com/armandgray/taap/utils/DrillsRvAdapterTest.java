@@ -29,6 +29,7 @@ import static org.mockito.Mockito.mock;
 public class DrillsRvAdapterTest {
 
     private DrillsRvAdapter adapter;
+    private DrillsRvAdapter.DrillViewHolder holder;
     private View mockView;
 
     @Before
@@ -45,6 +46,14 @@ public class DrillsRvAdapterTest {
         DrillsRvAdapter.DrillViewHolder drillViewHolder = testableAdapter
                 .onCreateViewHolder(new FrameLayout(RuntimeEnvironment.application), 0);
         assertEquals(mockView, drillViewHolder.itemView);
+    }
+
+    @Test
+    public void onBindViewHolder_setsTextAndClickEventForDrillItemView() {
+        adapter = new DrillsRvAdapter(new ArrayList<>(Collections.singletonList(
+                new Drill("1-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp))));
+        assertEquals("1-Ball Pound Dribble", holder.tvTitle.getText());
+        assertEquals(R.drawable.ic_fitness_center_white_24dp, holder.ivImage.getId());
     }
 
     static class TestableDrillsRvAdapter extends DrillsRvAdapter {
