@@ -2,6 +2,7 @@ package com.armandgray.taap.utils;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,7 +21,11 @@ public class DrillsRvAdapter {
         this.drillList = drillList;
     }
 
-    int getItemCount() {
+    public DrillViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return null;
+    }
+
+    public int getItemCount() {
         return drillList.size();
     }
 
