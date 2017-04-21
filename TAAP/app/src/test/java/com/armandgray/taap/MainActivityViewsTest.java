@@ -150,6 +150,8 @@ public class MainActivityViewsTest {
     @Test
     public void doesSetupRvDrills_MethodTest() throws Exception {
         assertNotNull(views.rvDrills);
+        assertNotNull(views.rvDrills.getAdapter());
+        assertTrue(views.rvDrills.getAdapter().getItemCount() > 0);
     }
 
     @After
