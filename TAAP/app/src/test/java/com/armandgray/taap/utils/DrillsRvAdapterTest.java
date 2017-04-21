@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+import static com.armandgray.taap.models.Drill.ALL;
 import static com.armandgray.taap.models.Drill.SHOOTING;
 import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
 import static junit.framework.Assert.assertEquals;
@@ -131,6 +132,14 @@ public class DrillsRvAdapterTest {
         for (int i = 0; i < expectedList.size(); i++) {
             assertTrue(expectedList.get(i).getTitle().equals(adapter.drillList.get(i).getTitle()));
         }
+    }
+
+    @Test
+    public void doesNotSwapDrillsForUnknownDrillType_MethodTest_SwapRvDrillsAdapterData() throws Exception {
+        adapter = new DrillsRvAdapter(getDrillsList());
+        adapter.swapRvDrillsAdapterData(ALL);
+        assertEquals(getDrillsList().size(), adapter.drillList.size());
+        assertEquals(getDrillsList(), adapter.drillList);
     }
 
     @After
