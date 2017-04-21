@@ -12,6 +12,7 @@ import com.armandgray.taap.models.Drill;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
 
@@ -56,15 +57,27 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
     }
 
     public void swapRvDrillsAdapterData(String drillType) {
+        swapDataSet(getListFilteredOnType(drillType));
+    }
+
+    private void swapDataSet(List<Drill> newDataList) {
+        drillList.clear();
+        drillList.addAll(newDataList);
+        notifyDataSetChanged();
+    }
+
+    private List<Drill> getListFilteredOnType(String drillType) {
         ArrayList<Drill> originalList = getDrillsList();
         for (int i = 0; i < originalList.size(); i++) {
-            if (!Arrays.asList(originalList.get(i).getCategory()).contains(drillType)) {
-                originalList.remove(i);
-            }
+            filterDrillOnType(drillType, originalList, i);
         }
-        drillList.clear();
-        drillList.addAll(originalList);
-        notifyDataSetChanged();
+        return originalList;
+    }
+
+    private void filterDrillOnType(String drillType, ArrayList<Drill> originalList, int i) {
+        if (!Arrays.asList(originalList.get(i).getCategory()).contains(drillType)) {
+            originalList.remove(i);
+        }
     }
 
     static class DrillViewHolder extends RecyclerView.ViewHolder {

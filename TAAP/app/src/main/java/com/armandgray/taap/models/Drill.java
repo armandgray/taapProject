@@ -10,6 +10,7 @@ public class Drill {
     public static final String[] SHOOTING_ARRAY = {SHOOTING};
     public static final String[] BALL_HANDLING_ARRAY = {BALL_HANDLING};
     public static final String[] PASSING_ARRAY = {PASSING};
+    public static final String[] DRILL_TYPES = {BALL_HANDLING, SHOOTING, PASSING, FUNDAMENTALS};
 
     private String title;
     private int imageId;
