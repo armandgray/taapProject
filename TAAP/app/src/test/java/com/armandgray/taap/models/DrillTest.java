@@ -10,10 +10,13 @@ public class DrillTest {
 
     @Test
     public void canCreateDrill() throws Exception {
-        Drill drill = new Drill("2-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp);
+        Drill drill = new Drill("2-Ball Pound Dribble",
+                R.drawable.ic_fitness_center_white_24dp,
+                Drill.BALL_HANDLING);
         assertNotNull(drill);
         assertNotNull(drill.getTitle());
         assertNotNull(drill.getImageId());
+        assertNotNull(drill.getCategory());
     }
 
 }

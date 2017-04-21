@@ -9,10 +9,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.armandgray.taap.models.Drill;
 import com.armandgray.taap.utils.DrillsRvAdapter;
 
-import java.util.ArrayList;
+import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
 
 class MainActivityViews {
 
@@ -97,14 +96,7 @@ class MainActivityViews {
 
     private void setupRvDrills() {
         rvDrills = (RecyclerView) activity.findViewById(R.id.rvDrills);
-        ArrayList<Drill> drillList = new ArrayList<>();
-        Drill drill = new Drill("2-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp);
-        drillList.add(drill);
-        drillList.add(drill);
-        drillList.add(drill);
-        drillList.add(drill);
-        drillList.add(drill);
-        rvDrills.setAdapter(new DrillsRvAdapter(drillList));
+        rvDrills.setAdapter(new DrillsRvAdapter(getDrillsList()));
         rvDrills.setLayoutManager(
                 new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
     }
