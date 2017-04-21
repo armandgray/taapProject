@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -38,6 +39,7 @@ class MainActivityViews {
         setupToolbar();
         setupFabClickListener();
         setupSortClickListener();
+        setupSpinnerItemSelectedListener();
         setupSearchVisibility();
         setupSearchClickListener();
         setupRvDrills();
@@ -74,6 +76,20 @@ class MainActivityViews {
         });
     }
 
+    private void setupSpinnerItemSelectedListener() {
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                listener.onSpinnerItemSelected(parent, view, position, id);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
     private void setupSearchVisibility() {
         etSearch.setFocusable(true);
         etSearch.setVisibility(View.GONE);
@@ -104,6 +120,7 @@ class MainActivityViews {
     interface MainViewsListener {
         void onFabClick();
         void onSortClick();
+        void onSpinnerItemSelected(AdapterView<?> parent, View view, int position, long id);
         void onSearchClick();
         void onEtSearchFocusChange(View v, boolean hasFocus);
     }

@@ -2,9 +2,11 @@ package com.armandgray.taap;
 
 import android.app.Service;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
 
 class MainActivityController implements MainActivityViews.MainViewsListener {
@@ -28,6 +30,11 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
     public void onSortClick() {
         views.spinner.performClick();
         views.spinner.requestFocusFromTouch();
+    }
+
+    @Override
+    public void onSpinnerItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Log.i("SPINNER", String.valueOf(position));
     }
 
     @Override
