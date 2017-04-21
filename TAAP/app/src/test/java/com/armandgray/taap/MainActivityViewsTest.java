@@ -2,6 +2,7 @@ package com.armandgray.taap;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
@@ -151,6 +152,8 @@ public class MainActivityViewsTest {
     public void doesSetupRvDrills_MethodTest() throws Exception {
         assertNotNull(views.rvDrills);
         assertNotNull(views.rvDrills.getAdapter());
+        assertNotNull(views.rvDrills.getLayoutManager());
+        assertTrue(views.rvDrills.getLayoutManager() instanceof LinearLayoutManager);
         assertTrue(views.rvDrills.getAdapter().getItemCount() > 0);
     }
 
