@@ -53,7 +53,7 @@ public class DrillsRvAdapterTest {
     @Test
     public void onBindViewHolder_DoesSetViewsForDrillItem() {
         adapter = new DrillsRvAdapter(new ArrayList<>(Collections.singletonList(
-                new Drill("1-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp))));
+                new Drill("1-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp, Drill.BALL_HANDLING_ARRAY))));
         LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         holder = new DrillsRvAdapter.DrillViewHolder(
@@ -81,7 +81,7 @@ public class DrillsRvAdapterTest {
 
     @Test
     public void canGetItemCount() throws Exception {
-        Drill drill = new Drill("2-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp);
+        Drill drill = new Drill("2-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp, Drill.BALL_HANDLING_ARRAY);
         ArrayList<Drill> drillList = new ArrayList<>();
         drillList.add(drill);
         drillList.add(drill);
@@ -93,9 +93,9 @@ public class DrillsRvAdapterTest {
     @Test
     public void canGetItemAtPosition() throws Exception {
         Drill firstDrill =
-                new Drill("1-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp);
+                new Drill("1-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp, Drill.BALL_HANDLING_ARRAY);
         Drill secondDrill =
-                new Drill("2-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp);
+                new Drill("2-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp, Drill.BALL_HANDLING_ARRAY);
         adapter = new DrillsRvAdapter(new ArrayList<>(Arrays.asList(firstDrill, secondDrill)));
         assertEquals(firstDrill, adapter.getItemAtPosition(0));
         assertEquals(secondDrill, adapter.getItemAtPosition(1));
@@ -110,7 +110,7 @@ public class DrillsRvAdapterTest {
 
     @Test
     public void canGetItemAtPosition_IndexOutOfBounds() throws Exception {
-        adapter = new DrillsRvAdapter(new ArrayList<>(Collections.singletonList(new Drill("", 0))));
+        adapter = new DrillsRvAdapter(new ArrayList<>(Collections.singletonList(new Drill("", 0, Drill.BALL_HANDLING_ARRAY))));
         assertNull(adapter.getItemAtPosition(1));
     }
 
