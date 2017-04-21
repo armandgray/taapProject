@@ -1,11 +1,18 @@
 package com.armandgray.taap;
 
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+
+import com.armandgray.taap.models.Drill;
+import com.armandgray.taap.utils.DrillsRvAdapter;
+
+import java.util.ArrayList;
 
 class MainActivityViews {
 
@@ -18,6 +25,7 @@ class MainActivityViews {
     Spinner spinner;
     private ImageView ivSort;
     private ImageView ivSearch;
+    RecyclerView rvDrills;
 
     MainActivityViews(MainActivity activity, MainViewsListener listener) {
         this.activity = activity;
@@ -33,6 +41,7 @@ class MainActivityViews {
         setupSortClickListener();
         setupSearchVisibility();
         setupSearchClickListener();
+        setupRvDrills();
     }
 
     private void assignGlobalViews() {
@@ -84,6 +93,20 @@ class MainActivityViews {
                 listener.onEtSearchFocusChange(v, hasFocus);
             }
         });
+    }
+
+    private void setupRvDrills() {
+        rvDrills = (RecyclerView) activity.findViewById(R.id.rvDrills);
+        ArrayList<Drill> drillList = new ArrayList<>();
+        Drill drill = new Drill("2-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp);
+        drillList.add(drill);
+        drillList.add(drill);
+        drillList.add(drill);
+        drillList.add(drill);
+        drillList.add(drill);
+        rvDrills.setAdapter(new DrillsRvAdapter(drillList));
+        rvDrills.setLayoutManager(
+                new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
     }
 
     interface MainViewsListener {
