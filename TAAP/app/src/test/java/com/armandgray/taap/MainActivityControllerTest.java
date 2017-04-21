@@ -11,8 +11,11 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
+import java.util.Arrays;
+
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -42,13 +45,10 @@ public class MainActivityControllerTest {
 
     @Test
     public void canGetAllSpinnerItems_MethodTest() throws Exception {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, 0);
-        adapter = adapter.getClass().cast(controller.views.spinner.getAdapter());
-        adapter.clear();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, 0,
+                activity.getResources().getStringArray(R.array.drill_types));
         String[] drillTypes = activity.getResources().getStringArray(R.array.drill_types);
-        for (String type : drillTypes) { adapter.add(type); }
-        adapter.notifyDataSetChanged();
-        assertEquals(drillTypes, controller.getAllSpinnerItems(adapter));
+        assertTrue(Arrays.equals(drillTypes, controller.getAllSpinnerItems(adapter)));
     }
 
     @After

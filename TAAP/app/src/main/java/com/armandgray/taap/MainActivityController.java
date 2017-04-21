@@ -39,7 +39,11 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
     }
 
     String[] getAllSpinnerItems(ArrayAdapter<String> adapter) {
-        return new String[0];
+        String[] drillTypes = new String[adapter.getCount()];
+        for (int i = 0; i < adapter.getCount(); i++) {
+            drillTypes[i] = adapter.getItem(i);
+        }
+        return drillTypes;
     }
 
     @Override
