@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+import static com.armandgray.taap.models.Drill.SHOOTING;
+import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNull;
 import static org.mockito.Mockito.mock;
@@ -112,6 +114,19 @@ public class DrillsRvAdapterTest {
     public void canGetItemAtPosition_IndexOutOfBounds() throws Exception {
         adapter = new DrillsRvAdapter(new ArrayList<>(Collections.singletonList(new Drill("", 0, Drill.BALL_HANDLING_ARRAY))));
         assertNull(adapter.getItemAtPosition(1));
+    }
+
+    @Test
+    public void canSwapRvDrillsAdapterData() throws Exception {
+        ArrayList<Drill> expectedList = getDrillsList();
+        for (int i = 0; i < expectedList.size(); i++) {
+            if (!Arrays.asList(expectedList.get(i).getCategory()).contains(SHOOTING)) {
+                expectedList.remove(i);
+            }
+        }
+        adapter = new DrillsRvAdapter(getDrillsList());
+        adapter.swapRvDrillsAdapterData(SHOOTING);
+        assertEquals(expectedList, adapter.drillList);
     }
 
     @After

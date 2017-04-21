@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillViewHolder> {
 
-    private ArrayList<Drill> drillList;
+    ArrayList<Drill> drillList;
 
     DrillsRvAdapter() {}
 
@@ -50,6 +50,10 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
     public Drill getItemAtPosition(int position) {
         if (drillList == null || drillList.size() <= position) { return null; }
         return drillList.get(position);
+    }
+
+    public void swapRvDrillsAdapterData(String drillType) {
+
     }
 
     static class DrillViewHolder extends RecyclerView.ViewHolder {
