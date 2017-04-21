@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
 class MainActivityController implements MainActivityViews.MainViewsListener {
@@ -35,6 +36,10 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
     @Override
     public void onSpinnerItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Log.i("SPINNER", String.valueOf(position));
+    }
+
+    String[] getAllSpinnerItems(ArrayAdapter<String> adapter) {
+        return new String[0];
     }
 
     @Override

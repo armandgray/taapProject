@@ -1,5 +1,7 @@
 package com.armandgray.taap;
 
+import android.widget.ArrayAdapter;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,6 +38,17 @@ public class MainActivityControllerTest {
     @Test
     public void doesCreateViewsHandler_TestConstructor() throws Exception {
         assertNotNull(controller.views);
+    }
+
+    @Test
+    public void canGetAllSpinnerItems_MethodTest() throws Exception {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, 0);
+        adapter = adapter.getClass().cast(controller.views.spinner.getAdapter());
+        adapter.clear();
+        String[] drillTypes = activity.getResources().getStringArray(R.array.drill_types);
+        for (String type : drillTypes) { adapter.add(type); }
+        adapter.notifyDataSetChanged();
+        assertEquals(drillTypes, controller.getAllSpinnerItems(adapter));
     }
 
     @After

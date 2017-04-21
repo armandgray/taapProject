@@ -2,6 +2,7 @@ package com.armandgray.taap.models;
 
 public class Drill {
 
+    public static final String ALL = "ALL";
     public static final String BALL_HANDLING = "Ball Handling";
     public static final String SHOOTING = "Shooting";
     public static final String PASSING = "Passing";
