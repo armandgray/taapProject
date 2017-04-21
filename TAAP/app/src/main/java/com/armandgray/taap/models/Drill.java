@@ -9,9 +9,9 @@ public class Drill {
 
     private String title;
     private int imageId;
-    private String category;
+    private String[] category;
 
-    public Drill(String title, int imageId, String category) {
+    public Drill(String title, int imageId, String[] category) {
         this.title = title;
         this.imageId = imageId;
         this.category = category;
@@ -25,7 +25,7 @@ public class Drill {
         return imageId;
     }
 
-    public String getCategory() {
+    public String[] getCategory() {
         return category;
     }
 }

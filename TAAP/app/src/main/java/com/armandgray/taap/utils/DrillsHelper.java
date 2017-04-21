@@ -5,30 +5,64 @@ import com.armandgray.taap.models.Drill;
 
 import java.util.ArrayList;
 
+import static com.armandgray.taap.models.Drill.FUNDAMENTALS;
+import static com.armandgray.taap.models.Drill.SHOOTING;
+
 public class DrillsHelper {
 
     public static ArrayList<Drill> getDrillsList() {
         ArrayList<Drill> drillsList = new ArrayList<>();
-        drillsList.add(new Drill("5 Spots Shooting (Mid-Range)", R.drawable.ic_fitness_center_white_24dp, Drill.SHOOTING));
-        drillsList.add(new Drill("5 Spots Spin-Rip Through (Mid-Range)", R.drawable.ic_fitness_center_white_24dp, Drill.SHOOTING));
-        drillsList.add(new Drill("5 Spots Spin-Pull Up (Mid-Range)", R.drawable.ic_fitness_center_white_24dp, Drill.SHOOTING));
-        drillsList.add(new Drill("Elbow-to-Elbow Shooting", R.drawable.ic_fitness_center_white_24dp, Drill.SHOOTING));
-        drillsList.add(new Drill("Corner-to-Wing Shooting (Mid-Range)", R.drawable.ic_fitness_center_white_24dp, Drill.SHOOTING));
-        drillsList.add(new Drill("Corner-to-Wing Shooting (3's)", R.drawable.ic_fitness_center_white_24dp, Drill.SHOOTING));
-        drillsList.add(new Drill("Corner-to-Wing Shooting (NBA)", R.drawable.ic_fitness_center_white_24dp, Drill.SHOOTING));
-        drillsList.add(new Drill("5 Spots Curl-Into-Shot (Mid-Range)", R.drawable.ic_fitness_center_white_24dp, Drill.SHOOTING));
-        drillsList.add(new Drill("5 Spots Curl-Into-Shot (3's)", R.drawable.ic_fitness_center_white_24dp, Drill.SHOOTING));
-        drillsList.add(new Drill("5 Spots Curl-Into-Shot (NBA)", R.drawable.ic_fitness_center_white_24dp, Drill.SHOOTING));
-        drillsList.add(new Drill("5 Spots Curl-Into-Shot Hesitation-Pull Up (Mid-Range)", R.drawable.ic_fitness_center_white_24dp, Drill.SHOOTING));
-        drillsList.add(new Drill("5 Spots Curl-Into-Shot Hesitation-Pull Up (3's)", R.drawable.ic_fitness_center_white_24dp, Drill.SHOOTING));
-        drillsList.add(new Drill("5 Spots Curl-Into-Shot Hesitation-Pull Up (NBA)", R.drawable.ic_fitness_center_white_24dp, Drill.SHOOTING));
-        drillsList.add(new Drill("Backpedal-to-Half Shooting (Mid-Range)", R.drawable.ic_fitness_center_white_24dp, Drill.SHOOTING));
-        drillsList.add(new Drill("Backpedal-to-Half Shooting (3's)", R.drawable.ic_fitness_center_white_24dp, Drill.SHOOTING));
-        drillsList.add(new Drill("Backpedal-to-Half Shooting (NBA)", R.drawable.ic_fitness_center_white_24dp, Drill.SHOOTING));
-        drillsList.add(new Drill("Beat-the-Pro (Mid-Range)", R.drawable.ic_fitness_center_white_24dp, Drill.SHOOTING));
-        drillsList.add(new Drill("Beat-the-Pro (3's)", R.drawable.ic_fitness_center_white_24dp, Drill.SHOOTING));
-        drillsList.add(new Drill("Beat-the-Pro (NBA)", R.drawable.ic_fitness_center_white_24dp, Drill.SHOOTING));
-        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, Drill.SHOOTING));
+        String[] shooting = {SHOOTING};
+        String[] fundShoot = {FUNDAMENTALS, SHOOTING};
+        drillsList.add(new Drill("5 Spots Shooting (Mid-Range)", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("5 Spots Spin-Rip Through (Mid-Range)", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("5 Spots Spin-Pull Up (Mid-Range)", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("Elbow-to-Elbow Shooting", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("Corner-to-Wing Shooting (Mid-Range)", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("Corner-to-Wing Shooting (3's)", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("Corner-to-Wing Shooting (NBA)", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("5 Spots Curl-Into-Shot (Mid-Range)", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("5 Spots Curl-Into-Shot (3's)", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("5 Spots Curl-Into-Shot (NBA)", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("5 Spots Curl-Into-Shot Hesitation-Pull Up (Mid-Range)", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("5 Spots Curl-Into-Shot Hesitation-Pull Up (3's)", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("5 Spots Curl-Into-Shot Hesitation-Pull Up (NBA)", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("Backpedal-to-Half Shooting (Mid-Range)", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("Backpedal-to-Half Shooting (3's)", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("Backpedal-to-Half Shooting (NBA)", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("Beat-the-Pro (Mid-Range)", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("Beat-the-Pro (3's)", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("Beat-the-Pro (NBA)", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, fundShoot));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
+        drillsList.add(new Drill("", R.drawable.ic_fitness_center_white_24dp, shooting));
         return drillsList;
     }
 }
