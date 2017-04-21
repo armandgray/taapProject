@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.armandgray.taap.models.Drill.DRILL_TYPES;
 import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
 
 public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillViewHolder> {
@@ -68,6 +69,7 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
 
     private List<Drill> getListFilteredOnType(String drillType) {
         ArrayList<Drill> originalList = getDrillsList();
+        if (!Arrays.asList(DRILL_TYPES).contains(drillType)) { return originalList; }
         for (int i = 0; i < originalList.size(); i++) {
             filterDrillOnType(drillType, originalList, i);
         }

@@ -128,6 +128,7 @@ public class DrillsRvAdapterTest {
         }
         adapter = new DrillsRvAdapter(getDrillsList());
         adapter.swapRvDrillsAdapterData(SHOOTING);
+
         assertEquals(expectedList.size(), adapter.drillList.size());
         for (int i = 0; i < expectedList.size(); i++) {
             assertTrue(expectedList.get(i).getTitle().equals(adapter.drillList.get(i).getTitle()));
@@ -136,10 +137,14 @@ public class DrillsRvAdapterTest {
 
     @Test
     public void doesNotSwapDrillsForUnknownDrillType_MethodTest_SwapRvDrillsAdapterData() throws Exception {
+        ArrayList<Drill> expectedList = getDrillsList();
         adapter = new DrillsRvAdapter(getDrillsList());
         adapter.swapRvDrillsAdapterData(ALL);
-        assertEquals(getDrillsList().size(), adapter.drillList.size());
-        assertEquals(getDrillsList(), adapter.drillList);
+
+        assertEquals(expectedList.size(), adapter.drillList.size());
+        for (int i = 0; i < expectedList.size(); i++) {
+            assertTrue(expectedList.get(i).getTitle().equals(adapter.drillList.get(i).getTitle()));
+        }
     }
 
     @After
