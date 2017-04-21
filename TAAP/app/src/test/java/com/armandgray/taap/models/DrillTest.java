@@ -14,6 +14,7 @@ public class DrillTest {
         assertNotNull(drill);
         assertNotNull(drill.getTitle());
         assertNotNull(drill.getImageId());
+        assertNotNull(drill.getCategory());
     }
 
 }

@@ -4,6 +4,7 @@ public class Drill {
 
     private String title;
     private int imageId;
+    private Object category;
 
     public Drill(String title, int imageId) {
         this.title = title;
@@ -16,5 +17,9 @@ public class Drill {
 
     public int getImageId() {
         return imageId;
+    }
+
+    public Object getCategory() {
+        return category;
     }
 }
