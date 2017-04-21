@@ -1,6 +1,7 @@
 package com.armandgray.taap;
 
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ class MainActivityViews {
     Spinner spinner;
     private ImageView ivSort;
     private ImageView ivSearch;
+    RecyclerView rvDrills;
 
     MainActivityViews(MainActivity activity, MainViewsListener listener) {
         this.activity = activity;

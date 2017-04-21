@@ -147,6 +147,11 @@ public class MainActivityViewsTest {
         assertEquals(View.VISIBLE, fab.getVisibility());
     }
 
+    @Test
+    public void doesSetupRvDrills_MethodTest() throws Exception {
+        assertNotNull(views.rvDrills);
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
