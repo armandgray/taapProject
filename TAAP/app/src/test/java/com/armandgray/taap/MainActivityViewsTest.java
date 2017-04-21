@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.armandgray.taap.settings.SettingsActivity;
+import com.armandgray.taap.utils.DrillsRvAdapter;
 
 import org.junit.After;
 import org.junit.Before;
@@ -21,6 +22,9 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
+import java.util.Arrays;
+
+import static com.armandgray.taap.models.Drill.SHOOTING;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
@@ -134,6 +138,18 @@ public class MainActivityViewsTest {
         ivSearch.performClick();
         assertEquals(View.GONE, spinner.getVisibility());
         assertEquals(View.GONE, fab.getVisibility());
+    }
+
+    @Test
+    public void canSelectSpinnerItemToSortDrills() throws Exception {
+        views.spinner.setSelection(1);
+        DrillsRvAdapter adapter = (DrillsRvAdapter) views.rvDrills.getAdapter();
+        for (int i = 0; i < adapter.getItemCount(); i++) {
+            assertTrue(Arrays.asList(adapter
+                    .getItemAtPosition(i).getCategory())
+                    .contains(SHOOTING));
+        }
+
     }
 
     @Test
