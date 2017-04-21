@@ -44,7 +44,7 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
     }
 
     View getLayout(ViewGroup parent) {
-        return LayoutInflater.from(parent.getContext()).inflate(R.layout.drill_listitem, null);
+        return LayoutInflater.from(parent.getContext()).inflate(R.layout.drill_listitem, parent, false);
     }
 
     Drill getItemAtPosition(int position) {

@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white"
+    android:background="@drawable/drill_item_background"
+    android:layout_marginLeft="@dimen/drill_item_margin_left"
+    android:layout_marginStart="@dimen/drill_item_margin_left"
     android:gravity="center_vertical"
-    android:padding="@dimen/activity_horizontal_margin">
+    android:orientation="horizontal"
+    android:padding="@dimen/drill_item_padding">
 
     <ImageView
         android:id="@+id/ivImage"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:padding="5dp"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
         android:tint="@color/colorPrimary"
         app:srcCompat="@drawable/ic_person_white_24dp" />
 
@@ -19,14 +21,10 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_toEndOf="@+id/ivImage"
-        android:layout_toRightOf="@+id/ivImage"
         android:ellipsize="end"
         android:maxLines="1"
         android:padding="@dimen/activity_horizontal_margin"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp" />
-
-</RelativeLayout>
+    
+</LinearLayout>
