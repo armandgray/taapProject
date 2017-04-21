@@ -26,6 +26,7 @@ import static com.armandgray.taap.models.Drill.SHOOTING;
 import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 @RunWith(RobolectricTestRunner.class)
@@ -126,7 +127,10 @@ public class DrillsRvAdapterTest {
         }
         adapter = new DrillsRvAdapter(getDrillsList());
         adapter.swapRvDrillsAdapterData(SHOOTING);
-        assertEquals(expectedList, adapter.drillList);
+        assertEquals(expectedList.size(), adapter.drillList.size());
+        for (int i = 0; i < expectedList.size(); i++) {
+            assertTrue(expectedList.get(i).getTitle().equals(adapter.drillList.get(i).getTitle()));
+        }
     }
 
     @After
