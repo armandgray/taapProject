@@ -12,7 +12,6 @@ import com.armandgray.taap.models.Drill;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static com.armandgray.taap.models.Drill.DRILL_TYPES;
 import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
@@ -58,28 +57,34 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
     }
 
     public void swapRvDrillsAdapterData(String drillType) {
+        System.out.println(drillType);
         swapDataSet(getListFilteredOnType(drillType));
     }
 
-    private void swapDataSet(List<Drill> newDataList) {
-        drillList.clear();
-        drillList.addAll(newDataList);
+    private void swapDataSet(ArrayList<Drill> newDataList) {
+        this.drillList = newDataList;
         notifyDataSetChanged();
     }
 
-    private List<Drill> getListFilteredOnType(String drillType) {
+    private ArrayList<Drill> getListFilteredOnType(String drillType) {
         ArrayList<Drill> originalList = getDrillsList();
         if (!Arrays.asList(DRILL_TYPES).contains(drillType)) { return originalList; }
-        for (int i = 0; i < originalList.size(); i++) {
-            filterDrillOnType(drillType, originalList, i);
-        }
+        filterListOnType(drillType, originalList);
         return originalList;
     }
 
-    private void filterDrillOnType(String drillType, ArrayList<Drill> originalList, int i) {
-        if (!Arrays.asList(originalList.get(i).getCategory()).contains(drillType)) {
-            originalList.remove(i);
+    private void filterListOnType(String drillType, ArrayList<Drill> originalList) {
+        for (int i = 0; i < originalList.size(); i++) {
+            if (!hasMatchingDrillType(drillType, originalList.get(i))) {
+                originalList.remove(i);
+            }
         }
+    }
+
+    private boolean hasMatchingDrillType(String drillType, Drill drill) {
+        System.out.printf("DrillType: %s | Object Categories: %s", drillType, drill.getCategory()[drill.getCategory().length - 1]);
+        return Arrays.asList(drill.getCategory()).contains(drillType);
+
     }
 
     static class DrillViewHolder extends RecyclerView.ViewHolder {

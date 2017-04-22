@@ -38,6 +38,7 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
     @Override
     public void onSpinnerItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Log.i("SPINNER", String.valueOf(position));
+        System.out.println("SPINNER ITEM CLICK");
         String[] drillTypes = getAllSpinnerItems(views.spinner.getAdapter());
         ((DrillsRvAdapter) views.rvDrills.getAdapter())
                 .swapRvDrillsAdapterData(drillTypes[position]);
