@@ -5,6 +5,8 @@ import com.armandgray.taap.R;
 import org.junit.Test;
 
 import static com.armandgray.taap.models.Drill.BALL_HANDLING;
+import static com.armandgray.taap.models.Drill.getQueryResultList;
+import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
 import static junit.framework.Assert.assertNotNull;
 
 public class DrillTest {
@@ -20,4 +22,8 @@ public class DrillTest {
         assertNotNull(drill.getCategory());
     }
 
+    @Test
+    public void canGetQueryResultList() throws Exception {
+        assertNotNull(getQueryResultList(getDrillsList(), "pro"));
+    }
 }

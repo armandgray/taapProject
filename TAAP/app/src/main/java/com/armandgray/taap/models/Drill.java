@@ -1,5 +1,7 @@
 package com.armandgray.taap.models;
 
+import java.util.ArrayList;
+
 public class Drill {
 
     public static final String ALL = "ALL";
@@ -33,4 +35,9 @@ public class Drill {
     public String[] getCategory() {
         return category;
     }
+
+    public static ArrayList<Drill> getQueryResultList(ArrayList<Drill> drillsList, String query) {
+        return null;
+    }
+
 }
