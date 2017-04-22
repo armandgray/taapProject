@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.armandgray.taap.models.Drill;
 import com.armandgray.taap.settings.SettingsActivity;
 import com.armandgray.taap.utils.DrillsRvAdapter;
 
@@ -22,9 +23,12 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static com.armandgray.taap.models.Drill.SHOOTING;
+import static com.armandgray.taap.models.Drill.getQueryResultList;
+import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
@@ -34,6 +38,7 @@ import static org.robolectric.Shadows.shadowOf;
 @Config(constants = BuildConfig.class)
 public class MainActivityViewsTest {
 
+    public static final String WALL = "wall";
     private ActivityController<MainActivity> activityController;
     private MainActivity activity;
     private Toolbar toolbar;
@@ -161,6 +166,26 @@ public class MainActivityViewsTest {
         assertEquals(View.GONE, etSearch.getVisibility());
         assertEquals(View.VISIBLE, spinner.getVisibility());
         assertEquals(View.VISIBLE, fab.getVisibility());
+    }
+
+    @Test
+    public void canChangeEtSearchTextToQueryDrillList() throws Exception {
+        views.etSearch.setText(WALL);
+        views.listener.onEtSearchTextChanged(null, 0, 0, 0);
+
+        ArrayList<Drill> expectedList = getQueryResultList(getDrillsList(), WALL);
+
+        DrillsRvAdapter adapter = (DrillsRvAdapter) views.rvDrills.getAdapter();
+        ArrayList<Drill> adapterDrillList = new ArrayList<>();
+        for (int i = 0; i < adapter.getItemCount(); i++) {
+            adapterDrillList.add(adapter.getItemAtPosition(i));
+        }
+
+        assertEquals(expectedList.size(), adapterDrillList.size());
+        for (int i = 0; i < expectedList.size(); i++) {
+            assertTrue(expectedList.get(i).getTitle().equals(adapterDrillList.get(i).getTitle()));
+        }
+
     }
 
     @Test
