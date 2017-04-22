@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static com.armandgray.taap.models.Drill.DRILL_TYPES;
+import static com.armandgray.taap.models.Drill.getQueryResultList;
 import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
 
 public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillViewHolder> {
@@ -56,6 +57,10 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
         return drillList.get(position);
     }
 
+    public void swapRvDrillsAdapterDataOnQuery(String query) {
+        swapDataSet(getQueryResultList(getDrillsList(), query));
+    }
+
     public void swapRvDrillsAdapterDataOnDrillType(String drillType) {
         swapDataSet(getListFilteredOnType(drillType));
     }
@@ -83,10 +88,6 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
 
     private boolean hasMatchingDrillType(String drillType, Drill drill) {
         return Arrays.asList(drill.getCategory()).contains(drillType);
-
-    }
-
-    public void swapRvDrillsAdapterDataOnQuery(String query) {
 
     }
 
