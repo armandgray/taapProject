@@ -148,6 +148,21 @@ public class DrillsRvAdapterTest {
         }
     }
 
+    @Test
+    public void canSwapRvDrillsAdapterDataOnQuery() throws Exception {
+        ArrayList<Drill> expectedList = getDrillsList();
+        for (int i = 0; i < expectedList.size(); i++) {
+
+        }
+        adapter = new DrillsRvAdapter(getDrillsList());
+        adapter.swapRvDrillsAdapterDataOnQuery("3 Man Weave");
+
+        assertEquals(expectedList.size(), adapter.drillList.size());
+        for (int i = 0; i < expectedList.size(); i++) {
+            assertTrue(expectedList.get(i).getTitle().equals(adapter.drillList.get(i).getTitle()));
+        }
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
