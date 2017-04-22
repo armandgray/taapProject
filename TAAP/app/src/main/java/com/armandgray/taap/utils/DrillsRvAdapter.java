@@ -86,6 +86,10 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
 
     }
 
+    public void swapRvDrillsAdapterDataOnQuery(String query) {
+
+    }
+
     static class DrillViewHolder extends RecyclerView.ViewHolder {
         View itemView;
         ImageView ivImage;

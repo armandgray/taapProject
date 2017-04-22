@@ -21,6 +21,7 @@ import org.robolectric.annotation.Config;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static com.armandgray.taap.models.Drill.ALL;
 import static com.armandgray.taap.models.Drill.SHOOTING;
@@ -150,10 +151,8 @@ public class DrillsRvAdapterTest {
 
     @Test
     public void canSwapRvDrillsAdapterDataOnQuery() throws Exception {
-        ArrayList<Drill> expectedList = getDrillsList();
-        for (int i = 0; i < expectedList.size(); i++) {
+        ArrayList<Drill> expectedList = getQueryResultList(getDrillsList(), "3 Man Weave");
 
-        }
         adapter = new DrillsRvAdapter(getDrillsList());
         adapter.swapRvDrillsAdapterDataOnQuery("3 Man Weave");
 
