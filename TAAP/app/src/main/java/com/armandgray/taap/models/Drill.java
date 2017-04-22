@@ -37,7 +37,9 @@ public class Drill {
     }
 
     public static ArrayList<Drill> getQueryResultList(ArrayList<Drill> drillsList, String query) {
-        return null;
+        ArrayList<Drill> dataList = new ArrayList<>();
+        if (drillsList != null) { dataList = drillsList; }
+        return dataList;
     }
 
 }
