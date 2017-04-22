@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
@@ -112,7 +113,7 @@ public class MainActivityResTest {
 
     @Test
     public void existsLayout_DrillListItem() throws Exception {
-        RelativeLayout drillListItem = (RelativeLayout) View.inflate(activity, R.layout.drill_listitem, null);
+        LinearLayout drillListItem = (LinearLayout) View.inflate(activity, R.layout.drill_listitem, null);
         assertNotNull(drillListItem);
     }
 
