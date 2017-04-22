@@ -31,7 +31,7 @@ public class DrillTest {
     public void canGetQueryResultList() throws Exception {
         ArrayList<Drill> expectedList = getDrillsList();
         for (int i = 0; i < expectedList.size(); i++) {
-            if (!expectedList.get(i).getTitle().contains("pro")) {
+            if (!expectedList.get(i).getTitle().toLowerCase().contains("pro")) {
                 expectedList.remove(i);
                 i--;
             }
