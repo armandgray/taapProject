@@ -71,6 +71,13 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
         }
     }
 
+    @Override
+    public void onEtSearchTextChanged(CharSequence s, int start, int before, int count) {
+        ((DrillsRvAdapter) views.rvDrills.getAdapter())
+                .swapRvDrillsAdapterDataOnQuery(
+                        views.etSearch.getText().toString());
+    }
+
     void dispatchTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             View v = activity.getCurrentFocus();
