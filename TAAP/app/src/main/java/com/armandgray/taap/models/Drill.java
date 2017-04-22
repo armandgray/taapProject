@@ -1,5 +1,7 @@
 package com.armandgray.taap.models;
 
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 
 public class Drill {
@@ -36,6 +38,7 @@ public class Drill {
         return category;
     }
 
+    @NonNull
     public static ArrayList<Drill> getQueryResultList(ArrayList<Drill> drillsList, String query) {
         ArrayList<Drill> dataList = new ArrayList<>();
         if (drillsList != null) { dataList = drillsList; }
