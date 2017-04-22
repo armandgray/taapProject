@@ -57,7 +57,6 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
     }
 
     public void swapRvDrillsAdapterData(String drillType) {
-        System.out.println(drillType);
         swapDataSet(getListFilteredOnType(drillType));
     }
 
@@ -69,20 +68,20 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
     private ArrayList<Drill> getListFilteredOnType(String drillType) {
         ArrayList<Drill> originalList = getDrillsList();
         if (!Arrays.asList(DRILL_TYPES).contains(drillType)) { return originalList; }
-        filterListOnType(drillType, originalList);
-        return originalList;
+        return getTypedList(drillType, originalList);
     }
 
-    private void filterListOnType(String drillType, ArrayList<Drill> originalList) {
+    private ArrayList<Drill> getTypedList(String drillType, ArrayList<Drill> originalList) {
         for (int i = 0; i < originalList.size(); i++) {
             if (!hasMatchingDrillType(drillType, originalList.get(i))) {
                 originalList.remove(i);
+                i--;
             }
         }
+        return originalList;
     }
 
     private boolean hasMatchingDrillType(String drillType, Drill drill) {
-        System.out.printf("DrillType: %s | Object Categories: %s", drillType, drill.getCategory()[drill.getCategory().length - 1]);
         return Arrays.asList(drill.getCategory()).contains(drillType);
 
     }

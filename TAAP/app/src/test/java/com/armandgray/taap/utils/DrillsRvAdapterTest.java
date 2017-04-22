@@ -124,6 +124,7 @@ public class DrillsRvAdapterTest {
         for (int i = 0; i < expectedList.size(); i++) {
             if (!Arrays.asList(expectedList.get(i).getCategory()).contains(SHOOTING)) {
                 expectedList.remove(i);
+                i--;
             }
         }
         adapter = new DrillsRvAdapter(getDrillsList());

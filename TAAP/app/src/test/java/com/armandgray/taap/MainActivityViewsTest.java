@@ -146,7 +146,6 @@ public class MainActivityViewsTest {
         DrillsRvAdapter adapter = (DrillsRvAdapter) views.rvDrills.getAdapter();
         for (int i = 0; i < adapter.getItemCount(); i++) {
             String[] types = adapter.getItemAtPosition(i).getCategory();
-            System.out.println(types[types.length - 1] + " | " + adapter.getItemAtPosition(i).getTitle());
             assertTrue(Arrays.asList(types).contains(SHOOTING));
         }
 
