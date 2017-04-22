@@ -1,5 +1,7 @@
 package com.armandgray.taap;
 
+import android.widget.ArrayAdapter;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,8 +11,11 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
+import java.util.Arrays;
+
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -36,6 +41,14 @@ public class MainActivityControllerTest {
     @Test
     public void doesCreateViewsHandler_TestConstructor() throws Exception {
         assertNotNull(controller.views);
+    }
+
+    @Test
+    public void canGetAllSpinnerItems_MethodTest() throws Exception {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, 0,
+                activity.getResources().getStringArray(R.array.drill_types));
+        String[] drillTypes = activity.getResources().getStringArray(R.array.drill_types);
+        assertTrue(Arrays.equals(drillTypes, controller.getAllSpinnerItems(adapter)));
     }
 
     @After

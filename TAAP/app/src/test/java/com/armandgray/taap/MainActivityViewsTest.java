@@ -142,12 +142,11 @@ public class MainActivityViewsTest {
 
     @Test
     public void canSelectSpinnerItemToSortDrills() throws Exception {
-        views.spinner.setSelection(1);
+        views.listener.onSpinnerItemSelected(null, null, 1, 0);
         DrillsRvAdapter adapter = (DrillsRvAdapter) views.rvDrills.getAdapter();
         for (int i = 0; i < adapter.getItemCount(); i++) {
-            assertTrue(Arrays.asList(adapter
-                    .getItemAtPosition(i).getCategory())
-                    .contains(SHOOTING));
+            String[] types = adapter.getItemAtPosition(i).getCategory();
+            assertTrue(Arrays.asList(types).contains(SHOOTING));
         }
 
     }

@@ -22,8 +22,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+import static com.armandgray.taap.models.Drill.ALL;
+import static com.armandgray.taap.models.Drill.SHOOTING;
+import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 @RunWith(RobolectricTestRunner.class)
@@ -53,7 +57,7 @@ public class DrillsRvAdapterTest {
     @Test
     public void onBindViewHolder_DoesSetViewsForDrillItem() {
         adapter = new DrillsRvAdapter(new ArrayList<>(Collections.singletonList(
-                new Drill("1-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp))));
+                new Drill("1-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp, Drill.BALL_HANDLING_ARRAY))));
         LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         holder = new DrillsRvAdapter.DrillViewHolder(
@@ -81,7 +85,7 @@ public class DrillsRvAdapterTest {
 
     @Test
     public void canGetItemCount() throws Exception {
-        Drill drill = new Drill("2-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp);
+        Drill drill = new Drill("2-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp, Drill.BALL_HANDLING_ARRAY);
         ArrayList<Drill> drillList = new ArrayList<>();
         drillList.add(drill);
         drillList.add(drill);
@@ -93,9 +97,9 @@ public class DrillsRvAdapterTest {
     @Test
     public void canGetItemAtPosition() throws Exception {
         Drill firstDrill =
-                new Drill("1-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp);
+                new Drill("1-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp, Drill.BALL_HANDLING_ARRAY);
         Drill secondDrill =
-                new Drill("2-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp);
+                new Drill("2-Ball Pound Dribble", R.drawable.ic_fitness_center_white_24dp, Drill.BALL_HANDLING_ARRAY);
         adapter = new DrillsRvAdapter(new ArrayList<>(Arrays.asList(firstDrill, secondDrill)));
         assertEquals(firstDrill, adapter.getItemAtPosition(0));
         assertEquals(secondDrill, adapter.getItemAtPosition(1));
@@ -110,8 +114,38 @@ public class DrillsRvAdapterTest {
 
     @Test
     public void canGetItemAtPosition_IndexOutOfBounds() throws Exception {
-        adapter = new DrillsRvAdapter(new ArrayList<>(Collections.singletonList(new Drill("", 0))));
+        adapter = new DrillsRvAdapter(new ArrayList<>(Collections.singletonList(new Drill("", 0, Drill.BALL_HANDLING_ARRAY))));
         assertNull(adapter.getItemAtPosition(1));
+    }
+
+    @Test
+    public void canSwapRvDrillsAdapterData() throws Exception {
+        ArrayList<Drill> expectedList = getDrillsList();
+        for (int i = 0; i < expectedList.size(); i++) {
+            if (!Arrays.asList(expectedList.get(i).getCategory()).contains(SHOOTING)) {
+                expectedList.remove(i);
+                i--;
+            }
+        }
+        adapter = new DrillsRvAdapter(getDrillsList());
+        adapter.swapRvDrillsAdapterData(SHOOTING);
+
+        assertEquals(expectedList.size(), adapter.drillList.size());
+        for (int i = 0; i < expectedList.size(); i++) {
+            assertTrue(expectedList.get(i).getTitle().equals(adapter.drillList.get(i).getTitle()));
+        }
+    }
+
+    @Test
+    public void doesNotSwapDrillsForUnknownDrillType_MethodTest_SwapRvDrillsAdapterData() throws Exception {
+        ArrayList<Drill> expectedList = getDrillsList();
+        adapter = new DrillsRvAdapter(getDrillsList());
+        adapter.swapRvDrillsAdapterData(ALL);
+
+        assertEquals(expectedList.size(), adapter.drillList.size());
+        for (int i = 0; i < expectedList.size(); i++) {
+            assertTrue(expectedList.get(i).getTitle().equals(adapter.drillList.get(i).getTitle()));
+        }
     }
 
     @After

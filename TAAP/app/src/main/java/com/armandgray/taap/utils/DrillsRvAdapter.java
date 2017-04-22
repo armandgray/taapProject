@@ -11,10 +11,14 @@ import com.armandgray.taap.R;
 import com.armandgray.taap.models.Drill;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import static com.armandgray.taap.models.Drill.DRILL_TYPES;
+import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
 
 public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillViewHolder> {
 
-    private ArrayList<Drill> drillList;
+    ArrayList<Drill> drillList;
 
     DrillsRvAdapter() {}
 
@@ -50,6 +54,36 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
     public Drill getItemAtPosition(int position) {
         if (drillList == null || drillList.size() <= position) { return null; }
         return drillList.get(position);
+    }
+
+    public void swapRvDrillsAdapterData(String drillType) {
+        swapDataSet(getListFilteredOnType(drillType));
+    }
+
+    private void swapDataSet(ArrayList<Drill> newDataList) {
+        this.drillList = newDataList;
+        notifyDataSetChanged();
+    }
+
+    private ArrayList<Drill> getListFilteredOnType(String drillType) {
+        ArrayList<Drill> originalList = getDrillsList();
+        if (!Arrays.asList(DRILL_TYPES).contains(drillType)) { return originalList; }
+        return getTypedList(drillType, originalList);
+    }
+
+    private ArrayList<Drill> getTypedList(String drillType, ArrayList<Drill> originalList) {
+        for (int i = 0; i < originalList.size(); i++) {
+            if (!hasMatchingDrillType(drillType, originalList.get(i))) {
+                originalList.remove(i);
+                i--;
+            }
+        }
+        return originalList;
+    }
+
+    private boolean hasMatchingDrillType(String drillType, Drill drill) {
+        return Arrays.asList(drill.getCategory()).contains(drillType);
+
     }
 
     static class DrillViewHolder extends RecyclerView.ViewHolder {

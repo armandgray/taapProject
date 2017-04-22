@@ -2,10 +2,15 @@ package com.armandgray.taap;
 
 import android.app.Service;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.SpinnerAdapter;
+
+import com.armandgray.taap.utils.DrillsRvAdapter;
 
 class MainActivityController implements MainActivityViews.MainViewsListener {
 
@@ -28,6 +33,23 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
     public void onSortClick() {
         views.spinner.performClick();
         views.spinner.requestFocusFromTouch();
+    }
+
+    @Override
+    public void onSpinnerItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Log.i("SPINNER", String.valueOf(position));
+        System.out.println("SPINNER ITEM CLICK");
+        String[] drillTypes = getAllSpinnerItems(views.spinner.getAdapter());
+        ((DrillsRvAdapter) views.rvDrills.getAdapter())
+                .swapRvDrillsAdapterData(drillTypes[position]);
+    }
+
+    String[] getAllSpinnerItems(SpinnerAdapter adapter) {
+        String[] drillTypes = new String[adapter.getCount()];
+        for (int i = 0; i < adapter.getCount(); i++) {
+            drillTypes[i] = (String) adapter.getItem(i);
+        }
+        return drillTypes;
     }
 
     @Override
