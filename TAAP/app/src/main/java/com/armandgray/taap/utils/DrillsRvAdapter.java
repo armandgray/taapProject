@@ -56,7 +56,7 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
         return drillList.get(position);
     }
 
-    public void swapRvDrillsAdapterData(String drillType) {
+    public void swapRvDrillsAdapterDataOnDrillType(String drillType) {
         swapDataSet(getListFilteredOnType(drillType));
     }
 
