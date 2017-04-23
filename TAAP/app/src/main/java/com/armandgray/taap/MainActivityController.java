@@ -12,6 +12,8 @@ import android.widget.SpinnerAdapter;
 
 import com.armandgray.taap.utils.DrillsRvAdapter;
 
+import static com.armandgray.taap.utils.DrillsRvAdapter.SEARCH;
+
 class MainActivityController implements MainActivityViews.MainViewsListener {
 
     MainActivity activity;
@@ -91,7 +93,7 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
         isQueryCall = true;
         views.spinner.setAdapter(spinnerAdapter);
         spinnerAdapter.addAll(activity.getResources().getStringArray(R.array.drill_types));
-        spinnerAdapter.add("Search: " + query);
+        spinnerAdapter.add(SEARCH + query);
         spinnerAdapter.notifyDataSetChanged();
         isQueryCall = true;
         views.spinner.setSelection(spinnerAdapter.getCount() - 1);
