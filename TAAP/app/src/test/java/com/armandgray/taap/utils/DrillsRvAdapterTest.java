@@ -24,6 +24,7 @@ import java.util.Collections;
 
 import static com.armandgray.taap.models.Drill.ALL;
 import static com.armandgray.taap.models.Drill.SHOOTING;
+import static com.armandgray.taap.models.Drill.getQueryResultList;
 import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNull;
@@ -119,7 +120,7 @@ public class DrillsRvAdapterTest {
     }
 
     @Test
-    public void canSwapRvDrillsAdapterData() throws Exception {
+    public void canSwapRvDrillsAdapterDataOnDrillType() throws Exception {
         ArrayList<Drill> expectedList = getDrillsList();
         for (int i = 0; i < expectedList.size(); i++) {
             if (!Arrays.asList(expectedList.get(i).getCategory()).contains(SHOOTING)) {
@@ -128,7 +129,7 @@ public class DrillsRvAdapterTest {
             }
         }
         adapter = new DrillsRvAdapter(getDrillsList());
-        adapter.swapRvDrillsAdapterData(SHOOTING);
+        adapter.swapRvDrillsAdapterDataOnDrillType(SHOOTING);
 
         assertEquals(expectedList.size(), adapter.drillList.size());
         for (int i = 0; i < expectedList.size(); i++) {
@@ -137,10 +138,23 @@ public class DrillsRvAdapterTest {
     }
 
     @Test
-    public void doesNotSwapDrillsForUnknownDrillType_MethodTest_SwapRvDrillsAdapterData() throws Exception {
+    public void doesRestoreDrillsListForUnknownDrillType_MethodTest_SwapRvDrillsAdapterData() throws Exception {
         ArrayList<Drill> expectedList = getDrillsList();
         adapter = new DrillsRvAdapter(getDrillsList());
-        adapter.swapRvDrillsAdapterData(ALL);
+        adapter.swapRvDrillsAdapterDataOnDrillType(ALL);
+
+        assertEquals(expectedList.size(), adapter.drillList.size());
+        for (int i = 0; i < expectedList.size(); i++) {
+            assertTrue(expectedList.get(i).getTitle().equals(adapter.drillList.get(i).getTitle()));
+        }
+    }
+
+    @Test
+    public void canSwapRvDrillsAdapterDataOnQuery() throws Exception {
+        ArrayList<Drill> expectedList = getQueryResultList(getDrillsList(), "3 Man Weave");
+
+        adapter = new DrillsRvAdapter(getDrillsList());
+        adapter.swapRvDrillsAdapterDataOnQuery("3 Man Weave");
 
         assertEquals(expectedList.size(), adapter.drillList.size());
         for (int i = 0; i < expectedList.size(); i++) {

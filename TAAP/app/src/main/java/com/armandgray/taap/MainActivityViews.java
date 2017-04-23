@@ -4,6 +4,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -41,7 +43,8 @@ class MainActivityViews {
         setupSortClickListener();
         setupSpinnerItemSelectedListener();
         setupSearchVisibility();
-        setupSearchClickListener();
+        setupSearchIconClickListener();
+        setupEtSearchTextChangeListener();
         setupRvDrills();
     }
 
@@ -52,6 +55,7 @@ class MainActivityViews {
         ivSort = (ImageView) activity.findViewById(R.id.ivSort);
         ivSearch = (ImageView) activity.findViewById(R.id.ivSearch);
     }
+
 
     private void setupToolbar() {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
@@ -95,7 +99,7 @@ class MainActivityViews {
         etSearch.setVisibility(View.GONE);
     }
 
-    private void setupSearchClickListener() {
+    private void setupSearchIconClickListener() {
         ivSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,6 +110,25 @@ class MainActivityViews {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 listener.onEtSearchFocusChange(v, hasFocus);
+            }
+        });
+    }
+
+    private void setupEtSearchTextChangeListener() {
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                listener.onEtSearchTextChanged(s, start, before, count);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
     }
@@ -123,5 +146,6 @@ class MainActivityViews {
         void onSpinnerItemSelected(AdapterView<?> parent, View view, int position, long id);
         void onSearchClick();
         void onEtSearchFocusChange(View v, boolean hasFocus);
+        void onEtSearchTextChanged(CharSequence s, int start, int before, int count);
     }
 }

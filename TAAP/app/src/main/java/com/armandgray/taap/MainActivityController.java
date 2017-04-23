@@ -2,25 +2,28 @@ package com.armandgray.taap;
 
 import android.app.Service;
 import android.graphics.Rect;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.SpinnerAdapter;
 
 import com.armandgray.taap.utils.DrillsRvAdapter;
 
+import static com.armandgray.taap.utils.DrillsRvAdapter.SEARCH;
+
 class MainActivityController implements MainActivityViews.MainViewsListener {
 
     MainActivity activity;
     MainActivityViews views;
+    private boolean isQueryCall;
 
     MainActivityController(MainActivity activity) {
         this.activity = activity;
         this.views = new MainActivityViews(activity, this);
-        
+
         views.setupActivityInitialState();
     }
 
@@ -37,11 +40,13 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
 
     @Override
     public void onSpinnerItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Log.i("SPINNER", String.valueOf(position));
-        System.out.println("SPINNER ITEM CLICK");
+        if (isQueryCall) {
+            isQueryCall = false;
+            return;
+        }
         String[] drillTypes = getAllSpinnerItems(views.spinner.getAdapter());
         ((DrillsRvAdapter) views.rvDrills.getAdapter())
-                .swapRvDrillsAdapterData(drillTypes[position]);
+                .swapRvDrillsAdapterDataOnDrillType(drillTypes[position]);
     }
 
     String[] getAllSpinnerItems(SpinnerAdapter adapter) {
@@ -69,6 +74,29 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
             views.spinner.setVisibility(View.VISIBLE);
             views.fab.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void onEtSearchTextChanged(CharSequence s, int start, int before, int count) {
+        String query = views.etSearch.getText().toString();
+        ((DrillsRvAdapter) views.rvDrills.getAdapter())
+                .swapRvDrillsAdapterDataOnQuery(query);
+        addSearchQueryToSpinner(query);
+    }
+
+    private void addSearchQueryToSpinner(String query) {
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(
+                activity,
+                android.R.layout.simple_spinner_item,
+                android.R.id.text1);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        isQueryCall = true;
+        views.spinner.setAdapter(spinnerAdapter);
+        spinnerAdapter.addAll(activity.getResources().getStringArray(R.array.drill_types));
+        spinnerAdapter.add(SEARCH + query);
+        spinnerAdapter.notifyDataSetChanged();
+        isQueryCall = true;
+        views.spinner.setSelection(spinnerAdapter.getCount() - 1);
     }
 
     void dispatchTouchEvent(MotionEvent event) {

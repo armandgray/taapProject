@@ -1,5 +1,9 @@
 package com.armandgray.taap.models;
 
+import android.support.annotation.NonNull;
+
+import java.util.ArrayList;
+
 public class Drill {
 
     public static final String ALL = "ALL";
@@ -33,4 +37,22 @@ public class Drill {
     public String[] getCategory() {
         return category;
     }
+
+    @NonNull
+    public static ArrayList<Drill> getQueryResultList(ArrayList<Drill> drillsList, String query) {
+        ArrayList<Drill> dataList = new ArrayList<>();
+        if (drillsList != null) { dataList = drillsList; }
+        return getFilteredListOnQuery(query, dataList);
+    }
+
+    private static ArrayList<Drill> getFilteredListOnQuery(String query, ArrayList<Drill> dataList) {
+        for (int i = 0; i < dataList.size(); i++) {
+            if (!dataList.get(i).getTitle().toLowerCase().contains(query.toLowerCase())) {
+                dataList.remove(i);
+                i--;
+            }
+        }
+        return dataList;
+    }
+
 }

@@ -14,10 +14,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static com.armandgray.taap.models.Drill.DRILL_TYPES;
+import static com.armandgray.taap.models.Drill.getQueryResultList;
 import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
 
 public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillViewHolder> {
 
+    public static final String SEARCH = "Search: ";
     ArrayList<Drill> drillList;
 
     DrillsRvAdapter() {}
@@ -56,7 +58,11 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
         return drillList.get(position);
     }
 
-    public void swapRvDrillsAdapterData(String drillType) {
+    public void swapRvDrillsAdapterDataOnQuery(String query) {
+        swapDataSet(getQueryResultList(getDrillsList(), query));
+    }
+
+    public void swapRvDrillsAdapterDataOnDrillType(String drillType) {
         swapDataSet(getListFilteredOnType(drillType));
     }
 
@@ -67,8 +73,19 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
 
     private ArrayList<Drill> getListFilteredOnType(String drillType) {
         ArrayList<Drill> originalList = getDrillsList();
-        if (!Arrays.asList(DRILL_TYPES).contains(drillType)) { return originalList; }
-        return getTypedList(drillType, originalList);
+        if (Arrays.asList(DRILL_TYPES).contains(drillType)) {
+            return getTypedList(drillType, originalList);
+        }
+        return isSearchType(drillType) ?
+                getQueryResultList(originalList, getParsedTypeForQuery(drillType)) : originalList;
+    }
+
+    private boolean isSearchType(String drillType) {
+        return drillType != null && drillType.contains(SEARCH);
+    }
+
+    private String getParsedTypeForQuery(String drillType) {
+        return drillType.substring(SEARCH.length(), drillType.length() - 1);
     }
 
     private ArrayList<Drill> getTypedList(String drillType, ArrayList<Drill> originalList) {

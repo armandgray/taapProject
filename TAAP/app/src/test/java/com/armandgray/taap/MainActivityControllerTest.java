@@ -21,6 +21,7 @@ import static junit.framework.Assert.assertTrue;
 @Config(constants = BuildConfig.class)
 public class MainActivityControllerTest {
 
+    private static final String W_ALL = "wAll";
     private ActivityController<MainActivity> activityController;
     private MainActivity activity;
     private MainActivityController controller;
@@ -44,11 +45,59 @@ public class MainActivityControllerTest {
     }
 
     @Test
-    public void canGetAllSpinnerItems_MethodTest() throws Exception {
+    public void canGetAllSpinnerItems_MethodTest_OnSpinnerItemSelected() throws Exception {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, 0,
                 activity.getResources().getStringArray(R.array.drill_types));
         String[] drillTypes = activity.getResources().getStringArray(R.array.drill_types);
         assertTrue(Arrays.equals(drillTypes, controller.getAllSpinnerItems(adapter)));
+    }
+
+    @Test
+    public void doesAddSearchQueryToSpinner_MethodTest_OnEtSearchTextChanged() throws Exception {
+        controller.views.etSearch.setText(W_ALL);
+        controller.views.listener.onEtSearchTextChanged(null, 0, 0, 0);
+
+        String[] allSpinnerItems = controller
+                .getAllSpinnerItems(controller.views.spinner.getAdapter());
+        assertNotNull(allSpinnerItems);
+        assertTrue(Arrays.asList(allSpinnerItems).contains("Search: " + W_ALL));
+    }
+
+    @Test
+    public void doesRecycleSpinnerSearchItem_MethodTest_OnEtSearchTextChanged() throws Exception {
+        controller.views.etSearch.setText(W_ALL);
+        controller.views.listener.onEtSearchTextChanged(null, 0, 0, 0);
+
+        String[] allSpinnerItems = controller
+                .getAllSpinnerItems(controller.views.spinner.getAdapter());
+        int expectedLength = allSpinnerItems.length;
+
+        controller.views.etSearch.setText(W_ALL);
+        controller.views.listener.onEtSearchTextChanged(null, 0, 0, 0);
+
+        allSpinnerItems = controller
+                .getAllSpinnerItems(controller.views.spinner.getAdapter());
+
+        assertNotNull(allSpinnerItems);
+        assertEquals(expectedLength, allSpinnerItems.length);
+    }
+
+    @Test
+    public void doesSetSpinnerToSearchItem_MethodTest_OnEtSearchTextChanged() throws Exception {
+        controller.views.etSearch.setText(W_ALL);
+        controller.views.listener.onEtSearchTextChanged(null, 0, 0, 0);
+
+        String[] allSpinnerItems = controller
+                .getAllSpinnerItems(controller.views.spinner.getAdapter());
+        assertNotNull(allSpinnerItems);
+        assertEquals(allSpinnerItems.length - 1,
+                Arrays.asList(allSpinnerItems).indexOf("Search: " + W_ALL));
+        assertEquals("Search: " + W_ALL, controller.views.spinner.getSelectedItem().toString());
+    }
+
+    @Test
+    public void doesNotSwapAdapterOnSearchQuery_MethodTest_OnEtSearchTextChanged() throws Exception {
+        // TODO add test
     }
 
     @After
