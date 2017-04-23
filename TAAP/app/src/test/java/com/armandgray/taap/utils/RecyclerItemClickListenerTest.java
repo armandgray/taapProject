@@ -18,10 +18,19 @@ public class RecyclerItemClickListenerTest {
         assertNotNull(new RecyclerItemClickListener(context,
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
-                    public void onItemClick(View view, int position) {
-
-                    }
+                    public void onItemClick(View view, int position) {}
                 }));
+    }
+
+    @Test
+    public void doesUseGestureDetectorForClicks_TestConstructor() throws Exception {
+        RecyclerItemClickListener clickListener = new RecyclerItemClickListener(context,
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {}
+                });
+        assertNotNull(clickListener);
+        assertNotNull(clickListener.gestureDetector);
     }
 
 }
