@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.SpinnerAdapter;
 
@@ -70,9 +71,21 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
 
     @Override
     public void onEtSearchTextChanged(CharSequence s, int start, int before, int count) {
+        String query = views.etSearch.getText().toString();
         ((DrillsRvAdapter) views.rvDrills.getAdapter())
-                .swapRvDrillsAdapterDataOnQuery(
-                        views.etSearch.getText().toString());
+                .swapRvDrillsAdapterDataOnQuery(query);
+        addSearchQueryToSpinner(query);
+    }
+
+    private void addSearchQueryToSpinner(String query) {
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(
+                activity,
+                android.R.layout.simple_spinner_item,
+                android.R.id.text1);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        views.spinner.setAdapter(spinnerAdapter);
+        spinnerAdapter.add(query);
+        spinnerAdapter.notifyDataSetChanged();
     }
 
     void dispatchTouchEvent(MotionEvent event) {
