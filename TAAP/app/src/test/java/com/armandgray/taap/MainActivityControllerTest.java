@@ -82,6 +82,19 @@ public class MainActivityControllerTest {
         assertEquals(expectedLength, allSpinnerItems.length);
     }
 
+    @Test
+    public void doesSetSpinnerToSearchItem_MethodTest_OnEtSearchTextChanged() throws Exception {
+        controller.views.etSearch.setText(W_ALL);
+        controller.views.listener.onEtSearchTextChanged(null, 0, 0, 0);
+
+        String[] allSpinnerItems = controller
+                .getAllSpinnerItems(controller.views.spinner.getAdapter());
+        assertNotNull(allSpinnerItems);
+        assertEquals(allSpinnerItems.length - 1,
+                Arrays.asList(allSpinnerItems).indexOf("Search: " + W_ALL));
+        assertEquals("Search: " + W_ALL, controller.views.spinner.getSelectedItem().toString());
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
