@@ -45,7 +45,7 @@ public class MainActivityControllerTest {
     }
 
     @Test
-    public void canGetAllSpinnerItems() throws Exception {
+    public void canGetAllSpinnerItems_MethodTest_OnSpinnerItemSelected() throws Exception {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, 0,
                 activity.getResources().getStringArray(R.array.drill_types));
         String[] drillTypes = activity.getResources().getStringArray(R.array.drill_types);
@@ -53,7 +53,7 @@ public class MainActivityControllerTest {
     }
 
     @Test
-    public void doesAddSearchQueryToSpinner() throws Exception {
+    public void doesAddSearchQueryToSpinner_MethodTest_OnEtSearchTextChanged() throws Exception {
         controller.views.etSearch.setText(W_ALL);
         controller.views.listener.onEtSearchTextChanged(null, 0, 0, 0);
 
