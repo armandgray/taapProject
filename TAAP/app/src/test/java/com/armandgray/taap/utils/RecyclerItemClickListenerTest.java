@@ -1,6 +1,7 @@
 package com.armandgray.taap.utils;
 
 import android.content.Context;
+import android.view.View;
 
 import org.junit.Test;
 import org.mockito.Mock;
@@ -15,7 +16,12 @@ public class RecyclerItemClickListenerTest {
     @Test
     public void canCreateRecyclerItemClickListener_TestConstructor() throws Exception {
         assertNotNull(new RecyclerItemClickListener(context,
-                new RecyclerItemClickListener.OnItemClickListener() {}));
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+
+                    }
+                }));
     }
 
 }
