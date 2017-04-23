@@ -171,7 +171,6 @@ public class MainActivityViewsTest {
     @Test
     public void canChangeEtSearchTextToQueryDrillList() throws Exception {
         views.etSearch.setText(WALL);
-        views.listener.onEtSearchTextChanged(null, 0, 0, 0);
 
         ArrayList<Drill> expectedList = getQueryResultList(getDrillsList(), WALL);
 
@@ -190,7 +189,6 @@ public class MainActivityViewsTest {
     @Test
     public void canSelectSpinnerSearchItemToReSortDrills() throws Exception {
         views.etSearch.setText(WALL);
-        views.listener.onEtSearchTextChanged(null, 0, 0, 0);
 
         int spinnerLastIndex = views.spinner.getAdapter().getCount() - 1;
         views.listener.onSpinnerItemSelected(null, null, 1, 0);
