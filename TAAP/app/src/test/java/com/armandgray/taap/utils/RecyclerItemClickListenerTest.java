@@ -1,12 +1,14 @@
 package com.armandgray.taap.utils;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import org.junit.Test;
 import org.mockito.Mock;
 
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
 
 public class RecyclerItemClickListenerTest {
 
@@ -31,6 +33,17 @@ public class RecyclerItemClickListenerTest {
                 });
         assertNotNull(clickListener);
         assertNotNull(clickListener.gestureDetector);
+    }
+
+    @Test
+    public void implementsOnItemTouchListener() throws Exception {
+        RecyclerItemClickListener clickListener = new RecyclerItemClickListener(context,
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {}
+                });
+        assertNotNull(clickListener);
+        assertTrue(clickListener instanceof RecyclerView.OnItemTouchListener);
     }
 
 }
