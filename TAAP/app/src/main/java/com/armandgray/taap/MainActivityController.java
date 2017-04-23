@@ -87,6 +87,7 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
         spinnerAdapter.addAll(activity.getResources().getStringArray(R.array.drill_types));
         spinnerAdapter.add("Search: " + query);
         spinnerAdapter.notifyDataSetChanged();
+        views.spinner.setSelection(spinnerAdapter.getCount() - 1);
     }
 
     void dispatchTouchEvent(MotionEvent event) {
