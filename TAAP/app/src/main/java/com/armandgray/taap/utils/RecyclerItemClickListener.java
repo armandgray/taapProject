@@ -1,6 +1,7 @@
 package com.armandgray.taap.utils;
 
 import android.content.Context;
+import android.view.View;
 
 public class RecyclerItemClickListener {
 
@@ -11,5 +12,6 @@ public class RecyclerItemClickListener {
     }
 
     public interface OnItemClickListener {
+        void onItemClick(View view, int position);
     }
 }
