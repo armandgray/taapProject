@@ -60,7 +60,7 @@ public class MainActivityControllerTest {
         String[] allSpinnerItems = controller
                 .getAllSpinnerItems(controller.views.spinner.getAdapter());
         assertNotNull(allSpinnerItems);
-        assertTrue(Arrays.asList(allSpinnerItems).contains(W_ALL));
+        assertTrue(Arrays.asList(allSpinnerItems).contains("Search: " + W_ALL));
     }
 
     @After

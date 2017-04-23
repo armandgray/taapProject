@@ -84,7 +84,7 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
                 android.R.id.text1);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         views.spinner.setAdapter(spinnerAdapter);
-        spinnerAdapter.add(query);
+        spinnerAdapter.add("Search: " + query);
         spinnerAdapter.notifyDataSetChanged();
     }
 
