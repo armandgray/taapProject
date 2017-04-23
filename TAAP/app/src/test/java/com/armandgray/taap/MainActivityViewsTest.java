@@ -38,7 +38,7 @@ import static org.robolectric.Shadows.shadowOf;
 @Config(constants = BuildConfig.class)
 public class MainActivityViewsTest {
 
-    public static final String WALL = "wall";
+    private static final String WALL = "wall";
     private ActivityController<MainActivity> activityController;
     private MainActivity activity;
     private Toolbar toolbar;

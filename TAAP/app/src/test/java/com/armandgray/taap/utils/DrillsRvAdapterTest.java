@@ -138,7 +138,7 @@ public class DrillsRvAdapterTest {
     }
 
     @Test
-    public void doesNotSwapDrillsForUnknownDrillType_MethodTest_SwapRvDrillsAdapterData() throws Exception {
+    public void doesRestoreDrillsListForUnknownDrillType_MethodTest_SwapRvDrillsAdapterData() throws Exception {
         ArrayList<Drill> expectedList = getDrillsList();
         adapter = new DrillsRvAdapter(getDrillsList());
         adapter.swapRvDrillsAdapterDataOnDrillType(ALL);

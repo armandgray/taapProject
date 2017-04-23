@@ -2,7 +2,6 @@ package com.armandgray.taap;
 
 import android.app.Service;
 import android.graphics.Rect;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
