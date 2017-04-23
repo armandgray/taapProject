@@ -185,7 +185,19 @@ public class MainActivityViewsTest {
         for (int i = 0; i < expectedList.size(); i++) {
             assertTrue(expectedList.get(i).getTitle().equals(adapterDrillList.get(i).getTitle()));
         }
+    }
 
+    @Test
+    public void canSelectSpinnerSearchItemToReSortDrills() throws Exception {
+        views.etSearch.setText(WALL);
+        views.listener.onEtSearchTextChanged(null, 0, 0, 0);
+
+        int spinnerLastIndex = views.spinner.getAdapter().getCount() - 1;
+        views.listener.onSpinnerItemSelected(null, null, 1, 0);
+        views.listener.onSpinnerItemSelected(null, null, spinnerLastIndex, 0);
+
+        ArrayList<Drill> expectedList = getQueryResultList(getDrillsList(), WALL);
+        assertEquals(expectedList.size(), views.rvDrills.getAdapter().getItemCount());
     }
 
     @Test

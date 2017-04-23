@@ -47,7 +47,7 @@ public class Drill {
 
     private static ArrayList<Drill> getFilteredListOnQuery(String query, ArrayList<Drill> dataList) {
         for (int i = 0; i < dataList.size(); i++) {
-            if (!dataList.get(i).getTitle().toLowerCase().contains(query)) {
+            if (!dataList.get(i).getTitle().toLowerCase().contains(query.toLowerCase())) {
                 dataList.remove(i);
                 i--;
             }

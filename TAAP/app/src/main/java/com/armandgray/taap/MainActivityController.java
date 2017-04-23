@@ -16,11 +16,12 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
 
     MainActivity activity;
     MainActivityViews views;
+    private boolean isQueryCall;
 
     MainActivityController(MainActivity activity) {
         this.activity = activity;
         this.views = new MainActivityViews(activity, this);
-        
+
         views.setupActivityInitialState();
     }
 
@@ -37,6 +38,10 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
 
     @Override
     public void onSpinnerItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if (isQueryCall) {
+            isQueryCall = false;
+            return;
+        }
         String[] drillTypes = getAllSpinnerItems(views.spinner.getAdapter());
         ((DrillsRvAdapter) views.rvDrills.getAdapter())
                 .swapRvDrillsAdapterDataOnDrillType(drillTypes[position]);
@@ -78,6 +83,7 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
     }
 
     private void addSearchQueryToSpinner(String query) {
+        isQueryCall = true;
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(
                 activity,
                 android.R.layout.simple_spinner_item,

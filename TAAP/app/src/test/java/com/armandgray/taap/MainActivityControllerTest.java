@@ -95,6 +95,11 @@ public class MainActivityControllerTest {
         assertEquals("Search: " + W_ALL, controller.views.spinner.getSelectedItem().toString());
     }
 
+    @Test
+    public void doesNotSwapAdapterOnSearchQuery_MethodTest_OnEtSearchTextChanged() throws Exception {
+        // TODO add test
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
