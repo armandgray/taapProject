@@ -199,12 +199,21 @@ public class MainActivityViewsTest {
     }
 
     @Test
-    public void doesSetupRvDrills_MethodTest() throws Exception {
+    public void doesSetupRvDrills() throws Exception {
         assertNotNull(views.rvDrills);
         assertNotNull(views.rvDrills.getAdapter());
         assertNotNull(views.rvDrills.getLayoutManager());
         assertTrue(views.rvDrills.getLayoutManager() instanceof LinearLayoutManager);
         assertTrue(views.rvDrills.getAdapter().getItemCount() > 0);
+    }
+
+    @Test
+    public void canClickRvDrillsItemToStartDetailActivity() throws Exception {
+        assertNotNull(views.rvDrills);
+        views.rvDrills.findViewHolderForAdapterPosition(0).itemView.performClick();
+        Intent expectedIntent = new Intent();
+        assertEquals(expectedIntent.toString(),
+                shadowOf(activity).getNextStartedActivity().toString());
     }
 
     @After
