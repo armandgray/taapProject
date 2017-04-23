@@ -2,11 +2,12 @@ package com.armandgray.taap.utils;
 
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
+import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class RecyclerItemClickListener {
+public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListener {
 
     private final OnItemClickListener listener;
     @VisibleForTesting GestureDetector gestureDetector;
@@ -19,6 +20,21 @@ public class RecyclerItemClickListener {
                 return true;
             }
         });
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+    }
+
+    @Override
+    public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
     }
 
     public interface OnItemClickListener {

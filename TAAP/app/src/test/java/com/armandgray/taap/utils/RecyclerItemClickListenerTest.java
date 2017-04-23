@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
 
 public class RecyclerItemClickListenerTest {
 
@@ -37,13 +36,12 @@ public class RecyclerItemClickListenerTest {
 
     @Test
     public void implementsOnItemTouchListener() throws Exception {
-        RecyclerItemClickListener clickListener = new RecyclerItemClickListener(context,
+        RecyclerView.OnItemTouchListener clickListener = new RecyclerItemClickListener(context,
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {}
                 });
         assertNotNull(clickListener);
-        assertTrue(clickListener instanceof RecyclerView.OnItemTouchListener);
     }
 
 }
