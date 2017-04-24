@@ -1,10 +1,12 @@
 package com.armandgray.taap.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 
-public class Drill {
+public class Drill implements Parcelable {
 
     public static final String ALL = "ALL";
     public static final String BALL_HANDLING = "Ball Handling";
@@ -55,4 +57,33 @@ public class Drill {
         return dataList;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.title);
+        dest.writeInt(this.imageId);
+        dest.writeStringArray(this.category);
+    }
+
+    protected Drill(Parcel in) {
+        this.title = in.readString();
+        this.imageId = in.readInt();
+        this.category = in.createStringArray();
+    }
+
+    public static final Parcelable.Creator<Drill> CREATOR = new Parcelable.Creator<Drill>() {
+        @Override
+        public Drill createFromParcel(Parcel source) {
+            return new Drill(source);
+        }
+
+        @Override
+        public Drill[] newArray(int size) {
+            return new Drill[size];
+        }
+    };
 }
