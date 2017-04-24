@@ -33,4 +33,5 @@
         <item>Passing</item>
         <item>Fundamentals</item>
     </string-array>
+    <string name="title_activity_drill_detail">DrillDetailActivity</string>
 </resources>
