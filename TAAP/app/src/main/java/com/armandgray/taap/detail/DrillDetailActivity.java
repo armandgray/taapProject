@@ -11,7 +11,7 @@ import com.armandgray.taap.R;
 
 public class DrillDetailActivity extends AppCompatActivity {
 
-    public DrillDetailController controller;
+    DrillDetailController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
