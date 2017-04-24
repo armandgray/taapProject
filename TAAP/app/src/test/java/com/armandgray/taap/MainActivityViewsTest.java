@@ -22,6 +22,7 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowToast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -104,13 +105,14 @@ public class MainActivityViewsTest {
     }
 
     @Test
-    public void doesSetupFABClickListener_MethodTest() throws Exception {
+    public void doesSetupFABClickListener() throws Exception {
         FloatingActionButton fab = (FloatingActionButton) activity.findViewById(R.id.fab);
-        assertNotNull(fab);
+        fab.performClick();
+        assertEquals("Feature Coming Soon!", ShadowToast.getTextOfLatestToast());
     }
 
     @Test
-    public void canClickSpinnerOnSortClick_MethodTest() throws Exception {
+    public void canClickSpinnerOnIvSortClick_MethodTest() throws Exception {
         // TODO test
     }
 
@@ -199,12 +201,22 @@ public class MainActivityViewsTest {
     }
 
     @Test
-    public void doesSetupRvDrills_MethodTest() throws Exception {
+    public void doesSetupRvDrills() throws Exception {
         assertNotNull(views.rvDrills);
         assertNotNull(views.rvDrills.getAdapter());
         assertNotNull(views.rvDrills.getLayoutManager());
         assertTrue(views.rvDrills.getLayoutManager() instanceof LinearLayoutManager);
         assertTrue(views.rvDrills.getAdapter().getItemCount() > 0);
+    }
+
+    @Test
+    public void canClickRvDrillsItemToStartDetailActivity() throws Exception {
+        // TODO correctly call on Click
+        assertNotNull(views.rvDrills);
+        views.rvDrills.getChildAt(0).performClick();
+        Intent expectedIntent = new Intent(activity, DrillDetailActivity.class);
+        assertEquals(expectedIntent.toString(),
+                shadowOf(activity).getNextStartedActivity().toString());
     }
 
     @After

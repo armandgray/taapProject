@@ -46,6 +46,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.armandgray.taap.settings.SettingsActivity" />
         </activity>
+        <activity
+            android:name=".DrillDetailActivity"
+            android:label="@string/title_activity_drill_detail"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
