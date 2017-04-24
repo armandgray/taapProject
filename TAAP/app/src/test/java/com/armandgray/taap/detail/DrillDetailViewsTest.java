@@ -5,8 +5,6 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.armandgray.taap.R;
-import com.armandgray.taap.settings.SettingsActivity;
-import com.armandgray.taap.settings.SettingsActivityViews;
 
 import org.junit.After;
 import org.junit.Before;
