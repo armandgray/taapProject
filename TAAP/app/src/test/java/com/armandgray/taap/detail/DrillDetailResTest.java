@@ -2,6 +2,7 @@ package com.armandgray.taap.settings;
 
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.armandgray.taap.BuildConfig;
@@ -65,6 +66,40 @@ public class DrillDetailResTest {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
         LinearLayout detailContainer = (LinearLayout) container.findViewById(R.id.detailContainer);
         assertNotNull(detailContainer.findViewById(R.id.tvGoal));
+    }
+
+    @Test
+    public void hasLayout_SetsContainer() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
+        assertNotNull(container.findViewById(R.id.setsContainer));
+    }
+
+    @Test
+    public void hasView_TvSets() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
+        RelativeLayout setsContainer = (RelativeLayout) container.findViewById(R.id.detailContainer);
+        assertNotNull(setsContainer.findViewById(R.id.tvSets));
+    }
+
+    @Test
+    public void hasView_TvReps() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
+        RelativeLayout setsContainer = (RelativeLayout) container.findViewById(R.id.detailContainer);
+        assertNotNull(setsContainer.findViewById(R.id.tvReps));
+    }
+
+    @Test
+    public void hasView_NpSets() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
+        RelativeLayout setsContainer = (RelativeLayout) container.findViewById(R.id.detailContainer);
+        assertNotNull(setsContainer.findViewById(R.id.npSets));
+    }
+
+    @Test
+    public void hasView_NpReps() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
+        RelativeLayout setsContainer = (RelativeLayout) container.findViewById(R.id.detailContainer);
+        assertNotNull(setsContainer.findViewById(R.id.npReps));
     }
 
     @After
