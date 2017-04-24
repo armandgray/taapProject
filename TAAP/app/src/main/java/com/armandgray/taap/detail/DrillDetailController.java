@@ -5,8 +5,7 @@ class DrillDetailController {
     DrillDetailActivity activity;
     DrillDetailViews views;
 
-    public DrillDetailController(DrillDetailActivity activity, DrillDetailViews views) {
+    public DrillDetailController(DrillDetailActivity activity) {
         this.activity = activity;
-        this.views = views;
     }
 }

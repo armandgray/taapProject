@@ -16,6 +16,9 @@ public class DrillDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        controller = new DrillDetailController(this);
+
         setContentView(R.layout.activity_drill_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
