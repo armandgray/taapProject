@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.armandgray.taap.models.Drill;
 import com.armandgray.taap.utils.DrillsRvAdapter;
 import com.armandgray.taap.utils.RecyclerItemClickListener;
 
@@ -20,6 +21,7 @@ import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
 
 class MainActivityViews {
 
+    public static final String SELECTED_DRILL = "SELECTED_DRILL";
     MainActivity activity;
     MainViewsListener listener;
 
@@ -149,6 +151,9 @@ class MainActivityViews {
                     @Override
                     public void onItemClick(View view, int position) {
                         Intent intent = new Intent(activity, DrillDetailActivity.class);
+                        Drill drill = ((DrillsRvAdapter) rvDrills.getAdapter())
+                                .getItemAtPosition(position);
+                        intent.putExtra(SELECTED_DRILL, drill);
                         activity.startActivity(intent);
                     }
                 }));
