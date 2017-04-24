@@ -9,6 +9,8 @@ import android.view.View;
 
 public class DrillDetailActivity extends AppCompatActivity {
 
+    public String controller;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
