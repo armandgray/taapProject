@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.SpinnerAdapter;
+import android.widget.Toast;
 
 import com.armandgray.taap.utils.DrillsRvAdapter;
 
@@ -29,7 +30,7 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
 
     @Override
     public void onFabClick() {
-        // TODO add FAB click action
+        Toast.makeText(activity, "Feature Coming Soon!", Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -105,14 +105,14 @@ public class MainActivityViewsTest {
     }
 
     @Test
-    public void doesSetupFABClickListener_MethodTest() throws Exception {
+    public void doesSetupFABClickListener() throws Exception {
         FloatingActionButton fab = (FloatingActionButton) activity.findViewById(R.id.fab);
-        assertNotNull(fab);
-        assertEquals("Feature Coming Soon", ShadowToast.getTextOfLatestToast());
+        fab.performClick();
+        assertEquals("Feature Coming Soon!", ShadowToast.getTextOfLatestToast());
     }
 
     @Test
-    public void canClickSpinnerOnSortClick_MethodTest() throws Exception {
+    public void canClickSpinnerOnIvSortClick_MethodTest() throws Exception {
         // TODO test
     }
 
