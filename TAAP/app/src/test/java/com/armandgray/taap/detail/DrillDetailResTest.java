@@ -49,21 +49,21 @@ public class DrillDetailResTest {
     @Test
     public void hasView_RvCurrentLog() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
-        LinearLayout detailContainer = container.findViewById(R.id.detailContainer);
+        LinearLayout detailContainer = (LinearLayout) container.findViewById(R.id.detailContainer);
         assertNotNull(detailContainer.findViewById(R.id.rvCurrentLog));
     }
 
     @Test
     public void hasView_RvLastLog() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
-        LinearLayout detailContainer = container.findViewById(R.id.detailContainer);
+        LinearLayout detailContainer = (LinearLayout) container.findViewById(R.id.detailContainer);
         assertNotNull(detailContainer.findViewById(R.id.rvLastLog));
     }
 
     @Test
     public void hasView_TvGoal() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
-        LinearLayout detailContainer = container.findViewById(R.id.detailContainer);
+        LinearLayout detailContainer = (LinearLayout) container.findViewById(R.id.detailContainer);
         assertNotNull(detailContainer.findViewById(R.id.tvGoal));
     }
 

@@ -13,8 +13,36 @@
         android:id="@+id/ivImage"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:tint="@color/colorDarkGray"
         android:contentDescription="@string/drill_image"
+        android:tint="@color/colorDarkGray"
         app:srcCompat="@drawable/ic_person_white_24dp" />
+
+    <LinearLayout
+        android:id="@+id/detailContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="0.9">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvCurrentLog"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvLastLog"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3" />
+
+        <TextView
+            android:id="@+id/tvGoal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
+            android:text="@string/set_goal"
+            android:textSize="@dimen/detail_container_text_size" />
+    </LinearLayout>
 
 </LinearLayout>
