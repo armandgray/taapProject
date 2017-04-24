@@ -1,5 +1,6 @@
 package com.armandgray.taap;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.armandgray.taap.utils.DrillsRvAdapter;
+import com.armandgray.taap.utils.RecyclerItemClickListener;
 
 import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
 
@@ -46,6 +48,7 @@ class MainActivityViews {
         setupSearchIconClickListener();
         setupEtSearchTextChangeListener();
         setupRvDrills();
+        setupRvDrillsItemClickListener();
     }
 
     private void assignGlobalViews() {
@@ -138,6 +141,17 @@ class MainActivityViews {
         rvDrills.setAdapter(new DrillsRvAdapter(getDrillsList()));
         rvDrills.setLayoutManager(
                 new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
+    }
+
+    private void setupRvDrillsItemClickListener() {
+        rvDrills.addOnItemTouchListener(new RecyclerItemClickListener(activity,
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Intent intent = new Intent();
+                        activity.startActivity(intent);
+                    }
+                }));
     }
 
     interface MainViewsListener {

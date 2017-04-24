@@ -209,8 +209,9 @@ public class MainActivityViewsTest {
 
     @Test
     public void canClickRvDrillsItemToStartDetailActivity() throws Exception {
+        // TODO correctly call on Click
         assertNotNull(views.rvDrills);
-        views.rvDrills.findViewHolderForAdapterPosition(0).itemView.performClick();
+        views.rvDrills.getChildAt(0).performClick();
         Intent expectedIntent = new Intent();
         assertEquals(expectedIntent.toString(),
                 shadowOf(activity).getNextStartedActivity().toString());
