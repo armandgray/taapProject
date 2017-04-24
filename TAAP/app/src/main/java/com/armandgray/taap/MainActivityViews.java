@@ -148,7 +148,7 @@ class MainActivityViews {
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Intent intent = new Intent();
+                        Intent intent = new Intent(activity, DrillDetailActivity.class);
                         activity.startActivity(intent);
                     }
                 }));
