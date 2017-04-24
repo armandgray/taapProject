@@ -19,7 +19,6 @@ public class DrillDetailActivity extends AppCompatActivity {
 
         controller = new DrillDetailController(this);
 
-        setContentView(R.layout.activity_drill_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

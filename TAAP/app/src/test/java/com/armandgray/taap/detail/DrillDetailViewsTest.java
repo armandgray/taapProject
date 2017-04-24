@@ -41,12 +41,12 @@ public class DrillDetailViewsTest {
 
     @Test
     public void activityInstanceOfMainActivity_TestConstructor() throws Exception {
-        assertEquals("details.DrillDetailActivity", views.activity.getLocalClassName());
+        assertEquals("detail.DrillDetailActivity", views.activity.getLocalClassName());
     }
 
     @Test
     public void doesSetContentView_MethodTest_SetupActivityInitialState() throws Exception {
-        assertEquals(R.id.activitySettingsLayout, shadowOf(activity).getContentView().getId());
+        assertEquals(R.id.activityDrillDetailLayout, shadowOf(activity).getContentView().getId());
     }
 
     @Test
