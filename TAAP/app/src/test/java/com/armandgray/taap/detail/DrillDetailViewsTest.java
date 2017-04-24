@@ -1,5 +1,6 @@
 package com.armandgray.taap.detail;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
@@ -13,9 +14,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
+import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
@@ -25,6 +28,7 @@ import static org.robolectric.Shadows.shadowOf;
 @Config(constants = BuildConfig.class)
 public class DrillDetailViewsTest {
 
+    private static final String BEAT_THE_PRO_MID_RANGE = "Beat-the-Pro (Mid-Range)";
     private ActivityController<DrillDetailActivity> activityController;
     private DrillDetailActivity activity;
     private Toolbar toolbar;
@@ -33,7 +37,9 @@ public class DrillDetailViewsTest {
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
-        activityController = Robolectric.buildActivity(DrillDetailActivity.class);
+        Intent intent = new Intent(RuntimeEnvironment.application, DrillDetailActivity.class);
+        intent.putExtra(SELECTED_DRILL, BEAT_THE_PRO_MID_RANGE);
+        activityController = Robolectric.buildActivity(DrillDetailActivity.class).withIntent(intent);
         activity = activityController.create().visible().get();
         toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         views = activity.controller.views;
@@ -76,7 +82,7 @@ public class DrillDetailViewsTest {
     public void doesSetCustomToolbarTitleText_MethodTest_SetupActivityInitialState() throws Exception {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         TextView tvTitle = (TextView) toolbar.findViewById(R.id.tvTitle);
-        assertEquals("Settings", tvTitle.getText());
+        assertEquals(BEAT_THE_PRO_MID_RANGE, tvTitle.getText());
     }
 
     @After

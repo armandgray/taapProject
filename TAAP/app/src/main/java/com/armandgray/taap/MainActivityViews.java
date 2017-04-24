@@ -18,11 +18,11 @@ import com.armandgray.taap.models.Drill;
 import com.armandgray.taap.utils.DrillsRvAdapter;
 import com.armandgray.taap.utils.RecyclerItemClickListener;
 
+import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
 import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
 
 class MainActivityViews {
 
-    public static final String SELECTED_DRILL = "SELECTED_DRILL";
     MainActivity activity;
     MainViewsListener listener;
 
