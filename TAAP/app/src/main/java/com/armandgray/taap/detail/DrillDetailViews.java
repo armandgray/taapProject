@@ -1,5 +1,7 @@
 package com.armandgray.taap.detail;
 
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 
@@ -29,6 +31,18 @@ class DrillDetailViews {
     private void setupToolbar() {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         activity.setSupportActionBar(toolbar);
+        if (activity.getSupportActionBar() != null) {
+            activity.getSupportActionBar().setDisplayShowTitleEnabled(false);
+            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            setHomeAsUpIndicatorColor();
+        }
+    }
+
+    private void setHomeAsUpIndicatorColor() {
+        final Drawable upArrow = activity.getResources().getDrawable(R.drawable.abc_ic_ab_back_material);
+        upArrow.setColorFilter(activity.getResources().getColor(R.color.colorDarkGray), PorterDuff.Mode.SRC_ATOP);
+        if (activity.getSupportActionBar() == null) { return; }
+        activity.getSupportActionBar().setHomeAsUpIndicator(upArrow);
     }
 
 }
