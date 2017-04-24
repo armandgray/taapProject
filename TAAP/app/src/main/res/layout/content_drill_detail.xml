@@ -9,4 +9,12 @@
     tools:context="com.armandgray.taap.detail.DrillDetailActivity"
     tools:showIn="@layout/activity_drill_detail">
 
+    <ImageView
+        android:id="@+id/ivImage"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:tint="@color/colorDarkGray"
+        android:contentDescription="@string/drill_image"
+        app:srcCompat="@drawable/ic_person_white_24dp" />
+
 </LinearLayout>
