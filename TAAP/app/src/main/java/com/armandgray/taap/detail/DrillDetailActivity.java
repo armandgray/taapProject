@@ -1,4 +1,4 @@
-package com.armandgray.taap;
+package com.armandgray.taap.detail;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -7,9 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.armandgray.taap.R;
+
 public class DrillDetailActivity extends AppCompatActivity {
 
-    public String controller;
+    public DrillDetailController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

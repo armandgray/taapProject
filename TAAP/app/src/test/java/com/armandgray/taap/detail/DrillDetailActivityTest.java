@@ -1,7 +1,7 @@
-package com.armandgray.taap.settings;
+package com.armandgray.taap.detail;
 
 import com.armandgray.taap.BuildConfig;
-import com.armandgray.taap.DrillDetailActivity;
+import com.armandgray.taap.detail.DrillDetailActivity;
 
 import org.junit.After;
 import org.junit.Before;

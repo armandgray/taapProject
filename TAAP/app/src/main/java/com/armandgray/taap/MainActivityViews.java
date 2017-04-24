@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.armandgray.taap.detail.DrillDetailActivity;
 import com.armandgray.taap.models.Drill;
 import com.armandgray.taap.utils.DrillsRvAdapter;
 import com.armandgray.taap.utils.RecyclerItemClickListener;
