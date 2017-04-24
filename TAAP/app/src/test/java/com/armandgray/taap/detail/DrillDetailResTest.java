@@ -40,6 +40,33 @@ public class DrillDetailResTest {
         assertNotNull(container.findViewById(R.id.ivImage));
     }
 
+    @Test
+    public void hasLayout_DetailContainer() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
+        assertNotNull(container.findViewById(R.id.detailContainer));
+    }
+
+    @Test
+    public void hasView_RvCurrentLog() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
+        LinearLayout detailContainer = container.findViewById(R.id.detailContainer);
+        assertNotNull(detailContainer.findViewById(R.id.rvCurrentLog));
+    }
+
+    @Test
+    public void hasView_RvLastLog() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
+        LinearLayout detailContainer = container.findViewById(R.id.detailContainer);
+        assertNotNull(detailContainer.findViewById(R.id.rvLastLog));
+    }
+
+    @Test
+    public void hasView_TvGoal() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
+        LinearLayout detailContainer = container.findViewById(R.id.detailContainer);
+        assertNotNull(detailContainer.findViewById(R.id.tvGoal));
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
