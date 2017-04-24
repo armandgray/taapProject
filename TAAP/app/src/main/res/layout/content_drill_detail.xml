@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.armandgray.taap.DrillDetailActivity"
+    tools:context="com.armandgray.taap.detail.DrillDetailActivity"
     tools:showIn="@layout/activity_drill_detail">
 
 </android.support.constraint.ConstraintLayout>
