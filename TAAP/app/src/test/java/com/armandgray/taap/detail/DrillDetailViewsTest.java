@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
+import com.armandgray.taap.models.Drill;
 
 import org.junit.After;
 import org.junit.Before;
@@ -38,7 +39,9 @@ public class DrillDetailViewsTest {
     public void setUp() {
         System.out.println("Running Set Up!");
         Intent intent = new Intent(RuntimeEnvironment.application, DrillDetailActivity.class);
-        intent.putExtra(SELECTED_DRILL, BEAT_THE_PRO_MID_RANGE);
+        intent.putExtra(SELECTED_DRILL, new Drill("Beat-the-Pro (Mid-Range)",
+                R.drawable.ic_fitness_center_white_24dp,
+                Drill.SHOOTING_ARRAY));
         activityController = Robolectric.buildActivity(DrillDetailActivity.class).withIntent(intent);
         activity = activityController.create().visible().get();
         toolbar = (Toolbar) activity.findViewById(R.id.toolbar);

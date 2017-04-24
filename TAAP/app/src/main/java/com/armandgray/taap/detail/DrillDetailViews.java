@@ -4,8 +4,12 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 import com.armandgray.taap.R;
+import com.armandgray.taap.models.Drill;
+
+import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
 
 class DrillDetailViews {
 
@@ -30,11 +34,20 @@ class DrillDetailViews {
 
     private void setupToolbar() {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        setToolbarTitle(toolbar);
         activity.setSupportActionBar(toolbar);
         if (activity.getSupportActionBar() != null) {
             activity.getSupportActionBar().setDisplayShowTitleEnabled(false);
             activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             setHomeAsUpIndicatorColor();
+        }
+    }
+
+    private void setToolbarTitle(Toolbar toolbar) {
+        Drill drill = activity.getIntent().getParcelableExtra(SELECTED_DRILL);
+        if (drill != null && drill.getTitle() != null && !drill.getTitle().equals("")) {
+            ((TextView) toolbar.findViewById(R.id.tvTitle))
+                    .setText(drill.getTitle());
         }
     }
 
