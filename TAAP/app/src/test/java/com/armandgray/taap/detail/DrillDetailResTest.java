@@ -99,6 +99,12 @@ public class DrillDetailResTest {
         assertNotNull(setsContainer.findViewById(R.id.npReps));
     }
 
+    @Test
+    public void hasView_BtnFinished() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
+        assertNotNull(container.findViewById(R.id.btnFinished));
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
