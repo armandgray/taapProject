@@ -22,6 +22,7 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowToast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -107,6 +108,7 @@ public class MainActivityViewsTest {
     public void doesSetupFABClickListener_MethodTest() throws Exception {
         FloatingActionButton fab = (FloatingActionButton) activity.findViewById(R.id.fab);
         assertNotNull(fab);
+        assertEquals("Feature Coming Soon", ShadowToast.getTextOfLatestToast());
     }
 
     @Test
