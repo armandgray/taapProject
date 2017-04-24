@@ -212,7 +212,7 @@ public class MainActivityViewsTest {
         // TODO correctly call on Click
         assertNotNull(views.rvDrills);
         views.rvDrills.getChildAt(0).performClick();
-        Intent expectedIntent = new Intent();
+        Intent expectedIntent = new Intent(activity, DrillDetailActivity.class);
         assertEquals(expectedIntent.toString(),
                 shadowOf(activity).getNextStartedActivity().toString());
     }
