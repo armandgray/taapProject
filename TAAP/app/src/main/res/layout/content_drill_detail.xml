@@ -45,4 +45,54 @@
             android:textSize="@dimen/detail_container_text_size" />
     </LinearLayout>
 
+    <RelativeLayout
+        android:id="@+id/setsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvSets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:text="@string/sets"
+            android:textSize="@dimen/detail_container_text_size" />
+
+        <TextView
+            android:id="@+id/tvReps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tvSets"
+            android:layout_toEndOf="@+id/tvSets"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:text="@string/reps"
+            android:textSize="@dimen/detail_container_text_size" />
+
+        <NumberPicker
+            android:id="@+id/npSets"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/tvSets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <NumberPicker
+            android:id="@+id/npReps"
+            android:layout_below="@+id/tvReps"
+            android:layout_toRightOf="@+id/npSets"
+            android:layout_toEndOf="@+id/npSets"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
 </LinearLayout>

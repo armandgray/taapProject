@@ -1,13 +1,11 @@
-package com.armandgray.taap.settings;
+package com.armandgray.taap.detail;
 
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
-import com.armandgray.taap.detail.DrillDetailActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -18,7 +16,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
-import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
 @RunWith(RobolectricTestRunner.class)
@@ -77,28 +74,28 @@ public class DrillDetailResTest {
     @Test
     public void hasView_TvSets() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
-        RelativeLayout setsContainer = (RelativeLayout) container.findViewById(R.id.detailContainer);
+        RelativeLayout setsContainer = (RelativeLayout) container.findViewById(R.id.setsContainer);
         assertNotNull(setsContainer.findViewById(R.id.tvSets));
     }
 
     @Test
     public void hasView_TvReps() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
-        RelativeLayout setsContainer = (RelativeLayout) container.findViewById(R.id.detailContainer);
+        RelativeLayout setsContainer = (RelativeLayout) container.findViewById(R.id.setsContainer);
         assertNotNull(setsContainer.findViewById(R.id.tvReps));
     }
 
     @Test
     public void hasView_NpSets() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
-        RelativeLayout setsContainer = (RelativeLayout) container.findViewById(R.id.detailContainer);
+        RelativeLayout setsContainer = (RelativeLayout) container.findViewById(R.id.setsContainer);
         assertNotNull(setsContainer.findViewById(R.id.npSets));
     }
 
     @Test
     public void hasView_NpReps() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
-        RelativeLayout setsContainer = (RelativeLayout) container.findViewById(R.id.detailContainer);
+        RelativeLayout setsContainer = (RelativeLayout) container.findViewById(R.id.setsContainer);
         assertNotNull(setsContainer.findViewById(R.id.npReps));
     }
 
