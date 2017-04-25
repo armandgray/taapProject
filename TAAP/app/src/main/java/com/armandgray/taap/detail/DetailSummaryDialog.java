@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,7 +23,18 @@ public class DetailSummaryDialog extends DialogFragment {
     public static final String DIALOG = "DIALOG";
     Activity activity;
     private RecyclerView rvSummary;
-    public String listener;
+    public DetailSummaryDialogListener listener;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            listener = (DetailSummaryDialogListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement DetailSummaryDialogListener");
+        }
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -54,5 +66,8 @@ public class DetailSummaryDialog extends DialogFragment {
         rvSummary.setAdapter(new DrillsRvAdapter(getDrillsList()));
         rvSummary.setLayoutManager(
                 new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
+    }
+
+    public interface DetailSummaryDialogListener {
     }
 }
