@@ -3,6 +3,7 @@ package com.armandgray.taap.detail;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -115,7 +116,9 @@ class DrillDetailViews {
         btnFinished.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DetailSummaryDialog().show(activity.getFragmentManager(), DIALOG);
+                System.out.println("btnFinished");
+                FragmentManager fragmentManager = activity.getSupportFragmentManager();
+                new DetailSummaryDialog().show(fragmentManager, DIALOG);
             }
         });
     }

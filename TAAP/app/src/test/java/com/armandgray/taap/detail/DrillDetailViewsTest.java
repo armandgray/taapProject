@@ -25,6 +25,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowDialog;
 
 import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
+import static com.armandgray.taap.detail.DetailSummaryDialog.DIALOG;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
@@ -164,11 +165,13 @@ public class DrillDetailViewsTest {
         Button btnFinished = (Button) activity.findViewById(R.id.btnFinished);
         btnFinished.setVisibility(View.VISIBLE);
         btnFinished.performClick();
+        activityController.start().resume();
 
         DetailSummaryDialog expectedDialog = new DetailSummaryDialog();
+        expectedDialog.show(activity.getSupportFragmentManager(), DIALOG);
         Dialog resultDialog = ShadowDialog.getLatestDialog();
         assertNotNull(resultDialog);
-        assertEquals(expectedDialog, resultDialog);
+        assertEquals(expectedDialog.getDialog(), resultDialog);
     }
 
     @After

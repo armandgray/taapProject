@@ -1,7 +1,7 @@
 package com.armandgray.taap.detail;
 
 import android.app.AlertDialog;
-import android.app.DialogFragment;
+import android.support.v4.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -45,7 +45,7 @@ public class DetailSummaryDialogTest {
         activityController = Robolectric.buildActivity(DrillDetailActivity.class);
         activity = activityController.create().visible().get();
         dialog = new DetailSummaryDialog();
-        dialog.show(activity.getFragmentManager(), DIALOG);
+        dialog.show(activity.getSupportFragmentManager(), DIALOG);
     }
 
     @Test
