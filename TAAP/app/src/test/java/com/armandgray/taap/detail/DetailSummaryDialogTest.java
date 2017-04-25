@@ -77,7 +77,9 @@ public class DetailSummaryDialogTest {
         DetailSummaryDialog dialog = new DetailSummaryDialog(activity);
         Bundle savedInstanceState = new Bundle();
         AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
-        Button btnContinue = resultDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        resultDialog.show();
+
+        Button btnContinue = resultDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
         btnContinue.performClick();
         Intent expectedIntent = new Intent(activity, LogActivity.class);
         assertEquals(expectedIntent.toString(),
