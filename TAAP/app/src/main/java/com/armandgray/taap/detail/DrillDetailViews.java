@@ -4,6 +4,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.armandgray.taap.R;
@@ -15,6 +16,8 @@ class DrillDetailViews {
 
     public DrillDetailActivity activity;
     private FloatingActionButton fab;
+    private NumberPicker npSets;
+    private NumberPicker npReps;
 
     DrillDetailViews(DrillDetailActivity activity) {
         this.activity = activity;
@@ -26,10 +29,13 @@ class DrillDetailViews {
         activity.setContentView(R.layout.activity_drill_detail);
         assignGlobalViews();
         setupToolbar();
+        setupNumberPickers();
     }
 
     private void assignGlobalViews() {
         fab = (FloatingActionButton) activity.findViewById(R.id.fab);
+        npSets = (NumberPicker) activity.findViewById(R.id.npSets);
+        npReps = (NumberPicker) activity.findViewById(R.id.npReps);
     }
 
     private void setupToolbar() {
@@ -56,6 +62,13 @@ class DrillDetailViews {
         upArrow.setColorFilter(activity.getResources().getColor(R.color.colorDarkGray), PorterDuff.Mode.SRC_ATOP);
         if (activity.getSupportActionBar() == null) { return; }
         activity.getSupportActionBar().setHomeAsUpIndicator(upArrow);
+    }
+
+    private void setupNumberPickers() {
+        npSets.setMinValue(1);
+        npSets.setMaxValue(10);
+        npReps.setMinValue(0);
+        npReps.setMaxValue(100);
     }
 
 }

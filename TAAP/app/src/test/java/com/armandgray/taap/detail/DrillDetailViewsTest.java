@@ -21,7 +21,6 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
 import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
-import static com.armandgray.taap.R.id.tvTitle;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
@@ -79,14 +78,14 @@ public class DrillDetailViewsTest {
     @Test
     public void hasCustomToolbarTitle() throws Exception {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        TextView tvTitle = (TextView) toolbar.findViewById(tvTitle);
+        TextView tvTitle = (TextView) toolbar.findViewById(R.id.tvTitle);
         assertNotNull(tvTitle);
     }
 
     @Test
     public void doesSetCustomToolbarTitleText_MethodTest_SetupActivityInitialState() throws Exception {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        TextView tvTitle = (TextView) toolbar.findViewById(tvTitle);
+        TextView tvTitle = (TextView) toolbar.findViewById(R.id.tvTitle);
         assertEquals(BEAT_THE_PRO_MID_RANGE, tvTitle.getText());
     }
 
