@@ -1,6 +1,6 @@
 package com.armandgray.taap.detail;
 
-import android.app.Dialog;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -16,8 +16,10 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowAlertDialog;
 
 import static junit.framework.Assert.assertNotNull;
+import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -47,7 +49,8 @@ public class DetailSummaryDialogTest {
 
     @Test
     public void existsLayout_DetailSummaryDialogLayout() {
-        LinearLayout detailSummaryDialogLayout = (LinearLayout) View.inflate(activity, R.layout.detail_summary_dialog_layout, null);
+        LinearLayout detailSummaryDialogLayout = (LinearLayout) View
+                .inflate(activity, R.layout.detail_summary_dialog_layout, null);
         assertNotNull(detailSummaryDialogLayout);
     }
 
@@ -55,9 +58,13 @@ public class DetailSummaryDialogTest {
     public void doesHaveCustomView_TestOnCreateDialog() {
         DetailSummaryDialog dialog = new DetailSummaryDialog(activity);
         Bundle savedInstanceState = new Bundle();
-        Dialog resultDialog = dialog.onCreateDialog(savedInstanceState);
+        AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
+        ShadowAlertDialog shadowDialog = shadowOf(resultDialog);
+
         assertNotNull(resultDialog);
-        assertNotNull(resultDialog.findViewById(R.id.detailSummaryDialogContainer));
+        assertNotNull(shadowDialog);
+        assertNotNull(shadowDialog.getView());
+        assertNotNull(shadowDialog.getView().findViewById(R.id.detailSummaryDialogContainer));
     }
 
     @After
