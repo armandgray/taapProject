@@ -3,6 +3,8 @@ package com.armandgray.taap.detail;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
@@ -126,6 +128,12 @@ public class DrillDetailViewsTest {
     public void doesSetNpSuccessesWrapWheel_MethodTest_SetupActivityInitialState() throws Exception {
         NumberPicker npSuccesses = (NumberPicker) activity.findViewById(R.id.npSuccesses);
         assertTrue(npSuccesses.getWrapSelectorWheel());
+    }
+
+    @Test
+    public void doesSetupHideBtnFinishedVisibility_MethodTest_SetupActivityInitialState() throws Exception {
+        Button btnFinished = (Button) activity.findViewById(R.id.btnFinished);
+        assertEquals(View.GONE, btnFinished.getVisibility());
     }
 
     @After
