@@ -66,7 +66,8 @@ public class DetailSummaryDialog extends DialogFragment {
     }
 
     private void setupRvSummary() {
-        rvSummary.setAdapter(new DrillsRvAdapter(getDrillsList()));
+        SessionLog sessionLog = new SessionLog();
+        rvSummary.setAdapter(new SessionLogAdapter(sessionLog));
         rvSummary.setLayoutManager(
                 new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
     }
