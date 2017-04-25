@@ -97,10 +97,22 @@ public class DrillDetailViewsTest {
     }
 
     @Test
+    public void doesSetNpSetsWrapWheel_MethodTest_SetupActivityInitialState() throws Exception {
+        NumberPicker npSets = (NumberPicker) activity.findViewById(R.id.npSets);
+        assertTrue(npSets.getWrapSelectorWheel());
+    }
+
+    @Test
     public void doesSetNpRepsValues_MethodTest_SetupActivityInitialState() throws Exception {
         NumberPicker npReps = (NumberPicker) activity.findViewById(R.id.npReps);
         assertEquals(0, npReps.getMinValue());
         assertTrue(npReps.getMaxValue() > npReps.getMinValue());
+    }
+
+    @Test
+    public void doesSetNpRepsWrapWheel_MethodTest_SetupActivityInitialState() throws Exception {
+        NumberPicker npReps = (NumberPicker) activity.findViewById(R.id.npReps);
+        assertTrue(npReps.getWrapSelectorWheel());
     }
 
     @After
