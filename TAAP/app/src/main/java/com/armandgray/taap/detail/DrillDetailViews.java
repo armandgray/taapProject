@@ -17,11 +17,11 @@ import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
 class DrillDetailViews {
 
     public DrillDetailActivity activity;
-    private FloatingActionButton fab;
+    FloatingActionButton fab;
     private NumberPicker npSets;
     private NumberPicker npReps;
     private NumberPicker npSuccesses;
-    private Button btnFinished;
+    Button btnFinished;
 
     DrillDetailViews(DrillDetailActivity activity) {
         this.activity = activity;

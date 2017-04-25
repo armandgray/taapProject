@@ -132,8 +132,14 @@ public class DrillDetailViewsTest {
 
     @Test
     public void doesSetupHideBtnFinishedVisibility_MethodTest_SetupActivityInitialState() throws Exception {
+        assertEquals(View.GONE, views.btnFinished.getVisibility());
+    }
+
+    @Test
+    public void canShowBtnFinishedOnFabClick() throws Exception {
+        views.fab.performClick();
         Button btnFinished = (Button) activity.findViewById(R.id.btnFinished);
-        assertEquals(View.GONE, btnFinished.getVisibility());
+        assertEquals(View.VISIBLE, btnFinished.getVisibility());
     }
 
     @After
