@@ -98,16 +98,18 @@ public class DetailSummaryDialogTest {
     }
 
     @Test
-    public void canDismissDialogToStartLogActivity_TestOnCreateDialog() {
+    public void canCancelDialogToStartLogActivity_TestOnCreateDialog() {
         DetailSummaryDialog dialog = new DetailSummaryDialog(activity);
         Bundle savedInstanceState = new Bundle();
         AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
         resultDialog.show();
-        resultDialog.dismiss();
+        resultDialog.cancel();
 
         Intent expectedIntent = new Intent(activity, LogActivity.class);
         assertEquals(expectedIntent.toString(),
-                shadowOf(activity).getNextStartedActivity().toString());
+                shadowOf(activity)
+                        .getNextStartedActivity()
+                        .toString());
     }
 
     @Test

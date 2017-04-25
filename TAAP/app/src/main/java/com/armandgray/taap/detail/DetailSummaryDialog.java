@@ -38,6 +38,12 @@ class DetailSummaryDialog {
                     public void onClick(DialogInterface dialog, int which) {
                         startLogActivity();
                     }
+                })
+                .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        startLogActivity();
+                    }
                 });
         setupRvSummary();
         return builder.create();
