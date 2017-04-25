@@ -60,6 +60,13 @@ public class DetailSummaryDialogTest {
     }
 
     @Test
+    public void existsView_RvSummary_DetailSummaryDialogLayout() {
+        LinearLayout detailSummaryDialogLayout = (LinearLayout) View
+                .inflate(activity, R.layout.detail_summary_dialog_layout, null);
+        assertNotNull(detailSummaryDialogLayout.findViewById(R.id.rvSummary));
+    }
+
+    @Test
     public void doesHaveCustomView_TestOnCreateDialog() {
         DetailSummaryDialog dialog = new DetailSummaryDialog(activity);
         Bundle savedInstanceState = new Bundle();
