@@ -18,6 +18,7 @@ class DrillDetailViews {
     private FloatingActionButton fab;
     private NumberPicker npSets;
     private NumberPicker npReps;
+    private NumberPicker npSuccesses;
 
     DrillDetailViews(DrillDetailActivity activity) {
         this.activity = activity;
@@ -36,6 +37,7 @@ class DrillDetailViews {
         fab = (FloatingActionButton) activity.findViewById(R.id.fab);
         npSets = (NumberPicker) activity.findViewById(R.id.npSets);
         npReps = (NumberPicker) activity.findViewById(R.id.npReps);
+        npSuccesses = (NumberPicker) activity.findViewById(R.id.npSuccesses);
     }
 
     private void setupToolbar() {
@@ -72,6 +74,10 @@ class DrillDetailViews {
         npReps.setMinValue(0);
         npReps.setMaxValue(100);
         npReps.setWrapSelectorWheel(true);
+
+        npSuccesses.setMinValue(0);
+        npSuccesses.setMaxValue(100);
+        npSuccesses.setWrapSelectorWheel(true);
     }
 
 }
