@@ -40,15 +40,21 @@ public class DetailSummaryDialog extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         startLogActivity();
                     }
-                })
-                .setOnCancelListener(new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        startLogActivity();
-                    }
                 });
         setupRvSummary();
         return builder.create();
+    }
+
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        super.onCancel(dialog);
+        startLogActivity();
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        startLogActivity();
     }
 
     private void startLogActivity() {
