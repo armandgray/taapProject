@@ -25,6 +25,7 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlertDialog;
 
+import static com.armandgray.taap.detail.DetailSummaryDialog.DIALOG;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
@@ -36,17 +37,15 @@ public class DetailSummaryDialogTest {
 
     private ActivityController<DrillDetailActivity> activityController;
     private DrillDetailActivity activity;
+    private DetailSummaryDialog dialog;
 
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
         activityController = Robolectric.buildActivity(DrillDetailActivity.class);
         activity = activityController.create().visible().get();
-    }
-
-    @Test
-    public void hasTemporaryConstructorWithActivity() {
-        assertNotNull(new DetailSummaryDialog(activity));
+        dialog = new DetailSummaryDialog(activity);
+        dialog.show(activity.getFragmentManager(), DIALOG);
     }
 
     @Test

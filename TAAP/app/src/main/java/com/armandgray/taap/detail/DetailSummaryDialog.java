@@ -21,6 +21,7 @@ import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
 
 public class DetailSummaryDialog extends DialogFragment {
 
+    public static final String DIALOG = "DIALOG";
     Activity activity;
     private RecyclerView rvSummary;
 
