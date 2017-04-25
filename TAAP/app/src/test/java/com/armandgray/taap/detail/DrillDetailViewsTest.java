@@ -165,11 +165,10 @@ public class DrillDetailViewsTest {
         btnFinished.setVisibility(View.VISIBLE);
         btnFinished.performClick();
 
-        DetailSummaryDialog expectedDialog = new DetailSummaryDialog();
-        DetailSummaryDialog resultDialog = (DetailSummaryDialog) ShadowDialog.getLatestDialog();
+        DetailSummaryDialog expectedDialog = new DetailSummaryDialog(activity);
+        Dialog resultDialog = ShadowDialog.getLatestDialog();
         assertNotNull(resultDialog);
         assertEquals(expectedDialog, resultDialog);
-
     }
 
     @After
