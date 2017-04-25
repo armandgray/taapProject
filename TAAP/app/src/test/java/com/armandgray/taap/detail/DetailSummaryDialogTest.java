@@ -44,21 +44,20 @@ public class DetailSummaryDialogTest {
         System.out.println("Running Set Up!");
         activityController = Robolectric.buildActivity(DrillDetailActivity.class);
         activity = activityController.create().visible().get();
-        dialog = new DetailSummaryDialog(activity);
+        dialog = new DetailSummaryDialog();
         dialog.show(activity.getFragmentManager(), DIALOG);
     }
 
     @Test
     public void canCreateDetailSummaryDialog_TestOnCreateDialog() {
-        DetailSummaryDialog dialog = new DetailSummaryDialog(activity);
         Bundle savedInstanceState = new Bundle();
         assertNotNull(dialog.onCreateDialog(savedInstanceState));
     }
 
     @Test
     public void doesImplementDialogFragment() {
-        DialogFragment dialog = new DetailSummaryDialog(activity);
-        assertNotNull(dialog);
+        DialogFragment dialogFragment = dialog;
+        assertNotNull(dialogFragment);
     }
 
     @Test
@@ -77,7 +76,6 @@ public class DetailSummaryDialogTest {
 
     @Test
     public void doesHaveCustomView_TestOnCreateDialog() {
-        DetailSummaryDialog dialog = new DetailSummaryDialog(activity);
         Bundle savedInstanceState = new Bundle();
         AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
         ShadowAlertDialog shadowDialog = shadowOf(resultDialog);
@@ -90,7 +88,6 @@ public class DetailSummaryDialogTest {
 
     @Test
     public void canClickNeutralContinueButtonToStartLogActivity_TestOnCreateDialog() {
-        DetailSummaryDialog dialog = new DetailSummaryDialog(activity);
         Bundle savedInstanceState = new Bundle();
         AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
         resultDialog.show();
@@ -105,7 +102,6 @@ public class DetailSummaryDialogTest {
 
     @Test
     public void canCancelDialogToStartLogActivity_TestOnCreateDialog() {
-        DetailSummaryDialog dialog = new DetailSummaryDialog(activity);
         Bundle savedInstanceState = new Bundle();
         AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
         resultDialog.show();
@@ -113,14 +109,11 @@ public class DetailSummaryDialogTest {
 
         Intent expectedIntent = new Intent(activity, LogActivity.class);
         assertEquals(expectedIntent.toString(),
-                shadowOf(activity)
-                        .getNextStartedActivity()
-                        .toString());
+                shadowOf(activity).getNextStartedActivity().toString());
     }
 
     @Test
     public void doesSetupRvDrills() throws Exception {
-        DetailSummaryDialog dialog = new DetailSummaryDialog(activity);
         Bundle savedInstanceState = new Bundle();
         AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
         resultDialog.show();
