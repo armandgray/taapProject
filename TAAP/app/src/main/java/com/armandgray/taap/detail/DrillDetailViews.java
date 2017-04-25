@@ -4,6 +4,8 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
@@ -19,6 +21,7 @@ class DrillDetailViews {
     private NumberPicker npSets;
     private NumberPicker npReps;
     private NumberPicker npSuccesses;
+    private Button btnFinished;
 
     DrillDetailViews(DrillDetailActivity activity) {
         this.activity = activity;
@@ -31,6 +34,7 @@ class DrillDetailViews {
         assignGlobalViews();
         setupToolbar();
         setupNumberPickers();
+        setupInitialViewVisibility();
     }
 
     private void assignGlobalViews() {
@@ -38,6 +42,7 @@ class DrillDetailViews {
         npSets = (NumberPicker) activity.findViewById(R.id.npSets);
         npReps = (NumberPicker) activity.findViewById(R.id.npReps);
         npSuccesses = (NumberPicker) activity.findViewById(R.id.npSuccesses);
+        btnFinished = (Button) activity.findViewById(R.id.btnFinished);
     }
 
     private void setupToolbar() {
@@ -78,6 +83,10 @@ class DrillDetailViews {
         npSuccesses.setMinValue(0);
         npSuccesses.setMaxValue(100);
         npSuccesses.setWrapSelectorWheel(true);
+    }
+
+    private void setupInitialViewVisibility() {
+        btnFinished.setVisibility(View.GONE);
     }
 
 }
