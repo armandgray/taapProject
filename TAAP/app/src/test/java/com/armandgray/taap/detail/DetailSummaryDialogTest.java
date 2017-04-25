@@ -1,8 +1,12 @@
 package com.armandgray.taap.detail;
 
+import android.app.Dialog;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.armandgray.taap.BuildConfig;
+import com.armandgray.taap.R;
 
 import org.junit.After;
 import org.junit.Before;
@@ -39,6 +43,12 @@ public class DetailSummaryDialogTest {
         DetailSummaryDialog dialog = new DetailSummaryDialog(activity);
         Bundle savedInstanceState = new Bundle();
         assertNotNull(dialog.onCreateDialog(savedInstanceState));
+    }
+
+    @Test
+    public void existsLayout_DetailSummaryDialogLayout() {
+        LinearLayout detailSummaryDialogLayout = (LinearLayout) View.inflate(activity, R.layout.detail_summary_dialog_layout, null);
+        assertNotNull(detailSummaryDialogLayout);
     }
 
     @After
