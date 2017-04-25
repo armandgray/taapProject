@@ -15,4 +15,8 @@ public class DrillDetailActivity extends AppCompatActivity
         controller = new DrillDetailController(this);
     }
 
+    @Override
+    public void onDialogDismiss() {
+        controller.onSummaryDialogDismiss();
+    }
 }

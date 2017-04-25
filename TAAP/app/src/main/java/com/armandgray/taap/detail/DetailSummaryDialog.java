@@ -46,6 +46,7 @@ public class DetailSummaryDialog extends DialogFragment {
                 .setNeutralButton("Continue", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        listener.onDialogDismiss();
                     }
                 });
         setupRvSummary();
@@ -55,11 +56,13 @@ public class DetailSummaryDialog extends DialogFragment {
     @Override
     public void onCancel(DialogInterface dialog) {
         super.onCancel(dialog);
+        listener.onDialogDismiss();
     }
 
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
+        listener.onDialogDismiss();
     }
 
     private void setupRvSummary() {
@@ -69,5 +72,6 @@ public class DetailSummaryDialog extends DialogFragment {
     }
 
     public interface DetailSummaryDialogListener {
+        void onDialogDismiss();
     }
 }
