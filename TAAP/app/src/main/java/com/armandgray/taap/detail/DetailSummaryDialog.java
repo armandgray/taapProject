@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +19,7 @@ import com.armandgray.taap.utils.DrillsRvAdapter;
 
 import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
 
-class DetailSummaryDialog {
+public class DetailSummaryDialog extends DialogFragment {
 
     Activity activity;
     private RecyclerView rvSummary;
@@ -27,6 +28,7 @@ class DetailSummaryDialog {
         this.activity = activity;
     }
 
+    @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         @SuppressLint("InflateParams") View dialogLayout = LayoutInflater.from(activity)
