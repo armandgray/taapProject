@@ -14,7 +14,7 @@ class DetailSummaryDialog {
     }
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog().Builder()
-        return null;
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        return builder.create();
     }
 }
