@@ -51,6 +51,15 @@ public class DetailSummaryDialogTest {
         assertNotNull(detailSummaryDialogLayout);
     }
 
+    @Test
+    public void doesHaveCustomView_TestOnCreateDialog() {
+        DetailSummaryDialog dialog = new DetailSummaryDialog(activity);
+        Bundle savedInstanceState = new Bundle();
+        Dialog resultDialog = dialog.onCreateDialog(savedInstanceState);
+        assertNotNull(resultDialog);
+        assertNotNull(resultDialog.findViewById(R.id.detailSummaryDialogContainer));
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
