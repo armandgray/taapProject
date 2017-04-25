@@ -36,12 +36,16 @@ class DetailSummaryDialog {
                 .setNeutralButton("Continue", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(activity, LogActivity.class);
-                        activity.startActivity(intent);
+                        startLogActivity();
                     }
                 });
         setupRvSummary();
         return builder.create();
+    }
+
+    private void startLogActivity() {
+        Intent intent = new Intent(activity, LogActivity.class);
+        activity.startActivity(intent);
     }
 
     private void setupRvSummary() {
