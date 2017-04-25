@@ -19,7 +19,6 @@
             android:id="@+id/tvSets"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
             android:padding="@dimen/activity_horizontal_margin"
             android:text="@string/sets"
             android:textSize="@dimen/detail_container_text_size" />
@@ -27,8 +26,7 @@
         <NumberPicker
             android:id="@+id/npSets"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary" />
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <LinearLayout
@@ -42,7 +40,6 @@
             android:id="@+id/tvReps"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
             android:padding="@dimen/activity_horizontal_margin"
             android:text="@string/reps"
             android:textSize="@dimen/detail_container_text_size" />
@@ -50,7 +47,6 @@
         <NumberPicker
             android:id="@+id/npReps"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </LinearLayout>

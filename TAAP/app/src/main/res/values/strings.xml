@@ -37,7 +37,7 @@
     <string name="drilldetailactivity">DrillDetailActivity</string>
     <string name="drill_image">drill image</string>
     <string name="drill_image_icon">drill image icon</string>
-    <string name="set_goal">Set Goal</string>
+    <string name="goal">Goal</string>
     <string name="sets">Sets</string>
     <string name="reps">Reps</string>
     <string name="finished">Finished</string>

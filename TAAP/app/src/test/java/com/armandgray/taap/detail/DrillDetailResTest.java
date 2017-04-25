@@ -78,13 +78,6 @@ public class DrillDetailResTest {
     }
 
     @Test
-    public void hasView_TvReps() throws Exception {
-        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
-        LinearLayout setsContainer = (LinearLayout) container.findViewById(R.id.setsContainer);
-        assertNotNull(setsContainer.findViewById(R.id.tvReps));
-    }
-
-    @Test
     public void hasView_NpSets() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
         LinearLayout setsContainer = (LinearLayout) container.findViewById(R.id.setsContainer);
@@ -92,10 +85,31 @@ public class DrillDetailResTest {
     }
 
     @Test
+    public void hasView_TvReps() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
+        LinearLayout setsContainer = (LinearLayout) container.findViewById(R.id.setsContainer);
+        assertNotNull(setsContainer.findViewById(R.id.tvReps));
+    }
+
+    @Test
     public void hasView_NpReps() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
         LinearLayout setsContainer = (LinearLayout) container.findViewById(R.id.setsContainer);
         assertNotNull(setsContainer.findViewById(R.id.npReps));
+    }
+
+    @Test
+    public void hasView_TvSuccesses() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
+        LinearLayout setsContainer = (LinearLayout) container.findViewById(R.id.setsContainer);
+        assertNotNull(setsContainer.findViewById(R.id.tvSuccesses));
+    }
+
+    @Test
+    public void hasView_NpSuccesses() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
+        LinearLayout setsContainer = (LinearLayout) container.findViewById(R.id.setsContainer);
+        assertNotNull(setsContainer.findViewById(R.id.npSuccesses));
     }
 
     @Test
