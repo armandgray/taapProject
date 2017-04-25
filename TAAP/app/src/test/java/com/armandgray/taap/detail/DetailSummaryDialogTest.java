@@ -2,11 +2,14 @@ package com.armandgray.taap.detail;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.armandgray.taap.BuildConfig;
+import com.armandgray.taap.LogActivity;
 import com.armandgray.taap.R;
 
 import org.junit.After;
@@ -19,6 +22,7 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlertDialog;
 
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static org.robolectric.Shadows.shadowOf;
 
@@ -69,11 +73,15 @@ public class DetailSummaryDialogTest {
     }
 
     @Test
-    public void doesHavePositiveContinueButton_TestOnCreateDialog() {
+    public void canClickNeutralContinueButtonToStartLogActivity_TestOnCreateDialog() {
         DetailSummaryDialog dialog = new DetailSummaryDialog(activity);
         Bundle savedInstanceState = new Bundle();
         AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
-        assertNotNull(resultDialog.getButton(DialogInterface.BUTTON_POSITIVE));
+        Button btnContinue = resultDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        btnContinue.performClick();
+        Intent expectedIntent = new Intent(activity, LogActivity.class);
+        assertEquals(expectedIntent.toString(),
+                shadowOf(activity).getNextStartedActivity().toString());
     }
 
     @After
