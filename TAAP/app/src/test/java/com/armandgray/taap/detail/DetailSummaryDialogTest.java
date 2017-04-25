@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -24,6 +26,7 @@ import org.robolectric.shadows.ShadowAlertDialog;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
@@ -91,6 +94,22 @@ public class DetailSummaryDialogTest {
         Intent expectedIntent = new Intent(activity, LogActivity.class);
         assertEquals(expectedIntent.toString(),
                 shadowOf(activity).getNextStartedActivity().toString());
+    }
+
+    @Test
+    public void doesSetupRvDrills() throws Exception {
+        DetailSummaryDialog dialog = new DetailSummaryDialog(activity);
+        Bundle savedInstanceState = new Bundle();
+        AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
+        resultDialog.show();
+
+        RecyclerView rvSummary = (RecyclerView) resultDialog.findViewById(R.id.rvSummary);
+        assertNotNull(rvSummary);
+        assertNotNull(rvSummary.getAdapter());
+        assertNotNull(rvSummary.getLayoutManager());
+        assertTrue(rvSummary.getLayoutManager() instanceof LinearLayoutManager);
+        assertTrue(rvSummary.getAdapter().getItemCount() > 0);
+        resultDialog.dismiss();
     }
 
     @After
