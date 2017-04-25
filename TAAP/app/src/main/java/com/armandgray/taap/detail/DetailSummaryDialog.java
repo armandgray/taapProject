@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.armandgray.taap.R;
+import com.armandgray.taap.models.SessionLog;
 import com.armandgray.taap.utils.DrillsRvAdapter;
 
 import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
