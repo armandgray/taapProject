@@ -1,6 +1,7 @@
 package com.armandgray.taap.detail;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -65,6 +66,14 @@ public class DetailSummaryDialogTest {
         assertNotNull(shadowDialog);
         assertNotNull(shadowDialog.getView());
         assertNotNull(shadowDialog.getView().findViewById(R.id.detailSummaryDialogContainer));
+    }
+
+    @Test
+    public void doesHavePositiveContinueButton_TestOnCreateDialog() {
+        DetailSummaryDialog dialog = new DetailSummaryDialog(activity);
+        Bundle savedInstanceState = new Bundle();
+        AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
+        assertNotNull(resultDialog.getButton(DialogInterface.BUTTON_POSITIVE));
     }
 
     @After
