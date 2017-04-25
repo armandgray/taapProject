@@ -1,5 +1,6 @@
 package com.armandgray.taap.detail;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -21,6 +22,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowDialog;
 
 import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
 import static junit.framework.Assert.assertEquals;
@@ -140,6 +142,32 @@ public class DrillDetailViewsTest {
         views.fab.performClick();
         Button btnFinished = (Button) activity.findViewById(R.id.btnFinished);
         assertEquals(View.VISIBLE, btnFinished.getVisibility());
+    }
+
+    @Test
+    public void doesShowPauseIconOnFabOddNumClick() throws Exception {
+        views.fab.performClick();
+        assertEquals(activity.getResources().getDrawable(R.drawable.ic_pause_white_24dp),
+                views.fab.getDrawable());
+    }
+
+    @Test
+    public void doesShowPlayIconOnFabEvenNumClick() throws Exception {
+        views.fab.performClick();
+        views.fab.performClick();
+        assertEquals(activity.getResources().getDrawable(R.drawable.ic_play_arrow_white_24dp),
+                views.fab.getDrawable());
+    }
+
+    @Test
+    public void canShowSummaryDialogOnBtnFinishedClick() throws Exception {
+        Button btnFinished = (Button) activity.findViewById(R.id.btnFinished);
+        btnFinished.setVisibility(View.VISIBLE);
+        btnFinished.performClick();
+
+        DetailSummaryDialog expectedDialog = new DetailSummaryDialog();
+        assertEquals(expectedDialog, (DetailSummaryDialog) ShadowDialog.getLatestDialog());
+
     }
 
     @After

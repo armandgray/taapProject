@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.armandgray.taap.R;
 import com.armandgray.taap.models.Drill;
@@ -22,6 +23,7 @@ class DrillDetailViews {
     private NumberPicker npReps;
     private NumberPicker npSuccesses;
     Button btnFinished;
+    private boolean drillActive;
 
     DrillDetailViews(DrillDetailActivity activity) {
         this.activity = activity;
@@ -95,6 +97,15 @@ class DrillDetailViews {
             @Override
             public void onClick(View v) {
                 btnFinished.setVisibility(View.VISIBLE);
+                fab.setBackgroundTintList(activity.getResources().getColorStateList(
+                        android.R.color.white));
+                if (drillActive) {
+                    fab.setImageResource(R.drawable.ic_play_arrow_white_24dp);
+                    drillActive = false;
+                } else {
+                    fab.setImageResource(R.drawable.ic_pause_white_24dp);
+                    drillActive = true;
+                }
             }
         });
     }
