@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/card_margin"
-        android:layout_weight="0.3"
+        android:layout_weight="0.25"
         android:background="@android:color/white"
         android:contentDescription="@string/drill_image"
         android:tint="@color/colorDarkGray"
@@ -25,14 +25,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="@dimen/card_margin"
-        android:layout_weight="0.3" />
+        android:layout_weight="0.25" />
 
     <include
         layout="@layout/drill_detail_set_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="@dimen/card_margin"
-        android:layout_weight="0.3" />
+        android:layout_weight="0.4" />
 
     <Button
         android:id="@+id/btnFinished"
