@@ -67,8 +67,11 @@ class DrillDetailViews {
     private void setupNumberPickers() {
         npSets.setMinValue(1);
         npSets.setMaxValue(10);
+        npSets.setWrapSelectorWheel(true);
+
         npReps.setMinValue(0);
         npReps.setMaxValue(100);
+        npReps.setWrapSelectorWheel(true);
     }
 
 }
