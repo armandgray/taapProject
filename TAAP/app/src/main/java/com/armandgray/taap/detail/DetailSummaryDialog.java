@@ -22,6 +22,7 @@ public class DetailSummaryDialog extends DialogFragment {
     public static final String DIALOG = "DIALOG";
     Activity activity;
     private RecyclerView rvSummary;
+    public String listener;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

@@ -87,6 +87,11 @@ public class DetailSummaryDialogTest {
     }
 
     @Test
+    public void doesAssignActivityAsListener() {
+        assertNotNull(dialog.listener);
+    }
+
+    @Test
     public void canClickNeutralContinueButtonToStartLogActivity_TestOnCreateDialog() {
         Bundle savedInstanceState = new Bundle();
         AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
