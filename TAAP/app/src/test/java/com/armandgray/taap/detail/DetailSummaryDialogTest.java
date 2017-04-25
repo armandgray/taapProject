@@ -1,6 +1,7 @@
 package com.armandgray.taap.detail;
 
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -53,6 +54,12 @@ public class DetailSummaryDialogTest {
         DetailSummaryDialog dialog = new DetailSummaryDialog(activity);
         Bundle savedInstanceState = new Bundle();
         assertNotNull(dialog.onCreateDialog(savedInstanceState));
+    }
+
+    @Test
+    public void doesImplementDialogFragment() {
+        DialogFragment dialog = new DetailSummaryDialog(activity);
+        assertNotNull(dialog);
     }
 
     @Test
