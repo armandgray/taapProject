@@ -8,12 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.armandgray.taap.R;
 import com.armandgray.taap.models.Drill;
 
 import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
+import static com.armandgray.taap.detail.DetailSummaryDialog.DIALOG;
 
 class DrillDetailViews {
 
@@ -38,6 +38,7 @@ class DrillDetailViews {
         setupNumberPickers();
         setupInitialViewVisibility();
         setupFabClickListener();
+        setupBtnFinishClickListener();
     }
 
     private void assignGlobalViews() {
@@ -106,6 +107,15 @@ class DrillDetailViews {
                     fab.setImageResource(R.drawable.ic_pause_white_24dp);
                     drillActive = true;
                 }
+            }
+        });
+    }
+
+    private void setupBtnFinishClickListener() {
+        btnFinished.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DetailSummaryDialog().show(activity.getFragmentManager(), DIALOG);
             }
         });
     }
