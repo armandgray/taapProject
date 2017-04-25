@@ -3,6 +3,7 @@ package com.armandgray.taap.detail;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.armandgray.taap.BuildConfig;
@@ -20,6 +21,7 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
 import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
+import static com.armandgray.taap.R.id.tvTitle;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
@@ -77,15 +79,29 @@ public class DrillDetailViewsTest {
     @Test
     public void hasCustomToolbarTitle() throws Exception {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        TextView tvTitle = (TextView) toolbar.findViewById(R.id.tvTitle);
+        TextView tvTitle = (TextView) toolbar.findViewById(tvTitle);
         assertNotNull(tvTitle);
     }
 
     @Test
     public void doesSetCustomToolbarTitleText_MethodTest_SetupActivityInitialState() throws Exception {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        TextView tvTitle = (TextView) toolbar.findViewById(R.id.tvTitle);
+        TextView tvTitle = (TextView) toolbar.findViewById(tvTitle);
         assertEquals(BEAT_THE_PRO_MID_RANGE, tvTitle.getText());
+    }
+
+    @Test
+    public void doesSetNpSetsValues_MethodTest_SetupActivityInitialState() throws Exception {
+        NumberPicker npSets = (NumberPicker) activity.findViewById(R.id.npSets);
+        assertEquals(1, npSets.getMinValue());
+        assertTrue(npSets.getMaxValue() > npSets.getMinValue());
+    }
+
+    @Test
+    public void doesSetNpRepsValues_MethodTest_SetupActivityInitialState() throws Exception {
+        NumberPicker npReps = (NumberPicker) activity.findViewById(R.id.npReps);
+        assertEquals(0, npReps.getMinValue());
+        assertTrue(npReps.getMaxValue() > npReps.getMinValue());
     }
 
     @After
