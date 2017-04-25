@@ -165,6 +165,7 @@ public class DrillDetailViewsTest {
         btnFinished.setVisibility(View.VISIBLE);
         btnFinished.performClick();
 
+        
         DetailSummaryDialog expectedDialog = new DetailSummaryDialog();
         assertEquals(expectedDialog, (DetailSummaryDialog) ShadowDialog.getLatestDialog());
 
