@@ -4,10 +4,10 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.support.v4.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,9 +15,6 @@ import android.view.View;
 
 import com.armandgray.taap.R;
 import com.armandgray.taap.models.SessionLog;
-import com.armandgray.taap.utils.DrillsRvAdapter;
-
-import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
 
 public class DetailSummaryDialog extends DialogFragment {
 
@@ -68,7 +65,7 @@ public class DetailSummaryDialog extends DialogFragment {
 
     private void setupRvSummary() {
         SessionLog sessionLog = new SessionLog();
-        rvSummary.setAdapter(new SessionLogAdapter(sessionLog));
+//        rvSummary.setAdapter(new SessionLogAdapter(sessionLog));
         rvSummary.setLayoutManager(
                 new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
     }
