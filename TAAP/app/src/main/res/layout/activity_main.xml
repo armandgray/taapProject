@@ -32,6 +32,6 @@
         android:layout_margin="@dimen/fab_margin"
         app:backgroundTint="@android:color/white"
         android:tint="@color/colorDarkGray"
-        app:srcCompat="@drawable/ic_fitness_center_white_24dp" />
+        app:srcCompat="@drawable/ic_fast_forward_white_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>
