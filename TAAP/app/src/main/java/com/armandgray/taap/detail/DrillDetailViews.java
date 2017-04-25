@@ -35,6 +35,7 @@ class DrillDetailViews {
         setupToolbar();
         setupNumberPickers();
         setupInitialViewVisibility();
+        setupFabClickListener();
     }
 
     private void assignGlobalViews() {
@@ -87,6 +88,15 @@ class DrillDetailViews {
 
     private void setupInitialViewVisibility() {
         btnFinished.setVisibility(View.GONE);
+    }
+
+    private void setupFabClickListener() {
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnFinished.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
 }
