@@ -64,7 +64,7 @@ public class DetailSummaryDialog extends DialogFragment {
     }
 
     private void setupRvSummary() {
-        SessionLog sessionLog = new SessionLog();
+        SessionLog sessionLog = new SessionLog(null);
 //        rvSummary.setAdapter(new SessionLogAdapter(sessionLog));
         rvSummary.setLayoutManager(
                 new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
