@@ -115,6 +115,19 @@ public class DrillDetailViewsTest {
         assertTrue(npReps.getWrapSelectorWheel());
     }
 
+    @Test
+    public void doesSetNpSuccessesValues_MethodTest_SetupActivityInitialState() throws Exception {
+        NumberPicker npSuccesses = (NumberPicker) activity.findViewById(R.id.npSuccesses);
+        assertEquals(0, npSuccesses.getMinValue());
+        assertTrue(npSuccesses.getMaxValue() > npSuccesses.getMinValue());
+    }
+
+    @Test
+    public void doesSetNpSuccessesWrapWheel_MethodTest_SetupActivityInitialState() throws Exception {
+        NumberPicker npSuccesses = (NumberPicker) activity.findViewById(R.id.npSuccesses);
+        assertTrue(npSuccesses.getWrapSelectorWheel());
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
