@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.armandgray.taap.R;
 import com.armandgray.taap.models.SessionLog;
 
-public class SessionLogRvAdapter {
+public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapter.SessionLogViewHolder> {
 
     private SessionLog sessionLog;
 
@@ -20,10 +20,12 @@ public class SessionLogRvAdapter {
         this.sessionLog = sessionLog;
     }
 
+    @Override
     public SessionLogViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new SessionLogViewHolder(getLayout(parent));
     }
 
+    @Override
     public void onBindViewHolder(SessionLogViewHolder viewHolder, int position) {
         final Object sessionItem = getItemAtPosition(position);
 
@@ -33,6 +35,7 @@ public class SessionLogRvAdapter {
         tvTitle.setText(sessionItem.hashCode());
     }
 
+    @Override
     public int getItemCount() {
         return SessionLog.getFieldCount();
     }
