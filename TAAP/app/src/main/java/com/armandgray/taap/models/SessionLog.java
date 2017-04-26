@@ -16,6 +16,15 @@ public class SessionLog {
     private double successRecord;
 
     public SessionLog(Builder builder) {
+        this.sessionDate = builder.sessionDate;
+        this.sessionLength = builder.sessionLength;
+        this.sessionGoal = builder.sessionGoal;
+        this.activeWork = builder.activeWork;
+        this.restTime = builder.restTime;
+        this.setsCompleted = builder.setsCompleted;
+        this.repsCompleted = builder.repsCompleted;
+        this.successRate = builder.successRate;
+        this.successRecord = builder.successRecord;
     }
 
     public static class Builder {
