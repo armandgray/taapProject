@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.Date;
 
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
 public class SessionLogTest {
@@ -30,6 +31,11 @@ public class SessionLogTest {
         assertNotNull(sessionLog.getRepsCompleted());
         assertNotNull(sessionLog.getSuccessRate());
         assertNotNull(sessionLog.getSuccessRecord());
+    }
+
+    @Test
+    public void canGetFieldCount() throws Exception {
+        assertEquals(9, SessionLog.getFieldCount());
     }
 
 }

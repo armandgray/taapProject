@@ -1,5 +1,6 @@
 package com.armandgray.taap.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,6 +73,7 @@ public class SessionLogAdapterTest {
         }
     }
 
+    @SuppressLint("InflateParams")
     @Test
     public void onBindViewHolder_DoesSetViewsForSessionLogItem() {
         adapter = new SessionLogRvAdapter(defaultSessionLog);
@@ -90,7 +92,7 @@ public class SessionLogAdapterTest {
     @Test
     public void canGetItemCount() throws Exception {
         adapter = new SessionLogRvAdapter(defaultSessionLog);
-        assertEquals(8, adapter.getItemCount());
+        assertEquals(9, adapter.getItemCount());
     }
 
     @Test

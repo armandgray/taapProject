@@ -33,6 +33,11 @@ public class SessionLogRvAdapter {
         tvTitle.setText(sessionItem.hashCode());
     }
 
+    @Override
+    public int getItemCount() {
+        return SessionLog.getFieldCount();
+    }
+
     View getLayout(ViewGroup parent) {
         return LayoutInflater.from(parent.getContext()).inflate(R.layout.drill_listitem, parent, false);
     }

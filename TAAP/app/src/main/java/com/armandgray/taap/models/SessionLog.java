@@ -31,6 +31,7 @@ public class SessionLog {
     public static class Builder {
 
         private Date sessionDate;
+
         private Date sessionLength;
         private Date sessionGoal;
         private Date activeWork;
@@ -39,7 +40,6 @@ public class SessionLog {
         private int repsCompleted;
         private double successRate;
         private double successRecord;
-
         public Builder() {
             // date --> timeinMilliseconds
             this.sessionDate = new Date();
@@ -98,10 +98,10 @@ public class SessionLog {
         System.out.println(currentDateTimeString);
         return sessionDate;
     }
+
     public Date getSessionLength() {
         return sessionLength;
     }
-
     public Date getSessionGoal() {
         return sessionGoal;
     }
@@ -122,13 +122,17 @@ public class SessionLog {
         return repsCompleted;
     }
 
-
     public double getSuccessRate() {
         return successRate;
     }
 
+
     public double getSuccessRecord() {
         return successRecord;
+    }
+
+    public static int getFieldCount() {
+        return 8;
     }
 
 }
