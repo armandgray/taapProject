@@ -8,7 +8,6 @@ import android.widget.FrameLayout;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
-import com.armandgray.taap.models.Drill;
 import com.armandgray.taap.models.SessionLog;
 
 import org.junit.After;
@@ -19,9 +18,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 
 import static junit.framework.Assert.assertEquals;
@@ -33,7 +29,7 @@ import static org.mockito.Mockito.mock;
 public class SessionLogAdapterTest {
 
     private SessionLogRvAdapter adapter;
-    private SummaryViewHolder holder;
+    private SessionLogRvAdapter.SessionLogViewHolder holder;
     private View mockView;
     private SessionLog defaultSessionLog;
     
@@ -58,7 +54,7 @@ public class SessionLogAdapterTest {
     public void onCreateViewHolder_ReturnsNewSessionLogViewHolderOfCorrectLayout() {
         TestableRvSummaryAdapter testableAdapter = new TestableRvSummaryAdapter();
         testableAdapter.setMockView(mockView);
-        SessionLogViewHolder sessionLogViewHolder = testableAdapter
+        SessionLogRvAdapter.SessionLogViewHolder sessionLogViewHolder = testableAdapter
                 .onCreateViewHolder(new FrameLayout(RuntimeEnvironment.application), 0);
         assertEquals(mockView, sessionLogViewHolder.itemView);
     }

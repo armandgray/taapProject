@@ -108,7 +108,7 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
         ImageView ivImage;
         TextView tvTitle;
 
-        public DrillViewHolder(View itemView) {
+        DrillViewHolder(View itemView) {
             super(itemView);
 
             this.itemView = itemView;
