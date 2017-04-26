@@ -2,6 +2,7 @@ package com.armandgray.taap.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import org.robolectric.annotation.Config;
 import java.util.Date;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertNull;
 import static org.mockito.Mockito.mock;
 
@@ -49,6 +51,13 @@ public class SessionLogAdapterTest {
                 .successRate(0.0)
                 .successRecord(0.0)
                 .create();
+    }
+
+    @Test
+    public void doesImplementAdapter() throws Exception {
+        RecyclerView.Adapter<SessionLogRvAdapter.SessionLogViewHolder> adapter =
+                new SessionLogRvAdapter(defaultSessionLog);
+        assertNotNull(adapter);
     }
 
     @Test
