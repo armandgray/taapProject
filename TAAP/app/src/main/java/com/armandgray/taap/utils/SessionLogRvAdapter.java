@@ -2,8 +2,8 @@ package com.armandgray.taap.utils;
 
 import com.armandgray.taap.models.SessionLog;
 
-public class SessionLogAdapter {
+public class SessionLogRvAdapter {
 
-    public SessionLogAdapter(SessionLog sessionLog) {
+    public SessionLogRvAdapter(SessionLog sessionLog) {
     }
 }

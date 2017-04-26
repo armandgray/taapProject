@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
 import com.armandgray.taap.models.Drill;
+import com.armandgray.taap.models.SessionLog;
 
 import org.junit.After;
 import org.junit.Before;
@@ -21,28 +22,93 @@ import org.robolectric.annotation.Config;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 
-import static com.armandgray.taap.models.Drill.ALL;
-import static com.armandgray.taap.models.Drill.SHOOTING;
-import static com.armandgray.taap.models.Drill.getQueryResultList;
-import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNull;
-import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
 public class SessionLogAdapterTest {
 
-    private SessionLogAdapter adapter;
+    private SessionLogRvAdapter adapter;
+    private SummaryViewHolder holder;
     private View mockView;
-
+    private SessionLog defaultSessionLog;
+    
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
-        adapter = new SessionLogAdapter(null);
+        adapter = new SessionLogRvAdapter(null);
         mockView = mock(View.class);
+        defaultSessionLog = new SessionLog.Builder()
+                .sessionLength(new Date(0))
+                .sessionGoal(new Date(0))
+                .activeWork(new Date(0))
+                .restTime(new Date(0))
+                .setsCompleted(0)
+                .repsCompleted(0)
+                .successRate(0.0)
+                .successRecord(0.0)
+                .create();
+    }
+
+    @Test
+    public void onCreateViewHolder_ReturnsNewSessionLogViewHolderOfCorrectLayout() {
+        TestableRvSummaryAdapter testableAdapter = new TestableRvSummaryAdapter();
+        testableAdapter.setMockView(mockView);
+        SessionLogViewHolder sessionLogViewHolder = testableAdapter
+                .onCreateViewHolder(new FrameLayout(RuntimeEnvironment.application), 0);
+        assertEquals(mockView, sessionLogViewHolder.itemView);
+    }
+
+    static class TestableRvSummaryAdapter extends SessionLogRvAdapter {
+        View mockView;
+
+        void setMockView(View mockView) {
+            this.mockView = mockView;
+        }
+
+        @Override
+        View getLayout(ViewGroup parent) {
+            return mockView;
+        }
+    }
+
+    @Test
+    public void onBindViewHolder_DoesSetViewsForSessionLogItem() {
+        adapter = new SessionLogRvAdapter(defaultSessionLog);
+        LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        holder = new SessionLogRvAdapter.SessionLogViewHolder(
+                inflater.inflate(R.layout.drill_listitem, null, false));
+        adapter.onBindViewHolder(holder, 0);
+
+        assertEquals("1-Ball Pound Dribble", holder.tvTitle.getText());
+        assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
+                R.drawable.ic_fitness_center_white_24dp),
+                holder.ivImage.getDrawable());
+    }
+
+    @Test
+    public void canGetItemCount() throws Exception {
+        adapter = new SessionLogRvAdapter(defaultSessionLog);
+        assertEquals(8, adapter.getItemCount());
+    }
+
+    @Test
+    public void canGetItemAtPosition() throws Exception {
+        adapter = new SessionLogRvAdapter(defaultSessionLog);
+        assertEquals(defaultSessionLog.getSessionDate(), adapter.getItemAtPosition(0));
+        assertEquals(defaultSessionLog.getSessionLength(), adapter.getItemAtPosition(1));
+        assertEquals(defaultSessionLog.getActiveWork(), adapter.getItemAtPosition(2));
+    }
+
+    @Test
+    public void canGetItemAtPosition_NullDrillList() throws Exception {
+        adapter = new SessionLogRvAdapter(null);
+        assertNull(adapter.getItemAtPosition(0));
     }
 
     @After
@@ -50,6 +116,7 @@ public class SessionLogAdapterTest {
         System.out.println("Running TearDown!");
         adapter = null;
         mockView = null;
+        defaultSessionLog = null;
     }
 
 }

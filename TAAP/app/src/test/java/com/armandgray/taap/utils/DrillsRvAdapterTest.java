@@ -1,5 +1,6 @@
 package com.armandgray.taap.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,6 +56,20 @@ public class DrillsRvAdapterTest {
         assertEquals(mockView, drillViewHolder.itemView);
     }
 
+    static class TestableDrillsRvAdapter extends DrillsRvAdapter {
+        View mockView;
+
+        void setMockView(View mockView) {
+            this.mockView = mockView;
+        }
+
+        @Override
+        View getLayout(ViewGroup parent) {
+            return mockView;
+        }
+    }
+
+    @SuppressLint("InflateParams")
     @Test
     public void onBindViewHolder_DoesSetViewsForDrillItem() {
         adapter = new DrillsRvAdapter(new ArrayList<>(Collections.singletonList(
@@ -69,19 +84,6 @@ public class DrillsRvAdapterTest {
         assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
                 R.drawable.ic_fitness_center_white_24dp),
                 holder.ivImage.getDrawable());
-    }
-
-    static class TestableDrillsRvAdapter extends DrillsRvAdapter {
-        View mockView;
-
-        void setMockView(View mockView) {
-            this.mockView = mockView;
-        }
-
-        @Override
-        View getLayout(ViewGroup parent) {
-            return mockView;
-        }
     }
 
     @Test

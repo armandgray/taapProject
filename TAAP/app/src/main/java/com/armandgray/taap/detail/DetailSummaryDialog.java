@@ -76,7 +76,7 @@ public class DetailSummaryDialog extends DialogFragment {
                 .successRate(0.0)
                 .successRecord(0.0)
                 .create();
-//        rvSummary.setAdapter(new SessionLogAdapter(sessionLog));
+//        rvSummary.setAdapter(new SessionLogRvAdapter(sessionLog));
         rvSummary.setLayoutManager(
                 new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
     }
