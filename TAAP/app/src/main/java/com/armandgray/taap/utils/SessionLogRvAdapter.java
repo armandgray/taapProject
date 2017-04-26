@@ -1,7 +1,9 @@
 package com.armandgray.taap.utils;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +18,14 @@ public class SessionLogRvAdapter {
 
     public SessionLogRvAdapter(SessionLog sessionLog) {
         this.sessionLog = sessionLog;
+    }
+
+    public SessionLogViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new SessionLogViewHolder(getLayout(parent));
+    }
+
+    View getLayout(ViewGroup parent) {
+        return LayoutInflater.from(parent.getContext()).inflate(R.layout.drill_listitem, parent, false);
     }
 
     static class SessionLogViewHolder extends RecyclerView.ViewHolder {
