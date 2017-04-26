@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.armandgray.taap.R;
-import com.armandgray.taap.models.Drill;
 import com.armandgray.taap.models.SessionLog;
 
 public class SessionLogRvAdapter {
@@ -26,13 +25,12 @@ public class SessionLogRvAdapter {
     }
 
     public void onBindViewHolder(SessionLogViewHolder viewHolder, int position) {
-        final Object item = getItemAtPosition(position);
+        final Object sessionItem = getItemAtPosition(position);
 
         ImageView ivImage = viewHolder.ivImage;
         TextView tvTitle = viewHolder.tvTitle;
 
-        ivImage.setImageResource(drill.getImageId());
-        tvTitle.setText(drill.getTitle());
+        tvTitle.setText(sessionItem.hashCode());
     }
 
     View getLayout(ViewGroup parent) {
@@ -59,6 +57,8 @@ public class SessionLogRvAdapter {
                 return sessionLog.getSuccessRate();
             case 8:
                 return sessionLog.getSuccessRecord();
+            default:
+                return null;
         }
     }
 
