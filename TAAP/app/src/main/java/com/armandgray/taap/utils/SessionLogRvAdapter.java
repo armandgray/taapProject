@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.armandgray.taap.R;
+import com.armandgray.taap.models.Drill;
 import com.armandgray.taap.models.SessionLog;
 
 public class SessionLogRvAdapter {
@@ -22,6 +23,16 @@ public class SessionLogRvAdapter {
 
     public SessionLogViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new SessionLogViewHolder(getLayout(parent));
+    }
+
+    public void onBindViewHolder(SessionLogViewHolder viewHolder, int position) {
+        final Drill drill = getItemAtPosition(position);
+
+        ImageView ivImage = viewHolder.ivImage;
+        TextView tvTitle = viewHolder.tvTitle;
+
+        ivImage.setImageResource(drill.getImageId());
+        tvTitle.setText(drill.getTitle());
     }
 
     View getLayout(ViewGroup parent) {
