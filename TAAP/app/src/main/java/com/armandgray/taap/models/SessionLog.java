@@ -1,21 +1,25 @@
 package com.armandgray.taap.models;
 
-import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class SessionLog {
 
-    private Object sessionDate;
-    private Object sessionLength;
-    private Object sessionGoal;
-    private Object activeWork;
-    private Object restTime;
+    private Date sessionDate;
+    private Date sessionLength;
+    private Date sessionGoal;
+    private Date activeWork;
+    private Date restTime;
     private int setsCompleted;
     private int repsCompleted;
     private double successRate;
     private double successRecord;
 
     public SessionLog(Builder builder) {
+        //timeinMilliseconds
+        Date d = new Date(0);
+
         this.sessionDate = builder.sessionDate;
         this.sessionLength = builder.sessionLength;
         this.sessionGoal = builder.sessionGoal;
@@ -29,36 +33,36 @@ public class SessionLog {
 
     public static class Builder {
 
-        private Object sessionDate;
-        private Object sessionLength;
-        private Object sessionGoal;
-        private Object activeWork;
-        private Object restTime;
+        private Date sessionDate;
+        private Date sessionLength;
+        private Date sessionGoal;
+        private Date activeWork;
+        private Date restTime;
         private int setsCompleted;
         private int repsCompleted;
         private double successRate;
         private double successRecord;
 
         public Builder() {
-            this.sessionDate = DateFormat.getDateTimeInstance().format(new Date());
+            this.sessionDate = new Date();
         }
 
-        public Builder sessionLength(Object s) {
+        public Builder sessionLength(Date s) {
             this.sessionLength = s;
             return this;
         }
 
-        public Builder sessionGoal(Object s) {
+        public Builder sessionGoal(Date s) {
             this.sessionGoal = s;
             return this;
         }
 
-        public Builder activeWork(Object s) {
+        public Builder activeWork(Date s) {
             this.activeWork = s;
             return this;
         }
 
-        public Builder restTime(Object s) {
+        public Builder restTime(Date s) {
             this.restTime = s;
             return this;
         }
@@ -89,22 +93,26 @@ public class SessionLog {
 
     }
 
-    public Object getSessionDate() {
+    public Date getSessionDate() {
+        SimpleDateFormat defaultDateFormat = new SimpleDateFormat("00:00:00", Locale.US);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss", Locale.US);
+        String currentDateTimeString = defaultDateFormat.format(new Date(0));
+        System.out.println(currentDateTimeString);
         return sessionDate;
     }
-    public Object getSessionLength() {
+    public Date getSessionLength() {
         return sessionLength;
     }
 
-    public Object getSessionGoal() {
+    public Date getSessionGoal() {
         return sessionGoal;
     }
 
-    public Object getActiveWork() {
+    public Date getActiveWork() {
         return activeWork;
     }
 
-    public Object getRestTime() {
+    public Date getRestTime() {
         return restTime;
     }
 
