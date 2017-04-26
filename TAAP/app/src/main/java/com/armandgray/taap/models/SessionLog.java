@@ -1,5 +1,8 @@
 package com.armandgray.taap.models;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 public class SessionLog {
 
     private Object sessionDate;
@@ -26,6 +29,11 @@ public class SessionLog {
         private int repsCompleted;
         private double successRate;
         private double successRecord;
+
+        public Builder() {
+            this.sessionDate = DateFormat.getDateTimeInstance().format(new Date());
+        }
+
         public Builder sessionLength(Object s) {
             this.sessionLength = s;
             return this;
