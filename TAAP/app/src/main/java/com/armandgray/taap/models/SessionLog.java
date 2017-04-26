@@ -16,10 +16,7 @@ public class SessionLog {
     private double successRate;
     private double successRecord;
 
-    public SessionLog(Builder builder) {
-        //timeinMilliseconds
-        Date d = new Date(0);
-
+    private SessionLog(Builder builder) {
         this.sessionDate = builder.sessionDate;
         this.sessionLength = builder.sessionLength;
         this.sessionGoal = builder.sessionGoal;
@@ -44,6 +41,7 @@ public class SessionLog {
         private double successRecord;
 
         public Builder() {
+            // date --> timeinMilliseconds
             this.sessionDate = new Date();
         }
 
