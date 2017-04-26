@@ -26,7 +26,7 @@ public class SessionLogRvAdapter {
     }
 
     public void onBindViewHolder(SessionLogViewHolder viewHolder, int position) {
-        final Drill drill = getItemAtPosition(position);
+        final Object item = getItemAtPosition(position);
 
         ImageView ivImage = viewHolder.ivImage;
         TextView tvTitle = viewHolder.tvTitle;
@@ -37,6 +37,29 @@ public class SessionLogRvAdapter {
 
     View getLayout(ViewGroup parent) {
         return LayoutInflater.from(parent.getContext()).inflate(R.layout.drill_listitem, parent, false);
+    }
+
+    public Object getItemAtPosition(int position) {
+        switch (position) {
+            case 0:
+                return sessionLog.getSessionDate();
+            case 1:
+                return sessionLog.getSessionLength();
+            case 2:
+                return sessionLog.getSessionGoal();
+            case 3:
+                return sessionLog.getActiveWork();
+            case 4:
+                return sessionLog.getRestTime();
+            case 5:
+                return sessionLog.getSetsCompleted();
+            case 6:
+                return sessionLog.getRepsCompleted();
+            case 7:
+                return sessionLog.getSuccessRate();
+            case 8:
+                return sessionLog.getSuccessRecord();
+        }
     }
 
     static class SessionLogViewHolder extends RecyclerView.ViewHolder {
