@@ -8,7 +8,16 @@ public class SessionLogTest {
 
     @Test
     public void canCreateSessionLogWithBuilder() throws Exception {
-        SessionLog sessionLog = new SessionLog.Builder().create();
+        SessionLog sessionLog = new SessionLog.Builder()
+                .sessionLength()
+                .sessionGoal()
+                .activeWork()
+                .restTime()
+                .setsCompleted()
+                .repsCompleted()
+                .successRate()
+                .successRecord()
+                .create();
         assertNotNull(sessionLog);
         assertNotNull(sessionLog.getSessionLength());
         assertNotNull(sessionLog.getSessionGoal());
