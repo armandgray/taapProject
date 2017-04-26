@@ -33,7 +33,6 @@ public class SessionLogRvAdapter {
         tvTitle.setText(sessionItem.hashCode());
     }
 
-    @Override
     public int getItemCount() {
         return SessionLog.getFieldCount();
     }
