@@ -9,16 +9,17 @@ public class SessionLogTest {
     @Test
     public void canCreateSessionLogWithBuilder() throws Exception {
         SessionLog sessionLog = new SessionLog.Builder()
-                .sessionLength()
-                .sessionGoal()
-                .activeWork()
-                .restTime()
-                .setsCompleted()
-                .repsCompleted()
-                .successRate()
-                .successRecord()
+                .sessionLength("")
+                .sessionGoal("")
+                .activeWork("")
+                .restTime("")
+                .setsCompleted(0)
+                .repsCompleted(0)
+                .successRate(0.0)
+                .successRecord(0.0)
                 .create();
         assertNotNull(sessionLog);
+        assertNotNull(sessionLog.getSessionDate());
         assertNotNull(sessionLog.getSessionLength());
         assertNotNull(sessionLog.getSessionGoal());
         assertNotNull(sessionLog.getActiveWork());
