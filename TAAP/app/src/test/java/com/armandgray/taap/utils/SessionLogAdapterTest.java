@@ -89,7 +89,7 @@ public class SessionLogAdapterTest {
         LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         holder = new SessionLogRvAdapter.SessionLogViewHolder(
-                inflater.inflate(R.layout.drill_listitem, null, false));
+                inflater.inflate(R.layout.session_log_listitem, null, false));
         adapter.onBindViewHolder(holder, 0);
 
         assertEquals("1-Ball Pound Dribble", holder.tvTitle.getText());
