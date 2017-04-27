@@ -30,7 +30,7 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
         final Object sessionItem = getItemAtPosition(position);
 
         ImageView ivImage = viewHolder.ivImage;
-        TextView tvTitle = viewHolder.tvTitle;
+        TextView tvTitle = viewHolder.tvText;
 
         tvTitle.setText(sessionItem.hashCode());
     }
@@ -72,14 +72,14 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
     static class SessionLogViewHolder extends RecyclerView.ViewHolder {
         View itemView;
         ImageView ivImage;
-        TextView tvTitle;
+        TextView tvText;
 
         SessionLogViewHolder(View itemView) {
             super(itemView);
 
             this.itemView = itemView;
             ivImage = (ImageView) itemView.findViewById(R.id.ivImage);
-            tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
+            tvText = (TextView) itemView.findViewById(R.id.tvTitle);
         }
     }
 }
