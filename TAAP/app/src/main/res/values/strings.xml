@@ -42,4 +42,5 @@
     <string name="reps">Reps</string>
     <string name="finished">Finished</string>
     <string name="successes">Successes</string>
+    <string name="icon_session_log_timer_detail">icon session log timer detail</string>
 </resources>
