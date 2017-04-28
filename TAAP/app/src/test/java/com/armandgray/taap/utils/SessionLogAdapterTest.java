@@ -92,10 +92,10 @@ public class SessionLogAdapterTest {
                         inflater.inflate(R.layout.session_log_listitem, null, false));
         adapter.onBindViewHolder(holder, 0);
 
-        assertEquals("Session Length", holder.tvHeader.getText());
+        assertEquals("Session Date", holder.tvHeader.getText());
         assertEquals("00:00:00", holder.tvText.getText());
         assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
-                R.drawable.ic_fitness_center_white_24dp),
+                R.drawable.ic_timer_white_24dp),
                 holder.ivImage.getDrawable());
     }
 

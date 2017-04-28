@@ -11,6 +11,10 @@ import android.widget.TextView;
 import com.armandgray.taap.R;
 import com.armandgray.taap.models.SessionLog;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapter.SessionLogViewHolder> {
 
     private SessionLog sessionLog;
@@ -28,13 +32,19 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
 
     @Override
     public void onBindViewHolder(SessionLogViewHolder viewHolder, int position) {
-        final Object sessionItem = getItemAtPosition(position);
+        final Pair<Integer, ?> sessionItem = getItemAtPosition(position);
 
         TextView tvHeader = viewHolder.tvHeader;
         ImageView ivImage = viewHolder.ivImage;
         TextView tvText = viewHolder.tvText;
 
-        tvText.setText(sessionItem.hashCode());
+        tvHeader.setText(sessionItem.first);
+        ivImage.setImageResource(R.drawable.ic_timer_white_24dp);
+
+        SimpleDateFormat defaultDateFormat = new SimpleDateFormat("00:00:00", Locale.US);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss", Locale.US);
+        String currentDateTimeString = defaultDateFormat.format(new Date(0));
+        tvText.setText(currentDateTimeString);
     }
 
     @Override
