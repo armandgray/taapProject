@@ -2,6 +2,7 @@ package com.armandgray.taap.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +33,6 @@ import static org.mockito.Mockito.mock;
 public class SessionLogAdapterTest {
 
     private SessionLogRvAdapter adapter;
-    private SessionLogRvAdapter.SessionLogViewHolder holder;
     private View mockView;
     private SessionLog defaultSessionLog;
     
@@ -88,8 +88,9 @@ public class SessionLogAdapterTest {
         adapter = new SessionLogRvAdapter(defaultSessionLog);
         LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        holder = new SessionLogRvAdapter.SessionLogViewHolder(
-                inflater.inflate(R.layout.session_log_listitem, null, false));
+        SessionLogRvAdapter.SessionLogViewHolder holder =
+                new SessionLogRvAdapter.SessionLogViewHolder(
+                        inflater.inflate(R.layout.session_log_listitem, null, false));
         adapter.onBindViewHolder(holder, 0);
 
         assertEquals("Session Length", holder.tvHeader.getText());
@@ -108,9 +109,12 @@ public class SessionLogAdapterTest {
     @Test
     public void canGetItemAtPosition() throws Exception {
         adapter = new SessionLogRvAdapter(defaultSessionLog);
-        assertEquals(defaultSessionLog.getSessionDate(), adapter.getItemAtPosition(0));
-        assertEquals(defaultSessionLog.getSessionLength(), adapter.getItemAtPosition(1));
-        assertEquals(defaultSessionLog.getActiveWork(), adapter.getItemAtPosition(2));
+        assertEquals(new Pair<>(R.string.session_date, defaultSessionLog.getSessionDate()),
+                adapter.getItemAtPosition(0));
+        assertEquals(new Pair<>(R.string.session_length, defaultSessionLog.getSessionLength()),
+                adapter.getItemAtPosition(1));
+        assertEquals(new Pair<>(R.string.session_goal, defaultSessionLog.getSessionGoal()),
+                adapter.getItemAtPosition(2));
     }
 
     @Test

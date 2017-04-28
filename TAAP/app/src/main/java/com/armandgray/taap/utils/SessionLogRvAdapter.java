@@ -15,8 +15,7 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
 
     private SessionLog sessionLog;
 
-    public SessionLogRvAdapter() {
-    }
+    public SessionLogRvAdapter() {}
 
     public SessionLogRvAdapter(SessionLog sessionLog) {
         this.sessionLog = sessionLog;
