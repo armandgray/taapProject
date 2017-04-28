@@ -17,5 +17,6 @@ class DrillDetailController {
     void onSummaryDialogDismiss() {
         Intent intent = new Intent(activity, LogActivity.class);
         activity.startActivity(intent);
+        activity.finish();
     }
 }

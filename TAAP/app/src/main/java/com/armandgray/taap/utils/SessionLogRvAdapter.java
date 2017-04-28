@@ -32,7 +32,8 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
 
     @Override
     public void onBindViewHolder(SessionLogViewHolder viewHolder, int position) {
-        final Pair<Integer, ?> sessionItem = getItemAtPosition(position);
+        if (position == getItemCount() - 1) {return;}
+        final Pair<Integer, ?> sessionItem = getItemAtPosition(position + 1);
 
         TextView tvHeader = viewHolder.tvHeader;
         ImageView ivImage = viewHolder.ivImage;
@@ -53,7 +54,7 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
     }
 
     View getLayout(ViewGroup parent) {
-        return LayoutInflater.from(parent.getContext()).inflate(R.layout.drill_listitem, parent, false);
+        return LayoutInflater.from(parent.getContext()).inflate(R.layout.session_log_listitem, parent, false);
     }
 
     Pair<Integer, ?> getItemAtPosition(int position) {

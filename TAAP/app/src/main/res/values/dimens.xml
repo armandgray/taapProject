@@ -9,4 +9,5 @@
     <dimen name="drill_item_padding">10dp</dimen>
     <dimen name="detail_container_text_size">14sp</dimen>
     <dimen name="card_margin">5dp</dimen>
+    <dimen name="session_log_dialog_border_width">7dp</dimen>
 </resources>

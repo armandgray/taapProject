@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -37,6 +38,7 @@ public class DetailSummaryDialog extends DialogFragment {
         }
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -51,7 +53,11 @@ public class DetailSummaryDialog extends DialogFragment {
                     }
                 });
         setupRvSummary();
-        return builder.create();
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL)
+                .setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        return alertDialog;
     }
 
     private void setupRvSummary() {
