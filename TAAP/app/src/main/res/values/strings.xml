@@ -33,6 +33,7 @@
         <item>Passing</item>
         <item>Fundamentals</item>
     </string-array>
+
     <string name="title_activity_drill_detail">DrillDetailActivity</string>
     <string name="drilldetailactivity">DrillDetailActivity</string>
     <string name="drill_image">drill image</string>
@@ -43,4 +44,13 @@
     <string name="finished">Finished</string>
     <string name="successes">Successes</string>
     <string name="icon_session_log_timer_detail">icon session log timer detail</string>
+    <string name="session_date">Session Date</string>
+    <string name="session_length">Session Length</string>
+    <string name="session_goal">Session Goal</string>
+    <string name="active_work">Active Work</string>
+    <string name="rest_time">Rest Time</string>
+    <string name="sets_completed">Sets Completed</string>
+    <string name="reps_completed">Reps Completed</string>
+    <string name="success_rate">Success Rate</string>
+    <string name="success_record">Success Record</string>
 </resources>

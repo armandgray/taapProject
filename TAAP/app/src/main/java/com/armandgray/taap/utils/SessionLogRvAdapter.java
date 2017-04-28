@@ -1,5 +1,6 @@
 package com.armandgray.taap.utils;
 
+import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,8 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
 
     private SessionLog sessionLog;
 
-    public SessionLogRvAdapter() {}
+    public SessionLogRvAdapter() {
+    }
 
     public SessionLogRvAdapter(SessionLog sessionLog) {
         this.sessionLog = sessionLog;
@@ -45,26 +47,26 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
         return LayoutInflater.from(parent.getContext()).inflate(R.layout.drill_listitem, parent, false);
     }
 
-    public Object getItemAtPosition(int position) {
+    Pair<Integer, ?> getItemAtPosition(int position) {
         switch (position) {
             case 0:
-                return sessionLog.getSessionDate();
+                return new Pair<>(R.string.session_date, sessionLog.getSessionDate());
             case 1:
-                return sessionLog.getSessionLength();
+                return new Pair<>(R.string.session_length, sessionLog.getSessionLength());
             case 2:
-                return sessionLog.getSessionGoal();
+                return new Pair<>(R.string.session_goal, sessionLog.getSessionGoal());
             case 3:
-                return sessionLog.getActiveWork();
+                return new Pair<>(R.string.active_work, sessionLog.getActiveWork());
             case 4:
-                return sessionLog.getRestTime();
+                return new Pair<>(R.string.rest_time, sessionLog.getRestTime());
             case 5:
-                return sessionLog.getSetsCompleted();
+                return new Pair<>(R.string.sets_completed, sessionLog.getSetsCompleted());
             case 6:
-                return sessionLog.getRepsCompleted();
+                return new Pair<>(R.string.reps_completed, sessionLog.getRepsCompleted());
             case 7:
-                return sessionLog.getSuccessRate();
+                return new Pair<>(R.string.success_rate, sessionLog.getSuccessRate());
             case 8:
-                return sessionLog.getSuccessRecord();
+                return new Pair<>(R.string.success_record, sessionLog.getSuccessRecord());
             default:
                 return null;
         }
