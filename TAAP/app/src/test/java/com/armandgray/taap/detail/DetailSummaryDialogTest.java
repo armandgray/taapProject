@@ -119,18 +119,6 @@ public class DetailSummaryDialogTest {
     }
 
     @Test
-    public void doesSetNeutralButtonBackgroundColor_TestOnCreateDialog() {
-        Bundle savedInstanceState = new Bundle();
-        AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
-        resultDialog.show();
-
-        Button btnContinue = resultDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
-        assertEquals(btnContinue.getDrawingCacheBackgroundColor(),
-                activity.getResources().getColor(R.color.colorPrimary));
-        resultDialog.dismiss();
-    }
-
-    @Test
     public void doesSetupRvDrills() throws Exception {
         Bundle savedInstanceState = new Bundle();
         AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);

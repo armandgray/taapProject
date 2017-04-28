@@ -53,11 +53,7 @@ public class DetailSummaryDialog extends DialogFragment {
                     }
                 });
         setupRvSummary();
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-        alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL)
-                .setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        return alertDialog;
+        return builder.create();
     }
 
     private void setupRvSummary() {
