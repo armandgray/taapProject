@@ -8,13 +8,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import com.armandgray.taap.R;
 import com.armandgray.taap.models.SessionLog;
+import com.armandgray.taap.utils.SessionLogRvAdapter;
 
 import java.util.Date;
 
@@ -53,18 +54,6 @@ public class DetailSummaryDialog extends DialogFragment {
         return builder.create();
     }
 
-    @Override
-    public void onCancel(DialogInterface dialog) {
-        super.onCancel(dialog);
-        listener.onDialogDismiss();
-    }
-
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-        super.onDismiss(dialog);
-        listener.onDialogDismiss();
-    }
-
     private void setupRvSummary() {
         SessionLog sessionLog = new SessionLog.Builder()
                 .sessionLength(new Date(0))
@@ -76,9 +65,8 @@ public class DetailSummaryDialog extends DialogFragment {
                 .successRate(0.0)
                 .successRecord(0.0)
                 .create();
-//        rvSummary.setAdapter(new SessionLogRvAdapter(sessionLog));
-        rvSummary.setLayoutManager(
-                new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
+        rvSummary.setAdapter(new SessionLogRvAdapter(sessionLog));
+        rvSummary.setLayoutManager(new GridLayoutManager(activity, 2));
     }
 
     public interface DetailSummaryDialogListener {
