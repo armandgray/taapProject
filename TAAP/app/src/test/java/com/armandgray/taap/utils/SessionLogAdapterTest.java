@@ -25,7 +25,6 @@ import java.util.Date;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertNull;
 import static org.mockito.Mockito.mock;
 
 @RunWith(RobolectricTestRunner.class)
@@ -115,12 +114,6 @@ public class SessionLogAdapterTest {
                 adapter.getItemAtPosition(1));
         assertEquals(new Pair<>(R.string.session_goal, defaultSessionLog.getSessionGoal()),
                 adapter.getItemAtPosition(2));
-    }
-
-    @Test
-    public void canGetItemAtPosition_NullDrillList() throws Exception {
-        adapter = new SessionLogRvAdapter(null);
-        assertNull(adapter.getItemAtPosition(0));
     }
 
     @After
