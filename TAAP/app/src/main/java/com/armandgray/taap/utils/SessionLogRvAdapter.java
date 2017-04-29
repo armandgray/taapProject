@@ -94,12 +94,18 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
         }
     }
 
+    static class SessionLogHeaderViewHolder extends SessionLogViewHolder {
+        SessionLogHeaderViewHolder(View itemView) {
+            super(itemView);
+        }
+    }
+
     static class SessionLogViewHolder extends RecyclerView.ViewHolder {
         View itemView;
         TextView tvHeader;
         ImageView ivImage;
-        TextView tvText;
 
+        TextView tvText;
         SessionLogViewHolder(View itemView) {
             super(itemView);
 
@@ -108,5 +114,6 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
             ivImage = (ImageView) itemView.findViewById(R.id.ivImage);
             tvText = (TextView) itemView.findViewById(R.id.tvText);
         }
+
     }
 }

@@ -85,6 +85,24 @@ public class SessionLogRvAdapterTest {
 
     @SuppressLint("InflateParams")
     @Test
+    public void onBindViewHolder_DoesSetViewsForSessionLogHeader() {
+        adapter = new SessionLogRvAdapter(defaultSessionLog);
+        LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        SessionLogRvAdapter.SessionLogViewHolder holder =
+                new SessionLogRvAdapter.SessionLogHeaderViewHolder(
+                        inflater.inflate(R.layout.session_log_header_layout, null, false));
+        adapter.onBindViewHolder(holder, 0);
+
+        assertEquals((Integer) R.string.session_date, adapter.getItemAtPosition(0).first);
+        assertEquals("00:00:00", holder.tvText.getText());
+        assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
+                R.drawable.ic_trending_up_darkgray_24dp),
+                holder.ivImage.getDrawable());
+    }
+
+    @SuppressLint("InflateParams")
+    @Test
     public void onBindViewHolder_DoesSetViewsForSessionLogItem() {
         adapter = new SessionLogRvAdapter(defaultSessionLog);
         LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
