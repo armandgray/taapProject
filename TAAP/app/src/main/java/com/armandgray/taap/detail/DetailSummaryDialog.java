@@ -68,10 +68,23 @@ public class DetailSummaryDialog extends DialogFragment {
                 .successRecord(0.0)
                 .create();
         rvSummary.setAdapter(new SessionLogRvAdapter(sessionLog));
-        rvSummary.setLayoutManager(new GridLayoutManager(activity, 2));
+        GridLayoutManager layoutManager = getGridLayoutManager();
+        rvSummary.setLayoutManager(layoutManager);
     }
 
-    public interface DetailSummaryDialogListener {
+    @NonNull
+    private GridLayoutManager getGridLayoutManager() {
+        GridLayoutManager layoutManager = new GridLayoutManager(activity, 2);
+        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return position == 0 ? 2 : 1;
+            }
+        });
+        return layoutManager;
+    }
+
+    interface DetailSummaryDialogListener {
         void onDialogDismiss();
     }
 }
