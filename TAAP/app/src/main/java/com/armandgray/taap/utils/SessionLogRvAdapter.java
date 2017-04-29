@@ -17,6 +17,9 @@ import java.util.Locale;
 
 public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapter.SessionLogViewHolder> {
 
+    static final int TYPE_HEADER = 100;
+    static final int TYPE_ITEM = 101;
+
     private SessionLog sessionLog;
 
     public SessionLogRvAdapter() {}
@@ -26,7 +29,17 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
     }
 
     @Override
+    public int getItemViewType(int position) {
+        if (position == 0) { return TYPE_HEADER; }
+        return TYPE_ITEM;
+    }
+
+    @Override
     public SessionLogViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == TYPE_HEADER) {
+            return new SessionLogViewHolder(LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.session_log_header_layout, parent, false));
+        }
         return new SessionLogViewHolder(getLayout(parent));
     }
 
