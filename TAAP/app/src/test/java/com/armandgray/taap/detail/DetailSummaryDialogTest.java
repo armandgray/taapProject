@@ -133,6 +133,18 @@ public class DetailSummaryDialogTest {
         resultDialog.dismiss();
     }
 
+    @Test
+    public void doesSetHeaderSpanSize_TestMethod_SetupRvDrills() throws Exception {
+        Bundle savedInstanceState = new Bundle();
+        AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
+        resultDialog.show();
+
+        RecyclerView rvSummary = (RecyclerView) resultDialog.findViewById(R.id.rvSummary);
+        GridLayoutManager gridLayoutManager = (GridLayoutManager) rvSummary.getLayoutManager();
+        assertEquals(2, gridLayoutManager.getSpanSizeLookup().getSpanSize(0));
+        resultDialog.dismiss();
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
