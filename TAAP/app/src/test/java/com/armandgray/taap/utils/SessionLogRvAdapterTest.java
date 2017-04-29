@@ -95,7 +95,7 @@ public class SessionLogRvAdapterTest {
         adapter.onBindViewHolder(holder, 0);
 
         assertEquals((Integer) R.string.session_date, adapter.getItemAtPosition(0).first);
-        assertEquals("00:00:00", holder.tvText.getText());
+        assertEquals("Wed, Jul 4, '01", holder.tvText.getText());
         assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
                 R.drawable.ic_trending_up_darkgray_24dp),
                 holder.ivImage.getDrawable());
