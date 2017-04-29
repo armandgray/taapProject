@@ -122,6 +122,24 @@ public class SessionLogRvAdapterTest {
                 holder.ivImage.getDrawable());
     }
 
+    @SuppressLint("InflateParams")
+    @Test
+    public void onBindViewHolder_DoesSetViewsForSessionLogItem_Ints() {
+        adapter = new SessionLogRvAdapter(defaultSessionLog);
+        LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        SessionLogRvAdapter.SessionLogViewHolder holder =
+                new SessionLogRvAdapter.SessionLogViewHolder(
+                        inflater.inflate(R.layout.session_log_listitem, null, false));
+        adapter.onBindViewHolder(holder, 5);
+
+        assertEquals("Sets Completed", holder.tvHeader.getText());
+        assertEquals("0", holder.tvText.getText());
+        assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
+                R.drawable.ic_fitness_center_white_24dp),
+                holder.ivImage.getDrawable());
+    }
+
     @Test
     public void canGetItemCount() throws Exception {
         adapter = new SessionLogRvAdapter(defaultSessionLog);

@@ -47,15 +47,12 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
     public void onBindViewHolder(SessionLogViewHolder viewHolder, int position) {
         final Pair<Integer, ?> sessionItem = getItemAtPosition(position);
 
-
         if (position == 0 && viewHolder instanceof SessionLogHeaderViewHolder) {
             SessionLogHeaderViewHolder holder = (SessionLogHeaderViewHolder) viewHolder;
 
             TextView tvText = holder.tvText;
             Date date = (Date) sessionItem.second;
-            tvText.setText(new SimpleDateFormat("EEE, MMM d, ''yy", Locale.US)
-                    .format(date));
-
+            tvText.setText(new SimpleDateFormat("EEE, MMM d, ''yy", Locale.US).format(date));
             return;
         }
 
