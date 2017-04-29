@@ -37,7 +37,7 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
     @Override
     public SessionLogViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_HEADER) {
-            return new SessionLogViewHolder(LayoutInflater.from(parent.getContext())
+            return new SessionLogHeaderViewHolder(LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.session_log_header_layout, parent, false));
         }
         return new SessionLogViewHolder(getLayout(parent));
@@ -51,7 +51,16 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
         ImageView ivImage = viewHolder.ivImage;
         TextView tvText = viewHolder.tvText;
 
-        tvHeader.setText(sessionItem.first);
+        if (viewHolder instanceof SessionLogHeaderViewHolder) {
+            SessionLogHeaderViewHolder holder = (SessionLogHeaderViewHolder) viewHolder;
+            tvHeader = null;
+            ivImage = holder.ivImage;
+            tvText = holder.tvText;
+        }
+
+        if (tvHeader != null) {
+            tvHeader.setText(sessionItem.first);
+        }
         ivImage.setImageResource(R.drawable.ic_timer_white_24dp);
 
         SimpleDateFormat defaultDateFormat = new SimpleDateFormat("00:00:00", Locale.US);
@@ -95,8 +104,16 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
     }
 
     static class SessionLogHeaderViewHolder extends SessionLogViewHolder {
+        View itemView;
+        ImageView ivImage;
+        TextView tvText;
+
         SessionLogHeaderViewHolder(View itemView) {
             super(itemView);
+
+            this.itemView = itemView;
+            ivImage = (ImageView) itemView.findViewById(R.id.ivImage);
+            tvText = (TextView) itemView.findViewById(R.id.tvText);
         }
     }
 
@@ -104,8 +121,8 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
         View itemView;
         TextView tvHeader;
         ImageView ivImage;
-
         TextView tvText;
+
         SessionLogViewHolder(View itemView) {
             super(itemView);
 
@@ -114,6 +131,5 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
             ivImage = (ImageView) itemView.findViewById(R.id.ivImage);
             tvText = (TextView) itemView.findViewById(R.id.tvText);
         }
-
     }
 }
