@@ -47,20 +47,23 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
     public void onBindViewHolder(SessionLogViewHolder viewHolder, int position) {
         final Pair<Integer, ?> sessionItem = getItemAtPosition(position);
 
+
+        if (position == 0 && viewHolder instanceof SessionLogHeaderViewHolder) {
+            SessionLogHeaderViewHolder holder = (SessionLogHeaderViewHolder) viewHolder;
+
+            TextView tvText = holder.tvText;
+            Date date = (Date) sessionItem.second;
+            tvText.setText(new SimpleDateFormat("EEE, MMM d, ''yy", Locale.US)
+                    .format(date));
+
+            return;
+        }
+
         TextView tvHeader = viewHolder.tvHeader;
         ImageView ivImage = viewHolder.ivImage;
         TextView tvText = viewHolder.tvText;
 
-        if (viewHolder instanceof SessionLogHeaderViewHolder) {
-            SessionLogHeaderViewHolder holder = (SessionLogHeaderViewHolder) viewHolder;
-            tvHeader = null;
-            ivImage = holder.ivImage;
-            tvText = holder.tvText;
-        }
-
-        if (tvHeader != null) {
-            tvHeader.setText(sessionItem.first);
-        }
+        tvHeader.setText(sessionItem.first);
         ivImage.setImageResource(R.drawable.ic_timer_white_24dp);
 
         SimpleDateFormat defaultDateFormat = new SimpleDateFormat("00:00:00", Locale.US);
@@ -105,14 +108,12 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
 
     static class SessionLogHeaderViewHolder extends SessionLogViewHolder {
         View itemView;
-        ImageView ivImage;
         TextView tvText;
 
         SessionLogHeaderViewHolder(View itemView) {
             super(itemView);
 
             this.itemView = itemView;
-            ivImage = (ImageView) itemView.findViewById(R.id.ivImage);
             tvText = (TextView) itemView.findViewById(R.id.tvText);
         }
     }

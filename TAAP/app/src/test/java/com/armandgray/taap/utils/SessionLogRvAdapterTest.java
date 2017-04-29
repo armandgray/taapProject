@@ -21,7 +21,9 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import static com.armandgray.taap.utils.SessionLogRvAdapter.TYPE_HEADER;
 import static com.armandgray.taap.utils.SessionLogRvAdapter.TYPE_ITEM;
@@ -94,11 +96,12 @@ public class SessionLogRvAdapterTest {
                         inflater.inflate(R.layout.session_log_header_layout, null, false));
         adapter.onBindViewHolder(holder, 0);
 
+        Date date = defaultSessionLog.getSessionDate();
+        String expectedDate = new SimpleDateFormat("EEE, MMM d, ''yy", Locale.US)
+                .format(date);
+
         assertEquals((Integer) R.string.session_date, adapter.getItemAtPosition(0).first);
-        assertEquals("Wed, Jul 4, '01", holder.tvText.getText());
-        assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
-                R.drawable.ic_trending_up_darkgray_24dp),
-                holder.ivImage.getDrawable());
+        assertEquals(expectedDate, holder.tvText.getText());
     }
 
     @SuppressLint("InflateParams")
