@@ -45,8 +45,7 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
 
     @Override
     public void onBindViewHolder(SessionLogViewHolder viewHolder, int position) {
-        if (position == getItemCount() - 1) {return;}
-        final Pair<Integer, ?> sessionItem = getItemAtPosition(position + 1);
+        final Pair<Integer, ?> sessionItem = getItemAtPosition(position);
 
         TextView tvHeader = viewHolder.tvHeader;
         ImageView ivImage = viewHolder.ivImage;
