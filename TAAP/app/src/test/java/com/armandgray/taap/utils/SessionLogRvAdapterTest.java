@@ -134,7 +134,7 @@ public class SessionLogRvAdapterTest {
         adapter.onBindViewHolder(holder, 5);
 
         assertEquals("Sets Completed", holder.tvHeader.getText());
-        assertEquals("0", holder.tvText.getText());
+        assertEquals(String.valueOf(defaultSessionLog.getSetsCompleted()), holder.tvText.getText());
         assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
                 R.drawable.ic_fitness_center_white_24dp),
                 holder.ivImage.getDrawable());

@@ -61,6 +61,12 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
         TextView tvText = viewHolder.tvText;
 
         tvHeader.setText(sessionItem.first);
+
+        if (position == 5 || position == 6) {
+            tvText.setText(String.valueOf(sessionItem.second));
+            return;
+        }
+
         ivImage.setImageResource(R.drawable.ic_timer_white_24dp);
 
         SimpleDateFormat defaultDateFormat = new SimpleDateFormat("00:00:00", Locale.US);
