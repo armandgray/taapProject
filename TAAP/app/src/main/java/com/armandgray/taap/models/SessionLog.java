@@ -1,6 +1,8 @@
 package com.armandgray.taap.models;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class SessionLog {
 
@@ -90,6 +92,10 @@ public class SessionLog {
     }
 
     public Date getSessionDate() {
+        SimpleDateFormat defaultDateFormat = new SimpleDateFormat("00:00:00", Locale.US);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss", Locale.US);
+        String currentDateTimeString = defaultDateFormat.format(new Date(0));
+        System.out.println(currentDateTimeString);
         return sessionDate;
     }
 

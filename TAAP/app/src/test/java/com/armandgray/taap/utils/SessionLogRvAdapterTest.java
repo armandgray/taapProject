@@ -25,7 +25,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
-import static com.armandgray.taap.utils.SessionLogRvAdapter.IMAGE_RESOURCE;
+import static com.armandgray.taap.utils.SessionLogRvAdapter.IMAGE_RESOURCE_ID;
 import static com.armandgray.taap.utils.SessionLogRvAdapter.ITEM_DATA;
 import static com.armandgray.taap.utils.SessionLogRvAdapter.STRING_RESOURCE_ID;
 import static com.armandgray.taap.utils.SessionLogRvAdapter.TYPE_HEADER;
@@ -155,7 +155,7 @@ public class SessionLogRvAdapterTest {
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put(STRING_RESOURCE_ID, R.string.session_date);
         hashMap.put(ITEM_DATA, defaultSessionLog.getSessionDate());
-        hashMap.put(IMAGE_RESOURCE, R.drawable.ic_timer_white_24dp);
+        hashMap.put(IMAGE_RESOURCE_ID, R.drawable.ic_timer_white_24dp);
         assertEquals(hashMap, adapter.getItemAtPosition(0));
     }
 

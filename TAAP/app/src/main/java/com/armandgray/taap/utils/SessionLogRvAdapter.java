@@ -21,7 +21,7 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
 
     static final int TYPE_HEADER = 100;
     static final int TYPE_ITEM = 101;
-    @VisibleForTesting static final String IMAGE_RESOURCE = "IMAGE_RESOURCE";
+    @VisibleForTesting static final String IMAGE_RESOURCE_ID = "IMAGE_RESOURCE_ID";
     @VisibleForTesting static final String ITEM_DATA = "ITEM_DATA";
     @VisibleForTesting static final String STRING_RESOURCE_ID = "STRING_RESOURCE_ID";
 
@@ -66,13 +66,12 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
         TextView tvText = viewHolder.tvText;
 
         tvHeader.setText((Integer) sessionItem.get(STRING_RESOURCE_ID));
+        ivImage.setImageResource((Integer) sessionItem.get(IMAGE_RESOURCE_ID));
 
         if (position == 5 || position == 6) {
             tvText.setText(String.valueOf(sessionItem.get(ITEM_DATA)));
             return;
         }
-
-        ivImage.setImageResource(R.drawable.ic_timer_white_24dp);
 
         SimpleDateFormat defaultDateFormat = new SimpleDateFormat("00:00:00", Locale.US);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss", Locale.US);
@@ -102,9 +101,9 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
             case 4:
                 return getHashMap(R.string.rest_time, sessionLog.getRestTime(), R.drawable.ic_timer_white_24dp);
             case 5:
-                return getHashMap(R.string.sets_completed, sessionLog.getSetsCompleted(), R.drawable.ic_timer_white_24dp);
+                return getHashMap(R.string.sets_completed, sessionLog.getSetsCompleted(), R.drawable.ic_fitness_center_white_24dp);
             case 6:
-                return getHashMap(R.string.reps_completed, sessionLog.getRepsCompleted(), R.drawable.ic_timer_white_24dp);
+                return getHashMap(R.string.reps_completed, sessionLog.getRepsCompleted(), R.drawable.ic_fitness_center_white_24dp);
             case 7:
                 return getHashMap(R.string.success_rate, sessionLog.getSuccessRate(), R.drawable.ic_timer_white_24dp);
             case 8:
@@ -119,7 +118,7 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put(STRING_RESOURCE_ID, stringResId);
         hashMap.put(ITEM_DATA, obj);
-        hashMap.put(IMAGE_RESOURCE, imageResId);
+        hashMap.put(IMAGE_RESOURCE_ID, imageResId);
         return hashMap;
     }
 
