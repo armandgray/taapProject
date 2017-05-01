@@ -48,7 +48,7 @@ public class SessionLogRvAdapterTest {
         adapter = new SessionLogRvAdapter(null);
         mockView = mock(View.class);
         testSessionLog = new SessionLog.Builder()
-                .sessionLength(new Date(0, 0, 0, 1, 5, 30))
+                .sessionLength(new Date(1, 1, 1, 1, 5, 30))
                 .sessionGoal(new Date(0))
                 .activeWork(new Date(0))
                 .restTime(new Date(0))
@@ -146,6 +146,24 @@ public class SessionLogRvAdapterTest {
         assertEquals(String.valueOf(testSessionLog.getSetsCompleted()), holder.tvText.getText());
         assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
                 R.drawable.ic_fitness_center_white_24dp),
+                holder.ivImage.getDrawable());
+    }
+
+    @SuppressLint("InflateParams")
+    @Test
+    public void onBindViewHolder_DoesSetViewsForSessionLogItem_Percents() {
+        adapter = new SessionLogRvAdapter(testSessionLog);
+        LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        SessionLogRvAdapter.SessionLogViewHolder holder =
+                new SessionLogRvAdapter.SessionLogViewHolder(
+                        inflater.inflate(R.layout.session_log_listitem, null, false));
+        adapter.onBindViewHolder(holder, 7);
+
+        assertEquals("Success Rate", holder.tvHeader.getText());
+        assertEquals(String.valueOf(testSessionLog.getSuccessRate() * 100), holder.tvText.getText());
+        assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
+                R.drawable.ic_timer_white_24dp),
                 holder.ivImage.getDrawable());
     }
 
