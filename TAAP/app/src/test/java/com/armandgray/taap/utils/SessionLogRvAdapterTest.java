@@ -2,7 +2,6 @@ package com.armandgray.taap.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,8 +22,12 @@ import org.robolectric.annotation.Config;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
+import static com.armandgray.taap.utils.SessionLogRvAdapter.IMAGE_RESOURCE;
+import static com.armandgray.taap.utils.SessionLogRvAdapter.ITEM_DATA;
+import static com.armandgray.taap.utils.SessionLogRvAdapter.STRING_RESOURCE_ID;
 import static com.armandgray.taap.utils.SessionLogRvAdapter.TYPE_HEADER;
 import static com.armandgray.taap.utils.SessionLogRvAdapter.TYPE_ITEM;
 import static junit.framework.Assert.assertEquals;
@@ -100,7 +103,7 @@ public class SessionLogRvAdapterTest {
         String expectedDate = new SimpleDateFormat("EEE, MMM d, ''yy", Locale.US)
                 .format(date);
 
-        assertEquals((Integer) R.string.session_date, adapter.getItemAtPosition(0).first);
+        assertEquals(R.string.session_date, adapter.getItemAtPosition(0).get(STRING_RESOURCE_ID));
         assertEquals(expectedDate, holder.tvText.getText());
     }
 
@@ -149,12 +152,11 @@ public class SessionLogRvAdapterTest {
     @Test
     public void canGetItemAtPosition() throws Exception {
         adapter = new SessionLogRvAdapter(defaultSessionLog);
-        assertEquals(new Pair<>(R.string.session_date, defaultSessionLog.getSessionDate()),
-                adapter.getItemAtPosition(0));
-        assertEquals(new Pair<>(R.string.session_length, defaultSessionLog.getSessionLength()),
-                adapter.getItemAtPosition(1));
-        assertEquals(new Pair<>(R.string.session_goal, defaultSessionLog.getSessionGoal()),
-                adapter.getItemAtPosition(2));
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put(STRING_RESOURCE_ID, R.string.session_date);
+        hashMap.put(ITEM_DATA, defaultSessionLog.getSessionDate());
+        hashMap.put(IMAGE_RESOURCE, R.drawable.ic_timer_white_24dp);
+        assertEquals(hashMap, adapter.getItemAtPosition(0));
     }
 
     @Test

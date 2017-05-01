@@ -1,6 +1,7 @@
 package com.armandgray.taap.utils;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +21,9 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
 
     static final int TYPE_HEADER = 100;
     static final int TYPE_ITEM = 101;
-    public static final String IMAGE_RESOURCE = "IMAGE_RESOURCE";
-    public static final String ITEM_DATA = "ITEM_DATA";
-    public static final String STRING_RESOURCE_ID = "STRING_RESOURCE_ID";
+    @VisibleForTesting static final String IMAGE_RESOURCE = "IMAGE_RESOURCE";
+    @VisibleForTesting static final String ITEM_DATA = "ITEM_DATA";
+    @VisibleForTesting static final String STRING_RESOURCE_ID = "STRING_RESOURCE_ID";
 
     private SessionLog sessionLog;
 
