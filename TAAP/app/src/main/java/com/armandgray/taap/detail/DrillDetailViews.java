@@ -116,7 +116,6 @@ class DrillDetailViews {
         btnFinished.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("btnFinished");
                 FragmentManager fragmentManager = activity.getSupportFragmentManager();
                 new DetailSummaryDialog().show(fragmentManager, DIALOG);
             }

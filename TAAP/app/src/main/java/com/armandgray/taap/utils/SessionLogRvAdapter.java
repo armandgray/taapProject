@@ -52,12 +52,8 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
     public void onBindViewHolder(SessionLogViewHolder viewHolder, int position) {
         final HashMap<String, Object> sessionItem = getItemAtPosition(position);
 
-        if (position == 0 && viewHolder instanceof SessionLogHeaderViewHolder) {
-            SessionLogHeaderViewHolder holder = (SessionLogHeaderViewHolder) viewHolder;
-
-            TextView tvText = holder.tvText;
-            Date date = (Date) sessionItem.get(ITEM_DATA);
-            tvText.setText(new SimpleDateFormat("EEE, MMM d, ''yy", Locale.US).format(date));
+        if (atHeaderPosition(viewHolder, position)) {
+            setupHeader((SessionLogHeaderViewHolder) viewHolder, sessionItem);
             return;
         }
 
@@ -67,18 +63,34 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
 
         tvHeader.setText((Integer) sessionItem.get(STRING_RESOURCE_ID));
         ivImage.setImageResource((Integer) sessionItem.get(IMAGE_RESOURCE_ID));
+        setTvText(position, sessionItem, tvText);
+    }
 
-        if (position == 5 || position == 6) {
-            tvText.setText(String.valueOf(sessionItem.get(ITEM_DATA)));
-            return;
-        }
+    private boolean atHeaderPosition(SessionLogViewHolder viewHolder, int position) {
+        return position == 0 && viewHolder instanceof SessionLogHeaderViewHolder;
+    }
 
+    private void setupHeader(SessionLogHeaderViewHolder viewHolder, HashMap<String, Object> sessionItem) {
+        TextView tvText = viewHolder.tvText;
         Date date = (Date) sessionItem.get(ITEM_DATA);
+        tvText.setText(new SimpleDateFormat("EEE, MMM d, ''yy", Locale.US).format(date));
+    }
+
+    private void setTvText(int position, HashMap<String, Object> sessionItem, TextView tvText) {
+        Object itemData = sessionItem.get(ITEM_DATA);
+
+        if (position <= 4) { tvText.setText(getFormattedTimeAsString(itemData)); }
+        else if (position <= 6) { tvText.setText(String.valueOf(itemData)); }
+        else if (position <= 8) { tvText.setText(String.valueOf((Double) itemData * 100)); }
+    }
+
+    private String getFormattedTimeAsString(Object itemData) {
+        Date date = (Date) itemData;
         SimpleDateFormat simpleDateFormat =
                 date == new Date(0)
-                ? new SimpleDateFormat("00:00:00", Locale.US)
-                : new SimpleDateFormat("hh:mm:ss", Locale.US);
-        tvText.setText(simpleDateFormat.format(date));
+                        ? new SimpleDateFormat("00:00:00", Locale.US)
+                        : new SimpleDateFormat("hh:mm:ss", Locale.US);
+        return simpleDateFormat.format(date);
     }
 
     @Override
