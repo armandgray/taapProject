@@ -73,10 +73,12 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
             return;
         }
 
-        SimpleDateFormat defaultDateFormat = new SimpleDateFormat("00:00:00", Locale.US);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss", Locale.US);
-        String currentDateTimeString = defaultDateFormat.format(new Date(0));
-        tvText.setText(currentDateTimeString);
+        Date date = (Date) sessionItem.get(ITEM_DATA);
+        SimpleDateFormat simpleDateFormat =
+                date == new Date(0)
+                ? new SimpleDateFormat("00:00:00", Locale.US)
+                : new SimpleDateFormat("hh:mm:ss", Locale.US);
+        tvText.setText(simpleDateFormat.format(date));
     }
 
     @Override

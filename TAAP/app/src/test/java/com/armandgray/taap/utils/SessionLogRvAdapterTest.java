@@ -40,21 +40,21 @@ public class SessionLogRvAdapterTest {
 
     private SessionLogRvAdapter adapter;
     private View mockView;
-    private SessionLog defaultSessionLog;
+    private SessionLog testSessionLog;
 
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
         adapter = new SessionLogRvAdapter(null);
         mockView = mock(View.class);
-        defaultSessionLog = new SessionLog.Builder()
-                .sessionLength(new Date(0))
+        testSessionLog = new SessionLog.Builder()
+                .sessionLength(new Date(0, 0, 0, 1, 5, 30))
                 .sessionGoal(new Date(0))
                 .activeWork(new Date(0))
                 .restTime(new Date(0))
                 .setsCompleted(0)
                 .repsCompleted(0)
-                .successRate(0.0)
+                .successRate(0.47)
                 .successRecord(0.0)
                 .create();
     }
@@ -62,7 +62,7 @@ public class SessionLogRvAdapterTest {
     @Test
     public void doesImplementAdapter() throws Exception {
         RecyclerView.Adapter<SessionLogRvAdapter.SessionLogViewHolder> adapter =
-                new SessionLogRvAdapter(defaultSessionLog);
+                new SessionLogRvAdapter(testSessionLog);
         assertNotNull(adapter);
     }
 
@@ -91,7 +91,7 @@ public class SessionLogRvAdapterTest {
     @SuppressLint("InflateParams")
     @Test
     public void onBindViewHolder_DoesSetViewsForSessionLogHeader() {
-        adapter = new SessionLogRvAdapter(defaultSessionLog);
+        adapter = new SessionLogRvAdapter(testSessionLog);
         LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         SessionLogRvAdapter.SessionLogViewHolder holder =
@@ -99,7 +99,7 @@ public class SessionLogRvAdapterTest {
                         inflater.inflate(R.layout.session_log_header_layout, null, false));
         adapter.onBindViewHolder(holder, 0);
 
-        Date date = defaultSessionLog.getSessionDate();
+        Date date = testSessionLog.getSessionDate();
         String expectedDate = new SimpleDateFormat("EEE, MMM d, ''yy", Locale.US)
                 .format(date);
 
@@ -110,16 +110,22 @@ public class SessionLogRvAdapterTest {
     @SuppressLint("InflateParams")
     @Test
     public void onBindViewHolder_DoesSetViewsForSessionLogItem() {
-        adapter = new SessionLogRvAdapter(defaultSessionLog);
+        adapter = new SessionLogRvAdapter(testSessionLog);
         LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         SessionLogRvAdapter.SessionLogViewHolder holder =
                 new SessionLogRvAdapter.SessionLogViewHolder(
                         inflater.inflate(R.layout.session_log_listitem, null, false));
-        adapter.onBindViewHolder(holder, 0);
+        adapter.onBindViewHolder(holder, 1);
 
-        assertEquals("Session Date", holder.tvHeader.getText());
-        assertEquals("00:00:00", holder.tvText.getText());
+        Date date = testSessionLog.getSessionLength();
+        SimpleDateFormat simpleDateFormat =
+                date == new Date(0)
+                        ? new SimpleDateFormat("00:00:00", Locale.US)
+                        : new SimpleDateFormat("hh:mm:ss", Locale.US);
+
+        assertEquals("Session Length", holder.tvHeader.getText());
+        assertEquals(simpleDateFormat.format(date), holder.tvText.getText());
         assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
                 R.drawable.ic_timer_white_24dp),
                 holder.ivImage.getDrawable());
@@ -128,7 +134,7 @@ public class SessionLogRvAdapterTest {
     @SuppressLint("InflateParams")
     @Test
     public void onBindViewHolder_DoesSetViewsForSessionLogItem_Ints() {
-        adapter = new SessionLogRvAdapter(defaultSessionLog);
+        adapter = new SessionLogRvAdapter(testSessionLog);
         LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         SessionLogRvAdapter.SessionLogViewHolder holder =
@@ -137,7 +143,7 @@ public class SessionLogRvAdapterTest {
         adapter.onBindViewHolder(holder, 5);
 
         assertEquals("Sets Completed", holder.tvHeader.getText());
-        assertEquals(String.valueOf(defaultSessionLog.getSetsCompleted()), holder.tvText.getText());
+        assertEquals(String.valueOf(testSessionLog.getSetsCompleted()), holder.tvText.getText());
         assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
                 R.drawable.ic_fitness_center_white_24dp),
                 holder.ivImage.getDrawable());
@@ -145,23 +151,23 @@ public class SessionLogRvAdapterTest {
 
     @Test
     public void canGetItemCount() throws Exception {
-        adapter = new SessionLogRvAdapter(defaultSessionLog);
+        adapter = new SessionLogRvAdapter(testSessionLog);
         assertEquals(9, adapter.getItemCount());
     }
 
     @Test
     public void canGetItemAtPosition() throws Exception {
-        adapter = new SessionLogRvAdapter(defaultSessionLog);
+        adapter = new SessionLogRvAdapter(testSessionLog);
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put(STRING_RESOURCE_ID, R.string.session_date);
-        hashMap.put(ITEM_DATA, defaultSessionLog.getSessionDate());
+        hashMap.put(ITEM_DATA, testSessionLog.getSessionDate());
         hashMap.put(IMAGE_RESOURCE_ID, R.drawable.ic_timer_white_24dp);
         assertEquals(hashMap, adapter.getItemAtPosition(0));
     }
 
     @Test
     public void canGetItemViewType() throws Exception {
-        adapter = new SessionLogRvAdapter(defaultSessionLog);
+        adapter = new SessionLogRvAdapter(testSessionLog);
         assertEquals(TYPE_HEADER , adapter.getItemViewType(0));
         assertEquals(TYPE_ITEM , adapter.getItemViewType(1));
     }
@@ -171,7 +177,7 @@ public class SessionLogRvAdapterTest {
         System.out.println("Running TearDown!");
         adapter = null;
         mockView = null;
-        defaultSessionLog = null;
+        testSessionLog = null;
     }
 
 }
