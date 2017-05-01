@@ -1,6 +1,6 @@
 package com.armandgray.taap.utils;
 
-import android.support.v4.util.Pair;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,12 +13,16 @@ import com.armandgray.taap.models.SessionLog;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapter.SessionLogViewHolder> {
 
     static final int TYPE_HEADER = 100;
     static final int TYPE_ITEM = 101;
+    public static final String IMAGE_RESOURCE = "IMAGE_RESOURCE";
+    public static final String ITEM_DATA = "ITEM_DATA";
+    public static final String STRING_RESOURCE_ID = "STRING_RESOURCE_ID";
 
     private SessionLog sessionLog;
 
@@ -45,13 +49,13 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
 
     @Override
     public void onBindViewHolder(SessionLogViewHolder viewHolder, int position) {
-        final Pair<Integer, ?> sessionItem = getItemAtPosition(position);
+        final HashMap<String, Object> sessionItem = getItemAtPosition(position);
 
         if (position == 0 && viewHolder instanceof SessionLogHeaderViewHolder) {
             SessionLogHeaderViewHolder holder = (SessionLogHeaderViewHolder) viewHolder;
 
             TextView tvText = holder.tvText;
-            Date date = (Date) sessionItem.second;
+            Date date = (Date) sessionItem.get(ITEM_DATA);
             tvText.setText(new SimpleDateFormat("EEE, MMM d, ''yy", Locale.US).format(date));
             return;
         }
@@ -60,10 +64,10 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
         ImageView ivImage = viewHolder.ivImage;
         TextView tvText = viewHolder.tvText;
 
-        tvHeader.setText(sessionItem.first);
+        tvHeader.setText((Integer) sessionItem.get(STRING_RESOURCE_ID));
 
         if (position == 5 || position == 6) {
-            tvText.setText(String.valueOf(sessionItem.second));
+            tvText.setText(String.valueOf(sessionItem.get(ITEM_DATA)));
             return;
         }
 
@@ -84,29 +88,38 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
         return LayoutInflater.from(parent.getContext()).inflate(R.layout.session_log_listitem, parent, false);
     }
 
-    Pair<Integer, ?> getItemAtPosition(int position) {
+    HashMap<String, Object> getItemAtPosition(int position) {
         switch (position) {
             case 0:
-                return new Pair<>(R.string.session_date, sessionLog.getSessionDate());
+                return getHashMap(R.string.session_date, sessionLog.getSessionDate(), R.drawable.ic_timer_white_24dp);
             case 1:
-                return new Pair<>(R.string.session_length, sessionLog.getSessionLength());
+                return getHashMap(R.string.session_length, sessionLog.getSessionLength(), R.drawable.ic_timer_white_24dp);
             case 2:
-                return new Pair<>(R.string.session_goal, sessionLog.getSessionGoal());
+                return getHashMap(R.string.session_goal, sessionLog.getSessionGoal(), R.drawable.ic_timer_white_24dp);
             case 3:
-                return new Pair<>(R.string.active_work, sessionLog.getActiveWork());
+                return getHashMap(R.string.active_work, sessionLog.getActiveWork(), R.drawable.ic_timer_white_24dp);
             case 4:
-                return new Pair<>(R.string.rest_time, sessionLog.getRestTime());
+                return getHashMap(R.string.rest_time, sessionLog.getRestTime(), R.drawable.ic_timer_white_24dp);
             case 5:
-                return new Pair<>(R.string.sets_completed, sessionLog.getSetsCompleted());
+                return getHashMap(R.string.sets_completed, sessionLog.getSetsCompleted(), R.drawable.ic_timer_white_24dp);
             case 6:
-                return new Pair<>(R.string.reps_completed, sessionLog.getRepsCompleted());
+                return getHashMap(R.string.reps_completed, sessionLog.getRepsCompleted(), R.drawable.ic_timer_white_24dp);
             case 7:
-                return new Pair<>(R.string.success_rate, sessionLog.getSuccessRate());
+                return getHashMap(R.string.success_rate, sessionLog.getSuccessRate(), R.drawable.ic_timer_white_24dp);
             case 8:
-                return new Pair<>(R.string.success_record, sessionLog.getSuccessRecord());
+                return getHashMap(R.string.success_record, sessionLog.getSuccessRecord(), R.drawable.ic_timer_white_24dp);
             default:
                 return null;
         }
+    }
+    
+    @NonNull
+    private HashMap<String, Object> getHashMap(Integer stringResId, Object obj, Integer imageResId) {
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put(STRING_RESOURCE_ID, stringResId);
+        hashMap.put(ITEM_DATA, obj);
+        hashMap.put(IMAGE_RESOURCE, imageResId);
+        return hashMap;
     }
 
     static class SessionLogHeaderViewHolder extends SessionLogViewHolder {
