@@ -120,7 +120,7 @@ public class SessionLogRvAdapterTest {
 
         Date date = testSessionLog.getSessionLength();
         SimpleDateFormat simpleDateFormat =
-                date == new Date(0)
+                date.equals(new Date(0))
                         ? new SimpleDateFormat("00:00:00", Locale.US)
                         : new SimpleDateFormat("hh:mm:ss", Locale.US);
 
@@ -159,9 +159,10 @@ public class SessionLogRvAdapterTest {
                 new SessionLogRvAdapter.SessionLogViewHolder(
                         inflater.inflate(R.layout.session_log_listitem, null, false));
         adapter.onBindViewHolder(holder, 7);
+        Double rate = testSessionLog.getSuccessRate() * 100;
 
         assertEquals("Success Rate", holder.tvHeader.getText());
-        assertEquals(String.valueOf(testSessionLog.getSuccessRate() * 100), holder.tvText.getText());
+        assertEquals(String.format(Locale.US, "%d%", rate.intValue()), holder.tvText.getText());
         assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
                 R.drawable.ic_timer_white_24dp),
                 holder.ivImage.getDrawable());

@@ -81,13 +81,17 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
 
         if (position <= 4) { tvText.setText(getFormattedTimeAsString(itemData)); }
         else if (position <= 6) { tvText.setText(String.valueOf(itemData)); }
-        else if (position <= 8) { tvText.setText(String.valueOf((Double) itemData * 100)); }
+        else if (position <= 8) {
+            Double rate = (Double) itemData * 100;
+            String text = rate.intValue() + "%";
+            tvText.setText(text);
+        }
     }
 
     private String getFormattedTimeAsString(Object itemData) {
         Date date = (Date) itemData;
         SimpleDateFormat simpleDateFormat =
-                date == new Date(0)
+                date.equals(new Date(0))
                         ? new SimpleDateFormat("00:00:00", Locale.US)
                         : new SimpleDateFormat("hh:mm:ss", Locale.US);
         return simpleDateFormat.format(date);

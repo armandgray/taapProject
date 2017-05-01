@@ -64,7 +64,7 @@ public class DetailSummaryDialog extends DialogFragment {
                 .restTime(new Date(0))
                 .setsCompleted(0)
                 .repsCompleted(0)
-                .successRate(0.0)
+                .successRate(0.24)
                 .successRecord(0.0)
                 .create();
         rvSummary.setAdapter(new SessionLogRvAdapter(sessionLog));
