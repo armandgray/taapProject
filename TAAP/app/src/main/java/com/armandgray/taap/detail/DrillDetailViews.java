@@ -19,6 +19,8 @@ import static com.armandgray.taap.detail.DetailSummaryDialog.DIALOG;
 class DrillDetailViews {
 
     public DrillDetailActivity activity;
+    DrillDetailViewsListener listener;
+
     FloatingActionButton fab;
     private NumberPicker npSets;
     private NumberPicker npReps;
@@ -26,8 +28,9 @@ class DrillDetailViews {
     Button btnFinished;
     private boolean drillActive;
 
-    DrillDetailViews(DrillDetailActivity activity) {
+    DrillDetailViews(DrillDetailActivity activity, DrillDetailViewsListener listener) {
         this.activity = activity;
+        this.listener = listener;
 
         setupActivityInitialState();
     }
@@ -120,6 +123,11 @@ class DrillDetailViews {
                 new DetailSummaryDialog().show(fragmentManager, DIALOG);
             }
         });
+    }
+
+    interface DrillDetailViewsListener {
+        void onFabClick(View v);
+        void onBtnFinishedClick(View v);
     }
 
 }
