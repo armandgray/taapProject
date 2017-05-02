@@ -49,6 +49,11 @@ public class DetailSummaryDialogTest {
     }
 
     @Test
+    public void canCreateDetailSummaryDialog() {
+        assertNotNull(new DetailSummaryDialog());
+    }
+
+    @Test
     public void canCreateDetailSummaryDialog_TestOnCreateDialog() {
         Bundle savedInstanceState = new Bundle();
         assertNotNull(dialog.onCreateDialog(savedInstanceState));
