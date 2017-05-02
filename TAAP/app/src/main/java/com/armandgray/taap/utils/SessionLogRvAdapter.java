@@ -113,19 +113,19 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
             case 1:
                 return getHashMap(R.string.session_length, sessionLog.getSessionLength(), R.drawable.ic_timer_white_24dp);
             case 2:
-                return getHashMap(R.string.session_goal, sessionLog.getSessionGoal(), R.drawable.ic_timer_white_24dp);
+                return getHashMap(R.string.session_goal, sessionLog.getSessionGoal(), R.drawable.ic_fast_forward_white_24dp);
             case 3:
-                return getHashMap(R.string.active_work, sessionLog.getActiveWork(), R.drawable.ic_timer_white_24dp);
+                return getHashMap(R.string.active_work, sessionLog.getActiveWork(), R.drawable.ic_add_alarm_white_24dp);
             case 4:
-                return getHashMap(R.string.rest_time, sessionLog.getRestTime(), R.drawable.ic_timer_white_24dp);
+                return getHashMap(R.string.rest_time, sessionLog.getRestTime(), R.drawable.ic_battery_charging_20_white_24dp);
             case 5:
                 return getHashMap(R.string.sets_completed, sessionLog.getSetsCompleted(), R.drawable.ic_fitness_center_white_24dp);
             case 6:
                 return getHashMap(R.string.reps_completed, sessionLog.getRepsCompleted(), R.drawable.ic_fitness_center_white_24dp);
             case 7:
-                return getHashMap(R.string.success_rate, sessionLog.getSuccessRate(), R.drawable.ic_timer_white_24dp);
+                return getHashMap(R.string.success_rate, sessionLog.getSuccessRate(), R.drawable.ic_star_white_24dp);
             case 8:
-                return getHashMap(R.string.success_record, sessionLog.getSuccessRecord(), R.drawable.ic_timer_white_24dp);
+                return getHashMap(R.string.success_record, sessionLog.getSuccessRecord(), R.drawable.ic_whatshot_white_24dp);
             default:
                 return null;
         }
