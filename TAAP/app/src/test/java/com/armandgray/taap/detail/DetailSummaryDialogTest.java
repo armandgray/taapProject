@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.LogActivity;
 import com.armandgray.taap.R;
+import com.armandgray.taap.models.SessionLog;
 
 import org.junit.After;
 import org.junit.Before;
@@ -26,6 +27,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlertDialog;
 
 import static com.armandgray.taap.detail.DetailSummaryDialog.DIALOG;
+import static com.armandgray.taap.detail.DetailSummaryDialog.SESSION_LOG;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
@@ -51,6 +53,15 @@ public class DetailSummaryDialogTest {
     @Test
     public void canCreateDetailSummaryDialog() {
         assertNotNull(new DetailSummaryDialog());
+    }
+
+    @Test
+    public void canCreateDetailSummaryDialog_NewInstanceMethod() {
+        SessionLog sessionLog = new SessionLog.Builder().create();
+        DetailSummaryDialog dialog = DetailSummaryDialog.newInstance(sessionLog);
+        assertNotNull(dialog);
+        assertNotNull(dialog.getArguments());
+        assertNotNull(dialog.getArguments().get(SESSION_LOG));
     }
 
     @Test
