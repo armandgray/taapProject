@@ -24,10 +24,12 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
     @VisibleForTesting static final String IMAGE_RESOURCE_ID = "IMAGE_RESOURCE_ID";
     @VisibleForTesting static final String ITEM_DATA = "ITEM_DATA";
     @VisibleForTesting static final String STRING_RESOURCE_ID = "STRING_RESOURCE_ID";
+    private static final String TINT_COLOR = "TINT_COLOR";
 
     private SessionLog sessionLog;
+    private ViewGroup parent;
 
-    public SessionLogRvAdapter() {}
+    SessionLogRvAdapter() {}
 
     public SessionLogRvAdapter(SessionLog sessionLog) {
         this.sessionLog = sessionLog;
@@ -41,6 +43,7 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
 
     @Override
     public SessionLogViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        this.parent = parent;
         if (viewType == TYPE_HEADER) {
             return new SessionLogHeaderViewHolder(LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.session_log_header_layout, parent, false));
@@ -63,6 +66,8 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
 
         tvHeader.setText((Integer) sessionItem.get(STRING_RESOURCE_ID));
         ivImage.setImageResource((Integer) sessionItem.get(IMAGE_RESOURCE_ID));
+        ivImage.setColorFilter(parent.getResources()
+                .getColor((Integer) sessionItem.get(TINT_COLOR)));
         setTvText(position, sessionItem, tvText);
     }
 
@@ -109,34 +114,35 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
     HashMap<String, Object> getItemAtPosition(int position) {
         switch (position) {
             case 0:
-                return getHashMap(R.string.session_date, sessionLog.getSessionDate(), R.drawable.ic_timer_white_24dp);
+                return getHashMap(R.string.session_date, sessionLog.getSessionDate(), R.drawable.ic_timer_white_24dp, android.R.color.holo_red_dark);
             case 1:
-                return getHashMap(R.string.session_length, sessionLog.getSessionLength(), R.drawable.ic_timer_white_24dp);
+                return getHashMap(R.string.session_length, sessionLog.getSessionLength(), R.drawable.ic_timer_white_24dp, android.R.color.holo_green_dark);
             case 2:
-                return getHashMap(R.string.session_goal, sessionLog.getSessionGoal(), R.drawable.ic_fast_forward_white_24dp);
+                return getHashMap(R.string.session_goal, sessionLog.getSessionGoal(), R.drawable.ic_fast_forward_white_24dp, android.R.color.holo_green_dark);
             case 3:
-                return getHashMap(R.string.active_work, sessionLog.getActiveWork(), R.drawable.ic_add_alarm_white_24dp);
+                return getHashMap(R.string.active_work, sessionLog.getActiveWork(), R.drawable.ic_add_alarm_white_24dp, android.R.color.holo_green_dark);
             case 4:
-                return getHashMap(R.string.rest_time, sessionLog.getRestTime(), R.drawable.ic_battery_charging_20_white_24dp);
+                return getHashMap(R.string.rest_time, sessionLog.getRestTime(), R.drawable.ic_battery_charging_20_white_24dp, android.R.color.holo_red_dark);
             case 5:
-                return getHashMap(R.string.sets_completed, sessionLog.getSetsCompleted(), R.drawable.ic_fitness_center_white_24dp);
+                return getHashMap(R.string.sets_completed, sessionLog.getSetsCompleted(), R.drawable.ic_fitness_center_white_24dp, R.color.colorPrimary);
             case 6:
-                return getHashMap(R.string.reps_completed, sessionLog.getRepsCompleted(), R.drawable.ic_fitness_center_white_24dp);
+                return getHashMap(R.string.reps_completed, sessionLog.getRepsCompleted(), R.drawable.ic_fitness_center_white_24dp, R.color.colorPrimaryDark);
             case 7:
-                return getHashMap(R.string.success_rate, sessionLog.getSuccessRate(), R.drawable.ic_star_white_24dp);
+                return getHashMap(R.string.success_rate, sessionLog.getSuccessRate(), R.drawable.ic_star_white_24dp, android.R.color.holo_green_dark);
             case 8:
-                return getHashMap(R.string.success_record, sessionLog.getSuccessRecord(), R.drawable.ic_whatshot_white_24dp);
+                return getHashMap(R.string.success_record, sessionLog.getSuccessRecord(), R.drawable.ic_whatshot_white_24dp, android.R.color.holo_green_dark);
             default:
                 return null;
         }
     }
     
     @NonNull
-    private HashMap<String, Object> getHashMap(Integer stringResId, Object obj, Integer imageResId) {
+    private HashMap<String, Object> getHashMap(Integer stringResId, Object obj, Integer imageResId, int imgTintColorId) {
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put(STRING_RESOURCE_ID, stringResId);
         hashMap.put(ITEM_DATA, obj);
         hashMap.put(IMAGE_RESOURCE_ID, imageResId);
+        hashMap.put(TINT_COLOR, imgTintColorId);
         return hashMap;
     }
 
