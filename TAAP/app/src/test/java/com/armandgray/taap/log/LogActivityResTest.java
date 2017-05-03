@@ -38,35 +38,35 @@ public class LogActivityResTest {
     }
 
     @Test
-    public void hasLayoutTotalSessionTime_DetailContainer() throws Exception {
+    public void hasLayout_TotalSessionTime_DetailContainer() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         LinearLayout detailContainer = (LinearLayout) container.findViewById(R.id.detailContainer);
         assertNotNull(detailContainer.findViewById(R.id.layoutTotalSessionTime));
     }
 
     @Test
-    public void hasLayoutTotalActiveTime_DetailContainer() throws Exception {
+    public void hasLayout_TotalActiveTime_DetailContainer() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         LinearLayout detailContainer = (LinearLayout) container.findViewById(R.id.detailContainer);
         assertNotNull(detailContainer.findViewById(R.id.layoutTotalActiveTime));
     }
 
     @Test
-    public void hasLayoutTotalRestTime_DetailContainer() throws Exception {
+    public void hasLayout_TotalRestTime_DetailContainer() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         LinearLayout detailContainer = (LinearLayout) container.findViewById(R.id.detailContainer);
         assertNotNull(detailContainer.findViewById(R.id.layoutTotalRestTime));
     }
 
     @Test
-    public void hasLayoutExercisesCompleted_DetailContainer() throws Exception {
+    public void hasLayout_ExercisesCompleted_DetailContainer() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         LinearLayout detailContainer = (LinearLayout) container.findViewById(R.id.detailContainer);
         assertNotNull(detailContainer.findViewById(R.id.layoutExercisesCompleted));
     }
 
     @Test
-    public void hasLayoutRepsCompleted_DetailContainer() throws Exception {
+    public void hasLayout_RepsCompleted_DetailContainer() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         LinearLayout detailContainer = (LinearLayout) container.findViewById(R.id.detailContainer);
         assertNotNull(detailContainer.findViewById(R.id.layoutRepsCompleted));
@@ -79,10 +79,21 @@ public class LogActivityResTest {
     }
 
     @Test
-    public void hasLayoutTvDate_RecordsContainer() throws Exception {
+    public void hasView_TvDate_RecordsContainer() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         LinearLayout recordsContainer = (LinearLayout) container.findViewById(R.id.recordsContainer);
         assertNotNull(recordsContainer.findViewById(R.id.tvDate));
+    }
+
+    @Test
+    public void hasLayout_TvGoalsMet_RecordsContainer() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
+        LinearLayout recordsContainer = (LinearLayout) container.findViewById(R.id.recordsContainer);
+        View goalsMetContainer = recordsContainer.findViewById(R.id.goalsMetContainer);
+        assertNotNull(goalsMetContainer);
+        assertNotNull(recordsContainer.findViewById(R.id.headerGoalsMet));
+        assertNotNull(recordsContainer.findViewById(R.id.tvGoalsMet));
+        assertNotNull(recordsContainer.findViewById(R.id.ivGoalsMet));
     }
 
     @After
