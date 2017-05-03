@@ -51,6 +51,9 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
             views.fab.setImageResource(R.drawable.ic_play_arrow_white_24dp);
             drillActive = false;
         } else {
+            restTime += timeElapsed == currentTimeMillis ? 0 : timeElapsed;
+            System.out.println("RestTime\n\n");
+            System.out.println(getTimeElapsed(restTime));
             views.fab.setImageResource(R.drawable.ic_pause_white_24dp);
             drillActive = true;
         }
