@@ -59,6 +59,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
 
     @Override
     public void onBtnFinishedClick(View v) {
+        if (drillActive) { togglePausePlay(); }
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         SessionLog sessionLog = new SessionLog.Builder()
                 .sessionLength(getTimeElapsed(activeWorkTime + restTime))
