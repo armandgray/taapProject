@@ -4,28 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.armandgray.taap.log.LogActivity"
     tools:showIn="@layout/activity_log">
-    
+
     <LinearLayout
         android:id="@+id/detailContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
         android:layout_margin="@dimen/card_margin"
+        android:background="@android:color/white"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/activity_vertical_margin">
+
+            <TextView
+                android:id="@+id/headerTotalSessionTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total_session_time"
+                android:textAllCaps="true"
+                android:textSize="@dimen/log_header_size"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/tvTotalSessionTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="@string/total_session_time"
+                android:textSize="@dimen/log_tv_text_size"
+                android:textStyle="bold" />
+        </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/recordsContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
+        android:layout_height="match_parent"
         android:layout_margin="@dimen/card_margin"
+        android:background="@android:color/white"
         android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/total_session_time"
+            android:textAllCaps="true"
+            android:textSize="16sp"
+            android:textStyle="italic" />
 
     </LinearLayout>
 
