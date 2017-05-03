@@ -29,7 +29,11 @@ public class DetailSummaryDialog extends DialogFragment {
     public DetailSummaryDialogListener listener;
 
     public static DetailSummaryDialog newInstance(SessionLog sessionLog) {
-        return null;
+        Bundle args = new Bundle();
+        DetailSummaryDialog fragment = new DetailSummaryDialog();
+        args.putParcelable(SESSION_LOG, sessionLog);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
