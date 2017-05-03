@@ -19,4 +19,14 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/recordsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:layout_margin="@dimen/card_margin"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
 </LinearLayout>
