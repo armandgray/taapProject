@@ -135,7 +135,7 @@ public class DetailSummaryDialogTest {
     }
 
     @Test
-    public void doesSetupRvDrills() throws Exception {
+    public void doesSetupRvSummary() throws Exception {
         Bundle savedInstanceState = new Bundle();
         AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
         resultDialog.show();

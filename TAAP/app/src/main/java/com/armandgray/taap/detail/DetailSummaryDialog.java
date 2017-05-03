@@ -18,8 +18,6 @@ import com.armandgray.taap.R;
 import com.armandgray.taap.models.SessionLog;
 import com.armandgray.taap.utils.SessionLogRvAdapter;
 
-import java.util.Date;
-
 public class DetailSummaryDialog extends DialogFragment {
 
     public static final String DIALOG = "DIALOG";
@@ -66,16 +64,7 @@ public class DetailSummaryDialog extends DialogFragment {
     }
 
     private void setupRvSummary() {
-        SessionLog sessionLog = new SessionLog.Builder()
-                .sessionLength(new Date(0))
-                .sessionGoal(new Date(0))
-                .activeWork(new Date(0))
-                .restTime(new Date(0))
-                .setsCompleted(0)
-                .repsCompleted(0)
-                .successRate(0.24)
-                .successRecord(0.0)
-                .create();
+        SessionLog sessionLog = (SessionLog) getArguments().get(SESSION_LOG);
         rvSummary.setAdapter(new SessionLogRvAdapter(sessionLog));
         GridLayoutManager layoutManager = getGridLayoutManager();
         rvSummary.setLayoutManager(layoutManager);
