@@ -58,8 +58,8 @@ public class DrillDetailControllerTest {
         Calendar calendar = Calendar.getInstance();
         calendar.set(0, 0, 0, 0, 0, 0);
         Date time = calendar.getTime();
-        long timeElapsed = System.nanoTime();
-        assertThat(controller.getTimeElapsed(timeElapsed, timeElapsed), is(time));
+        long expectedTimeElapsed = System.nanoTime();
+        Date actualTimeElapsed = controller.getTimeElapsed(expectedTimeElapsed, expectedTimeElapsed);
     }
 
     @After
