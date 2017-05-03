@@ -2,6 +2,7 @@ package com.armandgray.taap.log;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
@@ -54,6 +55,28 @@ public class LogActivityViewsTest {
         final int displayOptions = activity.getSupportActionBar().getDisplayOptions();
         assertTrue((displayOptions & ActionBar.DISPLAY_SHOW_HOME) != 0);
         assertTrue((displayOptions & ActionBar.DISPLAY_HOME_AS_UP) != 0);
+    }
+
+    @Test
+    public void doesSetupHideToolbarTitle_MethodTest_SetupActivityInitialState() throws Exception {
+        ActionBar actionBar = activity.getSupportActionBar();
+        assertNotNull(actionBar);
+        final int displayOptions = activity.getSupportActionBar().getDisplayOptions();
+        assertTrue((displayOptions & ActionBar.DISPLAY_SHOW_TITLE) == 0);
+    }
+
+    @Test
+    public void hasCustomToolbarTitle() throws Exception {
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        TextView tvTitle = (TextView) toolbar.findViewById(R.id.tvTitle);
+        assertNotNull(tvTitle);
+    }
+
+    @Test
+    public void doesSetCustomToolbarTitleText_MethodTest_SetupActivityInitialState() throws Exception {
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        TextView tvTitle = (TextView) toolbar.findViewById(R.id.tvTitle);
+        assertEquals("Settings", tvTitle.getText());
     }
 
     @After
