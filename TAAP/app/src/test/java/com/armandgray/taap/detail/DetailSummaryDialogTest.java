@@ -126,12 +126,11 @@ public class DetailSummaryDialogTest {
         Bundle savedInstanceState = new Bundle();
         AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
         resultDialog.show();
-        resultDialog.cancel();
+        resultDialog.dismiss();
 
         Intent expectedIntent = new Intent(activity, LogActivity.class);
-        // TODO verify test with assert
-//        assertEquals(expectedIntent.toString(),
-//                shadowOf(activity).getNextStartedActivity().toString());
+        assertEquals(expectedIntent.toString(),
+                shadowOf(activity).getNextStartedActivity().toString());
     }
 
     @Test

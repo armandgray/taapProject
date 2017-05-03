@@ -22,6 +22,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     private long timeElapsed;
     @VisibleForTesting long activeWorkTime;
     @VisibleForTesting long restTime;
+    private SessionLog sessionLog;
 
     DrillDetailController(DrillDetailActivity activity) {
         this.activity = activity;
@@ -61,7 +62,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     public void onBtnFinishedClick(View v) {
         if (drillActive) { togglePausePlay(); }
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
-        SessionLog sessionLog = new SessionLog.Builder()
+        sessionLog = new SessionLog.Builder()
                 .sessionLength(getTimeElapsed(activeWorkTime + restTime))
                 .sessionGoal(new Date(0))
                 .activeWork(getTimeElapsed(activeWorkTime))

@@ -88,6 +88,12 @@ public class DetailSummaryDialog extends DialogFragment {
         return layoutManager;
     }
 
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        listener.onDialogDismiss();
+    }
+
     interface DetailSummaryDialogListener {
         void onDialogDismiss();
     }
