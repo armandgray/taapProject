@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.armandgray.taap.LogActivity;
 import com.armandgray.taap.R;
+import com.armandgray.taap.models.SessionLog;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -46,14 +47,10 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
         timeElapsed = currentTimeMillis - timeElapsed;
         if (drillActive) {
             activeWorkTime += timeElapsed == currentTimeMillis ? 0 : timeElapsed;
-            System.out.println("ActiveWorkTime\n\n");
-            System.out.println(getTimeElapsed(activeWorkTime));
             views.fab.setImageResource(R.drawable.ic_play_arrow_white_24dp);
             drillActive = false;
         } else {
             restTime += timeElapsed == currentTimeMillis ? 0 : timeElapsed;
-            System.out.println("RestTime\n\n");
-            System.out.println(getTimeElapsed(restTime));
             views.fab.setImageResource(R.drawable.ic_pause_white_24dp);
             drillActive = true;
         }
@@ -63,15 +60,17 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     @Override
     public void onBtnFinishedClick(View v) {
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
-        new DetailSummaryDialog().show(fragmentManager, DIALOG);
+        SessionLog sessionLog = new SessionLog.Builder()
+                .sessionLength(getTimeElapsed(activeWorkTime + restTime))
+                .create();
+        DetailSummaryDialog.newInstance(sessionLog).show(fragmentManager, DIALOG);
     }
 
     @VisibleForTesting
     Date getTimeElapsed(long timeElapsed) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(0, 0, 0, 0, 0, 0);
-        Date time = calendar.getTime();
-        if (timeElapsed != 0) { time.setTime(timeElapsed); }
-        return time;
+        if (timeElapsed != 0) { calendar.setTimeInMillis(timeElapsed); }
+        return calendar.getTime();
     }
 }

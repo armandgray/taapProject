@@ -50,7 +50,6 @@ public class DrillDetailControllerTest {
         controller.views.fab.performClick();
         controller.views.fab.performClick();
 
-
         assertNotNull(controller.activeWorkTime);
         assertTrue(controller.activeWorkTime > 0);
     }
