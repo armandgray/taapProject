@@ -13,6 +13,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 
 import com.armandgray.taap.R;
 import com.armandgray.taap.models.SessionLog;
@@ -64,6 +65,11 @@ public class DetailSummaryDialog extends DialogFragment {
     }
 
     private void setupRvSummary() {
+        if (getArguments() == null || getArguments().get(SESSION_LOG) == null) {
+            Toast.makeText(activity, "Missing Required Session Log!", Toast.LENGTH_SHORT).show();
+            this.dismiss();
+            return;
+        }
         SessionLog sessionLog = (SessionLog) getArguments().get(SESSION_LOG);
         rvSummary.setAdapter(new SessionLogRvAdapter(sessionLog));
         GridLayoutManager layoutManager = getGridLayoutManager();
