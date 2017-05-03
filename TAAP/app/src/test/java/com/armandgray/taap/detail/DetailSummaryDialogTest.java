@@ -117,6 +117,7 @@ public class DetailSummaryDialogTest {
         Button btnContinue = resultDialog.getButton(DialogInterface.BUTTON_POSITIVE);
         btnContinue.performClick();
         Intent expectedIntent = new Intent(activity, LogActivity.class);
+        expectedIntent.putExtra(SESSION_LOG, new SessionLog.Builder().create());
         assertEquals(expectedIntent.toString(),
                 shadowOf(activity).getNextStartedActivity().toString());
         resultDialog.dismiss();
