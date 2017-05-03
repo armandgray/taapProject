@@ -108,12 +108,12 @@ public class DetailSummaryDialogTest {
     }
 
     @Test
-    public void canClickNeutralContinueButtonToStartLogActivity_TestOnCreateDialog() {
+    public void canClickPositiveContinueButtonToStartLogActivity_TestOnCreateDialog() {
         Bundle savedInstanceState = new Bundle();
         AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
         resultDialog.show();
 
-        Button btnContinue = resultDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
+        Button btnContinue = resultDialog.getButton(DialogInterface.BUTTON_POSITIVE);
         btnContinue.performClick();
         Intent expectedIntent = new Intent(activity, LogActivity.class);
         assertEquals(expectedIntent.toString(),
@@ -122,7 +122,7 @@ public class DetailSummaryDialogTest {
     }
 
     @Test
-    public void canCancelDialogToStartLogActivity_TestOnCreateDialog() {
+    public void canClickCancelDialogToStartLogActivity_TestOnCreateDialog() {
         Bundle savedInstanceState = new Bundle();
         AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
         resultDialog.show();

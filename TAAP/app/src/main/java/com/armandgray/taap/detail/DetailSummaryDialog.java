@@ -54,10 +54,10 @@ public class DetailSummaryDialog extends DialogFragment {
                 .inflate(R.layout.detail_summary_dialog_layout, null);
         rvSummary = (RecyclerView) dialogLayout.findViewById(R.id.rvSummary);
         builder.setView(dialogLayout)
-                .setNeutralButton("Continue", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        listener.onDialogDismiss();
+                        listener.onDialogContinue();
                     }
                 });
         setupRvSummary();
@@ -91,10 +91,10 @@ public class DetailSummaryDialog extends DialogFragment {
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
-        listener.onDialogDismiss();
+        listener.onDialogContinue();
     }
 
     interface DetailSummaryDialogListener {
-        void onDialogDismiss();
+        void onDialogContinue();
     }
 }
