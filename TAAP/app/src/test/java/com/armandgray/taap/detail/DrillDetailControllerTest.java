@@ -11,8 +11,12 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
+import java.sql.Timestamp;
+
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -43,7 +47,9 @@ public class DrillDetailControllerTest {
 
     @Test
     public void canGetTimeElapsed() throws Exception {
-        assertEquals(0, controller.getTimeElapsed(System.nanoTime(), System.nanoTime()));
+        Timestamp time = new Timestamp(0);
+        long timeElapsed = System.nanoTime();
+        assertThat(controller.getTimeElapsed(timeElapsed, timeElapsed), is(time));
     }
 
     @After
