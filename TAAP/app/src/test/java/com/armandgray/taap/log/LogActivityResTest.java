@@ -45,6 +45,34 @@ public class LogActivityResTest {
     }
 
     @Test
+    public void hasLayoutTotalActiveTime_DetailContainer() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
+        LinearLayout detailContainer = (LinearLayout) container.findViewById(R.id.detailContainer);
+        assertNotNull(detailContainer.findViewById(R.id.layoutTotalActiveTime));
+    }
+
+    @Test
+    public void hasLayoutTotalRestTime_DetailContainer() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
+        LinearLayout detailContainer = (LinearLayout) container.findViewById(R.id.detailContainer);
+        assertNotNull(detailContainer.findViewById(R.id.layoutTotalRestTime));
+    }
+
+    @Test
+    public void hasLayoutExercisesCompleted_DetailContainer() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
+        LinearLayout detailContainer = (LinearLayout) container.findViewById(R.id.detailContainer);
+        assertNotNull(detailContainer.findViewById(R.id.layoutExercicesCompleted));
+    }
+
+    @Test
+    public void hasLayoutRepsCompleted_DetailContainer() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
+        LinearLayout detailContainer = (LinearLayout) container.findViewById(R.id.detailContainer);
+        assertNotNull(detailContainer.findViewById(R.id.layoutRepsCompleted));
+    }
+
+    @Test
     public void hasLayout_RecordsContainer() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         assertNotNull(container.findViewById(R.id.recordsContainer));
