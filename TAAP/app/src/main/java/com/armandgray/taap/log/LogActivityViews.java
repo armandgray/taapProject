@@ -1,5 +1,7 @@
 package com.armandgray.taap.log;
 
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
@@ -29,7 +31,15 @@ class LogActivityViews {
         if (activity.getSupportActionBar() != null) {
             activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             activity.getSupportActionBar().setDisplayShowTitleEnabled(false);
+            setHomeAsUpIndicatorColor();
         }
+    }
+
+    private void setHomeAsUpIndicatorColor() {
+        final Drawable upArrow = activity.getResources().getDrawable(R.drawable.abc_ic_ab_back_material);
+        upArrow.setColorFilter(activity.getResources().getColor(R.color.colorDarkGray), PorterDuff.Mode.SRC_ATOP);
+        if (activity.getSupportActionBar() == null) { return; }
+        activity.getSupportActionBar().setHomeAsUpIndicator(upArrow);
     }
 
     interface LogViewsListener {
