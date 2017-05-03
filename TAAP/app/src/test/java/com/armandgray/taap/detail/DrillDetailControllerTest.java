@@ -1,5 +1,7 @@
 package com.armandgray.taap.detail;
 
+import android.view.View;
+
 import com.armandgray.taap.BuildConfig;
 
 import org.junit.After;
@@ -17,8 +19,6 @@ import java.util.Date;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -49,6 +49,8 @@ public class DrillDetailControllerTest {
 
     @Test
     public void doesTrackActiveWorkTime() throws Exception {
+        controller.views.fab.performClick();
+
         assertNotNull(controller.activeWorkTime);
         assertTrue(controller.activeWorkTime > 0);
     }
@@ -57,9 +59,9 @@ public class DrillDetailControllerTest {
     public void canGetTimeElapsed() throws Exception {
         Calendar calendar = Calendar.getInstance();
         calendar.set(0, 0, 0, 0, 0, 0);
-        Date time = calendar.getTime();
-        long expectedTimeElapsed = System.nanoTime();
-        Date actualTimeElapsed = controller.getTimeElapsed(expectedTimeElapsed, expectedTimeElapsed);
+        Date expectedTimeElapsed = calendar.getTime();
+        long dummyTime = System.nanoTime();
+        Date actualTimeElapsed = controller.getTimeElapsed(dummyTime, dummyTime);
     }
 
     @After

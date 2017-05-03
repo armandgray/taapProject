@@ -40,6 +40,8 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     }
 
     private void togglePausePlay() {
+        activeWorkTime += System.nanoTime() - activeWorkTime;
+        System.out.println(activeWorkTime);
         if (drillActive) {
             views.fab.setImageResource(R.drawable.ic_play_arrow_white_24dp);
             drillActive = false;
