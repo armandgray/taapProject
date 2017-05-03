@@ -46,7 +46,7 @@ public class DetailSummaryDialogTest {
         System.out.println("Running Set Up!");
         activityController = Robolectric.buildActivity(DrillDetailActivity.class);
         activity = activityController.create().visible().get();
-        dialog = new DetailSummaryDialog();
+        dialog = DetailSummaryDialog.newInstance(new SessionLog.Builder().create());
         dialog.show(activity.getSupportFragmentManager(), DIALOG);
     }
 
@@ -166,6 +166,7 @@ public class DetailSummaryDialogTest {
         System.out.println("Running TearDown!");
         activityController.pause().stop().destroy();
         activity = null;
+        dialog = null;
     }
 
 }
