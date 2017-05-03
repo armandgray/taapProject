@@ -11,7 +11,8 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
-import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Date;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
@@ -47,7 +48,9 @@ public class DrillDetailControllerTest {
 
     @Test
     public void canGetTimeElapsed() throws Exception {
-        Timestamp time = new Timestamp(0);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(0, 0, 0, 0, 0, 0);
+        Date time = calendar.getTime();
         long timeElapsed = System.nanoTime();
         assertThat(controller.getTimeElapsed(timeElapsed, timeElapsed), is(time));
     }

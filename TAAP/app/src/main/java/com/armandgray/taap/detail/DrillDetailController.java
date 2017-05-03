@@ -8,7 +8,8 @@ import android.view.View;
 import com.armandgray.taap.LogActivity;
 import com.armandgray.taap.R;
 
-import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Date;
 
 import static com.armandgray.taap.detail.DetailSummaryDialog.DIALOG;
 
@@ -54,9 +55,16 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     }
 
     @VisibleForTesting
-    Timestamp getTimeElapsed(long startTime, long endTime) {
-        Timestamp time = new Timestamp(0);
-        time.setTime(endTime - startTime);
+    Date getTimeElapsed(long startTime, long endTime) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(0, 0, 0, 0, 0, 0);
+        Date time = calendar.getTime();
+        time.setHours(0);
+        System.out.println(time);
+        if (endTime != startTime) {
+            time.setTime(endTime - startTime);
+        }
+        System.out.println(time);
         return time;
     }
 }
