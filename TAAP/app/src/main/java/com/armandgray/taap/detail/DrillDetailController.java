@@ -58,14 +58,13 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     }
 
     @VisibleForTesting
-    Date getTimeElapsed(long startTime, long endTime) {
+    Date getTimeElapsed(long timeElapsed) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(0, 0, 0, 0, 0, 0);
         Date time = calendar.getTime();
-        time.setHours(0);
         System.out.println(time);
-        if (endTime != startTime) {
-            time.setTime(endTime - startTime);
+        if (timeElapsed != 0) {
+            time.setTime(timeElapsed);
         }
         System.out.println(time);
         return time;

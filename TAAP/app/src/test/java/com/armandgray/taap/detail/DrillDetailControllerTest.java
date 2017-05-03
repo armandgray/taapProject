@@ -1,7 +1,5 @@
 package com.armandgray.taap.detail;
 
-import android.view.View;
-
 import com.armandgray.taap.BuildConfig;
 
 import org.junit.After;
@@ -61,7 +59,9 @@ public class DrillDetailControllerTest {
         calendar.set(0, 0, 0, 0, 0, 0);
         Date expectedTimeElapsed = calendar.getTime();
         long dummyTime = System.nanoTime();
-        Date actualTimeElapsed = controller.getTimeElapsed(dummyTime, dummyTime);
+        expectedTimeElapsed.setTime(dummyTime);
+        assertNotNull(controller.getTimeElapsed(dummyTime));
+        assertEquals(expectedTimeElapsed.getTime(), controller.getTimeElapsed(dummyTime).getTime());
     }
 
     @After
