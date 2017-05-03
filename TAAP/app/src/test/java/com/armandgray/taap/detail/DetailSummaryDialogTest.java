@@ -29,6 +29,7 @@ import org.robolectric.shadows.ShadowAlertDialog;
 import static com.armandgray.taap.detail.DetailSummaryDialog.DIALOG;
 import static com.armandgray.taap.detail.DetailSummaryDialog.SESSION_LOG;
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
@@ -122,15 +123,14 @@ public class DetailSummaryDialogTest {
     }
 
     @Test
-    public void canClickCancelDialogToStartLogActivity_TestOnCreateDialog() {
+    public void canClickNegativeCancelButtonToDismissDialog_TestOnCreateDialog() {
         Bundle savedInstanceState = new Bundle();
         AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
         resultDialog.show();
-        resultDialog.dismiss();
 
-        Intent expectedIntent = new Intent(activity, LogActivity.class);
-        assertEquals(expectedIntent.toString(),
-                shadowOf(activity).getNextStartedActivity().toString());
+        Button btnCancel = resultDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+        btnCancel.performClick();
+        assertFalse(resultDialog.isShowing());
     }
 
     @Test
