@@ -17,31 +17,9 @@
         android:background="@android:color/white"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="@dimen/activity_vertical_margin">
-
-            <TextView
-                android:id="@+id/headerTotalSessionTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/total_session_time"
-                android:textAllCaps="true"
-                android:textSize="@dimen/log_header_size"
-                android:textStyle="italic" />
-
-            <TextView
-                android:id="@+id/tvTotalSessionTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:text="@string/total_session_time"
-                android:textSize="@dimen/log_tv_text_size"
-                android:textStyle="bold" />
-        </LinearLayout>
+        <include
+            android:id="@+id/layoutTotalSessionTime"
+            layout="@layout/log_detail_layout" />
 
     </LinearLayout>
 
