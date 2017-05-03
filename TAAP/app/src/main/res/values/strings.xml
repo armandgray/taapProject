@@ -54,4 +54,6 @@
     <string name="success_rate">Success Rate</string>
     <string name="success_record">Success Record</string>
     <string name="icon_header_trending_upward">icon header trending upward</string>
+    <string name="continue_string">Continue</string>
+    <string name="cancel">Cancel</string>
 </resources>

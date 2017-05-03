@@ -54,12 +54,13 @@ public class DetailSummaryDialog extends DialogFragment {
                 .inflate(R.layout.detail_summary_dialog_layout, null);
         rvSummary = (RecyclerView) dialogLayout.findViewById(R.id.rvSummary);
         builder.setView(dialogLayout)
-                .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.continue_string, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         listener.onDialogContinue();
                     }
-                });
+                })
+                .setNegativeButton(R.string.cancel, null);
         setupRvSummary();
         return builder.create();
     }
