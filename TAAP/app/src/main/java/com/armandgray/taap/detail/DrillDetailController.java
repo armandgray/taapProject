@@ -18,6 +18,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     DrillDetailActivity activity;
     DrillDetailViews views;
     private boolean drillActive;
+    @VisibleForTesting long activeWorkTime;
 
     DrillDetailController(DrillDetailActivity activity) {
         this.activity = activity;

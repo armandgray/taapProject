@@ -16,6 +16,7 @@ import java.util.Date;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -44,6 +45,12 @@ public class DrillDetailControllerTest {
     public void doesCreateViewsHandler_TestConstructor() throws Exception {
         assertNotNull(controller.views);
         assertNotNull(controller.views.activity);
+    }
+
+    @Test
+    public void doesTrackActiveWorkTime() throws Exception {
+        assertNotNull(controller.activeWorkTime);
+        assertTrue(controller.activeWorkTime > 0);
     }
 
     @Test
