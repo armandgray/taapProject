@@ -63,7 +63,6 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
         SessionLog sessionLog = new SessionLog.Builder()
                 .sessionLength(getTimeElapsed(activeWorkTime + restTime))
                 .create();
-        System.out.println(getTimeElapsed(activeWorkTime + restTime));
         DetailSummaryDialog.newInstance(sessionLog).show(fragmentManager, DIALOG);
     }
 

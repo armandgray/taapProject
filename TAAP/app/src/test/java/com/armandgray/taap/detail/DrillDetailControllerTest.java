@@ -86,6 +86,15 @@ public class DrillDetailControllerTest {
         assertEquals(calendar.getTime().toString(), controller.getTimeElapsed(1).toString());
     }
 
+    @Test
+    public void doesAddElapsedTimeToActiveWorkIfDrillActive_OnBtnFinishedClick() throws Exception {
+        controller.views.fab.performClick();
+        controller.views.btnFinished.performClick();
+
+        assertNotNull(controller.activeWorkTime);
+        assertTrue(controller.activeWorkTime > 0);
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
