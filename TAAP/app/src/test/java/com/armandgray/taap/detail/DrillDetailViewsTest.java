@@ -183,7 +183,6 @@ public class DrillDetailViewsTest {
         // TODO add assert for each sessionLog data point here getting the Fragment
     }
 
-
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");

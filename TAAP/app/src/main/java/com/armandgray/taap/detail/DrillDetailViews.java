@@ -20,9 +20,9 @@ class DrillDetailViews {
     DrillDetailViewsListener listener;
 
     FloatingActionButton fab;
-    private NumberPicker npSets;
-    private NumberPicker npReps;
-    private NumberPicker npSuccesses;
+    NumberPicker npSets;
+    NumberPicker npReps;
+    NumberPicker npSuccesses;
     Button btnFinished;
 
     DrillDetailViews(DrillDetailActivity activity, DrillDetailViewsListener listener) {

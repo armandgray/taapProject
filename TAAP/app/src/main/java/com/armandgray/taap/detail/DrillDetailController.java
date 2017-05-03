@@ -63,8 +63,20 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         SessionLog sessionLog = new SessionLog.Builder()
                 .sessionLength(getTimeElapsed(activeWorkTime + restTime))
+                .sessionGoal(new Date(0))
+                .activeWork(getTimeElapsed(activeWorkTime))
+                .restTime(getTimeElapsed(restTime))
+                .setsCompleted(views.npSets.getValue())
+                .repsCompleted(views.npReps.getValue())
+                .successRate(getRateFromPickers())
+                .successRecord(getRateFromPickers())
                 .create();
+        System.out.println(views.npSuccesses.getValue() / views.npReps.getValue() * 1.0);
         DetailSummaryDialog.newInstance(sessionLog).show(fragmentManager, DIALOG);
+    }
+
+    private double getRateFromPickers() {
+        return views.npSuccesses.getValue() * 1.0 / views.npReps.getValue() * views.npSets.getValue();
     }
 
     @VisibleForTesting
