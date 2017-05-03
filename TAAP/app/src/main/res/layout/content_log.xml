@@ -109,5 +109,19 @@
         <include layout="@layout/log_record_layout"
             android:id="@+id/layoutFundamentals"/>
 
+        <include layout="@layout/log_record_layout"
+            android:id="@+id/layoutDefense"/>
+
+        <include layout="@layout/log_record_layout"
+            android:id="@+id/layoutOffBallOffense"/>
+
+        <include layout="@layout/log_record_layout"
+            android:id="@+id/layoutConditioning"/>
+
+        <include layout="@layout/log_record_layout"
+            android:id="@+id/layoutShooting"/>
+
+        <include layout="@layout/log_record_layout"
+            android:id="@+id/layoutBallHandling"/>
     </LinearLayout>
 </LinearLayout>

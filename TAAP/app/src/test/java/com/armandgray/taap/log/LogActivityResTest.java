@@ -112,10 +112,17 @@ public class LogActivityResTest {
     }
 
     @Test
+    public void hasLayout_OffBallOffense_RecordsContainer() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
+        LinearLayout recordsContainer = (LinearLayout) container.findViewById(R.id.recordsContainer);
+        assertNotNull(recordsContainer.findViewById(R.id.layoutOffBallOffense));
+    }
+
+    @Test
     public void hasLayout_Conditioning_RecordsContainer() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         LinearLayout recordsContainer = (LinearLayout) container.findViewById(R.id.recordsContainer);
-        assertNotNull(recordsContainer.findViewById(R.id.layoutFundamentals));
+        assertNotNull(recordsContainer.findViewById(R.id.layoutConditioning));
     }
 
     @Test
@@ -130,13 +137,6 @@ public class LogActivityResTest {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         LinearLayout recordsContainer = (LinearLayout) container.findViewById(R.id.recordsContainer);
         assertNotNull(recordsContainer.findViewById(R.id.layoutBallHandling));
-    }
-
-    @Test
-    public void hasLayout_OffBallOffense_RecordsContainer() throws Exception {
-        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
-        LinearLayout recordsContainer = (LinearLayout) container.findViewById(R.id.recordsContainer);
-        assertNotNull(recordsContainer.findViewById(R.id.layoutOffBallOffense));
     }
 
     @After
