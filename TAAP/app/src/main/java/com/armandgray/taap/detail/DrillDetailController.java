@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import static com.armandgray.taap.detail.DetailSummaryDialog.DIALOG;
+import static com.armandgray.taap.detail.DetailSummaryDialog.SESSION_LOG;
 
 class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener {
 
@@ -27,12 +28,6 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     DrillDetailController(DrillDetailActivity activity) {
         this.activity = activity;
         this.views = new DrillDetailViews(activity, this);
-    }
-
-    void onSummaryDialogDismiss() {
-        Intent intent = new Intent(activity, LogActivity.class);
-        activity.startActivity(intent);
-        activity.finish();
     }
 
     @Override
@@ -90,5 +85,12 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         if (hour > 12) { calendar.set(Calendar.HOUR_OF_DAY, 0); }
         return calendar.getTime();
+    }
+
+    void onSummaryDialogDismiss() {
+        Intent intent = new Intent(activity, LogActivity.class);
+        intent.putExtra(SESSION_LOG, sessionLog);
+        activity.startActivity(intent);
+        activity.finish();
     }
 }
