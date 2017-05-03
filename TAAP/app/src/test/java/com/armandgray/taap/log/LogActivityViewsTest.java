@@ -15,6 +15,7 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
 import static junit.framework.Assert.assertEquals;
+import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -37,6 +38,11 @@ public class LogActivityViewsTest {
     @Test
     public void activityInstanceOfMainActivity_TestConstructor() throws Exception {
         assertEquals("log.LogActivity", views.activity.getLocalClassName());
+    }
+
+    @Test
+    public void doesSetContentView_MethodTest_SetupActivityInitialState() throws Exception {
+        assertEquals(R.id.activityLogLayout, shadowOf(activity).getContentView().getId());
     }
 
     @After
