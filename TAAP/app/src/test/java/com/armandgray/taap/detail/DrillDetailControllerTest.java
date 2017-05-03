@@ -48,6 +48,7 @@ public class DrillDetailControllerTest {
     @Test
     public void doesTrackActiveWorkTime() throws Exception {
         controller.views.fab.performClick();
+        controller.views.fab.performClick();
 
 
         assertNotNull(controller.activeWorkTime);
@@ -56,6 +57,7 @@ public class DrillDetailControllerTest {
 
     @Test
     public void doesTrackRestTime() throws Exception {
+        controller.views.fab.performClick();
         controller.views.fab.performClick();
         controller.views.fab.performClick();
 
