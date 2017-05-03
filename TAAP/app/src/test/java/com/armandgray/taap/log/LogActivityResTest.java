@@ -78,6 +78,13 @@ public class LogActivityResTest {
         assertNotNull(container.findViewById(R.id.recordsContainer));
     }
 
+    @Test
+    public void hasLayoutTvDate_RecordsContainer() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
+        LinearLayout recordsContainer = (LinearLayout) container.findViewById(R.id.recordsContainer);
+        assertNotNull(recordsContainer.findViewById(R.id.tvDate));
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
