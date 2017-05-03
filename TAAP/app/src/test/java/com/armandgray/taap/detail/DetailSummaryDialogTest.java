@@ -61,7 +61,7 @@ public class DetailSummaryDialogTest {
         DetailSummaryDialog dialog = DetailSummaryDialog.newInstance(sessionLog);
         assertNotNull(dialog);
         assertNotNull(dialog.getArguments());
-        assertNotNull(dialog.getArguments().get(SESSION_LOG));
+        assertNotNull(SessionLog.class.cast(dialog.getArguments().get(SESSION_LOG)));
     }
 
     @Test
