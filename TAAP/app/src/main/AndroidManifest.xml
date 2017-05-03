@@ -29,7 +29,7 @@
                 android:value="com.armandgray.taap.MainActivity" />
         </activity>
         <activity
-            android:name=".LogActivity"
+            android:name=".log.LogActivity"
             android:label="@string/title_activity_log"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">

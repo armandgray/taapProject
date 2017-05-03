@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.armandgray.taap.LogActivity"
+    tools:context="com.armandgray.taap.log.LogActivity"
     tools:showIn="@layout/activity_log">
 
 </android.support.constraint.ConstraintLayout>
