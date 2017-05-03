@@ -29,15 +29,6 @@
                 android:value="com.armandgray.taap.MainActivity" />
         </activity>
         <activity
-            android:name=".log.LogActivity"
-            android:label="@string/title_activity_log"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.armandgray.taap.MainActivity" />
-        </activity>
-        <activity
             android:name=".settings.detail.SettingsDetailActivity"
             android:label="@string/title_activity_settings_detail"
             android:parentActivityName=".settings.SettingsActivity"
@@ -49,7 +40,16 @@
         <activity
             android:name=".detail.DrillDetailActivity"
             android:label="@string/title_activity_drill_detail"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".log.LogActivity"
+            android:label="@string/title_activity_log"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.armandgray.taap.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.armandgray.taap.BuildConfig;
-import com.armandgray.taap.log.LogActivity;
 import com.armandgray.taap.R;
 import com.armandgray.taap.models.SessionLog;
 

@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 
-import com.armandgray.taap.log.LogActivity;
 import com.armandgray.taap.settings.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity {

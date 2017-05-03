@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.armandgray.taap.detail.DrillDetailActivity;
-import com.armandgray.taap.log.LogActivity;
 import com.armandgray.taap.models.Drill;
 import com.armandgray.taap.settings.SettingsActivity;
 import com.armandgray.taap.utils.DrillsRvAdapter;
