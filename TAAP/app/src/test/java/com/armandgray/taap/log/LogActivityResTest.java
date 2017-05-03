@@ -89,7 +89,8 @@ public class LogActivityResTest {
     public void hasLayout_TvGoalsMet_RecordsContainer() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         LinearLayout recordsContainer = (LinearLayout) container.findViewById(R.id.recordsContainer);
-        View goalsMetContainer = recordsContainer.findViewById(R.id.goalsMetContainer);
+        LinearLayout goalsMetContainer = (LinearLayout) recordsContainer
+                .findViewById(R.id.goalsMetContainer);
         assertNotNull(goalsMetContainer);
         assertNotNull(recordsContainer.findViewById(R.id.headerGoalsMet));
         assertNotNull(recordsContainer.findViewById(R.id.tvGoalsMet));

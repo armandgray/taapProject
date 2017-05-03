@@ -59,4 +59,5 @@
     <string name="session_history">Session History</string>
     <string name="total_session_time">Total Session Time</string>
     <string name="today_s_date">## Today\'s Date ##</string>
+    <string name="icon_goals_met_trophy">icon goals met trophy</string>
 </resources>
