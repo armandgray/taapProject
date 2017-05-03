@@ -104,6 +104,41 @@ public class LogActivityResTest {
         assertNotNull(recordsContainer.findViewById(R.id.layoutFundamentals));
     }
 
+    @Test
+    public void hasLayout_Defense_RecordsContainer() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
+        LinearLayout recordsContainer = (LinearLayout) container.findViewById(R.id.recordsContainer);
+        assertNotNull(recordsContainer.findViewById(R.id.layoutDefense));
+    }
+
+    @Test
+    public void hasLayout_Conditioning_RecordsContainer() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
+        LinearLayout recordsContainer = (LinearLayout) container.findViewById(R.id.recordsContainer);
+        assertNotNull(recordsContainer.findViewById(R.id.layoutFundamentals));
+    }
+
+    @Test
+    public void hasLayout_Shooting_RecordsContainer() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
+        LinearLayout recordsContainer = (LinearLayout) container.findViewById(R.id.recordsContainer);
+        assertNotNull(recordsContainer.findViewById(R.id.layoutShooting));
+    }
+
+    @Test
+    public void hasLayout_BallHandling_RecordsContainer() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
+        LinearLayout recordsContainer = (LinearLayout) container.findViewById(R.id.recordsContainer);
+        assertNotNull(recordsContainer.findViewById(R.id.layoutBallHandling));
+    }
+
+    @Test
+    public void hasLayout_OffBallOffense_RecordsContainer() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
+        LinearLayout recordsContainer = (LinearLayout) container.findViewById(R.id.recordsContainer);
+        assertNotNull(recordsContainer.findViewById(R.id.layoutOffBallOffense));
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
