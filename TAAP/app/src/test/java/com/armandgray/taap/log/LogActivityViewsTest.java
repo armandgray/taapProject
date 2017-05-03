@@ -1,14 +1,9 @@
 package com.armandgray.taap.log;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.widget.TextView;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
-import com.armandgray.taap.settings.detail.SettingsDetailActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -20,9 +15,6 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
-import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -40,6 +32,11 @@ public class LogActivityViewsTest {
         activity = activityController.create().visible().get();
         toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         views = activity.controller.views;
+    }
+
+    @Test
+    public void activityInstanceOfMainActivity_TestConstructor() throws Exception {
+        assertEquals("log.LogActivity", views.activity.getLocalClassName());
     }
 
     @After

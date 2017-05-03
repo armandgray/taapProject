@@ -5,7 +5,7 @@ import android.support.annotation.VisibleForTesting;
 class LogActivityController {
 
     @VisibleForTesting LogActivity activity;
-    @VisibleForTesting Object views;
+    @VisibleForTesting LogActivityViews views;
 
     LogActivityController(LogActivity activity) {
         this.activity = activity;
