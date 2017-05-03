@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
 import com.armandgray.taap.models.Drill;
+import com.armandgray.taap.models.SessionLog;
 
 import org.junit.After;
 import org.junit.Before;
@@ -162,7 +163,8 @@ public class DrillDetailViewsTest {
         btnFinished.performClick();
         activityController.start().resume();
 
-        DetailSummaryDialog expectedDialog = new DetailSummaryDialog();
+        SessionLog sessionLog = new SessionLog.Builder().create();
+        DetailSummaryDialog expectedDialog = DetailSummaryDialog.newInstance(sessionLog);
         expectedDialog.show(activity.getSupportFragmentManager(), DIALOG);
         Dialog resultDialog = ShadowDialog.getLatestDialog();
         assertNotNull(resultDialog);

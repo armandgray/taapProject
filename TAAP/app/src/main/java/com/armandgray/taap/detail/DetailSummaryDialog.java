@@ -66,7 +66,7 @@ public class DetailSummaryDialog extends DialogFragment {
 
     private void setupRvSummary() {
         if (getArguments() == null || getArguments().get(SESSION_LOG) == null) {
-            Toast.makeText(activity, "Missing Required Session Log!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Missing Required Session Log!", Toast.LENGTH_SHORT).show();
             this.dismiss();
             return;
         }
