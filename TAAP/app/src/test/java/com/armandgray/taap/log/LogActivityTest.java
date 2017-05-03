@@ -32,7 +32,7 @@ public class LogActivityTest {
     @Test
     public void createsLogActivityController_TestOnCreate() throws Exception {
         assertNotNull(activity.controller);
-        assertNotNull(activity.controller);
+        assertNotNull(activity.controller.activity);
     }
 
     @After
