@@ -49,8 +49,18 @@ public class DrillDetailControllerTest {
     public void doesTrackActiveWorkTime() throws Exception {
         controller.views.fab.performClick();
 
+
         assertNotNull(controller.activeWorkTime);
         assertTrue(controller.activeWorkTime > 0);
+    }
+
+    @Test
+    public void doesTrackRestTime() throws Exception {
+        controller.views.fab.performClick();
+        controller.views.fab.performClick();
+
+        assertNotNull(controller.restTime);
+        assertTrue(controller.restTime > 0);
     }
 
     @Test
