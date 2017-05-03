@@ -1,6 +1,7 @@
 package com.armandgray.taap.detail;
 
 import android.content.Intent;
+import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 
@@ -48,5 +49,10 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     public void onBtnFinishedClick(View v) {
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         new DetailSummaryDialog().show(fragmentManager, DIALOG);
+    }
+
+    @VisibleForTesting
+    int getTimeElapsed(long startTime, long endTime) {
+        return -1;
     }
 }

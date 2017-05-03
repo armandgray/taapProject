@@ -1,7 +1,6 @@
 package com.armandgray.taap.detail;
 
 import com.armandgray.taap.BuildConfig;
-import com.armandgray.taap.detail.DrillDetailActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -40,6 +39,11 @@ public class DrillDetailControllerTest {
     public void doesCreateViewsHandler_TestConstructor() throws Exception {
         assertNotNull(controller.views);
         assertNotNull(controller.views.activity);
+    }
+
+    @Test
+    public void canGetTimeElapsed() throws Exception {
+        assertEquals(0, controller.getTimeElapsed(System.nanoTime(), System.nanoTime()));
     }
 
     @After
