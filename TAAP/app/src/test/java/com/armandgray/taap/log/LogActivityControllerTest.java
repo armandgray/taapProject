@@ -1,7 +1,5 @@
 package com.armandgray.taap.log;
 
-import android.widget.ArrayAdapter;
-
 import com.armandgray.taap.BuildConfig;
 
 import org.junit.After;
@@ -13,11 +11,8 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
-import java.util.Arrays;
-
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -38,7 +33,7 @@ public class LogActivityControllerTest {
 
     @Test
     public void activityInstanceOfAppCompatActivity_TestConstructor() throws Exception {
-        assertEquals("LogActivity", controller.activity.getLocalClassName());
+        assertEquals("log.LogActivity", controller.activity.getLocalClassName());
     }
 
     @Test
