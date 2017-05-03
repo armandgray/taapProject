@@ -109,7 +109,6 @@ public class DrillDetailControllerTest {
         assertNotNull(controller.sessionLog);
         assertTrue(controller.sessionLog
                 .getSessionLength().getTime() > calendar.getTime().getTime());
-        assertTrue(controller.sessionLog.getSetsCompleted() > 0);
     }
 
     @After

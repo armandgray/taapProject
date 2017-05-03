@@ -72,12 +72,14 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
                 .successRate(getRateFromPickers())
                 .successRecord(getRateFromPickers())
                 .create();
-        System.out.println(views.npSuccesses.getValue() / views.npReps.getValue() * 1.0);
         DetailSummaryDialog.newInstance(sessionLog).show(fragmentManager, DIALOG);
     }
 
     private double getRateFromPickers() {
-        return views.npSuccesses.getValue() * 1.0 / views.npReps.getValue() * views.npSets.getValue();
+        int reps = views.npReps.getValue();
+        return reps == 0
+                ? views.npSuccesses.getValue() * 1.0 / views.npSets.getValue()
+                : views.npSuccesses.getValue() * 1.0 / (reps * views.npSets.getValue());
     }
 
     @VisibleForTesting
