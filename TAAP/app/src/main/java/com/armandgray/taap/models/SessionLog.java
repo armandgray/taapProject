@@ -3,6 +3,7 @@ package com.armandgray.taap.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class SessionLog implements Parcelable {
@@ -32,17 +33,23 @@ public class SessionLog implements Parcelable {
     public static class Builder {
 
         private Date sessionDate;
-        private Date sessionLength = new Date(0);
-        private Date sessionGoal = new Date(0);
-        private Date activeWork = new Date(0);
-        private Date restTime = new Date(0);
+        private Date sessionLength;
+        private Date sessionGoal;
+        private Date activeWork;
+        private Date restTime;
         private int setsCompleted;
         private int repsCompleted;
         private double successRate;
         private double successRecord;
 
         public Builder() {
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(0, 0, 0, 0, 0, 0);
             this.sessionDate = new Date();
+            this.sessionLength = calendar.getTime();
+            this.sessionGoal = calendar.getTime();
+            this.activeWork = calendar.getTime();
+            this.restTime = calendar.getTime();
         }
 
         public Builder sessionLength(Date s) {
