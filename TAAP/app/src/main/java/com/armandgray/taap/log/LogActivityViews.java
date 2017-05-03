@@ -15,7 +15,7 @@ class LogActivityViews {
     }
 
     void setupActivityInitialState() {
-        activity.setContentView(R.layout.activity_main);
+        activity.setContentView(R.layout.activity_log);
     }
 
     interface LogViewsListener {

@@ -10,5 +10,7 @@ class LogActivityController implements LogActivityViews.LogViewsListener {
     LogActivityController(LogActivity activity) {
         this.activity = activity;
         this.views = new LogActivityViews(activity, this);
+
+        views.setupActivityInitialState();
     }
 }
