@@ -42,7 +42,7 @@ public class SessionLogTest {
 
     @Test
     public void implementsParcelable() throws Exception {
-        Parcelable sessionLog = (Parcelable) new SessionLog.Builder().create();
+        Parcelable sessionLog = new SessionLog.Builder().create();
         assertNotNull(sessionLog);
     }
 

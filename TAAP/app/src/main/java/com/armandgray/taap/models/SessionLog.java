@@ -1,8 +1,11 @@
 package com.armandgray.taap.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
-public class SessionLog {
+public class SessionLog implements Parcelable {
 
     private Date sessionDate;
     private Date sessionLength;
@@ -128,4 +131,50 @@ public class SessionLog {
         return 9;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.sessionDate != null ? this.sessionDate.getTime() : -1);
+        dest.writeLong(this.sessionLength != null ? this.sessionLength.getTime() : -1);
+        dest.writeLong(this.sessionGoal != null ? this.sessionGoal.getTime() : -1);
+        dest.writeLong(this.activeWork != null ? this.activeWork.getTime() : -1);
+        dest.writeLong(this.restTime != null ? this.restTime.getTime() : -1);
+        dest.writeInt(this.setsCompleted);
+        dest.writeInt(this.repsCompleted);
+        dest.writeDouble(this.successRate);
+        dest.writeDouble(this.successRecord);
+    }
+
+    protected SessionLog(Parcel in) {
+        long tmpSessionDate = in.readLong();
+        this.sessionDate = tmpSessionDate == -1 ? null : new Date(tmpSessionDate);
+        long tmpSessionLength = in.readLong();
+        this.sessionLength = tmpSessionLength == -1 ? null : new Date(tmpSessionLength);
+        long tmpSessionGoal = in.readLong();
+        this.sessionGoal = tmpSessionGoal == -1 ? null : new Date(tmpSessionGoal);
+        long tmpActiveWork = in.readLong();
+        this.activeWork = tmpActiveWork == -1 ? null : new Date(tmpActiveWork);
+        long tmpRestTime = in.readLong();
+        this.restTime = tmpRestTime == -1 ? null : new Date(tmpRestTime);
+        this.setsCompleted = in.readInt();
+        this.repsCompleted = in.readInt();
+        this.successRate = in.readDouble();
+        this.successRecord = in.readDouble();
+    }
+
+    public static final Parcelable.Creator<SessionLog> CREATOR = new Parcelable.Creator<SessionLog>() {
+        @Override
+        public SessionLog createFromParcel(Parcel source) {
+            return new SessionLog(source);
+        }
+
+        @Override
+        public SessionLog[] newArray(int size) {
+            return new SessionLog[size];
+        }
+    };
 }
