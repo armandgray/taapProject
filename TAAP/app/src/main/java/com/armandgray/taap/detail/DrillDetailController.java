@@ -19,6 +19,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     DrillDetailViews views;
     private boolean drillActive;
     @VisibleForTesting long activeWorkTime;
+    private long timeElapsed;
 
     DrillDetailController(DrillDetailActivity activity) {
         this.activity = activity;
@@ -40,16 +41,19 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     }
 
     private void togglePausePlay() {
-        activeWorkTime += System.currentTimeMillis() - activeWorkTime;
-        System.out.println("ActiveWorkTime");
-        System.out.println(getTimeElapsed(activeWorkTime));
+        long currentTimeMillis = System.currentTimeMillis();
+        timeElapsed = currentTimeMillis - timeElapsed;
         if (drillActive) {
+            activeWorkTime += timeElapsed == currentTimeMillis ? 0 : timeElapsed;
+            System.out.println("ActiveWorkTime\n\n");
+            System.out.println(getTimeElapsed(activeWorkTime));
             views.fab.setImageResource(R.drawable.ic_play_arrow_white_24dp);
             drillActive = false;
         } else {
             views.fab.setImageResource(R.drawable.ic_pause_white_24dp);
             drillActive = true;
         }
+        timeElapsed = currentTimeMillis;
     }
 
     @Override
@@ -63,11 +67,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
         Calendar calendar = Calendar.getInstance();
         calendar.set(0, 0, 0, 0, 0, 0);
         Date time = calendar.getTime();
-        System.out.println(time);
-        if (timeElapsed != 0) {
-            time.setTime(timeElapsed);
-        }
-        System.out.println(time);
+        if (timeElapsed != 0) { time.setTime(timeElapsed); }
         return time;
     }
 }
