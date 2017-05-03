@@ -56,4 +56,5 @@
     <string name="icon_header_trending_upward">icon header trending upward</string>
     <string name="continue_string">Continue</string>
     <string name="cancel">Cancel</string>
+    <string name="session_history">Session History</string>
 </resources>
