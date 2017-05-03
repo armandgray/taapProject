@@ -171,6 +171,19 @@ public class DrillDetailViewsTest {
         assertEquals(expectedDialog.getDialog(), resultDialog);
     }
 
+    @Test
+    public void doesPassSessionLog_OnBtnFinishedClick() throws Exception {
+        Button btnFinished = (Button) activity.findViewById(R.id.btnFinished);
+        btnFinished.setVisibility(View.VISIBLE);
+        btnFinished.performClick();
+        activityController.start().resume();
+        activity.getSupportFragmentManager().executePendingTransactions();
+
+        DetailSummaryDialog dialog = (DetailSummaryDialog) activity.getSupportFragmentManager().findFragmentByTag(DIALOG);
+        // TODO add assert for each sessionLog data point here getting the Fragment
+    }
+
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
