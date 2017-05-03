@@ -1,11 +1,13 @@
 package com.armandgray.taap.log;
 
+import android.support.annotation.VisibleForTesting;
+
 import com.armandgray.taap.R;
 
 class LogActivityViews {
 
-    LogActivity activity;
-    LogViewsListener listener;
+    @VisibleForTesting LogActivity activity;
+    @VisibleForTesting LogViewsListener listener;
 
     LogActivityViews(LogActivity activity, LogViewsListener listener) {
         this.activity = activity;
