@@ -95,6 +95,23 @@ public class DrillDetailControllerTest {
         assertTrue(controller.activeWorkTime > 0);
     }
 
+    @Test
+    public void doesAssignSessionLogFields_OnBtnFinishedClick() throws Exception {
+        controller.views.fab.performClick();
+        controller.views.fab.performClick();
+        controller.views.fab.performClick();
+        controller.views.fab.performClick();
+        controller.views.fab.performClick();
+        controller.views.btnFinished.performClick();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(0, 0, 0, 0, 0, 0);
+        assertNotNull(controller.sessionLog);
+        assertTrue(controller.sessionLog
+                .getSessionLength().getTime() > calendar.getTime().getTime());
+        assertTrue(controller.sessionLog.getSetsCompleted() > 0);
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");

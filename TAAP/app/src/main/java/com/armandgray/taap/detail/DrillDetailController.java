@@ -22,7 +22,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     private long timeElapsed;
     @VisibleForTesting long activeWorkTime;
     @VisibleForTesting long restTime;
-    private SessionLog sessionLog;
+    @VisibleForTesting SessionLog sessionLog;
 
     DrillDetailController(DrillDetailActivity activity) {
         this.activity = activity;
