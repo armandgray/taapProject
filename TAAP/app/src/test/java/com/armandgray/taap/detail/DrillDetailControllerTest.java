@@ -58,7 +58,7 @@ public class DrillDetailControllerTest {
         Calendar calendar = Calendar.getInstance();
         calendar.set(0, 0, 0, 0, 0, 0);
         Date expectedTimeElapsed = calendar.getTime();
-        long dummyTime = System.nanoTime();
+        long dummyTime = System.currentTimeMillis();
         expectedTimeElapsed.setTime(dummyTime);
         assertNotNull(controller.getTimeElapsed(dummyTime));
         assertEquals(expectedTimeElapsed.getTime(), controller.getTimeElapsed(dummyTime).getTime());
