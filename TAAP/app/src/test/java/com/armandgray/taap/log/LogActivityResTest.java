@@ -38,6 +38,14 @@ public class LogActivityResTest {
     }
 
     @Test
+    public void hasLayoutTvTotalSessionTime_DetailContainer() throws Exception {
+        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
+        LinearLayout detailContainer = (LinearLayout) container.findViewById(R.id.detailContainer);
+        assertNotNull(detailContainer.findViewById(R.id.headerTotalSessionTime));
+        assertNotNull(detailContainer.findViewById(R.id.tvTotalSessionTime));
+    }
+
+    @Test
     public void hasLayout_RecordsContainer() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         assertNotNull(container.findViewById(R.id.recordsContainer));
