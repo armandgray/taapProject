@@ -63,6 +63,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
         SessionLog sessionLog = new SessionLog.Builder()
                 .sessionLength(getTimeElapsed(activeWorkTime + restTime))
                 .create();
+        System.out.println(getTimeElapsed(activeWorkTime + restTime));
         DetailSummaryDialog.newInstance(sessionLog).show(fragmentManager, DIALOG);
     }
 
@@ -71,6 +72,8 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
         Calendar calendar = Calendar.getInstance();
         calendar.set(0, 0, 0, 0, 0, 0);
         if (timeElapsed != 0) { calendar.setTimeInMillis(timeElapsed); }
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        if (hour > 12) { calendar.set(Calendar.HOUR_OF_DAY, 0);}
         return calendar.getTime();
     }
 }

@@ -83,7 +83,7 @@ public class DrillDetailControllerTest {
         calendar.set(Calendar.HOUR_OF_DAY, 0);
 
         assertNotNull(controller.getTimeElapsed(0));
-        assertEquals(calendar.getTime().getTime(), controller.getTimeElapsed(0).getTime());
+        assertEquals(calendar.getTime(), controller.getTimeElapsed(0));
     }
 
     @After
