@@ -21,6 +21,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -118,14 +119,16 @@ public class SessionLogRvAdapterTest {
                         inflater.inflate(R.layout.session_log_listitem, null, false));
         adapter.onBindViewHolder(holder, 1);
 
-        Date date = testSessionLog.getSessionLength();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(testSessionLog.getSessionLength());
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
         SimpleDateFormat simpleDateFormat =
-                date.equals(new Date(0))
-                        ? new SimpleDateFormat("00:00:00", Locale.US)
+                hour == 0
+                        ? new SimpleDateFormat("00:mm:ss", Locale.US)
                         : new SimpleDateFormat("hh:mm:ss", Locale.US);
 
         assertEquals("Session Length", holder.tvHeader.getText());
-        assertEquals(simpleDateFormat.format(date), holder.tvText.getText());
+        assertEquals(simpleDateFormat.format(calendar.getTime()), holder.tvText.getText());
         assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
                 R.drawable.ic_timer_white_24dp),
                 holder.ivImage.getDrawable());
@@ -187,8 +190,8 @@ public class SessionLogRvAdapterTest {
     @Test
     public void canGetItemViewType() throws Exception {
         adapter = new SessionLogRvAdapter(testSessionLog);
-        assertEquals(TYPE_HEADER , adapter.getItemViewType(0));
-        assertEquals(TYPE_ITEM , adapter.getItemViewType(1));
+        assertEquals(TYPE_HEADER, adapter.getItemViewType(0));
+        assertEquals(TYPE_ITEM, adapter.getItemViewType(1));
     }
 
     @After
