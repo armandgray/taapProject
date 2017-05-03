@@ -73,7 +73,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
         calendar.set(0, 0, 0, 0, 0, 0);
         if (timeElapsed != 0) { calendar.setTimeInMillis(timeElapsed); }
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        if (hour > 12) { calendar.set(Calendar.HOUR_OF_DAY, 0);}
+        if (hour > 12) { calendar.set(Calendar.HOUR_OF_DAY, 0); }
         return calendar.getTime();
     }
 }

@@ -12,7 +12,6 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
@@ -68,22 +67,23 @@ public class DrillDetailControllerTest {
     public void canGetTimeElapsed() throws Exception {
         Calendar calendar = Calendar.getInstance();
         calendar.set(0, 0, 0, 0, 0, 0);
-        Date expectedTimeElapsed = calendar.getTime();
         long dummyTime = System.currentTimeMillis();
-        expectedTimeElapsed.setTime(dummyTime);
+        calendar.setTimeInMillis(dummyTime);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        if (hour > 12) { calendar.set(Calendar.HOUR_OF_DAY, 0); }
         assertNotNull(controller.getTimeElapsed(dummyTime));
-        assertEquals(expectedTimeElapsed.getTime(), controller.getTimeElapsed(dummyTime).getTime());
+        assertEquals(calendar.getTime(), controller.getTimeElapsed(dummyTime));
     }
 
     @Test
     public void doesZeroOutHoursForTimesLessThanOneHour_CanGetTimeElapsed() throws Exception {
         Calendar calendar = Calendar.getInstance();
         calendar.set(0, 0, 0, 0, 0, 0);
-        calendar.setTimeInMillis(0);
+        calendar.setTimeInMillis(1);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
 
-        assertNotNull(controller.getTimeElapsed(0));
-        assertEquals(calendar.getTime(), controller.getTimeElapsed(0));
+        assertNotNull(controller.getTimeElapsed(1));
+        assertEquals(calendar.getTime().toString(), controller.getTimeElapsed(0).toString());
     }
 
     @After
