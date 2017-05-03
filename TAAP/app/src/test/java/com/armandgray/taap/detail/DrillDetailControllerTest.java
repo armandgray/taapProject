@@ -75,6 +75,17 @@ public class DrillDetailControllerTest {
         assertEquals(expectedTimeElapsed.getTime(), controller.getTimeElapsed(dummyTime).getTime());
     }
 
+    @Test
+    public void doesZeroOutHoursForTimesLessThanOneHour_CanGetTimeElapsed() throws Exception {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(0, 0, 0, 0, 0, 0);
+        calendar.setTimeInMillis(0);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+
+        assertNotNull(controller.getTimeElapsed(0));
+        assertEquals(calendar.getTime().getTime(), controller.getTimeElapsed(0).getTime());
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
