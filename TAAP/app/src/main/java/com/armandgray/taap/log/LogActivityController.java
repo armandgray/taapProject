@@ -1,13 +1,13 @@
 package com.armandgray.taap.log;
 
-import android.app.Activity;
 import android.support.annotation.VisibleForTesting;
 
 class LogActivityController {
 
-    @VisibleForTesting Activity activity;
+    @VisibleForTesting LogActivity activity;
+    @VisibleForTesting Object views;
 
-    LogActivityController(Activity activity) {
+    LogActivityController(LogActivity activity) {
         this.activity = activity;
     }
 }
