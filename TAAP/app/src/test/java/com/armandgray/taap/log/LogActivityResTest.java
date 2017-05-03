@@ -62,7 +62,7 @@ public class LogActivityResTest {
     public void hasLayoutExercisesCompleted_DetailContainer() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         LinearLayout detailContainer = (LinearLayout) container.findViewById(R.id.detailContainer);
-        assertNotNull(detailContainer.findViewById(R.id.layoutExercicesCompleted));
+        assertNotNull(detailContainer.findViewById(R.id.layoutExercisesCompleted));
     }
 
     @Test
