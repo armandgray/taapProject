@@ -1,5 +1,7 @@
 package com.armandgray.taap.models;
 
+import android.os.Parcelable;
+
 import org.junit.Test;
 
 import java.util.Date;
@@ -36,6 +38,12 @@ public class SessionLogTest {
     @Test
     public void canGetFieldCount() throws Exception {
         assertEquals(9, SessionLog.getFieldCount());
+    }
+
+    @Test
+    public void implementsParcelable() throws Exception {
+        Parcelable sessionLog = (Parcelable) new SessionLog.Builder().create();
+        assertNotNull(sessionLog);
     }
 
 }
