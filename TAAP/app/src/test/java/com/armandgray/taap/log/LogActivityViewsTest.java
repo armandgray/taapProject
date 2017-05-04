@@ -89,6 +89,7 @@ public class LogActivityViewsTest {
         assertNotNull(header);
         assertNotNull(tvText);
         assertEquals(activity.getString(R.string.total_session_time), header.getText());
+        assertEquals(activity.getString(R.string.zero_time), tvText.getText());
     }
 
     @After

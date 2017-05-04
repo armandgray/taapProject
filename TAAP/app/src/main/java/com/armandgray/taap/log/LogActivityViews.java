@@ -24,6 +24,7 @@ class LogActivityViews {
         activity.setContentView(R.layout.activity_log);
         setupToolbar();
         assignFields();
+        setupDetailItems();
     }
 
     private void assignFields() {
@@ -47,6 +48,18 @@ class LogActivityViews {
         upArrow.setColorFilter(activity.getResources().getColor(R.color.colorDarkGray), PorterDuff.Mode.SRC_ATOP);
         if (activity.getSupportActionBar() == null) { return; }
         activity.getSupportActionBar().setHomeAsUpIndicator(upArrow);
+    }
+
+    private void setupDetailItems() {
+        setTextForDetailLayoutViews(layoutTotalSessionTime,
+                R.string.total_session_time, "00:00:00");
+    }
+
+    private void setTextForDetailLayoutViews(LinearLayout layoutTotalSessionTime, int total_session_time, String text) {
+        TextView header = (TextView) layoutTotalSessionTime.findViewById(R.id.header);
+        TextView tvText = (TextView) layoutTotalSessionTime.findViewById(R.id.tvText);
+        header.setText(total_session_time);
+        tvText.setText(text);
     }
 
     interface LogViewsListener {
