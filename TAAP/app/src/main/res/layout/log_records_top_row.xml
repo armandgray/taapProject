@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal"
+    android:weightSum="0.9"
+    tools:showIn="@layout/content_log">
+
+    <include
+        android:id="@+id/layoutFundamentals"
+        layout="@layout/log_record_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/card_margin"
+        android:layout_weight="0.3" />
+
+    <include
+        android:id="@+id/layoutDefense"
+        layout="@layout/log_record_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/card_margin"
+        android:layout_weight="0.3" />
+
+    <include
+        android:id="@+id/layoutOffBallOffense"
+        layout="@layout/log_record_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/card_margin"
+        android:layout_weight="0.3" />
+</LinearLayout>

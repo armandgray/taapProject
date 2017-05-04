@@ -61,4 +61,5 @@
     <string name="today_s_date">## Today\'s Date ##</string>
     <string name="icon_goals_met_trophy">icon goals met trophy</string>
     <string name="fundamentals">Fundamentals</string>
+    <string name="zero_time">00:00:00</string>
 </resources>
