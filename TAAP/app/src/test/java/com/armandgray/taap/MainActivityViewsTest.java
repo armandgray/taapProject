@@ -73,6 +73,11 @@ public class MainActivityViewsTest {
     }
 
     @Test
+    public void doesSetOptionsMenuItemColorFilterGray_Log() throws Exception {
+        // TODO create test
+    }
+
+    @Test
     public void canSelectOptionsMenuItem_Settings() throws Exception {
         shadowOf(activity).onCreateOptionsMenu(toolbar.getMenu());
         Menu optionsMenu = shadowOf(activity).getOptionsMenu();

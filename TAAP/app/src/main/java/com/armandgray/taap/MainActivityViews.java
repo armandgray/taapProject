@@ -1,12 +1,15 @@
 package com.armandgray.taap;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -158,6 +161,15 @@ class MainActivityViews {
                         activity.startActivity(intent);
                     }
                 }));
+    }
+
+    void setMenuLogColor(MenuItem menuItem) {
+        Drawable drawable = menuItem.getIcon();
+        if (drawable != null) {
+            drawable.mutate();
+            drawable.setColorFilter(activity.getResources().getColor(R.color.colorDarkGray),
+                    PorterDuff.Mode.SRC_ATOP);
+        }
     }
 
     interface MainViewsListener {
