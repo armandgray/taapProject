@@ -19,7 +19,7 @@
         android:layout_weight="0.45"
         android:contentDescription="@string/icon_goals_met_trophy"
         android:scaleType="fitEnd"
-        app:srcCompat="@drawable/ic_whatshot_white_24dp" />
+        app:srcCompat="@drawable/ic_trophy_variant_outline_white_48dp" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -37,14 +37,14 @@
             android:text="@string/ten"
             android:textColor="@android:color/white"
             android:textSize="30sp"
-            android:textStyle="bold" />
+            android:textStyle="bold|italic" />
 
         <TextView
             android:id="@+id/headerGoalsMet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal|start"
-            android:text="@string/total_session_time"
+            android:text="@string/goals_met"
             android:textAllCaps="true"
             android:textColor="@android:color/white"
             android:textSize="@dimen/log_header_size" />
