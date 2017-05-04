@@ -15,7 +15,7 @@ public class SessionLogTest {
     public void canCreateSessionLogWithBuilder() throws Exception {
         SessionLog sessionLog = new SessionLog.Builder()
                 .sessionLength(new Date(1))
-                .sessionGoal(new Date(3))
+                .sessionGoal("")
                 .activeWork(new Date(4))
                 .restTime(new Date(5))
                 .setsCompleted(4)

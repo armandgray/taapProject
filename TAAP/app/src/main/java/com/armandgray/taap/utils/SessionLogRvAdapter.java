@@ -91,7 +91,9 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
     private void setTvText(int position, HashMap<String, Object> sessionItem, TextView tvText) {
         Object itemData = sessionItem.get(ITEM_DATA);
 
-        if (position <= 4) {
+        if (position == 2) {
+            tvText.setText(itemData.toString());
+        } else if (position <= 4) {
             tvText.setText(getFormattedTimeAsString(itemData));
         } else if (position <= 6) {
             tvText.setText(String.valueOf(itemData));

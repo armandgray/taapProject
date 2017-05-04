@@ -42,7 +42,7 @@ public class SessionLogAdapterTest {
         mockView = mock(View.class);
         defaultSessionLog = new SessionLog.Builder()
                 .sessionLength(new Date(0))
-                .sessionGoal(new Date(0))
+                .sessionGoal("")
                 .activeWork(new Date(0))
                 .restTime(new Date(0))
                 .setsCompleted(0)

@@ -10,7 +10,7 @@ public class SessionLog implements Parcelable {
 
     private Date sessionDate;
     private Date sessionLength;
-    private Date sessionGoal;
+    private String sessionGoal;
     private Date activeWork;
     private Date restTime;
     private int setsCompleted;
@@ -36,7 +36,7 @@ public class SessionLog implements Parcelable {
 
         private Date sessionDate;
         private Date sessionLength;
-        private Date sessionGoal;
+        private String sessionGoal;
         private Date activeWork;
         private Date restTime;
         private int setsCompleted;
@@ -50,7 +50,7 @@ public class SessionLog implements Parcelable {
             calendar.set(0, 0, 0, 0, 0, 0);
             this.sessionDate = new Date();
             this.sessionLength = calendar.getTime();
-            this.sessionGoal = calendar.getTime();
+            this.sessionGoal = "None";
             this.activeWork = calendar.getTime();
             this.restTime = calendar.getTime();
         }
@@ -60,7 +60,7 @@ public class SessionLog implements Parcelable {
             return this;
         }
 
-        public Builder sessionGoal(Date s) {
+        public Builder sessionGoal(String s) {
             this.sessionGoal = s;
             return this;
         }
@@ -113,7 +113,7 @@ public class SessionLog implements Parcelable {
         return sessionLength;
     }
 
-    public Date getSessionGoal() {
+    public String getSessionGoal() {
         return sessionGoal;
     }
 
@@ -158,7 +158,7 @@ public class SessionLog implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(this.sessionDate != null ? this.sessionDate.getTime() : -1);
         dest.writeLong(this.sessionLength != null ? this.sessionLength.getTime() : -1);
-        dest.writeLong(this.sessionGoal != null ? this.sessionGoal.getTime() : -1);
+        dest.writeString(this.sessionGoal != null ? this.sessionGoal : "None");
         dest.writeLong(this.activeWork != null ? this.activeWork.getTime() : -1);
         dest.writeLong(this.restTime != null ? this.restTime.getTime() : -1);
         dest.writeInt(this.setsCompleted);
@@ -173,8 +173,8 @@ public class SessionLog implements Parcelable {
         this.sessionDate = tmpSessionDate == -1 ? null : new Date(tmpSessionDate);
         long tmpSessionLength = in.readLong();
         this.sessionLength = tmpSessionLength == -1 ? null : new Date(tmpSessionLength);
-        long tmpSessionGoal = in.readLong();
-        this.sessionGoal = tmpSessionGoal == -1 ? null : new Date(tmpSessionGoal);
+        String tmpSessionGoal = in.readString();
+        this.sessionGoal = tmpSessionGoal.equals("None") ? null : tmpSessionGoal;
         long tmpActiveWork = in.readLong();
         this.activeWork = tmpActiveWork == -1 ? null : new Date(tmpActiveWork);
         long tmpRestTime = in.readLong();

@@ -50,7 +50,7 @@ public class SessionLogRvAdapterTest {
         mockView = mock(View.class);
         testSessionLog = new SessionLog.Builder()
                 .sessionLength(new Date(1, 1, 1, 1, 5, 30))
-                .sessionGoal(new Date(0))
+                .sessionGoal("")
                 .activeWork(new Date(0))
                 .restTime(new Date(0))
                 .setsCompleted(0)

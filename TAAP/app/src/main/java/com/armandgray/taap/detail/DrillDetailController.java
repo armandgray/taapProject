@@ -59,7 +59,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         sessionLog = new SessionLog.Builder()
                 .sessionLength(getTimeElapsed(activeWorkTime + restTime))
-                .sessionGoal(new Date(0))
+                .sessionGoal("None")
                 .activeWork(getTimeElapsed(activeWorkTime))
                 .restTime(getTimeElapsed(restTime))
                 .setsCompleted(views.npSets.getValue())
