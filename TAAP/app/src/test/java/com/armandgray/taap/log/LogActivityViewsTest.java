@@ -83,13 +83,53 @@ public class LogActivityViewsTest {
 
     @Test
     public void doesSetLayoutText_DetailItem_TotalSessionTime() throws Exception {
-        LinearLayout layoutTotalSessionTime = views.layoutTotalSessionTime;
-        TextView header = (TextView) layoutTotalSessionTime.findViewById(R.id.header);
-        TextView tvText = (TextView) layoutTotalSessionTime.findViewById(R.id.tvText);
+        TextView header = (TextView) views.layoutTotalSessionTime.findViewById(R.id.header);
+        TextView tvText = (TextView) views.layoutTotalSessionTime.findViewById(R.id.tvText);
         assertNotNull(header);
         assertNotNull(tvText);
         assertEquals(activity.getString(R.string.total_session_time), header.getText());
         assertEquals(activity.getString(R.string.zero_time), tvText.getText());
+    }
+
+    @Test
+    public void doesSetLayoutText_DetailItem_TotalActiveTime() throws Exception {
+        TextView header = (TextView) views.layoutTotalActiveTime.findViewById(R.id.header);
+        TextView tvText = (TextView) views.layoutTotalActiveTime.findViewById(R.id.tvText);
+        assertNotNull(header);
+        assertNotNull(tvText);
+        assertEquals(activity.getString(R.string.total_active_time), header.getText());
+        assertEquals(activity.getString(R.string.zero_time), tvText.getText());
+    }
+
+    @Test
+    public void doesSetLayoutText_DetailItem_TotalRestTime() throws Exception {
+        TextView header = (TextView) views.layoutTotalRestTime.findViewById(R.id.header);
+        TextView tvText = (TextView) views.layoutTotalRestTime.findViewById(R.id.tvText);
+        assertNotNull(header);
+        assertNotNull(tvText);
+        assertEquals(activity.getString(R.string.total_rest_time), header.getText());
+        assertEquals(activity.getString(R.string.zero_time), tvText.getText());
+    }
+
+    @Test
+    public void doesSetLayoutText_DetailItem_ExercisesCompleted() throws Exception {
+        LinearLayout layoutTotalSessionTime = views.layoutTotalSessionTime;
+        TextView header = (TextView) views.layoutExercisesCompleted.findViewById(R.id.header);
+        TextView tvText = (TextView) views.layoutExercisesCompleted.findViewById(R.id.tvText);
+        assertNotNull(header);
+        assertNotNull(tvText);
+        assertEquals(activity.getString(R.string.exercises_completed), header.getText());
+        assertEquals(String.valueOf(0), tvText.getText());
+    }
+
+    @Test
+    public void doesSetLayoutText_DetailItem_RepsCompleted() throws Exception {
+        TextView header = (TextView) views.layoutRepsCompleted.findViewById(R.id.header);
+        TextView tvText = (TextView) views.layoutRepsCompleted.findViewById(R.id.tvText);
+        assertNotNull(header);
+        assertNotNull(tvText);
+        assertEquals(activity.getString(R.string.reps_completed), header.getText());
+        assertEquals(String.valueOf(0), tvText.getText());
     }
 
     @After

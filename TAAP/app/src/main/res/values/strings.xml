@@ -64,4 +64,7 @@
     <string name="zero_time">00:00:00</string>
     <string name="ten">10</string>
     <string name="goals_met">Goals Met</string>
+    <string name="total_active_time">TotalActiveTime</string>
+    <string name="total_rest_time">Total Rest Time</string>
+    <string name="exercises_completed">Exercises Completed</string>
 </resources>
