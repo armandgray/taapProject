@@ -7,6 +7,7 @@ import static com.armandgray.taap.db.DrillsTable.COLUMN_ID;
 import static com.armandgray.taap.db.DrillsTable.COLUMN_IMAGE_ID;
 import static com.armandgray.taap.db.DrillsTable.COLUMN_TITLE;
 import static com.armandgray.taap.db.DrillsTable.SQL_CREATE;
+import static com.armandgray.taap.db.DrillsTable.SQL_DELETE;
 import static com.armandgray.taap.db.DrillsTable.TABLE_DRILLS;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
@@ -39,6 +40,12 @@ public class DrillsTableTest {
 
         assertNotNull(SQL_CREATE);
         assertEquals(expected, SQL_CREATE);
+    }
+
+    @Test
+    public void hasField_SQLDelete() throws Exception {
+        assertNotNull(SQL_DELETE);
+        assertEquals("DROP TABLE " + TABLE_DRILLS, SQL_DELETE);
     }
 
 }

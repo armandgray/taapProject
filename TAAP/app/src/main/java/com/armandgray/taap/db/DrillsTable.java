@@ -15,4 +15,6 @@ class DrillsTable {
                     + COLUMN_IMAGE_ID + " INTEGER,"
                     + COLUMN_CATEGORY + " TEXT"
                     + ")";
+
+    static final String SQL_DELETE = null;
 }
