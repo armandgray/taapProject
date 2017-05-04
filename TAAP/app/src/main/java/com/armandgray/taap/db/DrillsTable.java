@@ -1,10 +1,10 @@
 package com.armandgray.taap.db;
 
-public class DrillsTable {
+class DrillsTable {
     
-    static final String TABLE_DRILLS = null;
-    static final String COLUMN_ID = null;
-    static final String COLUMN_TITLE = null;
-    static final String COLUMN_IMAGE_ID = null;
-    static final String COLUMN_CATEGORY = null;
+    static final String TABLE_DRILLS = "drills";
+    static final String COLUMN_ID = "drillId";
+    static final String COLUMN_TITLE = "itemTitle";
+    static final String COLUMN_IMAGE_ID = "itemImageId";
+    static final String COLUMN_CATEGORY = "itemCategory";
 }
