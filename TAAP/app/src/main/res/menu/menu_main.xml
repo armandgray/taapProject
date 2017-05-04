@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action_log"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_trending_up_darkgray_24dp"
+        android:icon="@drawable/ic_trending_up_white_24dp"
         android:title="@string/log"
         app:showAsAction="ifRoom" />
 
