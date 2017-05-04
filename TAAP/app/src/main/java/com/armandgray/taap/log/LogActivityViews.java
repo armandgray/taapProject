@@ -51,10 +51,15 @@ class LogActivityViews {
         layoutTotalRestTime = (LinearLayout) activity.findViewById(R.id.layoutTotalRestTime);
         layoutExercisesCompleted = (LinearLayout) activity.findViewById(R.id.layoutExercisesCompleted);
         layoutRepsCompleted = (LinearLayout) activity.findViewById(R.id.layoutRepsCompleted);
-        
-        tvDate = (TextView) activity.findViewById(R.id.recordsContainer).findViewById(R.id.tvDate);
-        layoutFundamentals = (LinearLayout) activity.findViewById(R.id.recordsContainer)
-                .findViewById(R.id.layoutFundamentals);
+
+        LinearLayout RecordsContainer = (LinearLayout) activity.findViewById(R.id.recordsContainer);
+        tvDate = (TextView) RecordsContainer.findViewById(R.id.tvDate);
+        layoutFundamentals = (LinearLayout) RecordsContainer.findViewById(R.id.layoutFundamentals);
+        layoutDefense = (LinearLayout) RecordsContainer.findViewById(R.id.layoutDefense);
+        layoutOffBallOffense = (LinearLayout) RecordsContainer.findViewById(R.id.layoutOffBallOffense);
+        layoutConditioning = (LinearLayout) RecordsContainer.findViewById(R.id.layoutConditioning);
+        layoutShooting = (LinearLayout) RecordsContainer.findViewById(R.id.layoutShooting);
+        layoutBallHandling = (LinearLayout) RecordsContainer.findViewById(R.id.layoutBallHandling);
     }
 
     private void setupToolbar() {
@@ -100,6 +105,16 @@ class LogActivityViews {
         tvDate.setText(dateString);
         setTextForRecordLayoutViews(layoutFundamentals, R.drawable.ic_timer_white_24dp,
                 "00:00:00", "0%", R.string.fundamentals);
+        setTextForRecordLayoutViews(layoutDefense, R.drawable.ic_timer_white_24dp,
+                "00:00:00", "0%", R.string.defense);
+        setTextForRecordLayoutViews(layoutOffBallOffense, R.drawable.ic_timer_white_24dp,
+                "00:00:00", "0%", R.string.off_ball_offense);
+        setTextForRecordLayoutViews(layoutConditioning, R.drawable.ic_timer_white_24dp,
+                "00:00:00", "0%", R.string.conditioning);
+        setTextForRecordLayoutViews(layoutShooting, R.drawable.ic_timer_white_24dp,
+                "00:00:00", "0%", R.string.shooting);
+        setTextForRecordLayoutViews(layoutBallHandling, R.drawable.ic_timer_white_24dp,
+                "00:00:00", "0%", R.string.ball_handling);
     }
 
     private void setTextForRecordLayoutViews(
