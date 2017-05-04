@@ -9,9 +9,14 @@ import android.widget.TextView;
 
 import com.armandgray.taap.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 class LogActivityViews {
 
-    @VisibleForTesting LogActivity activity;
+    @VisibleForTesting
+    LogActivity activity;
     private LogViewsListener listener;
     LinearLayout layoutTotalSessionTime;
     LinearLayout layoutTotalActiveTime;
@@ -30,6 +35,7 @@ class LogActivityViews {
         setupToolbar();
         assignFields();
         setupDetailItems();
+        setupRecordItems();
     }
 
     private void assignFields() {
@@ -38,6 +44,7 @@ class LogActivityViews {
         layoutTotalRestTime = (LinearLayout) activity.findViewById(R.id.layoutTotalRestTime);
         layoutExercisesCompleted = (LinearLayout) activity.findViewById(R.id.layoutExercisesCompleted);
         layoutRepsCompleted = (LinearLayout) activity.findViewById(R.id.layoutRepsCompleted);
+        tvDate = (TextView) activity.findViewById(R.id.recordsContainer).findViewById(R.id.tvDate);
     }
 
     private void setupToolbar() {
@@ -55,7 +62,9 @@ class LogActivityViews {
     private void setHomeAsUpIndicatorColor() {
         final Drawable upArrow = activity.getResources().getDrawable(R.drawable.abc_ic_ab_back_material);
         upArrow.setColorFilter(activity.getResources().getColor(R.color.colorDarkGray), PorterDuff.Mode.SRC_ATOP);
-        if (activity.getSupportActionBar() == null) { return; }
+        if (activity.getSupportActionBar() == null) {
+            return;
+        }
         activity.getSupportActionBar().setHomeAsUpIndicator(upArrow);
     }
 
@@ -77,6 +86,12 @@ class LogActivityViews {
         TextView tvText = (TextView) layoutTotalSessionTime.findViewById(R.id.tvText);
         header.setText(total_session_time);
         tvText.setText(text);
+    }
+
+    private void setupRecordItems() {
+        String dateString = "< ";
+        dateString += new SimpleDateFormat("EEE, MMM d, ''yy", Locale.US).format(new Date()) + " >";
+        tvDate.setText(dateString);
     }
 
     interface LogViewsListener {
