@@ -4,6 +4,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.Toolbar;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.armandgray.taap.R;
@@ -12,7 +13,7 @@ class LogActivityViews {
 
     @VisibleForTesting LogActivity activity;
     private LogViewsListener listener;
-    String layoutTotalSessionTime;
+    LinearLayout layoutTotalSessionTime;
 
     LogActivityViews(LogActivity activity, LogViewsListener listener) {
         this.activity = activity;
@@ -22,6 +23,11 @@ class LogActivityViews {
     void setupActivityInitialState() {
         activity.setContentView(R.layout.activity_log);
         setupToolbar();
+        assignFields();
+    }
+
+    private void assignFields() {
+        layoutTotalSessionTime = (LinearLayout) activity.findViewById(R.id.layoutTotalSessionTime);
     }
 
     private void setupToolbar() {
