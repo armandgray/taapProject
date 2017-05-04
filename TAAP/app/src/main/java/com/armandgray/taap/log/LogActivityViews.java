@@ -1,5 +1,6 @@
 package com.armandgray.taap.log;
 
+import android.app.Activity;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.VisibleForTesting;
@@ -24,6 +25,7 @@ class LogActivityViews {
     LinearLayout layoutExercisesCompleted;
     LinearLayout layoutRepsCompleted;
     TextView tvDate;
+    Activity layoutFundamentals;
 
     LogActivityViews(LogActivity activity, LogViewsListener listener) {
         this.activity = activity;

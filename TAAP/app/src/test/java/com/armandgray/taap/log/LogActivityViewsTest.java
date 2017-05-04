@@ -2,7 +2,7 @@ package com.armandgray.taap.log;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.armandgray.taap.BuildConfig;
@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
@@ -117,7 +118,6 @@ public class LogActivityViewsTest {
 
     @Test
     public void doesSetLayoutText_DetailItem_ExercisesCompleted() throws Exception {
-        LinearLayout layoutTotalSessionTime = views.layoutTotalSessionTime;
         TextView header = (TextView) views.layoutExercisesCompleted.findViewById(R.id.header);
         TextView tvText = (TextView) views.layoutExercisesCompleted.findViewById(R.id.tvText);
         assertNotNull(header);
@@ -142,6 +142,24 @@ public class LogActivityViewsTest {
         dateString += new SimpleDateFormat("EEE, MMM d, ''yy", Locale.US).format(new Date()) + "  <";
         assertNotNull(views.tvDate);
         assertEquals(dateString, views.tvDate.getText());
+    }
+
+    @Test
+    public void doesSetLayoutText_RecordItem_Fundamentals() throws Exception {
+        ImageView ivImage = (ImageView) views.layoutFundamentals.findViewById(R.id.ivImage);
+        TextView tvTime = (TextView) views.layoutFundamentals.findViewById(R.id.tvTime);
+        TextView tvSuccessRate = (TextView) views.layoutFundamentals.findViewById(R.id.tvSuccessRate);
+        TextView tvHeader = (TextView) views.layoutFundamentals.findViewById(R.id.tvHeader);
+
+        assertNotNull(ivImage);
+        assertNotNull(tvTime);
+        assertNotNull(tvSuccessRate);
+        assertNotNull(tvHeader);
+        assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
+                R.drawable.ic_timer_white_24dp), ivImage.getDrawable());
+        assertEquals(activity.getString(R.string.zero_time), tvTime.getText());
+        assertEquals("0%", tvSuccessRate.getText());
+        assertEquals(activity.getString(R.string.fundamentals), tvHeader.getText());
     }
 
     @After
