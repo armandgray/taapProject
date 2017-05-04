@@ -162,6 +162,101 @@ public class LogActivityViewsTest {
         assertEquals(activity.getString(R.string.fundamentals), tvHeader.getText());
     }
 
+    @Test
+    public void doesSetLayoutText_RecordItem_Defense() throws Exception {
+        ImageView ivImage = (ImageView) views.layoutDefense.findViewById(R.id.ivImage);
+        TextView tvTime = (TextView) views.layoutDefense.findViewById(R.id.tvTime);
+        TextView tvSuccessRate = (TextView) views.layoutDefense.findViewById(R.id.tvSuccessRate);
+        TextView tvHeader = (TextView) views.layoutDefense.findViewById(R.id.tvHeader);
+
+        assertNotNull(ivImage);
+        assertNotNull(tvTime);
+        assertNotNull(tvSuccessRate);
+        assertNotNull(tvHeader);
+        // TODO add correct assertion for image
+//        assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
+//                R.drawable.ic_timer_white_24dp), ivImage.getDrawable());
+        assertEquals(activity.getString(R.string.zero_time), tvTime.getText());
+        assertEquals("0%", tvSuccessRate.getText());
+        assertEquals(activity.getString(R.string.defense), tvHeader.getText());
+    }
+
+    @Test
+    public void doesSetLayoutText_RecordItem_OffBallOffense() throws Exception {
+        ImageView ivImage = (ImageView) views.layoutOffBallOffense.findViewById(R.id.ivImage);
+        TextView tvTime = (TextView) views.layoutOffBallOffense.findViewById(R.id.tvTime);
+        TextView tvSuccessRate = (TextView) views.layoutOffBallOffense.findViewById(R.id.tvSuccessRate);
+        TextView tvHeader = (TextView) views.layoutOffBallOffense.findViewById(R.id.tvHeader);
+
+        assertNotNull(ivImage);
+        assertNotNull(tvTime);
+        assertNotNull(tvSuccessRate);
+        assertNotNull(tvHeader);
+        // TODO add correct assertion for image
+//        assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
+//                R.drawable.ic_timer_white_24dp), ivImage.getDrawable());
+        assertEquals(activity.getString(R.string.zero_time), tvTime.getText());
+        assertEquals("0%", tvSuccessRate.getText());
+        assertEquals(activity.getString(R.string.off_ball_offense), tvHeader.getText());
+    }
+
+    @Test
+    public void doesSetLayoutText_RecordItem_Conditioning() throws Exception {
+        ImageView ivImage = (ImageView) views.layoutConditioning.findViewById(R.id.ivImage);
+        TextView tvTime = (TextView) views.layoutConditioning.findViewById(R.id.tvTime);
+        TextView tvSuccessRate = (TextView) views.layoutConditioning.findViewById(R.id.tvSuccessRate);
+        TextView tvHeader = (TextView) views.layoutConditioning.findViewById(R.id.tvHeader);
+
+        assertNotNull(ivImage);
+        assertNotNull(tvTime);
+        assertNotNull(tvSuccessRate);
+        assertNotNull(tvHeader);
+        // TODO add correct assertion for image
+//        assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
+//                R.drawable.ic_timer_white_24dp), ivImage.getDrawable());
+        assertEquals(activity.getString(R.string.zero_time), tvTime.getText());
+        assertEquals("0%", tvSuccessRate.getText());
+        assertEquals(activity.getString(R.string.conditioning), tvHeader.getText());
+    }
+
+    @Test
+    public void doesSetLayoutText_RecordItem_Shooting() throws Exception {
+        ImageView ivImage = (ImageView) views.layoutShooting.findViewById(R.id.ivImage);
+        TextView tvTime = (TextView) views.layoutShooting.findViewById(R.id.tvTime);
+        TextView tvSuccessRate = (TextView) views.layoutShooting.findViewById(R.id.tvSuccessRate);
+        TextView tvHeader = (TextView) views.layoutShooting.findViewById(R.id.tvHeader);
+
+        assertNotNull(ivImage);
+        assertNotNull(tvTime);
+        assertNotNull(tvSuccessRate);
+        assertNotNull(tvHeader);
+        // TODO add correct assertion for image
+//        assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
+//                R.drawable.ic_timer_white_24dp), ivImage.getDrawable());
+        assertEquals(activity.getString(R.string.zero_time), tvTime.getText());
+        assertEquals("0%", tvSuccessRate.getText());
+        assertEquals(activity.getString(R.string.shooting), tvHeader.getText());
+    }
+
+    @Test
+    public void doesSetLayoutText_RecordItem_BallHandling() throws Exception {
+        ImageView ivImage = (ImageView) views.layoutBallHandling.findViewById(R.id.ivImage);
+        TextView tvTime = (TextView) views.layoutBallHandling.findViewById(R.id.tvTime);
+        TextView tvSuccessRate = (TextView) views.layoutBallHandling.findViewById(R.id.tvSuccessRate);
+        TextView tvHeader = (TextView) views.layoutBallHandling.findViewById(R.id.tvHeader);
+
+        assertNotNull(ivImage);
+        assertNotNull(tvTime);
+        assertNotNull(tvSuccessRate);
+        assertNotNull(tvHeader);
+        // TODO add correct assertion for image
+//        assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
+//                R.drawable.ic_timer_white_24dp), ivImage.getDrawable());
+        assertEquals(activity.getString(R.string.zero_time), tvTime.getText());
+        assertEquals("0%", tvSuccessRate.getText());
+        assertEquals(activity.getString(R.string.ball_handling), tvHeader.getText());
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");

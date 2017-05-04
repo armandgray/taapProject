@@ -26,6 +26,11 @@ class LogActivityViews {
     LinearLayout layoutRepsCompleted;
     TextView tvDate;
     LinearLayout layoutFundamentals;
+    LinearLayout layoutDefense;
+    LinearLayout layoutOffBallOffense;
+    LinearLayout layoutConditioning;
+    LinearLayout layoutShooting;
+    LinearLayout layoutBallHandling;
 
     LogActivityViews(LogActivity activity, LogViewsListener listener) {
         this.activity = activity;
