@@ -156,7 +156,7 @@ public class LogActivityViewsTest {
         assertNotNull(tvHeader);
         // TODO add correct assertion for image
 //        assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
-//                R.drawable.ic_timer_white_24dp), ivImage.getDrawable());
+//                R.drawable.ic_key_white_48dp), ivImage.getDrawable());
         assertEquals(activity.getString(R.string.zero_time), tvTime.getText());
         assertEquals("0%", tvSuccessRate.getText());
         assertEquals(activity.getString(R.string.fundamentals), tvHeader.getText());
@@ -175,7 +175,7 @@ public class LogActivityViewsTest {
         assertNotNull(tvHeader);
         // TODO add correct assertion for image
 //        assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
-//                R.drawable.ic_timer_white_24dp), ivImage.getDrawable());
+//                R.drawable.ic_account_multiple_outline_white_48dp), ivImage.getDrawable());
         assertEquals(activity.getString(R.string.zero_time), tvTime.getText());
         assertEquals("0%", tvSuccessRate.getText());
         assertEquals(activity.getString(R.string.defense), tvHeader.getText());
@@ -194,7 +194,7 @@ public class LogActivityViewsTest {
         assertNotNull(tvHeader);
         // TODO add correct assertion for image
 //        assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
-//                R.drawable.ic_timer_white_24dp), ivImage.getDrawable());
+//                R.drawable.ic_human_handsup_white_48dp), ivImage.getDrawable());
         assertEquals(activity.getString(R.string.zero_time), tvTime.getText());
         assertEquals("0%", tvSuccessRate.getText());
         assertEquals(activity.getString(R.string.off_ball_offense), tvHeader.getText());
@@ -213,7 +213,7 @@ public class LogActivityViewsTest {
         assertNotNull(tvHeader);
         // TODO add correct assertion for image
 //        assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
-//                R.drawable.ic_timer_white_24dp), ivImage.getDrawable());
+//                R.drawable.ic_run_fast_white_48dp), ivImage.getDrawable());
         assertEquals(activity.getString(R.string.zero_time), tvTime.getText());
         assertEquals("0%", tvSuccessRate.getText());
         assertEquals(activity.getString(R.string.conditioning), tvHeader.getText());
@@ -232,7 +232,7 @@ public class LogActivityViewsTest {
         assertNotNull(tvHeader);
         // TODO add correct assertion for image
 //        assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
-//                R.drawable.ic_timer_white_24dp), ivImage.getDrawable());
+//                R.drawable.ic_dribbble_white_48dp), ivImage.getDrawable());
         assertEquals(activity.getString(R.string.zero_time), tvTime.getText());
         assertEquals("0%", tvSuccessRate.getText());
         assertEquals(activity.getString(R.string.shooting), tvHeader.getText());
@@ -251,7 +251,7 @@ public class LogActivityViewsTest {
         assertNotNull(tvHeader);
         // TODO add correct assertion for image
 //        assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
-//                R.drawable.ic_timer_white_24dp), ivImage.getDrawable());
+//                R.drawable.ic_gesture_two_double_tap_white_48dp), ivImage.getDrawable());
         assertEquals(activity.getString(R.string.zero_time), tvTime.getText());
         assertEquals("0%", tvSuccessRate.getText());
         assertEquals(activity.getString(R.string.ball_handling), tvHeader.getText());

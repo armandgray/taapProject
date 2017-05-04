@@ -103,17 +103,18 @@ class LogActivityViews {
                 + new SimpleDateFormat("EEE, MMM d, ''yy", Locale.US).format(new Date())
                 + "  <";
         tvDate.setText(dateString);
-        setTextForRecordLayoutViews(layoutFundamentals, R.drawable.ic_timer_white_24dp,
+        setTextForRecordLayoutViews(layoutFundamentals, R.drawable.ic_key_white_48dp,
                 "00:00:00", "0%", R.string.fundamentals);
-        setTextForRecordLayoutViews(layoutDefense, R.drawable.ic_timer_white_24dp,
+        setTextForRecordLayoutViews(layoutDefense, R.drawable.ic_account_multiple_outline_white_48dp,
                 "00:00:00", "0%", R.string.defense);
-        setTextForRecordLayoutViews(layoutOffBallOffense, R.drawable.ic_timer_white_24dp,
+        setTextForRecordLayoutViews(layoutOffBallOffense, R.drawable.ic_human_handsup_white_48dp,
                 "00:00:00", "0%", R.string.off_ball_offense);
-        setTextForRecordLayoutViews(layoutConditioning, R.drawable.ic_timer_white_24dp,
+        setTextForRecordLayoutViews(layoutConditioning, R.drawable.ic_run_fast_white_48dp,
                 "00:00:00", "0%", R.string.conditioning);
-        setTextForRecordLayoutViews(layoutShooting, R.drawable.ic_timer_white_24dp,
+        setTextForRecordLayoutViews(layoutShooting, R.drawable.ic_dribbble_white_48dp,
                 "00:00:00", "0%", R.string.shooting);
-        setTextForRecordLayoutViews(layoutBallHandling, R.drawable.ic_timer_white_24dp,
+        setTextForRecordLayoutViews(layoutBallHandling,
+                R.drawable.ic_gesture_two_double_tap_white_48dp,
                 "00:00:00", "0%", R.string.ball_handling);
     }
 
