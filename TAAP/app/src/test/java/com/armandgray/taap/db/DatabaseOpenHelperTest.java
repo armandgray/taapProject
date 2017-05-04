@@ -9,8 +9,8 @@ import static junit.framework.Assert.assertNotNull;
 public class DatabaseOpenHelperTest {
 
     @Test
-    public void doesImplementSQLiteOpenHelper() throws Exception {
-        SQLiteOpenHelper databaseOpenHelper = new DatabaseOpenHelper();
+    public void doesExtendSQLiteOpenHelper() throws Exception {
+        SQLiteOpenHelper databaseOpenHelper = new DatabaseOpenHelper(null);
         assertNotNull(databaseOpenHelper);
     }
 }
