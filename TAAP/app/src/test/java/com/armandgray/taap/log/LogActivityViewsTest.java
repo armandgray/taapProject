@@ -2,6 +2,7 @@ package com.armandgray.taap.log;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.armandgray.taap.BuildConfig;
@@ -82,7 +83,12 @@ public class LogActivityViewsTest {
 
     @Test
     public void doesSetLayoutText_DetailItem_TotalSessionTime() throws Exception {
-        assertNotNull(views.layoutTotalSessionTime);
+        LinearLayout layoutTotalSessionTime = views.layoutTotalSessionTime;
+        TextView header = (TextView) layoutTotalSessionTime.findViewById(R.id.header);
+        TextView tvText = (TextView) layoutTotalSessionTime.findViewById(R.id.tvText);
+        assertNotNull(header);
+        assertNotNull(tvText);
+        assertEquals(activity.getString(R.string.total_session_time), header.getText());
     }
 
     @After
