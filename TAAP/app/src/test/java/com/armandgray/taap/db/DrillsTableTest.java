@@ -6,6 +6,7 @@ import static com.armandgray.taap.db.DrillsTable.COLUMN_CATEGORY;
 import static com.armandgray.taap.db.DrillsTable.COLUMN_ID;
 import static com.armandgray.taap.db.DrillsTable.COLUMN_IMAGE_ID;
 import static com.armandgray.taap.db.DrillsTable.COLUMN_TITLE;
+import static com.armandgray.taap.db.DrillsTable.SQL_CREATE;
 import static com.armandgray.taap.db.DrillsTable.TABLE_DRILLS;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
@@ -24,6 +25,20 @@ public class DrillsTableTest {
         assertEquals("itemImageId", COLUMN_IMAGE_ID);
         assertNotNull(COLUMN_CATEGORY);
         assertEquals("itemCategory", COLUMN_CATEGORY);
+    }
+
+    @Test
+    public void hasField_SQLCreate() throws Exception {
+        String expected =
+                "CREATE TABLE " + TABLE_DRILLS + " ("
+                        + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                        + COLUMN_TITLE + " TEXT, "
+                        + COLUMN_IMAGE_ID + " INTEGER,"
+                        + COLUMN_CATEGORY + " TEXT"
+                        + ")";
+
+        assertNotNull(SQL_CREATE);
+        assertEquals(expected, SQL_CREATE);
     }
 
 }
