@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/ivImage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
         android:contentDescription="@string/icon_goals_met_trophy"
         android:layout_margin="@dimen/card_margin"
         app:srcCompat="@drawable/ic_whatshot_white_24dp" />
