@@ -12,14 +12,13 @@ import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
+import static com.armandgray.taap.db.DatabaseOpenHelper.DATABASE_NAME;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
 public class DatabaseOpenHelperTest {
-
-    private static final String TAAP_DB = "taap.db";
 
     @Test
     public void doesExtendSQLiteOpenHelper() throws Exception {
@@ -31,6 +30,7 @@ public class DatabaseOpenHelperTest {
     public void doesSetDatabaseName_TestConstructor() {
         ShadowApplication context = Shadows.shadowOf(RuntimeEnvironment.application);
         DatabaseOpenHelper dbHelper = new DatabaseOpenHelper(context.getApplicationContext());
-        assertEquals(TAAP_DB, dbHelper.getDatabaseName());
+        assertEquals(DATABASE_NAME, dbHelper.getDatabaseName());
     }
+
 }
