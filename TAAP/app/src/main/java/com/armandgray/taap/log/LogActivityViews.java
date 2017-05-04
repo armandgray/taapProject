@@ -12,6 +12,7 @@ class LogActivityViews {
 
     @VisibleForTesting LogActivity activity;
     private LogViewsListener listener;
+    String layoutTotalSessionTime;
 
     LogActivityViews(LogActivity activity, LogViewsListener listener) {
         this.activity = activity;

@@ -80,6 +80,11 @@ public class LogActivityViewsTest {
                 .getString(R.string.session_history), tvTitle.getText());
     }
 
+    @Test
+    public void doesSetLayoutText_DetailItem_TotalSessionTime() throws Exception {
+        assertNotNull(views.layoutTotalSessionTime);
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
