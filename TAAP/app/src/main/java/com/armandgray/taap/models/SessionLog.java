@@ -17,6 +17,7 @@ public class SessionLog implements Parcelable {
     private int repsCompleted;
     private double successRate;
     private double successRecord;
+    private Drill drill;
 
     private SessionLog(Builder builder) {
         this.sessionDate = builder.sessionDate;
@@ -28,6 +29,7 @@ public class SessionLog implements Parcelable {
         this.repsCompleted = builder.repsCompleted;
         this.successRate = builder.successRate;
         this.successRecord = builder.successRecord;
+        this.drill = builder.drill;
     }
 
     public static class Builder {
@@ -41,6 +43,7 @@ public class SessionLog implements Parcelable {
         private int repsCompleted;
         private double successRate;
         private double successRecord;
+        private Drill drill;
 
         public Builder() {
             Calendar calendar = Calendar.getInstance();
@@ -92,6 +95,11 @@ public class SessionLog implements Parcelable {
             return this;
         }
 
+        public Builder drill(Drill d) {
+            this.drill = d;
+            return this;
+        }
+
         public SessionLog create() {
             return new SessionLog(this);
         }
@@ -133,6 +141,10 @@ public class SessionLog implements Parcelable {
         return successRecord;
     }
 
+    public Drill getDrill() {
+        return drill;
+    }
+
     public static int getFieldCount() {
         return 9;
     }
@@ -153,6 +165,7 @@ public class SessionLog implements Parcelable {
         dest.writeInt(this.repsCompleted);
         dest.writeDouble(this.successRate);
         dest.writeDouble(this.successRecord);
+        dest.writeParcelable(this.drill, flags);
     }
 
     protected SessionLog(Parcel in) {
@@ -170,6 +183,7 @@ public class SessionLog implements Parcelable {
         this.repsCompleted = in.readInt();
         this.successRate = in.readDouble();
         this.successRecord = in.readDouble();
+        this.drill = in.readParcelable(Drill.class.getClassLoader());
     }
 
     public static final Parcelable.Creator<SessionLog> CREATOR = new Parcelable.Creator<SessionLog>() {

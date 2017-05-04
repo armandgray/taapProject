@@ -50,7 +50,6 @@ public class SessionLogTest {
         assertNotNull(sessionLog.getRepsCompleted());
         assertNotNull(sessionLog.getSuccessRate());
         assertNotNull(sessionLog.getSuccessRecord());
-        assertNotNull(sessionLog.getDrill());
     }
 
     @Test
