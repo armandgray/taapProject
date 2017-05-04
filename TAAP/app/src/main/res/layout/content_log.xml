@@ -106,22 +106,61 @@
             android:layout_height="1dp"
             android:background="@android:color/white" />
 
-        <include layout="@layout/log_record_layout"
-            android:id="@+id/layoutFundamentals"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:weightSum="0.9">
 
-        <include layout="@layout/log_record_layout"
-            android:id="@+id/layoutDefense"/>
+            <include
+                android:id="@+id/layoutFundamentals"
+                layout="@layout/log_record_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3" />
 
-        <include layout="@layout/log_record_layout"
-            android:id="@+id/layoutOffBallOffense"/>
+            <include
+                android:id="@+id/layoutDefense"
+                layout="@layout/log_record_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3" />
 
-        <include layout="@layout/log_record_layout"
-            android:id="@+id/layoutConditioning"/>
+            <include
+                android:id="@+id/layoutOffBallOffense"
+                layout="@layout/log_record_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3" />
+        </LinearLayout>
 
-        <include layout="@layout/log_record_layout"
-            android:id="@+id/layoutShooting"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/card_margin"
+            android:orientation="vertical">
 
-        <include layout="@layout/log_record_layout"
-            android:id="@+id/layoutBallHandling"/>
+            <include
+                android:id="@+id/layoutConditioning"
+                layout="@layout/log_record_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3" />
+
+            <include
+                android:id="@+id/layoutShooting"
+                layout="@layout/log_record_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3" />
+
+            <include
+                android:id="@+id/layoutBallHandling"
+                layout="@layout/log_record_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
