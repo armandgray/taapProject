@@ -138,8 +138,8 @@ public class LogActivityViewsTest {
 
     @Test
     public void doesSetLayoutText_RecordItem_Date() throws Exception {
-        String dateString = "< ";
-        dateString += new SimpleDateFormat("EEE, MMM d, ''yy", Locale.US).format(new Date()) + " >";
+        String dateString = ">  ";
+        dateString += new SimpleDateFormat("EEE, MMM d, ''yy", Locale.US).format(new Date()) + "  <";
         assertNotNull(views.tvDate);
         assertEquals(dateString, views.tvDate.getText());
     }

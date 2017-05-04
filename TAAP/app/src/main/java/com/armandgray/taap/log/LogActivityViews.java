@@ -89,8 +89,9 @@ class LogActivityViews {
     }
 
     private void setupRecordItems() {
-        String dateString = "< ";
-        dateString += new SimpleDateFormat("EEE, MMM d, ''yy", Locale.US).format(new Date()) + " >";
+        String dateString = ">  "
+                + new SimpleDateFormat("EEE, MMM d, ''yy", Locale.US).format(new Date())
+                + "  <";
         tvDate.setText(dateString);
     }
 
