@@ -14,6 +14,10 @@ class LogActivityViews {
     @VisibleForTesting LogActivity activity;
     private LogViewsListener listener;
     LinearLayout layoutTotalSessionTime;
+    LinearLayout layoutTotalActiveTime;
+    LinearLayout layoutTotalRestTime;
+    LinearLayout layoutExercisesCompleted;
+    LinearLayout layoutRepsCompleted;
 
     LogActivityViews(LogActivity activity, LogViewsListener listener) {
         this.activity = activity;
@@ -29,6 +33,10 @@ class LogActivityViews {
 
     private void assignFields() {
         layoutTotalSessionTime = (LinearLayout) activity.findViewById(R.id.layoutTotalSessionTime);
+        layoutTotalActiveTime = (LinearLayout) activity.findViewById(R.id.layoutTotalActiveTime);
+        layoutTotalRestTime = (LinearLayout) activity.findViewById(R.id.layoutTotalRestTime);
+        layoutExercisesCompleted = (LinearLayout) activity.findViewById(R.id.layoutExercisesCompleted);
+        layoutRepsCompleted = (LinearLayout) activity.findViewById(R.id.layoutRepsCompleted);
     }
 
     private void setupToolbar() {
@@ -53,6 +61,14 @@ class LogActivityViews {
     private void setupDetailItems() {
         setTextForDetailLayoutViews(layoutTotalSessionTime,
                 R.string.total_session_time, "00:00:00");
+        setTextForDetailLayoutViews(layoutTotalActiveTime,
+                R.string.total_active_time, "00:00:00");
+        setTextForDetailLayoutViews(layoutTotalRestTime,
+                R.string.total_rest_time, "00:00:00");
+        setTextForDetailLayoutViews(layoutExercisesCompleted,
+                R.string.exercises_completed, "0");
+        setTextForDetailLayoutViews(layoutRepsCompleted,
+                R.string.reps_completed, "0");
     }
 
     private void setTextForDetailLayoutViews(LinearLayout layoutTotalSessionTime, int total_session_time, String text) {
