@@ -1,10 +1,10 @@
 package com.armandgray.taap.log;
 
-import android.app.Activity;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,7 +25,7 @@ class LogActivityViews {
     LinearLayout layoutExercisesCompleted;
     LinearLayout layoutRepsCompleted;
     TextView tvDate;
-    Activity layoutFundamentals;
+    LinearLayout layoutFundamentals;
 
     LogActivityViews(LogActivity activity, LogViewsListener listener) {
         this.activity = activity;
@@ -46,7 +46,10 @@ class LogActivityViews {
         layoutTotalRestTime = (LinearLayout) activity.findViewById(R.id.layoutTotalRestTime);
         layoutExercisesCompleted = (LinearLayout) activity.findViewById(R.id.layoutExercisesCompleted);
         layoutRepsCompleted = (LinearLayout) activity.findViewById(R.id.layoutRepsCompleted);
+        
         tvDate = (TextView) activity.findViewById(R.id.recordsContainer).findViewById(R.id.tvDate);
+        layoutFundamentals = (LinearLayout) activity.findViewById(R.id.recordsContainer)
+                .findViewById(R.id.layoutFundamentals);
     }
 
     private void setupToolbar() {
@@ -71,22 +74,17 @@ class LogActivityViews {
     }
 
     private void setupDetailItems() {
-        setTextForDetailLayoutViews(layoutTotalSessionTime,
-                R.string.total_session_time, "00:00:00");
-        setTextForDetailLayoutViews(layoutTotalActiveTime,
-                R.string.total_active_time, "00:00:00");
-        setTextForDetailLayoutViews(layoutTotalRestTime,
-                R.string.total_rest_time, "00:00:00");
-        setTextForDetailLayoutViews(layoutExercisesCompleted,
-                R.string.exercises_completed, "0");
-        setTextForDetailLayoutViews(layoutRepsCompleted,
-                R.string.reps_completed, "0");
+        setTextForDetailLayoutViews(layoutTotalSessionTime, R.string.total_session_time, "00:00:00");
+        setTextForDetailLayoutViews(layoutTotalActiveTime, R.string.total_active_time, "00:00:00");
+        setTextForDetailLayoutViews(layoutTotalRestTime, R.string.total_rest_time, "00:00:00");
+        setTextForDetailLayoutViews(layoutExercisesCompleted, R.string.exercises_completed, "0");
+        setTextForDetailLayoutViews(layoutRepsCompleted, R.string.reps_completed, "0");
     }
 
-    private void setTextForDetailLayoutViews(LinearLayout layoutTotalSessionTime, int total_session_time, String text) {
-        TextView header = (TextView) layoutTotalSessionTime.findViewById(R.id.header);
-        TextView tvText = (TextView) layoutTotalSessionTime.findViewById(R.id.tvText);
-        header.setText(total_session_time);
+    private void setTextForDetailLayoutViews(LinearLayout layout, int headerResId, String text) {
+        TextView header = (TextView) layout.findViewById(R.id.header);
+        TextView tvText = (TextView) layout.findViewById(R.id.tvText);
+        header.setText(headerResId);
         tvText.setText(text);
     }
 
@@ -95,6 +93,21 @@ class LogActivityViews {
                 + new SimpleDateFormat("EEE, MMM d, ''yy", Locale.US).format(new Date())
                 + "  <";
         tvDate.setText(dateString);
+        setTextForRecordLayoutViews(layoutFundamentals, R.drawable.ic_timer_white_24dp,
+                "00:00:00", "0%", R.string.fundamentals);
+    }
+
+    private void setTextForRecordLayoutViews(
+            LinearLayout layout, int imageResId, String time, String successRate, int headerResId) {
+        ImageView ivImage = (ImageView) layout.findViewById(R.id.ivImage);
+        TextView tvTime = (TextView) layout.findViewById(R.id.tvTime);
+        TextView tvSuccessRate = (TextView) layout.findViewById(R.id.tvSuccessRate);
+        TextView tvHeader = (TextView) layout.findViewById(R.id.tvHeader);
+
+        ivImage.setImageResource(imageResId);
+        tvTime.setText(time);
+        tvSuccessRate.setText(successRate);
+        tvHeader.setText(headerResId);
     }
 
     interface LogViewsListener {
