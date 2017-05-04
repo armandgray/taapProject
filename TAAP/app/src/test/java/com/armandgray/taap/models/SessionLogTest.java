@@ -22,6 +22,7 @@ public class SessionLogTest {
                 .repsCompleted(3)
                 .successRate(0.23)
                 .successRecord(0.55)
+                .drill(new Drill("", 0, Drill.SHOOTING_ARRAY))
                 .create();
         assertNotNull(sessionLog);
         assertNotNull(sessionLog.getSessionDate());
@@ -33,6 +34,7 @@ public class SessionLogTest {
         assertNotNull(sessionLog.getRepsCompleted());
         assertNotNull(sessionLog.getSuccessRate());
         assertNotNull(sessionLog.getSuccessRecord());
+        assertNotNull(sessionLog.getDrill());
     }
 
     @Test
@@ -48,6 +50,7 @@ public class SessionLogTest {
         assertNotNull(sessionLog.getRepsCompleted());
         assertNotNull(sessionLog.getSuccessRate());
         assertNotNull(sessionLog.getSuccessRecord());
+        assertNotNull(sessionLog.getDrill());
     }
 
     @Test
