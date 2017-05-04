@@ -17,6 +17,10 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
@@ -130,6 +134,14 @@ public class LogActivityViewsTest {
         assertNotNull(tvText);
         assertEquals(activity.getString(R.string.reps_completed), header.getText());
         assertEquals(String.valueOf(0), tvText.getText());
+    }
+
+    @Test
+    public void doesSetLayoutText_RecordItem_Date() throws Exception {
+        Date date = new Date();
+        assertNotNull(views.tvDate);
+        assertEquals(new SimpleDateFormat("EEE, MMM d, ''yy", Locale.US).format(date),
+                views.tvDate.getText());
     }
 
     @After

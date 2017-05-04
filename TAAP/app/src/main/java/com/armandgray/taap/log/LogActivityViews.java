@@ -18,6 +18,7 @@ class LogActivityViews {
     LinearLayout layoutTotalRestTime;
     LinearLayout layoutExercisesCompleted;
     LinearLayout layoutRepsCompleted;
+    TextView tvDate;
 
     LogActivityViews(LogActivity activity, LogViewsListener listener) {
         this.activity = activity;
