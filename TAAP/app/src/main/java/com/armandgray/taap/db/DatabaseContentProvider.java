@@ -5,7 +5,9 @@ import android.support.annotation.VisibleForTesting;
 
 public class DatabaseContentProvider {
 
-    @VisibleForTesting static final String AUTHORITY = "com.armandgray.seeme.db.notesprovider";
+    public static final Uri CONTENT_URI_DRILLS;
+    @VisibleForTesting static final String AUTHORITY = "com.armandgray.taap.db.provider";
     @VisibleForTesting static final String BASE_PATH_DRILLS = "drills";
-    public static final Uri CONTENT_URI_DRILLS = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_DRILLS);
+
+    static { CONTENT_URI_DRILLS = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_DRILLS); }
 }
