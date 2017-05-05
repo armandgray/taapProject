@@ -2,6 +2,8 @@ package com.armandgray.taap.db;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static com.armandgray.taap.db.LogsTable.ALL_COLUMNS;
 import static com.armandgray.taap.db.LogsTable.COLUMN_ACTIVE_WORK;
 import static com.armandgray.taap.db.LogsTable.COLUMN_DATE;
@@ -48,7 +50,7 @@ public class LogsTableTest {
         assertNotNull(COLUMN_DRILL);
         assertEquals("itemDrill", COLUMN_DRILL);
         assertNotNull(ALL_COLUMNS);
-        assertEquals(allColumns, ALL_COLUMNS);
+        assertNotNull(Arrays.equals(allColumns, ALL_COLUMNS));
     }
 
 }

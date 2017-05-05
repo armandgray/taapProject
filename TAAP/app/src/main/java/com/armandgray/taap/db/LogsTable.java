@@ -1,17 +1,19 @@
 package com.armandgray.taap.db;
 
-public class LogsTable {
+class LogsTable {
 
-    static final String TABLE_LOGS = "";
-    static final String COLUMN_ID = "";
-    static final String COLUMN_DATE = "";
-    static final String COLUMN_LENGTH = "";
-    static final String COLUMN_GOAL = "";
-    static final String COLUMN_ACTIVE_WORK = "";
-    static final String COLUMN_REST_TIME = "";
-    static final String COLUMN_SETS_COMPLETED = "";
-    static final String COLUMN_REPS_COMPLETED = "";
-    static final String COLUMN_SUCCESS = "";
-    static final String COLUMN_DRILL = "";
-    static final String[] ALL_COLUMNS = {};
+    static final String TABLE_LOGS = "logs";
+    static final String COLUMN_ID = "logId";
+    static final String COLUMN_DATE = "itemDate";
+    static final String COLUMN_LENGTH = "itemLength";
+    static final String COLUMN_GOAL = "itemGoal";
+    static final String COLUMN_ACTIVE_WORK = "itemActiveWork";
+    static final String COLUMN_REST_TIME = "itemRestTime";
+    static final String COLUMN_SETS_COMPLETED = "itemSetsCompleted";
+    static final String COLUMN_REPS_COMPLETED = "itemRepsCompleted";
+    static final String COLUMN_SUCCESS = "itemSuccess";
+    static final String COLUMN_DRILL = "itemDrill";
+    static final String[] ALL_COLUMNS = {
+            COLUMN_ID, COLUMN_DATE, COLUMN_LENGTH, COLUMN_GOAL, COLUMN_ACTIVE_WORK,
+            COLUMN_REST_TIME, COLUMN_SETS_COMPLETED, COLUMN_SUCCESS, COLUMN_DRILL };
 }
