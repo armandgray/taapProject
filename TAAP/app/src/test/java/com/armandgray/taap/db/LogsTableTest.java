@@ -18,6 +18,7 @@ import static com.armandgray.taap.db.LogsTable.COLUMN_REST_TIME;
 import static com.armandgray.taap.db.LogsTable.COLUMN_SETS_COMPLETED;
 import static com.armandgray.taap.db.LogsTable.COLUMN_SUCCESS;
 import static com.armandgray.taap.db.LogsTable.SQL_CREATE;
+import static com.armandgray.taap.db.LogsTable.SQL_DELETE;
 import static com.armandgray.taap.db.LogsTable.TABLE_LOGS;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
@@ -79,6 +80,12 @@ public class LogsTableTest {
 
         assertNotNull(SQL_CREATE);
         assertEquals(expected, SQL_CREATE);
+    }
+
+    @Test
+    public void hasField_SQLDelete() throws Exception {
+        assertNotNull(SQL_DELETE);
+        assertEquals("DROP TABLE " + TABLE_LOGS, SQL_DELETE);
     }
 
 }

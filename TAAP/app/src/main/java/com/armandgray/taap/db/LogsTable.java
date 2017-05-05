@@ -32,7 +32,10 @@ class LogsTable {
                     + COLUMN_REPS_COMPLETED + " INTEGER, "
                     + COLUMN_SUCCESS + " REAL, "
                     + COLUMN_DRILL + " INTEGER NOT NULL, "
-                    + "FOREIGN KEY (" + COLUMN_DRILL + ") REFERENCES "
-                    + TABLE_DRILLS + " (" + DRILL_ID + ")"
+                        + "FOREIGN KEY (" + COLUMN_DRILL + ") REFERENCES "
+                            + TABLE_DRILLS + " (" + DRILL_ID + ")"
                     + ")";
-    }
+
+    static final String SQL_DELETE = "";
+
+}
