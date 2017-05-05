@@ -7,7 +7,8 @@ class DrillsTable {
     static final String COLUMN_TITLE = "itemTitle";
     static final String COLUMN_IMAGE_ID = "itemImageId";
     static final String COLUMN_CATEGORY = "itemCategory";
-    static final String[] ALL_COLUMNS = {};
+    static final String[] ALL_COLUMNS = {
+            COLUMN_ID, COLUMN_TITLE, COLUMN_IMAGE_ID, COLUMN_CATEGORY };
 
     static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_DRILLS + " ("
