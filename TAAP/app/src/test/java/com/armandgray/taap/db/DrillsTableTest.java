@@ -6,9 +6,9 @@ import java.util.Arrays;
 
 import static com.armandgray.taap.db.DrillsTable.ALL_COLUMNS;
 import static com.armandgray.taap.db.DrillsTable.COLUMN_CATEGORY;
-import static com.armandgray.taap.db.DrillsTable.COLUMN_ID;
 import static com.armandgray.taap.db.DrillsTable.COLUMN_IMAGE_ID;
 import static com.armandgray.taap.db.DrillsTable.COLUMN_TITLE;
+import static com.armandgray.taap.db.DrillsTable.DRILL_ID;
 import static com.armandgray.taap.db.DrillsTable.SQL_CREATE;
 import static com.armandgray.taap.db.DrillsTable.SQL_DELETE;
 import static com.armandgray.taap.db.DrillsTable.TABLE_DRILLS;
@@ -20,12 +20,12 @@ public class DrillsTableTest {
 
     @Test
     public void hasFields_TableColumns() throws Exception {
-        String[] allColumns = { COLUMN_ID, COLUMN_TITLE, COLUMN_IMAGE_ID, COLUMN_CATEGORY };
+        String[] allColumns = { DRILL_ID, COLUMN_TITLE, COLUMN_IMAGE_ID, COLUMN_CATEGORY };
 
         assertNotNull(TABLE_DRILLS);
         assertEquals("drills", TABLE_DRILLS);
-        assertNotNull(COLUMN_ID);
-        assertEquals("drillId", COLUMN_ID);
+        assertNotNull(DRILL_ID);
+        assertEquals("drillId", DRILL_ID);
         assertNotNull(COLUMN_TITLE);
         assertEquals("itemTitle", COLUMN_TITLE);
         assertNotNull(COLUMN_IMAGE_ID);
@@ -42,7 +42,7 @@ public class DrillsTableTest {
     public void hasField_SQLCreate() throws Exception {
         String expected =
                 "CREATE TABLE " + TABLE_DRILLS + " ("
-                        + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                        + DRILL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                         + COLUMN_TITLE + " TEXT, "
                         + COLUMN_IMAGE_ID + " INTEGER,"
                         + COLUMN_CATEGORY + " TEXT"
