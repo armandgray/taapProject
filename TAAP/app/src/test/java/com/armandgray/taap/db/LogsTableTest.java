@@ -18,6 +18,7 @@ import static com.armandgray.taap.db.LogsTable.COLUMN_SUCCESS;
 import static com.armandgray.taap.db.LogsTable.TABLE_LOGS;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
 
 public class LogsTableTest {
 
@@ -50,7 +51,9 @@ public class LogsTableTest {
         assertNotNull(COLUMN_DRILL);
         assertEquals("itemDrill", COLUMN_DRILL);
         assertNotNull(ALL_COLUMNS);
-        assertNotNull(Arrays.equals(allColumns, ALL_COLUMNS));
+        for (String column : allColumns) {
+            assertTrue(Arrays.asList(ALL_COLUMNS).contains(column));
+        }
     }
 
 }
