@@ -17,6 +17,8 @@ import org.robolectric.shadows.ShadowApplication;
 import static com.armandgray.taap.db.DatabaseOpenHelper.DATABASE_NAME;
 import static com.armandgray.taap.db.DrillsTable.ALL_DRILL_COLUMNS;
 import static com.armandgray.taap.db.DrillsTable.TABLE_DRILLS;
+import static com.armandgray.taap.db.LogsTable.ALL_LOG_COLUMNS;
+import static com.armandgray.taap.db.LogsTable.TABLE_LOGS;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
@@ -38,11 +40,21 @@ public class DatabaseOpenHelperTest {
     }
 
     @Test
-    public void canCreateTable_Drill() {
+    public void canCreateTable_Drills() {
         DatabaseOpenHelper databaseOpenHelper =
                 new DatabaseOpenHelper(RuntimeEnvironment.application);
         SQLiteDatabase database = databaseOpenHelper.getReadableDatabase();
         Cursor cursor = database.query(TABLE_DRILLS, ALL_DRILL_COLUMNS, "", null, null, null, null);
+        assertNotNull(cursor);
+        cursor.close();
+    }
+
+    @Test
+    public void canCreateTable_Logs() {
+        DatabaseOpenHelper databaseOpenHelper =
+                new DatabaseOpenHelper(RuntimeEnvironment.application);
+        SQLiteDatabase database = databaseOpenHelper.getReadableDatabase();
+        Cursor cursor = database.query(TABLE_LOGS, ALL_LOG_COLUMNS, "", null, null, null, null);
         assertNotNull(cursor);
         cursor.close();
     }
