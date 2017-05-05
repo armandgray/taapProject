@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import static com.armandgray.taap.db.DrillsTable.ALL_COLUMNS;
+import static com.armandgray.taap.db.DrillsTable.ALL_DRILL_COLUMNS;
 import static com.armandgray.taap.db.DrillsTable.COLUMN_CATEGORY;
 import static com.armandgray.taap.db.DrillsTable.COLUMN_IMAGE_ID;
 import static com.armandgray.taap.db.DrillsTable.COLUMN_TITLE;
@@ -32,9 +32,9 @@ public class DrillsTableTest {
         assertEquals("itemImageId", COLUMN_IMAGE_ID);
         assertNotNull(COLUMN_CATEGORY);
         assertEquals("itemCategory", COLUMN_CATEGORY);
-        assertNotNull(ALL_COLUMNS);
+        assertNotNull(ALL_DRILL_COLUMNS);
         for (String column : allColumns) {
-            assertTrue(Arrays.asList(ALL_COLUMNS).contains(column));
+            assertTrue(Arrays.asList(ALL_DRILL_COLUMNS).contains(column));
         }
     }
 

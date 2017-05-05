@@ -16,7 +16,7 @@ class LogsTable {
     static final String COLUMN_REPS_COMPLETED = "itemRepsCompleted";
     static final String COLUMN_SUCCESS = "itemSuccess";
     static final String COLUMN_DRILL = "itemDrill";
-    static final String[] ALL_COLUMNS = {
+    static final String[] ALL_LOG_COLUMNS = {
             LOG_ID, COLUMN_DATE, COLUMN_LENGTH, COLUMN_GOAL, COLUMN_ACTIVE_WORK,
             COLUMN_REST_TIME, COLUMN_SETS_COMPLETED, COLUMN_SUCCESS, COLUMN_DRILL };
 

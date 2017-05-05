@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import static com.armandgray.taap.db.DrillsTable.DRILL_ID;
 import static com.armandgray.taap.db.DrillsTable.TABLE_DRILLS;
-import static com.armandgray.taap.db.LogsTable.ALL_COLUMNS;
+import static com.armandgray.taap.db.LogsTable.ALL_LOG_COLUMNS;
 import static com.armandgray.taap.db.LogsTable.COLUMN_ACTIVE_WORK;
 import static com.armandgray.taap.db.LogsTable.COLUMN_DATE;
 import static com.armandgray.taap.db.LogsTable.COLUMN_DRILL;
@@ -54,9 +54,9 @@ public class LogsTableTest {
         assertEquals("itemSuccess", COLUMN_SUCCESS);
         assertNotNull(COLUMN_DRILL);
         assertEquals("itemDrill", COLUMN_DRILL);
-        assertNotNull(ALL_COLUMNS);
+        assertNotNull(ALL_LOG_COLUMNS);
         for (String column : allColumns) {
-            assertTrue(Arrays.asList(ALL_COLUMNS).contains(column));
+            assertTrue(Arrays.asList(ALL_LOG_COLUMNS).contains(column));
         }
     }
 
