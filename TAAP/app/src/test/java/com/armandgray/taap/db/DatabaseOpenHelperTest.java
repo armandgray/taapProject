@@ -1,5 +1,7 @@
 package com.armandgray.taap.db;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.armandgray.taap.BuildConfig;
@@ -13,6 +15,8 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import static com.armandgray.taap.db.DatabaseOpenHelper.DATABASE_NAME;
+import static com.armandgray.taap.db.DrillsTable.COLUMN_ID;
+import static com.armandgray.taap.db.DrillsTable.TABLE_DRILLS;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
@@ -31,6 +35,17 @@ public class DatabaseOpenHelperTest {
         ShadowApplication context = Shadows.shadowOf(RuntimeEnvironment.application);
         DatabaseOpenHelper dbHelper = new DatabaseOpenHelper(context.getApplicationContext());
         assertEquals(DATABASE_NAME, dbHelper.getDatabaseName());
+    }
+
+    @Test
+    public void canCreateTable_Drill() {
+        DatabaseOpenHelper databaseOpenHelper =
+                new DatabaseOpenHelper(RuntimeEnvironment.application);
+        SQLiteDatabase database = databaseOpenHelper.getReadableDatabase();
+        String[] columnId = { COLUMN_ID };
+        Cursor cursor = database.query(TABLE_DRILLS, columnId, "", null, null, null, null);
+        assertNotNull(cursor);
+        cursor.close();
     }
 
 }
