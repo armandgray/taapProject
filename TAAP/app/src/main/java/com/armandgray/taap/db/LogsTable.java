@@ -36,6 +36,5 @@ class LogsTable {
                             + TABLE_DRILLS + " (" + DRILL_ID + ")"
                     + ")";
 
-    static final String SQL_DELETE = "";
-
+    static final String SQL_DELETE = "DROP TABLE " + TABLE_LOGS;
 }
