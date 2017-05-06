@@ -1,5 +1,6 @@
 package com.armandgray.taap.db;
 
+import android.content.ContentProvider;
 import android.net.Uri;
 
 import com.armandgray.taap.BuildConfig;
@@ -23,6 +24,12 @@ public class DatabaseContentProviderTest {
     public void hasContentUri_Drills() {
         assertNotNull(CONTENT_URI_DRILLS);
         assertEquals(Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_DRILLS), CONTENT_URI_DRILLS);
+    }
+
+    @Test
+    public void doesExtendContentProvider() {
+        ContentProvider databaseContentProvider = new DatabaseContentProvider();
+        assertNotNull(databaseContentProvider);
     }
 
     @Test
