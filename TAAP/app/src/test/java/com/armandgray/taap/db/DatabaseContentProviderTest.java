@@ -15,6 +15,7 @@ import static com.armandgray.taap.db.DatabaseContentProvider.BASE_PATH_DRILLS;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -34,6 +35,9 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void doesAssignWritableDatabase_TestOnCreate() {
+        DatabaseContentProvider contentProvider = new DatabaseContentProvider();
+        assertTrue(contentProvider.onCreate());
+        assertNotNull(contentProvider.database);
     }
 
 }
