@@ -13,11 +13,10 @@ import android.support.annotation.VisibleForTesting;
 public class DatabaseContentProvider extends ContentProvider {
 
     public static final Uri CONTENT_URI_DRILLS;
+    public static final Uri CONTENT_URI_LOGS;
     @VisibleForTesting static final String AUTHORITY = "com.armandgray.taap.db.provider";
     @VisibleForTesting static final String BASE_PATH_DRILLS = "drills";
-
-    static { CONTENT_URI_DRILLS = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_DRILLS); }
-
+    @VisibleForTesting static final String BASE_PATH_LOGS = "logs";
 
     @VisibleForTesting static final int ALL_DRILLS = 1;
     @VisibleForTesting static final int DRILLS_ID = 2;
@@ -25,6 +24,9 @@ public class DatabaseContentProvider extends ContentProvider {
     @VisibleForTesting static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
+        CONTENT_URI_DRILLS = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_DRILLS);
+        CONTENT_URI_LOGS = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_LOGS);
+
         uriMatcher.addURI(AUTHORITY, BASE_PATH_DRILLS, ALL_DRILLS);
         uriMatcher.addURI(AUTHORITY, BASE_PATH_DRILLS + "/#", DRILLS_ID);
     }
