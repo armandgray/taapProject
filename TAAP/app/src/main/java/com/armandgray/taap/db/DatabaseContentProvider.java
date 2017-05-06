@@ -18,7 +18,16 @@ public class DatabaseContentProvider extends ContentProvider {
 
     static { CONTENT_URI_DRILLS = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_DRILLS); }
 
+
+    @VisibleForTesting static final int ALL_DRILLS = 1;
+    @VisibleForTesting static final int DRILLS_ID = 2;
+
     @VisibleForTesting static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+
+    static {
+        uriMatcher.addURI(AUTHORITY, BASE_PATH_DRILLS, ALL_DRILLS);
+        uriMatcher.addURI(AUTHORITY, BASE_PATH_DRILLS + "/#", DRILLS_ID);
+    }
 
 
     @VisibleForTesting SQLiteDatabase database;
