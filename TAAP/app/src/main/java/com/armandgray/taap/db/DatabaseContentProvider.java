@@ -20,8 +20,8 @@ public class DatabaseContentProvider extends ContentProvider {
 
     @VisibleForTesting static final int ALL_DRILLS = 1;
     @VisibleForTesting static final int DRILLS_ID = 2;
-    @VisibleForTesting static final int ALL_LOGS = 1;
-    @VisibleForTesting static final int LOGS_ID = 2;
+    @VisibleForTesting static final int ALL_LOGS = 3;
+    @VisibleForTesting static final int LOGS_ID = 4;
 
     @VisibleForTesting static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
@@ -31,6 +31,8 @@ public class DatabaseContentProvider extends ContentProvider {
 
         uriMatcher.addURI(AUTHORITY, BASE_PATH_DRILLS, ALL_DRILLS);
         uriMatcher.addURI(AUTHORITY, BASE_PATH_DRILLS + "/#", DRILLS_ID);
+        uriMatcher.addURI(AUTHORITY, BASE_PATH_LOGS, ALL_LOGS);
+        uriMatcher.addURI(AUTHORITY, BASE_PATH_LOGS+ "/#", LOGS_ID);
     }
 
 
