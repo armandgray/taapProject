@@ -11,12 +11,14 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import static com.armandgray.taap.db.DatabaseContentProvider.ALL_DRILLS;
+import static com.armandgray.taap.db.DatabaseContentProvider.ALL_LOGS;
 import static com.armandgray.taap.db.DatabaseContentProvider.AUTHORITY;
 import static com.armandgray.taap.db.DatabaseContentProvider.BASE_PATH_DRILLS;
 import static com.armandgray.taap.db.DatabaseContentProvider.BASE_PATH_LOGS;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_LOGS;
 import static com.armandgray.taap.db.DatabaseContentProvider.DRILLS_ID;
+import static com.armandgray.taap.db.DatabaseContentProvider.LOGS_ID;
 import static com.armandgray.taap.db.DatabaseContentProvider.uriMatcher;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
@@ -44,6 +46,9 @@ public class DatabaseContentProviderTest {
         assertEquals(ALL_DRILLS, uriMatcher.match(CONTENT_URI_DRILLS));
         assertEquals(DRILLS_ID,
                 uriMatcher.match(Uri.parse(DatabaseContentProvider.CONTENT_URI_DRILLS + "/" + 0)));
+        assertEquals(ALL_LOGS, uriMatcher.match(CONTENT_URI_LOGS));
+        assertEquals(LOGS_ID,
+                uriMatcher.match(Uri.parse(DatabaseContentProvider.CONTENT_URI_LOGS + "/" + 0)));
     }
 
     @Test
