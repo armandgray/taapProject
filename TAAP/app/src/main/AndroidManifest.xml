@@ -51,6 +51,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.armandgray.taap.MainActivity" />
         </activity>
+
+        <provider
+            android:name=".db.DatabaseContentProvider"
+            android:authorities="com.armandgray.taap.db.provider"
+            android:exported="false" />
     </application>
 
 </manifest>
