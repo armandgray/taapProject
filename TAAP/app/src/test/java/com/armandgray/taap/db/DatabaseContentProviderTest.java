@@ -25,4 +25,8 @@ public class DatabaseContentProviderTest {
         assertEquals(Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_DRILLS), CONTENT_URI_DRILLS);
     }
 
+    @Test
+    public void doesAssignWritableDatabase_TestOnCreate() {
+    }
+
 }
