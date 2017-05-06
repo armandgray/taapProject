@@ -2,6 +2,7 @@ package com.armandgray.taap.db;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -16,6 +17,9 @@ public class DatabaseContentProvider extends ContentProvider {
     @VisibleForTesting static final String BASE_PATH_DRILLS = "drills";
 
     static { CONTENT_URI_DRILLS = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_DRILLS); }
+
+    @VisibleForTesting static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+
 
     @VisibleForTesting SQLiteDatabase database;
 

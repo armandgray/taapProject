@@ -13,6 +13,7 @@ import org.robolectric.annotation.Config;
 import static com.armandgray.taap.db.DatabaseContentProvider.AUTHORITY;
 import static com.armandgray.taap.db.DatabaseContentProvider.BASE_PATH_DRILLS;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
+import static com.armandgray.taap.db.DatabaseContentProvider.uriMatcher;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
@@ -25,6 +26,13 @@ public class DatabaseContentProviderTest {
     public void hasContentUri_Drills() {
         assertNotNull(CONTENT_URI_DRILLS);
         assertEquals(Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_DRILLS), CONTENT_URI_DRILLS);
+    }
+
+    @Test
+    public void hasContentUriMatcher() {
+        assertNotNull(uriMatcher);
+        assertEquals(0, uriMatcher.match(CONTENT_URI_DRILLS));
+        assertEquals(0, uriMatcher.match(Uri.parse(DatabaseContentProvider.CONTENT_URI_DRILLS + "/" + 0)));
     }
 
     @Test
