@@ -122,13 +122,10 @@ public class DatabaseContentProviderTest {
         values.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
         values.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
         values.put(DrillsTable.COLUMN_CATEGORY, drill.getCategory()[0]);
+        RuntimeEnvironment.application.getContentResolver().insert(CONTENT_URI_DRILLS, values);
 
-        DatabaseOpenHelper databaseOpenHelper =
-                new DatabaseOpenHelper(RuntimeEnvironment.application);
-        contentProvider.database = databaseOpenHelper.getWritableDatabase();
-
-        contentProvider.insert(CONTENT_URI_DRILLS, values);
-        Cursor cursor = databaseOpenHelper.getReadableDatabase()
+        Cursor cursor = (new DatabaseOpenHelper(RuntimeEnvironment.application))
+                .getReadableDatabase()
                 .query(DrillsTable.TABLE_DRILLS, DrillsTable.ALL_DRILL_COLUMNS,
                         null, null, null, null, null);
 
