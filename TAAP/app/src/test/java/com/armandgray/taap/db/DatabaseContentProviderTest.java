@@ -200,7 +200,16 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canQueryDatabaseForLogUsingContentProvider() {
+        insertLogToDatabase();
 
+        String selectedLog = LogsTable.LOG_ID + " = " + TEST_SESSION_LOG.getDrill().getDrillId();
+        Cursor cursor = RuntimeEnvironment.application.getContentResolver()
+                .query(CONTENT_URI_LOGS, LogsTable.ALL_LOG_COLUMNS, selectedLog,
+                        null, null);
+
+        assertNotNull(cursor);
+        assertCursorDataEqualsLog(cursor, TEST_SESSION_LOG);
+        cursor.close();
     }
 
     @Test
