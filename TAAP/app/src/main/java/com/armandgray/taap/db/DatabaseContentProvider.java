@@ -149,6 +149,18 @@ public class DatabaseContentProvider extends ContentProvider {
         return drillValues;
     }
 
+    public static void insertLogToDatabase(SessionLog sessionLog, Context context) {
+        ContentValues logValues = getLogContentValues(sessionLog);
+        if (sessionLog.getDrill().getDrillId() == 0) {
+            insertDrillToDatabase(sessionLog.getDrill(), context);
+        }
+        logValues.put(LogsTable.COLUMN_DRILL, sessionLog.getDrill().getDrillId());
+        Uri uri = context.getContentResolver().insert(CONTENT_URI_LOGS, logValues);
+        if (uri != null) {
+            sessionLog.setSessionId(Integer.parseInt(uri.getLastPathSegment()));
+        }
+    }
+
     @NonNull
     @VisibleForTesting
     static ContentValues getLogContentValues(SessionLog testSessionLog) {

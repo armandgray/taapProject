@@ -4,7 +4,6 @@ import android.content.ContentProvider;
 import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 
@@ -35,6 +34,7 @@ import static com.armandgray.taap.db.DatabaseContentProvider.LOGS_ID;
 import static com.armandgray.taap.db.DatabaseContentProvider.getDrillContentValues;
 import static com.armandgray.taap.db.DatabaseContentProvider.getLogContentValues;
 import static com.armandgray.taap.db.DatabaseContentProvider.insertDrillToDatabase;
+import static com.armandgray.taap.db.DatabaseContentProvider.insertLogToDatabase;
 import static com.armandgray.taap.db.DatabaseContentProvider.uriMatcher;
 import static com.armandgray.taap.utils.StringHelper.getStringAsArray;
 import static junit.framework.Assert.assertEquals;
@@ -354,18 +354,6 @@ public class DatabaseContentProviderTest {
                 cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
         assertThat(drill.getCategory(), is(getStringAsArray(cursor.getString(
                 cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)))));
-    }
-
-    private void insertLogToDatabase(SessionLog sessionLog, Context context) {
-        ContentValues logValues = getLogContentValues(sessionLog);
-        if (sessionLog.getDrill().getDrillId() == 0) {
-            insertDrillToDatabase(sessionLog.getDrill(), context);
-        }
-        logValues.put(LogsTable.COLUMN_DRILL, sessionLog.getDrill().getDrillId());
-        Uri uri = context.getContentResolver().insert(CONTENT_URI_LOGS, logValues);
-        if (uri != null) {
-            sessionLog.setSessionId(Integer.parseInt(uri.getLastPathSegment()));
-        }
     }
 
     private void assertCursorDataEqualsLog(Cursor cursor, SessionLog sessionLog) {
