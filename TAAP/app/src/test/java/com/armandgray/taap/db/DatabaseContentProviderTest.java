@@ -33,6 +33,7 @@ import static com.armandgray.taap.db.DatabaseContentProvider.EXECUTION_FAILURE;
 import static com.armandgray.taap.db.DatabaseContentProvider.LOGS_ID;
 import static com.armandgray.taap.db.DatabaseContentProvider.getDrillContentValues;
 import static com.armandgray.taap.db.DatabaseContentProvider.getLogContentValues;
+import static com.armandgray.taap.db.DatabaseContentProvider.insertDrillToDatabase;
 import static com.armandgray.taap.db.DatabaseContentProvider.uriMatcher;
 import static com.armandgray.taap.utils.StringHelper.getStringAsArray;
 import static junit.framework.Assert.assertEquals;
@@ -117,7 +118,7 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canQueryDatabaseForDrillUsingContentProvider() {
-        insertDrillToDatabase();
+        insertDrillToDatabase(TEST_DRILL, RuntimeEnvironment.application);
 
         String selectedDrill = DrillsTable.DRILL_ID + " = " + TEST_DRILL.getDrillId();
         Cursor cursor = RuntimeEnvironment.application.getContentResolver()
@@ -131,7 +132,7 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canQueryDatabaseForDrill_UsingDrillIdContentUri() {
-        insertDrillToDatabase();
+        insertDrillToDatabase(TEST_DRILL, RuntimeEnvironment.application);
 
         String selectedDrill = DrillsTable.DRILL_ID + " = " + TEST_DRILL.getDrillId();
         Uri uri = Uri.parse(CONTENT_URI_DRILLS + "/" + TEST_DRILL.getDrillId());
@@ -157,7 +158,7 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canInsertDrillIntoDatabaseUsingContentProvider() {
-        insertDrillToDatabase();
+        insertDrillToDatabase(TEST_DRILL, RuntimeEnvironment.application);
 
         Cursor cursor = (new DatabaseOpenHelper(RuntimeEnvironment.application))
                 .getReadableDatabase()
@@ -171,7 +172,7 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canDeleteDrillFromDatabaseUsingContentProvider() {
-        insertDrillToDatabase();
+        insertDrillToDatabase(TEST_DRILL, RuntimeEnvironment.application);
 
         String selectedDrill = DrillsTable.DRILL_ID + " = " + TEST_DRILL.getDrillId();
         Uri uri = Uri.parse(CONTENT_URI_DRILLS + "/" + TEST_DRILL.getDrillId());
@@ -192,7 +193,7 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canUpdateDrillFromDatabase_UsingDrillIdContentUri() {
-        insertDrillToDatabase();
+        insertDrillToDatabase(TEST_DRILL, RuntimeEnvironment.application);
 
         String selectedDrill = DrillsTable.DRILL_ID + " = " + TEST_DRILL.getDrillId();
         ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
@@ -340,16 +341,6 @@ public class DatabaseContentProviderTest {
                 contentProviderClient.getLocalContentProvider();
     }
 
-    private void insertDrillToDatabase() {
-        Drill drill = TEST_DRILL;
-        ContentValues drillValues = getDrillContentValues(drill);
-        Uri uri = RuntimeEnvironment.application.getContentResolver()
-                .insert(CONTENT_URI_DRILLS, drillValues);
-        if (uri != null) {
-            drill.setDrillId(Integer.parseInt(uri.getLastPathSegment()));
-        }
-    }
-
     private void assertCursorDataEqualsDrill(Cursor cursor, Drill drill) {
         assertTrue(cursor.moveToFirst());
         assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
@@ -367,7 +358,7 @@ public class DatabaseContentProviderTest {
     private void insertLogToDatabase() {
         ContentValues logValues = getLogContentValues(TEST_SESSION_LOG);
         if (TEST_SESSION_LOG.getDrill().getDrillId() == 0) {
-            insertDrillToDatabase();
+            insertDrillToDatabase(TEST_DRILL, RuntimeEnvironment.application);
         }
         logValues.put(LogsTable.COLUMN_DRILL, TEST_SESSION_LOG.getDrill().getDrillId());
         Uri uri = RuntimeEnvironment.application.getContentResolver()

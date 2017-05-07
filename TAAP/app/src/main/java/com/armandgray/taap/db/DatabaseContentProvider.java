@@ -2,6 +2,7 @@ package com.armandgray.taap.db;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -130,8 +131,17 @@ public class DatabaseContentProvider extends ContentProvider {
         return EXECUTION_FAILURE;
     }
 
+    public static void insertDrillToDatabase(Drill drill, Context context) {
+        ContentValues drillValues = getDrillContentValues(drill);
+        Uri uri = context.getContentResolver().insert(CONTENT_URI_DRILLS, drillValues);
+        if (uri != null) {
+            drill.setDrillId(Integer.parseInt(uri.getLastPathSegment()));
+        }
+    }
+
     @NonNull
-    public static ContentValues getDrillContentValues(Drill drill) {
+    @VisibleForTesting
+    static ContentValues getDrillContentValues(Drill drill) {
         ContentValues drillValues = new ContentValues();
         drillValues.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
         drillValues.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
@@ -140,7 +150,8 @@ public class DatabaseContentProvider extends ContentProvider {
     }
 
     @NonNull
-    public static ContentValues getLogContentValues(SessionLog testSessionLog) {
+    @VisibleForTesting
+    static ContentValues getLogContentValues(SessionLog testSessionLog) {
         ContentValues logValues = new ContentValues();
         logValues.put(LogsTable.COLUMN_DATE, testSessionLog.getSessionDate().getTime());
         logValues.put(LogsTable.COLUMN_LENGTH, testSessionLog.getSessionLength().getTime());
