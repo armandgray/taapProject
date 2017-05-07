@@ -68,7 +68,7 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void doesExtendContentProvider() {
-        ContentProvider databaseContentProvider = new DatabaseContentProvider();
+        ContentProvider databaseContentProvider = contentProvider;
         assertNotNull(databaseContentProvider);
     }
 
@@ -92,7 +92,6 @@ public class DatabaseContentProviderTest {
 
         DatabaseOpenHelper databaseOpenHelper =
                 new DatabaseOpenHelper(RuntimeEnvironment.application);
-        DatabaseContentProvider contentProvider = new DatabaseContentProvider();
         contentProvider.database = databaseOpenHelper.getWritableDatabase();
 
         contentProvider.insert(CONTENT_URI_DRILLS, values);
