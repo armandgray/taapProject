@@ -273,6 +273,8 @@ public class DatabaseContentProviderTest {
         assertTrue(cursor.moveToFirst());
         assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
         assertEquals(1, cursor.getCount());
+        assertEquals(drill.getDrillId(),
+                cursor.getInt(cursor.getColumnIndex(DrillsTable.DRILL_ID)));
         assertEquals(drill.getTitle(),
                 cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
         assertEquals(drill.getImageId(),
