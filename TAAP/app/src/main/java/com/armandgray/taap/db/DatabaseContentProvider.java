@@ -57,7 +57,7 @@ public class DatabaseContentProvider extends ContentProvider {
         if (uriMatcher.match(uri) == ALL_DRILLS || uriMatcher.match(uri) == DRILLS_ID) {
             return DrillsTable.TABLE_DRILLS;
         }
-        
+
         return null;
     }
 
