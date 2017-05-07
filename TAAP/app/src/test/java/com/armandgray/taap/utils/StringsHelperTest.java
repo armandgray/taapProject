@@ -22,4 +22,9 @@ public class StringsHelperTest {
         assertNull(getArrayAsString(null));
     }
 
+    @Test
+    public void canReturnNullWhenPassedZeroLengthArray_GetArrayAsString() throws Exception {
+        assertNull(getArrayAsString(new String[0]));
+    }
+
 }
