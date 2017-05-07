@@ -161,7 +161,6 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canInsertDrillIntoDatabaseUsingContentProvider() {
-        Drill drill = getTestDrill();
         insertDrillToDatabase();
 
         Cursor cursor = (new DatabaseOpenHelper(RuntimeEnvironment.application))
@@ -170,14 +169,7 @@ public class DatabaseContentProviderTest {
                         null, null, null, null, null);
 
         assertTrue(cursor.moveToNext());
-        assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
-        assertEquals(1, cursor.getCount());
-        assertEquals(drill.getTitle(),
-                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
-        assertEquals(drill.getImageId(),
-                cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
-        assertEquals(getArrayAsString(drill.getCategory()),
-                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
+        assertCursorDataEqualsDrill(cursor, getTestDrill());
         cursor.close();
     }
 
