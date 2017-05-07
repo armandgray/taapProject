@@ -14,16 +14,24 @@ public class DatabaseContentProvider extends ContentProvider {
 
     public static final Uri CONTENT_URI_DRILLS;
     public static final Uri CONTENT_URI_LOGS;
-    @VisibleForTesting static final String AUTHORITY = "com.armandgray.taap.db.provider";
-    @VisibleForTesting static final String BASE_PATH_DRILLS = "drills";
-    @VisibleForTesting static final String BASE_PATH_LOGS = "logs";
+    @VisibleForTesting
+    static final String AUTHORITY = "com.armandgray.taap.db.provider";
+    @VisibleForTesting
+    static final String BASE_PATH_DRILLS = "drills";
+    @VisibleForTesting
+    static final String BASE_PATH_LOGS = "logs";
 
-    @VisibleForTesting static final int ALL_DRILLS = 1;
-    @VisibleForTesting static final int DRILLS_ID = 2;
-    @VisibleForTesting static final int ALL_LOGS = 3;
-    @VisibleForTesting static final int LOGS_ID = 4;
+    @VisibleForTesting
+    static final int ALL_DRILLS = 1;
+    @VisibleForTesting
+    static final int DRILLS_ID = 2;
+    @VisibleForTesting
+    static final int ALL_LOGS = 3;
+    @VisibleForTesting
+    static final int LOGS_ID = 4;
 
-    @VisibleForTesting static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+    @VisibleForTesting
+    static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
         CONTENT_URI_DRILLS = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_DRILLS);
@@ -32,11 +40,12 @@ public class DatabaseContentProvider extends ContentProvider {
         uriMatcher.addURI(AUTHORITY, BASE_PATH_DRILLS, ALL_DRILLS);
         uriMatcher.addURI(AUTHORITY, BASE_PATH_DRILLS + "/#", DRILLS_ID);
         uriMatcher.addURI(AUTHORITY, BASE_PATH_LOGS, ALL_LOGS);
-        uriMatcher.addURI(AUTHORITY, BASE_PATH_LOGS+ "/#", LOGS_ID);
+        uriMatcher.addURI(AUTHORITY, BASE_PATH_LOGS + "/#", LOGS_ID);
     }
 
 
-    @VisibleForTesting SQLiteDatabase database;
+    @VisibleForTesting
+    SQLiteDatabase database;
 
     @Override
     public boolean onCreate() {
@@ -93,7 +102,13 @@ public class DatabaseContentProvider extends ContentProvider {
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return database.delete(DrillsTable.TABLE_DRILLS, selection, selectionArgs);
+        if (uriMatcher.match(uri) == ALL_DRILLS) {
+            return database.delete(DrillsTable.TABLE_DRILLS, selection, selectionArgs);
+        }
+        if (uriMatcher.match(uri) == ALL_LOGS) {
+            return database.delete(LogsTable.TABLE_LOGS, selection, selectionArgs);
+        }
+        return 0;
     }
 
     @Override
