@@ -127,7 +127,7 @@ public class DatabaseContentProvider extends ContentProvider {
                 return database.update(LogsTable.TABLE_LOGS, values, selection, selectionArgs);
 
             case LOGS_ID:
-                return 0;
+                return database.update(LogsTable.TABLE_LOGS, values, selection, selectionArgs);
         }
         return EXECUTION_FAILURE;
     }
