@@ -120,7 +120,7 @@ public class DatabaseContentProvider extends ContentProvider {
                 return database.update(DrillsTable.TABLE_DRILLS, values, selection, selectionArgs);
 
             case DRILLS_ID:
-                return 0;
+                return database.update(DrillsTable.TABLE_DRILLS, values, selection, selectionArgs);
 
             case ALL_LOGS:
                 return database.update(LogsTable.TABLE_LOGS, values, selection, selectionArgs);
@@ -128,6 +128,6 @@ public class DatabaseContentProvider extends ContentProvider {
             case LOGS_ID:
                 return 0;
         }
-        return 0;
+        return EXECUTION_FAILURE;
     }
 }

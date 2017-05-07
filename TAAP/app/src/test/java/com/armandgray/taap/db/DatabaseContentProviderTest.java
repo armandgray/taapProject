@@ -268,6 +268,21 @@ public class DatabaseContentProviderTest {
     }
 
     @Test
+    public void canQueryDatabaseForLog_UsingLogIdContentUri() {
+        insertLogToDatabase();
+
+        String selectedLog = LogsTable.LOG_ID + " = " + TEST_SESSION_LOG.getSessionId();
+        Uri uri = Uri.parse(CONTENT_URI_LOGS + "/" + TEST_SESSION_LOG.getSessionId());
+        Cursor cursor = RuntimeEnvironment.application.getContentResolver()
+                .query(uri, LogsTable.ALL_LOG_COLUMNS, selectedLog,
+                        null, null);
+
+        assertNotNull(cursor);
+        assertCursorDataEqualsLog(cursor, TEST_SESSION_LOG);
+        cursor.close();
+    }
+
+    @Test
     public void canInsertLogIntoDatabaseUsingContentProvider() {
         insertLogToDatabase();
 
