@@ -264,7 +264,9 @@ public class DatabaseContentProviderTest {
         drillValues.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
         drillValues.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
         drillValues.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(drill.getCategory()));
-        RuntimeEnvironment.application.getContentResolver().insert(CONTENT_URI_DRILLS, drillValues);
+        Uri uri = RuntimeEnvironment.application.getContentResolver()
+                .insert(CONTENT_URI_DRILLS, drillValues);
+        if (uri != null) { drill.setDrillId(Integer.parseInt(uri.getLastPathSegment())); }
     }
 
     private void assertCursorDataEqualsDrill(Cursor cursor, Drill drill) {
