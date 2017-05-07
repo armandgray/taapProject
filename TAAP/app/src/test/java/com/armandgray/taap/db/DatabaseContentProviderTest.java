@@ -228,7 +228,16 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canDeleteLogFromDatabaseUsingContentProvider() {
+        insertLogToDatabase();
 
+        String selectedLog = LogsTable.LOG_ID + " = " + 1;
+        RuntimeEnvironment.application.getContentResolver()
+                .delete(CONTENT_URI_LOGS, selectedLog, null);
+
+        assertFalse(getDatabaseContentProvider()
+                .database
+                .rawQuery("SELECT * FROM logs", null)
+                .moveToFirst());
     }
 
     @Test
