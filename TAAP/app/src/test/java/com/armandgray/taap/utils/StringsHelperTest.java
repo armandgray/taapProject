@@ -23,8 +23,10 @@ public class StringsHelperTest {
     }
 
     @Test
-    public void canReturnNullWhenPassedZeroLengthArray_GetArrayAsString() throws Exception {
-        assertNull(getArrayAsString(new String[0]));
+    public void canConvertNullToEmptyString_GetArrayAsString() throws Exception {
+        String[] array = new String[3];
+        assertNotNull(array);
+        assertEquals(",,", getArrayAsString(array));
     }
 
 }
