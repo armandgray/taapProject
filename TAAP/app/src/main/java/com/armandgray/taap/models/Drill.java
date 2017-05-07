@@ -33,6 +33,10 @@ public class Drill implements Parcelable {
         return drillId;
     }
 
+    public void setDrillId(int drillId) {
+        this.drillId = drillId;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -91,4 +95,5 @@ public class Drill implements Parcelable {
             return new Drill[size];
         }
     };
+
 }

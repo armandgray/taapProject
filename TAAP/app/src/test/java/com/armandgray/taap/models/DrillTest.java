@@ -55,4 +55,15 @@ public class DrillTest {
             assertTrue(expectedList.get(i).getTitle().equals(returnList.get(i).getTitle()));
         }
     }
+
+    @Test
+    public void canSetDrillId() throws Exception {
+        String[] ballHandling = {BALL_HANDLING};
+        Drill drill = new Drill("2-Ball Pound Dribble",
+                R.drawable.ic_fitness_center_white_24dp, ballHandling);
+        drill.setDrillId(100);
+        assertNotNull(drill);
+        assertNotNull(drill.getDrillId());
+        assertEquals(100, drill.getDrillId());
+    }
 }
