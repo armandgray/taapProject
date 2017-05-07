@@ -65,7 +65,6 @@ public class DatabaseContentProviderTest {
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
-        System.out.println(TIME_IN_MILLIS);
         contentProvider = new DatabaseContentProvider();
     }
 
@@ -136,21 +135,14 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canQueryDatabaseForDrillUsingContentProvider() {
-        Drill drill = new Drill(
-                "5 Spots Shooting (Mid-Range)",
-                R.drawable.ic_account_multiple_outline_white_48dp,
-                Drill.SHOOTING_ARRAY);
-        ContentValues values = new ContentValues();
-        values.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
-        values.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
-        values.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(drill.getCategory()));
-        ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
-        contentResolver.insert(CONTENT_URI_DRILLS, values);
+        insertDrillToDatabase();
 
         String selectedDrill = DrillsTable.DRILL_ID + " = " + 1;
-        Cursor cursor = shadowOf(contentResolver).query(CONTENT_URI_DRILLS,
-                DrillsTable.ALL_DRILL_COLUMNS, selectedDrill, null, null, null);
+        Cursor cursor = RuntimeEnvironment.application.getContentResolver()
+                .query(CONTENT_URI_DRILLS, DrillsTable.ALL_DRILL_COLUMNS, selectedDrill,
+                        null, null);
 
+        Drill drill = getTestDrill();
         assertNotNull(cursor);
         assertTrue(cursor.moveToFirst());
         assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
