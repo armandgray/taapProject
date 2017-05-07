@@ -261,6 +261,147 @@ public class DatabaseContentProviderTest {
         cursor.close();
     }
 
+    @Test
+    public void canQueryDatabaseForLogUsingContentProvider() {
+        Drill drill = new Drill(
+                "5 Spots Shooting (Mid-Range)",
+                R.drawable.ic_account_multiple_outline_white_48dp,
+                Drill.SHOOTING_ARRAY);
+        ContentValues values = new ContentValues();
+        values.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
+        values.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
+        values.put(DrillsTable.COLUMN_CATEGORY, drill.getCategory()[0]);
+        ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
+        contentResolver.insert(CONTENT_URI_DRILLS, values);
+
+        String selectedDrill = DrillsTable.DRILL_ID + " = " + 1;
+        Cursor cursor = shadowOf(contentResolver).query(CONTENT_URI_DRILLS,
+                DrillsTable.ALL_DRILL_COLUMNS, selectedDrill, null, null, null);
+
+        assertNotNull(cursor);
+        assertTrue(cursor.moveToFirst());
+        assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
+        assertEquals(1, cursor.getCount());
+        assertEquals(drill.getTitle(),
+                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
+        assertEquals(drill.getImageId(),
+                cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
+        assertEquals(drill.getCategory()[0],
+                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
+        cursor.close();
+    }
+
+    @Test
+    public void canInsertLogIntoDatabaseUsingContentProvider() {
+        Drill drill = new Drill(
+                "5 Spots Shooting (Mid-Range)",
+                R.drawable.ic_account_multiple_outline_white_48dp,
+                Drill.SHOOTING_ARRAY);
+        ContentValues values = new ContentValues();
+        values.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
+        values.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
+        values.put(DrillsTable.COLUMN_CATEGORY, drill.getCategory()[0]);
+        RuntimeEnvironment.application.getContentResolver().insert(CONTENT_URI_DRILLS, values);
+
+        Cursor cursor = (new DatabaseOpenHelper(RuntimeEnvironment.application))
+                .getReadableDatabase()
+                .query(DrillsTable.TABLE_DRILLS, DrillsTable.ALL_DRILL_COLUMNS,
+                        null, null, null, null, null);
+
+        assertTrue(cursor.moveToNext());
+        assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
+        assertEquals(1, cursor.getCount());
+        assertEquals(drill.getTitle(),
+                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
+        assertEquals(drill.getImageId(),
+                cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
+        assertEquals(drill.getCategory()[0],
+                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
+        cursor.close();
+    }
+
+    @Test
+    public void canDeleteLogFromDatabaseUsingContentProvider() {
+        Drill drill = new Drill(
+                "5 Spots Shooting (Mid-Range)",
+                R.drawable.ic_account_multiple_outline_white_48dp,
+                Drill.SHOOTING_ARRAY);
+        ContentValues values = new ContentValues();
+        values.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
+        values.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
+        values.put(DrillsTable.COLUMN_CATEGORY, drill.getCategory()[0]);
+        ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
+        contentResolver.insert(CONTENT_URI_DRILLS, values);
+
+        String selectedDrill = DrillsTable.DRILL_ID + " = " + 1;
+        contentResolver.delete(CONTENT_URI_DRILLS, selectedDrill, null);
+
+        ContentProviderClient contentProviderClient = contentResolver
+                .acquireContentProviderClient(DatabaseContentProvider.CONTENT_URI_DRILLS);
+        assertNotNull(contentProviderClient);
+        DatabaseContentProvider contentProvider = (DatabaseContentProvider)
+                contentProviderClient.getLocalContentProvider();
+        assertNotNull(contentProvider);
+
+        Cursor cursor = contentProvider.database.rawQuery("SELECT * FROM drills", null);
+        assertFalse(cursor.moveToFirst());
+        cursor.close();
+    }
+
+    @Test
+    public void canUpdateLogFromDatabaseUsingContentProvider() {
+        Drill drill = new Drill(
+                "5 Spots Shooting (Mid-Range)",
+                R.drawable.ic_account_multiple_outline_white_48dp,
+                Drill.SHOOTING_ARRAY);
+        ContentValues values = new ContentValues();
+        values.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
+        values.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
+        values.put(DrillsTable.COLUMN_CATEGORY, drill.getCategory()[0]);
+        ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
+        contentResolver.insert(CONTENT_URI_DRILLS, values);
+
+        String selectedDrill = DrillsTable.DRILL_ID + " = " + 1;
+        Cursor cursor = contentResolver.query(CONTENT_URI_DRILLS,
+                DrillsTable.ALL_DRILL_COLUMNS, selectedDrill, null, null);
+
+        assertNotNull(cursor);
+        assertTrue(cursor.moveToFirst());
+        assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
+        assertEquals(1, cursor.getCount());
+        assertEquals(drill.getTitle(),
+                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
+        assertEquals(drill.getImageId(),
+                cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
+        assertEquals(drill.getCategory()[0],
+                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
+
+        Drill updatedDrill = new Drill(
+                "Pass & Pass Back (Left Layup)",
+                R.drawable.ic_fitness_center_white_24dp,
+                Drill.PASSING_ARRAY);
+        ContentValues updatedValues = new ContentValues();
+        updatedValues.put(DrillsTable.COLUMN_TITLE, updatedDrill.getTitle());
+        updatedValues.put(DrillsTable.COLUMN_IMAGE_ID, updatedDrill.getImageId());
+        updatedValues.put(DrillsTable.COLUMN_CATEGORY, updatedDrill.getCategory()[0]);
+
+        contentResolver.update(CONTENT_URI_DRILLS, updatedValues, selectedDrill, null);
+        cursor = contentResolver.query(CONTENT_URI_DRILLS,
+                DrillsTable.ALL_DRILL_COLUMNS, selectedDrill, null, null);
+
+        assertNotNull(cursor);
+        assertTrue(cursor.moveToFirst());
+        assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
+        assertEquals(1, cursor.getCount());
+        assertEquals(updatedDrill.getTitle(),
+                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
+        assertEquals(updatedDrill.getImageId(),
+                cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
+        assertEquals(updatedDrill.getCategory()[0],
+                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
+        cursor.close();
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
