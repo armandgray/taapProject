@@ -103,7 +103,7 @@ public class DatabaseContentProvider extends ContentProvider {
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
-        if (uriMatcher.match(uri) == ALL_DRILLS) {
+        if (uriMatcher.match(uri) == DRILLS_ID) {
             return database.delete(DrillsTable.TABLE_DRILLS, selection, selectionArgs);
         }
         if (uriMatcher.match(uri) == LOGS_ID) {
