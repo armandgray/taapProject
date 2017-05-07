@@ -31,6 +31,7 @@ import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_LOGS;
 import static com.armandgray.taap.db.DatabaseContentProvider.DRILLS_ID;
 import static com.armandgray.taap.db.DatabaseContentProvider.LOGS_ID;
 import static com.armandgray.taap.db.DatabaseContentProvider.uriMatcher;
+import static com.armandgray.taap.utils.StringsHelper.getArrayAsString;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
@@ -123,7 +124,7 @@ public class DatabaseContentProviderTest {
         ContentValues values = new ContentValues();
         values.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
         values.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
-        values.put(DrillsTable.COLUMN_CATEGORY, drill.getCategory()[0]);
+        values.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(drill.getCategory()));
         ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
         contentResolver.insert(CONTENT_URI_DRILLS, values);
 
@@ -139,7 +140,7 @@ public class DatabaseContentProviderTest {
                 cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
         assertEquals(drill.getImageId(),
                 cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
-        assertEquals(drill.getCategory()[0],
+        assertEquals(getArrayAsString(drill.getCategory()),
                 cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
         cursor.close();
     }
@@ -165,7 +166,7 @@ public class DatabaseContentProviderTest {
         ContentValues values = new ContentValues();
         values.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
         values.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
-        values.put(DrillsTable.COLUMN_CATEGORY, drill.getCategory()[0]);
+        values.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(drill.getCategory()));
         RuntimeEnvironment.application.getContentResolver().insert(CONTENT_URI_DRILLS, values);
 
         Cursor cursor = (new DatabaseOpenHelper(RuntimeEnvironment.application))
@@ -180,7 +181,7 @@ public class DatabaseContentProviderTest {
                 cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
         assertEquals(drill.getImageId(),
                 cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
-        assertEquals(drill.getCategory()[0],
+        assertEquals(getArrayAsString(drill.getCategory()),
                 cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
         cursor.close();
     }
@@ -194,7 +195,7 @@ public class DatabaseContentProviderTest {
         ContentValues values = new ContentValues();
         values.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
         values.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
-        values.put(DrillsTable.COLUMN_CATEGORY, drill.getCategory()[0]);
+        values.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(drill.getCategory()));
         ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
         contentResolver.insert(CONTENT_URI_DRILLS, values);
 
@@ -222,7 +223,7 @@ public class DatabaseContentProviderTest {
         ContentValues values = new ContentValues();
         values.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
         values.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
-        values.put(DrillsTable.COLUMN_CATEGORY, drill.getCategory()[0]);
+        values.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(drill.getCategory()));
         ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
         contentResolver.insert(CONTENT_URI_DRILLS, values);
 
@@ -238,7 +239,7 @@ public class DatabaseContentProviderTest {
                 cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
         assertEquals(drill.getImageId(),
                 cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
-        assertEquals(drill.getCategory()[0],
+        assertEquals(getArrayAsString(drill.getCategory()),
                 cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
 
         Drill updatedDrill = new Drill(
@@ -248,7 +249,7 @@ public class DatabaseContentProviderTest {
         ContentValues updatedValues = new ContentValues();
         updatedValues.put(DrillsTable.COLUMN_TITLE, updatedDrill.getTitle());
         updatedValues.put(DrillsTable.COLUMN_IMAGE_ID, updatedDrill.getImageId());
-        updatedValues.put(DrillsTable.COLUMN_CATEGORY, updatedDrill.getCategory()[0]);
+        updatedValues.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(updatedDrill.getCategory()));
 
         contentResolver.update(CONTENT_URI_DRILLS, updatedValues, selectedDrill, null);
         cursor = contentResolver.query(CONTENT_URI_DRILLS,
@@ -262,7 +263,7 @@ public class DatabaseContentProviderTest {
                 cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
         assertEquals(updatedDrill.getImageId(),
                 cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
-        assertEquals(updatedDrill.getCategory()[0],
+        assertEquals(getArrayAsString(updatedDrill.getCategory()),
                 cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
         cursor.close();
     }
@@ -276,7 +277,7 @@ public class DatabaseContentProviderTest {
         ContentValues values = new ContentValues();
         values.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
         values.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
-        values.put(DrillsTable.COLUMN_CATEGORY, drill.getCategory()[0]);
+        values.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(drill.getCategory()));
         ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
         contentResolver.insert(CONTENT_URI_DRILLS, values);
 
@@ -292,7 +293,7 @@ public class DatabaseContentProviderTest {
                 cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
         assertEquals(drill.getImageId(),
                 cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
-        assertEquals(drill.getCategory()[0],
+        assertEquals(getArrayAsString(drill.getCategory()),
                 cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
         cursor.close();
     }
@@ -306,7 +307,7 @@ public class DatabaseContentProviderTest {
         ContentValues values = new ContentValues();
         values.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
         values.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
-        values.put(DrillsTable.COLUMN_CATEGORY, drill.getCategory()[0]);
+        values.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(drill.getCategory()));
         RuntimeEnvironment.application.getContentResolver().insert(CONTENT_URI_DRILLS, values);
 
         Cursor cursor = (new DatabaseOpenHelper(RuntimeEnvironment.application))
@@ -321,7 +322,7 @@ public class DatabaseContentProviderTest {
                 cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
         assertEquals(drill.getImageId(),
                 cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
-        assertEquals(drill.getCategory()[0],
+        assertEquals(getArrayAsString(drill.getCategory()),
                 cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
         cursor.close();
     }
@@ -335,7 +336,7 @@ public class DatabaseContentProviderTest {
         ContentValues values = new ContentValues();
         values.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
         values.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
-        values.put(DrillsTable.COLUMN_CATEGORY, drill.getCategory()[0]);
+        values.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(drill.getCategory()));
         ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
         contentResolver.insert(CONTENT_URI_DRILLS, values);
 
@@ -363,7 +364,7 @@ public class DatabaseContentProviderTest {
         ContentValues values = new ContentValues();
         values.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
         values.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
-        values.put(DrillsTable.COLUMN_CATEGORY, drill.getCategory()[0]);
+        values.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(drill.getCategory()));
         ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
         contentResolver.insert(CONTENT_URI_DRILLS, values);
 
@@ -379,7 +380,7 @@ public class DatabaseContentProviderTest {
                 cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
         assertEquals(drill.getImageId(),
                 cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
-        assertEquals(drill.getCategory()[0],
+        assertEquals(getArrayAsString(drill.getCategory()),
                 cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
 
         Drill updatedDrill = new Drill(
@@ -389,7 +390,7 @@ public class DatabaseContentProviderTest {
         ContentValues updatedValues = new ContentValues();
         updatedValues.put(DrillsTable.COLUMN_TITLE, updatedDrill.getTitle());
         updatedValues.put(DrillsTable.COLUMN_IMAGE_ID, updatedDrill.getImageId());
-        updatedValues.put(DrillsTable.COLUMN_CATEGORY, updatedDrill.getCategory()[0]);
+        updatedValues.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(updatedDrill.getCategory()));
 
         contentResolver.update(CONTENT_URI_DRILLS, updatedValues, selectedDrill, null);
         cursor = contentResolver.query(CONTENT_URI_DRILLS,
@@ -403,7 +404,7 @@ public class DatabaseContentProviderTest {
                 cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
         assertEquals(updatedDrill.getImageId(),
                 cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
-        assertEquals(updatedDrill.getCategory()[0],
+        assertEquals(getArrayAsString(updatedDrill.getCategory()),
                 cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
         cursor.close();
     }
