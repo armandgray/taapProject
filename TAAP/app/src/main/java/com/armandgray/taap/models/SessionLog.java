@@ -18,6 +18,7 @@ public class SessionLog implements Parcelable {
     private double successRate;
     private double successRecord;
     private Drill drill;
+    private int sessionId;
 
     private SessionLog(Builder builder) {
         this.sessionDate = builder.sessionDate;
@@ -105,6 +106,14 @@ public class SessionLog implements Parcelable {
         }
     }
 
+    public int getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(int sessionId) {
+        this.sessionId = sessionId;
+    }
+
     public Date getSessionDate() {
         return sessionDate;
     }
@@ -158,7 +167,7 @@ public class SessionLog implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(this.sessionDate != null ? this.sessionDate.getTime() : -1);
         dest.writeLong(this.sessionLength != null ? this.sessionLength.getTime() : -1);
-        dest.writeString(this.sessionGoal != null ? this.sessionGoal : "None");
+        dest.writeString(this.sessionGoal);
         dest.writeLong(this.activeWork != null ? this.activeWork.getTime() : -1);
         dest.writeLong(this.restTime != null ? this.restTime.getTime() : -1);
         dest.writeInt(this.setsCompleted);
@@ -166,6 +175,7 @@ public class SessionLog implements Parcelable {
         dest.writeDouble(this.successRate);
         dest.writeDouble(this.successRecord);
         dest.writeParcelable(this.drill, flags);
+        dest.writeInt(this.sessionId);
     }
 
     protected SessionLog(Parcel in) {
@@ -173,8 +183,7 @@ public class SessionLog implements Parcelable {
         this.sessionDate = tmpSessionDate == -1 ? null : new Date(tmpSessionDate);
         long tmpSessionLength = in.readLong();
         this.sessionLength = tmpSessionLength == -1 ? null : new Date(tmpSessionLength);
-        String tmpSessionGoal = in.readString();
-        this.sessionGoal = tmpSessionGoal.equals("None") ? null : tmpSessionGoal;
+        this.sessionGoal = in.readString();
         long tmpActiveWork = in.readLong();
         this.activeWork = tmpActiveWork == -1 ? null : new Date(tmpActiveWork);
         long tmpRestTime = in.readLong();
@@ -184,6 +193,7 @@ public class SessionLog implements Parcelable {
         this.successRate = in.readDouble();
         this.successRecord = in.readDouble();
         this.drill = in.readParcelable(Drill.class.getClassLoader());
+        this.sessionId = in.readInt();
     }
 
     public static final Parcelable.Creator<SessionLog> CREATOR = new Parcelable.Creator<SessionLog>() {

@@ -21,11 +21,20 @@ public class Drill implements Parcelable {
     private String title;
     private int imageId;
     private String[] category;
+    private int drillId;
 
     public Drill(String title, int imageId, String[] category) {
         this.title = title;
         this.imageId = imageId;
         this.category = category;
+    }
+
+    public int getDrillId() {
+        return drillId;
+    }
+
+    public void setDrillId(int drillId) {
+        this.drillId = drillId;
     }
 
     public String getTitle() {
@@ -67,12 +76,14 @@ public class Drill implements Parcelable {
         dest.writeString(this.title);
         dest.writeInt(this.imageId);
         dest.writeStringArray(this.category);
+        dest.writeInt(this.drillId);
     }
 
     protected Drill(Parcel in) {
         this.title = in.readString();
         this.imageId = in.readInt();
         this.category = in.createStringArray();
+        this.drillId = in.readInt();
     }
 
     public static final Parcelable.Creator<Drill> CREATOR = new Parcelable.Creator<Drill>() {
