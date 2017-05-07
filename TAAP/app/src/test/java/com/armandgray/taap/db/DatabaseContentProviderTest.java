@@ -12,8 +12,6 @@ import com.armandgray.taap.R;
 import com.armandgray.taap.models.Drill;
 import com.armandgray.taap.models.SessionLog;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -60,14 +58,6 @@ public class DatabaseContentProviderTest {
             .drill(getTestDrill())
             .create();
 
-    private DatabaseContentProvider contentProvider;
-
-    @Before
-    public void setUp() {
-        System.out.println("Running Set Up!");
-        contentProvider = new DatabaseContentProvider();
-    }
-
     @Test
     public void hasContentUri_Drills() {
         assertNotNull(CONTENT_URI_DRILLS);
@@ -93,16 +83,14 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void doesExtendContentProvider() {
-        ContentProvider databaseContentProvider = contentProvider;
+        ContentProvider databaseContentProvider = new DatabaseContentProvider();
         assertNotNull(databaseContentProvider);
     }
 
     @Test
     public void doesAssignWritableDatabase_TestOnCreate() {
-        DatabaseContentProvider contentProvider = getDatabaseContentProvider();
-
-        assertNotNull(contentProvider);
-        assertNotNull(contentProvider.database);
+        assertNotNull(getDatabaseContentProvider());
+        assertNotNull(getDatabaseContentProvider().database);
     }
 
     @Test
@@ -425,12 +413,6 @@ public class DatabaseContentProviderTest {
         logValues.put(LogsTable.COLUMN_SUCCESS, SESSION_LOG.getSuccessRate());
         logValues.put(LogsTable.COLUMN_DRILL, 1);
         RuntimeEnvironment.application.getContentResolver().insert(CONTENT_URI_LOGS, logValues);
-    }
-
-    @After
-    public void tearDown() {
-        System.out.println("Running TearDown!");
-        contentProvider = null;
     }
 
 }
