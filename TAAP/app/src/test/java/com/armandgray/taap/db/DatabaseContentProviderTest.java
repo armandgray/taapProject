@@ -34,6 +34,7 @@ import static com.armandgray.taap.db.DatabaseContentProvider.uriMatcher;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
+import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -130,6 +131,35 @@ public class DatabaseContentProviderTest {
                         null, null, null, null, null);
 
         assertTrue(cursor.moveToNext());
+        assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
+        assertEquals(1, cursor.getCount());
+        assertEquals(drill.getTitle(),
+                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
+        assertEquals(drill.getImageId(),
+                cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
+        assertEquals(drill.getCategory()[0],
+                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
+        cursor.close();
+    }
+
+    @Test
+    public void canQueryDatabaseForDrillUsingContentProvider() {
+        Drill drill = new Drill(
+                "5 Spots Shooting (Mid-Range)",
+                R.drawable.ic_account_multiple_outline_white_48dp,
+                Drill.SHOOTING_ARRAY);
+        ContentValues values = new ContentValues();
+        values.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
+        values.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
+        values.put(DrillsTable.COLUMN_CATEGORY, drill.getCategory()[0]);
+        ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
+        contentResolver.insert(CONTENT_URI_DRILLS, values);
+
+        String selectedDrill = DrillsTable.DRILL_ID + " = " + 1;
+        Cursor cursor = shadowOf(contentResolver).query(CONTENT_URI_DRILLS,
+                DrillsTable.ALL_DRILL_COLUMNS, selectedDrill, null, null);
+
+        assertNotNull(cursor);
         assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
         assertEquals(1, cursor.getCount());
         assertEquals(drill.getTitle(),
