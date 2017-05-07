@@ -32,10 +32,13 @@ import static com.armandgray.taap.db.DatabaseContentProvider.DRILLS_ID;
 import static com.armandgray.taap.db.DatabaseContentProvider.LOGS_ID;
 import static com.armandgray.taap.db.DatabaseContentProvider.uriMatcher;
 import static com.armandgray.taap.utils.StringsHelper.getArrayAsString;
+import static com.armandgray.taap.utils.StringsHelper.getStringAsArray;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
@@ -140,8 +143,8 @@ public class DatabaseContentProviderTest {
                 cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
         assertEquals(drill.getImageId(),
                 cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
-        assertEquals(getArrayAsString(drill.getCategory()),
-                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
+        assertThat(drill.getCategory(), is(getStringAsArray(cursor.getString(
+                cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)))));
         cursor.close();
     }
 
@@ -293,8 +296,8 @@ public class DatabaseContentProviderTest {
                 cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
         assertEquals(drill.getImageId(),
                 cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
-        assertEquals(getArrayAsString(drill.getCategory()),
-                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
+        assertThat(drill.getCategory(), is(getStringAsArray(cursor.getString(
+                cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)))));
         cursor.close();
     }
 
