@@ -280,6 +280,7 @@ public class DatabaseContentProviderTest {
                 .create();
         ContentValues updatedValues = getLogContentValues(updatedLog);
         contentResolver.update(CONTENT_URI_LOGS, updatedValues, selectedLog, null);
+        updatedLog.setSessionId(TEST_SESSION_LOG.getSessionId());
 
         cursor = contentResolver.query(CONTENT_URI_LOGS, LogsTable.ALL_LOG_COLUMNS, selectedLog,
                 null, null);
