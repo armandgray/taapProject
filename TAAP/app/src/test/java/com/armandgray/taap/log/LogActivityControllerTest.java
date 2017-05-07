@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 
 import com.armandgray.taap.BuildConfig;
-import com.armandgray.taap.db.DrillsTable;
+import com.armandgray.taap.db.LogsTable;
 import com.armandgray.taap.models.SessionLog;
 
 import org.junit.After;
@@ -17,10 +17,10 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
-import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
-import static com.armandgray.taap.db.DatabaseContentProviderTest.TEST_DRILL;
+import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_LOGS;
 import static com.armandgray.taap.db.DatabaseContentProviderTest.TEST_SESSION_LOG;
 import static com.armandgray.taap.db.DatabaseContentProviderTest.assertCursorDataEqualsDrill;
+import static com.armandgray.taap.db.DatabaseContentProviderTest.assertCursorDataEqualsLog;
 import static com.armandgray.taap.log.LogActivity.SESSION_LOG;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
@@ -67,13 +67,14 @@ public class LogActivityControllerTest {
     public void doesInsertNonNullSessionLogIntoDatabase() throws Exception {
         assertNotNull(controller.sessionLog);
 
-        String selectedDrill = DrillsTable.DRILL_ID + " = " + TEST_DRILL.getDrillId();
+        String selectedLog = LogsTable.LOG_ID + " = " + TEST_SESSION_LOG.getSessionId();
         Cursor cursor = RuntimeEnvironment.application.getContentResolver()
-                .query(CONTENT_URI_DRILLS, DrillsTable.ALL_DRILL_COLUMNS, selectedDrill,
+                .query(CONTENT_URI_LOGS, LogsTable.ALL_LOG_COLUMNS, selectedLog,
                         null, null);
 
         assertNotNull(cursor);
-        assertCursorDataEqualsDrill(cursor, TEST_DRILL);
+        assertCursorDataEqualsDrill(cursor, TEST_SESSION_LOG.getDrill());
+        assertCursorDataEqualsLog(cursor, TEST_SESSION_LOG);
         cursor.close();
     }
 
