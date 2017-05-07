@@ -19,6 +19,8 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import java.util.ArrayList;
+
 import static com.armandgray.taap.db.DatabaseContentProvider.ALL_DRILLS;
 import static com.armandgray.taap.db.DatabaseContentProvider.ALL_LOGS;
 import static com.armandgray.taap.db.DatabaseContentProvider.AUTHORITY;
@@ -85,6 +87,29 @@ public class DatabaseContentProviderTest {
 
         assertNotNull(contentProvider);
         assertNotNull(contentProvider.database);
+    }
+
+    @Test
+    public void doesAssignWritableDatabase_WithDrillsAndLogsTables_TestOnCreate() {
+        ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
+        ContentProviderClient contentProviderClient = contentResolver
+                .acquireContentProviderClient(DatabaseContentProvider.CONTENT_URI_DRILLS);
+        assertNotNull(contentProviderClient);
+        DatabaseContentProvider contentProvider = (DatabaseContentProvider)
+                contentProviderClient.getLocalContentProvider();
+
+        assertNotNull(contentProvider);
+        Cursor cursor = contentProvider.database
+                .rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
+        assertTrue(cursor.moveToFirst());
+        ArrayList<String> listTableNames = new ArrayList<>();
+        while ( !cursor.isAfterLast() ) {
+            listTableNames.add(cursor.getString(0));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        assertTrue(listTableNames.contains(DrillsTable.TABLE_DRILLS));
+        assertTrue(listTableNames.contains(LogsTable.TABLE_LOGS));
     }
 
     @Test
