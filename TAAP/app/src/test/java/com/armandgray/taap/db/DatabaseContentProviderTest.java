@@ -159,9 +159,10 @@ public class DatabaseContentProviderTest {
     public void canDeleteDrillFromDatabaseUsingContentProvider() {
         insertDrillToDatabase();
 
-        String selectedDrill = DrillsTable.DRILL_ID + " = " + 1;
+        String selectedDrill = DrillsTable.DRILL_ID + " = " + TEST_DRILL.getDrillId();
+        Uri uri = Uri.parse(CONTENT_URI_DRILLS + "/" + TEST_DRILL.getDrillId());
         RuntimeEnvironment.application.getContentResolver()
-                .delete(CONTENT_URI_DRILLS, selectedDrill, null);
+                .delete(uri, selectedDrill, null);
 
         assertFalse(getDatabaseContentProvider()
                 .database
