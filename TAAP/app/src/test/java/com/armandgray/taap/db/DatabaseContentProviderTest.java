@@ -71,7 +71,7 @@ public class DatabaseContentProviderTest {
     }
 
     @Test
-    public void canInsertDrillIntoDatabase() {
+    public void canInsertDrillIntoDatabaseUsingContentProvider() {
         Drill drill = new Drill(
                 "5 Spots Shooting (Mid-Range)",
                 R.drawable.ic_account_multiple_outline_white_48dp,

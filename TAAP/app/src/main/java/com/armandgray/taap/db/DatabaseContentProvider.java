@@ -59,7 +59,8 @@ public class DatabaseContentProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
-        return null;
+        long id = database.insert(DrillsTable.TABLE_DRILLS, null, values);
+        return Uri.parse(BASE_PATH_DRILLS + "/" + id);
     }
 
     @Override
