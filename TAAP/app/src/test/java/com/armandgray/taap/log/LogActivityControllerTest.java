@@ -70,23 +70,29 @@ public class LogActivityControllerTest {
     public void doesInsertNonNullSessionLogIntoDatabase() throws Exception {
         assertNotNull(controller.sessionLog);
 
+        String selectedLog = LogsTable.LOG_ID + " = " + TEST_SESSION_LOG.getSessionId();
+        Cursor logCursor = RuntimeEnvironment.application.getContentResolver()
+                .query(CONTENT_URI_LOGS, LogsTable.ALL_LOG_COLUMNS, selectedLog,
+                        null, null);
+
+        assertNotNull(logCursor);
+        assertCursorDataEqualsLog(logCursor, TEST_SESSION_LOG);
+        logCursor.close();
+    }
+
+    @Test
+    public void doesImplicitlyInsertDrillIntoDatabase() throws Exception {
+        assertNotNull(controller.sessionLog);
+
         String selectedDrill =
                 DrillsTable.DRILL_ID + " = " + TEST_SESSION_LOG.getDrill().getDrillId();
         Uri uri = Uri.parse(CONTENT_URI_DRILLS + "/" + TEST_SESSION_LOG.getDrill().getDrillId());
         Cursor drillCursor = RuntimeEnvironment.application.getContentResolver()
                 .query(uri, DrillsTable.ALL_DRILL_COLUMNS, selectedDrill, null, null);
 
-        String selectedLog = LogsTable.LOG_ID + " = " + TEST_SESSION_LOG.getSessionId();
-        Cursor logCursor = RuntimeEnvironment.application.getContentResolver()
-                .query(CONTENT_URI_LOGS, LogsTable.ALL_LOG_COLUMNS, selectedLog,
-                        null, null);
-
         assertNotNull(drillCursor);
-        assertNotNull(logCursor);
         assertCursorDataEqualsDrill(drillCursor, TEST_SESSION_LOG.getDrill());
-        assertCursorDataEqualsLog(logCursor, TEST_SESSION_LOG);
         drillCursor.close();
-        logCursor.close();
     }
 
     @After
