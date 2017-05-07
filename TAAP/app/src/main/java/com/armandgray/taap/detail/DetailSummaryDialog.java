@@ -19,10 +19,11 @@ import com.armandgray.taap.R;
 import com.armandgray.taap.models.SessionLog;
 import com.armandgray.taap.utils.SessionLogRvAdapter;
 
+import static com.armandgray.taap.log.LogActivity.SESSION_LOG;
+
 public class DetailSummaryDialog extends DialogFragment {
 
     public static final String DIALOG = "DIALOG";
-    public static final String SESSION_LOG = "SESSION_LOG";
     Activity activity;
     private RecyclerView rvSummary;
     public DetailSummaryDialogListener listener;

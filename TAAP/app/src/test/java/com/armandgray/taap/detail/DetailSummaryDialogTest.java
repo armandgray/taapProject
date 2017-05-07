@@ -27,7 +27,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlertDialog;
 
 import static com.armandgray.taap.detail.DetailSummaryDialog.DIALOG;
-import static com.armandgray.taap.detail.DetailSummaryDialog.SESSION_LOG;
+import static com.armandgray.taap.log.LogActivity.SESSION_LOG;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
