@@ -150,6 +150,10 @@ public class DatabaseContentProviderTest {
                 .getType(CONTENT_URI_DRILLS));
         assertEquals(DrillsTable.TABLE_DRILLS, RuntimeEnvironment.application.getContentResolver()
                 .getType(Uri.parse(CONTENT_URI_DRILLS + "/" + 0)));
+        assertEquals(LogsTable.TABLE_LOGS, RuntimeEnvironment.application.getContentResolver()
+                .getType(CONTENT_URI_LOGS));
+        assertEquals(LogsTable.TABLE_LOGS, RuntimeEnvironment.application.getContentResolver()
+                .getType(Uri.parse(CONTENT_URI_LOGS + "/" + 0)));
     }
 
     @Test
