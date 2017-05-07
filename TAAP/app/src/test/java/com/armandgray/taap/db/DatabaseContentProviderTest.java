@@ -4,6 +4,7 @@ import android.content.ContentProvider;
 import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 
@@ -228,7 +229,7 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canQueryDatabaseForLogUsingContentProvider() {
-        insertLogToDatabase();
+        insertLogToDatabase(TEST_SESSION_LOG, RuntimeEnvironment.application);
 
         String selectedLog = LogsTable.LOG_ID + " = " + TEST_SESSION_LOG.getSessionId();
         Cursor cursor = RuntimeEnvironment.application.getContentResolver()
@@ -242,7 +243,7 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canQueryDatabaseForLog_UsingLogIdContentUri() {
-        insertLogToDatabase();
+        insertLogToDatabase(TEST_SESSION_LOG, RuntimeEnvironment.application);
 
         String selectedLog = LogsTable.LOG_ID + " = " + TEST_SESSION_LOG.getSessionId();
         Uri uri = Uri.parse(CONTENT_URI_LOGS + "/" + TEST_SESSION_LOG.getSessionId());
@@ -257,7 +258,7 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canInsertLogIntoDatabaseUsingContentProvider() {
-        insertLogToDatabase();
+        insertLogToDatabase(TEST_SESSION_LOG, RuntimeEnvironment.application);
 
         Cursor cursor = (new DatabaseOpenHelper(RuntimeEnvironment.application))
                 .getReadableDatabase()
@@ -271,7 +272,7 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canDeleteLogFromDatabaseUsingContentProvider() {
-        insertLogToDatabase();
+        insertLogToDatabase(TEST_SESSION_LOG, RuntimeEnvironment.application);
 
         String selectedLog = LogsTable.LOG_ID + " = " + TEST_SESSION_LOG.getSessionId();
         Uri uri = Uri.parse(CONTENT_URI_LOGS + "/" + TEST_SESSION_LOG.getSessionId());
@@ -292,7 +293,7 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canUpdateLogFromDatabase_UsingLogIdContentUri() {
-        insertLogToDatabase();
+        insertLogToDatabase(TEST_SESSION_LOG, RuntimeEnvironment.application);
 
         String selectedLog = LogsTable.LOG_ID + " = " + TEST_SESSION_LOG.getSessionId();
         ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
@@ -355,16 +356,15 @@ public class DatabaseContentProviderTest {
                 cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)))));
     }
 
-    private void insertLogToDatabase() {
-        ContentValues logValues = getLogContentValues(TEST_SESSION_LOG);
-        if (TEST_SESSION_LOG.getDrill().getDrillId() == 0) {
-            insertDrillToDatabase(TEST_DRILL, RuntimeEnvironment.application);
+    private void insertLogToDatabase(SessionLog sessionLog, Context context) {
+        ContentValues logValues = getLogContentValues(sessionLog);
+        if (sessionLog.getDrill().getDrillId() == 0) {
+            insertDrillToDatabase(sessionLog.getDrill(), context);
         }
-        logValues.put(LogsTable.COLUMN_DRILL, TEST_SESSION_LOG.getDrill().getDrillId());
-        Uri uri = RuntimeEnvironment.application.getContentResolver()
-                .insert(CONTENT_URI_LOGS, logValues);
+        logValues.put(LogsTable.COLUMN_DRILL, sessionLog.getDrill().getDrillId());
+        Uri uri = context.getContentResolver().insert(CONTENT_URI_LOGS, logValues);
         if (uri != null) {
-            TEST_SESSION_LOG.setSessionId(Integer.parseInt(uri.getLastPathSegment()));
+            sessionLog.setSessionId(Integer.parseInt(uri.getLastPathSegment()));
         }
     }
 
