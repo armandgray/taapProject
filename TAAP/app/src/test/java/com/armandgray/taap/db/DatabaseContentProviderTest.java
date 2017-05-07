@@ -148,6 +148,8 @@ public class DatabaseContentProviderTest {
     public void canGetTypeForUriUsingContentProvider() {
         assertEquals(DrillsTable.TABLE_DRILLS, RuntimeEnvironment.application.getContentResolver()
                 .getType(CONTENT_URI_DRILLS));
+        assertEquals(DrillsTable.TABLE_DRILLS, RuntimeEnvironment.application.getContentResolver()
+                .getType(Uri.parse(CONTENT_URI_DRILLS + "/" + 0)));
     }
 
     @Test
