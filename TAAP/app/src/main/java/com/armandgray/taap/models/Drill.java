@@ -21,11 +21,16 @@ public class Drill implements Parcelable {
     private String title;
     private int imageId;
     private String[] category;
+    private int drillId;
 
     public Drill(String title, int imageId, String[] category) {
         this.title = title;
         this.imageId = imageId;
         this.category = category;
+    }
+
+    public int getDrillId() {
+        return drillId;
     }
 
     public String getTitle() {

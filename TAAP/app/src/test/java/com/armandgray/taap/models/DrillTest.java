@@ -25,6 +25,7 @@ public class DrillTest {
         Drill drill = new Drill("2-Ball Pound Dribble",
                 R.drawable.ic_fitness_center_white_24dp, ballHandling);
         assertNotNull(drill);
+        assertNotNull(drill.getDrillId());
         assertNotNull(drill.getTitle());
         assertNotNull(drill.getImageId());
         assertNotNull(drill.getCategory());
