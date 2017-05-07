@@ -71,7 +71,8 @@ public class DatabaseContentProvider extends ContentProvider {
                         null, null, null, null);
 
             case LOGS_ID:
-                return null;
+                return database.query(LogsTable.TABLE_LOGS, projection, selection,
+                        null, null, null, null);
         }
         return null;
     }
