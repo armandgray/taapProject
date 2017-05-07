@@ -13,7 +13,7 @@ public class StringsHelperTest {
         String[] array = {"a", "ab", "aab", "abc"};
         String arrayAsString = getArrayAsString(array);
         assertNotNull(arrayAsString);
-        assertEquals("a, ab, aab, abc", arrayAsString);
+        assertEquals("a,ab,aab,abc", arrayAsString);
     }
 
 }
