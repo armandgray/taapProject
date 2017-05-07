@@ -170,6 +170,12 @@ public class DatabaseContentProviderTest {
     }
 
     @Test
+    public void cannotDeleteDrillFromDatabase_UsingAllDrillContentUri() {
+        assertEquals(EXECUTION_FAILURE, RuntimeEnvironment.application.getContentResolver()
+                .delete(CONTENT_URI_DRILLS, null, null));
+    }
+
+    @Test
     public void canUpdateDrillFromDatabaseUsingContentProvider() {
         insertDrillToDatabase();
 
