@@ -115,35 +115,6 @@ public class DatabaseContentProviderTest {
     }
 
     @Test
-    public void canInsertDrillIntoDatabaseUsingContentProvider() {
-        Drill drill = new Drill(
-                "5 Spots Shooting (Mid-Range)",
-                R.drawable.ic_account_multiple_outline_white_48dp,
-                Drill.SHOOTING_ARRAY);
-        ContentValues values = new ContentValues();
-        values.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
-        values.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
-        values.put(DrillsTable.COLUMN_CATEGORY, drill.getCategory()[0]);
-        RuntimeEnvironment.application.getContentResolver().insert(CONTENT_URI_DRILLS, values);
-
-        Cursor cursor = (new DatabaseOpenHelper(RuntimeEnvironment.application))
-                .getReadableDatabase()
-                .query(DrillsTable.TABLE_DRILLS, DrillsTable.ALL_DRILL_COLUMNS,
-                        null, null, null, null, null);
-
-        assertTrue(cursor.moveToNext());
-        assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
-        assertEquals(1, cursor.getCount());
-        assertEquals(drill.getTitle(),
-                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
-        assertEquals(drill.getImageId(),
-                cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
-        assertEquals(drill.getCategory()[0],
-                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
-        cursor.close();
-    }
-
-    @Test
     public void canQueryDatabaseForDrillUsingContentProvider() {
         Drill drill = new Drill(
                 "5 Spots Shooting (Mid-Range)",
@@ -162,6 +133,41 @@ public class DatabaseContentProviderTest {
 
         assertNotNull(cursor);
         assertTrue(cursor.moveToFirst());
+        assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
+        assertEquals(1, cursor.getCount());
+        assertEquals(drill.getTitle(),
+                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
+        assertEquals(drill.getImageId(),
+                cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
+        assertEquals(drill.getCategory()[0],
+                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
+        cursor.close();
+    }
+
+    @Test
+    public void canGetTypeForUriUsingContentProvider() {
+        assertEquals(DrillsTable.TABLE_DRILLS, RuntimeEnvironment.application.getContentResolver()
+                .getType(CONTENT_URI_DRILLS));
+    }
+
+    @Test
+    public void canInsertDrillIntoDatabaseUsingContentProvider() {
+        Drill drill = new Drill(
+                "5 Spots Shooting (Mid-Range)",
+                R.drawable.ic_account_multiple_outline_white_48dp,
+                Drill.SHOOTING_ARRAY);
+        ContentValues values = new ContentValues();
+        values.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
+        values.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
+        values.put(DrillsTable.COLUMN_CATEGORY, drill.getCategory()[0]);
+        RuntimeEnvironment.application.getContentResolver().insert(CONTENT_URI_DRILLS, values);
+
+        Cursor cursor = (new DatabaseOpenHelper(RuntimeEnvironment.application))
+                .getReadableDatabase()
+                .query(DrillsTable.TABLE_DRILLS, DrillsTable.ALL_DRILL_COLUMNS,
+                        null, null, null, null, null);
+
+        assertTrue(cursor.moveToNext());
         assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
         assertEquals(1, cursor.getCount());
         assertEquals(drill.getTitle(),
