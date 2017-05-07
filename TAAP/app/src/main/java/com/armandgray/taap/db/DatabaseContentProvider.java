@@ -10,6 +10,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 
+import com.armandgray.taap.models.SessionLog;
+
 public class DatabaseContentProvider extends ContentProvider {
 
     public static final Uri CONTENT_URI_DRILLS;
@@ -123,5 +125,19 @@ public class DatabaseContentProvider extends ContentProvider {
             return database.update(LogsTable.TABLE_LOGS, values, selection, selectionArgs);
         }
         return EXECUTION_FAILURE;
+    }
+
+    @NonNull
+    public static ContentValues getLogContentValues(SessionLog testSessionLog) {
+        ContentValues logValues = new ContentValues();
+        logValues.put(LogsTable.COLUMN_DATE, testSessionLog.getSessionDate().getTime());
+        logValues.put(LogsTable.COLUMN_LENGTH, testSessionLog.getSessionLength().getTime());
+        logValues.put(LogsTable.COLUMN_GOAL, testSessionLog.getSessionGoal());
+        logValues.put(LogsTable.COLUMN_ACTIVE_WORK, testSessionLog.getActiveWork().getTime());
+        logValues.put(LogsTable.COLUMN_REST_TIME, testSessionLog.getRestTime().getTime());
+        logValues.put(LogsTable.COLUMN_SETS_COMPLETED, testSessionLog.getSetsCompleted());
+        logValues.put(LogsTable.COLUMN_REPS_COMPLETED, testSessionLog.getRepsCompleted());
+        logValues.put(LogsTable.COLUMN_SUCCESS, testSessionLog.getSuccessRate());
+        return logValues;
     }
 }
