@@ -48,7 +48,7 @@ public class StringsHelperTest {
 
     @Test
     public void canConvertEmptyStringToNull_GetArrayAsString() throws Exception {
-        String[] expectedArray = new String[3];
+        @SuppressWarnings("all") String[] expectedArray = new String[3];
         String string = ",,";
         String[] stringAsArray = getStringAsArray(string);
         assertNotNull(stringAsArray);
