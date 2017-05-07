@@ -41,4 +41,9 @@ public class StringsHelperTest {
         assertThat(expectedArray, is(stringAsArray));
     }
 
+    @Test
+    public void canReturnNullWhenPassedNull_GetStringAsArray() throws Exception {
+        assertNull(getStringAsArray(null));
+    }
+
 }
