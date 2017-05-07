@@ -99,12 +99,7 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void doesAssignWritableDatabase_TestOnCreate() {
-        ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
-        ContentProviderClient contentProviderClient = contentResolver
-                .acquireContentProviderClient(DatabaseContentProvider.CONTENT_URI_DRILLS);
-        assertNotNull(contentProviderClient);
-        DatabaseContentProvider contentProvider = (DatabaseContentProvider)
-                contentProviderClient.getLocalContentProvider();
+        DatabaseContentProvider contentProvider = getDatabaseContentProvider();
 
         assertNotNull(contentProvider);
         assertNotNull(contentProvider.database);
@@ -112,14 +107,9 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void doesAssignWritableDatabase_WithDrillsAndLogsTables_TestOnCreate() {
-        ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
-        ContentProviderClient contentProviderClient = contentResolver
-                .acquireContentProviderClient(DatabaseContentProvider.CONTENT_URI_DRILLS);
-        assertNotNull(contentProviderClient);
-        DatabaseContentProvider contentProvider = (DatabaseContentProvider)
-                contentProviderClient.getLocalContentProvider();
-
+        DatabaseContentProvider contentProvider = getDatabaseContentProvider();
         assertNotNull(contentProvider);
+
         Cursor cursor = contentProvider.database
                 .rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
         assertTrue(cursor.moveToFirst());
@@ -129,6 +119,7 @@ public class DatabaseContentProviderTest {
             cursor.moveToNext();
         }
         cursor.close();
+
         assertTrue(listTableNames.contains(DrillsTable.TABLE_DRILLS));
         assertTrue(listTableNames.contains(LogsTable.TABLE_LOGS));
     }
@@ -189,11 +180,7 @@ public class DatabaseContentProviderTest {
         String selectedDrill = DrillsTable.DRILL_ID + " = " + 1;
         contentResolver.delete(CONTENT_URI_DRILLS, selectedDrill, null);
 
-        ContentProviderClient contentProviderClient = contentResolver
-                .acquireContentProviderClient(DatabaseContentProvider.CONTENT_URI_DRILLS);
-        assertNotNull(contentProviderClient);
-        DatabaseContentProvider contentProvider = (DatabaseContentProvider)
-                contentProviderClient.getLocalContentProvider();
+        DatabaseContentProvider contentProvider = getDatabaseContentProvider();
         assertNotNull(contentProvider);
 
         Cursor cursor = contentProvider.database.rawQuery("SELECT * FROM drills", null);
@@ -327,11 +314,7 @@ public class DatabaseContentProviderTest {
         String selectedDrill = DrillsTable.DRILL_ID + " = " + 1;
         contentResolver.delete(CONTENT_URI_DRILLS, selectedDrill, null);
 
-        ContentProviderClient contentProviderClient = contentResolver
-                .acquireContentProviderClient(DatabaseContentProvider.CONTENT_URI_DRILLS);
-        assertNotNull(contentProviderClient);
-        DatabaseContentProvider contentProvider = (DatabaseContentProvider)
-                contentProviderClient.getLocalContentProvider();
+        DatabaseContentProvider contentProvider = getDatabaseContentProvider();
         assertNotNull(contentProvider);
 
         Cursor cursor = contentProvider.database.rawQuery("SELECT * FROM drills", null);
@@ -391,6 +374,15 @@ public class DatabaseContentProviderTest {
         assertEquals(getArrayAsString(updatedDrill.getCategory()),
                 cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
         cursor.close();
+    }
+
+    private DatabaseContentProvider getDatabaseContentProvider() {
+        ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
+        ContentProviderClient contentProviderClient = contentResolver
+                .acquireContentProviderClient(DatabaseContentProvider.CONTENT_URI_DRILLS);
+        assertNotNull(contentProviderClient);
+        return (DatabaseContentProvider)
+                contentProviderClient.getLocalContentProvider();
     }
 
     private static Drill getTestDrill() {
