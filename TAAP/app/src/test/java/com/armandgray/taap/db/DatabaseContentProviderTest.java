@@ -117,7 +117,7 @@ public class DatabaseContentProviderTest {
     public void canQueryDatabaseForDrillUsingContentProvider() {
         insertDrillToDatabase();
 
-        String selectedDrill = DrillsTable.DRILL_ID + " = " + 1;
+        String selectedDrill = DrillsTable.DRILL_ID + " = " + TEST_DRILL.getDrillId();
         Cursor cursor = RuntimeEnvironment.application.getContentResolver()
                 .query(CONTENT_URI_DRILLS, DrillsTable.ALL_DRILL_COLUMNS, selectedDrill,
                         null, null);
@@ -171,7 +171,7 @@ public class DatabaseContentProviderTest {
     public void canUpdateDrillFromDatabaseUsingContentProvider() {
         insertDrillToDatabase();
 
-        String selectedDrill = DrillsTable.DRILL_ID + " = " + 1;
+        String selectedDrill = DrillsTable.DRILL_ID + " = " + TEST_DRILL.getDrillId();
         ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
         Cursor cursor = contentResolver.query(CONTENT_URI_DRILLS, DrillsTable.ALL_DRILL_COLUMNS,
                 selectedDrill, null, null);
@@ -188,6 +188,7 @@ public class DatabaseContentProviderTest {
         updatedValues.put(DrillsTable.COLUMN_IMAGE_ID, updatedDrill.getImageId());
         updatedValues.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(updatedDrill.getCategory()));
         contentResolver.update(CONTENT_URI_DRILLS, updatedValues, selectedDrill, null);
+        updatedDrill.setDrillId(TEST_DRILL.getDrillId());
 
         cursor = contentResolver.query(CONTENT_URI_DRILLS,
                 DrillsTable.ALL_DRILL_COLUMNS, selectedDrill, null, null);
