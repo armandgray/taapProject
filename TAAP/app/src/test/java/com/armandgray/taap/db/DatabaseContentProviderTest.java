@@ -142,17 +142,8 @@ public class DatabaseContentProviderTest {
                 .query(CONTENT_URI_DRILLS, DrillsTable.ALL_DRILL_COLUMNS, selectedDrill,
                         null, null);
 
-        Drill drill = getTestDrill();
         assertNotNull(cursor);
-        assertTrue(cursor.moveToFirst());
-        assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
-        assertEquals(1, cursor.getCount());
-        assertEquals(drill.getTitle(),
-                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
-        assertEquals(drill.getImageId(),
-                cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
-        assertThat(drill.getCategory(), is(getStringAsArray(cursor.getString(
-                cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)))));
+        assertCursorDataEqualsDrill(cursor, getTestDrill());
         cursor.close();
     }
 
@@ -289,16 +280,7 @@ public class DatabaseContentProviderTest {
         Cursor cursor = shadowOf(contentResolver).query(CONTENT_URI_DRILLS,
                 DrillsTable.ALL_DRILL_COLUMNS, selectedDrill, null, null, null);
 
-        assertNotNull(cursor);
-        assertTrue(cursor.moveToFirst());
-        assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
-        assertEquals(1, cursor.getCount());
-        assertEquals(drill.getTitle(),
-                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
-        assertEquals(drill.getImageId(),
-                cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
-        assertThat(drill.getCategory(), is(getStringAsArray(cursor.getString(
-                cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)))));
+        assertCursorDataEqualsDrill(cursor, drill);
         cursor.close();
     }
 
@@ -433,6 +415,18 @@ public class DatabaseContentProviderTest {
         drillValues.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
         drillValues.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(drill.getCategory()));
         RuntimeEnvironment.application.getContentResolver().insert(CONTENT_URI_DRILLS, drillValues);
+    }
+
+    private void assertCursorDataEqualsDrill(Cursor cursor, Drill drill) {
+        assertTrue(cursor.moveToFirst());
+        assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
+        assertEquals(1, cursor.getCount());
+        assertEquals(drill.getTitle(),
+                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
+        assertEquals(drill.getImageId(),
+                cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
+        assertThat(drill.getCategory(), is(getStringAsArray(cursor.getString(
+                cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)))));
     }
 
     private void insertLogToDatabase() {
