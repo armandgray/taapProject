@@ -14,6 +14,7 @@ public class StringsHelper {
     }
 
     public static String[] getStringAsArray(String string) {
+        if (string == null) { return null; }
         String[] array = string.split(",");
         return array;
     }
