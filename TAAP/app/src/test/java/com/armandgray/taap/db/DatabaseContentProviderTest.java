@@ -450,8 +450,8 @@ public class DatabaseContentProviderTest {
         logValues.put(LogsTable.COLUMN_GOAL, SESSION_LOG.getSessionGoal());
         logValues.put(LogsTable.COLUMN_ACTIVE_WORK, SESSION_LOG.getActiveWork().getTime());
         logValues.put(LogsTable.COLUMN_REST_TIME, SESSION_LOG.getRestTime().getTime());
-        logValues.put(LogsTable.COLUMN_SETS_COMPLETED, SESSION_LOG.getSessionGoal());
-        logValues.put(LogsTable.COLUMN_REPS_COMPLETED, SESSION_LOG.getSessionGoal());
+        logValues.put(LogsTable.COLUMN_SETS_COMPLETED, SESSION_LOG.getSetsCompleted());
+        logValues.put(LogsTable.COLUMN_REPS_COMPLETED, SESSION_LOG.getRepsCompleted());
         logValues.put(LogsTable.COLUMN_SUCCESS, SESSION_LOG.getSuccessRate());
         logValues.put(LogsTable.COLUMN_DRILL, 1);
         RuntimeEnvironment.application.getContentResolver().insert(CONTENT_URI_LOGS, logValues);
