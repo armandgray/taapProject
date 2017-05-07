@@ -30,6 +30,7 @@ import static com.armandgray.taap.db.DatabaseContentProvider.BASE_PATH_LOGS;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_LOGS;
 import static com.armandgray.taap.db.DatabaseContentProvider.DRILLS_ID;
+import static com.armandgray.taap.db.DatabaseContentProvider.EXECUTION_FAILURE;
 import static com.armandgray.taap.db.DatabaseContentProvider.LOGS_ID;
 import static com.armandgray.taap.db.DatabaseContentProvider.uriMatcher;
 import static com.armandgray.taap.utils.StringsHelper.getArrayAsString;
@@ -239,6 +240,12 @@ public class DatabaseContentProviderTest {
                 .database
                 .rawQuery("SELECT * FROM logs", null)
                 .moveToFirst());
+    }
+
+    @Test
+    public void cannotDeleteLogFromDatabase_UsingAllLogsContentUri() {
+        assertEquals(EXECUTION_FAILURE, RuntimeEnvironment.application.getContentResolver()
+                .delete(CONTENT_URI_LOGS, null, null));
     }
 
     @Test

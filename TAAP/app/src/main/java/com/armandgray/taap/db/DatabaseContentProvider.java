@@ -32,6 +32,7 @@ public class DatabaseContentProvider extends ContentProvider {
 
     @VisibleForTesting
     static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+    static final int EXECUTION_FAILURE = -1;
 
     static {
         CONTENT_URI_DRILLS = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_DRILLS);
@@ -108,7 +109,7 @@ public class DatabaseContentProvider extends ContentProvider {
         if (uriMatcher.match(uri) == ALL_LOGS) {
             return database.delete(LogsTable.TABLE_LOGS, selection, selectionArgs);
         }
-        return 0;
+        return EXECUTION_FAILURE;
     }
 
     @Override
