@@ -9,6 +9,8 @@ import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
 import com.armandgray.taap.models.Drill;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -32,6 +34,14 @@ import static junit.framework.Assert.assertTrue;
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
 public class DatabaseContentProviderTest {
+
+    private DatabaseContentProvider contentProvider;
+
+    @Before
+    public void setUp() {
+        System.out.println("Running Set Up!");
+        contentProvider = new DatabaseContentProvider();
+    }
 
     @Test
     public void hasContentUri_Drills() {
@@ -65,7 +75,6 @@ public class DatabaseContentProviderTest {
     @Test
     public void doesAssignWritableDatabase_TestOnCreate() {
         // TODO add test
-//        DatabaseContentProvider contentProvider = new DatabaseContentProvider();
 //        assertTrue(contentProvider.onCreate());
 //        assertNotNull(contentProvider.database);
     }
@@ -101,6 +110,12 @@ public class DatabaseContentProviderTest {
         assertEquals(drill.getCategory()[0],
                 cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
         cursor.close();
+    }
+
+    @After
+    public void tearDown() {
+        System.out.println("Running TearDown!");
+        contentProvider = null;
     }
 
 }
