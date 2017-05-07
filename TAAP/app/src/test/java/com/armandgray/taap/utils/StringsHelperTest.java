@@ -28,7 +28,7 @@ public class StringsHelperTest {
     @Test
     public void canConvertNullToEmptyString_GetArrayAsString() throws Exception {
         String[] array = new String[3];
-        assertNotNull(array);
+        assertNotNull(getArrayAsString(array));
         assertEquals(",,", getArrayAsString(array));
     }
 
@@ -44,6 +44,17 @@ public class StringsHelperTest {
     @Test
     public void canReturnNullWhenPassedNull_GetStringAsArray() throws Exception {
         assertNull(getStringAsArray(null));
+    }
+
+    @Test
+    public void canConvertEmptyStringToNull_GetArrayAsString() throws Exception {
+        String[] expectedArray = new String[3];
+        String string = ",,";
+        String[] stringAsArray = getStringAsArray(string);
+        assertNotNull(stringAsArray);
+        for (int i = 0; i < stringAsArray.length; i++) {
+            assertEquals(expectedArray[i], stringAsArray[i]);
+        }
     }
 
 }
