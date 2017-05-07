@@ -76,12 +76,14 @@ public class Drill implements Parcelable {
         dest.writeString(this.title);
         dest.writeInt(this.imageId);
         dest.writeStringArray(this.category);
+        dest.writeInt(this.drillId);
     }
 
     protected Drill(Parcel in) {
         this.title = in.readString();
         this.imageId = in.readInt();
         this.category = in.createStringArray();
+        this.drillId = in.readInt();
     }
 
     public static final Parcelable.Creator<Drill> CREATOR = new Parcelable.Creator<Drill>() {
@@ -95,5 +97,4 @@ public class Drill implements Parcelable {
             return new Drill[size];
         }
     };
-
 }
