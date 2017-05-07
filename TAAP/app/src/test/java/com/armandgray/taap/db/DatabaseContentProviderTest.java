@@ -47,11 +47,25 @@ import static org.robolectric.Shadows.shadowOf;
 @Config(constants = BuildConfig.class)
 public class DatabaseContentProviderTest {
 
+    private static final long TIME_IN_MILLIS = 1494179392802L;
+    private static final SessionLog SESSION_LOG = new SessionLog.Builder()
+            .sessionLength(new Date(TIME_IN_MILLIS))
+            .sessionGoal("")
+            .activeWork(new Date(TIME_IN_MILLIS + 555555))
+            .restTime(new Date(TIME_IN_MILLIS + 111111))
+            .setsCompleted(4)
+            .repsCompleted(3)
+            .successRate(0.23)
+            .successRecord(0.55)
+            .drill(getTestDrill())
+            .create();
+
     private DatabaseContentProvider contentProvider;
 
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
+        System.out.println(TIME_IN_MILLIS);
         contentProvider = new DatabaseContentProvider();
     }
 
@@ -300,7 +314,6 @@ public class DatabaseContentProviderTest {
     public void canInsertLogIntoDatabaseUsingContentProvider() {
         Drill drill = getTestDrill();
         insertDrillToDatabase();
-        SessionLog sessionLog = getTestSessionLog();
         insertLogToDatabase();
 
         Cursor cursor = (new DatabaseOpenHelper(RuntimeEnvironment.application))
@@ -311,25 +324,24 @@ public class DatabaseContentProviderTest {
         assertTrue(cursor.moveToFirst());
         assertEquals(LogsTable.ALL_LOG_COLUMNS.length, cursor.getColumnCount());
         assertEquals(1, cursor.getCount());
-        assertEquals(sessionLog.getSessionDate().getTime(),
+        assertEquals(SESSION_LOG.getSessionDate().getTime(),
                 cursor.getLong(cursor.getColumnIndex(LogsTable.COLUMN_DATE)));
-        assertEquals(sessionLog.getSessionLength().getTime(),
+        assertEquals(SESSION_LOG.getSessionLength().getTime(),
                 cursor.getLong(cursor.getColumnIndex(LogsTable.COLUMN_LENGTH)));
-        assertEquals(sessionLog.getSessionGoal(),
+        assertEquals(SESSION_LOG.getSessionGoal(),
                 cursor.getString(cursor.getColumnIndex(LogsTable.COLUMN_GOAL)));
-        assertEquals(sessionLog.getActiveWork().getTime(),
+        assertEquals(SESSION_LOG.getActiveWork().getTime(),
                 cursor.getLong(cursor.getColumnIndex(LogsTable.COLUMN_ACTIVE_WORK)));
-        assertEquals(sessionLog.getRestTime().getTime(),
+        assertEquals(SESSION_LOG.getRestTime().getTime(),
                 cursor.getLong(cursor.getColumnIndex(LogsTable.COLUMN_REST_TIME)));
-        assertEquals(sessionLog.getSetsCompleted(),
+        assertEquals(SESSION_LOG.getSetsCompleted(),
                 cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_SETS_COMPLETED)));
-        assertEquals(sessionLog.getRepsCompleted(),
+        assertEquals(SESSION_LOG.getRepsCompleted(),
                 cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_REPS_COMPLETED)));
-        assertEquals(sessionLog.getSuccessRate(),
+        assertEquals(SESSION_LOG.getSuccessRate(),
                 cursor.getDouble(cursor.getColumnIndex(LogsTable.COLUMN_SUCCESS)));
         assertEquals(1,
                 cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_DRILL)));
-
         cursor.close();
     }
 
@@ -415,7 +427,7 @@ public class DatabaseContentProviderTest {
         cursor.close();
     }
 
-    private Drill getTestDrill() {
+    private static Drill getTestDrill() {
         return new Drill(
                 "5 Spots Shooting (Mid-Range)",
                 R.drawable.ic_account_multiple_outline_white_48dp,
@@ -431,31 +443,16 @@ public class DatabaseContentProviderTest {
         RuntimeEnvironment.application.getContentResolver().insert(CONTENT_URI_DRILLS, drillValues);
     }
 
-    private SessionLog getTestSessionLog() {
-        return new SessionLog.Builder()
-                .sessionLength(new Date(System.currentTimeMillis()))
-                .sessionGoal("")
-                .activeWork(new Date(System.currentTimeMillis() + 555555))
-                .restTime(new Date(System.currentTimeMillis() + 111111))
-                .setsCompleted(4)
-                .repsCompleted(3)
-                .successRate(0.23)
-                .successRecord(0.55)
-                .drill(getTestDrill())
-                .create();
-    }
-
     private void insertLogToDatabase() {
-        SessionLog sessionLog = getTestSessionLog();
         ContentValues logValues = new ContentValues();
-        logValues.put(LogsTable.COLUMN_DATE, sessionLog.getSessionDate().getTime());
-        logValues.put(LogsTable.COLUMN_LENGTH, sessionLog.getSessionLength().getTime());
-        logValues.put(LogsTable.COLUMN_GOAL, sessionLog.getSessionGoal());
-        logValues.put(LogsTable.COLUMN_ACTIVE_WORK, sessionLog.getActiveWork().getTime());
-        logValues.put(LogsTable.COLUMN_REST_TIME, sessionLog.getRestTime().getTime());
-        logValues.put(LogsTable.COLUMN_SETS_COMPLETED, sessionLog.getSessionGoal());
-        logValues.put(LogsTable.COLUMN_REPS_COMPLETED, sessionLog.getSessionGoal());
-        logValues.put(LogsTable.COLUMN_SUCCESS, sessionLog.getSuccessRate());
+        logValues.put(LogsTable.COLUMN_DATE, SESSION_LOG.getSessionDate().getTime());
+        logValues.put(LogsTable.COLUMN_LENGTH, SESSION_LOG.getSessionLength().getTime());
+        logValues.put(LogsTable.COLUMN_GOAL, SESSION_LOG.getSessionGoal());
+        logValues.put(LogsTable.COLUMN_ACTIVE_WORK, SESSION_LOG.getActiveWork().getTime());
+        logValues.put(LogsTable.COLUMN_REST_TIME, SESSION_LOG.getRestTime().getTime());
+        logValues.put(LogsTable.COLUMN_SETS_COMPLETED, SESSION_LOG.getSessionGoal());
+        logValues.put(LogsTable.COLUMN_REPS_COMPLETED, SESSION_LOG.getSessionGoal());
+        logValues.put(LogsTable.COLUMN_SUCCESS, SESSION_LOG.getSuccessRate());
         logValues.put(LogsTable.COLUMN_DRILL, 1);
         RuntimeEnvironment.application.getContentResolver().insert(CONTENT_URI_LOGS, logValues);
     }
