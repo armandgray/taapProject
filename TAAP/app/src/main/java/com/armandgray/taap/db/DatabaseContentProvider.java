@@ -63,7 +63,8 @@ public class DatabaseContentProvider extends ContentProvider {
                         null, null, null, null);
 
             case DRILLS_ID:
-                return null;
+                return database.query(DrillsTable.TABLE_DRILLS, projection, selection,
+                        null, null, null, null);
 
             case ALL_LOGS:
                 return database.query(LogsTable.TABLE_LOGS, projection, selection,
