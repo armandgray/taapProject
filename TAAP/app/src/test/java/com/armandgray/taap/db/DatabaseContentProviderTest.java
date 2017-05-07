@@ -222,6 +222,38 @@ public class DatabaseContentProviderTest {
     }
 
     @Test
+    public void canUpdateDrillFromDatabase_UsingDrillIdContentUri() {
+        insertDrillToDatabase();
+
+        String selectedDrill = DrillsTable.DRILL_ID + " = " + TEST_DRILL.getDrillId();
+        ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
+        Cursor cursor = contentResolver.query(CONTENT_URI_DRILLS, DrillsTable.ALL_DRILL_COLUMNS,
+                selectedDrill, null, null);
+
+        assertNotNull(cursor);
+        assertCursorDataEqualsDrill(cursor, TEST_DRILL);
+
+        Drill updatedDrill = new Drill(
+                "Pass & Pass Back (Left Layup)",
+                R.drawable.ic_fitness_center_white_24dp,
+                Drill.PASSING_ARRAY);
+        ContentValues updatedValues = new ContentValues();
+        updatedValues.put(DrillsTable.COLUMN_TITLE, updatedDrill.getTitle());
+        updatedValues.put(DrillsTable.COLUMN_IMAGE_ID, updatedDrill.getImageId());
+        updatedValues.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(updatedDrill.getCategory()));
+        Uri uri = Uri.parse(CONTENT_URI_DRILLS + "/" + TEST_DRILL.getDrillId());
+        contentResolver.update(uri, updatedValues, selectedDrill, null);
+        updatedDrill.setDrillId(TEST_DRILL.getDrillId());
+
+        cursor = contentResolver.query(CONTENT_URI_DRILLS,
+                DrillsTable.ALL_DRILL_COLUMNS, selectedDrill, null, null);
+
+        assertNotNull(cursor);
+        assertCursorDataEqualsDrill(cursor, updatedDrill);
+        cursor.close();
+    }
+
+    @Test
     public void canQueryDatabaseForLogUsingContentProvider() {
         insertLogToDatabase();
 
