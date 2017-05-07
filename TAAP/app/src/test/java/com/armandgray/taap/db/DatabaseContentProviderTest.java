@@ -6,7 +6,6 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
@@ -32,9 +31,9 @@ import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_LOGS;
 import static com.armandgray.taap.db.DatabaseContentProvider.DRILLS_ID;
 import static com.armandgray.taap.db.DatabaseContentProvider.EXECUTION_FAILURE;
 import static com.armandgray.taap.db.DatabaseContentProvider.LOGS_ID;
+import static com.armandgray.taap.db.DatabaseContentProvider.getDrillContentValues;
 import static com.armandgray.taap.db.DatabaseContentProvider.getLogContentValues;
 import static com.armandgray.taap.db.DatabaseContentProvider.uriMatcher;
-import static com.armandgray.taap.utils.StringHelper.getArrayAsString;
 import static com.armandgray.taap.utils.StringHelper.getStringAsArray;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
@@ -349,15 +348,6 @@ public class DatabaseContentProviderTest {
         if (uri != null) {
             drill.setDrillId(Integer.parseInt(uri.getLastPathSegment()));
         }
-    }
-
-    @NonNull
-    private ContentValues getDrillContentValues(Drill drill) {
-        ContentValues drillValues = new ContentValues();
-        drillValues.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
-        drillValues.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
-        drillValues.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(drill.getCategory()));
-        return drillValues;
     }
 
     private void assertCursorDataEqualsDrill(Cursor cursor, Drill drill) {

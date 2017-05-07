@@ -10,7 +10,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 
+import com.armandgray.taap.models.Drill;
 import com.armandgray.taap.models.SessionLog;
+
+import static com.armandgray.taap.utils.StringHelper.getArrayAsString;
 
 public class DatabaseContentProvider extends ContentProvider {
 
@@ -125,6 +128,15 @@ public class DatabaseContentProvider extends ContentProvider {
             return database.update(LogsTable.TABLE_LOGS, values, selection, selectionArgs);
         }
         return EXECUTION_FAILURE;
+    }
+
+    @NonNull
+    public static ContentValues getDrillContentValues(Drill drill) {
+        ContentValues drillValues = new ContentValues();
+        drillValues.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
+        drillValues.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
+        drillValues.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(drill.getCategory()));
+        return drillValues;
     }
 
     @NonNull
