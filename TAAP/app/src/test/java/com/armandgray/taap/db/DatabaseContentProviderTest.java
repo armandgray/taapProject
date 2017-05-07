@@ -202,7 +202,7 @@ public class DatabaseContentProviderTest {
     public void canQueryDatabaseForLogUsingContentProvider() {
         insertLogToDatabase();
 
-        String selectedLog = LogsTable.LOG_ID + " = " + TEST_SESSION_LOG.getDrill().getDrillId();
+        String selectedLog = LogsTable.LOG_ID + " = " + 1;
         Cursor cursor = RuntimeEnvironment.application.getContentResolver()
                 .query(CONTENT_URI_LOGS, LogsTable.ALL_LOG_COLUMNS, selectedLog,
                         null, null);
@@ -286,6 +286,7 @@ public class DatabaseContentProviderTest {
     }
 
     private void assertCursorDataEqualsLog(Cursor cursor, SessionLog sessionLog) {
+        assertTrue(cursor.moveToFirst());
         assertEquals(LogsTable.ALL_LOG_COLUMNS.length, cursor.getColumnCount());
         assertEquals(1, cursor.getCount());
         assertEquals(sessionLog.getSessionDate().getTime(),
