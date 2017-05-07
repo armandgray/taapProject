@@ -6,6 +6,7 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
@@ -206,10 +207,7 @@ public class DatabaseContentProviderTest {
                 "Pass & Pass Back (Left Layup)",
                 R.drawable.ic_fitness_center_white_24dp,
                 Drill.PASSING_ARRAY);
-        ContentValues updatedValues = new ContentValues();
-        updatedValues.put(DrillsTable.COLUMN_TITLE, updatedDrill.getTitle());
-        updatedValues.put(DrillsTable.COLUMN_IMAGE_ID, updatedDrill.getImageId());
-        updatedValues.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(updatedDrill.getCategory()));
+        ContentValues updatedValues = getDrillContentValues(updatedDrill);
         Uri uri = Uri.parse(CONTENT_URI_DRILLS + "/" + TEST_DRILL.getDrillId());
         contentResolver.update(uri, updatedValues, selectedDrill, null);
         updatedDrill.setDrillId(TEST_DRILL.getDrillId());
@@ -345,15 +343,21 @@ public class DatabaseContentProviderTest {
 
     private void insertDrillToDatabase() {
         Drill drill = TEST_DRILL;
-        ContentValues drillValues = new ContentValues();
-        drillValues.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
-        drillValues.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
-        drillValues.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(drill.getCategory()));
+        ContentValues drillValues = getDrillContentValues(drill);
         Uri uri = RuntimeEnvironment.application.getContentResolver()
                 .insert(CONTENT_URI_DRILLS, drillValues);
         if (uri != null) {
             drill.setDrillId(Integer.parseInt(uri.getLastPathSegment()));
         }
+    }
+
+    @NonNull
+    private ContentValues getDrillContentValues(Drill drill) {
+        ContentValues drillValues = new ContentValues();
+        drillValues.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
+        drillValues.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
+        drillValues.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(drill.getCategory()));
+        return drillValues;
     }
 
     private void assertCursorDataEqualsDrill(Cursor cursor, Drill drill) {
