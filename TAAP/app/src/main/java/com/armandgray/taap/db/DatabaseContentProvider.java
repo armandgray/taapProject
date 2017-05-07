@@ -113,6 +113,19 @@ public class DatabaseContentProvider extends ContentProvider {
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return database.update(DrillsTable.TABLE_DRILLS, values, selection, selectionArgs);
+        switch (uriMatcher.match(uri)) {
+            case ALL_DRILLS:
+                return database.update(DrillsTable.TABLE_DRILLS, values, selection, selectionArgs);
+
+            case DRILLS_ID:
+                return 0;
+
+            case ALL_LOGS:
+                return database.update(LogsTable.TABLE_LOGS, values, selection, selectionArgs);
+
+            case LOGS_ID:
+                return 0;
+        }
+        return 0;
     }
 }
