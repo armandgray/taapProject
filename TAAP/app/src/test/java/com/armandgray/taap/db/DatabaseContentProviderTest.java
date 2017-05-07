@@ -6,7 +6,6 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
@@ -32,6 +31,7 @@ import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_LOGS;
 import static com.armandgray.taap.db.DatabaseContentProvider.DRILLS_ID;
 import static com.armandgray.taap.db.DatabaseContentProvider.EXECUTION_FAILURE;
 import static com.armandgray.taap.db.DatabaseContentProvider.LOGS_ID;
+import static com.armandgray.taap.db.DatabaseContentProvider.getLogContentValues;
 import static com.armandgray.taap.db.DatabaseContentProvider.uriMatcher;
 import static com.armandgray.taap.utils.StringHelper.getArrayAsString;
 import static com.armandgray.taap.utils.StringHelper.getStringAsArray;
@@ -381,20 +381,6 @@ public class DatabaseContentProviderTest {
         if (uri != null) {
             TEST_SESSION_LOG.setSessionId(Integer.parseInt(uri.getLastPathSegment()));
         }
-    }
-
-    @NonNull
-    private ContentValues getLogContentValues(SessionLog testSessionLog) {
-        ContentValues logValues = new ContentValues();
-        logValues.put(LogsTable.COLUMN_DATE, testSessionLog.getSessionDate().getTime());
-        logValues.put(LogsTable.COLUMN_LENGTH, testSessionLog.getSessionLength().getTime());
-        logValues.put(LogsTable.COLUMN_GOAL, testSessionLog.getSessionGoal());
-        logValues.put(LogsTable.COLUMN_ACTIVE_WORK, testSessionLog.getActiveWork().getTime());
-        logValues.put(LogsTable.COLUMN_REST_TIME, testSessionLog.getRestTime().getTime());
-        logValues.put(LogsTable.COLUMN_SETS_COMPLETED, testSessionLog.getSetsCompleted());
-        logValues.put(LogsTable.COLUMN_REPS_COMPLETED, testSessionLog.getRepsCompleted());
-        logValues.put(LogsTable.COLUMN_SUCCESS, testSessionLog.getSuccessRate());
-        return logValues;
     }
 
     private void assertCursorDataEqualsLog(Cursor cursor, SessionLog sessionLog) {
