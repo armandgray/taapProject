@@ -42,8 +42,9 @@ public class StringsHelperTest {
     }
 
     @Test
-    public void canReturnNullWhenPassedNull_GetStringAsArray() throws Exception {
+    public void canReturnNullWhenPassedNullOrEmptyString_GetStringAsArray() throws Exception {
         assertNull(getStringAsArray(null));
+        assertNull(getStringAsArray(""));
     }
 
     @Test
