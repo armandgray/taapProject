@@ -1,13 +1,18 @@
 package com.armandgray.taap.db;
 
 import android.content.ContentProvider;
+import android.content.ContentValues;
+import android.database.Cursor;
 import android.net.Uri;
 
 import com.armandgray.taap.BuildConfig;
+import com.armandgray.taap.R;
+import com.armandgray.taap.models.Drill;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import static com.armandgray.taap.db.DatabaseContentProvider.ALL_DRILLS;
@@ -59,9 +64,43 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void doesAssignWritableDatabase_TestOnCreate() {
+        // TODO add test
+//        DatabaseContentProvider contentProvider = new DatabaseContentProvider();
+//        assertTrue(contentProvider.onCreate());
+//        assertNotNull(contentProvider.database);
+    }
+
+    @Test
+    public void canInsertDrillIntoDatabase() {
+        Drill drill = new Drill(
+                "5 Spots Shooting (Mid-Range)",
+                R.drawable.ic_account_multiple_outline_white_48dp,
+                Drill.SHOOTING_ARRAY);
+        ContentValues values = new ContentValues();
+        values.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
+        values.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
+        values.put(DrillsTable.COLUMN_CATEGORY, drill.getCategory()[0]);
+
+        DatabaseOpenHelper databaseOpenHelper =
+                new DatabaseOpenHelper(RuntimeEnvironment.application);
         DatabaseContentProvider contentProvider = new DatabaseContentProvider();
-        assertTrue(contentProvider.onCreate());
-        assertNotNull(contentProvider.database);
+        contentProvider.database = databaseOpenHelper.getWritableDatabase();
+
+        contentProvider.insert(CONTENT_URI_DRILLS, values);
+        Cursor cursor = databaseOpenHelper.getReadableDatabase()
+                .query(DrillsTable.TABLE_DRILLS, DrillsTable.ALL_DRILL_COLUMNS,
+                        null, null, null, null, null);
+
+        assertTrue(cursor.moveToNext());
+        assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
+        assertEquals(1, cursor.getCount());
+        assertEquals(drill.getTitle(),
+                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
+        assertEquals(drill.getImageId(),
+                cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
+        assertEquals(drill.getCategory()[0],
+                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
+        cursor.close();
     }
 
 }
