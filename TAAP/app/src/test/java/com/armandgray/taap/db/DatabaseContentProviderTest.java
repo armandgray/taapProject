@@ -352,6 +352,42 @@ public class DatabaseContentProviderTest {
         cursor.close();
     }
 
+    @Test
+    public void canUpdateLogFromDatabase_UsingLogIdContentUri() {
+        insertLogToDatabase();
+
+        String selectedLog = LogsTable.LOG_ID + " = " + TEST_SESSION_LOG.getSessionId();
+        ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
+        Cursor cursor = contentResolver.query(CONTENT_URI_LOGS, LogsTable.ALL_LOG_COLUMNS,
+                selectedLog, null, null);
+
+        assertNotNull(cursor);
+        assertCursorDataEqualsLog(cursor, TEST_SESSION_LOG);
+
+        SessionLog updatedLog = new SessionLog.Builder()
+                .sessionLength(new Date(TIME_IN_MILLIS))
+                .sessionGoal(String.valueOf(TIME_IN_MILLIS))
+                .activeWork(new Date(TIME_IN_MILLIS + 55225555))
+                .restTime(new Date(TIME_IN_MILLIS + 11122111))
+                .setsCompleted(43)
+                .repsCompleted(30)
+                .successRate(0.93)
+                .successRecord(1.00)
+                .drill(TEST_DRILL)
+                .create();
+        ContentValues updatedValues = getLogContentValues(updatedLog);
+        Uri uri = Uri.parse(CONTENT_URI_LOGS + "/" + TEST_SESSION_LOG.getSessionId());
+        contentResolver.update(uri, updatedValues, selectedLog, null);
+        updatedLog.setSessionId(TEST_SESSION_LOG.getSessionId());
+
+        cursor = contentResolver.query(CONTENT_URI_LOGS, LogsTable.ALL_LOG_COLUMNS, selectedLog,
+                null, null);
+
+        assertNotNull(cursor);
+        assertCursorDataEqualsLog(cursor, updatedLog);
+        cursor.close();
+    }
+
     private DatabaseContentProvider getDatabaseContentProvider() {
         ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
         ContentProviderClient contentProviderClient = contentResolver
