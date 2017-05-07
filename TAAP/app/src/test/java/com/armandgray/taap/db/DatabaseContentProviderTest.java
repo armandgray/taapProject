@@ -39,7 +39,6 @@ import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -183,8 +182,8 @@ public class DatabaseContentProviderTest {
         updatedValues.put(DrillsTable.COLUMN_TITLE, updatedDrill.getTitle());
         updatedValues.put(DrillsTable.COLUMN_IMAGE_ID, updatedDrill.getImageId());
         updatedValues.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(updatedDrill.getCategory()));
-
         contentResolver.update(CONTENT_URI_DRILLS, updatedValues, selectedDrill, null);
+
         cursor = contentResolver.query(CONTENT_URI_DRILLS,
                 DrillsTable.ALL_DRILL_COLUMNS, selectedDrill, null, null);
 
@@ -195,23 +194,7 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canQueryDatabaseForLogUsingContentProvider() {
-        Drill drill = new Drill(
-                "5 Spots Shooting (Mid-Range)",
-                R.drawable.ic_account_multiple_outline_white_48dp,
-                Drill.SHOOTING_ARRAY);
-        ContentValues values = new ContentValues();
-        values.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
-        values.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
-        values.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(drill.getCategory()));
-        ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
-        contentResolver.insert(CONTENT_URI_DRILLS, values);
 
-        String selectedDrill = DrillsTable.DRILL_ID + " = " + 1;
-        Cursor cursor = shadowOf(contentResolver).query(CONTENT_URI_DRILLS,
-                DrillsTable.ALL_DRILL_COLUMNS, selectedDrill, null, null, null);
-
-        assertCursorDataEqualsDrill(cursor, drill);
-        cursor.close();
     }
 
     @Test
@@ -251,80 +234,12 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canDeleteLogFromDatabaseUsingContentProvider() {
-        Drill drill = new Drill(
-                "5 Spots Shooting (Mid-Range)",
-                R.drawable.ic_account_multiple_outline_white_48dp,
-                Drill.SHOOTING_ARRAY);
-        ContentValues values = new ContentValues();
-        values.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
-        values.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
-        values.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(drill.getCategory()));
-        ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
-        contentResolver.insert(CONTENT_URI_DRILLS, values);
 
-        String selectedDrill = DrillsTable.DRILL_ID + " = " + 1;
-        contentResolver.delete(CONTENT_URI_DRILLS, selectedDrill, null);
-
-        DatabaseContentProvider contentProvider = getDatabaseContentProvider();
-        assertNotNull(contentProvider);
-
-        Cursor cursor = contentProvider.database.rawQuery("SELECT * FROM drills", null);
-        assertFalse(cursor.moveToFirst());
-        cursor.close();
     }
 
     @Test
     public void canUpdateLogFromDatabaseUsingContentProvider() {
-        Drill drill = new Drill(
-                "5 Spots Shooting (Mid-Range)",
-                R.drawable.ic_account_multiple_outline_white_48dp,
-                Drill.SHOOTING_ARRAY);
-        ContentValues values = new ContentValues();
-        values.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
-        values.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
-        values.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(drill.getCategory()));
-        ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
-        contentResolver.insert(CONTENT_URI_DRILLS, values);
-
-        String selectedDrill = DrillsTable.DRILL_ID + " = " + 1;
-        Cursor cursor = contentResolver.query(CONTENT_URI_DRILLS,
-                DrillsTable.ALL_DRILL_COLUMNS, selectedDrill, null, null);
-
-        assertNotNull(cursor);
-        assertTrue(cursor.moveToFirst());
-        assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
-        assertEquals(1, cursor.getCount());
-        assertEquals(drill.getTitle(),
-                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
-        assertEquals(drill.getImageId(),
-                cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
-        assertEquals(getArrayAsString(drill.getCategory()),
-                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
-
-        Drill updatedDrill = new Drill(
-                "Pass & Pass Back (Left Layup)",
-                R.drawable.ic_fitness_center_white_24dp,
-                Drill.PASSING_ARRAY);
-        ContentValues updatedValues = new ContentValues();
-        updatedValues.put(DrillsTable.COLUMN_TITLE, updatedDrill.getTitle());
-        updatedValues.put(DrillsTable.COLUMN_IMAGE_ID, updatedDrill.getImageId());
-        updatedValues.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(updatedDrill.getCategory()));
-
-        contentResolver.update(CONTENT_URI_DRILLS, updatedValues, selectedDrill, null);
-        cursor = contentResolver.query(CONTENT_URI_DRILLS,
-                DrillsTable.ALL_DRILL_COLUMNS, selectedDrill, null, null);
-
-        assertNotNull(cursor);
-        assertTrue(cursor.moveToFirst());
-        assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
-        assertEquals(1, cursor.getCount());
-        assertEquals(updatedDrill.getTitle(),
-                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
-        assertEquals(updatedDrill.getImageId(),
-                cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
-        assertEquals(getArrayAsString(updatedDrill.getCategory()),
-                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
-        cursor.close();
+        
     }
 
     private DatabaseContentProvider getDatabaseContentProvider() {
