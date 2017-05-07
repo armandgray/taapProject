@@ -207,6 +207,58 @@ public class DatabaseContentProviderTest {
         cursor.close();
     }
 
+    @Test
+    public void canUpdateDrillFromDatabaseUsingContentProvider() {
+        Drill drill = new Drill(
+                "5 Spots Shooting (Mid-Range)",
+                R.drawable.ic_account_multiple_outline_white_48dp,
+                Drill.SHOOTING_ARRAY);
+        ContentValues values = new ContentValues();
+        values.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
+        values.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
+        values.put(DrillsTable.COLUMN_CATEGORY, drill.getCategory()[0]);
+        ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
+        contentResolver.insert(CONTENT_URI_DRILLS, values);
+
+        String selectedDrill = DrillsTable.DRILL_ID + " = " + 1;
+        Cursor cursor = shadowOf(contentResolver).query(CONTENT_URI_DRILLS,
+                DrillsTable.ALL_DRILL_COLUMNS, selectedDrill, null, null, null);
+
+        assertTrue(cursor.moveToNext());
+        assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
+        assertEquals(1, cursor.getCount());
+        assertEquals(drill.getTitle(),
+                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
+        assertEquals(drill.getImageId(),
+                cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
+        assertEquals(drill.getCategory()[0],
+                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
+
+        Drill updatedDrill = new Drill(
+                "Pass & Pass Back (Left Layup)",
+                R.drawable.ic_fitness_center_white_24dp,
+                Drill.PASSING_ARRAY);
+        ContentValues updatedValues = new ContentValues();
+        updatedValues.put(DrillsTable.COLUMN_TITLE, updatedDrill.getTitle());
+        updatedValues.put(DrillsTable.COLUMN_IMAGE_ID, updatedDrill.getImageId());
+        updatedValues.put(DrillsTable.COLUMN_CATEGORY, updatedDrill.getCategory()[0]);
+
+        contentResolver.update(CONTENT_URI_DRILLS, values, selectedDrill, null);
+        cursor = shadowOf(contentResolver).query(CONTENT_URI_DRILLS,
+                DrillsTable.ALL_DRILL_COLUMNS, selectedDrill, null, null, null);
+
+        assertTrue(cursor.moveToNext());
+        assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
+        assertEquals(1, cursor.getCount());
+        assertEquals(updatedDrill.getTitle(),
+                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
+        assertEquals(updatedDrill.getImageId(),
+                cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
+        assertEquals(updatedDrill.getCategory()[0],
+                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
+        cursor.close();
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
