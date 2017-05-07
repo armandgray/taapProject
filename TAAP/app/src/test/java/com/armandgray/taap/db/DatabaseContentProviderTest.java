@@ -48,10 +48,10 @@ public class DatabaseContentProviderTest {
 
     private static final long TIME_IN_MILLIS = 1494179392802L;
     private static final Drill TEST_DRILL = new Drill(
-                "5 Spots Shooting (Mid-Range)",
-                R.drawable.ic_account_multiple_outline_white_48dp,
-                Drill.SHOOTING_ARRAY);
-    
+            "5 Spots Shooting (Mid-Range)",
+            R.drawable.ic_account_multiple_outline_white_48dp,
+            Drill.SHOOTING_ARRAY);
+
     private static final SessionLog TEST_SESSION_LOG = new SessionLog.Builder()
             .sessionLength(new Date(TIME_IN_MILLIS))
             .sessionGoal("")
@@ -123,6 +123,20 @@ public class DatabaseContentProviderTest {
         Cursor cursor = RuntimeEnvironment.application.getContentResolver()
                 .query(CONTENT_URI_DRILLS, DrillsTable.ALL_DRILL_COLUMNS, selectedDrill,
                         null, null);
+
+        assertNotNull(cursor);
+        assertCursorDataEqualsDrill(cursor, TEST_DRILL);
+        cursor.close();
+    }
+
+    @Test
+    public void canQueryDatabaseForDrill_UsingDrillIdContentUri() {
+        insertDrillToDatabase();
+
+        String selectedDrill = DrillsTable.DRILL_ID + " = " + TEST_DRILL.getDrillId();
+        Uri uri = Uri.parse(CONTENT_URI_DRILLS + "/" + TEST_DRILL.getDrillId());
+        Cursor cursor = RuntimeEnvironment.application.getContentResolver()
+                .query(uri, DrillsTable.ALL_DRILL_COLUMNS, selectedDrill, null, null);
 
         assertNotNull(cursor);
         assertCursorDataEqualsDrill(cursor, TEST_DRILL);
@@ -262,7 +276,7 @@ public class DatabaseContentProviderTest {
 
         String selectedLog = LogsTable.LOG_ID + " = " + TEST_SESSION_LOG.getSessionId();
         ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
-        Cursor cursor = contentResolver.query(CONTENT_URI_LOGS, LogsTable.ALL_LOG_COLUMNS, 
+        Cursor cursor = contentResolver.query(CONTENT_URI_LOGS, LogsTable.ALL_LOG_COLUMNS,
                 selectedLog, null, null);
 
         assertNotNull(cursor);
@@ -308,7 +322,9 @@ public class DatabaseContentProviderTest {
         drillValues.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(drill.getCategory()));
         Uri uri = RuntimeEnvironment.application.getContentResolver()
                 .insert(CONTENT_URI_DRILLS, drillValues);
-        if (uri != null) { drill.setDrillId(Integer.parseInt(uri.getLastPathSegment())); }
+        if (uri != null) {
+            drill.setDrillId(Integer.parseInt(uri.getLastPathSegment()));
+        }
     }
 
     private void assertCursorDataEqualsDrill(Cursor cursor, Drill drill) {
@@ -327,7 +343,9 @@ public class DatabaseContentProviderTest {
 
     private void insertLogToDatabase() {
         ContentValues logValues = getLogContentValues(TEST_SESSION_LOG);
-        if (TEST_SESSION_LOG.getDrill().getDrillId() == 0) { insertDrillToDatabase(); }
+        if (TEST_SESSION_LOG.getDrill().getDrillId() == 0) {
+            insertDrillToDatabase();
+        }
         logValues.put(LogsTable.COLUMN_DRILL, TEST_SESSION_LOG.getDrill().getDrillId());
         Uri uri = RuntimeEnvironment.application.getContentResolver()
                 .insert(CONTENT_URI_LOGS, logValues);
