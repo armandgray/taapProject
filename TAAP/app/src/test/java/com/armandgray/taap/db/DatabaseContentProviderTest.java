@@ -221,9 +221,10 @@ public class DatabaseContentProviderTest {
         contentResolver.insert(CONTENT_URI_DRILLS, values);
 
         String selectedDrill = DrillsTable.DRILL_ID + " = " + 1;
-        Cursor cursor = shadowOf(contentResolver).query(CONTENT_URI_DRILLS,
-                DrillsTable.ALL_DRILL_COLUMNS, selectedDrill, null, null, null);
+        Cursor cursor = contentResolver.query(CONTENT_URI_DRILLS,
+                DrillsTable.ALL_DRILL_COLUMNS, selectedDrill, null, null);
 
+        assertNotNull(cursor);
         assertTrue(cursor.moveToFirst());
         assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
         assertEquals(1, cursor.getCount());
@@ -244,9 +245,10 @@ public class DatabaseContentProviderTest {
         updatedValues.put(DrillsTable.COLUMN_CATEGORY, updatedDrill.getCategory()[0]);
 
         contentResolver.update(CONTENT_URI_DRILLS, updatedValues, selectedDrill, null);
-        cursor = shadowOf(contentResolver).query(CONTENT_URI_DRILLS,
-                DrillsTable.ALL_DRILL_COLUMNS, selectedDrill, null, null, null);
+        cursor = contentResolver.query(CONTENT_URI_DRILLS,
+                DrillsTable.ALL_DRILL_COLUMNS, selectedDrill, null, null);
 
+        assertNotNull(cursor);
         assertTrue(cursor.moveToFirst());
         assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
         assertEquals(1, cursor.getCount());

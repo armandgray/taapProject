@@ -75,6 +75,6 @@ public class DatabaseContentProvider extends ContentProvider {
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+        return database.update(DrillsTable.TABLE_DRILLS, values, selection, selectionArgs);
     }
 }
