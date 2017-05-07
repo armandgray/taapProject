@@ -321,7 +321,11 @@ public class DatabaseContentProviderTest {
         ContentValues logValues = getLogContentValues(TEST_SESSION_LOG);
         if (TEST_SESSION_LOG.getDrill().getDrillId() == 0) { insertDrillToDatabase(); }
         logValues.put(LogsTable.COLUMN_DRILL, TEST_SESSION_LOG.getDrill().getDrillId());
-        RuntimeEnvironment.application.getContentResolver().insert(CONTENT_URI_LOGS, logValues);
+        Uri uri = RuntimeEnvironment.application.getContentResolver()
+                .insert(CONTENT_URI_LOGS, logValues);
+        if (uri != null) {
+            TEST_SESSION_LOG.setSessionId(Integer.parseInt(uri.getLastPathSegment()));
+        }
     }
 
     @NonNull
@@ -342,6 +346,8 @@ public class DatabaseContentProviderTest {
         assertTrue(cursor.moveToFirst());
         assertEquals(LogsTable.ALL_LOG_COLUMNS.length, cursor.getColumnCount());
         assertEquals(1, cursor.getCount());
+        assertEquals(sessionLog.getSessionId(),
+                cursor.getInt(cursor.getColumnIndex(LogsTable.LOG_ID)));
         assertEquals(sessionLog.getSessionDate().getTime(),
                 cursor.getLong(cursor.getColumnIndex(LogsTable.COLUMN_DATE)));
         assertEquals(sessionLog.getSessionLength().getTime(),
