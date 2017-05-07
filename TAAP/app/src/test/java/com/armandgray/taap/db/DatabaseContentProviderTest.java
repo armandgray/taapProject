@@ -49,12 +49,12 @@ import static org.hamcrest.Matchers.is;
 public class DatabaseContentProviderTest {
 
     private static final long TIME_IN_MILLIS = 1494179392802L;
-    private static final Drill TEST_DRILL = new Drill(
+    public static final Drill TEST_DRILL = new Drill(
             "5 Spots Shooting (Mid-Range)",
             R.drawable.ic_account_multiple_outline_white_48dp,
             Drill.SHOOTING_ARRAY);
 
-    private static final SessionLog TEST_SESSION_LOG = new SessionLog.Builder()
+    public static final SessionLog TEST_SESSION_LOG = new SessionLog.Builder()
             .sessionLength(new Date(TIME_IN_MILLIS))
             .sessionGoal("")
             .activeWork(new Date(TIME_IN_MILLIS + 555555))
@@ -342,7 +342,7 @@ public class DatabaseContentProviderTest {
                 contentProviderClient.getLocalContentProvider();
     }
 
-    private void assertCursorDataEqualsDrill(Cursor cursor, Drill drill) {
+    public static void assertCursorDataEqualsDrill(Cursor cursor, Drill drill) {
         assertTrue(cursor.moveToFirst());
         assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
         assertEquals(1, cursor.getCount());
@@ -356,7 +356,7 @@ public class DatabaseContentProviderTest {
                 cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)))));
     }
 
-    private void assertCursorDataEqualsLog(Cursor cursor, SessionLog sessionLog) {
+    public static void assertCursorDataEqualsLog(Cursor cursor, SessionLog sessionLog) {
         assertTrue(cursor.moveToFirst());
         assertEquals(LogsTable.ALL_LOG_COLUMNS.length, cursor.getColumnCount());
         assertEquals(1, cursor.getCount());
