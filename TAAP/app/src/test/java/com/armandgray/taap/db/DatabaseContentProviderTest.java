@@ -233,8 +233,9 @@ public class DatabaseContentProviderTest {
         insertLogToDatabase();
 
         String selectedLog = LogsTable.LOG_ID + " = " + 1;
+        Uri uri = Uri.parse(CONTENT_URI_LOGS + "/" + 1);
         RuntimeEnvironment.application.getContentResolver()
-                .delete(CONTENT_URI_LOGS, selectedLog, null);
+                .delete(uri, selectedLog, null);
 
         assertFalse(getDatabaseContentProvider()
                 .database
