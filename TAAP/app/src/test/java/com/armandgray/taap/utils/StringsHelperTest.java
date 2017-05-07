@@ -7,6 +7,8 @@ import static com.armandgray.taap.utils.StringsHelper.getStringAsArray;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertNull;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 public class StringsHelperTest {
 
@@ -36,7 +38,7 @@ public class StringsHelperTest {
         String string = "a,ab,aab,abc";
         String[] stringAsArray = getStringAsArray(string);
         assertNotNull(stringAsArray);
-        assertEquals(expectedArray, stringAsArray);
+        assertThat(expectedArray, is(stringAsArray));
     }
 
 }
