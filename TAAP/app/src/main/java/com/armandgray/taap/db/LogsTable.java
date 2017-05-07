@@ -17,8 +17,8 @@ class LogsTable {
     static final String COLUMN_SUCCESS = "itemSuccess";
     static final String COLUMN_DRILL = "itemDrill";
     static final String[] ALL_LOG_COLUMNS = {
-            LOG_ID, COLUMN_DATE, COLUMN_LENGTH, COLUMN_GOAL, COLUMN_ACTIVE_WORK,
-            COLUMN_REST_TIME, COLUMN_SETS_COMPLETED, COLUMN_SUCCESS, COLUMN_DRILL };
+            LOG_ID, COLUMN_DATE, COLUMN_LENGTH, COLUMN_GOAL, COLUMN_ACTIVE_WORK, COLUMN_REST_TIME,
+            COLUMN_SETS_COMPLETED, COLUMN_REPS_COMPLETED, COLUMN_SUCCESS, COLUMN_DRILL };
 
     static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_LOGS + " ("
