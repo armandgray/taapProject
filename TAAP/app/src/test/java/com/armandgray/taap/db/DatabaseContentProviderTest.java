@@ -191,37 +191,6 @@ public class DatabaseContentProviderTest {
     }
 
     @Test
-    public void canUpdateDrillFromDatabaseUsingContentProvider() {
-        insertDrillToDatabase();
-
-        String selectedDrill = DrillsTable.DRILL_ID + " = " + TEST_DRILL.getDrillId();
-        ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
-        Cursor cursor = contentResolver.query(CONTENT_URI_DRILLS, DrillsTable.ALL_DRILL_COLUMNS,
-                selectedDrill, null, null);
-
-        assertNotNull(cursor);
-        assertCursorDataEqualsDrill(cursor, TEST_DRILL);
-
-        Drill updatedDrill = new Drill(
-                "Pass & Pass Back (Left Layup)",
-                R.drawable.ic_fitness_center_white_24dp,
-                Drill.PASSING_ARRAY);
-        ContentValues updatedValues = new ContentValues();
-        updatedValues.put(DrillsTable.COLUMN_TITLE, updatedDrill.getTitle());
-        updatedValues.put(DrillsTable.COLUMN_IMAGE_ID, updatedDrill.getImageId());
-        updatedValues.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(updatedDrill.getCategory()));
-        contentResolver.update(CONTENT_URI_DRILLS, updatedValues, selectedDrill, null);
-        updatedDrill.setDrillId(TEST_DRILL.getDrillId());
-
-        cursor = contentResolver.query(CONTENT_URI_DRILLS,
-                DrillsTable.ALL_DRILL_COLUMNS, selectedDrill, null, null);
-
-        assertNotNull(cursor);
-        assertCursorDataEqualsDrill(cursor, updatedDrill);
-        cursor.close();
-    }
-
-    @Test
     public void canUpdateDrillFromDatabase_UsingDrillIdContentUri() {
         insertDrillToDatabase();
 
@@ -251,6 +220,12 @@ public class DatabaseContentProviderTest {
         assertNotNull(cursor);
         assertCursorDataEqualsDrill(cursor, updatedDrill);
         cursor.close();
+    }
+
+    @Test
+    public void cannotUpdateDrillFromDatabase_UsingAllDrillsContentUri() {
+        assertEquals(EXECUTION_FAILURE, RuntimeEnvironment.application.getContentResolver()
+                .update(CONTENT_URI_DRILLS, null, null, null));
     }
 
     @Test
