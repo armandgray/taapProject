@@ -2,8 +2,10 @@ package com.armandgray.taap.log;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 
 import com.armandgray.taap.BuildConfig;
+import com.armandgray.taap.db.DrillsTable;
 import com.armandgray.taap.db.LogsTable;
 import com.armandgray.taap.models.SessionLog;
 
@@ -17,6 +19,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
+import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_LOGS;
 import static com.armandgray.taap.db.DatabaseContentProviderTest.TEST_SESSION_LOG;
 import static com.armandgray.taap.db.DatabaseContentProviderTest.assertCursorDataEqualsDrill;
@@ -67,15 +70,23 @@ public class LogActivityControllerTest {
     public void doesInsertNonNullSessionLogIntoDatabase() throws Exception {
         assertNotNull(controller.sessionLog);
 
+        String selectedDrill =
+                DrillsTable.DRILL_ID + " = " + TEST_SESSION_LOG.getDrill().getDrillId();
+        Uri uri = Uri.parse(CONTENT_URI_DRILLS + "/" + TEST_SESSION_LOG.getDrill().getDrillId());
+        Cursor drillCursor = RuntimeEnvironment.application.getContentResolver()
+                .query(uri, DrillsTable.ALL_DRILL_COLUMNS, selectedDrill, null, null);
+
         String selectedLog = LogsTable.LOG_ID + " = " + TEST_SESSION_LOG.getSessionId();
-        Cursor cursor = RuntimeEnvironment.application.getContentResolver()
+        Cursor logCursor = RuntimeEnvironment.application.getContentResolver()
                 .query(CONTENT_URI_LOGS, LogsTable.ALL_LOG_COLUMNS, selectedLog,
                         null, null);
 
-        assertNotNull(cursor);
-        assertCursorDataEqualsDrill(cursor, TEST_SESSION_LOG.getDrill());
-        assertCursorDataEqualsLog(cursor, TEST_SESSION_LOG);
-        cursor.close();
+        assertNotNull(drillCursor);
+        assertNotNull(logCursor);
+        assertCursorDataEqualsDrill(drillCursor, TEST_SESSION_LOG.getDrill());
+        assertCursorDataEqualsLog(logCursor, TEST_SESSION_LOG);
+        drillCursor.close();
+        logCursor.close();
     }
 
     @After
