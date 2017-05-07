@@ -95,6 +95,13 @@ public class LogActivityControllerTest {
         drillCursor.close();
     }
 
+    @Test
+    public void doesAssignListAllLogsFromDatabase() throws Exception {
+        assertNotNull(controller.listAllLogs);
+        assertEquals(1, controller.listAllLogs.size());
+        assertEquals(TEST_SESSION_LOG, controller.listAllLogs.get(0));
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
