@@ -47,7 +47,8 @@ public class DatabaseContentProvider extends ContentProvider {
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
-        return null;
+        return database.query(DrillsTable.TABLE_DRILLS, projection, selection,
+                null, null, null, null);
     }
 
     @Nullable

@@ -157,9 +157,10 @@ public class DatabaseContentProviderTest {
 
         String selectedDrill = DrillsTable.DRILL_ID + " = " + 1;
         Cursor cursor = shadowOf(contentResolver).query(CONTENT_URI_DRILLS,
-                DrillsTable.ALL_DRILL_COLUMNS, selectedDrill, null, null);
+                DrillsTable.ALL_DRILL_COLUMNS, selectedDrill, null, null, null);
 
         assertNotNull(cursor);
+        assertTrue(cursor.moveToFirst());
         assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
         assertEquals(1, cursor.getCount());
         assertEquals(drill.getTitle(),
