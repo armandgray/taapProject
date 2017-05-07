@@ -106,7 +106,7 @@ public class DatabaseContentProvider extends ContentProvider {
         if (uriMatcher.match(uri) == ALL_DRILLS) {
             return database.delete(DrillsTable.TABLE_DRILLS, selection, selectionArgs);
         }
-        if (uriMatcher.match(uri) == ALL_LOGS) {
+        if (uriMatcher.match(uri) == LOGS_ID) {
             return database.delete(LogsTable.TABLE_LOGS, selection, selectionArgs);
         }
         return EXECUTION_FAILURE;
