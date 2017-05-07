@@ -13,4 +13,8 @@ public class StringsHelper {
         return builder.toString();
     }
 
+    public static String[] getStringAsArray(String string) {
+        return null;
+    }
+
 }
