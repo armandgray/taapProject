@@ -205,7 +205,6 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canInsertLogIntoDatabaseUsingContentProvider() {
-        insertDrillToDatabase();
         insertLogToDatabase();
 
         Cursor cursor = (new DatabaseOpenHelper(RuntimeEnvironment.application))
@@ -272,7 +271,8 @@ public class DatabaseContentProviderTest {
         logValues.put(LogsTable.COLUMN_SETS_COMPLETED, TEST_SESSION_LOG.getSetsCompleted());
         logValues.put(LogsTable.COLUMN_REPS_COMPLETED, TEST_SESSION_LOG.getRepsCompleted());
         logValues.put(LogsTable.COLUMN_SUCCESS, TEST_SESSION_LOG.getSuccessRate());
-        logValues.put(LogsTable.COLUMN_DRILL, 1);
+        if (TEST_SESSION_LOG.getDrill().getDrillId() == 0) { insertDrillToDatabase(); }
+        logValues.put(LogsTable.COLUMN_DRILL, TEST_SESSION_LOG.getDrill().getDrillId());
         RuntimeEnvironment.application.getContentResolver().insert(CONTENT_URI_LOGS, logValues);
     }
 
@@ -295,7 +295,7 @@ public class DatabaseContentProviderTest {
                 cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_REPS_COMPLETED)));
         assertEquals(sessionLog.getSuccessRate(),
                 cursor.getDouble(cursor.getColumnIndex(LogsTable.COLUMN_SUCCESS)));
-        assertEquals(1,
+        assertEquals(sessionLog.getDrill().getDrillId(),
                 cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_DRILL)));
     }
 
