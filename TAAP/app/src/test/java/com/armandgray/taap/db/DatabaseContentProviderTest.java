@@ -204,7 +204,7 @@ public class DatabaseContentProviderTest {
     public void canQueryDatabaseForLogUsingContentProvider() {
         insertLogToDatabase();
 
-        String selectedLog = LogsTable.LOG_ID + " = " + 1;
+        String selectedLog = LogsTable.LOG_ID + " = " + TEST_SESSION_LOG.getSessionId();
         Cursor cursor = RuntimeEnvironment.application.getContentResolver()
                 .query(CONTENT_URI_LOGS, LogsTable.ALL_LOG_COLUMNS, selectedLog,
                         null, null);
@@ -232,8 +232,8 @@ public class DatabaseContentProviderTest {
     public void canDeleteLogFromDatabaseUsingContentProvider() {
         insertLogToDatabase();
 
-        String selectedLog = LogsTable.LOG_ID + " = " + 1;
-        Uri uri = Uri.parse(CONTENT_URI_LOGS + "/" + 1);
+        String selectedLog = LogsTable.LOG_ID + " = " + TEST_SESSION_LOG.getSessionId();
+        Uri uri = Uri.parse(CONTENT_URI_LOGS + "/" + TEST_SESSION_LOG.getSessionId());
         RuntimeEnvironment.application.getContentResolver()
                 .delete(uri, selectedLog, null);
 
@@ -253,7 +253,7 @@ public class DatabaseContentProviderTest {
     public void canUpdateLogFromDatabaseUsingContentProvider() {
         insertLogToDatabase();
 
-        String selectedLog = LogsTable.LOG_ID + " = " + 1;
+        String selectedLog = LogsTable.LOG_ID + " = " + TEST_SESSION_LOG.getSessionId();
         ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
         Cursor cursor = contentResolver.query(CONTENT_URI_LOGS, LogsTable.ALL_LOG_COLUMNS, 
                 selectedLog, null, null);
