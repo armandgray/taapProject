@@ -32,6 +32,7 @@ import static com.armandgray.taap.db.DatabaseContentProvider.DRILLS_ID;
 import static com.armandgray.taap.db.DatabaseContentProvider.LOGS_ID;
 import static com.armandgray.taap.db.DatabaseContentProvider.uriMatcher;
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
@@ -169,6 +170,34 @@ public class DatabaseContentProviderTest {
                 cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
         assertEquals(drill.getCategory()[0],
                 cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)));
+        cursor.close();
+    }
+
+    @Test
+    public void canDeleteDrillFromDatabaseUsingContentProvider() {
+        Drill drill = new Drill(
+                "5 Spots Shooting (Mid-Range)",
+                R.drawable.ic_account_multiple_outline_white_48dp,
+                Drill.SHOOTING_ARRAY);
+        ContentValues values = new ContentValues();
+        values.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
+        values.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
+        values.put(DrillsTable.COLUMN_CATEGORY, drill.getCategory()[0]);
+        ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
+        contentResolver.insert(CONTENT_URI_DRILLS, values);
+
+        String selectedDrill = DrillsTable.DRILL_ID + " = " + 1;
+        contentResolver.delete(CONTENT_URI_DRILLS, selectedDrill, null);
+
+        ContentProviderClient contentProviderClient = contentResolver
+                .acquireContentProviderClient(DatabaseContentProvider.CONTENT_URI_DRILLS);
+        assertNotNull(contentProviderClient);
+        DatabaseContentProvider contentProvider = (DatabaseContentProvider)
+                contentProviderClient.getLocalContentProvider();
+        assertNotNull(contentProvider);
+
+        Cursor cursor = contentProvider.database.rawQuery("SELECT * FROM drills", null);
+        assertFalse(cursor.moveToFirst());
         cursor.close();
     }
 
