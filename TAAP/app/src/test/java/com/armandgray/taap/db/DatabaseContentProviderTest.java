@@ -1,6 +1,8 @@
 package com.armandgray.taap.db;
 
 import android.content.ContentProvider;
+import android.content.ContentProviderClient;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
@@ -74,9 +76,15 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void doesAssignWritableDatabase_TestOnCreate() {
-        // TODO add test
-//        assertTrue(contentProvider.onCreate());
-//        assertNotNull(contentProvider.database);
+        ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
+        ContentProviderClient contentProviderClient = contentResolver
+                .acquireContentProviderClient(DatabaseContentProvider.CONTENT_URI_DRILLS);
+        assertNotNull(contentProviderClient);
+        DatabaseContentProvider contentProvider = (DatabaseContentProvider)
+                contentProviderClient.getLocalContentProvider();
+
+        assertNotNull(contentProvider);
+        assertNotNull(contentProvider.database);
     }
 
     @Test
