@@ -214,26 +214,7 @@ public class DatabaseContentProviderTest {
                         null, null, null, null, null);
 
         assertTrue(cursor.moveToFirst());
-        assertEquals(LogsTable.ALL_LOG_COLUMNS.length, cursor.getColumnCount());
-        assertEquals(1, cursor.getCount());
-        assertEquals(TEST_SESSION_LOG.getSessionDate().getTime(),
-                cursor.getLong(cursor.getColumnIndex(LogsTable.COLUMN_DATE)));
-        assertEquals(TEST_SESSION_LOG.getSessionLength().getTime(),
-                cursor.getLong(cursor.getColumnIndex(LogsTable.COLUMN_LENGTH)));
-        assertEquals(TEST_SESSION_LOG.getSessionGoal(),
-                cursor.getString(cursor.getColumnIndex(LogsTable.COLUMN_GOAL)));
-        assertEquals(TEST_SESSION_LOG.getActiveWork().getTime(),
-                cursor.getLong(cursor.getColumnIndex(LogsTable.COLUMN_ACTIVE_WORK)));
-        assertEquals(TEST_SESSION_LOG.getRestTime().getTime(),
-                cursor.getLong(cursor.getColumnIndex(LogsTable.COLUMN_REST_TIME)));
-        assertEquals(TEST_SESSION_LOG.getSetsCompleted(),
-                cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_SETS_COMPLETED)));
-        assertEquals(TEST_SESSION_LOG.getRepsCompleted(),
-                cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_REPS_COMPLETED)));
-        assertEquals(TEST_SESSION_LOG.getSuccessRate(),
-                cursor.getDouble(cursor.getColumnIndex(LogsTable.COLUMN_SUCCESS)));
-        assertEquals(1,
-                cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_DRILL)));
+        assertCursorDataEqualsLog(cursor, TEST_SESSION_LOG);
         cursor.close();
     }
 
@@ -244,7 +225,7 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canUpdateLogFromDatabaseUsingContentProvider() {
-        
+
     }
 
     private DatabaseContentProvider getDatabaseContentProvider() {
@@ -293,6 +274,29 @@ public class DatabaseContentProviderTest {
         logValues.put(LogsTable.COLUMN_SUCCESS, TEST_SESSION_LOG.getSuccessRate());
         logValues.put(LogsTable.COLUMN_DRILL, 1);
         RuntimeEnvironment.application.getContentResolver().insert(CONTENT_URI_LOGS, logValues);
+    }
+
+    private void assertCursorDataEqualsLog(Cursor cursor, SessionLog sessionLog) {
+        assertEquals(LogsTable.ALL_LOG_COLUMNS.length, cursor.getColumnCount());
+        assertEquals(1, cursor.getCount());
+        assertEquals(sessionLog.getSessionDate().getTime(),
+                cursor.getLong(cursor.getColumnIndex(LogsTable.COLUMN_DATE)));
+        assertEquals(sessionLog.getSessionLength().getTime(),
+                cursor.getLong(cursor.getColumnIndex(LogsTable.COLUMN_LENGTH)));
+        assertEquals(sessionLog.getSessionGoal(),
+                cursor.getString(cursor.getColumnIndex(LogsTable.COLUMN_GOAL)));
+        assertEquals(sessionLog.getActiveWork().getTime(),
+                cursor.getLong(cursor.getColumnIndex(LogsTable.COLUMN_ACTIVE_WORK)));
+        assertEquals(sessionLog.getRestTime().getTime(),
+                cursor.getLong(cursor.getColumnIndex(LogsTable.COLUMN_REST_TIME)));
+        assertEquals(sessionLog.getSetsCompleted(),
+                cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_SETS_COMPLETED)));
+        assertEquals(sessionLog.getRepsCompleted(),
+                cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_REPS_COMPLETED)));
+        assertEquals(sessionLog.getSuccessRate(),
+                cursor.getDouble(cursor.getColumnIndex(LogsTable.COLUMN_SUCCESS)));
+        assertEquals(1,
+                cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_DRILL)));
     }
 
 }
