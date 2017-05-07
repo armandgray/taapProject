@@ -53,10 +53,9 @@ public class LogActivityControllerTest {
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
-        activityController = Robolectric.buildActivity(LogActivity.class);
         Intent intent = new Intent(RuntimeEnvironment.application, LogActivity.class);
         intent.putExtra(SESSION_LOG, TEST_SESSION_LOG);
-        activityController.newIntent(intent);
+        activityController = Robolectric.buildActivity(LogActivity.class).withIntent(intent);
         activity = activityController.create().visible().get();
         controller = activity.controller;
     }
