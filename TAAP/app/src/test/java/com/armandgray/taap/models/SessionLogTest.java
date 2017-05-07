@@ -25,6 +25,7 @@ public class SessionLogTest {
                 .drill(new Drill("", 0, Drill.SHOOTING_ARRAY))
                 .create();
         assertNotNull(sessionLog);
+        assertNotNull(sessionLog.getSessionId());
         assertNotNull(sessionLog.getSessionDate());
         assertNotNull(sessionLog.getSessionLength());
         assertNotNull(sessionLog.getSessionGoal());
@@ -50,6 +51,15 @@ public class SessionLogTest {
         assertNotNull(sessionLog.getRepsCompleted());
         assertNotNull(sessionLog.getSuccessRate());
         assertNotNull(sessionLog.getSuccessRecord());
+    }
+
+    @Test
+    public void canSetDrillId() throws Exception {
+        SessionLog sessionLog = new SessionLog.Builder().create();
+        sessionLog.setSessionId(100);
+        assertNotNull(sessionLog);
+        assertNotNull(sessionLog.getSessionId());
+        assertEquals(100, sessionLog.getSessionId());
     }
 
     @Test

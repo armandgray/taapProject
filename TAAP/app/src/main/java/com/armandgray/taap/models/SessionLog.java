@@ -18,6 +18,7 @@ public class SessionLog implements Parcelable {
     private double successRate;
     private double successRecord;
     private Drill drill;
+    private int sessionId;
 
     private SessionLog(Builder builder) {
         this.sessionDate = builder.sessionDate;
@@ -103,6 +104,14 @@ public class SessionLog implements Parcelable {
         public SessionLog create() {
             return new SessionLog(this);
         }
+    }
+
+    public int getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(int sessionId) {
+        this.sessionId = sessionId;
     }
 
     public Date getSessionDate() {
