@@ -79,4 +79,19 @@ public class DateTimeHelperTest {
                 getDateFormattedAsString(calendar.getTime()));
     }
 
+    @Test
+    public void canGetDateFormattedAsString_DateZero() throws Exception {
+        Date testDate = new Date(0);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(testDate);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        SimpleDateFormat simpleDateFormat =
+                hour == 0
+                        ? new SimpleDateFormat("00:mm:ss", Locale.US)
+                        : new SimpleDateFormat("hh:mm:ss", Locale.US);
+        assertNotNull(getDateFormattedAsString(testDate));
+        assertEquals(simpleDateFormat.format(testDate), getDateFormattedAsString(testDate));
+    }
+
 }

@@ -30,7 +30,7 @@ public class DateTimeHelper {
         calendar.setTime(date);
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         SimpleDateFormat simpleDateFormat =
-                hour == 0
+                hour == 0 || date.equals(new Date(0))
                         ? new SimpleDateFormat("00:mm:ss", Locale.US)
                         : new SimpleDateFormat("hh:mm:ss", Locale.US);
         return simpleDateFormat.format(date);
