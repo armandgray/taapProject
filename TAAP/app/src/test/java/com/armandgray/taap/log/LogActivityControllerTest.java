@@ -21,15 +21,21 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_LOGS;
-import static com.armandgray.taap.db.DatabaseContentProvider.insertLogToDatabase;
 import static com.armandgray.taap.db.DatabaseContentProviderTest.TEST_SESSION_LOG;
 import static com.armandgray.taap.db.DatabaseContentProviderTest.assertCursorDataEqualsDrill;
 import static com.armandgray.taap.db.DatabaseContentProviderTest.assertCursorDataEqualsLog;
 import static com.armandgray.taap.log.LogActivity.SESSION_LOG;
+import static com.armandgray.taap.models.Drill.BALL_HANDLING;
+import static com.armandgray.taap.models.Drill.CONDITIONING;
+import static com.armandgray.taap.models.Drill.DEFENSE;
 import static com.armandgray.taap.models.Drill.FUNDAMENTALS;
+import static com.armandgray.taap.models.Drill.OFF_BALL_OFFENSE;
+import static com.armandgray.taap.models.Drill.PASSING;
+import static com.armandgray.taap.models.Drill.SHOOTING;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
@@ -122,27 +128,68 @@ public class LogActivityControllerTest {
 
     @Test
     public void doesRetrieveFieldValuesFromLogs_Defense() throws Exception {
+        ArrayList<SessionLog> expectedList = new ArrayList<>();
+        for (SessionLog log : controller.listAllLogs) {
+            if (Arrays.asList(log.getDrill().getCategory()).contains(DEFENSE)) {
+                expectedList.add(log);
+            }
+        }
+
         assertNotNull(controller.listDefenseLogs);
+        assertEquals(expectedList, controller.listDefenseLogs);
     }
 
     @Test
     public void doesRetrieveFieldValuesFromLogs_OffBallOffense() throws Exception {
+        ArrayList<SessionLog> expectedList = new ArrayList<>();
+        for (SessionLog log : controller.listAllLogs) {
+            List<String> category = Arrays.asList(log.getDrill().getCategory());
+            if (category.contains(OFF_BALL_OFFENSE) || category.contains(PASSING)) {
+                expectedList.add(log);
+            }
+        }
+
         assertNotNull(controller.listOffBallOffenseLogs);
+        assertEquals(expectedList, controller.listOffBallOffenseLogs);
     }
 
     @Test
     public void doesRetrieveFieldValuesFromLogs_Conditioning() throws Exception {
+        ArrayList<SessionLog> expectedList = new ArrayList<>();
+        for (SessionLog log : controller.listAllLogs) {
+            if (Arrays.asList(log.getDrill().getCategory()).contains(CONDITIONING)) {
+                expectedList.add(log);
+            }
+        }
+
         assertNotNull(controller.listConditioningLogs);
+        assertEquals(expectedList, controller.listConditioningLogs);
     }
 
     @Test
     public void doesRetrieveFieldValuesFromLogs_Shooting() throws Exception {
+        ArrayList<SessionLog> expectedList = new ArrayList<>();
+        for (SessionLog log : controller.listAllLogs) {
+            if (Arrays.asList(log.getDrill().getCategory()).contains(SHOOTING)) {
+                expectedList.add(log);
+            }
+        }
+
         assertNotNull(controller.listShootingLogs);
+        assertEquals(expectedList, controller.listShootingLogs);
     }
 
     @Test
     public void doesRetrieveFieldValuesFromLogs_BallHandling() throws Exception {
+        ArrayList<SessionLog> expectedList = new ArrayList<>();
+        for (SessionLog log : controller.listAllLogs) {
+            if (Arrays.asList(log.getDrill().getCategory()).contains(BALL_HANDLING)) {
+                expectedList.add(log);
+            }
+        }
+
         assertNotNull(controller.listBallHandlingLogs);
+        assertEquals(expectedList, controller.listBallHandlingLogs);
     }
 
     @After

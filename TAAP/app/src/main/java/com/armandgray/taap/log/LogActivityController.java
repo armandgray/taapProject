@@ -57,8 +57,12 @@ class LogActivityController implements LogActivityViews.LogViewsListener {
         }
         cursor.close();
 
-//        retrieveFieldData();
+        retrieveFieldData();
 //        setViewFields();
+    }
+
+    private void retrieveFieldData() {
+        
     }
 
     private SessionLog getLogAtCurrentPosition(Cursor cursor) {
@@ -104,6 +108,10 @@ class LogActivityController implements LogActivityViews.LogViewsListener {
                 getStringAsArray(cursor.getString(columnCategory)));
         drill.setDrillId(cursor.getInt(columnDrillId));
         return drill;
+    }
+
+    private void addAll(ArrayList<SessionLog> targetList, ArrayList<SessionLog> sourceList, String category) {
+
     }
 
 }
