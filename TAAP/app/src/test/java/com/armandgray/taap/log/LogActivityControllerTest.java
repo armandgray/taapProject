@@ -208,6 +208,20 @@ public class LogActivityControllerTest {
     }
 
     @Test
+    public void doesSetViewValuesFromLogs_RepsCompleted() throws Exception {
+        int expectedNum = 0;
+        for (SessionLog log : controller.listAllLogs) {
+            expectedNum += log.getRepsCompleted() > 0
+                    ? log.getSetsCompleted() * log.getRepsCompleted()
+                    : log.getSetsCompleted();
+        }
+
+        TextView tvText = (TextView) controller.views.
+                layoutRepsCompleted.findViewById(R.id.tvText);
+        assertEquals(String.valueOf(expectedNum), tvText.getText());
+    }
+
+    @Test
     public void doesSetViewValuesFromLogs_Fundamentals() throws Exception {
         Double expectedSuccessRate = getAveragePercentage(controller.listFundamentalLogs);
         expectedSuccessRate *= 100;
