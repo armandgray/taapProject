@@ -15,7 +15,9 @@ public class DateTimeHelper {
     }
 
     public static long getTotalTime(Date[] times) {
-        return 0;
+        long expectedTotal = 0L;
+        for (Date time : times) { expectedTotal += time.getTime(); }
+        return expectedTotal;
     }
 
 }
