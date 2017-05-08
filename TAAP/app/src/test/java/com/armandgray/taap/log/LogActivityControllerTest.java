@@ -3,8 +3,11 @@ package com.armandgray.taap.log;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.armandgray.taap.BuildConfig;
+import com.armandgray.taap.R;
 import com.armandgray.taap.db.DrillsTable;
 import com.armandgray.taap.db.LogsTable;
 import com.armandgray.taap.models.SessionLog;
@@ -19,9 +22,13 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_LOGS;
@@ -108,6 +115,7 @@ public class LogActivityControllerTest {
 
     @Test
     public void doesAssignListAllLogsFromDatabase() throws Exception {
+        // TODO FIX ISSUE WITH SETUP & TEARDOWN NOT RELOADING CURSOR
         assertNotNull(controller.listAllLogs);
         assertEquals(1, controller.listAllLogs.size());
         assertEquals(TEST_SESSION_LOG.getSessionId(), controller.listAllLogs.get(0).getSessionId());
@@ -190,6 +198,28 @@ public class LogActivityControllerTest {
 
         assertNotNull(controller.listBallHandlingLogs);
         assertEquals(expectedList, controller.listBallHandlingLogs);
+    }
+
+    @Test
+    public void doesSetViewValuesFromLogs_Fundamentals() throws Exception {
+        Double expectedSuccessRate = 0.0;
+        expectedSuccessRate *= 100;
+
+        Date expectedTime = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(expectedTime);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        SimpleDateFormat simpleDateFormat =
+                hour == 0
+                        ? new SimpleDateFormat("00:mm:ss", Locale.US)
+                        : new SimpleDateFormat("hh:mm:ss", Locale.US);
+
+        LinearLayout layout = controller.views.layoutBallHandling;
+        TextView tvTime = (TextView) layout.findViewById(R.id.tvTime);
+        TextView tvSuccessRate = (TextView) layout.findViewById(R.id.tvSuccessRate);
+
+        assertEquals(simpleDateFormat.format(calendar.getTime()), tvTime.getText());
+        assertEquals(expectedSuccessRate.intValue() + "%", tvSuccessRate.getText());
     }
 
     @After

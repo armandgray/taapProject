@@ -91,7 +91,7 @@ class LogActivityViews {
         setTextForDetailLayoutViews(layoutRepsCompleted, R.string.reps_completed, "0");
     }
 
-    private void setTextForDetailLayoutViews(LinearLayout layout, int headerResId, String text) {
+    void setTextForDetailLayoutViews(LinearLayout layout, int headerResId, String text) {
         TextView header = (TextView) layout.findViewById(R.id.header);
         TextView tvText = (TextView) layout.findViewById(R.id.tvText);
         header.setText(headerResId);
@@ -118,8 +118,8 @@ class LogActivityViews {
                 "00:00:00", "0%", R.string.ball_handling);
     }
 
-    private void setTextForRecordLayoutViews(
-            LinearLayout layout, int imageResId, String time, String successRate, int headerResId) {
+    private void setTextForRecordLayoutViews(LinearLayout layout, int imageResId,
+                                             String time, String successRate, int headerResId) {
         ImageView ivImage = (ImageView) layout.findViewById(R.id.ivImage);
         TextView tvTime = (TextView) layout.findViewById(R.id.tvTime);
         TextView tvSuccessRate = (TextView) layout.findViewById(R.id.tvSuccessRate);
