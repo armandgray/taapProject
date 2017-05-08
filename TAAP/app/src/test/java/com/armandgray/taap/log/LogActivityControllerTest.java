@@ -149,8 +149,8 @@ public class LogActivityControllerTest {
             }
         }
 
-        assertNotNull(controller.listOffBallOffenseLogs);
-        assertEquals(expectedList, controller.listOffBallOffenseLogs);
+        assertNotNull(controller.listOffenseLogs);
+        assertEquals(expectedList, controller.listOffenseLogs);
     }
 
     @Test

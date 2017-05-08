@@ -56,7 +56,7 @@ class LogActivityViews {
         tvDate = (TextView) RecordsContainer.findViewById(R.id.tvDate);
         layoutFundamentals = (LinearLayout) RecordsContainer.findViewById(R.id.layoutFundamentals);
         layoutDefense = (LinearLayout) RecordsContainer.findViewById(R.id.layoutDefense);
-        layoutOffBallOffense = (LinearLayout) RecordsContainer.findViewById(R.id.layoutOffBallOffense);
+        layoutOffBallOffense = (LinearLayout) RecordsContainer.findViewById(R.id.layoutOffense);
         layoutConditioning = (LinearLayout) RecordsContainer.findViewById(R.id.layoutConditioning);
         layoutShooting = (LinearLayout) RecordsContainer.findViewById(R.id.layoutShooting);
         layoutBallHandling = (LinearLayout) RecordsContainer.findViewById(R.id.layoutBallHandling);

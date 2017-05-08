@@ -25,7 +25,7 @@ class LogActivityController implements LogActivityViews.LogViewsListener {
     ArrayList<SessionLog> listAllLogs;
     ArrayList<SessionLog> listFundamentalLogs;
     ArrayList<SessionLog> listDefenseLogs;
-    ArrayList<SessionLog> listOffBallOffenseLogs;
+    ArrayList<SessionLog> listOffenseLogs;
     ArrayList<SessionLog> listConditioningLogs;
     ArrayList<SessionLog> listShootingLogs;
     ArrayList<SessionLog> listBallHandlingLogs;
@@ -37,7 +37,7 @@ class LogActivityController implements LogActivityViews.LogViewsListener {
         this.listAllLogs = new ArrayList<>();
         this.listFundamentalLogs = new ArrayList<>();
         this.listDefenseLogs = new ArrayList<>();
-        this.listOffBallOffenseLogs = new ArrayList<>();
+        this.listOffenseLogs = new ArrayList<>();
         this.listConditioningLogs = new ArrayList<>();
         this.listShootingLogs = new ArrayList<>();
         this.listBallHandlingLogs = new ArrayList<>();
@@ -62,7 +62,7 @@ class LogActivityController implements LogActivityViews.LogViewsListener {
     }
 
     private void retrieveFieldData() {
-        
+
     }
 
     private SessionLog getLogAtCurrentPosition(Cursor cursor) {
