@@ -23,6 +23,8 @@ import static com.armandgray.taap.models.Drill.FUNDAMENTALS;
 import static com.armandgray.taap.models.Drill.OFFENSE;
 import static com.armandgray.taap.models.Drill.PASSING;
 import static com.armandgray.taap.models.Drill.SHOOTING;
+import static com.armandgray.taap.models.SessionLog.ACTIVE_WORK;
+import static com.armandgray.taap.models.SessionLog.REST_TIME;
 import static com.armandgray.taap.models.SessionLog.SESSION_LENGTH;
 import static com.armandgray.taap.utils.DateTimeHelper.getDateFormattedAsString;
 import static com.armandgray.taap.utils.DateTimeHelper.getTotalTimeAsDate;
@@ -145,6 +147,12 @@ class LogActivityController {
         views.setDataValueForDetailLayout(
                 views.layoutTotalSessionTime,
                 getDateFormattedAsString(getTotalTimeAsDate(listAllLogs, SESSION_LENGTH)));
+        views.setDataValueForDetailLayout(
+                views.layoutTotalActiveTime,
+                getDateFormattedAsString(getTotalTimeAsDate(listAllLogs, ACTIVE_WORK)));
+        views.setDataValueForDetailLayout(
+                views.layoutTotalRestTime,
+                getDateFormattedAsString(getTotalTimeAsDate(listAllLogs, REST_TIME)));
         views.setDataValueForDetailLayout(
                 views.layoutRepsCompleted,
                 String.valueOf(getTotalReps()));
