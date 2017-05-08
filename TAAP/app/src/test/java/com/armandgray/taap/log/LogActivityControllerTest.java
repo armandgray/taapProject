@@ -33,7 +33,7 @@ import static com.armandgray.taap.models.Drill.BALL_HANDLING;
 import static com.armandgray.taap.models.Drill.CONDITIONING;
 import static com.armandgray.taap.models.Drill.DEFENSE;
 import static com.armandgray.taap.models.Drill.FUNDAMENTALS;
-import static com.armandgray.taap.models.Drill.OFF_BALL_OFFENSE;
+import static com.armandgray.taap.models.Drill.OFFENSE;
 import static com.armandgray.taap.models.Drill.PASSING;
 import static com.armandgray.taap.models.Drill.SHOOTING;
 import static junit.framework.Assert.assertEquals;
@@ -140,11 +140,11 @@ public class LogActivityControllerTest {
     }
 
     @Test
-    public void doesRetrieveFieldValuesFromLogs_OffBallOffense() throws Exception {
+    public void doesRetrieveFieldValuesFromLogs_Offense() throws Exception {
         ArrayList<SessionLog> expectedList = new ArrayList<>();
         for (SessionLog log : controller.listAllLogs) {
             List<String> category = Arrays.asList(log.getDrill().getCategory());
-            if (category.contains(OFF_BALL_OFFENSE) || category.contains(PASSING)) {
+            if (category.contains(OFFENSE) || category.contains(PASSING)) {
                 expectedList.add(log);
             }
         }
