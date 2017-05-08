@@ -3,7 +3,7 @@ package com.armandgray.taap.log;
 import android.database.Cursor;
 import android.support.annotation.VisibleForTesting;
 
-import com.armandgray.taap.R;
+import com.armandgray.taap.db.DrillsTable;
 import com.armandgray.taap.db.LogsTable;
 import com.armandgray.taap.models.Drill;
 import com.armandgray.taap.models.SessionLog;
@@ -11,9 +11,11 @@ import com.armandgray.taap.models.SessionLog;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_LOGS;
+import static com.armandgray.taap.db.DatabaseContentProvider.ALL_TABLE_COLUMNS;
+import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_ALL;
 import static com.armandgray.taap.db.DatabaseContentProvider.insertLogToDatabase;
 import static com.armandgray.taap.log.LogActivity.SESSION_LOG;
+import static com.armandgray.taap.utils.StringHelper.getStringAsArray;
 
 class LogActivityController implements LogActivityViews.LogViewsListener {
 
@@ -35,10 +37,11 @@ class LogActivityController implements LogActivityViews.LogViewsListener {
 
     private void assignListAllLogsFromDatabase() {
         Cursor cursor = activity.getContentResolver()
-                .query(CONTENT_URI_LOGS, LogsTable.ALL_LOG_COLUMNS, null, null, null);
+                .query(CONTENT_URI_ALL, ALL_TABLE_COLUMNS, null, null, null);
         if (cursor == null) { return; }
         while (cursor.moveToNext()) {
-            listAllLogs.add(getLogAtCurrentPosition(cursor));
+            SessionLog logAtCurrentPosition = getLogAtCurrentPosition(cursor);
+            listAllLogs.add(logAtCurrentPosition);
         }
         cursor.close();
     }
@@ -53,12 +56,9 @@ class LogActivityController implements LogActivityViews.LogViewsListener {
         int columnSetsCompleted = cursor.getColumnIndex(LogsTable.COLUMN_SETS_COMPLETED);
         int columnRepsCompleted = cursor.getColumnIndex(LogsTable.COLUMN_REPS_COMPLETED);
         int columnSuccess = cursor.getColumnIndex(LogsTable.COLUMN_SUCCESS);
-        int columnDrill = cursor.getColumnIndex(LogsTable.COLUMN_DRILL);
 
-        Drill drill = new Drill(
-                "5 Spots Shooting (Mid-Range)",
-                R.drawable.ic_account_multiple_outline_white_48dp,
-                Drill.SHOOTING_ARRAY);
+        Drill drill = getLogDrillFromCursor(cursor);
+        if (drill == null) { return null; }
 
         SessionLog sessionLog = new SessionLog.Builder()
                 .sessionLength(new Date(cursor.getLong(columnLength)))
@@ -73,6 +73,20 @@ class LogActivityController implements LogActivityViews.LogViewsListener {
         sessionLog.setSessionDate(new Date(cursor.getLong(columnDate)));
         sessionLog.setSessionId(cursor.getInt(columnLogId));
         return sessionLog;
+    }
+
+    private Drill getLogDrillFromCursor(Cursor cursor) {
+        int columnLogDrill = cursor.getColumnIndex(LogsTable.COLUMN_DRILL);
+        int columnDrillId = cursor.getColumnIndex(DrillsTable.DRILL_ID);
+        int columnTitle = cursor.getColumnIndex(DrillsTable.COLUMN_TITLE);
+        int columnImageId = cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID);
+        int columnCategory = cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY);
+
+        if (cursor.getInt(columnDrillId) != cursor.getInt(columnLogDrill)) { return null; }
+        return new Drill(
+                cursor.getString(columnTitle),
+                cursor.getInt(columnImageId),
+                getStringAsArray(cursor.getString(columnCategory)));
     }
 
 }
