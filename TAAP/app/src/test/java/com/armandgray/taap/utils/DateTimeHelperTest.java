@@ -3,8 +3,10 @@ package com.armandgray.taap.utils;
 import org.junit.Test;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import static com.armandgray.taap.utils.DateTimeHelper.getTimeElapsedAsDate;
+import static com.armandgray.taap.utils.DateTimeHelper.getTotalTime;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
@@ -31,6 +33,16 @@ public class DateTimeHelperTest {
 
         assertNotNull(getTimeElapsedAsDate(1));
         assertEquals(calendar.getTime().toString(), getTimeElapsedAsDate(1).toString());
+    }
+
+    @Test
+    public void canGetTotalTime() throws Exception {
+        Date[] times = {new Date(133353535L), new Date(1991991291L), new Date(10302939)};
+        long expectedTotal = 0L;
+        for (Date time : times) { expectedTotal += time.getTime(); }
+
+        assertNotNull(getTotalTime(times));
+        assertEquals(expectedTotal , getTotalTime(times));
     }
 
 }

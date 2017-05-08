@@ -14,4 +14,8 @@ public class DateTimeHelper {
         return calendar.getTime();
     }
 
+    public static long getTotalTime(Date[] times) {
+        return 0;
+    }
+
 }
