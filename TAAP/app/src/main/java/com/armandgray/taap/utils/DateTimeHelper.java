@@ -8,6 +8,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.armandgray.taap.models.SessionLog.ACTIVE_WORK;
+import static com.armandgray.taap.models.SessionLog.REST_TIME;
+import static com.armandgray.taap.models.SessionLog.SESSION_LENGTH;
+
 public class DateTimeHelper {
 
     public static Date getTimeElapsedAsDate(long timeElapsed) {
@@ -26,7 +30,24 @@ public class DateTimeHelper {
     }
 
     public static Date getTotalTimeAsDate(ArrayList<SessionLog> logs, String field) {
-        return null;
+        long expectedTotal = 0L;
+        for (SessionLog log : logs) {
+            expectedTotal += getDateForField(log, field).getTime(); }
+        return getTimeElapsedAsDate(expectedTotal);
+    }
+
+    private static Date getDateForField(SessionLog log, String field) {
+        switch (field) {
+            case SESSION_LENGTH:
+                return log.getSessionLength();
+
+            case ACTIVE_WORK:
+                return log.getActiveWork();
+
+            case REST_TIME:
+                return log.getRestTime();
+        }
+        return log.getActiveWork();
     }
 
     public static String getDateFormattedAsString(Date date) {
