@@ -14,10 +14,10 @@ public class DateTimeHelper {
         return calendar.getTime();
     }
 
-    public static long getTotalTime(Date[] times) {
+    public static Date getTotalTimeAsDate(Date[] times) {
         long expectedTotal = 0L;
         for (Date time : times) { expectedTotal += time.getTime(); }
-        return expectedTotal;
+        return getTimeElapsedAsDate(expectedTotal);
     }
 
 }
