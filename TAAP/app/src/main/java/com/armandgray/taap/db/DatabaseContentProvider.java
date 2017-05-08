@@ -50,6 +50,7 @@ public class DatabaseContentProvider extends ContentProvider {
         CONTENT_URI_DRILLS = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_DRILLS);
         CONTENT_URI_LOGS = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_LOGS);
 
+        uriMatcher.addURI(AUTHORITY, BASE_PATH_ALL, ALL_DATA);
         uriMatcher.addURI(AUTHORITY, BASE_PATH_DRILLS, ALL_DRILLS);
         uriMatcher.addURI(AUTHORITY, BASE_PATH_DRILLS + "/#", DRILLS_ID);
         uriMatcher.addURI(AUTHORITY, BASE_PATH_LOGS, ALL_LOGS);
