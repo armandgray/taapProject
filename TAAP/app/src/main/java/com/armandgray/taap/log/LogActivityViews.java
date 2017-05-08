@@ -82,11 +82,11 @@ class LogActivityViews {
     }
 
     private void setupDetailItems() {
-        setTextForDetailLayoutViews(layoutTotalSessionTime, R.string.total_session_time, "00:00:01");
-        setTextForDetailLayoutViews(layoutTotalActiveTime, R.string.total_active_time, "00:00:01");
-        setTextForDetailLayoutViews(layoutTotalRestTime, R.string.total_rest_time, "00:00:01");
-        setTextForDetailLayoutViews(layoutExercisesCompleted, R.string.exercises_completed, "0.01");
-        setTextForDetailLayoutViews(layoutRepsCompleted, R.string.reps_completed, "0.01");
+        setTextForDetailLayoutViews(layoutTotalSessionTime, R.string.total_session_time, "00:00:00");
+        setTextForDetailLayoutViews(layoutTotalActiveTime, R.string.total_active_time, "00:00:00");
+        setTextForDetailLayoutViews(layoutTotalRestTime, R.string.total_rest_time, "00:00:00");
+        setTextForDetailLayoutViews(layoutExercisesCompleted, R.string.exercises_completed, "0");
+        setTextForDetailLayoutViews(layoutRepsCompleted, R.string.reps_completed, "0");
     }
 
     void setTextForDetailLayoutViews(LinearLayout layout, int headerResId, String text) {
@@ -102,18 +102,18 @@ class LogActivityViews {
                 + "  <";
         tvDate.setText(dateString);
         setTextForRecordLayoutViews(layoutFundamentals, R.drawable.ic_key_white_48dp,
-                "00:00:01", "0.01%", R.string.fundamentals);
+                "00:00:00", "0%", R.string.fundamentals);
         setTextForRecordLayoutViews(layoutDefense, R.drawable.ic_account_multiple_outline_white_48dp,
-                "00:00:01", "0.01%", R.string.defense);
+                "00:00:00", "0%", R.string.defense);
         setTextForRecordLayoutViews(layoutOffense, R.drawable.ic_human_handsup_white_48dp,
-                "00:00:01", "0.01%", R.string.off_ball_offense);
+                "00:00:00", "0%", R.string.off_ball_offense);
         setTextForRecordLayoutViews(layoutConditioning, R.drawable.ic_run_fast_white_48dp,
-                "00:00:01", "0.01%", R.string.conditioning);
+                "00:00:00", "0%", R.string.conditioning);
         setTextForRecordLayoutViews(layoutShooting, R.drawable.ic_dribbble_white_48dp,
-                "00:00:01", "0.01%", R.string.shooting);
+                "00:00:00", "0%", R.string.shooting);
         setTextForRecordLayoutViews(layoutBallHandling,
                 R.drawable.ic_gesture_two_double_tap_white_48dp,
-                "00:00:01", "0.01%", R.string.ball_handling);
+                "00:00:00", "0%", R.string.ball_handling);
     }
 
     private void setTextForRecordLayoutViews(LinearLayout layout, int imageResId,
