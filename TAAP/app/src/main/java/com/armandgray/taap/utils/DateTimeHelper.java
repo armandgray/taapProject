@@ -2,9 +2,11 @@ package com.armandgray.taap.utils;
 
 import com.armandgray.taap.models.SessionLog;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class DateTimeHelper {
 
@@ -23,8 +25,15 @@ public class DateTimeHelper {
         return getTimeElapsedAsDate(expectedTotal);
     }
 
-    public static String getDateFormattedAsString(Date testDate) {
-        return null;
+    public static String getDateFormattedAsString(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        SimpleDateFormat simpleDateFormat =
+                hour == 0
+                        ? new SimpleDateFormat("00:mm:ss", Locale.US)
+                        : new SimpleDateFormat("hh:mm:ss", Locale.US);
+        return simpleDateFormat.format(date);
     }
 
 }
