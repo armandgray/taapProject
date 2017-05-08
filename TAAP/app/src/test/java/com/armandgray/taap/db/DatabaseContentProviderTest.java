@@ -356,6 +356,19 @@ public class DatabaseContentProviderTest {
                 .update(CONTENT_URI_LOGS, null, null, null));
     }
 
+    @Test
+    public void canQueryDatabaseForAllColumnsUsingContentProvider() {
+        insertLogToDatabase(TEST_SESSION_LOG, RuntimeEnvironment.application);
+
+        Cursor cursor = RuntimeEnvironment.application.getContentResolver()
+                .query(CONTENT_URI_ALL, ALL_TABLE_COLUMNS, null, null, null);
+
+        assertNotNull(cursor);
+        assertCursorDataEqualsDrill(cursor, TEST_SESSION_LOG.getDrill());
+        assertCursorDataEqualsLog(cursor, TEST_SESSION_LOG);
+        cursor.close();
+    }
+
     private DatabaseContentProvider getDatabaseContentProvider() {
         ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
         ContentProviderClient contentProviderClient = contentResolver

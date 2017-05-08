@@ -31,10 +31,10 @@ public class DatabaseContentProvider extends ContentProvider {
     @VisibleForTesting static final String BASE_PATH_LOGS = "logs";
 
     @VisibleForTesting static final int ALL_DATA = 1;
-    @VisibleForTesting static final int ALL_DRILLS = 1;
-    @VisibleForTesting static final int DRILLS_ID = 2;
-    @VisibleForTesting static final int ALL_LOGS = 3;
-    @VisibleForTesting static final int LOGS_ID = 4;
+    @VisibleForTesting static final int ALL_DRILLS = 2;
+    @VisibleForTesting static final int DRILLS_ID = 3;
+    @VisibleForTesting static final int ALL_LOGS = 4;
+    @VisibleForTesting static final int LOGS_ID = 5;
 
     @VisibleForTesting
     static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
