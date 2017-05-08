@@ -2,6 +2,7 @@ package com.armandgray.taap.utils;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class DateTimeHelper {
 
@@ -14,7 +15,7 @@ public class DateTimeHelper {
         return calendar.getTime();
     }
 
-    public static Date getTotalTimeAsDate(Date[] times) {
+    public static Date getTotalTimeAsDate(List<Date> times) {
         long expectedTotal = 0L;
         for (Date time : times) { expectedTotal += time.getTime(); }
         return getTimeElapsedAsDate(expectedTotal);

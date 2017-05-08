@@ -2,6 +2,7 @@ package com.armandgray.taap.utils;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -37,7 +38,11 @@ public class DateTimeHelperTest {
 
     @Test
     public void canGetTotalTimeAsDate() throws Exception {
-        Date[] times = {new Date(133353535L), new Date(1991991291L), new Date(10302939)};
+        ArrayList<Date> times = new ArrayList<>();
+        times.add(new Date(133353535L));
+        times.add(new Date(1991991291L));
+        times.add(new Date(10302939));
+        
         long expectedTotal = 0L;
         for (Date time : times) { expectedTotal += time.getTime(); }
 
