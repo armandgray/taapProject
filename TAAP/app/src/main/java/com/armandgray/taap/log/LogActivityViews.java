@@ -18,7 +18,6 @@ class LogActivityViews {
 
     @VisibleForTesting
     LogActivity activity;
-    private LogViewsListener listener;
     LinearLayout layoutTotalSessionTime;
     LinearLayout layoutTotalActiveTime;
     LinearLayout layoutTotalRestTime;
@@ -32,9 +31,8 @@ class LogActivityViews {
     LinearLayout layoutShooting;
     LinearLayout layoutBallHandling;
 
-    LogActivityViews(LogActivity activity, LogViewsListener listener) {
+    LogActivityViews(LogActivity activity) {
         this.activity = activity;
-        this.listener = listener;
     }
 
     void setupActivityInitialState() {
@@ -131,6 +129,4 @@ class LogActivityViews {
         tvHeader.setText(headerResId);
     }
 
-    interface LogViewsListener {
-    }
 }

@@ -25,7 +25,7 @@ import static com.armandgray.taap.models.Drill.PASSING;
 import static com.armandgray.taap.models.Drill.SHOOTING;
 import static com.armandgray.taap.utils.StringHelper.getStringAsArray;
 
-class LogActivityController implements LogActivityViews.LogViewsListener {
+class LogActivityController {
 
     @VisibleForTesting LogActivity activity;
     @VisibleForTesting LogActivityViews views;
@@ -40,7 +40,7 @@ class LogActivityController implements LogActivityViews.LogViewsListener {
 
     LogActivityController(LogActivity activity) {
         this.activity = activity;
-        this.views = new LogActivityViews(activity, this);
+        this.views = new LogActivityViews(activity);
         this.sessionLog = activity.getIntent().getParcelableExtra(SESSION_LOG);
         this.listAllLogs = new ArrayList<>();
         this.listFundamentalLogs = new ArrayList<>();
