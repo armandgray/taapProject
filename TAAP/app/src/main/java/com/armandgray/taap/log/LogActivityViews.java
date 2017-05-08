@@ -113,7 +113,7 @@ class LogActivityViews {
                 "00:00:01", "0.01%", R.string.shooting);
         setTextForRecordLayoutViews(layoutBallHandling,
                 R.drawable.ic_gesture_two_double_tap_white_48dp,
-                "00:00:00", "0.01%", R.string.ball_handling);
+                "00:00:01", "0.01%", R.string.ball_handling);
     }
 
     private void setTextForRecordLayoutViews(LinearLayout layout, int imageResId,
@@ -127,6 +127,14 @@ class LogActivityViews {
         tvTime.setText(time);
         tvSuccessRate.setText(successRate);
         tvHeader.setText(headerResId);
+    }
+
+    void setDataValuesForRecordLayout(LinearLayout layout, String time, String successRate) {
+        TextView tvTime = (TextView) layout.findViewById(R.id.tvTime);
+        TextView tvSuccessRate = (TextView) layout.findViewById(R.id.tvSuccessRate);
+
+        tvTime.setText(time);
+        tvSuccessRate.setText(successRate);
     }
 
 }
