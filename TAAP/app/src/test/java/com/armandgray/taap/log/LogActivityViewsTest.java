@@ -183,10 +183,10 @@ public class LogActivityViewsTest {
 
     @Test
     public void doesSetLayoutText_RecordItem_OffBallOffense() throws Exception {
-        ImageView ivImage = (ImageView) views.layoutOffBallOffense.findViewById(R.id.ivImage);
-        TextView tvTime = (TextView) views.layoutOffBallOffense.findViewById(R.id.tvTime);
-        TextView tvSuccessRate = (TextView) views.layoutOffBallOffense.findViewById(R.id.tvSuccessRate);
-        TextView tvHeader = (TextView) views.layoutOffBallOffense.findViewById(R.id.tvHeader);
+        ImageView ivImage = (ImageView) views.layoutOffense.findViewById(R.id.ivImage);
+        TextView tvTime = (TextView) views.layoutOffense.findViewById(R.id.tvTime);
+        TextView tvSuccessRate = (TextView) views.layoutOffense.findViewById(R.id.tvSuccessRate);
+        TextView tvHeader = (TextView) views.layoutOffense.findViewById(R.id.tvHeader);
 
         assertNotNull(ivImage);
         assertNotNull(tvTime);

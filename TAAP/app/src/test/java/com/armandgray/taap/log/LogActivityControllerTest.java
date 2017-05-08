@@ -206,6 +206,76 @@ public class LogActivityControllerTest {
         expectedSuccessRate *= 100;
         Date expectedTime = getTotalTimeAsDate(controller.listFundamentalLogs);
 
+        LinearLayout layout = controller.views.layoutFundamentals;
+        TextView tvTime = (TextView) layout.findViewById(R.id.tvTime);
+        TextView tvSuccessRate = (TextView) layout.findViewById(R.id.tvSuccessRate);
+
+        assertEquals(getDateFormattedAsString(expectedTime), tvTime.getText());
+        assertEquals(expectedSuccessRate.intValue() + "%", tvSuccessRate.getText());
+    }
+
+    @Test
+    public void doesSetViewValuesFromLogs_Defense() throws Exception {
+        Double expectedSuccessRate = getAveragePercentage(controller.listDefenseLogs);
+        expectedSuccessRate *= 100;
+        Date expectedTime = getTotalTimeAsDate(controller.listDefenseLogs);
+
+        LinearLayout layout = controller.views.layoutDefense;
+        TextView tvTime = (TextView) layout.findViewById(R.id.tvTime);
+        TextView tvSuccessRate = (TextView) layout.findViewById(R.id.tvSuccessRate);
+
+        assertEquals(getDateFormattedAsString(expectedTime), tvTime.getText());
+        assertEquals(expectedSuccessRate.intValue() + "%", tvSuccessRate.getText());
+    }
+
+    @Test
+    public void doesSetViewValuesFromLogs_Offense() throws Exception {
+        Double expectedSuccessRate = getAveragePercentage(controller.listOffenseLogs);
+        expectedSuccessRate *= 100;
+        Date expectedTime = getTotalTimeAsDate(controller.listOffenseLogs);
+
+        LinearLayout layout = controller.views.layoutOffense;
+        TextView tvTime = (TextView) layout.findViewById(R.id.tvTime);
+        TextView tvSuccessRate = (TextView) layout.findViewById(R.id.tvSuccessRate);
+
+        assertEquals(getDateFormattedAsString(expectedTime), tvTime.getText());
+        assertEquals(expectedSuccessRate.intValue() + "%", tvSuccessRate.getText());
+    }
+
+    @Test
+    public void doesSetViewValuesFromLogs_Conditioning() throws Exception {
+        Double expectedSuccessRate = getAveragePercentage(controller.listConditioningLogs);
+        expectedSuccessRate *= 100;
+        Date expectedTime = getTotalTimeAsDate(controller.listConditioningLogs);
+
+        LinearLayout layout = controller.views.layoutConditioning;
+        TextView tvTime = (TextView) layout.findViewById(R.id.tvTime);
+        TextView tvSuccessRate = (TextView) layout.findViewById(R.id.tvSuccessRate);
+
+        assertEquals(getDateFormattedAsString(expectedTime), tvTime.getText());
+        assertEquals(expectedSuccessRate.intValue() + "%", tvSuccessRate.getText());
+    }
+
+    @Test
+    public void doesSetViewValuesFromLogs_Shooting() throws Exception {
+        Double expectedSuccessRate = getAveragePercentage(controller.listShootingLogs);
+        expectedSuccessRate *= 100;
+        Date expectedTime = getTotalTimeAsDate(controller.listShootingLogs);
+
+        LinearLayout layout = controller.views.layoutShooting;
+        TextView tvTime = (TextView) layout.findViewById(R.id.tvTime);
+        TextView tvSuccessRate = (TextView) layout.findViewById(R.id.tvSuccessRate);
+
+        assertEquals(getDateFormattedAsString(expectedTime), tvTime.getText());
+        assertEquals(expectedSuccessRate.intValue() + "%", tvSuccessRate.getText());
+    }
+
+    @Test
+    public void doesSetViewValuesFromLogs_BallHandling() throws Exception {
+        Double expectedSuccessRate = getAveragePercentage(controller.listBallHandlingLogs);
+        expectedSuccessRate *= 100;
+        Date expectedTime = getTotalTimeAsDate(controller.listBallHandlingLogs);
+
         LinearLayout layout = controller.views.layoutBallHandling;
         TextView tvTime = (TextView) layout.findViewById(R.id.tvTime);
         TextView tvSuccessRate = (TextView) layout.findViewById(R.id.tvSuccessRate);
