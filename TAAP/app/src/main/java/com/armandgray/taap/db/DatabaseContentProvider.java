@@ -71,6 +71,9 @@ public class DatabaseContentProvider extends ContentProvider {
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
         switch (uriMatcher.match(uri)) {
+            case ALL_DATA:
+                return database.rawQuery("SELECT * FROM logs INNER JOIN drills ON logs.itemDrill = drills.drillId", null);
+
             case ALL_DRILLS:
                 return database.query(DrillsTable.TABLE_DRILLS, projection, selection,
                         null, null, null, null);
