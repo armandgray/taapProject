@@ -44,6 +44,8 @@ class LogActivityController implements LogActivityViews.LogViewsListener {
     }
 
     private SessionLog getLogAtCurrentPosition(Cursor cursor) {
+        int columnLogId = cursor.getColumnIndex(LogsTable.LOG_ID);
+        int columnDate = cursor.getColumnIndex(LogsTable.COLUMN_DATE);
         int columnLength = cursor.getColumnIndex(LogsTable.COLUMN_LENGTH);
         int columnGoal = cursor.getColumnIndex(LogsTable.COLUMN_GOAL);
         int columnActiveWork = cursor.getColumnIndex(LogsTable.COLUMN_ACTIVE_WORK);
@@ -58,7 +60,7 @@ class LogActivityController implements LogActivityViews.LogViewsListener {
                 R.drawable.ic_account_multiple_outline_white_48dp,
                 Drill.SHOOTING_ARRAY);
 
-        return new SessionLog.Builder()
+        SessionLog sessionLog = new SessionLog.Builder()
                 .sessionLength(new Date(cursor.getLong(columnLength)))
                 .sessionGoal(cursor.getString(columnGoal))
                 .activeWork(new Date(cursor.getLong(columnActiveWork)))
@@ -68,6 +70,9 @@ class LogActivityController implements LogActivityViews.LogViewsListener {
                 .successRate(cursor.getDouble(columnSuccess))
                 .drill(drill)
                 .create();
+        sessionLog.setSessionDate(new Date(cursor.getLong(columnDate)));
+        sessionLog.setSessionId(cursor.getInt(columnLogId));
+        return sessionLog;
     }
 
 }
