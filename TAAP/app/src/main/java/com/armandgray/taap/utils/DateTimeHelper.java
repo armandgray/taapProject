@@ -19,7 +19,7 @@ public class DateTimeHelper {
 
     public static Date getTotalTimeAsDate(ArrayList<SessionLog> logs) {
         long expectedTotal = 0L;
-//        for (Date time : logs) { expectedTotal += time.getTime(); }
+        for (SessionLog log : logs) { expectedTotal += log.getActiveWork().getTime(); }
         return getTimeElapsedAsDate(expectedTotal);
     }
 
