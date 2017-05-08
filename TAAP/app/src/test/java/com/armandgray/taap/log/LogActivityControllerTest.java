@@ -41,6 +41,8 @@ import static com.armandgray.taap.models.Drill.OFFENSE;
 import static com.armandgray.taap.models.Drill.PASSING;
 import static com.armandgray.taap.models.Drill.SHOOTING;
 import static com.armandgray.taap.utils.DateTimeHelper.getDateFormattedAsString;
+import static com.armandgray.taap.utils.DateTimeHelper.getTotalTimeAsDate;
+import static com.armandgray.taap.utils.MathHelper.getAveragePercentage;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
@@ -200,14 +202,15 @@ public class LogActivityControllerTest {
 
     @Test
     public void doesSetViewValuesFromLogs_Fundamentals() throws Exception {
-        Double expectedSuccessRate = 0.0;
+        Double expectedSuccessRate = getAveragePercentage(controller.listFundamentalLogs);
         expectedSuccessRate *= 100;
+        Date expectedTime = getTotalTimeAsDate(controller.listFundamentalLogs);
 
         LinearLayout layout = controller.views.layoutBallHandling;
         TextView tvTime = (TextView) layout.findViewById(R.id.tvTime);
         TextView tvSuccessRate = (TextView) layout.findViewById(R.id.tvSuccessRate);
 
-        assertEquals(getDateFormattedAsString(new Date(0)), tvTime.getText());
+        assertEquals(getDateFormattedAsString(expectedTime), tvTime.getText());
         assertEquals(expectedSuccessRate.intValue() + "%", tvSuccessRate.getText());
     }
 
