@@ -24,6 +24,7 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
@@ -39,6 +40,7 @@ import static com.armandgray.taap.models.Drill.FUNDAMENTALS;
 import static com.armandgray.taap.models.Drill.OFFENSE;
 import static com.armandgray.taap.models.Drill.PASSING;
 import static com.armandgray.taap.models.Drill.SHOOTING;
+import static com.armandgray.taap.utils.DateTimeHelper.getDateFormattedAsString;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
@@ -205,7 +207,7 @@ public class LogActivityControllerTest {
         TextView tvTime = (TextView) layout.findViewById(R.id.tvTime);
         TextView tvSuccessRate = (TextView) layout.findViewById(R.id.tvSuccessRate);
 
-        assertEquals(null, tvTime.getText());
+        assertEquals(getDateFormattedAsString(new Date(0)), tvTime.getText());
         assertEquals(expectedSuccessRate.intValue() + "%", tvSuccessRate.getText());
     }
 
