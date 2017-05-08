@@ -19,12 +19,17 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_LOGS;
+import static com.armandgray.taap.db.DatabaseContentProvider.insertLogToDatabase;
 import static com.armandgray.taap.db.DatabaseContentProviderTest.TEST_SESSION_LOG;
 import static com.armandgray.taap.db.DatabaseContentProviderTest.assertCursorDataEqualsDrill;
 import static com.armandgray.taap.db.DatabaseContentProviderTest.assertCursorDataEqualsLog;
 import static com.armandgray.taap.log.LogActivity.SESSION_LOG;
+import static com.armandgray.taap.models.Drill.FUNDAMENTALS;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
@@ -104,7 +109,15 @@ public class LogActivityControllerTest {
 
     @Test
     public void doesRetrieveFieldValuesFromLogs_Fundamentals() throws Exception {
+        ArrayList<SessionLog> expectedList = new ArrayList<>();
+        for (SessionLog log : controller.listAllLogs) {
+            if (Arrays.asList(log.getDrill().getCategory()).contains(FUNDAMENTALS)) {
+                expectedList.add(log);
+            }
+        }
+
         assertNotNull(controller.listFundamentalLogs);
+        assertEquals(expectedList, controller.listFundamentalLogs);
     }
 
     @Test
