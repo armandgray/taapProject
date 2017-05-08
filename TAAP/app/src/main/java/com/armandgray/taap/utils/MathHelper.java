@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class MathHelper {
 
     public static double getAveragePercentage(ArrayList<Double> percentages) {
-        return 0.0;
+        double total = 0.0;
+        for (Double percent : percentages ) { total += percent; }
+        return total/percentages.size();
     }
 }
