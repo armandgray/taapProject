@@ -83,10 +83,12 @@ class LogActivityController implements LogActivityViews.LogViewsListener {
         int columnCategory = cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY);
 
         if (cursor.getInt(columnDrillId) != cursor.getInt(columnLogDrill)) { return null; }
-        return new Drill(
+        Drill drill = new Drill(
                 cursor.getString(columnTitle),
                 cursor.getInt(columnImageId),
                 getStringAsArray(cursor.getString(columnCategory)));
+        drill.setDrillId(cursor.getInt(columnDrillId));
+        return drill;
     }
 
 }
