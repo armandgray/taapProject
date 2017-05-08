@@ -60,17 +60,21 @@ class LogActivityController {
     }
 
     private void setupHistoryFields() {
-        Cursor cursor = activity.getContentResolver()
-                .query(CONTENT_URI_ALL, ALL_TABLE_COLUMNS, null, null, null);
+        Cursor cursor = activity.getContentResolver().query(CONTENT_URI_ALL, ALL_TABLE_COLUMNS,
+                null, null, null);
         if (cursor == null) { return; }
-        while (cursor.moveToNext()) {
-            SessionLog logAtCurrentPosition = getLogAtCurrentPosition(cursor);
-            listAllLogs.add(logAtCurrentPosition);
-        }
+        retrieveAllLogsData(cursor);
         cursor.close();
 
         retrieveFieldData();
         setViewFields();
+    }
+
+    private void retrieveAllLogsData(Cursor cursor) {
+        while (cursor.moveToNext()) {
+            SessionLog logAtCurrentPosition = getLogAtCurrentPosition(cursor);
+            listAllLogs.add(logAtCurrentPosition);
+        }
     }
 
     private SessionLog getLogAtCurrentPosition(Cursor cursor) {
