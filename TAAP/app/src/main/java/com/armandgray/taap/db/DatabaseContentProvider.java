@@ -22,12 +22,15 @@ import static com.armandgray.taap.utils.StringHelper.getArrayAsString;
 public class DatabaseContentProvider extends ContentProvider {
 
     public static final String[] ALL_TABLE_COLUMNS;
+    public static final Uri CONTENT_URI_ALL;
     public static final Uri CONTENT_URI_DRILLS;
     public static final Uri CONTENT_URI_LOGS;
     @VisibleForTesting static final String AUTHORITY = "com.armandgray.taap.db.provider";
+    @VisibleForTesting static final String BASE_PATH_ALL = "all";
     @VisibleForTesting static final String BASE_PATH_DRILLS = "drills";
     @VisibleForTesting static final String BASE_PATH_LOGS = "logs";
 
+    @VisibleForTesting static final int ALL_DATA = 1;
     @VisibleForTesting static final int ALL_DRILLS = 1;
     @VisibleForTesting static final int DRILLS_ID = 2;
     @VisibleForTesting static final int ALL_LOGS = 3;
@@ -43,6 +46,7 @@ public class DatabaseContentProvider extends ContentProvider {
         expectedColumns.addAll(Arrays.asList(DrillsTable.ALL_DRILL_COLUMNS));
         ALL_TABLE_COLUMNS = expectedColumns.toArray(new String[expectedColumns.size()]);
 
+        CONTENT_URI_ALL = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_ALL);
         CONTENT_URI_DRILLS = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_DRILLS);
         CONTENT_URI_LOGS = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_LOGS);
 

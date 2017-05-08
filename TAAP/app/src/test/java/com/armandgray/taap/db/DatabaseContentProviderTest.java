@@ -22,12 +22,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
+import static com.armandgray.taap.db.DatabaseContentProvider.ALL_DATA;
 import static com.armandgray.taap.db.DatabaseContentProvider.ALL_DRILLS;
 import static com.armandgray.taap.db.DatabaseContentProvider.ALL_LOGS;
 import static com.armandgray.taap.db.DatabaseContentProvider.ALL_TABLE_COLUMNS;
 import static com.armandgray.taap.db.DatabaseContentProvider.AUTHORITY;
+import static com.armandgray.taap.db.DatabaseContentProvider.BASE_PATH_ALL;
 import static com.armandgray.taap.db.DatabaseContentProvider.BASE_PATH_DRILLS;
 import static com.armandgray.taap.db.DatabaseContentProvider.BASE_PATH_LOGS;
+import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_ALL;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_LOGS;
 import static com.armandgray.taap.db.DatabaseContentProvider.DRILLS_ID;
@@ -80,6 +83,12 @@ public class DatabaseContentProviderTest {
     }
 
     @Test
+    public void hasContentUri_All() {
+        assertNotNull(CONTENT_URI_ALL);
+        assertEquals(Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_ALL), CONTENT_URI_ALL);
+    }
+
+    @Test
     public void hasContentUri_Drills() {
         assertNotNull(CONTENT_URI_DRILLS);
         assertEquals(Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_DRILLS), CONTENT_URI_DRILLS);
@@ -94,6 +103,7 @@ public class DatabaseContentProviderTest {
     @Test
     public void hasContentUriMatcher() {
         assertNotNull(uriMatcher);
+        assertEquals(ALL_DATA, uriMatcher.match(CONTENT_URI_ALL));
         assertEquals(ALL_DRILLS, uriMatcher.match(CONTENT_URI_DRILLS));
         assertEquals(DRILLS_ID,
                 uriMatcher.match(Uri.parse(DatabaseContentProvider.CONTENT_URI_DRILLS + "/" + 0)));
