@@ -26,6 +26,7 @@ import static com.armandgray.taap.models.Drill.SHOOTING;
 import static com.armandgray.taap.utils.DateTimeHelper.getDateFormattedAsString;
 import static com.armandgray.taap.utils.DateTimeHelper.getTotalTimeAsDate;
 import static com.armandgray.taap.utils.MathHelper.getAveragePercentage;
+import static com.armandgray.taap.utils.MathHelper.getPercentFormattedAsString;
 import static com.armandgray.taap.utils.StringHelper.getStringAsArray;
 
 class LogActivityController {
@@ -54,8 +55,8 @@ class LogActivityController {
         this.listBallHandlingLogs = new ArrayList<>();
 
         if (sessionLog != null) { insertLogToDatabase(sessionLog, activity); }
-        setupHistoryFields();
         views.setupActivityInitialState();
+        setupHistoryFields();
     }
 
     private void setupHistoryFields() {
@@ -135,11 +136,31 @@ class LogActivityController {
         }
     }
 
-    private void setViewFields() {
+    void setViewFields() {
         views.setDataValuesForRecordLayout(
                 views.layoutFundamentals,
+                getDateFormattedAsString(getTotalTimeAsDate(listFundamentalLogs)),
+                getPercentFormattedAsString(getAveragePercentage(listFundamentalLogs)));
+        views.setDataValuesForRecordLayout(
+                views.layoutDefense,
+                getDateFormattedAsString(getTotalTimeAsDate(listDefenseLogs)),
+                getPercentFormattedAsString(getAveragePercentage(listDefenseLogs)));
+        views.setDataValuesForRecordLayout(
+                views.layoutOffense,
+                getDateFormattedAsString(getTotalTimeAsDate(listOffenseLogs)),
+                getPercentFormattedAsString(getAveragePercentage(listOffenseLogs)));
+        views.setDataValuesForRecordLayout(
+                views.layoutConditioning,
+                getDateFormattedAsString(getTotalTimeAsDate(listConditioningLogs)),
+                getPercentFormattedAsString(getAveragePercentage(listConditioningLogs)));
+        views.setDataValuesForRecordLayout(
+                views.layoutShooting,
+                getDateFormattedAsString(getTotalTimeAsDate(listShootingLogs)),
+                getPercentFormattedAsString(getAveragePercentage(listShootingLogs)));
+        views.setDataValuesForRecordLayout(
+                views.layoutBallHandling,
                 getDateFormattedAsString(getTotalTimeAsDate(listBallHandlingLogs)),
-                getAveragePercentage(listBallHandlingLogs) + "%");
+                getPercentFormattedAsString(getAveragePercentage(listBallHandlingLogs)));
     }
 
 }
