@@ -4,10 +4,13 @@ import com.armandgray.taap.models.SessionLog;
 
 import org.junit.Test;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
+import static com.armandgray.taap.utils.DateTimeHelper.getDateFormattedAsString;
 import static com.armandgray.taap.utils.DateTimeHelper.getTimeElapsedAsDate;
 import static com.armandgray.taap.utils.DateTimeHelper.getTotalTimeAsDate;
 import static junit.framework.Assert.assertEquals;
@@ -50,6 +53,20 @@ public class DateTimeHelperTest {
 
         assertNotNull(getTotalTimeAsDate(logs));
         assertEquals(getTimeElapsedAsDate(expectedTotal) , getTotalTimeAsDate(logs));
+    }
+
+    @Test
+    public void canGetDateFormattedAsString() throws Exception {
+        Date testDate = new Date(System.currentTimeMillis());
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(testDate);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        SimpleDateFormat simpleDateFormat =
+                hour == 0
+                        ? new SimpleDateFormat("00:mm:ss", Locale.US)
+                        : new SimpleDateFormat("hh:mm:ss", Locale.US);
+        assertNotNull(getDateFormattedAsString(testDate));
+        assertEquals(simpleDateFormat.format(testDate), getDateFormattedAsString(testDate));
     }
 
 }

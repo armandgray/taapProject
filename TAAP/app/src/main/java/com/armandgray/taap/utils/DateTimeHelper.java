@@ -23,4 +23,8 @@ public class DateTimeHelper {
         return getTimeElapsedAsDate(expectedTotal);
     }
 
+    public static String getDateFormattedAsString(Date testDate) {
+        return null;
+    }
+
 }
