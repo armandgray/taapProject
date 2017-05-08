@@ -1,5 +1,7 @@
 package com.armandgray.taap.utils;
 
+import com.armandgray.taap.models.SessionLog;
+
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -12,15 +14,15 @@ public class MathHelperTest {
 
     @Test
     public void canGetAveragePercentage() throws Exception {
-        ArrayList<Double> percentages = new ArrayList<>();
-        percentages.add(0.20);
-        percentages.add(0.40);
-        percentages.add(0.90);
+        ArrayList<SessionLog> logs = new ArrayList<>();
+        logs.add(new SessionLog.Builder().successRate(0.20).create());
+        logs.add(new SessionLog.Builder().successRate(0.40).create());
+        logs.add(new SessionLog.Builder().successRate(0.90).create());
         double total = 0.0;
-        for (Double percent : percentages ) { total += percent; }
+        for (SessionLog log : logs ) { total += log.getSuccessRate(); }
 
-        assertNotNull(getAveragePercentage(percentages));
-        assertEquals(total/percentages.size() , getAveragePercentage(percentages));
+        assertNotNull(getAveragePercentage(logs));
+        assertEquals(total/logs.size() , getAveragePercentage(logs));
     }
 
 }
