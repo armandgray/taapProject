@@ -23,6 +23,9 @@ import static com.armandgray.taap.models.Drill.FUNDAMENTALS;
 import static com.armandgray.taap.models.Drill.OFFENSE;
 import static com.armandgray.taap.models.Drill.PASSING;
 import static com.armandgray.taap.models.Drill.SHOOTING;
+import static com.armandgray.taap.utils.DateTimeHelper.getDateFormattedAsString;
+import static com.armandgray.taap.utils.DateTimeHelper.getTotalTimeAsDate;
+import static com.armandgray.taap.utils.MathHelper.getAveragePercentage;
 import static com.armandgray.taap.utils.StringHelper.getStringAsArray;
 
 class LogActivityController {
@@ -66,7 +69,7 @@ class LogActivityController {
         cursor.close();
 
         retrieveFieldData();
-//        setViewFields();
+        setViewFields();
     }
 
     private SessionLog getLogAtCurrentPosition(Cursor cursor) {
@@ -130,6 +133,13 @@ class LogActivityController {
                 targetList.add(log);
             }
         }
+    }
+
+    private void setViewFields() {
+        views.setDataValuesForRecordLayout(
+                views.layoutFundamentals,
+                getDateFormattedAsString(getTotalTimeAsDate(listBallHandlingLogs)),
+                getAveragePercentage(listBallHandlingLogs).intValue() + "%");
     }
 
 }
