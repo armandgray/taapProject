@@ -26,7 +26,7 @@
         android:layout_weight="0.3" />
 
     <include
-        android:id="@+id/layoutOffBallOffense"
+        android:id="@+id/layoutOffense"
         layout="@layout/log_record_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

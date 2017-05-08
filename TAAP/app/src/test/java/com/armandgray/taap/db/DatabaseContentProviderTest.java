@@ -6,7 +6,6 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
@@ -20,21 +19,29 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
+import static com.armandgray.taap.db.DatabaseContentProvider.ALL_DATA;
 import static com.armandgray.taap.db.DatabaseContentProvider.ALL_DRILLS;
 import static com.armandgray.taap.db.DatabaseContentProvider.ALL_LOGS;
+import static com.armandgray.taap.db.DatabaseContentProvider.ALL_TABLE_COLUMNS;
 import static com.armandgray.taap.db.DatabaseContentProvider.AUTHORITY;
+import static com.armandgray.taap.db.DatabaseContentProvider.BASE_PATH_ALL;
 import static com.armandgray.taap.db.DatabaseContentProvider.BASE_PATH_DRILLS;
 import static com.armandgray.taap.db.DatabaseContentProvider.BASE_PATH_LOGS;
+import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_ALL;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_LOGS;
 import static com.armandgray.taap.db.DatabaseContentProvider.DRILLS_ID;
 import static com.armandgray.taap.db.DatabaseContentProvider.EXECUTION_FAILURE;
 import static com.armandgray.taap.db.DatabaseContentProvider.LOGS_ID;
+import static com.armandgray.taap.db.DatabaseContentProvider.getDrillContentValues;
+import static com.armandgray.taap.db.DatabaseContentProvider.getLogContentValues;
+import static com.armandgray.taap.db.DatabaseContentProvider.insertDrillToDatabase;
+import static com.armandgray.taap.db.DatabaseContentProvider.insertLogToDatabase;
 import static com.armandgray.taap.db.DatabaseContentProvider.uriMatcher;
-import static com.armandgray.taap.utils.StringsHelper.getArrayAsString;
-import static com.armandgray.taap.utils.StringsHelper.getStringAsArray;
+import static com.armandgray.taap.utils.StringHelper.getStringAsArray;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
@@ -52,7 +59,7 @@ public class DatabaseContentProviderTest {
             R.drawable.ic_account_multiple_outline_white_48dp,
             Drill.SHOOTING_ARRAY);
 
-    private static final SessionLog TEST_SESSION_LOG = new SessionLog.Builder()
+    public static final SessionLog TEST_SESSION_LOG = new SessionLog.Builder()
             .sessionLength(new Date(TIME_IN_MILLIS))
             .sessionGoal("")
             .activeWork(new Date(TIME_IN_MILLIS + 555555))
@@ -63,6 +70,23 @@ public class DatabaseContentProviderTest {
             .successRecord(0.55)
             .drill(TEST_DRILL)
             .create();
+
+    @Test
+    public void hasField_ALL_TABLE_COLUMNS() {
+        ArrayList<String> expectedColumns = new ArrayList<>();
+        expectedColumns.addAll(Arrays.asList(LogsTable.ALL_LOG_COLUMNS));
+        expectedColumns.addAll(Arrays.asList(DrillsTable.ALL_DRILL_COLUMNS));
+        String[] expectedArray = expectedColumns.toArray(new String[expectedColumns.size()]);
+
+        assertNotNull(ALL_TABLE_COLUMNS);
+        assertThat(expectedArray, is(ALL_TABLE_COLUMNS));
+    }
+
+    @Test
+    public void hasContentUri_All() {
+        assertNotNull(CONTENT_URI_ALL);
+        assertEquals(Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_ALL), CONTENT_URI_ALL);
+    }
 
     @Test
     public void hasContentUri_Drills() {
@@ -79,6 +103,7 @@ public class DatabaseContentProviderTest {
     @Test
     public void hasContentUriMatcher() {
         assertNotNull(uriMatcher);
+        assertEquals(ALL_DATA, uriMatcher.match(CONTENT_URI_ALL));
         assertEquals(ALL_DRILLS, uriMatcher.match(CONTENT_URI_DRILLS));
         assertEquals(DRILLS_ID,
                 uriMatcher.match(Uri.parse(DatabaseContentProvider.CONTENT_URI_DRILLS + "/" + 0)));
@@ -117,7 +142,7 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canQueryDatabaseForDrillUsingContentProvider() {
-        insertDrillToDatabase();
+        insertDrillToDatabase(TEST_DRILL, RuntimeEnvironment.application);
 
         String selectedDrill = DrillsTable.DRILL_ID + " = " + TEST_DRILL.getDrillId();
         Cursor cursor = RuntimeEnvironment.application.getContentResolver()
@@ -131,7 +156,7 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canQueryDatabaseForDrill_UsingDrillIdContentUri() {
-        insertDrillToDatabase();
+        insertDrillToDatabase(TEST_DRILL, RuntimeEnvironment.application);
 
         String selectedDrill = DrillsTable.DRILL_ID + " = " + TEST_DRILL.getDrillId();
         Uri uri = Uri.parse(CONTENT_URI_DRILLS + "/" + TEST_DRILL.getDrillId());
@@ -157,7 +182,7 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canInsertDrillIntoDatabaseUsingContentProvider() {
-        insertDrillToDatabase();
+        insertDrillToDatabase(TEST_DRILL, RuntimeEnvironment.application);
 
         Cursor cursor = (new DatabaseOpenHelper(RuntimeEnvironment.application))
                 .getReadableDatabase()
@@ -171,7 +196,7 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canDeleteDrillFromDatabaseUsingContentProvider() {
-        insertDrillToDatabase();
+        insertDrillToDatabase(TEST_DRILL, RuntimeEnvironment.application);
 
         String selectedDrill = DrillsTable.DRILL_ID + " = " + TEST_DRILL.getDrillId();
         Uri uri = Uri.parse(CONTENT_URI_DRILLS + "/" + TEST_DRILL.getDrillId());
@@ -192,7 +217,7 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canUpdateDrillFromDatabase_UsingDrillIdContentUri() {
-        insertDrillToDatabase();
+        insertDrillToDatabase(TEST_DRILL, RuntimeEnvironment.application);
 
         String selectedDrill = DrillsTable.DRILL_ID + " = " + TEST_DRILL.getDrillId();
         ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
@@ -206,10 +231,7 @@ public class DatabaseContentProviderTest {
                 "Pass & Pass Back (Left Layup)",
                 R.drawable.ic_fitness_center_white_24dp,
                 Drill.PASSING_ARRAY);
-        ContentValues updatedValues = new ContentValues();
-        updatedValues.put(DrillsTable.COLUMN_TITLE, updatedDrill.getTitle());
-        updatedValues.put(DrillsTable.COLUMN_IMAGE_ID, updatedDrill.getImageId());
-        updatedValues.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(updatedDrill.getCategory()));
+        ContentValues updatedValues = getDrillContentValues(updatedDrill);
         Uri uri = Uri.parse(CONTENT_URI_DRILLS + "/" + TEST_DRILL.getDrillId());
         contentResolver.update(uri, updatedValues, selectedDrill, null);
         updatedDrill.setDrillId(TEST_DRILL.getDrillId());
@@ -230,7 +252,7 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canQueryDatabaseForLogUsingContentProvider() {
-        insertLogToDatabase();
+        insertLogToDatabase(TEST_SESSION_LOG, RuntimeEnvironment.application);
 
         String selectedLog = LogsTable.LOG_ID + " = " + TEST_SESSION_LOG.getSessionId();
         Cursor cursor = RuntimeEnvironment.application.getContentResolver()
@@ -244,7 +266,7 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canQueryDatabaseForLog_UsingLogIdContentUri() {
-        insertLogToDatabase();
+        insertLogToDatabase(TEST_SESSION_LOG, RuntimeEnvironment.application);
 
         String selectedLog = LogsTable.LOG_ID + " = " + TEST_SESSION_LOG.getSessionId();
         Uri uri = Uri.parse(CONTENT_URI_LOGS + "/" + TEST_SESSION_LOG.getSessionId());
@@ -259,7 +281,7 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canInsertLogIntoDatabaseUsingContentProvider() {
-        insertLogToDatabase();
+        insertLogToDatabase(TEST_SESSION_LOG, RuntimeEnvironment.application);
 
         Cursor cursor = (new DatabaseOpenHelper(RuntimeEnvironment.application))
                 .getReadableDatabase()
@@ -273,7 +295,7 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canDeleteLogFromDatabaseUsingContentProvider() {
-        insertLogToDatabase();
+        insertLogToDatabase(TEST_SESSION_LOG, RuntimeEnvironment.application);
 
         String selectedLog = LogsTable.LOG_ID + " = " + TEST_SESSION_LOG.getSessionId();
         Uri uri = Uri.parse(CONTENT_URI_LOGS + "/" + TEST_SESSION_LOG.getSessionId());
@@ -294,7 +316,7 @@ public class DatabaseContentProviderTest {
 
     @Test
     public void canUpdateLogFromDatabase_UsingLogIdContentUri() {
-        insertLogToDatabase();
+        insertLogToDatabase(TEST_SESSION_LOG, RuntimeEnvironment.application);
 
         String selectedLog = LogsTable.LOG_ID + " = " + TEST_SESSION_LOG.getSessionId();
         ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
@@ -334,6 +356,49 @@ public class DatabaseContentProviderTest {
                 .update(CONTENT_URI_LOGS, null, null, null));
     }
 
+    @Test
+    public void canQueryDatabaseForAllColumnsUsingContentProvider() {
+        insertLogToDatabase(TEST_SESSION_LOG, RuntimeEnvironment.application);
+        insertDrillToDatabase(TEST_SESSION_LOG.getDrill(), RuntimeEnvironment.application);
+
+        Cursor cursor = RuntimeEnvironment.application.getContentResolver()
+                .query(CONTENT_URI_ALL, ALL_TABLE_COLUMNS, null, null, null);
+
+        assertNotNull(cursor);
+        assertEquals(1, cursor.getCount());
+        assertTrue(cursor.moveToFirst());
+        assertThat(ALL_TABLE_COLUMNS, is(cursor.getColumnNames()));
+        assertEquals(TEST_SESSION_LOG.getDrill().getDrillId(),
+                cursor.getInt(cursor.getColumnIndex(DrillsTable.DRILL_ID)));
+        assertEquals(TEST_SESSION_LOG.getDrill().getTitle(),
+                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
+        assertEquals(TEST_SESSION_LOG.getDrill().getImageId(),
+                cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
+        assertThat(TEST_SESSION_LOG.getDrill().getCategory(), is(getStringAsArray(cursor.getString(
+                cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)))));
+        assertEquals(TEST_SESSION_LOG.getSessionId(),
+                cursor.getInt(cursor.getColumnIndex(LogsTable.LOG_ID)));
+        assertEquals(TEST_SESSION_LOG.getSessionDate().getTime(),
+                cursor.getLong(cursor.getColumnIndex(LogsTable.COLUMN_DATE)));
+        assertEquals(TEST_SESSION_LOG.getSessionLength().getTime(),
+                cursor.getLong(cursor.getColumnIndex(LogsTable.COLUMN_LENGTH)));
+        assertEquals(TEST_SESSION_LOG.getSessionGoal(),
+                cursor.getString(cursor.getColumnIndex(LogsTable.COLUMN_GOAL)));
+        assertEquals(TEST_SESSION_LOG.getActiveWork().getTime(),
+                cursor.getLong(cursor.getColumnIndex(LogsTable.COLUMN_ACTIVE_WORK)));
+        assertEquals(TEST_SESSION_LOG.getRestTime().getTime(),
+                cursor.getLong(cursor.getColumnIndex(LogsTable.COLUMN_REST_TIME)));
+        assertEquals(TEST_SESSION_LOG.getSetsCompleted(),
+                cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_SETS_COMPLETED)));
+        assertEquals(TEST_SESSION_LOG.getRepsCompleted(),
+                cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_REPS_COMPLETED)));
+        assertEquals(TEST_SESSION_LOG.getSuccessRate(),
+                cursor.getDouble(cursor.getColumnIndex(LogsTable.COLUMN_SUCCESS)));
+        assertEquals(TEST_SESSION_LOG.getDrill().getDrillId(),
+                cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_DRILL)));
+        cursor.close();
+    }
+
     private DatabaseContentProvider getDatabaseContentProvider() {
         ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
         ContentProviderClient contentProviderClient = contentResolver
@@ -343,20 +408,7 @@ public class DatabaseContentProviderTest {
                 contentProviderClient.getLocalContentProvider();
     }
 
-    private void insertDrillToDatabase() {
-        Drill drill = TEST_DRILL;
-        ContentValues drillValues = new ContentValues();
-        drillValues.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
-        drillValues.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
-        drillValues.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(drill.getCategory()));
-        Uri uri = RuntimeEnvironment.application.getContentResolver()
-                .insert(CONTENT_URI_DRILLS, drillValues);
-        if (uri != null) {
-            drill.setDrillId(Integer.parseInt(uri.getLastPathSegment()));
-        }
-    }
-
-    private void assertCursorDataEqualsDrill(Cursor cursor, Drill drill) {
+    public static void assertCursorDataEqualsDrill(Cursor cursor, Drill drill) {
         assertTrue(cursor.moveToFirst());
         assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
         assertEquals(1, cursor.getCount());
@@ -370,34 +422,7 @@ public class DatabaseContentProviderTest {
                 cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)))));
     }
 
-    private void insertLogToDatabase() {
-        ContentValues logValues = getLogContentValues(TEST_SESSION_LOG);
-        if (TEST_SESSION_LOG.getDrill().getDrillId() == 0) {
-            insertDrillToDatabase();
-        }
-        logValues.put(LogsTable.COLUMN_DRILL, TEST_SESSION_LOG.getDrill().getDrillId());
-        Uri uri = RuntimeEnvironment.application.getContentResolver()
-                .insert(CONTENT_URI_LOGS, logValues);
-        if (uri != null) {
-            TEST_SESSION_LOG.setSessionId(Integer.parseInt(uri.getLastPathSegment()));
-        }
-    }
-
-    @NonNull
-    private ContentValues getLogContentValues(SessionLog testSessionLog) {
-        ContentValues logValues = new ContentValues();
-        logValues.put(LogsTable.COLUMN_DATE, testSessionLog.getSessionDate().getTime());
-        logValues.put(LogsTable.COLUMN_LENGTH, testSessionLog.getSessionLength().getTime());
-        logValues.put(LogsTable.COLUMN_GOAL, testSessionLog.getSessionGoal());
-        logValues.put(LogsTable.COLUMN_ACTIVE_WORK, testSessionLog.getActiveWork().getTime());
-        logValues.put(LogsTable.COLUMN_REST_TIME, testSessionLog.getRestTime().getTime());
-        logValues.put(LogsTable.COLUMN_SETS_COMPLETED, testSessionLog.getSetsCompleted());
-        logValues.put(LogsTable.COLUMN_REPS_COMPLETED, testSessionLog.getRepsCompleted());
-        logValues.put(LogsTable.COLUMN_SUCCESS, testSessionLog.getSuccessRate());
-        return logValues;
-    }
-
-    private void assertCursorDataEqualsLog(Cursor cursor, SessionLog sessionLog) {
+    public static void assertCursorDataEqualsLog(Cursor cursor, SessionLog sessionLog) {
         assertTrue(cursor.moveToFirst());
         assertEquals(LogsTable.ALL_LOG_COLUMNS.length, cursor.getColumnCount());
         assertEquals(1, cursor.getCount());

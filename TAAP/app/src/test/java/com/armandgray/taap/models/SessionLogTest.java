@@ -63,6 +63,15 @@ public class SessionLogTest {
     }
 
     @Test
+    public void canSetDate() throws Exception {
+        SessionLog sessionLog = new SessionLog.Builder().create();
+        sessionLog.setSessionDate(new Date(12313123123L));
+        assertNotNull(sessionLog);
+        assertNotNull(sessionLog.getSessionDate());
+        assertEquals(new Date(12313123123L), sessionLog.getSessionDate());
+    }
+
+    @Test
     public void canGetFieldCount() throws Exception {
         assertEquals(9, SessionLog.getFieldCount());
     }

@@ -115,7 +115,7 @@ public class LogActivityResTest {
     public void hasLayout_OffBallOffense_RecordsContainer() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         LinearLayout recordsContainer = (LinearLayout) container.findViewById(R.id.recordsContainer);
-        assertNotNull(recordsContainer.findViewById(R.id.layoutOffBallOffense));
+        assertNotNull(recordsContainer.findViewById(R.id.layoutOffense));
     }
 
     @Test

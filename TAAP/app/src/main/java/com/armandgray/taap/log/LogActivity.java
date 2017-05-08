@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 
 public class LogActivity extends AppCompatActivity {
 
+    public static final String SESSION_LOG = "SESSION_LOG";
+
     @VisibleForTesting LogActivityController controller;
 
     @Override

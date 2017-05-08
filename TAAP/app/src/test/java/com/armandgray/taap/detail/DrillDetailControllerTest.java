@@ -64,29 +64,6 @@ public class DrillDetailControllerTest {
     }
 
     @Test
-    public void canGetTimeElapsed() throws Exception {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(0, 0, 0, 0, 0, 0);
-        long dummyTime = System.currentTimeMillis();
-        calendar.setTimeInMillis(dummyTime);
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        if (hour > 12) { calendar.set(Calendar.HOUR_OF_DAY, 0); }
-        assertNotNull(controller.getTimeElapsed(dummyTime));
-        assertEquals(calendar.getTime(), controller.getTimeElapsed(dummyTime));
-    }
-
-    @Test
-    public void doesZeroOutHoursForTimesLessThanOneHour_CanGetTimeElapsed() throws Exception {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(0, 0, 0, 0, 0, 0);
-        calendar.setTimeInMillis(1);
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-
-        assertNotNull(controller.getTimeElapsed(1));
-        assertEquals(calendar.getTime().toString(), controller.getTimeElapsed(1).toString());
-    }
-
-    @Test
     public void doesAddElapsedTimeToActiveWorkIfDrillActive_OnBtnFinishedClick() throws Exception {
         controller.views.fab.performClick();
         controller.views.btnFinished.performClick();

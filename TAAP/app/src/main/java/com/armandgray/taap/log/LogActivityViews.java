@@ -18,7 +18,6 @@ class LogActivityViews {
 
     @VisibleForTesting
     LogActivity activity;
-    private LogViewsListener listener;
     LinearLayout layoutTotalSessionTime;
     LinearLayout layoutTotalActiveTime;
     LinearLayout layoutTotalRestTime;
@@ -27,14 +26,13 @@ class LogActivityViews {
     TextView tvDate;
     LinearLayout layoutFundamentals;
     LinearLayout layoutDefense;
-    LinearLayout layoutOffBallOffense;
+    LinearLayout layoutOffense;
     LinearLayout layoutConditioning;
     LinearLayout layoutShooting;
     LinearLayout layoutBallHandling;
 
-    LogActivityViews(LogActivity activity, LogViewsListener listener) {
+    LogActivityViews(LogActivity activity) {
         this.activity = activity;
-        this.listener = listener;
     }
 
     void setupActivityInitialState() {
@@ -56,7 +54,7 @@ class LogActivityViews {
         tvDate = (TextView) RecordsContainer.findViewById(R.id.tvDate);
         layoutFundamentals = (LinearLayout) RecordsContainer.findViewById(R.id.layoutFundamentals);
         layoutDefense = (LinearLayout) RecordsContainer.findViewById(R.id.layoutDefense);
-        layoutOffBallOffense = (LinearLayout) RecordsContainer.findViewById(R.id.layoutOffBallOffense);
+        layoutOffense = (LinearLayout) RecordsContainer.findViewById(R.id.layoutOffense);
         layoutConditioning = (LinearLayout) RecordsContainer.findViewById(R.id.layoutConditioning);
         layoutShooting = (LinearLayout) RecordsContainer.findViewById(R.id.layoutShooting);
         layoutBallHandling = (LinearLayout) RecordsContainer.findViewById(R.id.layoutBallHandling);
@@ -91,7 +89,7 @@ class LogActivityViews {
         setTextForDetailLayoutViews(layoutRepsCompleted, R.string.reps_completed, "0");
     }
 
-    private void setTextForDetailLayoutViews(LinearLayout layout, int headerResId, String text) {
+    void setTextForDetailLayoutViews(LinearLayout layout, int headerResId, String text) {
         TextView header = (TextView) layout.findViewById(R.id.header);
         TextView tvText = (TextView) layout.findViewById(R.id.tvText);
         header.setText(headerResId);
@@ -107,7 +105,7 @@ class LogActivityViews {
                 "00:00:00", "0%", R.string.fundamentals);
         setTextForRecordLayoutViews(layoutDefense, R.drawable.ic_account_multiple_outline_white_48dp,
                 "00:00:00", "0%", R.string.defense);
-        setTextForRecordLayoutViews(layoutOffBallOffense, R.drawable.ic_human_handsup_white_48dp,
+        setTextForRecordLayoutViews(layoutOffense, R.drawable.ic_human_handsup_white_48dp,
                 "00:00:00", "0%", R.string.off_ball_offense);
         setTextForRecordLayoutViews(layoutConditioning, R.drawable.ic_run_fast_white_48dp,
                 "00:00:00", "0%", R.string.conditioning);
@@ -118,8 +116,8 @@ class LogActivityViews {
                 "00:00:00", "0%", R.string.ball_handling);
     }
 
-    private void setTextForRecordLayoutViews(
-            LinearLayout layout, int imageResId, String time, String successRate, int headerResId) {
+    private void setTextForRecordLayoutViews(LinearLayout layout, int imageResId,
+                                             String time, String successRate, int headerResId) {
         ImageView ivImage = (ImageView) layout.findViewById(R.id.ivImage);
         TextView tvTime = (TextView) layout.findViewById(R.id.tvTime);
         TextView tvSuccessRate = (TextView) layout.findViewById(R.id.tvSuccessRate);
@@ -131,6 +129,16 @@ class LogActivityViews {
         tvHeader.setText(headerResId);
     }
 
-    interface LogViewsListener {
+    void setDataValueForDetailLayout(LinearLayout layout, String text) {
+        ((TextView) layout.findViewById(R.id.tvText)).setText(text);
     }
+
+    void setDataValuesForRecordLayout(LinearLayout layout, String time, String successRate) {
+        TextView tvTime = (TextView) layout.findViewById(R.id.tvTime);
+        TextView tvSuccessRate = (TextView) layout.findViewById(R.id.tvSuccessRate);
+
+        tvTime.setText(time);
+        tvSuccessRate.setText(successRate);
+    }
+
 }
