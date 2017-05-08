@@ -8,7 +8,7 @@ public class MathHelper {
 
     public static double getAveragePercentage(ArrayList<SessionLog> logs) {
         double total = 0.0;
-//        for (Double percent : logs) { total += percent; }
+        for (SessionLog log : logs ) { total += log.getSuccessRate(); }
         return total/ logs.size();
     }
 }
