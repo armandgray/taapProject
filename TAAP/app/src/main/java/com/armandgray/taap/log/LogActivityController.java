@@ -23,12 +23,24 @@ class LogActivityController implements LogActivityViews.LogViewsListener {
     @VisibleForTesting LogActivityViews views;
     @VisibleForTesting SessionLog sessionLog;
     ArrayList<SessionLog> listAllLogs;
+    ArrayList<SessionLog> listFundamentalLogs;
+    ArrayList<SessionLog> listDefenseLogs;
+    ArrayList<SessionLog> listOffBallOffenseLogs;
+    ArrayList<SessionLog> listConditioningLogs;
+    ArrayList<SessionLog> listShootingLogs;
+    ArrayList<SessionLog> listBallHandlingLogs;
 
     LogActivityController(LogActivity activity) {
         this.activity = activity;
         this.views = new LogActivityViews(activity, this);
         this.sessionLog = activity.getIntent().getParcelableExtra(SESSION_LOG);
         this.listAllLogs = new ArrayList<>();
+        this.listFundamentalLogs = new ArrayList<>();
+        this.listDefenseLogs = new ArrayList<>();
+        this.listOffBallOffenseLogs = new ArrayList<>();
+        this.listConditioningLogs = new ArrayList<>();
+        this.listShootingLogs = new ArrayList<>();
+        this.listBallHandlingLogs = new ArrayList<>();
 
         if (sessionLog != null) { insertLogToDatabase(sessionLog, activity); }
         setupHistoryFields();
@@ -44,6 +56,9 @@ class LogActivityController implements LogActivityViews.LogViewsListener {
             listAllLogs.add(logAtCurrentPosition);
         }
         cursor.close();
+
+//        retrieveFieldData();
+//        setViewFields();
     }
 
     private SessionLog getLogAtCurrentPosition(Cursor cursor) {

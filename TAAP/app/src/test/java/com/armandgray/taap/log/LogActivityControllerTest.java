@@ -102,6 +102,36 @@ public class LogActivityControllerTest {
         assertEquals(TEST_SESSION_LOG.getSessionId(), controller.listAllLogs.get(0).getSessionId());
     }
 
+    @Test
+    public void doesRetrieveFieldValuesFromLogs_Fundamentals() throws Exception {
+        assertNotNull(controller.listFundamentalLogs);
+    }
+
+    @Test
+    public void doesRetrieveFieldValuesFromLogs_Defense() throws Exception {
+        assertNotNull(controller.listDefenseLogs);
+    }
+
+    @Test
+    public void doesRetrieveFieldValuesFromLogs_OffBallOffense() throws Exception {
+        assertNotNull(controller.listOffBallOffenseLogs);
+    }
+
+    @Test
+    public void doesRetrieveFieldValuesFromLogs_Conditioning() throws Exception {
+        assertNotNull(controller.listConditioningLogs);
+    }
+
+    @Test
+    public void doesRetrieveFieldValuesFromLogs_Shooting() throws Exception {
+        assertNotNull(controller.listShootingLogs);
+    }
+
+    @Test
+    public void doesRetrieveFieldValuesFromLogs_BallHandling() throws Exception {
+        assertNotNull(controller.listBallHandlingLogs);
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
