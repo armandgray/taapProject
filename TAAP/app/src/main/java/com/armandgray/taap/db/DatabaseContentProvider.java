@@ -14,33 +14,34 @@ import android.support.annotation.VisibleForTesting;
 import com.armandgray.taap.models.Drill;
 import com.armandgray.taap.models.SessionLog;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static com.armandgray.taap.utils.StringHelper.getArrayAsString;
 
 public class DatabaseContentProvider extends ContentProvider {
 
+    public static final String[] ALL_TABLE_COLUMNS;
     public static final Uri CONTENT_URI_DRILLS;
     public static final Uri CONTENT_URI_LOGS;
-    @VisibleForTesting
-    static final String AUTHORITY = "com.armandgray.taap.db.provider";
-    @VisibleForTesting
-    static final String BASE_PATH_DRILLS = "drills";
-    @VisibleForTesting
-    static final String BASE_PATH_LOGS = "logs";
+    @VisibleForTesting static final String AUTHORITY = "com.armandgray.taap.db.provider";
+    @VisibleForTesting static final String BASE_PATH_DRILLS = "drills";
+    @VisibleForTesting static final String BASE_PATH_LOGS = "logs";
 
-    @VisibleForTesting
-    static final int ALL_DRILLS = 1;
-    @VisibleForTesting
-    static final int DRILLS_ID = 2;
-    @VisibleForTesting
-    static final int ALL_LOGS = 3;
-    @VisibleForTesting
-    static final int LOGS_ID = 4;
+    @VisibleForTesting static final int ALL_DRILLS = 1;
+    @VisibleForTesting static final int DRILLS_ID = 2;
+    @VisibleForTesting static final int ALL_LOGS = 3;
+    @VisibleForTesting static final int LOGS_ID = 4;
 
     @VisibleForTesting
     static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
     static final int EXECUTION_FAILURE = -1;
 
     static {
+        List<String> columns = Arrays.asList(LogsTable.ALL_LOG_COLUMNS);
+        columns.addAll(Arrays.asList(DrillsTable.ALL_DRILL_COLUMNS));
+        ALL_TABLE_COLUMNS = columns.toArray(new String[columns.size()]);
+
         CONTENT_URI_DRILLS = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_DRILLS);
         CONTENT_URI_LOGS = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_LOGS);
 
