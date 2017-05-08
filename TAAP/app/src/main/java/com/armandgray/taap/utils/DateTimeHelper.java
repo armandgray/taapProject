@@ -1,8 +1,10 @@
 package com.armandgray.taap.utils;
 
+import com.armandgray.taap.models.SessionLog;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 public class DateTimeHelper {
 
@@ -15,9 +17,9 @@ public class DateTimeHelper {
         return calendar.getTime();
     }
 
-    public static Date getTotalTimeAsDate(List<Date> times) {
+    public static Date getTotalTimeAsDate(ArrayList<SessionLog> logs) {
         long expectedTotal = 0L;
-        for (Date time : times) { expectedTotal += time.getTime(); }
+//        for (Date time : logs) { expectedTotal += time.getTime(); }
         return getTimeElapsedAsDate(expectedTotal);
     }
 

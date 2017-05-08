@@ -1,5 +1,7 @@
 package com.armandgray.taap.utils;
 
+import com.armandgray.taap.models.SessionLog;
+
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -38,16 +40,16 @@ public class DateTimeHelperTest {
 
     @Test
     public void canGetTotalTimeAsDate() throws Exception {
-        ArrayList<Date> times = new ArrayList<>();
-        times.add(new Date(133353535L));
-        times.add(new Date(1991991291L));
-        times.add(new Date(10302939));
+        ArrayList<SessionLog> logs = new ArrayList<>();
+        logs.add(new SessionLog.Builder().sessionLength(new Date(133353535L)).create());
+        logs.add(new SessionLog.Builder().sessionLength(new Date(1991991291L)).create());
+        logs.add(new SessionLog.Builder().sessionLength(new Date(10302939L)).create());
 
         long expectedTotal = 0L;
-        for (Date time : times) { expectedTotal += time.getTime(); }
+        for (SessionLog log : logs) { expectedTotal += log.getActiveWork().getTime(); }
 
-        assertNotNull(getTotalTimeAsDate(times));
-        assertEquals(getTimeElapsedAsDate(expectedTotal) , getTotalTimeAsDate(times));
+        assertNotNull(getTotalTimeAsDate(logs));
+        assertEquals(getTimeElapsedAsDate(expectedTotal) , getTotalTimeAsDate(logs));
     }
 
 }
