@@ -9,12 +9,20 @@ import com.armandgray.taap.models.Drill;
 import com.armandgray.taap.models.SessionLog;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 import static com.armandgray.taap.db.DatabaseContentProvider.ALL_TABLE_COLUMNS;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_ALL;
 import static com.armandgray.taap.db.DatabaseContentProvider.insertLogToDatabase;
 import static com.armandgray.taap.log.LogActivity.SESSION_LOG;
+import static com.armandgray.taap.models.Drill.BALL_HANDLING;
+import static com.armandgray.taap.models.Drill.CONDITIONING;
+import static com.armandgray.taap.models.Drill.DEFENSE;
+import static com.armandgray.taap.models.Drill.FUNDAMENTALS;
+import static com.armandgray.taap.models.Drill.OFFENSE;
+import static com.armandgray.taap.models.Drill.PASSING;
+import static com.armandgray.taap.models.Drill.SHOOTING;
 import static com.armandgray.taap.utils.StringHelper.getStringAsArray;
 
 class LogActivityController implements LogActivityViews.LogViewsListener {
@@ -59,10 +67,6 @@ class LogActivityController implements LogActivityViews.LogViewsListener {
 
         retrieveFieldData();
 //        setViewFields();
-    }
-
-    private void retrieveFieldData() {
-
     }
 
     private SessionLog getLogAtCurrentPosition(Cursor cursor) {
@@ -110,8 +114,22 @@ class LogActivityController implements LogActivityViews.LogViewsListener {
         return drill;
     }
 
-    private void addAll(ArrayList<SessionLog> targetList, ArrayList<SessionLog> sourceList, String category) {
+    private void retrieveFieldData() {
+        addAll(listFundamentalLogs, listAllLogs, FUNDAMENTALS);
+        addAll(listDefenseLogs, listAllLogs, DEFENSE);
+        addAll(listOffenseLogs, listAllLogs, OFFENSE);
+        addAll(listOffenseLogs, listAllLogs, PASSING);
+        addAll(listConditioningLogs, listAllLogs, CONDITIONING);
+        addAll(listShootingLogs, listAllLogs, SHOOTING);
+        addAll(listBallHandlingLogs, listAllLogs, BALL_HANDLING);
+    }
 
+    private void addAll(ArrayList<SessionLog> targetList, ArrayList<SessionLog> sourceList, String category) {
+        for (SessionLog log : sourceList) {
+            if (Arrays.asList(log.getDrill().getCategory()).contains(category)) {
+                targetList.add(log);
+            }
+        }
     }
 
 }
