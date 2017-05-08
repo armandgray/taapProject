@@ -25,6 +25,10 @@ public class DateTimeHelper {
         return getTimeElapsedAsDate(expectedTotal);
     }
 
+    public static Date getTotalTimeAsDate(ArrayList<SessionLog> logs, String field) {
+        return null;
+    }
+
     public static String getDateFormattedAsString(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);

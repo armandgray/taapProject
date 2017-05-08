@@ -204,10 +204,10 @@ public class LogActivityControllerTest {
     public void doesSetViewValuesFromLogs_TotalSessionTime() throws Exception {
         Date expectedTime = getTotalTimeAsDate(controller.listAllLogs);
 
-        TextView tvTime = (TextView) controller.views
-                .layoutTotalSessionTime.findViewById(R.id.tvTime);
+        TextView tvText = (TextView) controller.views
+                .layoutTotalSessionTime.findViewById(R.id.tvText);
 
-        assertEquals(getDateFormattedAsString(expectedTime), tvTime.getText());
+        assertEquals(getDateFormattedAsString(expectedTime), tvText.getText());
     }
 
     @Test

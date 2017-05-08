@@ -8,6 +8,10 @@ import java.util.Date;
 
 public class SessionLog implements Parcelable {
 
+    public static final String SESSION_LENGTH = "SESSION_LENGTH";
+    public static final String ACTIVE_WORK = "ACTIVE_WORK";
+    public static final String REST_TIME = "REST_TIME";
+
     private Date sessionDate;
     private Date sessionLength;
     private String sessionGoal;

@@ -10,6 +10,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.armandgray.taap.models.SessionLog.REST_TIME;
+import static com.armandgray.taap.models.SessionLog.SESSION_LENGTH;
 import static com.armandgray.taap.utils.DateTimeHelper.getDateFormattedAsString;
 import static com.armandgray.taap.utils.DateTimeHelper.getTimeElapsedAsDate;
 import static com.armandgray.taap.utils.DateTimeHelper.getTotalTimeAsDate;
@@ -44,15 +46,46 @@ public class DateTimeHelperTest {
     @Test
     public void canGetTotalTimeAsDate() throws Exception {
         ArrayList<SessionLog> logs = new ArrayList<>();
-        logs.add(new SessionLog.Builder().sessionLength(new Date(133353535L)).create());
-        logs.add(new SessionLog.Builder().sessionLength(new Date(1991991291L)).create());
-        logs.add(new SessionLog.Builder().sessionLength(new Date(10302939L)).create());
+        logs.add(new SessionLog.Builder().activeWork(new Date(133353535L)).create());
+        logs.add(new SessionLog.Builder().activeWork(new Date(1991991291L)).create());
+        logs.add(new SessionLog.Builder().activeWork(new Date(10302939L)).create());
 
         long expectedTotal = 0L;
         for (SessionLog log : logs) { expectedTotal += log.getActiveWork().getTime(); }
 
         assertNotNull(getTotalTimeAsDate(logs));
         assertEquals(getTimeElapsedAsDate(expectedTotal) , getTotalTimeAsDate(logs));
+    }
+
+    @Test
+    public void canGetTotalTimeAsDate_Telescope_Field() throws Exception {
+        ArrayList<SessionLog> logs = new ArrayList<>();
+        logs.add(new SessionLog.Builder()
+                .sessionLength(new Date(133353535L))
+                .restTime(new Date(13335322535L))
+                .create());
+        logs.add(new SessionLog.Builder()
+                .sessionLength(new Date(1991991291L))
+                .restTime(new Date(133355333335L))
+                .create());
+        logs.add(new SessionLog.Builder()
+                .sessionLength(new Date(10302939L))
+                .restTime(new Date(1322535L))
+                .create());
+
+        long expectedTotalLength = 0L;
+        long expectedTotalRest = 0L;
+        for (SessionLog log : logs) {
+            expectedTotalLength += log.getSessionLength().getTime();
+            expectedTotalRest += log.getRestTime().getTime();
+        }
+
+        assertNotNull(getTotalTimeAsDate(logs, SESSION_LENGTH));
+        assertNotNull(getTotalTimeAsDate(logs, REST_TIME));
+        assertEquals(getTimeElapsedAsDate(expectedTotalLength),
+                getTotalTimeAsDate(logs, SESSION_LENGTH));
+        assertEquals(getTimeElapsedAsDate(expectedTotalRest),
+                getTotalTimeAsDate(logs, REST_TIME));
     }
 
     @Test
