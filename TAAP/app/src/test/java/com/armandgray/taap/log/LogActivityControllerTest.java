@@ -40,6 +40,9 @@ import static com.armandgray.taap.models.Drill.FUNDAMENTALS;
 import static com.armandgray.taap.models.Drill.OFFENSE;
 import static com.armandgray.taap.models.Drill.PASSING;
 import static com.armandgray.taap.models.Drill.SHOOTING;
+import static com.armandgray.taap.models.SessionLog.ACTIVE_WORK;
+import static com.armandgray.taap.models.SessionLog.REST_TIME;
+import static com.armandgray.taap.models.SessionLog.SESSION_LENGTH;
 import static com.armandgray.taap.utils.DateTimeHelper.getDateFormattedAsString;
 import static com.armandgray.taap.utils.DateTimeHelper.getTotalTimeAsDate;
 import static com.armandgray.taap.utils.MathHelper.getAveragePercentage;
@@ -202,10 +205,30 @@ public class LogActivityControllerTest {
 
     @Test
     public void doesSetViewValuesFromLogs_TotalSessionTime() throws Exception {
-        Date expectedTime = getTotalTimeAsDate(controller.listAllLogs);
+        Date expectedTime = getTotalTimeAsDate(controller.listAllLogs, SESSION_LENGTH);
 
         TextView tvText = (TextView) controller.views
                 .layoutTotalSessionTime.findViewById(R.id.tvText);
+
+        assertEquals(getDateFormattedAsString(expectedTime), tvText.getText());
+    }
+
+    @Test
+    public void doesSetViewValuesFromLogs_TotalActiveTime() throws Exception {
+        Date expectedTime = getTotalTimeAsDate(controller.listAllLogs, ACTIVE_WORK);
+
+        TextView tvText = (TextView) controller.views
+                .layoutTotalActiveTime.findViewById(R.id.tvText);
+
+        assertEquals(getDateFormattedAsString(expectedTime), tvText.getText());
+    }
+
+    @Test
+    public void doesSetViewValuesFromLogs_TotalRestTime() throws Exception {
+        Date expectedTime = getTotalTimeAsDate(controller.listAllLogs, REST_TIME);
+
+        TextView tvText = (TextView) controller.views
+                .layoutTotalRestTime.findViewById(R.id.tvText);
 
         assertEquals(getDateFormattedAsString(expectedTime), tvText.getText());
     }
