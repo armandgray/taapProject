@@ -23,6 +23,7 @@ import static com.armandgray.taap.models.Drill.FUNDAMENTALS;
 import static com.armandgray.taap.models.Drill.OFFENSE;
 import static com.armandgray.taap.models.Drill.PASSING;
 import static com.armandgray.taap.models.Drill.SHOOTING;
+import static com.armandgray.taap.models.SessionLog.SESSION_LENGTH;
 import static com.armandgray.taap.utils.DateTimeHelper.getDateFormattedAsString;
 import static com.armandgray.taap.utils.DateTimeHelper.getTotalTimeAsDate;
 import static com.armandgray.taap.utils.MathHelper.getAveragePercentage;
@@ -141,6 +142,9 @@ class LogActivityController {
     }
 
     private void setViewFields() {
+        views.setDataValueForDetailLayout(
+                views.layoutTotalSessionTime,
+                getDateFormattedAsString(getTotalTimeAsDate(listAllLogs, SESSION_LENGTH)));
         views.setDataValueForDetailLayout(
                 views.layoutRepsCompleted,
                 String.valueOf(getTotalReps()));
