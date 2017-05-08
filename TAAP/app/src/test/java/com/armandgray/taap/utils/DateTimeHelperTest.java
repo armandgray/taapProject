@@ -74,8 +74,9 @@ public class DateTimeHelperTest {
                 hour == 0
                         ? new SimpleDateFormat("00:mm:ss", Locale.US)
                         : new SimpleDateFormat("hh:mm:ss", Locale.US);
-        assertNotNull(getDateFormattedAsString(testDate));
-        assertEquals(simpleDateFormat.format(testDate), getDateFormattedAsString(testDate));
+        assertNotNull(getDateFormattedAsString(calendar.getTime()));
+        assertEquals(simpleDateFormat.format(testDate),
+                getDateFormattedAsString(calendar.getTime()));
     }
 
 }
