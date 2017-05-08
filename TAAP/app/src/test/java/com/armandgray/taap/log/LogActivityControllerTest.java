@@ -99,7 +99,7 @@ public class LogActivityControllerTest {
     public void doesAssignListAllLogsFromDatabase() throws Exception {
         assertNotNull(controller.listAllLogs);
         assertEquals(1, controller.listAllLogs.size());
-        assertEquals(TEST_SESSION_LOG, controller.listAllLogs.get(0));
+        assertEquals(TEST_SESSION_LOG.getSessionId(), controller.listAllLogs.get(0).getSessionId());
     }
 
     @After

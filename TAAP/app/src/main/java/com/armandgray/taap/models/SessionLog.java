@@ -118,6 +118,10 @@ public class SessionLog implements Parcelable {
         return sessionDate;
     }
 
+    public void setSessionDate(Date sessionDate) {
+        this.sessionDate = sessionDate;
+    }
+
     public Date getSessionLength() {
         return sessionLength;
     }
