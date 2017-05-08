@@ -58,10 +58,10 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
         if (drillActive) { togglePausePlay(); }
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         sessionLog = new SessionLog.Builder()
-                .sessionLength(getTimeElapsed(activeWorkTime + restTime))
+                .sessionLength(getTimeElapsedAsDate(activeWorkTime + restTime))
                 .sessionGoal("None")
-                .activeWork(getTimeElapsed(activeWorkTime))
-                .restTime(getTimeElapsed(restTime))
+                .activeWork(getTimeElapsedAsDate(activeWorkTime))
+                .restTime(getTimeElapsedAsDate(restTime))
                 .setsCompleted(views.npSets.getValue())
                 .repsCompleted(views.npReps.getValue())
                 .successRate(getRateFromPickers())
@@ -77,8 +77,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
                 : views.npSuccesses.getValue() * 1.0 / (reps * views.npSets.getValue());
     }
 
-    @VisibleForTesting
-    Date getTimeElapsed(long timeElapsed) {
+    Date getTimeElapsedAsDate(long timeElapsed) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(0, 0, 0, 0, 0, 0);
         if (timeElapsed != 0) { calendar.setTimeInMillis(timeElapsed); }

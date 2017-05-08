@@ -31,11 +31,13 @@ class LogActivityController implements LogActivityViews.LogViewsListener {
         this.listAllLogs = new ArrayList<>();
 
         if (sessionLog != null) { insertLogToDatabase(sessionLog, activity); }
-        assignListAllLogsFromDatabase();
+        setupHistoryFields();
+        setupHistoryFields();
         views.setupActivityInitialState();
     }
 
-    private void assignListAllLogsFromDatabase() {
+    @VisibleForTesting
+    void setupHistoryFields() {
         Cursor cursor = activity.getContentResolver()
                 .query(CONTENT_URI_ALL, ALL_TABLE_COLUMNS, null, null, null);
         if (cursor == null) { return; }

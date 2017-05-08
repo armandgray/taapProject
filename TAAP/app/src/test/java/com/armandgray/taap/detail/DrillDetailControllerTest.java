@@ -71,8 +71,8 @@ public class DrillDetailControllerTest {
         calendar.setTimeInMillis(dummyTime);
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         if (hour > 12) { calendar.set(Calendar.HOUR_OF_DAY, 0); }
-        assertNotNull(controller.getTimeElapsed(dummyTime));
-        assertEquals(calendar.getTime(), controller.getTimeElapsed(dummyTime));
+        assertNotNull(controller.getTimeElapsedAsDate(dummyTime));
+        assertEquals(calendar.getTime(), controller.getTimeElapsedAsDate(dummyTime));
     }
 
     @Test
@@ -82,8 +82,8 @@ public class DrillDetailControllerTest {
         calendar.setTimeInMillis(1);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
 
-        assertNotNull(controller.getTimeElapsed(1));
-        assertEquals(calendar.getTime().toString(), controller.getTimeElapsed(1).toString());
+        assertNotNull(controller.getTimeElapsedAsDate(1));
+        assertEquals(calendar.getTime().toString(), controller.getTimeElapsedAsDate(1).toString());
     }
 
     @Test
