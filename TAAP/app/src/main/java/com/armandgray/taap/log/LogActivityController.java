@@ -140,7 +140,10 @@ class LogActivityController {
         }
     }
 
-    void setViewFields() {
+    private void setViewFields() {
+        views.setDataValueForDetailLayout(
+                views.layoutExercisesCompleted,
+                String.valueOf(listAllLogs.size()));
         views.setDataValuesForRecordLayout(
                 views.layoutFundamentals,
                 getDateFormattedAsString(getTotalTimeAsDate(listFundamentalLogs)),

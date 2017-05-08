@@ -202,8 +202,6 @@ public class LogActivityControllerTest {
 
     @Test
     public void doesSetViewValuesFromLogs_ExercisesCompleted() throws Exception {
-        LinearLayout layout = controller.views.layoutFundamentals;
-
         TextView tvText = (TextView) controller.views.
                 layoutExercisesCompleted.findViewById(R.id.tvText);
         assertEquals(String.valueOf(controller.listAllLogs.size()), tvText.getText());

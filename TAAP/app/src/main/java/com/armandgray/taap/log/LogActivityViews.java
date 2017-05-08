@@ -129,6 +129,10 @@ class LogActivityViews {
         tvHeader.setText(headerResId);
     }
 
+    void setDataValueForDetailLayout(LinearLayout layout, String text) {
+        ((TextView) layout.findViewById(R.id.tvText)).setText(text);
+    }
+
     void setDataValuesForRecordLayout(LinearLayout layout, String time, String successRate) {
         TextView tvTime = (TextView) layout.findViewById(R.id.tvTime);
         TextView tvSuccessRate = (TextView) layout.findViewById(R.id.tvSuccessRate);
