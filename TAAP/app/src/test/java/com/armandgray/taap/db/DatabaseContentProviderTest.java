@@ -19,10 +19,12 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 import static com.armandgray.taap.db.DatabaseContentProvider.ALL_DRILLS;
 import static com.armandgray.taap.db.DatabaseContentProvider.ALL_LOGS;
+import static com.armandgray.taap.db.DatabaseContentProvider.ALL_TABLE_COLUMNS;
 import static com.armandgray.taap.db.DatabaseContentProvider.AUTHORITY;
 import static com.armandgray.taap.db.DatabaseContentProvider.BASE_PATH_DRILLS;
 import static com.armandgray.taap.db.DatabaseContentProvider.BASE_PATH_LOGS;
@@ -65,6 +67,17 @@ public class DatabaseContentProviderTest {
             .successRecord(0.55)
             .drill(TEST_DRILL)
             .create();
+
+    @Test
+    public void hasField_ALL_TABLE_COLUMNS() {
+        ArrayList<String> expectedColumns = new ArrayList<>();
+        expectedColumns.addAll(Arrays.asList(LogsTable.ALL_LOG_COLUMNS));
+        expectedColumns.addAll(Arrays.asList(DrillsTable.ALL_DRILL_COLUMNS));
+        String[] expectedArray = expectedColumns.toArray(new String[expectedColumns.size()]);
+
+        assertNotNull(ALL_TABLE_COLUMNS);
+        assertThat(expectedArray, is(ALL_TABLE_COLUMNS));
+    }
 
     @Test
     public void hasContentUri_Drills() {
