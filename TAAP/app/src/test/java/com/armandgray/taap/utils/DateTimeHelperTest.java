@@ -58,8 +58,17 @@ public class DateTimeHelperTest {
     @Test
     public void canGetDateFormattedAsString() throws Exception {
         Date testDate = new Date(System.currentTimeMillis());
+        assertNotNull(getDateFormattedAsString(testDate));
+        assertEquals(new SimpleDateFormat("hh:mm:ss", Locale.US).format(testDate),
+                getDateFormattedAsString(testDate));
+    }
+
+    @Test
+    public void canGetDateFormattedAsString_ZeroHour() throws Exception {
+        Date testDate = new Date(0);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(testDate);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         SimpleDateFormat simpleDateFormat =
                 hour == 0
