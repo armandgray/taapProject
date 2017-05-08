@@ -42,7 +42,7 @@ public class DateTimeHelperTest {
         times.add(new Date(133353535L));
         times.add(new Date(1991991291L));
         times.add(new Date(10302939));
-        
+
         long expectedTotal = 0L;
         for (Date time : times) { expectedTotal += time.getTime(); }
 
