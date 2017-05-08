@@ -1,5 +1,7 @@
 package com.armandgray.taap.utils;
 
+import android.util.Log;
+
 import com.armandgray.taap.models.SessionLog;
 
 import java.text.SimpleDateFormat;
@@ -16,10 +18,11 @@ public class DateTimeHelper {
 
     public static Date getTimeElapsedAsDate(long timeElapsed) {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(0, 0, 0, 0, 0, 0);
+        calendar.setTimeInMillis(0);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
         if (timeElapsed != 0) { calendar.setTimeInMillis(timeElapsed); }
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        if (hour > 12) { calendar.set(Calendar.HOUR_OF_DAY, 0); }
+        if (hour == 0) { calendar.set(Calendar.HOUR_OF_DAY, 0); }
         return calendar.getTime();
     }
 
@@ -31,8 +34,12 @@ public class DateTimeHelper {
 
     public static Date getTotalTimeAsDate(ArrayList<SessionLog> logs, String field) {
         long expectedTotal = 0L;
+        long time;
         for (SessionLog log : logs) {
-            expectedTotal += getDateForField(log, field).getTime(); }
+            time = getDateForField(log, field).getTime();
+            Log.i("TIME", String.valueOf(new Date(time)));
+            expectedTotal += time;
+        }
         return getTimeElapsedAsDate(expectedTotal);
     }
 
@@ -57,7 +64,7 @@ public class DateTimeHelper {
         SimpleDateFormat simpleDateFormat =
                 hour == 0 || date.equals(new Date(0))
                         ? new SimpleDateFormat("00:mm:ss", Locale.US)
-                        : new SimpleDateFormat("hh:mm:ss", Locale.US);
+                        : new SimpleDateFormat("kk:mm:ss", Locale.US);
         return simpleDateFormat.format(date);
     }
 
