@@ -142,6 +142,9 @@ class LogActivityController {
 
     private void setViewFields() {
         views.setDataValueForDetailLayout(
+                views.layoutRepsCompleted,
+                String.valueOf(getTotalReps()));
+        views.setDataValueForDetailLayout(
                 views.layoutExercisesCompleted,
                 String.valueOf(listAllLogs.size()));
         views.setDataValuesForRecordLayout(
@@ -168,6 +171,16 @@ class LogActivityController {
                 views.layoutBallHandling,
                 getDateFormattedAsString(getTotalTimeAsDate(listBallHandlingLogs)),
                 getPercentFormattedAsString(getAveragePercentage(listBallHandlingLogs)));
+    }
+
+    private int getTotalReps() {
+        int reps = 0;
+        for (SessionLog log : listAllLogs) {
+            reps += log.getRepsCompleted() > 0
+                    ? log.getSetsCompleted() * log.getRepsCompleted()
+                    : log.getSetsCompleted();
+        }
+        return reps;
     }
 
 }
