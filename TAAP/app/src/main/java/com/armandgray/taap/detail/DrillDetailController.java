@@ -9,11 +9,9 @@ import com.armandgray.taap.R;
 import com.armandgray.taap.log.LogActivity;
 import com.armandgray.taap.models.SessionLog;
 
-import java.util.Calendar;
-import java.util.Date;
-
 import static com.armandgray.taap.detail.DetailSummaryDialog.DIALOG;
 import static com.armandgray.taap.log.LogActivity.SESSION_LOG;
+import static com.armandgray.taap.utils.DateTimeHelper.getTimeElapsedAsDate;
 
 class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener {
 
@@ -75,15 +73,6 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
         return reps == 0
                 ? views.npSuccesses.getValue() * 1.0 / views.npSets.getValue()
                 : views.npSuccesses.getValue() * 1.0 / (reps * views.npSets.getValue());
-    }
-
-    Date getTimeElapsedAsDate(long timeElapsed) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(0, 0, 0, 0, 0, 0);
-        if (timeElapsed != 0) { calendar.setTimeInMillis(timeElapsed); }
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        if (hour > 12) { calendar.set(Calendar.HOUR_OF_DAY, 0); }
-        return calendar.getTime();
     }
 
     void onSummaryDialogDismiss() {
