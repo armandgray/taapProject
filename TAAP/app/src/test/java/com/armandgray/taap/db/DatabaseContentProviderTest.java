@@ -49,7 +49,7 @@ import static org.hamcrest.Matchers.is;
 public class DatabaseContentProviderTest {
 
     private static final long TIME_IN_MILLIS = 1494179392802L;
-    public static final Drill TEST_DRILL = new Drill(
+    private static final Drill TEST_DRILL = new Drill(
             "5 Spots Shooting (Mid-Range)",
             R.drawable.ic_account_multiple_outline_white_48dp,
             Drill.SHOOTING_ARRAY);
