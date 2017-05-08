@@ -139,7 +139,7 @@ class LogActivityController {
         views.setDataValuesForRecordLayout(
                 views.layoutFundamentals,
                 getDateFormattedAsString(getTotalTimeAsDate(listBallHandlingLogs)),
-                getAveragePercentage(listBallHandlingLogs).intValue() + "%");
+                getAveragePercentage(listBallHandlingLogs) + "%");
     }
 
 }

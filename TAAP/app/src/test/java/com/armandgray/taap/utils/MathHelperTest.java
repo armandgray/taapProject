@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import static com.armandgray.taap.utils.MathHelper.getAveragePercentage;
+import static com.armandgray.taap.utils.MathHelper.getPercentFormattedAsString;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
@@ -23,6 +24,15 @@ public class MathHelperTest {
 
         assertNotNull(getAveragePercentage(logs));
         assertEquals(total/logs.size() , getAveragePercentage(logs));
+    }
+
+    @Test
+    public void canGetPercentageFormattedAsString() throws Exception {
+        double percent = 0.78;
+        Double rate = percent * 100;
+
+        assertNotNull(getPercentFormattedAsString(percent));
+        assertEquals(rate.intValue() + "%", getPercentFormattedAsString(percent));
     }
 
 }
