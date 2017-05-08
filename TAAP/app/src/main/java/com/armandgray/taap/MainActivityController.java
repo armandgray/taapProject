@@ -1,6 +1,7 @@
 package com.armandgray.taap;
 
 import android.app.Service;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.View;
@@ -11,8 +12,11 @@ import android.widget.EditText;
 import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
+import com.armandgray.taap.detail.DrillDetailActivity;
+import com.armandgray.taap.models.Drill;
 import com.armandgray.taap.utils.DrillsRvAdapter;
 
+import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
 import static com.armandgray.taap.utils.DrillsRvAdapter.SEARCH;
 
 class MainActivityController implements MainActivityViews.MainViewsListener {
@@ -83,6 +87,15 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
         ((DrillsRvAdapter) views.rvDrills.getAdapter())
                 .swapRvDrillsAdapterDataOnQuery(query);
         addSearchQueryToSpinner(query);
+    }
+
+    @Override
+    public void onRvDrillsItemTouch(View view, int position) {
+        Intent intent = new Intent(activity, DrillDetailActivity.class);
+        Drill drill = ((DrillsRvAdapter) views.rvDrills.getAdapter())
+                .getItemAtPosition(position);
+        intent.putExtra(SELECTED_DRILL, drill);
+        activity.startActivity(intent);
     }
 
     private void addSearchQueryToSpinner(String query) {

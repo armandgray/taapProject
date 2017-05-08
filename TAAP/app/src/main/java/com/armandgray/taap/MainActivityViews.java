@@ -1,6 +1,5 @@
 package com.armandgray.taap;
 
-import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
@@ -16,12 +15,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.armandgray.taap.detail.DrillDetailActivity;
-import com.armandgray.taap.models.Drill;
 import com.armandgray.taap.utils.DrillsRvAdapter;
 import com.armandgray.taap.utils.RecyclerItemClickListener;
 
-import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
 import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
 
 class MainActivityViews {
@@ -154,11 +150,7 @@ class MainActivityViews {
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Intent intent = new Intent(activity, DrillDetailActivity.class);
-                        Drill drill = ((DrillsRvAdapter) rvDrills.getAdapter())
-                                .getItemAtPosition(position);
-                        intent.putExtra(SELECTED_DRILL, drill);
-                        activity.startActivity(intent);
+                        listener.onRvDrillsItemTouch(view, position);
                     }
                 }));
     }
@@ -179,5 +171,6 @@ class MainActivityViews {
         void onSearchClick();
         void onEtSearchFocusChange(View v, boolean hasFocus);
         void onEtSearchTextChanged(CharSequence s, int start, int before, int count);
+        void onRvDrillsItemTouch(View view, int position);
     }
 }

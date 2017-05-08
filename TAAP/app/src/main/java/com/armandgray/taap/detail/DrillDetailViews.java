@@ -18,6 +18,7 @@ class DrillDetailViews {
 
     public DrillDetailActivity activity;
     DrillDetailViewsListener listener;
+    Drill drill;
 
     FloatingActionButton fab;
     NumberPicker npSets;
@@ -62,7 +63,7 @@ class DrillDetailViews {
     }
 
     private void setToolbarTitle(Toolbar toolbar) {
-        Drill drill = activity.getIntent().getParcelableExtra(SELECTED_DRILL);
+        drill = activity.getIntent().getParcelableExtra(SELECTED_DRILL);
         if (drill != null && drill.getTitle() != null && !drill.getTitle().equals("")) {
             ((TextView) toolbar.findViewById(R.id.tvTitle))
                     .setText(drill.getTitle());

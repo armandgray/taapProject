@@ -64,6 +64,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
                 .repsCompleted(views.npReps.getValue())
                 .successRate(getRateFromPickers())
                 .successRecord(getRateFromPickers())
+                .drill(views.drill)
                 .create();
         DetailSummaryDialog.newInstance(sessionLog).show(fragmentManager, DIALOG);
     }
