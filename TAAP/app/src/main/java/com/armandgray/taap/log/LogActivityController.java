@@ -32,12 +32,10 @@ class LogActivityController implements LogActivityViews.LogViewsListener {
 
         if (sessionLog != null) { insertLogToDatabase(sessionLog, activity); }
         setupHistoryFields();
-        setupHistoryFields();
         views.setupActivityInitialState();
     }
 
-    @VisibleForTesting
-    void setupHistoryFields() {
+    private void setupHistoryFields() {
         Cursor cursor = activity.getContentResolver()
                 .query(CONTENT_URI_ALL, ALL_TABLE_COLUMNS, null, null, null);
         if (cursor == null) { return; }
