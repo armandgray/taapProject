@@ -28,11 +28,11 @@ public class MathHelperTest {
 
     @Test
     public void canGetPercentageFormattedAsString() throws Exception {
-        double percent = 0.78;
-        Double rate = percent * 100;
+        double decimal = 0.78;
+        Double percent = decimal * 100;
 
-        assertNotNull(getPercentFormattedAsString(percent));
-        assertEquals(rate.intValue() + "%", getPercentFormattedAsString(percent));
+        assertNotNull(getPercentFormattedAsString(decimal));
+        assertEquals(percent.intValue() + "%", getPercentFormattedAsString(decimal));
     }
 
 }

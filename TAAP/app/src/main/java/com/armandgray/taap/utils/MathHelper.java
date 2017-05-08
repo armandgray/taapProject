@@ -12,7 +12,8 @@ public class MathHelper {
         return total/ logs.size();
     }
 
-    public static String getPercentFormattedAsString(double percent) {
-        return null;
+    public static String getPercentFormattedAsString(double decimal) {
+        Double percent = decimal * 100;
+        return percent.intValue() + "%";
     }
 }
