@@ -29,6 +29,7 @@ import java.util.Locale;
 import static com.armandgray.taap.utils.SessionLogRvAdapter.IMAGE_RESOURCE_ID;
 import static com.armandgray.taap.utils.SessionLogRvAdapter.ITEM_DATA;
 import static com.armandgray.taap.utils.SessionLogRvAdapter.STRING_RESOURCE_ID;
+import static com.armandgray.taap.utils.SessionLogRvAdapter.TINT_COLOR;
 import static com.armandgray.taap.utils.SessionLogRvAdapter.TYPE_HEADER;
 import static com.armandgray.taap.utils.SessionLogRvAdapter.TYPE_ITEM;
 import static junit.framework.Assert.assertEquals;
@@ -184,6 +185,7 @@ public class SessionLogRvAdapterTest {
         hashMap.put(STRING_RESOURCE_ID, R.string.session_date);
         hashMap.put(ITEM_DATA, testSessionLog.getSessionDate());
         hashMap.put(IMAGE_RESOURCE_ID, R.drawable.ic_timer_white_24dp);
+        hashMap.put(TINT_COLOR, android.R.color.holo_red_dark);
         assertEquals(hashMap, adapter.getItemAtPosition(0));
     }
 

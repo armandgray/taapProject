@@ -26,7 +26,7 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
     @VisibleForTesting static final String IMAGE_RESOURCE_ID = "IMAGE_RESOURCE_ID";
     @VisibleForTesting static final String ITEM_DATA = "ITEM_DATA";
     @VisibleForTesting static final String STRING_RESOURCE_ID = "STRING_RESOURCE_ID";
-    private static final String TINT_COLOR = "TINT_COLOR";
+    @VisibleForTesting static final String TINT_COLOR = "TINT_COLOR";
 
     private SessionLog sessionLog;
     private ViewGroup parent;
