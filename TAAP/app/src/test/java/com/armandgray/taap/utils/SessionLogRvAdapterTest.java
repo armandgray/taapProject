@@ -166,11 +166,11 @@ public class SessionLogRvAdapterTest {
                         inflater.inflate(R.layout.session_log_listitem, null, false));
         adapter.parent = new FrameLayout(RuntimeEnvironment.application);
         adapter.onBindViewHolder(holder, 7);
-        
+
         Double rate = testSessionLog.getSuccessRate() * 100;
 
         assertEquals("Success Rate", holder.tvHeader.getText());
-        assertEquals(String.format(Locale.US, "%d%", rate.intValue()), holder.tvText.getText());
+        assertEquals(String.format(Locale.US, "%d%%", rate.intValue()), holder.tvText.getText());
         assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
                 R.drawable.ic_timer_white_24dp),
                 holder.ivImage.getDrawable());
