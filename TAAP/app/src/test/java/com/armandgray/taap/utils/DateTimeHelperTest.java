@@ -27,7 +27,7 @@ public class DateTimeHelperTest {
         long dummyTime = System.currentTimeMillis();
         calendar.setTimeInMillis(dummyTime);
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        if (hour > 12) { calendar.set(Calendar.HOUR_OF_DAY, 0); }
+        if (hour == 0) { calendar.set(Calendar.HOUR_OF_DAY, 0); }
         assertNotNull(getTimeElapsedAsDate(dummyTime));
         assertEquals(calendar.getTime(), getTimeElapsedAsDate(dummyTime));
     }
@@ -36,11 +36,9 @@ public class DateTimeHelperTest {
     public void doesZeroOutHoursForTimesLessThanOneHour_CanGetTimeElapsed() throws Exception {
         Calendar calendar = Calendar.getInstance();
         calendar.set(0, 0, 0, 0, 0, 0);
-        calendar.setTimeInMillis(1);
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
 
-        assertNotNull(getTimeElapsedAsDate(1));
-        assertEquals(calendar.getTime().toString(), getTimeElapsedAsDate(1).toString());
+        assertNotNull(getTimeElapsedAsDate(calendar.getTimeInMillis()));
+        assertEquals(calendar.getTime().toString(), getTimeElapsedAsDate(calendar.getTimeInMillis()).toString());
     }
 
     @Test
