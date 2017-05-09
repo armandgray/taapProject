@@ -145,6 +145,7 @@ public class SessionLogRvAdapterTest {
         SessionLogRvAdapter.SessionLogViewHolder holder =
                 new SessionLogRvAdapter.SessionLogViewHolder(
                         inflater.inflate(R.layout.session_log_listitem, null, false));
+        adapter.parent = new FrameLayout(RuntimeEnvironment.application);
         adapter.onBindViewHolder(holder, 5);
 
         assertEquals("Sets Completed", holder.tvHeader.getText());
@@ -163,7 +164,9 @@ public class SessionLogRvAdapterTest {
         SessionLogRvAdapter.SessionLogViewHolder holder =
                 new SessionLogRvAdapter.SessionLogViewHolder(
                         inflater.inflate(R.layout.session_log_listitem, null, false));
+        adapter.parent = new FrameLayout(RuntimeEnvironment.application);
         adapter.onBindViewHolder(holder, 7);
+        
         Double rate = testSessionLog.getSuccessRate() * 100;
 
         assertEquals("Success Rate", holder.tvHeader.getText());
