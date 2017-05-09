@@ -20,7 +20,7 @@ public class DateTimeHelper {
 
     public static Date getTimeElapsedAsDate(long timeElapsed) {
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(timeElapsed);
+        calendar.setTimeInMillis(timeElapsed - (ONE_HOUR * 16) + ONE_DAY);
         return calendar.getTime();
     }
 

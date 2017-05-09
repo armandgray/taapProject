@@ -31,8 +31,7 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
     private SessionLog sessionLog;
     @VisibleForTesting ViewGroup parent;
 
-    SessionLogRvAdapter() {
-    }
+    SessionLogRvAdapter() {}
 
     public SessionLogRvAdapter(SessionLog sessionLog) {
         this.sessionLog = sessionLog;
