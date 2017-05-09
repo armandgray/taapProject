@@ -56,10 +56,10 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
         if (drillActive) { togglePausePlay(); }
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         sessionLog = new SessionLog.Builder()
-                .sessionLength(getTimeElapsedAsDate(activeWorkTime + restTime))
+                .sessionLength(getTimeElapsedAsDate(activeWorkTime + restTime, true))
                 .sessionGoal("None")
-                .activeWork(getTimeElapsedAsDate(activeWorkTime))
-                .restTime(getTimeElapsedAsDate(restTime))
+                .activeWork(getTimeElapsedAsDate(activeWorkTime, true))
+                .restTime(getTimeElapsedAsDate(restTime, true))
                 .setsCompleted(views.npSets.getValue())
                 .repsCompleted(views.npReps.getValue())
                 .successRate(getRateFromPickers())

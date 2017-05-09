@@ -20,6 +20,13 @@ public class DateTimeHelper {
 
     public static Date getTimeElapsedAsDate(long timeElapsed) {
         Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(timeElapsed - (ONE_HOUR * 8) + ONE_DAY);
+        return calendar.getTime();
+    }
+
+    public static Date getTimeElapsedAsDate(long timeElapsed, boolean isSessionLogAdapter) {
+        if (!isSessionLogAdapter) { return getTimeElapsedAsDate(timeElapsed); }
+        Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(timeElapsed - (ONE_HOUR * 16) + ONE_DAY);
         return calendar.getTime();
     }
