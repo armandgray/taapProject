@@ -118,6 +118,7 @@ public class SessionLogRvAdapterTest {
         SessionLogRvAdapter.SessionLogViewHolder holder =
                 new SessionLogRvAdapter.SessionLogViewHolder(
                         inflater.inflate(R.layout.session_log_listitem, null, false));
+        adapter.parent = new FrameLayout(RuntimeEnvironment.application);
         adapter.onBindViewHolder(holder, 1);
 
         Calendar calendar = Calendar.getInstance();
