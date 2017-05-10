@@ -1,5 +1,7 @@
 package com.armandgray.taap.detail;
 
+import android.app.Dialog;
+
 import com.armandgray.taap.BuildConfig;
 
 import org.junit.After;
@@ -10,12 +12,18 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowDialog;
+import org.robolectric.shadows.ShadowHandler;
+import org.robolectric.shadows.ShadowToast;
 
 import java.util.Calendar;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -61,6 +69,21 @@ public class DrillDetailControllerTest {
 
         assertNotNull(controller.restTime);
         assertTrue(controller.restTime > 0);
+    }
+
+    @Test
+    public void doesToastErrorIfSuccessesGreaterThanReps_OnBtnFinishedClick() throws Exception {
+        controller.views.npSuccesses.setValue(100);
+        controller.views.fab.performClick();
+        controller.views.btnFinished.performClick();
+        activityController.start().resume();
+
+        Dialog resultDialog = ShadowDialog.getLatestDialog();
+        ShadowHandler.idleMainLooper();
+
+        assertNull(resultDialog);
+        assertThat( ShadowToast.getTextOfLatestToast(), equalTo("Please enter a value."));
+
     }
 
     @Test
