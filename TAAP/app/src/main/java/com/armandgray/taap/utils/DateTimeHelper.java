@@ -16,18 +16,17 @@ public class DateTimeHelper {
 
     public static final long ONE_DAY = 86400000L;
     public static final long ONE_HOUR = 3600000L;
-    static int i = 0;
 
     public static Date getTimeElapsedAsDate(long timeElapsed) {
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(timeElapsed - (ONE_HOUR * 8) + ONE_DAY);
+        calendar.setTimeInMillis(timeElapsed);
         return calendar.getTime();
     }
 
-    public static Date getTimeElapsedAsDate(long timeElapsed, boolean isSessionLogAdapter) {
-        if (!isSessionLogAdapter) { return getTimeElapsedAsDate(timeElapsed); }
+    public static Date getTimeElapsedAsDate(long timeElapsed, int hoursToSubtract) {
+        if (hoursToSubtract == 0) { return getTimeElapsedAsDate(timeElapsed); }
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(timeElapsed - (ONE_HOUR * 16) + ONE_DAY);
+        calendar.setTimeInMillis(timeElapsed - (ONE_HOUR * hoursToSubtract) + ONE_DAY);
         return calendar.getTime();
     }
 
