@@ -10,7 +10,6 @@ public class SettingsActivityController implements SettingsActivityViews.Setting
     static final String ARMANDGRAY_COM = "http://armandgray.com";
     // TODO change to Taap URL
     static final String GOOGLE_PLAY_STORE_TAAP = "https://play.google.com/store/apps/details?id=com.armandgray.taap&hl=en";
-    public static final String COPYRIGHT = "Copyright";
     public static final String SELECTED_ITEM = "SELECTED_ITEM";
     public static final String TERMS_AND_CONDITIONS = "Terms & Conditions";
     public static final String SOFTWARE_LICENSES = "Software Licenses";
@@ -36,10 +35,8 @@ public class SettingsActivityController implements SettingsActivityViews.Setting
     }
 
     @Override
-    public void onTvCopyrightClick() {
-        Intent intent = new Intent(activity, SettingsDetailActivity.class);
-        intent.putExtra(SELECTED_ITEM, COPYRIGHT);
-        activity.startActivity(intent);
+    public void onTvClearDataClick() {
+
     }
 
     @Override

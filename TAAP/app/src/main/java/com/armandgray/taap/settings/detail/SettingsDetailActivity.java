@@ -9,11 +9,9 @@ import android.widget.TextView;
 
 import com.armandgray.taap.R;
 
-import static com.armandgray.taap.settings.SettingsActivityController.COPYRIGHT;
 import static com.armandgray.taap.settings.SettingsActivityController.SELECTED_ITEM;
 import static com.armandgray.taap.settings.SettingsActivityController.SOFTWARE_LICENSES;
 import static com.armandgray.taap.settings.SettingsActivityController.TERMS_AND_CONDITIONS;
-import static com.armandgray.taap.utils.StringHelper.getFormattedHeaderTextString;
 
 public class SettingsDetailActivity extends AppCompatActivity {
 
@@ -51,13 +49,6 @@ public class SettingsDetailActivity extends AppCompatActivity {
     private void setTvContentsText() {
         TextView tvContents = (TextView) findViewById(R.id.tvContents);
         switch (getIntent().getStringExtra(SELECTED_ITEM)) {
-            case COPYRIGHT:
-                String[] headers = {"Evox Images", "LibphoneNumber"};
-                String[] text = new String[2];
-                text[0] = "Evox Images (C) 2014.\n\nhttp://www.evoximages.com";
-                text[1] = "Evox Images (C) 2014.\n\nhttp://www.evoximages.com";
-                tvContents.setText(getFormattedHeaderTextString(headers, text));
-                break;
             case TERMS_AND_CONDITIONS:
                 tvContents.setText(TERMS_AND_CONDITIONS);
                 break;

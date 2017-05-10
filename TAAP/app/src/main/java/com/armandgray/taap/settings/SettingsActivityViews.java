@@ -62,7 +62,7 @@ class SettingsActivityViews {
         tvCopyright.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onTvCopyrightClick();
+                listener.onTvClearDataClick();
             }
         });
 
@@ -86,7 +86,7 @@ class SettingsActivityViews {
     interface SettingsViewsListener {
         void onTvSeeMoreClick();
         void onTvRateThisAppClick();
-        void onTvCopyrightClick();
+        void onTvClearDataClick();
         void onTvTermsConditionsClick();
         void onTvSoftwareLicensesClick();
     }
