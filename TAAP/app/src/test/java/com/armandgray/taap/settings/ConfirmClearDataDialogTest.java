@@ -26,6 +26,7 @@ import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_LOGS;
 import static com.armandgray.taap.db.DatabaseContentProvider.insertDrillToDatabase;
 import static com.armandgray.taap.db.DatabaseContentProvider.insertLogToDatabase;
 import static com.armandgray.taap.db.DatabaseContentProviderTest.TEST_SESSION_LOG;
+import static com.armandgray.taap.detail.DetailSummaryDialog.DIALOG;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
@@ -43,7 +44,8 @@ public class ConfirmClearDataDialogTest {
         System.out.println("Running Set Up!");
         activityController = Robolectric.buildActivity(SettingsActivity.class);
         activity = activityController.create().visible().get();
-        dialog = new ConfirmClearDataDialog(RuntimeEnvironment.application);
+        dialog = new ConfirmClearDataDialog();
+        dialog.show(activity.getSupportFragmentManager(), DIALOG);
     }
 
     @Test

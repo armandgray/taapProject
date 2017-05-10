@@ -5,21 +5,15 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 
 import com.armandgray.taap.R;
 
-class ConfirmClearDataDialog extends DialogFragment {
+public class ConfirmClearDataDialog extends DialogFragment {
 
     private Context context;
     private ClearDataListener listener;
-
-    ConfirmClearDataDialog() {
-    }
-
-    ConfirmClearDataDialog(Context context) {
-        this.context = context;
-    }
 
     @Override
     public void onAttach(Context context) {
@@ -32,6 +26,7 @@ class ConfirmClearDataDialog extends DialogFragment {
         }
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
