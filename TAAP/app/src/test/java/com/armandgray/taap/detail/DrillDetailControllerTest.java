@@ -47,6 +47,16 @@ public class DrillDetailControllerTest {
     }
 
     @Test
+    public void doesShowTimerDialogOnFabClick() throws Exception {
+        controller.views.fab.performClick();
+        activityController.start().resume();
+
+        Dialog resultDialog = ShadowDialog.getLatestDialog();
+        assertNotNull(resultDialog);
+        assertEquals(new TimerDialog().getDialog(), resultDialog);
+    }
+
+    @Test
     public void doesCreateViewsHandler_TestConstructor() throws Exception {
         assertNotNull(controller.views);
         assertNotNull(controller.views.activity);
