@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
@@ -28,7 +29,7 @@ public class ConfirmClearDataDialogTest {
         System.out.println("Running Set Up!");
         activityController = Robolectric.buildActivity(SettingsActivity.class);
         activity = activityController.create().visible().get();
-        dialog = new ConfirmClearDataDialog();
+        dialog = new ConfirmClearDataDialog(RuntimeEnvironment.application);
     }
 
     @Test
