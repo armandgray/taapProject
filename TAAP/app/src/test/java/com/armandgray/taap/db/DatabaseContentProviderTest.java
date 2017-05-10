@@ -35,6 +35,7 @@ import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_ALL;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DELETE_ALL_DATA;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_LOGS;
+import static com.armandgray.taap.db.DatabaseContentProvider.DELETE_ALL;
 import static com.armandgray.taap.db.DatabaseContentProvider.DRILLS_ID;
 import static com.armandgray.taap.db.DatabaseContentProvider.EXECUTION_FAILURE;
 import static com.armandgray.taap.db.DatabaseContentProvider.LOGS_ID;
@@ -119,6 +120,8 @@ public class DatabaseContentProviderTest {
         assertEquals(ALL_LOGS, uriMatcher.match(CONTENT_URI_LOGS));
         assertEquals(LOGS_ID,
                 uriMatcher.match(Uri.parse(DatabaseContentProvider.CONTENT_URI_LOGS + "/" + 0)));
+        assertEquals(DELETE_ALL,
+                uriMatcher.match(Uri.parse(DatabaseContentProvider.CONTENT_URI_DELETE_ALL_DATA + "/" + 0)));
     }
 
     @Test

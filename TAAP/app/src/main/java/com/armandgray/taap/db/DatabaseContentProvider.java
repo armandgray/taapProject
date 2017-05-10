@@ -37,6 +37,7 @@ public class DatabaseContentProvider extends ContentProvider {
     @VisibleForTesting static final int DRILLS_ID = 3;
     @VisibleForTesting static final int ALL_LOGS = 4;
     @VisibleForTesting static final int LOGS_ID = 5;
+    @VisibleForTesting static final int DELETE_ALL = 6;
 
     @VisibleForTesting
     static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
