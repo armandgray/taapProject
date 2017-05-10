@@ -50,10 +50,10 @@ public class SettingsDetailActivity extends AppCompatActivity {
         TextView tvContents = (TextView) findViewById(R.id.tvContents);
         switch (getIntent().getStringExtra(SELECTED_ITEM)) {
             case TERMS_AND_CONDITIONS:
-                tvContents.setText(TERMS_AND_CONDITIONS);
+                tvContents.setText(R.string.none);
                 break;
             case SOFTWARE_LICENSES:
-                tvContents.setText(SOFTWARE_LICENSES);
+                tvContents.setText(R.string.none);
                 break;
         }
     }
