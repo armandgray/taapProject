@@ -1,5 +1,7 @@
 package com.armandgray.taap.settings;
 
+import android.os.Bundle;
+
 import com.armandgray.taap.BuildConfig;
 
 import org.junit.After;
@@ -32,6 +34,12 @@ public class ConfirmClearDataDialogTest {
     @Test
     public void canCreateConfirmClearDataDialog() {
         assertNotNull(new ConfirmClearDataDialog());
+    }
+
+    @Test
+    public void canCreateConfirmClearDataDialog_TestOnCreateDialog() {
+        Bundle savedInstanceState = new Bundle();
+        assertNotNull(dialog.onCreateDialog(savedInstanceState));
     }
 
     @After
