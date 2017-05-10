@@ -113,7 +113,7 @@ public class SettingsActivityViewsTest {
 
     @Test
     public void doesSetupCopyrightClickListener_MethodTest_SetupActivityInitialState() throws Exception {
-        TextView tvCopyright = (TextView) activity.findViewById(R.id.tvCopyright);
+        TextView tvCopyright = (TextView) activity.findViewById(R.id.tvClearData);
         tvCopyright.performClick();
         Intent expectedIntent = (new Intent(activity, SettingsDetailActivity.class))
                 .putExtra(SELECTED_ITEM, COPYRIGHT);

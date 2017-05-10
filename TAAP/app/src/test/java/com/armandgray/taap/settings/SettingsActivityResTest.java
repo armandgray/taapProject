@@ -78,7 +78,7 @@ public class SettingsActivityResTest {
     @Test
     public void hasView_AboutContainer_CopyRight() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_settings, null);
-        assertNotNull(container.findViewById(R.id.tvCopyright));
+        assertNotNull(container.findViewById(R.id.tvClearData));
     }
 
     @Test

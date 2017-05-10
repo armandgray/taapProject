@@ -58,7 +58,7 @@ class SettingsActivityViews {
             }
         });
 
-        TextView tvCopyright = (TextView) activity.findViewById(R.id.tvCopyright);
+        TextView tvCopyright = (TextView) activity.findViewById(R.id.tvClearData);
         tvCopyright.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
