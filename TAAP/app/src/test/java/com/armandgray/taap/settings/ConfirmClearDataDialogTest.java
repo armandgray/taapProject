@@ -32,6 +32,7 @@ import static com.armandgray.taap.detail.DetailSummaryDialog.DIALOG;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
+import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -70,12 +71,13 @@ public class ConfirmClearDataDialogTest {
     @Test
     public void doesContainConfirmationMessage() {
         activityController.start().resume().visible();
+        ShadowAlertDialog shadowAlertDialog = shadowOf(RuntimeEnvironment.application)
+                .getLatestAlertDialog();
 
-        assertNotNull(ShadowAlertDialog.getLatestAlertDialog());
-        assertNotNull(new ShadowAlertDialog());
-        assertNotNull(new ShadowAlertDialog().getMessage());
+        assertNotNull(shadowAlertDialog);
+        assertNotNull(shadowAlertDialog.getMessage());
         assertEquals(activity.getString(R.string.clear_data_message),
-                new ShadowAlertDialog().getMessage());
+                shadowAlertDialog.getMessage());
     }
 
     @Test

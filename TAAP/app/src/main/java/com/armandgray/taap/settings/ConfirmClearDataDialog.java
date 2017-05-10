@@ -29,7 +29,8 @@ public class ConfirmClearDataDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setPositiveButton(getActivity().getString(R.string.yes), new DialogInterface.OnClickListener() {
+        builder.setMessage(R.string.clear_data_message)
+                .setPositiveButton(getActivity().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         listener.onPositiveClearDataClick();
