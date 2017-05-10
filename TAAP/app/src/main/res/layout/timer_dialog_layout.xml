@@ -6,5 +6,12 @@
     android:background="@drawable/session_log_dialog_background"
     android:orientation="vertical">
 
+    <Chronometer
+        android:id="@+id/chronometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:format="@string/chronometer_initial_format"
+        android:paddingBottom="30dip"
+        android:paddingTop="30dip" />
 
 </LinearLayout>

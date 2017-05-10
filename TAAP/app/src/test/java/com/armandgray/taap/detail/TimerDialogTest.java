@@ -65,10 +65,10 @@ public class TimerDialogTest {
     }
 
     @Test
-    public void existsView_RvSummary_TimerDialogLayout() {
+    public void existsView_Chronometer_TimerDialogLayout() {
         LinearLayout TimerDialogLayout = (LinearLayout) View
                 .inflate(activity, R.layout.timer_dialog_layout, null);
-        assertNotNull(TimerDialogLayout.findViewById(R.id.rvSummary));
+        assertNotNull(TimerDialogLayout.findViewById(R.id.chronometer));
     }
 
     @Test
