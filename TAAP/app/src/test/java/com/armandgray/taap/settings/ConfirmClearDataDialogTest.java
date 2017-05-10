@@ -26,6 +26,7 @@ import static com.armandgray.taap.db.DatabaseContentProvider.insertDrillToDataba
 import static com.armandgray.taap.db.DatabaseContentProvider.insertLogToDatabase;
 import static com.armandgray.taap.db.DatabaseContentProviderTest.TEST_SESSION_LOG;
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
 
 @RunWith(RobolectricTestRunner.class)
@@ -85,6 +86,17 @@ public class ConfirmClearDataDialogTest {
         assertEquals(0, logCursor.getCount());
         drillCursor.close();
         logCursor.close();
+    }
+
+    @Test
+    public void canClickNegativeCancelButtonToDismissDialog_TestOnCreateDialog() {
+        Bundle savedInstanceState = new Bundle();
+        AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
+        resultDialog.show();
+
+        Button btnCancel = resultDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+        btnCancel.performClick();
+        assertFalse(resultDialog.isShowing());
     }
 
     @After
