@@ -79,14 +79,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="@dimen/card_margin"
-                android:layout_weight=".4"
+                android:layout_weight=".42"
                 android:gravity="center" />
 
             <include
                 layout="@layout/log_records_bottom_row"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight=".4"
+                android:layout_weight=".38"
                 android:gravity="center" />
         </LinearLayout>
     </LinearLayout>
