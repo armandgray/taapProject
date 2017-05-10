@@ -11,6 +11,7 @@ import com.armandgray.taap.R;
 class ConfirmClearDataDialog {
 
     private Context context;
+    private ClearDataListener listener;
 
     ConfirmClearDataDialog() {}
 
@@ -18,15 +19,28 @@ class ConfirmClearDataDialog {
         this.context = context;
     }
 
+    public void onAttach(Context context) {
+//        super.onAttach(context);
+        try {
+            listener = (ClearDataListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement ClearDataListener");
+        }
+    }
+
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setPositiveButton(context.getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                
+                //                activity.getContentResolver().delete(CONTENT_URI_DELETE_ALL_DATA, null, null);
             }
         });
         return builder.create();
+    }
+
+    public interface ClearDataListener {
     }
 
 }
