@@ -5,10 +5,11 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 
 import com.armandgray.taap.R;
 
-class ConfirmClearDataDialog {
+class ConfirmClearDataDialog extends DialogFragment {
 
     private Context context;
     private ClearDataListener listener;
@@ -20,8 +21,9 @@ class ConfirmClearDataDialog {
         this.context = context;
     }
 
+    @Override
     public void onAttach(Context context) {
-//        super.onAttach(context);
+        super.onAttach(context);
         try {
             listener = (ClearDataListener) context;
         } catch (ClassCastException e) {
@@ -30,6 +32,7 @@ class ConfirmClearDataDialog {
         }
     }
 
+    @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setPositiveButton(context.getString(R.string.yes), new DialogInterface.OnClickListener() {

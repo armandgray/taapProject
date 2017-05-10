@@ -58,7 +58,7 @@ public class ConfirmClearDataDialogTest {
     }
 
     @Test
-    public void doesImplementDialogFragment() {
+    public void doesExtendDialogFragment() {
         DialogFragment dialogFragment = dialog;
         assertNotNull(dialogFragment);
     }
