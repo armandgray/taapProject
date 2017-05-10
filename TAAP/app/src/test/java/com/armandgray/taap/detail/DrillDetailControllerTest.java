@@ -18,6 +18,7 @@ import org.robolectric.shadows.ShadowToast;
 
 import java.util.Calendar;
 
+import static com.armandgray.taap.detail.DetailSummaryDialog.DIALOG;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertNull;
@@ -52,8 +53,11 @@ public class DrillDetailControllerTest {
         activityController.start().resume();
 
         Dialog resultDialog = ShadowDialog.getLatestDialog();
+        TimerDialog expectedDialog = new TimerDialog();
+        expectedDialog.show(activity.getSupportFragmentManager(), DIALOG);
         assertNotNull(resultDialog);
-        assertEquals(new TimerDialog().getDialog(), resultDialog);
+        assertEquals(expectedDialog.getDialog().findViewById(R.id.timerDialogContainer).getId(),
+                resultDialog.findViewById(R.id.timerDialogContainer).getId());
     }
 
     @Test
