@@ -8,6 +8,7 @@ import android.support.v4.app.DialogFragment;
 import android.widget.Button;
 
 import com.armandgray.taap.BuildConfig;
+import com.armandgray.taap.R;
 import com.armandgray.taap.db.DrillsTable;
 import com.armandgray.taap.db.LogsTable;
 
@@ -20,6 +21,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowAlertDialog;
 
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_LOGS;
@@ -63,6 +65,17 @@ public class ConfirmClearDataDialogTest {
     public void doesExtendDialogFragment() {
         DialogFragment dialogFragment = dialog;
         assertNotNull(dialogFragment);
+    }
+
+    @Test
+    public void doesContainConfirmationMessage() {
+        activityController.start().resume().visible();
+
+        assertNotNull(ShadowAlertDialog.getLatestAlertDialog());
+        assertNotNull(new ShadowAlertDialog());
+        assertNotNull(new ShadowAlertDialog().getMessage());
+        assertEquals(activity.getString(R.string.clear_data_message),
+                new ShadowAlertDialog().getMessage());
     }
 
     @Test
