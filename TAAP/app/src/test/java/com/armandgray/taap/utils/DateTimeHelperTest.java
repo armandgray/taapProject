@@ -12,6 +12,8 @@ import java.util.Locale;
 
 import static com.armandgray.taap.models.SessionLog.REST_TIME;
 import static com.armandgray.taap.models.SessionLog.SESSION_LENGTH;
+import static com.armandgray.taap.utils.DateTimeHelper.ONE_DAY;
+import static com.armandgray.taap.utils.DateTimeHelper.ONE_HOUR;
 import static com.armandgray.taap.utils.DateTimeHelper.getDateFormattedAsString;
 import static com.armandgray.taap.utils.DateTimeHelper.getTimeElapsedAsDate;
 import static com.armandgray.taap.utils.DateTimeHelper.getTotalTimeAsDate;
@@ -26,21 +28,30 @@ public class DateTimeHelperTest {
         calendar.set(0, 0, 0, 0, 0, 0);
         long dummyTime = System.currentTimeMillis();
         calendar.setTimeInMillis(dummyTime);
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        if (hour > 12) { calendar.set(Calendar.HOUR_OF_DAY, 0); }
         assertNotNull(getTimeElapsedAsDate(dummyTime));
         assertEquals(calendar.getTime(), getTimeElapsedAsDate(dummyTime));
+    }
+
+    @Test
+    public void canGetTimeElapsed_Telescope_NumHours() throws Exception {
+        int hoursToSubtract = 16;
+        long dummyTime = System.currentTimeMillis();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(0, 0, 0, 0, 0, 0);
+        calendar.setTimeInMillis(dummyTime - (ONE_HOUR * hoursToSubtract) + ONE_DAY);
+
+        assertNotNull(getTimeElapsedAsDate(dummyTime, hoursToSubtract));
+        assertEquals(calendar.getTime(), getTimeElapsedAsDate(dummyTime, hoursToSubtract));
     }
 
     @Test
     public void doesZeroOutHoursForTimesLessThanOneHour_CanGetTimeElapsed() throws Exception {
         Calendar calendar = Calendar.getInstance();
         calendar.set(0, 0, 0, 0, 0, 0);
-        calendar.setTimeInMillis(1);
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
 
-        assertNotNull(getTimeElapsedAsDate(1));
-        assertEquals(calendar.getTime().toString(), getTimeElapsedAsDate(1).toString());
+        assertNotNull(getTimeElapsedAsDate(calendar.getTimeInMillis()));
+        assertEquals(calendar.getTime().toString(), getTimeElapsedAsDate(calendar.getTimeInMillis()).toString());
     }
 
     @Test
@@ -92,7 +103,7 @@ public class DateTimeHelperTest {
     public void canGetDateFormattedAsString() throws Exception {
         Date testDate = new Date(System.currentTimeMillis());
         assertNotNull(getDateFormattedAsString(testDate));
-        assertEquals(new SimpleDateFormat("hh:mm:ss", Locale.US).format(testDate),
+        assertEquals(new SimpleDateFormat("kk:mm:ss", Locale.US).format(testDate),
                 getDateFormattedAsString(testDate));
     }
 

@@ -9,30 +9,42 @@ import java.util.Date;
 import java.util.Locale;
 
 import static com.armandgray.taap.models.SessionLog.ACTIVE_WORK;
+import static com.armandgray.taap.models.SessionLog.ALL_FIELDS;
 import static com.armandgray.taap.models.SessionLog.REST_TIME;
 import static com.armandgray.taap.models.SessionLog.SESSION_LENGTH;
 
 public class DateTimeHelper {
 
+    public static final long ONE_DAY = 86400000L;
+    public static final long ONE_HOUR = 3600000L;
+
     public static Date getTimeElapsedAsDate(long timeElapsed) {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(0, 0, 0, 0, 0, 0);
-        if (timeElapsed != 0) { calendar.setTimeInMillis(timeElapsed); }
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        if (hour > 12) { calendar.set(Calendar.HOUR_OF_DAY, 0); }
+        calendar.setTimeInMillis(timeElapsed);
+        return calendar.getTime();
+    }
+
+    public static Date getTimeElapsedAsDate(long timeElapsed, int hoursToSubtract) {
+        if (hoursToSubtract == 0) { return getTimeElapsedAsDate(timeElapsed); }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(timeElapsed - (ONE_HOUR * hoursToSubtract) + ONE_DAY);
         return calendar.getTime();
     }
 
     public static Date getTotalTimeAsDate(ArrayList<SessionLog> logs) {
         long expectedTotal = 0L;
         for (SessionLog log : logs) { expectedTotal += log.getActiveWork().getTime(); }
+        long extraHoursAddedForPositiveTimesInMillis = ONE_HOUR * 8 * (logs.size() - 1);
+        expectedTotal -= extraHoursAddedForPositiveTimesInMillis;
         return getTimeElapsedAsDate(expectedTotal);
     }
 
     public static Date getTotalTimeAsDate(ArrayList<SessionLog> logs, String field) {
+        if (field == null || !ALL_FIELDS.contains(field)) { return getTotalTimeAsDate(logs); }
         long expectedTotal = 0L;
-        for (SessionLog log : logs) {
-            expectedTotal += getDateForField(log, field).getTime(); }
+        for (SessionLog log : logs) { expectedTotal += getDateForField(log, field).getTime(); }
+        long extraHoursAddedForPositiveTimesInMillis = ONE_HOUR * 8 * (logs.size() - 1);
+        expectedTotal -= extraHoursAddedForPositiveTimesInMillis;
         return getTimeElapsedAsDate(expectedTotal);
     }
 
@@ -57,7 +69,7 @@ public class DateTimeHelper {
         SimpleDateFormat simpleDateFormat =
                 hour == 0 || date.equals(new Date(0))
                         ? new SimpleDateFormat("00:mm:ss", Locale.US)
-                        : new SimpleDateFormat("hh:mm:ss", Locale.US);
+                        : new SimpleDateFormat("kk:mm:ss", Locale.US);
         return simpleDateFormat.format(date);
     }
 

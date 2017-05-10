@@ -13,28 +13,25 @@ import com.armandgray.taap.R;
 import com.armandgray.taap.models.SessionLog;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+
+import static com.armandgray.taap.utils.DateTimeHelper.getDateFormattedAsString;
 
 public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapter.SessionLogViewHolder> {
 
     static final int TYPE_HEADER = 100;
     static final int TYPE_ITEM = 101;
-    @VisibleForTesting
-    static final String IMAGE_RESOURCE_ID = "IMAGE_RESOURCE_ID";
-    @VisibleForTesting
-    static final String ITEM_DATA = "ITEM_DATA";
-    @VisibleForTesting
-    static final String STRING_RESOURCE_ID = "STRING_RESOURCE_ID";
-    private static final String TINT_COLOR = "TINT_COLOR";
+    @VisibleForTesting static final String IMAGE_RESOURCE_ID = "IMAGE_RESOURCE_ID";
+    @VisibleForTesting static final String ITEM_DATA = "ITEM_DATA";
+    @VisibleForTesting static final String STRING_RESOURCE_ID = "STRING_RESOURCE_ID";
+    @VisibleForTesting static final String TINT_COLOR = "TINT_COLOR";
 
     private SessionLog sessionLog;
-    private ViewGroup parent;
+    @VisibleForTesting ViewGroup parent;
 
-    SessionLogRvAdapter() {
-    }
+    SessionLogRvAdapter() {}
 
     public SessionLogRvAdapter(SessionLog sessionLog) {
         this.sessionLog = sessionLog;
@@ -94,7 +91,7 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
         if (position == 2) {
             tvText.setText(itemData.toString());
         } else if (position <= 4) {
-            tvText.setText(getFormattedTimeAsString(itemData));
+            tvText.setText(getDateFormattedAsString((Date) itemData));
         } else if (position <= 6) {
             tvText.setText(String.valueOf(itemData));
         } else if (position <= 8) {
@@ -102,17 +99,6 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
             String text = rate.intValue() + "%";
             tvText.setText(text);
         }
-    }
-
-    private String getFormattedTimeAsString(Object itemData) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime((Date) itemData);
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        SimpleDateFormat simpleDateFormat =
-                hour == 0
-                        ? new SimpleDateFormat("00:mm:ss", Locale.US)
-                        : new SimpleDateFormat("hh:mm:ss", Locale.US);
-        return simpleDateFormat.format(calendar.getTime());
     }
 
     @Override

@@ -3,14 +3,24 @@ package com.armandgray.taap.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class SessionLog implements Parcelable {
 
     public static final String SESSION_LENGTH = "SESSION_LENGTH";
     public static final String ACTIVE_WORK = "ACTIVE_WORK";
     public static final String REST_TIME = "REST_TIME";
+    public static final List<String> ALL_FIELDS;
+
+    static {
+        ALL_FIELDS = new ArrayList<>(3);
+        ALL_FIELDS.add(SESSION_LENGTH);
+        ALL_FIELDS.add(ACTIVE_WORK);
+        ALL_FIELDS.add(REST_TIME);
+    }
 
     private Date sessionDate;
     private Date sessionLength;

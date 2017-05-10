@@ -29,6 +29,7 @@ import java.util.Locale;
 import static com.armandgray.taap.utils.SessionLogRvAdapter.IMAGE_RESOURCE_ID;
 import static com.armandgray.taap.utils.SessionLogRvAdapter.ITEM_DATA;
 import static com.armandgray.taap.utils.SessionLogRvAdapter.STRING_RESOURCE_ID;
+import static com.armandgray.taap.utils.SessionLogRvAdapter.TINT_COLOR;
 import static com.armandgray.taap.utils.SessionLogRvAdapter.TYPE_HEADER;
 import static com.armandgray.taap.utils.SessionLogRvAdapter.TYPE_ITEM;
 import static junit.framework.Assert.assertEquals;
@@ -117,6 +118,7 @@ public class SessionLogRvAdapterTest {
         SessionLogRvAdapter.SessionLogViewHolder holder =
                 new SessionLogRvAdapter.SessionLogViewHolder(
                         inflater.inflate(R.layout.session_log_listitem, null, false));
+        adapter.parent = new FrameLayout(RuntimeEnvironment.application);
         adapter.onBindViewHolder(holder, 1);
 
         Calendar calendar = Calendar.getInstance();
@@ -143,6 +145,7 @@ public class SessionLogRvAdapterTest {
         SessionLogRvAdapter.SessionLogViewHolder holder =
                 new SessionLogRvAdapter.SessionLogViewHolder(
                         inflater.inflate(R.layout.session_log_listitem, null, false));
+        adapter.parent = new FrameLayout(RuntimeEnvironment.application);
         adapter.onBindViewHolder(holder, 5);
 
         assertEquals("Sets Completed", holder.tvHeader.getText());
@@ -161,11 +164,13 @@ public class SessionLogRvAdapterTest {
         SessionLogRvAdapter.SessionLogViewHolder holder =
                 new SessionLogRvAdapter.SessionLogViewHolder(
                         inflater.inflate(R.layout.session_log_listitem, null, false));
+        adapter.parent = new FrameLayout(RuntimeEnvironment.application);
         adapter.onBindViewHolder(holder, 7);
+
         Double rate = testSessionLog.getSuccessRate() * 100;
 
         assertEquals("Success Rate", holder.tvHeader.getText());
-        assertEquals(String.format(Locale.US, "%d%", rate.intValue()), holder.tvText.getText());
+        assertEquals(String.format(Locale.US, "%d%%", rate.intValue()), holder.tvText.getText());
         assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
                 R.drawable.ic_timer_white_24dp),
                 holder.ivImage.getDrawable());
@@ -184,6 +189,7 @@ public class SessionLogRvAdapterTest {
         hashMap.put(STRING_RESOURCE_ID, R.string.session_date);
         hashMap.put(ITEM_DATA, testSessionLog.getSessionDate());
         hashMap.put(IMAGE_RESOURCE_ID, R.drawable.ic_timer_white_24dp);
+        hashMap.put(TINT_COLOR, android.R.color.holo_red_dark);
         assertEquals(hashMap, adapter.getItemAtPosition(0));
     }
 

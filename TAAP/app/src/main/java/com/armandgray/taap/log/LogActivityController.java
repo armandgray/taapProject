@@ -144,9 +144,11 @@ class LogActivityController {
     }
 
     private void setViewFields() {
+        Date totalTimeAsDate = getTotalTimeAsDate(listAllLogs, SESSION_LENGTH);
+        String dateFormattedAsString = getDateFormattedAsString(totalTimeAsDate);
         views.setDataValueForDetailLayout(
                 views.layoutTotalSessionTime,
-                getDateFormattedAsString(getTotalTimeAsDate(listAllLogs, SESSION_LENGTH)));
+                dateFormattedAsString);
         views.setDataValueForDetailLayout(
                 views.layoutTotalActiveTime,
                 getDateFormattedAsString(getTotalTimeAsDate(listAllLogs, ACTIVE_WORK)));
