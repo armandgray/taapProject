@@ -432,6 +432,22 @@ public class DatabaseContentProviderTest {
         assertEquals(3, logCursor.getCount());
         drillCursor.close();
         logCursor.close();
+
+        RuntimeEnvironment.application.getContentResolver()
+                .delete(CONTENT_URI_DELETE_ALL_DATA, null, null);
+        drillCursor = RuntimeEnvironment.application.getContentResolver()
+                .query(CONTENT_URI_DRILLS, DrillsTable.ALL_DRILL_COLUMNS,
+                        null, null, null);
+        logCursor = RuntimeEnvironment.application.getContentResolver()
+                .query(CONTENT_URI_LOGS, LogsTable.ALL_LOG_COLUMNS,
+                        null, null, null);
+
+        assertNotNull(drillCursor);
+        assertNotNull(logCursor);
+        assertEquals(0, drillCursor.getCount());
+        assertEquals(0, logCursor.getCount());
+        drillCursor.close();
+        logCursor.close();
     }
 
     private DatabaseContentProvider getDatabaseContentProvider() {
