@@ -20,8 +20,8 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
-import static com.armandgray.taap.settings.SettingsActivityController.COPYRIGHT;
 import static com.armandgray.taap.settings.SettingsActivityController.SELECTED_ITEM;
+import static com.armandgray.taap.settings.SettingsActivityController.TERMS_AND_CONDITIONS;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
@@ -37,7 +37,7 @@ public class SettingsDetailActivityTest {
     public void setUp() {
         System.out.println("Running Set Up!");
         Intent intent = new Intent(RuntimeEnvironment.application, SettingsDetailActivity.class);
-        intent.putExtra(SELECTED_ITEM, COPYRIGHT);
+        intent.putExtra(SELECTED_ITEM, TERMS_AND_CONDITIONS);
         activityController = Robolectric.buildActivity(SettingsDetailActivity.class).withIntent(intent);
         activity = activityController.create().visible().get();
     }
@@ -75,7 +75,7 @@ public class SettingsDetailActivityTest {
     public void doesSetCustomToolbarTitleText() throws Exception {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         TextView tvTitle = (TextView) toolbar.findViewById(R.id.tvTitle);
-        assertEquals(COPYRIGHT, tvTitle.getText());
+        assertEquals(TERMS_AND_CONDITIONS, tvTitle.getText());
     }
 
     @Test

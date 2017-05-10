@@ -35,7 +35,6 @@ public class SettingsActivityViewsTest {
 
     private ActivityController<SettingsActivity> activityController;
     private SettingsActivity activity;
-    private Toolbar toolbar;
     private SettingsActivityViews views;
 
     @Before
@@ -43,7 +42,6 @@ public class SettingsActivityViewsTest {
         System.out.println("Running Set Up!");
         activityController = Robolectric.buildActivity(SettingsActivity.class);
         activity = activityController.create().visible().get();
-        toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         views = activity.controller.views;
     }
 
@@ -144,7 +142,6 @@ public class SettingsActivityViewsTest {
         System.out.println("Running TearDown!");
         activityController.pause().stop().destroy();
         activity = null;
-        toolbar = null;
         views = null;
     }
 
