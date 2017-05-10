@@ -410,6 +410,30 @@ public class DatabaseContentProviderTest {
         cursor.close();
     }
 
+    @Test
+    public void canDeleteAllDataFromAllColumns() {
+        insertDrillToDatabase(TEST_DRILL, RuntimeEnvironment.application);
+        insertDrillToDatabase(TEST_DRILL, RuntimeEnvironment.application);
+        insertDrillToDatabase(TEST_DRILL, RuntimeEnvironment.application);
+        insertLogToDatabase(TEST_SESSION_LOG, RuntimeEnvironment.application);
+        insertLogToDatabase(TEST_SESSION_LOG, RuntimeEnvironment.application);
+        insertLogToDatabase(TEST_SESSION_LOG, RuntimeEnvironment.application);
+
+        Cursor drillCursor = RuntimeEnvironment.application.getContentResolver()
+                .query(CONTENT_URI_DRILLS, DrillsTable.ALL_DRILL_COLUMNS,
+                        null, null, null);
+        Cursor logCursor = RuntimeEnvironment.application.getContentResolver()
+                .query(CONTENT_URI_LOGS, LogsTable.ALL_LOG_COLUMNS,
+                        null, null, null);
+
+        assertNotNull(drillCursor);
+        assertNotNull(logCursor);
+        assertEquals(3, drillCursor.getCount());
+        assertEquals(3, logCursor.getCount());
+        drillCursor.close();
+        logCursor.close();
+    }
+
     private DatabaseContentProvider getDatabaseContentProvider() {
         ContentResolver contentResolver = RuntimeEnvironment.application.getContentResolver();
         ContentProviderClient contentProviderClient = contentResolver
