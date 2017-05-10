@@ -1,6 +1,7 @@
 package com.armandgray.taap.settings;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -8,6 +9,8 @@ import android.widget.TextView;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
+import com.armandgray.taap.db.DrillsTable;
+import com.armandgray.taap.db.LogsTable;
 import com.armandgray.taap.settings.detail.SettingsDetailActivity;
 
 import org.junit.After;
@@ -16,9 +19,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
+import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
+import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_LOGS;
+import static com.armandgray.taap.db.DatabaseContentProvider.insertDrillToDatabase;
+import static com.armandgray.taap.db.DatabaseContentProvider.insertLogToDatabase;
+import static com.armandgray.taap.db.DatabaseContentProviderTest.TEST_SESSION_LOG;
 import static com.armandgray.taap.settings.SettingsActivityController.ARMANDGRAY_COM;
 import static com.armandgray.taap.settings.SettingsActivityController.GOOGLE_PLAY_STORE_TAAP;
 import static com.armandgray.taap.settings.SettingsActivityController.SELECTED_ITEM;
@@ -110,9 +119,29 @@ public class SettingsActivityViewsTest {
 
     @Test
     public void doesSetupCopyrightClickListener_MethodTest_SetupActivityInitialState() throws Exception {
+        insertDrillToDatabase(TEST_SESSION_LOG.getDrill(), RuntimeEnvironment.application);
+        insertDrillToDatabase(TEST_SESSION_LOG.getDrill(), RuntimeEnvironment.application);
+        insertDrillToDatabase(TEST_SESSION_LOG.getDrill(), RuntimeEnvironment.application);
+        insertLogToDatabase(TEST_SESSION_LOG, RuntimeEnvironment.application);
+        insertLogToDatabase(TEST_SESSION_LOG, RuntimeEnvironment.application);
+        insertLogToDatabase(TEST_SESSION_LOG, RuntimeEnvironment.application);
+
         TextView tvClearData = (TextView) activity.findViewById(R.id.tvClearData);
         tvClearData.performClick();
-        // TODO add test to delete all table data
+
+        Cursor drillCursor = RuntimeEnvironment.application.getContentResolver()
+                .query(CONTENT_URI_DRILLS, DrillsTable.ALL_DRILL_COLUMNS,
+                        null, null, null);
+        Cursor logCursor = RuntimeEnvironment.application.getContentResolver()
+                .query(CONTENT_URI_LOGS, LogsTable.ALL_LOG_COLUMNS,
+                        null, null, null);
+
+        assertNotNull(drillCursor);
+        assertNotNull(logCursor);
+        assertEquals(0, drillCursor.getCount());
+        assertEquals(0, logCursor.getCount());
+        drillCursor.close();
+        logCursor.close();
     }
 
     @Test
