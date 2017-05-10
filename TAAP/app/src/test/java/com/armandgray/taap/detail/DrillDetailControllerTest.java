@@ -14,7 +14,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowDialog;
-import org.robolectric.shadows.ShadowHandler;
 import org.robolectric.shadows.ShadowToast;
 
 import java.util.Calendar;
@@ -74,15 +73,15 @@ public class DrillDetailControllerTest {
 
     @Test
     public void doesToastErrorIfSuccessesGreaterThanReps_OnBtnFinishedClick() throws Exception {
-        controller.views.npSuccesses.setValue(100);
-        controller.views.fab.performClick();
-        controller.views.btnFinished.performClick();
         activityController.start().resume();
-
+        controller.views.npSuccesses.setValue(100);
         Dialog resultDialog = ShadowDialog.getLatestDialog();
 
+        controller.views.fab.performClick();
+        controller.views.btnFinished.performClick();
+
         assertNull(resultDialog);
-        assertThat( ShadowToast.getTextOfLatestToast(),
+        assertThat(ShadowToast.getTextOfLatestToast(),
                 equalTo(activity.getString(R.string.invalid_successes)));
 
     }
