@@ -34,12 +34,15 @@ public class DateTimeHelperTest {
 
     @Test
     public void canGetTimeElapsed_Telescope_NumHours() throws Exception {
+        int hoursToSubtract = 16;
+        long dummyTime = System.currentTimeMillis();
+
         Calendar calendar = Calendar.getInstance();
         calendar.set(0, 0, 0, 0, 0, 0);
-        long dummyTime = System.currentTimeMillis();
-        calendar.setTimeInMillis(dummyTime - (ONE_HOUR * 16) + ONE_DAY);
-        assertNotNull(getTimeElapsedAsDate(dummyTime, 16));
-        assertEquals(calendar.getTime(), getTimeElapsedAsDate(dummyTime, 16));
+        calendar.setTimeInMillis(dummyTime - (ONE_HOUR * hoursToSubtract) + ONE_DAY);
+
+        assertNotNull(getTimeElapsedAsDate(dummyTime, hoursToSubtract));
+        assertEquals(calendar.getTime(), getTimeElapsedAsDate(dummyTime, hoursToSubtract));
     }
 
     @Test
