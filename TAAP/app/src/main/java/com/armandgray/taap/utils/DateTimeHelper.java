@@ -34,17 +34,17 @@ public class DateTimeHelper {
     public static Date getTotalTimeAsDate(ArrayList<SessionLog> logs) {
         long expectedTotal = 0L;
         for (SessionLog log : logs) { expectedTotal += log.getActiveWork().getTime(); }
+        long extraHoursAddedForPositiveTimesInMillis = ONE_HOUR * 8 * (logs.size() - 1);
+        expectedTotal -= extraHoursAddedForPositiveTimesInMillis;
         return getTimeElapsedAsDate(expectedTotal);
     }
 
     public static Date getTotalTimeAsDate(ArrayList<SessionLog> logs, String field) {
         if (field == null || !ALL_FIELDS.contains(field)) { return getTotalTimeAsDate(logs); }
         long expectedTotal = 0L;
-        long time;
-        for (SessionLog log : logs) {
-            time = getDateForField(log, field).getTime();
-            expectedTotal += time;
-        }
+        for (SessionLog log : logs) { expectedTotal += getDateForField(log, field).getTime(); }
+        long extraHoursAddedForPositiveTimesInMillis = ONE_HOUR * 8 * (logs.size() - 1);
+        expectedTotal -= extraHoursAddedForPositiveTimesInMillis;
         return getTimeElapsedAsDate(expectedTotal);
     }
 
