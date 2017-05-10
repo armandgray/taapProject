@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.widget.Button;
 
 import com.armandgray.taap.BuildConfig;
@@ -54,6 +55,12 @@ public class ConfirmClearDataDialogTest {
     public void canCreateConfirmClearDataDialog_TestOnCreateDialog() {
         Bundle savedInstanceState = new Bundle();
         assertNotNull(dialog.onCreateDialog(savedInstanceState));
+    }
+
+    @Test
+    public void doesImplementDialogFragment() {
+        DialogFragment dialogFragment = dialog;
+        assertNotNull(dialogFragment);
     }
 
     @Test
