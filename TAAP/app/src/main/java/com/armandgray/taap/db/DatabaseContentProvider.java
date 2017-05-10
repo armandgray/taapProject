@@ -25,7 +25,7 @@ public class DatabaseContentProvider extends ContentProvider {
     public static final Uri CONTENT_URI_ALL;
     public static final Uri CONTENT_URI_DRILLS;
     public static final Uri CONTENT_URI_LOGS;
-    public static final Uri CONTENT_URI_DELETE_ALL_DATA = null;
+    public static final Uri CONTENT_URI_DELETE_ALL_DATA;
     @VisibleForTesting static final String AUTHORITY = "com.armandgray.taap.db.provider";
     @VisibleForTesting static final String BASE_PATH_ALL = "all";
     @VisibleForTesting static final String BASE_PATH_DRILLS = "drills";
@@ -51,6 +51,8 @@ public class DatabaseContentProvider extends ContentProvider {
         CONTENT_URI_ALL = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_ALL);
         CONTENT_URI_DRILLS = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_DRILLS);
         CONTENT_URI_LOGS = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_LOGS);
+        CONTENT_URI_DELETE_ALL_DATA = Uri.parse("content://" + AUTHORITY + "/"
+                + BASE_PATH_DELETE_ALL_DATA);
 
         uriMatcher.addURI(AUTHORITY, BASE_PATH_ALL, ALL_DATA);
         uriMatcher.addURI(AUTHORITY, BASE_PATH_DRILLS, ALL_DRILLS);
