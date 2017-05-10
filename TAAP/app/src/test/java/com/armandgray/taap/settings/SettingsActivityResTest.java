@@ -63,49 +63,41 @@ public class SettingsActivityResTest {
 
     @Test
     public void hasView_AboutContainer_TvSeeMore() throws Exception {
-        
         assertNotNull(settingsContainer.findViewById(R.id.tvSeeMore));
     }
 
     @Test
     public void hasView_AboutContainer_LegalHeader() throws Exception {
-        
         assertNotNull(settingsContainer.findViewById(R.id.tvLegalHeader));
     }
 
     @Test
     public void hasView_AboutContainer_SecondTopBorder() throws Exception {
-        
         assertNotNull(settingsContainer.findViewById(R.id.secondTopBorder));
     }
 
     @Test
     public void hasView_AboutContainer_CopyRight() throws Exception {
-        
         assertNotNull(settingsContainer.findViewById(R.id.tvClearData));
     }
 
     @Test
     public void hasView_AboutContainer_TermsAndConditions() throws Exception {
-        
         assertNotNull(settingsContainer.findViewById(R.id.tvTermsConditions));
     }
 
     @Test
     public void hasView_AboutContainer_SoftwareLicenses() throws Exception {
-        
         assertNotNull(settingsContainer.findViewById(R.id.tvSoftwareLicenses));
     }
 
     @Test
     public void hasView_AboutContainer_AppInfoHeader() throws Exception {
-        
         assertNotNull(settingsContainer.findViewById(R.id.tvAppInfo));
     }
 
     @Test
     public void hasView_AboutContainer_VersionNumber() throws Exception {
-        
         assertNotNull(settingsContainer.findViewById(R.id.tvVersionHeader));
         assertNotNull(settingsContainer.findViewById(R.id.tvVersionNumber));
     }
