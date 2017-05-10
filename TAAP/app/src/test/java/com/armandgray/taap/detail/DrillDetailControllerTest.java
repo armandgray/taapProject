@@ -3,6 +3,7 @@ package com.armandgray.taap.detail;
 import android.app.Dialog;
 
 import com.armandgray.taap.BuildConfig;
+import com.armandgray.taap.R;
 
 import org.junit.After;
 import org.junit.Before;
@@ -82,7 +83,8 @@ public class DrillDetailControllerTest {
         ShadowHandler.idleMainLooper();
 
         assertNull(resultDialog);
-        assertThat( ShadowToast.getTextOfLatestToast(), equalTo("Please enter a value."));
+        assertThat( ShadowToast.getTextOfLatestToast(),
+                equalTo(activity.getString(R.string.invalid_successes)));
 
     }
 

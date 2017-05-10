@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
+import android.widget.Toast;
 
 import com.armandgray.taap.R;
 import com.armandgray.taap.log.LogActivity;
@@ -54,6 +55,11 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     @Override
     public void onBtnFinishedClick(View v) {
         if (drillActive) { togglePausePlay(); }
+        if (views.npReps.getValue() < views.npSuccesses.getValue()) {
+            String alert = activity.getString(R.string.invalid_successes);
+            Toast.makeText(activity, alert, Toast.LENGTH_SHORT).show();
+            return;
+        }
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         sessionLog = new SessionLog.Builder()
                 .sessionLength(getTimeElapsedAsDate(activeWorkTime + restTime, 16))
