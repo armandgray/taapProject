@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Chronometer;
 
 import com.armandgray.taap.R;
 
@@ -19,7 +20,8 @@ public class TimerDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         @SuppressLint("InflateParams") View dialogLayout = LayoutInflater.from(getActivity())
                 .inflate(R.layout.timer_dialog_layout, null);
-
+        Chronometer chronometer = (Chronometer) dialogLayout.findViewById(R.id.chronometer);
+        chronometer.start();
         builder.setView(dialogLayout);
         return builder.create();
     }
