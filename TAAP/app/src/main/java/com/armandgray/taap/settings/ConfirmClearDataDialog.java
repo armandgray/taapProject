@@ -12,7 +12,6 @@ import com.armandgray.taap.R;
 
 public class ConfirmClearDataDialog extends DialogFragment {
 
-    private Context context;
     private ClearDataListener listener;
 
     @Override

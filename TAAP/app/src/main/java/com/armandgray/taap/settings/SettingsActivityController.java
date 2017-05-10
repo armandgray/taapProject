@@ -54,4 +54,8 @@ public class SettingsActivityController implements SettingsActivityViews.Setting
         intent.putExtra(SELECTED_ITEM, SOFTWARE_LICENSES);
         activity.startActivity(intent);
     }
+
+    public void onPositiveClearDataClick() {
+        
+    }
 }

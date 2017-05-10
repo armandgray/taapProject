@@ -3,7 +3,8 @@ package com.armandgray.taap.settings;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity
+        implements ConfirmClearDataDialog.ClearDataListener {
 
     SettingsActivityController controller;
 
@@ -14,4 +15,8 @@ public class SettingsActivity extends AppCompatActivity {
         controller = new SettingsActivityController(this);
     }
 
+    @Override
+    public void onPositiveClearDataClick() {
+        controller.onPositiveClearDataClick();
+    }
 }
