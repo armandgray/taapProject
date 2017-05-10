@@ -80,7 +80,6 @@ public class DrillDetailControllerTest {
         activityController.start().resume();
 
         Dialog resultDialog = ShadowDialog.getLatestDialog();
-        ShadowHandler.idleMainLooper();
 
         assertNull(resultDialog);
         assertThat( ShadowToast.getTextOfLatestToast(),
