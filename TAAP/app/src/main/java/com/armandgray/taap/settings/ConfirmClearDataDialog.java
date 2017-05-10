@@ -35,12 +35,14 @@ class ConfirmClearDataDialog {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //                activity.getContentResolver().delete(CONTENT_URI_DELETE_ALL_DATA, null, null);
+                listener.onPositiveClearDataClick();
             }
         });
         return builder.create();
     }
 
     public interface ClearDataListener {
+        void onPositiveClearDataClick();
     }
 
 }
