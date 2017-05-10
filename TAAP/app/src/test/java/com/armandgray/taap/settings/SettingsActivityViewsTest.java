@@ -118,7 +118,7 @@ public class SettingsActivityViewsTest {
     }
 
     @Test
-    public void doesSetupCopyrightClickListener_MethodTest_SetupActivityInitialState() throws Exception {
+    public void doesSetupClearDataClickListener_MethodTest_SetupActivityInitialState() throws Exception {
         insertDrillToDatabase(TEST_SESSION_LOG.getDrill(), RuntimeEnvironment.application);
         insertDrillToDatabase(TEST_SESSION_LOG.getDrill(), RuntimeEnvironment.application);
         insertDrillToDatabase(TEST_SESSION_LOG.getDrill(), RuntimeEnvironment.application);

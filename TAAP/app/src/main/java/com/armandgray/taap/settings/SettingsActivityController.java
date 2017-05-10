@@ -5,6 +5,8 @@ import android.net.Uri;
 
 import com.armandgray.taap.settings.detail.SettingsDetailActivity;
 
+import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DELETE_ALL_DATA;
+
 public class SettingsActivityController implements SettingsActivityViews.SettingsViewsListener {
 
     static final String ARMANDGRAY_COM = "http://armandgray.com";
@@ -36,7 +38,8 @@ public class SettingsActivityController implements SettingsActivityViews.Setting
 
     @Override
     public void onTvClearDataClick() {
-
+        activity.getContentResolver()
+                .delete(CONTENT_URI_DELETE_ALL_DATA, null, null);
     }
 
     @Override
