@@ -38,8 +38,7 @@ public class SettingsActivityController implements SettingsActivityViews.Setting
 
     @Override
     public void onTvClearDataClick() {
-        activity.getContentResolver()
-                .delete(CONTENT_URI_DELETE_ALL_DATA, null, null);
+        activity.getContentResolver().delete(CONTENT_URI_DELETE_ALL_DATA, null, null);
     }
 
     @Override

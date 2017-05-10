@@ -73,4 +73,5 @@
     <string name="shooting">Shooting</string>
     <string name="ball_handling">Ball Handling</string>
     <string name="invalid_successes">Invalid Successes (Must be less than Reps)</string>
+    <string name="yes">Yes</string>
 </resources>
