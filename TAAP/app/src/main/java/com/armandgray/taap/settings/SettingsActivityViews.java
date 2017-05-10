@@ -58,8 +58,8 @@ class SettingsActivityViews {
             }
         });
 
-        TextView tvCopyright = (TextView) activity.findViewById(R.id.tvClearData);
-        tvCopyright.setOnClickListener(new View.OnClickListener() {
+        TextView tvClearData = (TextView) activity.findViewById(R.id.tvClearData);
+        tvClearData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listener.onTvClearDataClick();
