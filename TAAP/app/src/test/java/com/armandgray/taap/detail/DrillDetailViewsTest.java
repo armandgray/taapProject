@@ -163,12 +163,14 @@ public class DrillDetailViewsTest {
         btnFinished.performClick();
         activityController.start().resume();
 
+        Dialog resultDialog = ShadowDialog.getLatestDialog();
         SessionLog sessionLog = new SessionLog.Builder().create();
         DetailSummaryDialog expectedDialog = DetailSummaryDialog.newInstance(sessionLog);
         expectedDialog.show(activity.getSupportFragmentManager(), DIALOG);
-        Dialog resultDialog = ShadowDialog.getLatestDialog();
         assertNotNull(resultDialog);
-        assertEquals(expectedDialog.getDialog(), resultDialog);
+        assertEquals(
+                expectedDialog.getDialog().findViewById(R.id.detailSummaryDialogContainer).getId(),
+                resultDialog.findViewById(R.id.detailSummaryDialogContainer).getId());
     }
 
     @Test

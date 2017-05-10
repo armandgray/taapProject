@@ -1,6 +1,5 @@
 package com.armandgray.taap.settings;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.ActionBar;
@@ -17,9 +16,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowDialog;
+import org.robolectric.shadows.ShadowAlertDialog;
 
 import static com.armandgray.taap.detail.DetailSummaryDialog.DIALOG;
 import static com.armandgray.taap.settings.SettingsActivityController.ARMANDGRAY_COM;
@@ -114,12 +114,17 @@ public class SettingsActivityViewsTest {
     @Test
     public void canShowSummaryDialogSetupOnClearDataClick_MethodTest_SetupActivityInitialState() throws Exception {
         activityController.start().resume();
+        TextView tvClearData = (TextView) activity.findViewById(R.id.tvClearData);
+        tvClearData.performClick();
 
+        ShadowAlertDialog resultDialog = shadowOf(RuntimeEnvironment.application)
+                .getLatestAlertDialog();
         ConfirmClearDataDialog expectedDialog = new ConfirmClearDataDialog();
         expectedDialog.show(activity.getSupportFragmentManager(), DIALOG);
-        Dialog resultDialog = ShadowDialog.getLatestDialog();
+        ShadowAlertDialog shadowExpected = shadowOf(RuntimeEnvironment.application)
+                .getLatestAlertDialog();
         assertNotNull(resultDialog);
-        assertEquals(expectedDialog.getDialog(), resultDialog);
+        assertEquals(shadowExpected.getView(), resultDialog.getView());
     }
 
     @Test
