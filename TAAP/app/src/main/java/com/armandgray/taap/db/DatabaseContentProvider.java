@@ -60,6 +60,7 @@ public class DatabaseContentProvider extends ContentProvider {
         uriMatcher.addURI(AUTHORITY, BASE_PATH_DRILLS + "/#", DRILLS_ID);
         uriMatcher.addURI(AUTHORITY, BASE_PATH_LOGS, ALL_LOGS);
         uriMatcher.addURI(AUTHORITY, BASE_PATH_LOGS + "/#", LOGS_ID);
+        uriMatcher.addURI(AUTHORITY, BASE_PATH_DELETE_ALL_DATA, DELETE_ALL);
     }
 
 

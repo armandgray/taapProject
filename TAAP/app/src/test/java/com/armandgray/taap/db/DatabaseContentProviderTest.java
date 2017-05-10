@@ -120,8 +120,7 @@ public class DatabaseContentProviderTest {
         assertEquals(ALL_LOGS, uriMatcher.match(CONTENT_URI_LOGS));
         assertEquals(LOGS_ID,
                 uriMatcher.match(Uri.parse(DatabaseContentProvider.CONTENT_URI_LOGS + "/" + 0)));
-        assertEquals(DELETE_ALL,
-                uriMatcher.match(Uri.parse(DatabaseContentProvider.CONTENT_URI_DELETE_ALL_DATA + "/" + 0)));
+        assertEquals(DELETE_ALL, uriMatcher.match(CONTENT_URI_DELETE_ALL_DATA));
     }
 
     @Test
