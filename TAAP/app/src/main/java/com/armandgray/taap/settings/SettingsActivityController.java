@@ -55,7 +55,7 @@ public class SettingsActivityController implements SettingsActivityViews.Setting
         activity.startActivity(intent);
     }
 
-    public void onPositiveClearDataClick() {
-        
+    void onPositiveClearDataClick() {
+        activity.getContentResolver().delete(CONTENT_URI_DELETE_ALL_DATA, null, null);
     }
 }
