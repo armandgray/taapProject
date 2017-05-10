@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
+import android.widget.Chronometer;
 import android.widget.LinearLayout;
 
 import com.armandgray.taap.BuildConfig;
@@ -21,6 +22,7 @@ import org.robolectric.shadows.ShadowAlertDialog;
 
 import static com.armandgray.taap.detail.DetailSummaryDialog.DIALOG;
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
@@ -81,6 +83,18 @@ public class TimerDialogTest {
         assertNotNull(shadowDialog);
         assertNotNull(shadowDialog.getView());
         assertNotNull(shadowDialog.getView().findViewById(R.id.timerDialogContainer));
+    }
+
+    @Test
+    public void doesStartTimer_TestOnCreateDialog() {
+        Bundle savedInstanceState = new Bundle();
+        AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
+        ShadowAlertDialog shadowDialog = shadowOf(resultDialog);
+        Chronometer chronometer = (Chronometer) shadowDialog.getView()
+                .findViewById(R.id.chronometer);
+
+        assertNotNull(chronometer);
+        assertTrue(chronometer.isActivated());
     }
 
     @After

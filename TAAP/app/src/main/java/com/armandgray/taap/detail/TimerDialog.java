@@ -19,6 +19,7 @@ public class TimerDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         @SuppressLint("InflateParams") View dialogLayout = LayoutInflater.from(getActivity())
                 .inflate(R.layout.timer_dialog_layout, null);
+
         builder.setView(dialogLayout);
         return builder.create();
     }
