@@ -28,9 +28,11 @@ import static com.armandgray.taap.db.DatabaseContentProvider.ALL_LOGS;
 import static com.armandgray.taap.db.DatabaseContentProvider.ALL_TABLE_COLUMNS;
 import static com.armandgray.taap.db.DatabaseContentProvider.AUTHORITY;
 import static com.armandgray.taap.db.DatabaseContentProvider.BASE_PATH_ALL;
+import static com.armandgray.taap.db.DatabaseContentProvider.BASE_PATH_DELETE_ALL_DATA;
 import static com.armandgray.taap.db.DatabaseContentProvider.BASE_PATH_DRILLS;
 import static com.armandgray.taap.db.DatabaseContentProvider.BASE_PATH_LOGS;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_ALL;
+import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DELETE_ALL_DATA;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_LOGS;
 import static com.armandgray.taap.db.DatabaseContentProvider.DRILLS_ID;
@@ -98,6 +100,13 @@ public class DatabaseContentProviderTest {
     public void hasContentUri_Logs() {
         assertNotNull(CONTENT_URI_LOGS);
         assertEquals(Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_LOGS), CONTENT_URI_LOGS);
+    }
+
+    @Test
+    public void hasContentUri_DeleteAllData() {
+        assertNotNull(CONTENT_URI_DELETE_ALL_DATA);
+        assertEquals(Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_DELETE_ALL_DATA),
+                CONTENT_URI_DELETE_ALL_DATA);
     }
 
     @Test

@@ -25,10 +25,12 @@ public class DatabaseContentProvider extends ContentProvider {
     public static final Uri CONTENT_URI_ALL;
     public static final Uri CONTENT_URI_DRILLS;
     public static final Uri CONTENT_URI_LOGS;
+    public static final Uri CONTENT_URI_DELETE_ALL_DATA = null;
     @VisibleForTesting static final String AUTHORITY = "com.armandgray.taap.db.provider";
     @VisibleForTesting static final String BASE_PATH_ALL = "all";
     @VisibleForTesting static final String BASE_PATH_DRILLS = "drills";
     @VisibleForTesting static final String BASE_PATH_LOGS = "logs";
+    @VisibleForTesting static final String BASE_PATH_DELETE_ALL_DATA = "delete_all";
 
     @VisibleForTesting static final int ALL_DATA = 1;
     @VisibleForTesting static final int ALL_DRILLS = 2;
