@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import static com.armandgray.taap.models.SessionLog.ACTIVE_WORK;
+import static com.armandgray.taap.models.SessionLog.ALL_FIELDS;
 import static com.armandgray.taap.models.SessionLog.REST_TIME;
 import static com.armandgray.taap.models.SessionLog.SESSION_LENGTH;
 
@@ -37,6 +38,7 @@ public class DateTimeHelper {
     }
 
     public static Date getTotalTimeAsDate(ArrayList<SessionLog> logs, String field) {
+        if (field == null || !ALL_FIELDS.contains(field)) { return getTotalTimeAsDate(logs); }
         long expectedTotal = 0L;
         long time;
         for (SessionLog log : logs) {
