@@ -1,86 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.armandgray.taap.log.LogActivity"
     tools:showIn="@layout/activity_log">
 
     <LinearLayout
-        android:id="@+id/detailContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/card_margin"
-        android:background="@android:color/white"
         android:orientation="vertical">
-
-        <include
-            android:id="@+id/layoutTotalSessionTime"
-            layout="@layout/log_detail_layout" />
-
-        <include
-            android:id="@+id/layoutTotalActiveTime"
-            layout="@layout/log_detail_layout" />
-
-        <include
-            android:id="@+id/layoutTotalRestTime"
-            layout="@layout/log_detail_layout" />
-
-        <include
-            android:id="@+id/layoutExercisesCompleted"
-            layout="@layout/log_detail_layout" />
-
-        <include
-            android:id="@+id/layoutRepsCompleted"
-            layout="@layout/log_detail_layout" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/recordsContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/card_margin"
-        android:background="@color/colorPrimary"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tvDate"
+        
+        <LinearLayout
+            android:id="@+id/detailContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="@dimen/activity_horizontal_margin"
-            android:text="@string/today_s_date"
-            android:textAllCaps="true"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:layout_margin="@dimen/card_margin"
+            android:background="@android:color/white"
+            android:orientation="vertical">
 
-        <include layout="@layout/log_record_goals_met_layout"
-            android:layout_width="match_parent"
-            android:layout_weight=".3"
-            android:layout_height="0dp"/>
+            <include
+                android:id="@+id/layoutTotalSessionTime"
+                layout="@layout/log_detail_layout" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/white" />
+            <include
+                android:id="@+id/layoutTotalActiveTime"
+                layout="@layout/log_detail_layout" />
 
-        <include
-            layout="@layout/log_records_top_row"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/card_margin"
-            android:layout_weight=".4"
-            android:gravity="center" />
+            <include
+                android:id="@+id/layoutTotalRestTime"
+                layout="@layout/log_detail_layout" />
 
-        <include
-            layout="@layout/log_records_bottom_row"
+            <include
+                android:id="@+id/layoutExercisesCompleted"
+                layout="@layout/log_detail_layout" />
+
+            <include
+                android:id="@+id/layoutRepsCompleted"
+                layout="@layout/log_detail_layout" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/recordsContainer"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".4"
-            android:gravity="center" />
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/card_margin"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/activity_horizontal_margin"
+                android:text="@string/today_s_date"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <include
+                layout="@layout/log_record_goals_met_layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".3" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/white" />
+
+            <include
+                layout="@layout/log_records_top_row"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/card_margin"
+                android:layout_weight=".4"
+                android:gravity="center" />
+
+            <include
+                layout="@layout/log_records_bottom_row"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".4"
+                android:gravity="center" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</ScrollView>
