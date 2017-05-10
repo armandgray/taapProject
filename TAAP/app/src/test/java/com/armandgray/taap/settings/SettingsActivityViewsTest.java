@@ -20,7 +20,6 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
 import static com.armandgray.taap.settings.SettingsActivityController.ARMANDGRAY_COM;
-import static com.armandgray.taap.settings.SettingsActivityController.COPYRIGHT;
 import static com.armandgray.taap.settings.SettingsActivityController.GOOGLE_PLAY_STORE_TAAP;
 import static com.armandgray.taap.settings.SettingsActivityController.SELECTED_ITEM;
 import static com.armandgray.taap.settings.SettingsActivityController.SOFTWARE_LICENSES;
@@ -113,13 +112,9 @@ public class SettingsActivityViewsTest {
 
     @Test
     public void doesSetupCopyrightClickListener_MethodTest_SetupActivityInitialState() throws Exception {
-        TextView tvCopyright = (TextView) activity.findViewById(R.id.tvClearData);
-        tvCopyright.performClick();
-        Intent expectedIntent = (new Intent(activity, SettingsDetailActivity.class))
-                .putExtra(SELECTED_ITEM, COPYRIGHT);
-        Intent actualIntent = shadowOf(activity).getNextStartedActivity();
-        assertEquals(expectedIntent.toString(), actualIntent.toString());
-        assertEquals(COPYRIGHT, actualIntent.getStringExtra(SELECTED_ITEM));
+        TextView tvClearData = (TextView) activity.findViewById(R.id.tvClearData);
+        tvClearData.performClick();
+        // TODO add test to delete all table data
     }
 
     @Test
