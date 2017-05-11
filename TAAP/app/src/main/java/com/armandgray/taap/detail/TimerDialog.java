@@ -3,6 +3,7 @@ package com.armandgray.taap.detail;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -25,4 +26,11 @@ public class TimerDialog extends DialogFragment {
         builder.setView(dialogLayout);
         return builder.create();
     }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+
+    }
+
 }

@@ -1,6 +1,9 @@
 package com.armandgray.taap.detail;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
@@ -20,6 +23,7 @@ import java.util.Calendar;
 
 import static com.armandgray.taap.detail.DetailSummaryDialog.DIALOG;
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
@@ -123,6 +127,24 @@ public class DrillDetailControllerTest {
         assertNotNull(controller.sessionLog);
         assertTrue(controller.sessionLog
                 .getSessionLength().getTime() > calendar.getTime().getTime());
+    }
+
+    @SuppressLint("InflateParams")
+    @Test
+    public void doesTogglePlayButtonOnTimerDialogDismiss() {
+        controller.views.fab.performClick();
+        activityController.start().resume();
+
+        Dialog resultDialog = ShadowDialog.getLatestDialog();
+        View layout = LayoutInflater.from(activity)
+                .inflate(R.layout.timer_dialog_layout, null, false);
+        resultDialog.dismiss();
+
+        assertNotNull(resultDialog);
+        assertFalse(resultDialog.isShowing());
+        assertEquals(layout.findViewById(R.id.timerDialogContainer).getId(),
+                resultDialog.findViewById(R.id.timerDialogContainer).getId());
+        assertFalse(controller.drillActive);
     }
 
     @After
