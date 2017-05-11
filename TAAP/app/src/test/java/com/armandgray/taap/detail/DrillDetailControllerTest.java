@@ -22,7 +22,7 @@ import org.robolectric.shadows.ShadowToast;
 
 import java.util.Calendar;
 
-import static com.armandgray.taap.detail.DetailSummaryDialog.DIALOG;
+import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;

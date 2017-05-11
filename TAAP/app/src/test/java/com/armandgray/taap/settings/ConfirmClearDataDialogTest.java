@@ -28,7 +28,7 @@ import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_LOGS;
 import static com.armandgray.taap.db.DatabaseContentProvider.insertDrillToDatabase;
 import static com.armandgray.taap.db.DatabaseContentProvider.insertLogToDatabase;
 import static com.armandgray.taap.db.DatabaseContentProviderTest.TEST_SESSION_LOG;
-import static com.armandgray.taap.detail.DetailSummaryDialog.DIALOG;
+import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;

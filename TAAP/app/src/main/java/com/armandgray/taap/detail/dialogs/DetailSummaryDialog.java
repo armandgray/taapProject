@@ -1,4 +1,4 @@
-package com.armandgray.taap.detail;
+package com.armandgray.taap.detail.dialogs;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -28,7 +28,8 @@ public class DetailSummaryDialog extends DialogFragment {
     Activity activity;
     private RecyclerView rvSummary;
     public DetailSummaryDialogListener listener;
-    @VisibleForTesting SummaryDialogController controller;
+    @VisibleForTesting
+    SummaryDialogController controller;
 
     public static DetailSummaryDialog newInstance(SessionLog sessionLog) {
         Bundle args = new Bundle();
@@ -93,7 +94,7 @@ public class DetailSummaryDialog extends DialogFragment {
         return layoutManager;
     }
 
-    interface DetailSummaryDialogListener {
+    public interface DetailSummaryDialogListener {
         void onDialogContinue();
     }
 }

@@ -6,7 +6,7 @@ import android.net.Uri;
 import com.armandgray.taap.settings.detail.SettingsDetailActivity;
 
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DELETE_ALL_DATA;
-import static com.armandgray.taap.detail.DetailSummaryDialog.DIALOG;
+import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
 
 public class SettingsActivityController implements SettingsActivityViews.SettingsViewsListener {
 

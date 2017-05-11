@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
+import com.armandgray.taap.detail.dialogs.DetailSummaryDialog;
 import com.armandgray.taap.models.Drill;
 import com.armandgray.taap.models.SessionLog;
 
@@ -26,7 +27,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowDialog;
 
 import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
-import static com.armandgray.taap.detail.DetailSummaryDialog.DIALOG;
+import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;

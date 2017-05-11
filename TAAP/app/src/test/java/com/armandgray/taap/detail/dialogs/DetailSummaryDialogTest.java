@@ -1,4 +1,4 @@
-package com.armandgray.taap.detail;
+package com.armandgray.taap.detail.dialogs;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
+import com.armandgray.taap.detail.DrillDetailActivity;
 import com.armandgray.taap.log.LogActivity;
 import com.armandgray.taap.models.SessionLog;
 
@@ -26,7 +27,7 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlertDialog;
 
-import static com.armandgray.taap.detail.DetailSummaryDialog.DIALOG;
+import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
 import static com.armandgray.taap.log.LogActivity.SESSION_LOG;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;

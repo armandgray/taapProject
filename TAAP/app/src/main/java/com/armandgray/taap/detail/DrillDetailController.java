@@ -7,11 +7,12 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.armandgray.taap.R;
+import com.armandgray.taap.detail.dialogs.DetailSummaryDialog;
 import com.armandgray.taap.detail.dialogs.TimerDialog;
 import com.armandgray.taap.log.LogActivity;
 import com.armandgray.taap.models.SessionLog;
 
-import static com.armandgray.taap.detail.DetailSummaryDialog.DIALOG;
+import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
 import static com.armandgray.taap.log.LogActivity.SESSION_LOG;
 import static com.armandgray.taap.utils.DateTimeHelper.getTimeElapsedAsDate;
 

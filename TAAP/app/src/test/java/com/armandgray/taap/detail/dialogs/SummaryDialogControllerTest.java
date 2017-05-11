@@ -1,6 +1,9 @@
-package com.armandgray.taap.detail;
+package com.armandgray.taap.detail.dialogs;
 
 import com.armandgray.taap.BuildConfig;
+import com.armandgray.taap.detail.DrillDetailActivity;
+import com.armandgray.taap.detail.dialogs.DetailSummaryDialog;
+import com.armandgray.taap.detail.dialogs.SummaryDialogController;
 import com.armandgray.taap.models.SessionLog;
 
 import org.junit.After;
@@ -12,7 +15,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
-import static com.armandgray.taap.detail.DetailSummaryDialog.DIALOG;
+import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
 import static junit.framework.Assert.assertEquals;
 
 @RunWith(RobolectricTestRunner.class)

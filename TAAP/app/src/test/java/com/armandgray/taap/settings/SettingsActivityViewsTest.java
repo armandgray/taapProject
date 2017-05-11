@@ -21,7 +21,7 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlertDialog;
 
-import static com.armandgray.taap.detail.DetailSummaryDialog.DIALOG;
+import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
 import static com.armandgray.taap.settings.SettingsActivityController.ARMANDGRAY_COM;
 import static com.armandgray.taap.settings.SettingsActivityController.GOOGLE_PLAY_STORE_TAAP;
 import static com.armandgray.taap.settings.SettingsActivityController.SELECTED_ITEM;
