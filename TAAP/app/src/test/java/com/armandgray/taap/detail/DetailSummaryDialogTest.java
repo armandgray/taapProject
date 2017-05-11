@@ -57,6 +57,12 @@ public class DetailSummaryDialogTest {
     }
 
     @Test
+    public void createsSummaryDialogControllerController_TestOnCreate() throws Exception {
+        assertNotNull(dialog.controller);
+        assertNotNull(dialog.controller.dialog);
+    }
+
+    @Test
     public void canCreateDetailSummaryDialog_NewInstanceMethod() {
         SessionLog sessionLog = new SessionLog.Builder().create();
         DetailSummaryDialog dialog = DetailSummaryDialog.newInstance(sessionLog);
