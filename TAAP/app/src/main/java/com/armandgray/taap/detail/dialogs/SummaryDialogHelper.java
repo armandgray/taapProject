@@ -2,6 +2,7 @@ package com.armandgray.taap.detail.dialogs;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.GridLayoutManager;
@@ -33,16 +34,26 @@ class SummaryDialogHelper {
     }
 
     void setupRvSummary(Activity activity, RecyclerView rvSummary) {
-        if (dialog.getArguments() == null || dialog.getArguments().get(SESSION_LOG) == null) {
-            Toast.makeText(dialog.getActivity(), "Missing Required Session Log!",
-                    Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
-            return;
-        }
-        SessionLog sessionLog = (SessionLog) dialog.getArguments().get(SESSION_LOG);
+        Bundle args = dialog.getArguments();
+        SessionLog sessionLog = args != null ? (SessionLog) args.get(SESSION_LOG) : null;
+        if (isSessionLogNull(sessionLog)) return;
         rvSummary.setAdapter(new SessionLogRvAdapter(sessionLog));
         GridLayoutManager layoutManager = getGridLayoutManager(activity);
         rvSummary.setLayoutManager(layoutManager);
+    }
+
+    private boolean isSessionLogNull(SessionLog sessionLog) {
+        if (sessionLog == null) {
+            Toast.makeText(dialog.getActivity(), "Missing Required Session Log!",
+                    Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+            return true;
+        }
+        return false;
+    }
+
+    private double getDrillSuccessRecord() {
+        return 0;
     }
 
     @NonNull
