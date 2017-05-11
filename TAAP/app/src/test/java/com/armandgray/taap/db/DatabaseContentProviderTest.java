@@ -389,10 +389,10 @@ public class DatabaseContentProviderTest {
         insertDrillToDatabase(TEST_SESSION_LOG.getDrill(), RuntimeEnvironment.application);
 
         int drillId = TEST_SESSION_LOG.getDrill().getDrillId();
-        String selectedDrill = LogsTable.COLUMN_DRILL + " = " + drillId;
+        String[] selectionArgs = {String.valueOf(drillId)};
         Uri uri = Uri.parse(CONTENT_URI_ALL + "/" + drillId);
         Cursor cursor = RuntimeEnvironment.application.getContentResolver()
-                .query(uri, ALL_TABLE_COLUMNS, selectedDrill, null, null);
+                .query(uri, ALL_TABLE_COLUMNS, null, selectionArgs, null);
 
         assertNotNull(cursor);
         assertCursorDataEqualsLogWithAllTableColumns(cursor, TEST_SESSION_LOG);

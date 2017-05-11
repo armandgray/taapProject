@@ -82,6 +82,9 @@ public class DatabaseContentProvider extends ContentProvider {
             case ALL_DATA:
                 return database.rawQuery("SELECT * FROM logs INNER JOIN drills ON logs.itemDrill = drills.drillId", null);
 
+            case ALL_DATA_DRILL_ID:
+                return database.rawQuery("SELECT * FROM logs INNER JOIN drills ON logs.itemDrill = drills.drillId WHERE logs.itemDrill = ?", selectionArgs);
+
             case ALL_DRILLS:
                 return database.query(DrillsTable.TABLE_DRILLS, projection, selection,
                         null, null, null, null);
