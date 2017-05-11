@@ -162,6 +162,15 @@ public class DrillDetailControllerTest {
         assertFalse(controller.drillActive);
     }
 
+    @Test
+    public void doesToastRestMessageOnTimerDialogDismiss() {
+        controller.views.fab.performClick();
+        ShadowDialog.getLatestDialog().dismiss();
+
+        assertThat(ShadowToast.getTextOfLatestToast(),
+                equalTo(activity.getString(R.string.rest_time_started)));
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
