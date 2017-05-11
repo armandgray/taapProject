@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,6 +28,7 @@ public class DetailSummaryDialog extends DialogFragment {
     Activity activity;
     private RecyclerView rvSummary;
     public DetailSummaryDialogListener listener;
+    @VisibleForTesting SummaryDialogController controller;
 
     public static DetailSummaryDialog newInstance(SessionLog sessionLog) {
         Bundle args = new Bundle();
@@ -39,6 +41,7 @@ public class DetailSummaryDialog extends DialogFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
         try {
             listener = (DetailSummaryDialogListener) context;
         } catch (ClassCastException e) {
