@@ -2,8 +2,6 @@ package com.armandgray.taap.detail.dialogs;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.detail.DrillDetailActivity;
-import com.armandgray.taap.detail.dialogs.DetailSummaryDialog;
-import com.armandgray.taap.detail.dialogs.SummaryDialogController;
 import com.armandgray.taap.models.SessionLog;
 
 import org.junit.After;
@@ -22,6 +20,7 @@ import static junit.framework.Assert.assertEquals;
 @Config(constants = BuildConfig.class)
 public class SummaryDialogControllerTest {
 
+    public static final String DIALOG_CLASS_NAME = "com.armandgray.taap.detail.dialogs.DetailSummaryDialog";
     private ActivityController<DrillDetailActivity> activityController;
     private DrillDetailActivity activity;
     private DetailSummaryDialog dialog;
@@ -39,7 +38,7 @@ public class SummaryDialogControllerTest {
 
     @Test
     public void dialogInstanceOfDialogFragment_TestConstructor() throws Exception {
-        assertEquals("settings.SettingsActivity", controller.dialog.getClass());
+        assertEquals(DIALOG_CLASS_NAME, controller.dialog.getClass().getName());
     }
 
     @After
