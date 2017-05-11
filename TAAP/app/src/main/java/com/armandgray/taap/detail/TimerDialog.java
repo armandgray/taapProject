@@ -3,6 +3,7 @@ package com.armandgray.taap.detail;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +15,19 @@ import android.widget.Chronometer;
 import com.armandgray.taap.R;
 
 public class TimerDialog extends DialogFragment {
+
+    private TimerDialogListener listener;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            listener = (TimerDialogListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement TimerDialogListener");
+        }
+    }
 
     @NonNull
     @Override
@@ -30,7 +44,11 @@ public class TimerDialog extends DialogFragment {
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
+        listener.onTimerDismiss();
+    }
 
+    public interface TimerDialogListener {
+        void onTimerDismiss();
     }
 
 }
