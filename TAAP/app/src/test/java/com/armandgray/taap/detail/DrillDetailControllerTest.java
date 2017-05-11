@@ -124,6 +124,15 @@ public class DrillDetailControllerTest {
     }
 
     @Test
+    public void doesToastRestMessageIfDrillActive_OnTogglePausePlay() {
+        controller.views.fab.performClick();
+        ShadowDialog.getLatestDialog().dismiss();
+
+        assertThat(ShadowToast.getTextOfLatestToast(),
+                equalTo(activity.getString(R.string.rest_time_started)));
+    }
+
+    @Test
     public void doesAssignSessionLogFields_OnBtnFinishedClick() throws Exception {
         controller.views.fab.performClick();
         ShadowDialog.getLatestDialog().dismiss();
@@ -160,15 +169,6 @@ public class DrillDetailControllerTest {
         assertEquals(layout.findViewById(R.id.timerDialogContainer).getId(),
                 resultDialog.findViewById(R.id.timerDialogContainer).getId());
         assertFalse(controller.drillActive);
-    }
-
-    @Test
-    public void doesToastRestMessageOnTimerDialogDismiss() {
-        controller.views.fab.performClick();
-        ShadowDialog.getLatestDialog().dismiss();
-
-        assertThat(ShadowToast.getTextOfLatestToast(),
-                equalTo(activity.getString(R.string.rest_time_started)));
     }
 
     @After
