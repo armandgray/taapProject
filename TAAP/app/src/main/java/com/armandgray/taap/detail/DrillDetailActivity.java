@@ -4,7 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 public class DrillDetailActivity extends AppCompatActivity
-        implements DetailSummaryDialog.DetailSummaryDialogListener {
+        implements DetailSummaryDialog.DetailSummaryDialogListener,
+        TimerDialog.TimerDialogListener {
 
     DrillDetailController controller;
 
@@ -13,6 +14,11 @@ public class DrillDetailActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         controller = new DrillDetailController(this);
+    }
+
+    @Override
+    public void onTimerDismiss() {
+        
     }
 
     @Override
