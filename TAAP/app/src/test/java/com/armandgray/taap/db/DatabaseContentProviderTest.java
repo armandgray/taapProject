@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 import static com.armandgray.taap.db.DatabaseContentProvider.ALL_DATA;
+import static com.armandgray.taap.db.DatabaseContentProvider.ALL_DATA_DRILL_ID;
 import static com.armandgray.taap.db.DatabaseContentProvider.ALL_DRILLS;
 import static com.armandgray.taap.db.DatabaseContentProvider.ALL_LOGS;
 import static com.armandgray.taap.db.DatabaseContentProvider.ALL_TABLE_COLUMNS;
@@ -114,7 +115,7 @@ public class DatabaseContentProviderTest {
     public void hasContentUriMatcher() {
         assertNotNull(uriMatcher);
         assertEquals(ALL_DATA, uriMatcher.match(CONTENT_URI_ALL));
-        assertEquals(ALL_DATA,
+        assertEquals(ALL_DATA_DRILL_ID,
                 uriMatcher.match(Uri.parse(DatabaseContentProvider.CONTENT_URI_ALL + "/" + 0)));
         assertEquals(ALL_DRILLS, uriMatcher.match(CONTENT_URI_DRILLS));
         assertEquals(DRILLS_ID,

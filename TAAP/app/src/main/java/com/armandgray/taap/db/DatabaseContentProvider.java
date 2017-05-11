@@ -33,11 +33,12 @@ public class DatabaseContentProvider extends ContentProvider {
     @VisibleForTesting static final String BASE_PATH_DELETE_ALL_DATA = "delete_all";
 
     @VisibleForTesting static final int ALL_DATA = 1;
-    @VisibleForTesting static final int ALL_DRILLS = 2;
-    @VisibleForTesting static final int DRILLS_ID = 3;
-    @VisibleForTesting static final int ALL_LOGS = 4;
-    @VisibleForTesting static final int LOGS_ID = 5;
-    @VisibleForTesting static final int DELETE_ALL = 6;
+    @VisibleForTesting static final int ALL_DATA_DRILL_ID = 2;
+    @VisibleForTesting static final int DELETE_ALL = 3;
+    @VisibleForTesting static final int ALL_DRILLS = 4;
+    @VisibleForTesting static final int DRILLS_ID = 5;
+    @VisibleForTesting static final int ALL_LOGS = 6;
+    @VisibleForTesting static final int LOGS_ID = 7;
 
     @VisibleForTesting
     static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
@@ -56,11 +57,12 @@ public class DatabaseContentProvider extends ContentProvider {
                 + BASE_PATH_DELETE_ALL_DATA);
 
         uriMatcher.addURI(AUTHORITY, BASE_PATH_ALL, ALL_DATA);
+        uriMatcher.addURI(AUTHORITY, BASE_PATH_ALL + "/#", ALL_DATA_DRILL_ID);
+        uriMatcher.addURI(AUTHORITY, BASE_PATH_DELETE_ALL_DATA, DELETE_ALL);
         uriMatcher.addURI(AUTHORITY, BASE_PATH_DRILLS, ALL_DRILLS);
         uriMatcher.addURI(AUTHORITY, BASE_PATH_DRILLS + "/#", DRILLS_ID);
         uriMatcher.addURI(AUTHORITY, BASE_PATH_LOGS, ALL_LOGS);
         uriMatcher.addURI(AUTHORITY, BASE_PATH_LOGS + "/#", LOGS_ID);
-        uriMatcher.addURI(AUTHORITY, BASE_PATH_DELETE_ALL_DATA, DELETE_ALL);
     }
 
 
