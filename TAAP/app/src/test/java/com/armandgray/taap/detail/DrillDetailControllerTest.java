@@ -56,15 +56,16 @@ public class DrillDetailControllerTest {
         controller.views.fab.performClick();
 
         Dialog resultDialog = ShadowDialog.getLatestDialog();
+        int resultId = resultDialog.findViewById(R.id.timerDialogContainer).getId();
         resultDialog.dismiss();
 
         TimerDialog expectedDialog = new TimerDialog();
         expectedDialog.show(activity.getSupportFragmentManager(), DIALOG);
+        int expectedId = expectedDialog.getDialog().findViewById(R.id.timerDialogContainer).getId();
         expectedDialog.dismiss();
-        
+
         assertNotNull(resultDialog);
-        assertEquals(expectedDialog.getDialog().findViewById(R.id.timerDialogContainer).getId(),
-                resultDialog.findViewById(R.id.timerDialogContainer).getId());
+        assertEquals(expectedId, resultId);
     }
 
     @Test
