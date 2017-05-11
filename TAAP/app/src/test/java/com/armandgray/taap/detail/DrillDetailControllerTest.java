@@ -42,7 +42,7 @@ public class DrillDetailControllerTest {
     public void setUp() {
         System.out.println("Running Set Up!");
         activityController = Robolectric.buildActivity(DrillDetailActivity.class);
-        activity = activityController.create().visible().get();
+        activity = activityController.create().start().resume().visible().get();
         controller = activity.controller;
     }
 
@@ -54,7 +54,7 @@ public class DrillDetailControllerTest {
     @Test
     public void doesShowTimerDialogOnFabClick() throws Exception {
         controller.views.fab.performClick();
-        activityController.start().resume();
+        
 
         Dialog resultDialog = ShadowDialog.getLatestDialog();
         TimerDialog expectedDialog = new TimerDialog();
@@ -91,7 +91,7 @@ public class DrillDetailControllerTest {
 
     @Test
     public void doesToastErrorIfSuccessesGreaterThanReps_OnBtnFinishedClick() throws Exception {
-        activityController.start().resume();
+        
         controller.views.npSuccesses.setValue(100);
         Dialog resultDialog = ShadowDialog.getLatestDialog();
 
@@ -107,6 +107,8 @@ public class DrillDetailControllerTest {
     @Test
     public void doesAddElapsedTimeToActiveWorkIfDrillActive_OnBtnFinishedClick() throws Exception {
         controller.views.fab.performClick();
+        Dialog resultDialog = ShadowDialog.getLatestDialog();
+        resultDialog.dismiss();
         controller.views.btnFinished.performClick();
 
         assertNotNull(controller.activeWorkTime);
@@ -133,7 +135,6 @@ public class DrillDetailControllerTest {
     @Test
     public void doesTogglePlayButtonOnTimerDialogDismiss() {
         controller.views.fab.performClick();
-        activityController.start().resume();
 
         Dialog resultDialog = ShadowDialog.getLatestDialog();
         View layout = LayoutInflater.from(activity)
