@@ -72,6 +72,15 @@ public class SessionLogTest {
     }
 
     @Test
+    public void canSetSuccessRecord() throws Exception {
+        SessionLog sessionLog = new SessionLog.Builder().create();
+        sessionLog.setSuccessRecord(0.45);
+        assertNotNull(sessionLog);
+        assertNotNull(sessionLog.getSuccessRecord());
+        assertEquals(0.45, sessionLog.getSuccessRecord());
+    }
+
+    @Test
     public void canGetFieldCount() throws Exception {
         assertEquals(9, SessionLog.getFieldCount());
     }
