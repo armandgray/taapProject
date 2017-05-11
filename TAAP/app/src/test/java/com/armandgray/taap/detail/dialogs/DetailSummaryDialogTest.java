@@ -56,8 +56,8 @@ public class DetailSummaryDialogTest {
 
     @Test
     public void createsSummaryDialogControllerController_TestOnCreate() throws Exception {
-        assertNotNull(dialog.controller);
-        assertNotNull(dialog.controller.dialog);
+        assertNotNull(dialog.helper);
+        assertNotNull(dialog.helper.dialog);
     }
 
     @Test

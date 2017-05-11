@@ -29,7 +29,7 @@ public class DetailSummaryDialog extends DialogFragment {
     private RecyclerView rvSummary;
     public DetailSummaryDialogListener listener;
     @VisibleForTesting
-    SummaryDialogController controller;
+    SummaryDialogHelper helper;
 
     public static DetailSummaryDialog newInstance(SessionLog sessionLog) {
         Bundle args = new Bundle();
@@ -43,7 +43,7 @@ public class DetailSummaryDialog extends DialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        controller = new SummaryDialogController(this);
+        helper = new SummaryDialogHelper(this);
         assignDetailActivityAsListener(context);
     }
 

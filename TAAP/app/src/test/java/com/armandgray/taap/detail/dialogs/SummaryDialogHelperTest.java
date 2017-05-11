@@ -28,13 +28,13 @@ import static junit.framework.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
-public class SummaryDialogControllerTest {
+public class SummaryDialogHelperTest {
 
     private static final String DIALOG_CLASS_NAME = "com.armandgray.taap.detail.dialogs.DetailSummaryDialog";
     private ActivityController<DrillDetailActivity> activityController;
     private DrillDetailActivity activity;
     private DetailSummaryDialog dialog;
-    private SummaryDialogController controller;
+    private SummaryDialogHelper helper;
 
     @Before
     public void setUp() {
@@ -43,12 +43,12 @@ public class SummaryDialogControllerTest {
         activity = activityController.create().start().resume().visible().get();
         dialog = DetailSummaryDialog.newInstance(new SessionLog.Builder().create());
         dialog.show(activity.getSupportFragmentManager(), DIALOG);
-        controller = dialog.controller;
+        helper = dialog.helper;
     }
 
     @Test
     public void dialogInstanceOfDialogFragment_TestConstructor() throws Exception {
-        assertEquals(DIALOG_CLASS_NAME, controller.dialog.getClass().getName());
+        assertEquals(DIALOG_CLASS_NAME, helper.dialog.getClass().getName());
     }
 
     @Test
@@ -91,7 +91,7 @@ public class SummaryDialogControllerTest {
         activityController.pause().stop().destroy();
         activity = null;
         dialog = null;
-        controller = null;
+        helper = null;
     }
 
 }
