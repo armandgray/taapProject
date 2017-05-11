@@ -114,6 +114,8 @@ public class DatabaseContentProviderTest {
     public void hasContentUriMatcher() {
         assertNotNull(uriMatcher);
         assertEquals(ALL_DATA, uriMatcher.match(CONTENT_URI_ALL));
+        assertEquals(ALL_DATA,
+                uriMatcher.match(Uri.parse(DatabaseContentProvider.CONTENT_URI_ALL + "/" + 0)));
         assertEquals(ALL_DRILLS, uriMatcher.match(CONTENT_URI_DRILLS));
         assertEquals(DRILLS_ID,
                 uriMatcher.match(Uri.parse(DatabaseContentProvider.CONTENT_URI_DRILLS + "/" + 0)));
@@ -379,6 +381,19 @@ public class DatabaseContentProviderTest {
         assertCursorDataEqualsLogWithAllTableColumns(cursor, TEST_SESSION_LOG);
         cursor.close();
     }
+
+//    @Test
+//    public void canQueryDatabaseOnSingleDrill_ForAllColumnsUsingContentProvider() {
+//        insertLogToDatabase(TEST_SESSION_LOG, RuntimeEnvironment.application);
+//        insertDrillToDatabase(TEST_SESSION_LOG.getDrill(), RuntimeEnvironment.application);
+//
+//        Cursor cursor = RuntimeEnvironment.application.getContentResolver()
+//                .query(CONTENT_URI_ALL, ALL_TABLE_COLUMNS, null, null, null);
+//
+//        assertNotNull(cursor);
+//        assertCursorDataEqualsLogWithAllTableColumns(cursor, TEST_SESSION_LOG);
+//        cursor.close();
+//    }
 
     @Test
     public void canDeleteAllDataFromAllColumns() {
