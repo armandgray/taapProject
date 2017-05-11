@@ -41,6 +41,8 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
         long currentTimeMillis = System.currentTimeMillis();
         timeElapsed = currentTimeMillis - timeElapsed;
         if (drillActive) {
+            Toast.makeText(activity, activity.getString(R.string.rest_time_started),
+                    Toast.LENGTH_LONG).show();
             activeWorkTime += timeElapsed == currentTimeMillis ? 0 : timeElapsed;
             views.fab.setImageResource(R.drawable.ic_play_arrow_white_24dp);
             drillActive = false;
