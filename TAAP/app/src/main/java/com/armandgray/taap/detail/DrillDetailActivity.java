@@ -18,7 +18,7 @@ public class DrillDetailActivity extends AppCompatActivity
 
     @Override
     public void onTimerDismiss() {
-        
+        controller.onTimerDismiss();
     }
 
     @Override

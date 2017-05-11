@@ -83,6 +83,10 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
                 : views.npSuccesses.getValue() * 1.0 / (reps * views.npSets.getValue());
     }
 
+    public void onTimerDismiss() {
+
+    }
+
     void onSummaryDialogDismiss() {
         Intent intent = new Intent(activity, LogActivity.class);
         intent.putExtra(SESSION_LOG, sessionLog);
