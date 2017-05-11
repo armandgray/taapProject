@@ -383,18 +383,21 @@ public class DatabaseContentProviderTest {
         cursor.close();
     }
 
-//    @Test
-//    public void canQueryDatabaseOnSingleDrill_ForAllColumnsUsingContentProvider() {
-//        insertLogToDatabase(TEST_SESSION_LOG, RuntimeEnvironment.application);
-//        insertDrillToDatabase(TEST_SESSION_LOG.getDrill(), RuntimeEnvironment.application);
-//
-//        Cursor cursor = RuntimeEnvironment.application.getContentResolver()
-//                .query(CONTENT_URI_ALL, ALL_TABLE_COLUMNS, null, null, null);
-//
-//        assertNotNull(cursor);
-//        assertCursorDataEqualsLogWithAllTableColumns(cursor, TEST_SESSION_LOG);
-//        cursor.close();
-//    }
+    @Test
+    public void canQueryDatabaseOnSingleDrill_ForAllColumnsUsingContentProvider() {
+        insertLogToDatabase(TEST_SESSION_LOG, RuntimeEnvironment.application);
+        insertDrillToDatabase(TEST_SESSION_LOG.getDrill(), RuntimeEnvironment.application);
+
+        int drillId = TEST_SESSION_LOG.getDrill().getDrillId();
+        String selectedDrill = LogsTable.COLUMN_DRILL + " = " + drillId;
+        Uri uri = Uri.parse(CONTENT_URI_ALL + "/" + drillId);
+        Cursor cursor = RuntimeEnvironment.application.getContentResolver()
+                .query(uri, ALL_TABLE_COLUMNS, selectedDrill, null, null);
+
+        assertNotNull(cursor);
+        assertCursorDataEqualsLogWithAllTableColumns(cursor, TEST_SESSION_LOG);
+        cursor.close();
+    }
 
     @Test
     public void canDeleteAllDataFromAllColumns() {
