@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.armandgray.taap.R;
+import com.armandgray.taap.detail.dialogs.TimerDialog;
 import com.armandgray.taap.log.LogActivity;
 import com.armandgray.taap.models.SessionLog;
 
