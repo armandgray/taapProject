@@ -99,6 +99,7 @@ public class TimerDialogTest {
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
+        dialog.dismiss();
         activityController.pause().stop().destroy();
         activity = null;
         dialog = null;
