@@ -54,11 +54,14 @@ public class DrillDetailControllerTest {
     @Test
     public void doesShowTimerDialogOnFabClick() throws Exception {
         controller.views.fab.performClick();
-        ShadowDialog.getLatestDialog().dismiss();
 
         Dialog resultDialog = ShadowDialog.getLatestDialog();
+        resultDialog.dismiss();
+
         TimerDialog expectedDialog = new TimerDialog();
         expectedDialog.show(activity.getSupportFragmentManager(), DIALOG);
+        expectedDialog.dismiss();
+        
         assertNotNull(resultDialog);
         assertEquals(expectedDialog.getDialog().findViewById(R.id.timerDialogContainer).getId(),
                 resultDialog.findViewById(R.id.timerDialogContainer).getId());
