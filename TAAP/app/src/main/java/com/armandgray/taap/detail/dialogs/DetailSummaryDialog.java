@@ -10,15 +10,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Toast;
 
 import com.armandgray.taap.R;
 import com.armandgray.taap.models.SessionLog;
-import com.armandgray.taap.utils.SessionLogRvAdapter;
 
 import static com.armandgray.taap.log.LogActivity.SESSION_LOG;
 
@@ -71,32 +68,8 @@ public class DetailSummaryDialog extends DialogFragment {
                     }
                 })
                 .setNegativeButton(R.string.cancel, null);
-        setupRvSummary();
+        helper.setupRvSummary(activity, rvSummary);
         return builder.create();
-    }
-
-    private void setupRvSummary() {
-        if (getArguments() == null || getArguments().get(SESSION_LOG) == null) {
-            Toast.makeText(getActivity(), "Missing Required Session Log!", Toast.LENGTH_SHORT).show();
-            this.dismiss();
-            return;
-        }
-        SessionLog sessionLog = (SessionLog) getArguments().get(SESSION_LOG);
-        rvSummary.setAdapter(new SessionLogRvAdapter(sessionLog));
-        GridLayoutManager layoutManager = getGridLayoutManager();
-        rvSummary.setLayoutManager(layoutManager);
-    }
-
-    @NonNull
-    private GridLayoutManager getGridLayoutManager() {
-        GridLayoutManager layoutManager = new GridLayoutManager(activity, 2);
-        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                return position == 0 ? 2 : 1;
-            }
-        });
-        return layoutManager;
     }
 
     public interface DetailSummaryDialogListener {
