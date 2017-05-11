@@ -54,7 +54,7 @@ public class DrillDetailControllerTest {
     @Test
     public void doesShowTimerDialogOnFabClick() throws Exception {
         controller.views.fab.performClick();
-        
+        ShadowDialog.getLatestDialog().dismiss();
 
         Dialog resultDialog = ShadowDialog.getLatestDialog();
         TimerDialog expectedDialog = new TimerDialog();
@@ -73,7 +73,9 @@ public class DrillDetailControllerTest {
     @Test
     public void doesTrackActiveWorkTime() throws Exception {
         controller.views.fab.performClick();
+        ShadowDialog.getLatestDialog().dismiss();
         controller.views.fab.performClick();
+        ShadowDialog.getLatestDialog().dismiss();
 
         assertNotNull(controller.activeWorkTime);
         assertTrue(controller.activeWorkTime > 0);
@@ -82,8 +84,11 @@ public class DrillDetailControllerTest {
     @Test
     public void doesTrackRestTime() throws Exception {
         controller.views.fab.performClick();
+        ShadowDialog.getLatestDialog().dismiss();
         controller.views.fab.performClick();
+        ShadowDialog.getLatestDialog().dismiss();
         controller.views.fab.performClick();
+        ShadowDialog.getLatestDialog().dismiss();
 
         assertNotNull(controller.restTime);
         assertTrue(controller.restTime > 0);
@@ -91,11 +96,11 @@ public class DrillDetailControllerTest {
 
     @Test
     public void doesToastErrorIfSuccessesGreaterThanReps_OnBtnFinishedClick() throws Exception {
-        
         controller.views.npSuccesses.setValue(100);
         Dialog resultDialog = ShadowDialog.getLatestDialog();
 
         controller.views.fab.performClick();
+        ShadowDialog.getLatestDialog().dismiss();
         controller.views.btnFinished.performClick();
 
         assertNull(resultDialog);
@@ -107,8 +112,7 @@ public class DrillDetailControllerTest {
     @Test
     public void doesAddElapsedTimeToActiveWorkIfDrillActive_OnBtnFinishedClick() throws Exception {
         controller.views.fab.performClick();
-        Dialog resultDialog = ShadowDialog.getLatestDialog();
-        resultDialog.dismiss();
+        ShadowDialog.getLatestDialog().dismiss();
         controller.views.btnFinished.performClick();
 
         assertNotNull(controller.activeWorkTime);
@@ -118,10 +122,15 @@ public class DrillDetailControllerTest {
     @Test
     public void doesAssignSessionLogFields_OnBtnFinishedClick() throws Exception {
         controller.views.fab.performClick();
+        ShadowDialog.getLatestDialog().dismiss();
         controller.views.fab.performClick();
+        ShadowDialog.getLatestDialog().dismiss();
         controller.views.fab.performClick();
+        ShadowDialog.getLatestDialog().dismiss();
         controller.views.fab.performClick();
+        ShadowDialog.getLatestDialog().dismiss();
         controller.views.fab.performClick();
+        ShadowDialog.getLatestDialog().dismiss();
         controller.views.btnFinished.performClick();
 
         Calendar calendar = Calendar.getInstance();
@@ -135,6 +144,7 @@ public class DrillDetailControllerTest {
     @Test
     public void doesTogglePlayButtonOnTimerDialogDismiss() {
         controller.views.fab.performClick();
+        ShadowDialog.getLatestDialog().dismiss();
 
         Dialog resultDialog = ShadowDialog.getLatestDialog();
         View layout = LayoutInflater.from(activity)
