@@ -376,37 +376,7 @@ public class DatabaseContentProviderTest {
                 .query(CONTENT_URI_ALL, ALL_TABLE_COLUMNS, null, null, null);
 
         assertNotNull(cursor);
-        assertEquals(1, cursor.getCount());
-        assertTrue(cursor.moveToFirst());
-        assertThat(ALL_TABLE_COLUMNS, is(cursor.getColumnNames()));
-        assertEquals(TEST_SESSION_LOG.getDrill().getDrillId(),
-                cursor.getInt(cursor.getColumnIndex(DrillsTable.DRILL_ID)));
-        assertEquals(TEST_SESSION_LOG.getDrill().getTitle(),
-                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
-        assertEquals(TEST_SESSION_LOG.getDrill().getImageId(),
-                cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
-        assertThat(TEST_SESSION_LOG.getDrill().getCategory(), is(getStringAsArray(cursor.getString(
-                cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)))));
-        assertEquals(TEST_SESSION_LOG.getSessionId(),
-                cursor.getInt(cursor.getColumnIndex(LogsTable.LOG_ID)));
-        assertEquals(TEST_SESSION_LOG.getSessionDate().getTime(),
-                cursor.getLong(cursor.getColumnIndex(LogsTable.COLUMN_DATE)));
-        assertEquals(TEST_SESSION_LOG.getSessionLength().getTime(),
-                cursor.getLong(cursor.getColumnIndex(LogsTable.COLUMN_LENGTH)));
-        assertEquals(TEST_SESSION_LOG.getSessionGoal(),
-                cursor.getString(cursor.getColumnIndex(LogsTable.COLUMN_GOAL)));
-        assertEquals(TEST_SESSION_LOG.getActiveWork().getTime(),
-                cursor.getLong(cursor.getColumnIndex(LogsTable.COLUMN_ACTIVE_WORK)));
-        assertEquals(TEST_SESSION_LOG.getRestTime().getTime(),
-                cursor.getLong(cursor.getColumnIndex(LogsTable.COLUMN_REST_TIME)));
-        assertEquals(TEST_SESSION_LOG.getSetsCompleted(),
-                cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_SETS_COMPLETED)));
-        assertEquals(TEST_SESSION_LOG.getRepsCompleted(),
-                cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_REPS_COMPLETED)));
-        assertEquals(TEST_SESSION_LOG.getSuccessRate(),
-                cursor.getDouble(cursor.getColumnIndex(LogsTable.COLUMN_SUCCESS)));
-        assertEquals(TEST_SESSION_LOG.getDrill().getDrillId(),
-                cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_DRILL)));
+        assertCursorDataEqualsLogWithAllTableColumns(cursor, TEST_SESSION_LOG);
         cursor.close();
     }
 
@@ -460,9 +430,9 @@ public class DatabaseContentProviderTest {
     }
 
     public static void assertCursorDataEqualsDrill(Cursor cursor, Drill drill) {
+        assertEquals(1, cursor.getCount());
         assertTrue(cursor.moveToFirst());
         assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
-        assertEquals(1, cursor.getCount());
         assertEquals(drill.getDrillId(),
                 cursor.getInt(cursor.getColumnIndex(DrillsTable.DRILL_ID)));
         assertEquals(drill.getTitle(),
@@ -474,9 +444,43 @@ public class DatabaseContentProviderTest {
     }
 
     public static void assertCursorDataEqualsLog(Cursor cursor, SessionLog sessionLog) {
+        assertEquals(1, cursor.getCount());
         assertTrue(cursor.moveToFirst());
         assertEquals(LogsTable.ALL_LOG_COLUMNS.length, cursor.getColumnCount());
+        assertEquals(sessionLog.getSessionId(),
+                cursor.getInt(cursor.getColumnIndex(LogsTable.LOG_ID)));
+        assertEquals(sessionLog.getSessionDate().getTime(),
+                cursor.getLong(cursor.getColumnIndex(LogsTable.COLUMN_DATE)));
+        assertEquals(sessionLog.getSessionLength().getTime(),
+                cursor.getLong(cursor.getColumnIndex(LogsTable.COLUMN_LENGTH)));
+        assertEquals(sessionLog.getSessionGoal(),
+                cursor.getString(cursor.getColumnIndex(LogsTable.COLUMN_GOAL)));
+        assertEquals(sessionLog.getActiveWork().getTime(),
+                cursor.getLong(cursor.getColumnIndex(LogsTable.COLUMN_ACTIVE_WORK)));
+        assertEquals(sessionLog.getRestTime().getTime(),
+                cursor.getLong(cursor.getColumnIndex(LogsTable.COLUMN_REST_TIME)));
+        assertEquals(sessionLog.getSetsCompleted(),
+                cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_SETS_COMPLETED)));
+        assertEquals(sessionLog.getRepsCompleted(),
+                cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_REPS_COMPLETED)));
+        assertEquals(sessionLog.getSuccessRate(),
+                cursor.getDouble(cursor.getColumnIndex(LogsTable.COLUMN_SUCCESS)));
+        assertEquals(sessionLog.getDrill().getDrillId(),
+                cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_DRILL)));
+    }
+
+    private void assertCursorDataEqualsLogWithAllTableColumns(Cursor cursor, SessionLog sessionLog) {
         assertEquals(1, cursor.getCount());
+        assertTrue(cursor.moveToFirst());
+        assertThat(ALL_TABLE_COLUMNS, is(cursor.getColumnNames()));
+        assertEquals(sessionLog.getDrill().getDrillId(),
+                cursor.getInt(cursor.getColumnIndex(DrillsTable.DRILL_ID)));
+        assertEquals(sessionLog.getDrill().getTitle(),
+                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
+        assertEquals(sessionLog.getDrill().getImageId(),
+                cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
+        assertThat(sessionLog.getDrill().getCategory(), is(getStringAsArray(cursor.getString(
+                cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)))));
         assertEquals(sessionLog.getSessionId(),
                 cursor.getInt(cursor.getColumnIndex(LogsTable.LOG_ID)));
         assertEquals(sessionLog.getSessionDate().getTime(),

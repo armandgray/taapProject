@@ -59,6 +59,16 @@ public class SummaryDialogHelperTest {
     }
 
     @Test
+    public void doesSetSessionLogSuccessRecord() throws Exception {
+//        assertNotNull(dialog.helper.sessionLog);
+//        assertNotNull(cursor);
+//        assertEquals(1, cursor.getCount());
+//
+//        assertEquals(0.0, dialog.helper.sessionLog.getSuccessRecord());
+//        cursor.close();
+    }
+
+    @Test
     public void doesSetupRvSummary() throws Exception {
         Bundle savedInstanceState = new Bundle();
         AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
