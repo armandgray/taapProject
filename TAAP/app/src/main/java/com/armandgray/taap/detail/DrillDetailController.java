@@ -84,7 +84,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     }
 
     public void onTimerDismiss() {
-
+        togglePausePlay();
     }
 
     void onSummaryDialogDismiss() {
