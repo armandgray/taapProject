@@ -1,4 +1,4 @@
-package com.armandgray.taap.detail;
+package com.armandgray.taap.detail.dialogs;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
+import com.armandgray.taap.detail.DrillDetailActivity;
 
 import org.junit.After;
 import org.junit.Before;

@@ -1,4 +1,4 @@
-package com.armandgray.taap.detail;
+package com.armandgray.taap.detail.dialogs;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;

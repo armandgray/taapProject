@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
+import com.armandgray.taap.detail.dialogs.TimerDialog;
 
 import org.junit.After;
 import org.junit.Before;
