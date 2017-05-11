@@ -1,6 +1,14 @@
 package com.armandgray.taap.detail.dialogs;
 
+import android.app.AlertDialog;
+import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.LinearLayout;
+
 import com.armandgray.taap.BuildConfig;
+import com.armandgray.taap.R;
 import com.armandgray.taap.detail.DrillDetailActivity;
 import com.armandgray.taap.models.SessionLog;
 
@@ -15,12 +23,14 @@ import org.robolectric.annotation.Config;
 
 import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
 public class SummaryDialogControllerTest {
 
-    public static final String DIALOG_CLASS_NAME = "com.armandgray.taap.detail.dialogs.DetailSummaryDialog";
+    private static final String DIALOG_CLASS_NAME = "com.armandgray.taap.detail.dialogs.DetailSummaryDialog";
     private ActivityController<DrillDetailActivity> activityController;
     private DrillDetailActivity activity;
     private DetailSummaryDialog dialog;
@@ -39,6 +49,40 @@ public class SummaryDialogControllerTest {
     @Test
     public void dialogInstanceOfDialogFragment_TestConstructor() throws Exception {
         assertEquals(DIALOG_CLASS_NAME, controller.dialog.getClass().getName());
+    }
+
+    @Test
+    public void existsView_RvSummary_DetailSummaryDialogLayout() {
+        LinearLayout detailSummaryDialogLayout = (LinearLayout) View
+                .inflate(activity, R.layout.detail_summary_dialog_layout, null);
+        assertNotNull(detailSummaryDialogLayout.findViewById(R.id.rvSummary));
+    }
+
+    @Test
+    public void doesSetupRvSummary() throws Exception {
+        Bundle savedInstanceState = new Bundle();
+        AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
+        resultDialog.show();
+
+        RecyclerView rvSummary = (RecyclerView) resultDialog.findViewById(R.id.rvSummary);
+        assertNotNull(rvSummary);
+        assertNotNull(rvSummary.getAdapter());
+        assertNotNull(rvSummary.getLayoutManager());
+        assertTrue(rvSummary.getLayoutManager() instanceof GridLayoutManager);
+        assertTrue(rvSummary.getAdapter().getItemCount() > 0);
+        resultDialog.dismiss();
+    }
+
+    @Test
+    public void doesSetHeaderSpanSize_TestMethod_SetupRvSummary() throws Exception {
+        Bundle savedInstanceState = new Bundle();
+        AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
+        resultDialog.show();
+
+        RecyclerView rvSummary = (RecyclerView) resultDialog.findViewById(R.id.rvSummary);
+        GridLayoutManager gridLayoutManager = (GridLayoutManager) rvSummary.getLayoutManager();
+        assertEquals(2, gridLayoutManager.getSpanSizeLookup().getSpanSize(0));
+        resultDialog.dismiss();
     }
 
     @After

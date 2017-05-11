@@ -5,8 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -32,7 +30,6 @@ import static com.armandgray.taap.log.LogActivity.SESSION_LOG;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
@@ -92,13 +89,6 @@ public class DetailSummaryDialogTest {
     }
 
     @Test
-    public void existsView_RvSummary_DetailSummaryDialogLayout() {
-        LinearLayout detailSummaryDialogLayout = (LinearLayout) View
-                .inflate(activity, R.layout.detail_summary_dialog_layout, null);
-        assertNotNull(detailSummaryDialogLayout.findViewById(R.id.rvSummary));
-    }
-
-    @Test
     public void doesHaveCustomView_TestOnCreateDialog() {
         Bundle savedInstanceState = new Bundle();
         AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
@@ -139,33 +129,6 @@ public class DetailSummaryDialogTest {
         Button btnCancel = resultDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
         btnCancel.performClick();
         assertFalse(resultDialog.isShowing());
-    }
-
-    @Test
-    public void doesSetupRvSummary() throws Exception {
-        Bundle savedInstanceState = new Bundle();
-        AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
-        resultDialog.show();
-
-        RecyclerView rvSummary = (RecyclerView) resultDialog.findViewById(R.id.rvSummary);
-        assertNotNull(rvSummary);
-        assertNotNull(rvSummary.getAdapter());
-        assertNotNull(rvSummary.getLayoutManager());
-        assertTrue(rvSummary.getLayoutManager() instanceof GridLayoutManager);
-        assertTrue(rvSummary.getAdapter().getItemCount() > 0);
-        resultDialog.dismiss();
-    }
-
-    @Test
-    public void doesSetHeaderSpanSize_TestMethod_SetupRvDrills() throws Exception {
-        Bundle savedInstanceState = new Bundle();
-        AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
-        resultDialog.show();
-
-        RecyclerView rvSummary = (RecyclerView) resultDialog.findViewById(R.id.rvSummary);
-        GridLayoutManager gridLayoutManager = (GridLayoutManager) rvSummary.getLayoutManager();
-        assertEquals(2, gridLayoutManager.getSpanSizeLookup().getSpanSize(0));
-        resultDialog.dismiss();
     }
 
     @After
