@@ -23,7 +23,6 @@ public class DetailSummaryDialog extends DialogFragment {
 
     public static final String DIALOG = "DIALOG";
     Activity activity;
-    private RecyclerView rvSummary;
     public DetailSummaryDialogListener listener;
     @VisibleForTesting
     SummaryDialogHelper helper;
@@ -41,35 +40,26 @@ public class DetailSummaryDialog extends DialogFragment {
         super.onAttach(context);
 
         helper = new SummaryDialogHelper(this);
-        assignDetailActivityAsListener(context);
-    }
-
-    private void assignDetailActivityAsListener(Context context) {
-        try {
-            listener = (DetailSummaryDialogListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString()
-                    + " must implement DetailSummaryDialogListener");
-        }
+        listener = helper.getDetailActivityAsListener(context);
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         @SuppressLint("InflateParams") View dialogLayout = LayoutInflater.from(getActivity())
                 .inflate(R.layout.detail_summary_dialog_layout, null);
-        rvSummary = (RecyclerView) dialogLayout.findViewById(R.id.rvSummary);
-        builder.setView(dialogLayout)
+        RecyclerView rvSummary = (RecyclerView) dialogLayout.findViewById(R.id.rvSummary);
+        helper.setupRvSummary(activity, rvSummary);
+
+        return new AlertDialog.Builder(getActivity()).setView(dialogLayout)
                 .setPositiveButton(R.string.continue_string, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         listener.onDialogContinue();
                     }
                 })
-                .setNegativeButton(R.string.cancel, null);
-        helper.setupRvSummary(activity, rvSummary);
-        return builder.create();
+                .setNegativeButton(R.string.cancel, null)
+                .create();
     }
 
     public interface DetailSummaryDialogListener {

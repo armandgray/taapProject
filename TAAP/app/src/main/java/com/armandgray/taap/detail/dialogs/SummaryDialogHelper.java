@@ -1,6 +1,7 @@
 package com.armandgray.taap.detail.dialogs;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.GridLayoutManager;
@@ -16,8 +17,19 @@ class SummaryDialogHelper {
 
     @VisibleForTesting DetailSummaryDialog dialog;
 
-    public SummaryDialogHelper(DetailSummaryDialog dialog) {
+    SummaryDialogHelper(DetailSummaryDialog dialog) {
         this.dialog = dialog;
+    }
+
+    DetailSummaryDialog.DetailSummaryDialogListener getDetailActivityAsListener(Context context) {
+        DetailSummaryDialog.DetailSummaryDialogListener listener;
+        try {
+            listener = (DetailSummaryDialog.DetailSummaryDialogListener) context;
+            return listener;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement DetailSummaryDialogListener");
+        }
     }
 
     void setupRvSummary(Activity activity, RecyclerView rvSummary) {
