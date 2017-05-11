@@ -43,6 +43,11 @@ public class DetailSummaryDialog extends DialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
+        controller = new SummaryDialogController(this);
+        assignDetailActivityAsListener(context);
+    }
+
+    private void assignDetailActivityAsListener(Context context) {
         try {
             listener = (DetailSummaryDialogListener) context;
         } catch (ClassCastException e) {

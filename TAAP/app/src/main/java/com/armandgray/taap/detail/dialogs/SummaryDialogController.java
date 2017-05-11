@@ -4,6 +4,9 @@ import android.support.annotation.VisibleForTesting;
 
 class SummaryDialogController {
 
-    @VisibleForTesting
-    DetailSummaryDialog dialog;
+    @VisibleForTesting DetailSummaryDialog dialog;
+
+    public SummaryDialogController(DetailSummaryDialog dialog) {
+        this.dialog = dialog;
+    }
 }
