@@ -2,6 +2,7 @@ package com.armandgray.taap.log;
 
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
@@ -23,71 +24,65 @@ public class LogActivityResTest {
 
     private ActivityController<LogActivity> activityController;
     private LogActivity activity;
+    private LinearLayout container;
 
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
         activityController = Robolectric.buildActivity(LogActivity.class);
         activity = activityController.create().visible().get();
+        ScrollView layout = (ScrollView) View.inflate(activity, R.layout.content_log, null);
+        container = (LinearLayout) layout.findViewById(R.id.logContainer);
     }
 
     @Test
     public void hasLayout_DetailContainer() throws Exception {
-        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         assertNotNull(container.findViewById(R.id.detailContainer));
     }
 
     @Test
     public void hasLayout_TotalSessionTime_DetailContainer() throws Exception {
-        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         LinearLayout detailContainer = (LinearLayout) container.findViewById(R.id.detailContainer);
         assertNotNull(detailContainer.findViewById(R.id.layoutTotalSessionTime));
     }
 
     @Test
     public void hasLayout_TotalActiveTime_DetailContainer() throws Exception {
-        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         LinearLayout detailContainer = (LinearLayout) container.findViewById(R.id.detailContainer);
         assertNotNull(detailContainer.findViewById(R.id.layoutTotalActiveTime));
     }
 
     @Test
     public void hasLayout_TotalRestTime_DetailContainer() throws Exception {
-        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         LinearLayout detailContainer = (LinearLayout) container.findViewById(R.id.detailContainer);
         assertNotNull(detailContainer.findViewById(R.id.layoutTotalRestTime));
     }
 
     @Test
     public void hasLayout_ExercisesCompleted_DetailContainer() throws Exception {
-        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         LinearLayout detailContainer = (LinearLayout) container.findViewById(R.id.detailContainer);
         assertNotNull(detailContainer.findViewById(R.id.layoutExercisesCompleted));
     }
 
     @Test
     public void hasLayout_RepsCompleted_DetailContainer() throws Exception {
-        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         LinearLayout detailContainer = (LinearLayout) container.findViewById(R.id.detailContainer);
         assertNotNull(detailContainer.findViewById(R.id.layoutRepsCompleted));
     }
 
     @Test
     public void hasLayout_RecordsContainer() throws Exception {
-        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         assertNotNull(container.findViewById(R.id.recordsContainer));
     }
 
     @Test
     public void hasView_TvDate_RecordsContainer() throws Exception {
-        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         LinearLayout recordsContainer = (LinearLayout) container.findViewById(R.id.recordsContainer);
         assertNotNull(recordsContainer.findViewById(R.id.tvDate));
     }
 
     @Test
     public void hasLayout_TvGoalsMet_RecordsContainer() throws Exception {
-        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         LinearLayout recordsContainer = (LinearLayout) container.findViewById(R.id.recordsContainer);
         LinearLayout goalsMetContainer = (LinearLayout) recordsContainer
                 .findViewById(R.id.goalsMetContainer);
@@ -99,42 +94,36 @@ public class LogActivityResTest {
 
     @Test
     public void hasLayout_Fundamentals_RecordsContainer() throws Exception {
-        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         LinearLayout recordsContainer = (LinearLayout) container.findViewById(R.id.recordsContainer);
         assertNotNull(recordsContainer.findViewById(R.id.layoutFundamentals));
     }
 
     @Test
     public void hasLayout_Defense_RecordsContainer() throws Exception {
-        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         LinearLayout recordsContainer = (LinearLayout) container.findViewById(R.id.recordsContainer);
         assertNotNull(recordsContainer.findViewById(R.id.layoutDefense));
     }
 
     @Test
     public void hasLayout_OffBallOffense_RecordsContainer() throws Exception {
-        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         LinearLayout recordsContainer = (LinearLayout) container.findViewById(R.id.recordsContainer);
         assertNotNull(recordsContainer.findViewById(R.id.layoutOffense));
     }
 
     @Test
     public void hasLayout_Conditioning_RecordsContainer() throws Exception {
-        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         LinearLayout recordsContainer = (LinearLayout) container.findViewById(R.id.recordsContainer);
         assertNotNull(recordsContainer.findViewById(R.id.layoutConditioning));
     }
 
     @Test
     public void hasLayout_Shooting_RecordsContainer() throws Exception {
-        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         LinearLayout recordsContainer = (LinearLayout) container.findViewById(R.id.recordsContainer);
         assertNotNull(recordsContainer.findViewById(R.id.layoutShooting));
     }
 
     @Test
     public void hasLayout_BallHandling_RecordsContainer() throws Exception {
-        LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_log, null);
         LinearLayout recordsContainer = (LinearLayout) container.findViewById(R.id.recordsContainer);
         assertNotNull(recordsContainer.findViewById(R.id.layoutBallHandling));
     }
