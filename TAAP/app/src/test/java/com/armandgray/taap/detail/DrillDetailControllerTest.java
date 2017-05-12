@@ -48,6 +48,10 @@ import static org.hamcrest.core.IsEqual.equalTo;
 @Config(constants = BuildConfig.class)
 public class DrillDetailControllerTest {
 
+    public static final SessionLog DUMMY_SESSION_LOG = new SessionLog.Builder()
+            .successRate(1.00)
+            .drill(TEST_SESSION_LOG.getDrill())
+            .create();
     private ActivityController<DrillDetailActivity> activityController;
     private DrillDetailActivity activity;
     private DrillDetailController controller;
@@ -129,6 +133,8 @@ public class DrillDetailControllerTest {
 
     @Test
     public void doesAddElapsedTimeToActiveWorkIfDrillActive_OnBtnFinishedClick() throws Exception {
+        controller.sessionLog = DUMMY_SESSION_LOG;
+
         controller.views.fab.performClick();
         ShadowDialog.getLatestDialog().dismiss();
         controller.views.btnFinished.performClick();
@@ -148,6 +154,8 @@ public class DrillDetailControllerTest {
 
     @Test
     public void doesAssignSessionLogFields_OnBtnFinishedClick() throws Exception {
+        controller.sessionLog = DUMMY_SESSION_LOG;
+
         controller.views.fab.performClick();
         ShadowDialog.getLatestDialog().dismiss();
         controller.views.fab.performClick();
@@ -169,9 +177,7 @@ public class DrillDetailControllerTest {
 
     @Test
     public void doesSetSessionLogSuccessRecord() throws Exception {
-        controller.sessionLog = new SessionLog.Builder()
-                .successRate(1.00)
-                .create();
+        controller.sessionLog = DUMMY_SESSION_LOG;
         controller.views.npSets.setValue(1);
         controller.views.npReps.setValue(1);
         controller.views.npSuccesses.setValue(1);

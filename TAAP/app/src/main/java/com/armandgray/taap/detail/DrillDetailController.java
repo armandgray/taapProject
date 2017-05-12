@@ -1,6 +1,8 @@
 package com.armandgray.taap.detail;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
@@ -12,8 +14,14 @@ import com.armandgray.taap.detail.dialogs.TimerDialog;
 import com.armandgray.taap.log.LogActivity;
 import com.armandgray.taap.models.SessionLog;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.armandgray.taap.db.DatabaseContentProvider.ALL_TABLE_COLUMNS;
+import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_ALL;
 import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
 import static com.armandgray.taap.log.LogActivity.SESSION_LOG;
+import static com.armandgray.taap.utils.CursorDataHelper.addAllLogsData;
 import static com.armandgray.taap.utils.DateTimeHelper.getTimeElapsedAsDate;
 
 class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener {
@@ -74,7 +82,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
                 .setsCompleted(views.npSets.getValue())
                 .repsCompleted(views.npReps.getValue())
                 .successRate(getOverallRateFromPickers())
-                .successRecord(getOverallRateFromPickers())
+                .successRecord(getOverallSuccessRecord())
                 .drill(views.drill)
                 .create();
         DetailSummaryDialog.newInstance(sessionLog).show(fragmentManager, DIALOG);
@@ -87,7 +95,35 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
                 : views.npSuccesses.getValue() * 1.0 / (reps * views.npSets.getValue());
     }
 
-    public void onTimerDismiss() {
+    private double getOverallSuccessRecord() {
+        Cursor cursor = getCursorAllLogsForDrill();
+        if (cursor == null) { return 0; }
+
+        List<SessionLog> listAllLogs = new ArrayList<>();
+        addAllLogsData(cursor, listAllLogs);
+        cursor.close();
+
+        return getAvgSuccessRate(listAllLogs);
+    }
+
+    private Cursor getCursorAllLogsForDrill() {
+        int drillId = sessionLog.getDrill().getDrillId();
+        String[] selectionArgs = {String.valueOf(drillId)};
+        Uri uri = Uri.parse(CONTENT_URI_ALL + "/" + drillId);
+        return activity.getContentResolver()
+                .query(uri, ALL_TABLE_COLUMNS, null, selectionArgs, null);
+    }
+
+    private double getAvgSuccessRate(List<SessionLog> listAllLogs) {
+        double avg = 0.0;
+        for (SessionLog log : listAllLogs) { avg += log.getSuccessRate(); }
+        avg += getOverallRateFromPickers();
+        avg /= listAllLogs.size() + 1;
+        avg = Math.floor(avg * 100) / 100;
+        return avg;
+    }
+
+    void onTimerDismiss() {
         togglePausePlay();
     }
 
