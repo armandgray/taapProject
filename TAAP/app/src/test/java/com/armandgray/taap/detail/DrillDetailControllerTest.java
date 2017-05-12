@@ -24,7 +24,9 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowDialog;
 import org.robolectric.shadows.ShadowToast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import static com.armandgray.taap.db.DatabaseContentProvider.ALL_TABLE_COLUMNS;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_ALL;
@@ -33,6 +35,7 @@ import static com.armandgray.taap.db.DatabaseContentProvider.insertLogToDatabase
 import static com.armandgray.taap.db.DatabaseContentProviderTest.TEST_SESSION_LOG;
 import static com.armandgray.taap.db.DatabaseContentProviderTest.assertCursorDataEqualsLogWithAllTableColumns;
 import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
+import static com.armandgray.taap.utils.CursorDataHelper.addAllLogsData;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
@@ -174,27 +177,27 @@ public class DrillDetailControllerTest {
         Uri uri = Uri.parse(CONTENT_URI_ALL + "/" + drillId);
         Cursor cursor = RuntimeEnvironment.application.getContentResolver()
                 .query(uri, ALL_TABLE_COLUMNS, null, selectionArgs, null);
-//
-//        List<SessionLog> listAllLogs = new ArrayList<>();
-//        addAllLogsData(cursor, listAllLogs);
+
+        List<SessionLog> listAllLogs = new ArrayList<>();
+        addAllLogsData(cursor, listAllLogs);
         controller.sessionLog = new SessionLog.Builder()
                 .successRate(1.00)
                 .create();
-//
-//        double avg = 0.0;
-//        for (SessionLog log : listAllLogs) { avg += log.getSuccessRate(); }
-//        avg += controller.sessionLog.getSuccessRate();
-//        avg /= listAllLogs.size() + 1;
-//        avg = Math.floor(avg * 100) / 100;
-//
+
+        double avg = 0.0;
+        for (SessionLog log : listAllLogs) { avg += log.getSuccessRate(); }
+        avg += controller.sessionLog.getSuccessRate();
+        avg /= listAllLogs.size() + 1;
+        avg = Math.floor(avg * 100) / 100;
+
         assertCursorDataEqualsLogWithAllTableColumns(cursor, TEST_SESSION_LOG);
         assertNotNull(controller.sessionLog);
         assertNotNull(cursor);
         assertEquals(1, cursor.getCount());
-//        assertEquals(1, listAllLogs.size());
-//        assertEquals(TEST_SESSION_LOG.getSuccessRate(), listAllLogs.get(0).getSuccessRate());
-//        assertEquals(1.00, controller.sessionLog.getSuccessRate());
-//        assertEquals(avg, controller.sessionLog.getSuccessRecord());
+        assertEquals(1, listAllLogs.size());
+        assertEquals(TEST_SESSION_LOG.getSuccessRate(), listAllLogs.get(0).getSuccessRate());
+        assertEquals(1.00, controller.sessionLog.getSuccessRate());
+        assertEquals(avg, controller.sessionLog.getSuccessRecord());
         cursor.close();
     }
 
