@@ -82,17 +82,19 @@ public class SummaryDialogHelperTest {
         Cursor cursor = RuntimeEnvironment.application.getContentResolver()
                 .query(uri, ALL_TABLE_COLUMNS, null, selectionArgs, null);
 
-        assertNotNull(cursor);
-        assertCursorDataEqualsLogWithAllTableColumns(cursor, TEST_SESSION_LOG);
-
         List<SessionLog> listAllLogs = new ArrayList<>();
         addAllLogsData(cursor, listAllLogs);
+        dialog.helper.sessionLog = new SessionLog.Builder()
+                .successRate(1.00)
+                .create();
 
+        assertCursorDataEqualsLogWithAllTableColumns(cursor, TEST_SESSION_LOG);
         assertNotNull(dialog.helper.sessionLog);
         assertNotNull(cursor);
         assertEquals(1, cursor.getCount());
-
-        assertEquals(0.0, dialog.helper.sessionLog.getSuccessRecord());
+        assertEquals(1, listAllLogs.size());
+        assertEquals(TEST_SESSION_LOG.getSuccessRate(), listAllLogs.get(0).getSuccessRate());
+        assertEquals(1.00, dialog.helper.sessionLog.getSuccessRate());
         cursor.close();
     }
 
