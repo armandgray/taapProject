@@ -194,11 +194,10 @@ public class DrillDetailControllerTest {
 
         List<SessionLog> listAllLogs = new ArrayList<>();
         addAllLogsData(cursor, listAllLogs);
-        double avg = 0.0;
-        for (SessionLog log : listAllLogs) { avg += log.getSuccessRate(); }
-        avg += controller.sessionLog.getSuccessRate();
-        avg /= listAllLogs.size() + 1;
-        avg = Math.floor(avg * 100) / 100;
+        double max = controller.sessionLog.getSuccessRate();
+        for (SessionLog log : listAllLogs) {
+            if (log.getSuccessRate() > max) { max = log.getSuccessRate(); }
+        }
 
         controller.views.fab.performClick();
         ShadowDialog.getLatestDialog().dismiss();
@@ -211,7 +210,7 @@ public class DrillDetailControllerTest {
         assertEquals(1, listAllLogs.size());
         assertEquals(TEST_SESSION_LOG.getSuccessRate(), listAllLogs.get(0).getSuccessRate());
         assertEquals(1.00, controller.sessionLog.getSuccessRate());
-        assertEquals(avg, controller.sessionLog.getSuccessRecord());
+        assertEquals(max, controller.sessionLog.getSuccessRecord());
         cursor.close();
     }
 
