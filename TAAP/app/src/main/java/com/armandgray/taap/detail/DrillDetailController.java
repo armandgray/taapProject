@@ -103,7 +103,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
         addAllLogsData(cursor, listAllLogs);
         cursor.close();
 
-        return getAvgSuccessRate(listAllLogs);
+        return getMaxSuccessRate(listAllLogs);
     }
 
     private Cursor getCursorAllLogsForDrill() {
@@ -114,13 +114,12 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
                 .query(uri, ALL_TABLE_COLUMNS, null, selectionArgs, null);
     }
 
-    private double getAvgSuccessRate(List<SessionLog> listAllLogs) {
-        double avg = 0.0;
-        for (SessionLog log : listAllLogs) { avg += log.getSuccessRate(); }
-        avg += getOverallRateFromPickers();
-        avg /= listAllLogs.size() + 1;
-        avg = Math.floor(avg * 100) / 100;
-        return avg;
+    private double getMaxSuccessRate(List<SessionLog> listAllLogs) {
+        double max = sessionLog.getSuccessRate();
+        for (SessionLog log : listAllLogs) {
+            if (log.getSuccessRate() > max) { max = log.getSuccessRate(); }
+        }
+        return max;
     }
 
     void onTimerDismiss() {
