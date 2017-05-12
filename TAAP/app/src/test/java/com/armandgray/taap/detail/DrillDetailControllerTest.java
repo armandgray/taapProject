@@ -169,6 +169,12 @@ public class DrillDetailControllerTest {
 
     @Test
     public void doesSetSessionLogSuccessRecord() throws Exception {
+        controller.sessionLog = new SessionLog.Builder()
+                .successRate(1.00)
+                .create();
+        controller.views.npReps.setValue(1);
+        controller.views.npSuccesses.setValue(1);
+
         insertDrillToDatabase(TEST_SESSION_LOG.getDrill(), RuntimeEnvironment.application);
         insertLogToDatabase(TEST_SESSION_LOG, RuntimeEnvironment.application);
 
@@ -178,17 +184,18 @@ public class DrillDetailControllerTest {
         Cursor cursor = RuntimeEnvironment.application.getContentResolver()
                 .query(uri, ALL_TABLE_COLUMNS, null, selectionArgs, null);
 
+
         List<SessionLog> listAllLogs = new ArrayList<>();
         addAllLogsData(cursor, listAllLogs);
-        controller.sessionLog = new SessionLog.Builder()
-                .successRate(1.00)
-                .create();
-
         double avg = 0.0;
         for (SessionLog log : listAllLogs) { avg += log.getSuccessRate(); }
         avg += controller.sessionLog.getSuccessRate();
         avg /= listAllLogs.size() + 1;
         avg = Math.floor(avg * 100) / 100;
+
+        controller.views.fab.performClick();
+        ShadowDialog.getLatestDialog().dismiss();
+        controller.views.btnFinished.performClick();
 
         assertCursorDataEqualsLogWithAllTableColumns(cursor, TEST_SESSION_LOG);
         assertNotNull(controller.sessionLog);
