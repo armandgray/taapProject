@@ -3,9 +3,6 @@ package com.armandgray.taap.log;
 import android.database.Cursor;
 import android.support.annotation.VisibleForTesting;
 
-import com.armandgray.taap.db.DrillsTable;
-import com.armandgray.taap.db.LogsTable;
-import com.armandgray.taap.models.Drill;
 import com.armandgray.taap.models.SessionLog;
 
 import java.util.ArrayList;
@@ -26,11 +23,11 @@ import static com.armandgray.taap.models.Drill.SHOOTING;
 import static com.armandgray.taap.models.SessionLog.ACTIVE_WORK;
 import static com.armandgray.taap.models.SessionLog.REST_TIME;
 import static com.armandgray.taap.models.SessionLog.SESSION_LENGTH;
+import static com.armandgray.taap.utils.CursorDataHelper.retrieveAllLogsData;
 import static com.armandgray.taap.utils.DateTimeHelper.getDateFormattedAsString;
 import static com.armandgray.taap.utils.DateTimeHelper.getTotalTimeAsDate;
 import static com.armandgray.taap.utils.MathHelper.getAveragePercentage;
 import static com.armandgray.taap.utils.MathHelper.getPercentFormattedAsString;
-import static com.armandgray.taap.utils.StringHelper.getStringAsArray;
 
 class LogActivityController {
 
@@ -66,63 +63,11 @@ class LogActivityController {
         Cursor cursor = activity.getContentResolver().query(CONTENT_URI_ALL, ALL_TABLE_COLUMNS,
                 null, null, null);
         if (cursor == null) { return; }
-        retrieveAllLogsData(cursor);
+        retrieveAllLogsData(cursor, listAllLogs);
         cursor.close();
 
         retrieveFieldData();
         setViewFields();
-    }
-
-    private void retrieveAllLogsData(Cursor cursor) {
-        while (cursor.moveToNext()) {
-            SessionLog logAtCurrentPosition = getLogAtCurrentPosition(cursor);
-            listAllLogs.add(logAtCurrentPosition);
-        }
-    }
-
-    private SessionLog getLogAtCurrentPosition(Cursor cursor) {
-        int columnLogId = cursor.getColumnIndex(LogsTable.LOG_ID);
-        int columnDate = cursor.getColumnIndex(LogsTable.COLUMN_DATE);
-        int columnLength = cursor.getColumnIndex(LogsTable.COLUMN_LENGTH);
-        int columnGoal = cursor.getColumnIndex(LogsTable.COLUMN_GOAL);
-        int columnActiveWork = cursor.getColumnIndex(LogsTable.COLUMN_ACTIVE_WORK);
-        int columnRestTime = cursor.getColumnIndex(LogsTable.COLUMN_REST_TIME);
-        int columnSetsCompleted = cursor.getColumnIndex(LogsTable.COLUMN_SETS_COMPLETED);
-        int columnRepsCompleted = cursor.getColumnIndex(LogsTable.COLUMN_REPS_COMPLETED);
-        int columnSuccess = cursor.getColumnIndex(LogsTable.COLUMN_SUCCESS);
-
-        Drill drill = getLogDrillFromCursor(cursor);
-        if (drill == null) { return null; }
-
-        SessionLog sessionLog = new SessionLog.Builder()
-                .sessionLength(new Date(cursor.getLong(columnLength)))
-                .sessionGoal(cursor.getString(columnGoal))
-                .activeWork(new Date(cursor.getLong(columnActiveWork)))
-                .restTime(new Date(cursor.getLong(columnRestTime)))
-                .setsCompleted(cursor.getInt(columnSetsCompleted))
-                .repsCompleted(cursor.getInt(columnRepsCompleted))
-                .successRate(cursor.getDouble(columnSuccess))
-                .drill(drill)
-                .create();
-        sessionLog.setSessionDate(new Date(cursor.getLong(columnDate)));
-        sessionLog.setSessionId(cursor.getInt(columnLogId));
-        return sessionLog;
-    }
-
-    private Drill getLogDrillFromCursor(Cursor cursor) {
-        int columnLogDrill = cursor.getColumnIndex(LogsTable.COLUMN_DRILL);
-        int columnDrillId = cursor.getColumnIndex(DrillsTable.DRILL_ID);
-        int columnTitle = cursor.getColumnIndex(DrillsTable.COLUMN_TITLE);
-        int columnImageId = cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID);
-        int columnCategory = cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY);
-
-        if (cursor.getInt(columnDrillId) != cursor.getInt(columnLogDrill)) { return null; }
-        Drill drill = new Drill(
-                cursor.getString(columnTitle),
-                cursor.getInt(columnImageId),
-                getStringAsArray(cursor.getString(columnCategory)));
-        drill.setDrillId(cursor.getInt(columnDrillId));
-        return drill;
     }
 
     private void retrieveFieldData() {
