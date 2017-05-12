@@ -115,7 +115,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     }
 
     private double getMaxSuccessRate(List<SessionLog> listAllLogs) {
-        double max = sessionLog.getSuccessRate();
+        double max = getOverallRateFromPickers();
         for (SessionLog log : listAllLogs) {
             if (log.getSuccessRate() > max) { max = log.getSuccessRate(); }
         }
