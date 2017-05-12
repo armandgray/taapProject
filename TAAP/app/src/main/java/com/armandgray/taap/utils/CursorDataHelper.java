@@ -14,7 +14,7 @@ import static com.armandgray.taap.utils.StringHelper.getStringAsArray;
 
 public class CursorDataHelper {
 
-    public static void retrieveAllLogsData(Cursor cursor, List<SessionLog> logs) {
+    public static void addAllLogsData(Cursor cursor, List<SessionLog> logs) {
         while (cursor.moveToNext()) {
             SessionLog logAtCurrentPosition = getLogAtCurrentPosition(cursor);
             logs.add(logAtCurrentPosition);

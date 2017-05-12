@@ -488,7 +488,7 @@ public class DatabaseContentProviderTest {
                 cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_DRILL)));
     }
 
-    private void assertCursorDataEqualsLogWithAllTableColumns(Cursor cursor, SessionLog sessionLog) {
+    public static void assertCursorDataEqualsLogWithAllTableColumns(Cursor cursor, SessionLog sessionLog) {
         assertEquals(1, cursor.getCount());
         assertTrue(cursor.moveToFirst());
         assertThat(ALL_TABLE_COLUMNS, is(cursor.getColumnNames()));

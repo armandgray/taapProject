@@ -23,7 +23,7 @@ import static com.armandgray.taap.models.Drill.SHOOTING;
 import static com.armandgray.taap.models.SessionLog.ACTIVE_WORK;
 import static com.armandgray.taap.models.SessionLog.REST_TIME;
 import static com.armandgray.taap.models.SessionLog.SESSION_LENGTH;
-import static com.armandgray.taap.utils.CursorDataHelper.retrieveAllLogsData;
+import static com.armandgray.taap.utils.CursorDataHelper.addAllLogsData;
 import static com.armandgray.taap.utils.DateTimeHelper.getDateFormattedAsString;
 import static com.armandgray.taap.utils.DateTimeHelper.getTotalTimeAsDate;
 import static com.armandgray.taap.utils.MathHelper.getAveragePercentage;
@@ -63,7 +63,7 @@ class LogActivityController {
         Cursor cursor = activity.getContentResolver().query(CONTENT_URI_ALL, ALL_TABLE_COLUMNS,
                 null, null, null);
         if (cursor == null) { return; }
-        retrieveAllLogsData(cursor, listAllLogs);
+        addAllLogsData(cursor, listAllLogs);
         cursor.close();
 
         retrieveFieldData();

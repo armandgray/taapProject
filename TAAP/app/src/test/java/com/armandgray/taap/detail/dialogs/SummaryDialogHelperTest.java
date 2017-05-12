@@ -1,6 +1,8 @@
 package com.armandgray.taap.detail.dialogs;
 
 import android.app.AlertDialog;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,10 +20,21 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.armandgray.taap.db.DatabaseContentProvider.ALL_TABLE_COLUMNS;
+import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_ALL;
+import static com.armandgray.taap.db.DatabaseContentProvider.insertDrillToDatabase;
+import static com.armandgray.taap.db.DatabaseContentProvider.insertLogToDatabase;
+import static com.armandgray.taap.db.DatabaseContentProviderTest.TEST_SESSION_LOG;
+import static com.armandgray.taap.db.DatabaseContentProviderTest.assertCursorDataEqualsLogWithAllTableColumns;
 import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
+import static com.armandgray.taap.utils.CursorDataHelper.addAllLogsData;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
@@ -60,12 +73,27 @@ public class SummaryDialogHelperTest {
 
     @Test
     public void doesSetSessionLogSuccessRecord() throws Exception {
-//        assertNotNull(dialog.helper.sessionLog);
-//        assertNotNull(cursor);
-//        assertEquals(1, cursor.getCount());
-//
-//        assertEquals(0.0, dialog.helper.sessionLog.getSuccessRecord());
-//        cursor.close();
+        insertDrillToDatabase(TEST_SESSION_LOG.getDrill(), RuntimeEnvironment.application);
+        insertLogToDatabase(TEST_SESSION_LOG, RuntimeEnvironment.application);
+
+        int drillId = TEST_SESSION_LOG.getDrill().getDrillId();
+        String[] selectionArgs = {String.valueOf(drillId)};
+        Uri uri = Uri.parse(CONTENT_URI_ALL + "/" + drillId);
+        Cursor cursor = RuntimeEnvironment.application.getContentResolver()
+                .query(uri, ALL_TABLE_COLUMNS, null, selectionArgs, null);
+
+        assertNotNull(cursor);
+        assertCursorDataEqualsLogWithAllTableColumns(cursor, TEST_SESSION_LOG);
+
+        List<SessionLog> listAllLogs = new ArrayList<>();
+        addAllLogsData(cursor, listAllLogs);
+
+        assertNotNull(dialog.helper.sessionLog);
+        assertNotNull(cursor);
+        assertEquals(1, cursor.getCount());
+
+        assertEquals(0.0, dialog.helper.sessionLog.getSuccessRecord());
+        cursor.close();
     }
 
     @Test
