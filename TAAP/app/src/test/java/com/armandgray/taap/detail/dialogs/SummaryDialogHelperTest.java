@@ -88,6 +88,12 @@ public class SummaryDialogHelperTest {
                 .successRate(1.00)
                 .create();
 
+        double avg = 0.0;
+        for (SessionLog log : listAllLogs) { avg += log.getSuccessRate(); }
+        avg += dialog.helper.sessionLog.getSuccessRate();
+        avg /= listAllLogs.size() + 1;
+        avg = Math.floor(avg * 100) / 100;
+
         assertCursorDataEqualsLogWithAllTableColumns(cursor, TEST_SESSION_LOG);
         assertNotNull(dialog.helper.sessionLog);
         assertNotNull(cursor);
@@ -95,6 +101,7 @@ public class SummaryDialogHelperTest {
         assertEquals(1, listAllLogs.size());
         assertEquals(TEST_SESSION_LOG.getSuccessRate(), listAllLogs.get(0).getSuccessRate());
         assertEquals(1.00, dialog.helper.sessionLog.getSuccessRate());
+        assertEquals(avg, dialog.helper.sessionLog.getSuccessRecord());
         cursor.close();
     }
 
