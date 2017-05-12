@@ -73,14 +73,14 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
                 .restTime(getTimeElapsedAsDate(restTime, 16))
                 .setsCompleted(views.npSets.getValue())
                 .repsCompleted(views.npReps.getValue())
-                .successRate(getRateFromPickers())
-                .successRecord(getRateFromPickers())
+                .successRate(getOverallRateFromPickers())
+                .successRecord(getOverallRateFromPickers())
                 .drill(views.drill)
                 .create();
         DetailSummaryDialog.newInstance(sessionLog).show(fragmentManager, DIALOG);
     }
 
-    private double getRateFromPickers() {
+    private double getOverallRateFromPickers() {
         int reps = views.npReps.getValue();
         return reps == 0
                 ? views.npSuccesses.getValue() * 1.0 / views.npSets.getValue()

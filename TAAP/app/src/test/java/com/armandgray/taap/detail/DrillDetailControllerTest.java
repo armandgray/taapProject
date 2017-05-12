@@ -172,6 +172,7 @@ public class DrillDetailControllerTest {
         controller.sessionLog = new SessionLog.Builder()
                 .successRate(1.00)
                 .create();
+        controller.views.npSets.setValue(1);
         controller.views.npReps.setValue(1);
         controller.views.npSuccesses.setValue(1);
 
