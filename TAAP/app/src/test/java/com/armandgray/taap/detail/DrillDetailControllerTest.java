@@ -134,6 +134,7 @@ public class DrillDetailControllerTest {
     @Test
     public void doesAddElapsedTimeToActiveWorkIfDrillActive_OnBtnFinishedClick() throws Exception {
         controller.sessionLog = DUMMY_SESSION_LOG;
+        controller.views.drill = DUMMY_SESSION_LOG.getDrill();
 
         controller.views.fab.performClick();
         ShadowDialog.getLatestDialog().dismiss();
@@ -155,6 +156,7 @@ public class DrillDetailControllerTest {
     @Test
     public void doesAssignSessionLogFields_OnBtnFinishedClick() throws Exception {
         controller.sessionLog = DUMMY_SESSION_LOG;
+        controller.views.drill = DUMMY_SESSION_LOG.getDrill();
 
         controller.views.fab.performClick();
         ShadowDialog.getLatestDialog().dismiss();
@@ -178,6 +180,8 @@ public class DrillDetailControllerTest {
     @Test
     public void doesSetSessionLogSuccessRecord() throws Exception {
         controller.sessionLog = DUMMY_SESSION_LOG;
+        controller.views.drill = DUMMY_SESSION_LOG.getDrill();
+
         controller.views.npSets.setValue(1);
         controller.views.npReps.setValue(1);
         controller.views.npSuccesses.setValue(1);

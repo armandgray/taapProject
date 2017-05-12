@@ -107,7 +107,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     }
 
     private Cursor getCursorAllLogsForDrill() {
-        int drillId = sessionLog.getDrill().getDrillId();
+        int drillId = views.drill.getDrillId();
         String[] selectionArgs = {String.valueOf(drillId)};
         Uri uri = Uri.parse(CONTENT_URI_ALL + "/" + drillId);
         return activity.getContentResolver()
