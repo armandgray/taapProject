@@ -10,6 +10,7 @@ import android.view.View;
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
 import com.armandgray.taap.detail.dialogs.TimerDialog;
+import com.armandgray.taap.models.SessionLog;
 
 import org.junit.After;
 import org.junit.Before;
@@ -176,9 +177,9 @@ public class DrillDetailControllerTest {
 //
 //        List<SessionLog> listAllLogs = new ArrayList<>();
 //        addAllLogsData(cursor, listAllLogs);
-//        controller.sessionLog = new SessionLog.Builder()
-//                .successRate(1.00)
-//                .create();
+        controller.sessionLog = new SessionLog.Builder()
+                .successRate(1.00)
+                .create();
 //
 //        double avg = 0.0;
 //        for (SessionLog log : listAllLogs) { avg += log.getSuccessRate(); }
