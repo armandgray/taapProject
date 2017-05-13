@@ -1,4 +1,6 @@
 package com.armandgray.taap;
 
-public class SplashActivity {
+import android.support.v7.app.AppCompatActivity;
+
+public class SplashActivity extends AppCompatActivity {
 }
