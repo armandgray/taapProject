@@ -4,12 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.armandgray.taap.models.Drill;
+
+import static com.armandgray.taap.db.DatabaseContentProvider.insertDrillToDatabase;
+import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
+
 public class SplashActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        for (Drill drill : getDrillsList()) { insertDrillToDatabase(drill, this); }
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();

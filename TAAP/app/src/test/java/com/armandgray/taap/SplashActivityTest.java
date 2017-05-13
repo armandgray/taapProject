@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 
 import com.armandgray.taap.db.DrillsTable;
+import com.armandgray.taap.models.Drill;
 
 import org.junit.After;
 import org.junit.Before;
@@ -16,10 +17,12 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
-import static com.armandgray.taap.db.DatabaseContentProviderTest.assertCursorDataEqualsDrill;
 import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
+import static com.armandgray.taap.utils.StringHelper.getStringAsArray;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
@@ -52,8 +55,16 @@ public class SplashActivityTest {
         int i = 0;
         assertNotNull(cursor);
         assertEquals(getDrillsList().size(), cursor.getCount());
+        assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
+
         while (cursor.moveToNext()) {
-            assertCursorDataEqualsDrill(cursor, getDrillsList().get(i));
+            Drill drill = getDrillsList().get(i);
+            assertEquals(drill.getTitle(),
+                    cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
+            assertEquals(drill.getImageId(),
+                    cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
+            assertThat(drill.getCategory(), is(getStringAsArray(cursor.getString(
+                    cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)))));
             i++;
         }
         cursor.close();
