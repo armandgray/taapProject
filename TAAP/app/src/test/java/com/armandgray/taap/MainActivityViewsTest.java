@@ -1,6 +1,7 @@
 package com.armandgray.taap;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.armandgray.taap.db.DrillsTable;
 import com.armandgray.taap.detail.DrillDetailActivity;
 import com.armandgray.taap.log.LogActivity;
 import com.armandgray.taap.models.Drill;
@@ -22,6 +24,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowToast;
@@ -29,6 +32,7 @@ import org.robolectric.shadows.ShadowToast;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
 import static com.armandgray.taap.models.Drill.SHOOTING;
 import static com.armandgray.taap.models.Drill.getQueryResultList;
 import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
@@ -209,11 +213,18 @@ public class MainActivityViewsTest {
 
     @Test
     public void doesSetupRvDrills() throws Exception {
+        Robolectric.buildActivity(SplashActivity.class).create();
+        Cursor cursor = RuntimeEnvironment.application.getContentResolver()
+                .query(CONTENT_URI_DRILLS, DrillsTable.ALL_DRILL_COLUMNS,
+                        null, null, null);
+
+        assertNotNull(cursor);
         assertNotNull(views.rvDrills);
         assertNotNull(views.rvDrills.getAdapter());
         assertNotNull(views.rvDrills.getLayoutManager());
         assertTrue(views.rvDrills.getLayoutManager() instanceof LinearLayoutManager);
-        assertTrue(views.rvDrills.getAdapter().getItemCount() > 0);
+        assertEquals(cursor.getCount(), views.rvDrills.getAdapter().getItemCount());
+        cursor.close();
     }
 
     @Test

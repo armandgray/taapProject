@@ -50,7 +50,6 @@ class MainActivityViews {
         setupSearchIconClickListener();
         setupEtSearchTextChangeListener();
         setupRvDrills();
-        setupRvDrillsItemClickListener();
     }
 
     private void assignGlobalViews() {
@@ -143,6 +142,7 @@ class MainActivityViews {
         rvDrills.setAdapter(new DrillsRvAdapter(getDrillsList()));
         rvDrills.setLayoutManager(
                 new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
+        setupRvDrillsItemClickListener();
     }
 
     private void setupRvDrillsItemClickListener() {
