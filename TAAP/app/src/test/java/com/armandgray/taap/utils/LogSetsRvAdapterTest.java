@@ -23,6 +23,7 @@ import org.robolectric.annotation.Config;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
@@ -32,6 +33,7 @@ import static org.mockito.Mockito.mock;
 @Config(constants = BuildConfig.class)
 public class LogSetsRvAdapterTest {
 
+    public static final int POSITION = 1;
     private LogSetsRvAdapter adapter;
     private ArrayList<SessionLog> testLogList;
     private View mockView;
@@ -54,6 +56,7 @@ public class LogSetsRvAdapterTest {
                 .successRecord(0.0)
                 .create();
         testLogList = new ArrayList<>();
+        testLogList.add(testSessionLog);
         testLogList.add(testSessionLog);
     }
 
@@ -88,19 +91,22 @@ public class LogSetsRvAdapterTest {
 
     @SuppressLint("InflateParams")
     @Test
-    public void onBindViewHolder_DoesSetViewsForSessionLogItem() {
+    public void onBindViewHolder_DoesSetText() {
         adapter = new LogSetsRvAdapter(testLogList);
         LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         LogSetsRvAdapter.LogSetsViewHolder holder =
                 new LogSetsRvAdapter.LogSetsViewHolder(
                         inflater.inflate(R.layout.session_log_listitem, null, false));
-        adapter.onBindViewHolder(holder, 1);
+        adapter.onBindViewHolder(holder, POSITION);
 
-        assertEquals("Session Length", holder.tvHeader.getText());
-        assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
-                R.drawable.ic_timer_white_24dp),
-                holder.ivImage.getDrawable());
+        SessionLog log = adapter.getItemAtPosition(POSITION);
+        String expected = String.format(Locale.US,
+                "%dx%d @%d%%",
+                log.getSetsCompleted(),
+                log.getRepsCompleted(),
+                ((Double) log.getSuccessRate()).intValue());
+        assertEquals(expected, holder.tvHeader.getText());
     }
 
     @Test
