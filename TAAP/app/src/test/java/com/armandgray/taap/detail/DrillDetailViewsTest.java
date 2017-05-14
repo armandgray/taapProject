@@ -108,6 +108,15 @@ public class DrillDetailViewsTest {
     }
 
     @Test
+    public void doesSetupRvCurrentLog() throws Exception {
+        RecyclerView rvCurrentLog = (RecyclerView) activity.findViewById(R.id.rvCurrentLog);
+        assertNotNull(rvCurrentLog);
+        assertNotNull(rvCurrentLog.getAdapter());
+        assertNotNull(rvCurrentLog.getLayoutManager());
+        assertTrue(rvCurrentLog.getLayoutManager() instanceof LinearLayoutManager);
+    }
+
+    @Test
     public void doesSetNpSetsValues_MethodTest_SetupActivityInitialState() throws Exception {
         NumberPicker npSets = (NumberPicker) activity.findViewById(R.id.npSets);
         assertEquals(1, npSets.getMinValue());
