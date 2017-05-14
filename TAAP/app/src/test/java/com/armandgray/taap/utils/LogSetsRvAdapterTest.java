@@ -121,6 +121,17 @@ public class LogSetsRvAdapterTest {
         assertEquals(testLogList.get(0), adapter.getItemAtPosition(0));
     }
 
+    @Test
+    public void canAddLogAndUpdateRv() throws Exception {
+        adapter.addLog(adapter.getItemAtPosition(0));
+
+        ArrayList<SessionLog> expectedList = new ArrayList<>();
+        expectedList.addAll(adapter.logs);
+        expectedList.add(adapter.getItemAtPosition(0));
+        assertEquals(expectedList.size(), adapter.getItemCount());
+        assertEquals(expectedList, adapter.logs);
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");

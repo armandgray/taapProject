@@ -15,7 +15,7 @@ import java.util.Locale;
 
 public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogSetsViewHolder> {
 
-    private ArrayList<SessionLog> logs;
+    @VisibleForTesting ArrayList<SessionLog> logs;
 
     LogSetsRvAdapter() {}
 
@@ -52,6 +52,10 @@ public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogS
     SessionLog getItemAtPosition(int position) {
         if (logs == null || logs.size() <= position) { return null; }
         return logs.get(position);
+    }
+
+    public void addLog(SessionLog itemAtPosition) {
+
     }
 
     static class LogSetsViewHolder extends RecyclerView.ViewHolder {
