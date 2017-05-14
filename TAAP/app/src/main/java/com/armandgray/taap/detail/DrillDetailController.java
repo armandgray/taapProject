@@ -33,10 +33,31 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     @VisibleForTesting long activeWorkTime;
     @VisibleForTesting long restTime;
     @VisibleForTesting SessionLog sessionLog;
+    private ArrayList<SessionLog> listAllLogs;
 
     DrillDetailController(DrillDetailActivity activity) {
         this.activity = activity;
         this.views = new DrillDetailViews(activity, this);
+
+        listAllLogs = new ArrayList<>();
+        addAllCursorDrillData(listAllLogs);
+    }
+
+    private void addAllCursorDrillData(ArrayList<SessionLog> list) {
+        Cursor cursor = getCursorAllLogsForDrill();
+        if (cursor == null) { return; }
+
+        List<SessionLog> listAllLogs = new ArrayList<>();
+        addAllLogsData(cursor, listAllLogs);
+        cursor.close();
+    }
+
+    private Cursor getCursorAllLogsForDrill() {
+        int drillId = views.drill.getDrillId();
+        String[] selectionArgs = {String.valueOf(drillId)};
+        Uri uri = Uri.parse(CONTENT_URI_ALL + "/" + drillId);
+        return activity.getContentResolver()
+                .query(uri, ALL_TABLE_COLUMNS, null, selectionArgs, null);
     }
 
     @Override
@@ -74,8 +95,6 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
             return;
         }
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
-        ArrayList<SessionLog> listAllLogs = new ArrayList<>();
-        addAllCursorDrillData(listAllLogs);
         sessionLog = new SessionLog.Builder()
                 .sessionLength(getTimeElapsedAsDate(activeWorkTime + restTime, 16))
                 .sessionGoal("None")
@@ -87,16 +106,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
                 .successRecord(getMaxSuccessRate(listAllLogs))
                 .drill(views.drill)
                 .create();
-        DetailSummaryDialog.newInstance(sessionLog, listAllLogs).show(fragmentManager, DIALOG);
-    }
-
-    private void addAllCursorDrillData(ArrayList<SessionLog> list) {
-        Cursor cursor = getCursorAllLogsForDrill();
-        if (cursor == null) { return; }
-
-        List<SessionLog> listAllLogs = new ArrayList<>();
-        addAllLogsData(cursor, listAllLogs);
-        cursor.close();
+        DetailSummaryDialog.newInstance(sessionLog).show(fragmentManager, DIALOG);
     }
 
     private double getOverallRateFromPickers() {
@@ -104,14 +114,6 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
         return reps == 0
                 ? views.npSuccesses.getValue() * 1.0 / views.npSets.getValue()
                 : views.npSuccesses.getValue() * 1.0 / (reps * views.npSets.getValue());
-    }
-
-    private Cursor getCursorAllLogsForDrill() {
-        int drillId = views.drill.getDrillId();
-        String[] selectionArgs = {String.valueOf(drillId)};
-        Uri uri = Uri.parse(CONTENT_URI_ALL + "/" + drillId);
-        return activity.getContentResolver()
-                .query(uri, ALL_TABLE_COLUMNS, null, selectionArgs, null);
     }
 
     private double getMaxSuccessRate(List<SessionLog> listAllLogs) {
