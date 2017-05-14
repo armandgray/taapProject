@@ -25,6 +25,9 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlertDialog;
 
+import java.util.ArrayList;
+
+import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.ALL_LOGS;
 import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
 import static com.armandgray.taap.log.LogActivity.SESSION_LOG;
 import static junit.framework.Assert.assertEquals;
@@ -67,6 +70,18 @@ public class DetailSummaryDialogTest {
         assertNotNull(dialog);
         assertNotNull(dialog.getArguments());
         assertNotNull(SessionLog.class.cast(dialog.getArguments().get(SESSION_LOG)));
+    }
+
+    @Test
+    public void canCreateDetailSummaryDialog_NewInstanceMethod_TelescopeLogsList() {
+        SessionLog sessionLog = new SessionLog.Builder().create();
+        ArrayList<SessionLog> logs = new ArrayList<>();
+        logs.add(sessionLog);
+        DetailSummaryDialog dialog = DetailSummaryDialog.newInstance(sessionLog, logs);
+        assertNotNull(dialog);
+        assertNotNull(dialog.getArguments());
+        assertNotNull(SessionLog.class.cast(dialog.getArguments().getParcelable(SESSION_LOG)));
+        assertNotNull(logs.getClass().cast(dialog.getArguments().getParcelableArrayList(ALL_LOGS)));
     }
 
     @Test
