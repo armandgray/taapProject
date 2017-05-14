@@ -197,7 +197,7 @@ public class LogActivityViewsTest {
 //                R.drawable.ic_human_handsup_white_48dp), ivImage.getDrawable());
         assertEquals(activity.getString(R.string.zero_time), tvTime.getText());
         assertEquals("0%", tvSuccessRate.getText());
-        assertEquals(activity.getString(R.string.off_ball_offense), tvHeader.getText());
+        assertEquals(activity.getString(R.string.offense), tvHeader.getText());
     }
 
     @Test

@@ -106,7 +106,7 @@ class LogActivityViews {
         setTextForRecordLayoutViews(layoutDefense, R.drawable.ic_account_multiple_outline_white_48dp,
                 "00:00:00", "0%", R.string.defense);
         setTextForRecordLayoutViews(layoutOffense, R.drawable.ic_human_handsup_white_48dp,
-                "00:00:00", "0%", R.string.off_ball_offense);
+                "00:00:00", "0%", R.string.offense);
         setTextForRecordLayoutViews(layoutConditioning, R.drawable.ic_run_fast_white_48dp,
                 "00:00:00", "0%", R.string.conditioning);
         setTextForRecordLayoutViews(layoutShooting, R.drawable.ic_dribbble_white_48dp,
