@@ -82,7 +82,7 @@ class DrillDetailViews {
         npSets.setMaxValue(10);
         npSets.setWrapSelectorWheel(true);
 
-        npReps.setMinValue(0);
+        npReps.setMinValue(1);
         npReps.setMaxValue(100);
         npReps.setWrapSelectorWheel(true);
 
