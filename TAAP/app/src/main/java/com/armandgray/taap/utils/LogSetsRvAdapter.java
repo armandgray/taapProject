@@ -7,8 +7,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.armandgray.taap.R;
+import com.armandgray.taap.models.SessionLog;
+
+import java.util.ArrayList;
 
 public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogSetsViewHolder> {
+
+    private ArrayList<SessionLog> logs;
+
+    public LogSetsRvAdapter(ArrayList<SessionLog> logs) {
+        this.logs = logs;
+    }
 
     @Override
     public LogSetsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

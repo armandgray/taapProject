@@ -21,15 +21,16 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
-import static com.armandgray.taap.utils.SessionLogRvAdapter.IMAGE_RESOURCE_ID;
-import static com.armandgray.taap.utils.SessionLogRvAdapter.ITEM_DATA;
-import static com.armandgray.taap.utils.SessionLogRvAdapter.STRING_RESOURCE_ID;
-import static com.armandgray.taap.utils.SessionLogRvAdapter.TINT_COLOR;
+import static com.armandgray.taap.utils.LogSetsRvAdapter.IMAGE_RESOURCE_ID;
+import static com.armandgray.taap.utils.LogSetsRvAdapter.ITEM_DATA;
+import static com.armandgray.taap.utils.LogSetsRvAdapter.STRING_RESOURCE_ID;
+import static com.armandgray.taap.utils.LogSetsRvAdapter.TINT_COLOR;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
@@ -40,7 +41,7 @@ public class LogSetsRvAdapterTest {
 
     private LogSetsRvAdapter adapter;
     private View mockView;
-    private SessionLog testSessionLog;
+    private ArrayList<SessionLog> testLogList;
 
     @Before
     public void setUp() {
@@ -49,7 +50,7 @@ public class LogSetsRvAdapterTest {
         mockView = mock(View.class);
         Calendar calendar = Calendar.getInstance();
         calendar.set(1, 1, 1, 1, 5, 30);
-        testSessionLog = new SessionLog.Builder()
+        SessionLog testSessionLog = new SessionLog.Builder()
                 .sessionLength(calendar.getTime())
                 .sessionGoal("")
                 .activeWork(new Date(0))
@@ -59,25 +60,27 @@ public class LogSetsRvAdapterTest {
                 .successRate(0.47)
                 .successRecord(0.0)
                 .create();
+        testLogList = new ArrayList<>();
+        testLogList.add(testSessionLog);
     }
 
     @Test
     public void doesImplementAdapter() throws Exception {
-        RecyclerView.Adapter<SessionLogRvAdapter.SessionLogViewHolder> adapter =
-                new SessionLogRvAdapter(testSessionLog);
+        RecyclerView.Adapter<LogSetsRvAdapter.LogSetsViewHolder> adapter =
+                new LogSetsRvAdapter(testLogList);
         assertNotNull(adapter);
     }
 
     @Test
-    public void onCreateViewHolder_ReturnsNewSessionLogViewHolderOfCorrectLayout() {
+    public void onCreateViewHolder_ReturnsNewLogSetsViewHolderOfCorrectLayout() {
         TestableRvSummaryAdapter testableAdapter = new TestableRvSummaryAdapter();
         testableAdapter.setMockView(mockView);
-        SessionLogRvAdapter.SessionLogViewHolder sessionLogViewHolder = testableAdapter
+        LogSetsRvAdapter.LogSetsViewHolder LogSetsViewHolder = testableAdapter
                 .onCreateViewHolder(new FrameLayout(RuntimeEnvironment.application), 0);
-        assertEquals(mockView, sessionLogViewHolder.itemView);
+        assertEquals(mockView, LogSetsViewHolder.itemView);
     }
 
-    static class TestableRvSummaryAdapter extends SessionLogRvAdapter {
+    static class TestableRvSummaryAdapter extends LogSetsRvAdapter {
         View mockView;
 
         void setMockView(View mockView) {
@@ -93,15 +96,15 @@ public class LogSetsRvAdapterTest {
     @SuppressLint("InflateParams")
     @Test
     public void onBindViewHolder_DoesSetViewsForSessionLogHeader() {
-        adapter = new LogSetsRvAdapter(testSessionLog);
+        adapter = new LogSetsRvAdapter(testLogList);
         LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        SessionLogRvAdapter.SessionLogViewHolder holder =
-                new SessionLogRvAdapter.SessionLogHeaderViewHolder(
+        LogSetsRvAdapter.LogSetsViewHolder holder =
+                new LogSetsRvAdapter.LogSetsViewHolder(
                         inflater.inflate(R.layout.session_log_header_layout, null, false));
         adapter.onBindViewHolder(holder, 0);
 
-        Date date = testSessionLog.getSessionDate();
+        Date date = testLogList.getSessionDate();
         String expectedDate = new SimpleDateFormat("EEE, MMM d, ''yy", Locale.US)
                 .format(date);
 
@@ -112,16 +115,16 @@ public class LogSetsRvAdapterTest {
     @SuppressLint("InflateParams")
     @Test
     public void onBindViewHolder_DoesSetViewsForSessionLogItem() {
-        adapter = new LogSetsRvAdapter(testSessionLog);
+        adapter = new LogSetsRvAdapter(testLogList);
         LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        SessionLogRvAdapter.SessionLogViewHolder holder =
-                new SessionLogRvAdapter.SessionLogViewHolder(
+        LogSetsRvAdapter.LogSetsViewHolder holder =
+                new LogSetsRvAdapter.LogSetsViewHolder(
                         inflater.inflate(R.layout.session_log_listitem, null, false));
         adapter.onBindViewHolder(holder, 1);
 
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(testSessionLog.getSessionLength());
+        calendar.setTime(testLogList.getSessionLength());
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         SimpleDateFormat simpleDateFormat =
                 hour == 0
@@ -138,16 +141,16 @@ public class LogSetsRvAdapterTest {
     @SuppressLint("InflateParams")
     @Test
     public void onBindViewHolder_DoesSetViewsForSessionLogItem_Ints() {
-        adapter = new SessionLogRvAdapter(testSessionLog);
+        adapter = new LogSetsRvAdapter(testLogList);
         LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        SessionLogRvAdapter.SessionLogViewHolder holder =
-                new SessionLogRvAdapter.SessionLogViewHolder(
+        LogSetsRvAdapter.LogSetsViewHolder holder =
+                new LogSetsRvAdapter.LogSetsViewHolder(
                         inflater.inflate(R.layout.session_log_listitem, null, false));
         adapter.onBindViewHolder(holder, 5);
 
         assertEquals("Sets Completed", holder.tvHeader.getText());
-        assertEquals(String.valueOf(testSessionLog.getSetsCompleted()), holder.tvText.getText());
+        assertEquals(String.valueOf(testLogList.getSetsCompleted()), holder.tvText.getText());
         assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
                 R.drawable.ic_fitness_center_white_24dp),
                 holder.ivImage.getDrawable());
@@ -156,16 +159,16 @@ public class LogSetsRvAdapterTest {
     @SuppressLint("InflateParams")
     @Test
     public void onBindViewHolder_DoesSetViewsForSessionLogItem_Percents() {
-        adapter = new LogSetsRvAdapter(testSessionLog);
+        adapter = new LogSetsRvAdapter(testLogList);
         LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        SessionLogRvAdapter.SessionLogViewHolder holder =
-                new SessionLogRvAdapter.SessionLogViewHolder(
+        LogSetsRvAdapter.LogSetsViewHolder holder =
+                new LogSetsRvAdapter.LogSetsViewHolder(
                         inflater.inflate(R.layout.session_log_listitem, null, false));
         adapter.parent = new FrameLayout(RuntimeEnvironment.application);
         adapter.onBindViewHolder(holder, 7);
 
-        Double rate = testSessionLog.getSuccessRate() * 100;
+        Double rate = testLogList.getSuccessRate() * 100;
 
         assertEquals("Success Rate", holder.tvHeader.getText());
         assertEquals(String.format(Locale.US, "%d%%", rate.intValue()), holder.tvText.getText());
@@ -176,16 +179,16 @@ public class LogSetsRvAdapterTest {
 
     @Test
     public void canGetItemCount() throws Exception {
-        adapter = new SessionLogRvAdapter(testSessionLog);
+        adapter = new LogSetsRvAdapter(testLogList);
         assertEquals(9, adapter.getItemCount());
     }
 
     @Test
     public void canGetItemAtPosition() throws Exception {
-        adapter = new LogSetsRvAdapter(testSessionLog);
+        adapter = new LogSetsRvAdapter(testLogList);
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put(STRING_RESOURCE_ID, R.string.session_date);
-        hashMap.put(ITEM_DATA, testSessionLog.getSessionDate());
+        hashMap.put(ITEM_DATA, testLogList.getSessionDate());
         hashMap.put(IMAGE_RESOURCE_ID, R.drawable.ic_timer_white_24dp);
         hashMap.put(TINT_COLOR, android.R.color.holo_red_dark);
         assertEquals(hashMap, adapter.getItemAtPosition(0));
@@ -196,7 +199,7 @@ public class LogSetsRvAdapterTest {
         System.out.println("Running TearDown!");
         adapter = null;
         mockView = null;
-        testSessionLog = null;
+        testLogList = null;
     }
 
 }
