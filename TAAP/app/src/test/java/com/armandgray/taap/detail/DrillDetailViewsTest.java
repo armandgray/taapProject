@@ -112,7 +112,7 @@ public class DrillDetailViewsTest {
     @Test
     public void doesSetNpRepsValues_MethodTest_SetupActivityInitialState() throws Exception {
         NumberPicker npReps = (NumberPicker) activity.findViewById(R.id.npReps);
-        assertEquals(0, npReps.getMinValue());
+        assertEquals(1, npReps.getMinValue());
         assertTrue(npReps.getMaxValue() > npReps.getMinValue());
     }
 

@@ -74,7 +74,7 @@ public class DrillDetailResTest {
     public void hasView_TvSets() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
         LinearLayout setsContainer = (LinearLayout) container.findViewById(R.id.setsContainer);
-        assertNotNull(setsContainer.findViewById(R.id.tvSets));
+        assertNotNull(setsContainer.findViewById(R.id.tvSetsLeft));
     }
 
     @Test
