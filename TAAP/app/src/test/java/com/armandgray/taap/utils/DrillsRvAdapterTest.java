@@ -49,14 +49,14 @@ public class DrillsRvAdapterTest {
 
     @Test
     public void onCreateViewHolder_ReturnsNewDrillViewHolderOfCorrectLayout() {
-        TestableDrillsRvAdapter testableAdapter = new TestableDrillsRvAdapter();
+        TestableLogSetsRvAdapter testableAdapter = new TestableLogSetsRvAdapter();
         testableAdapter.setMockView(mockView);
-        DrillsRvAdapter.DrillViewHolder drillViewHolder = testableAdapter
+        LogSetsRvAdapter.LogSetsViewHolder logSetsViewHolder = testableAdapter
                 .onCreateViewHolder(new FrameLayout(RuntimeEnvironment.application), 0);
-        assertEquals(mockView, drillViewHolder.itemView);
+        assertEquals(mockView, logSetsViewHolder.itemView);
     }
 
-    static class TestableDrillsRvAdapter extends DrillsRvAdapter {
+    static class TestableLogSetsRvAdapter extends LogSetsRvAdapter {
         View mockView;
 
         void setMockView(View mockView) {

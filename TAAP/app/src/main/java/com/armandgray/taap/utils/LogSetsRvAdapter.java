@@ -16,6 +16,8 @@ public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogS
 
     private ArrayList<SessionLog> logs;
 
+    LogSetsRvAdapter() {}
+
     public LogSetsRvAdapter(ArrayList<SessionLog> logs) {
         this.logs = logs;
     }

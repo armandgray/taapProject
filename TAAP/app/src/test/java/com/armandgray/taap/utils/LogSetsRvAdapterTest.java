@@ -40,8 +40,8 @@ import static org.mockito.Mockito.mock;
 public class LogSetsRvAdapterTest {
 
     private LogSetsRvAdapter adapter;
-    private View mockView;
     private ArrayList<SessionLog> testLogList;
+    private View mockView;
 
     @Before
     public void setUp() {
@@ -95,25 +95,6 @@ public class LogSetsRvAdapterTest {
 
     @SuppressLint("InflateParams")
     @Test
-    public void onBindViewHolder_DoesSetViewsForSessionLogHeader() {
-        adapter = new LogSetsRvAdapter(testLogList);
-        LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        LogSetsRvAdapter.LogSetsViewHolder holder =
-                new LogSetsRvAdapter.LogSetsViewHolder(
-                        inflater.inflate(R.layout.session_log_header_layout, null, false));
-        adapter.onBindViewHolder(holder, 0);
-
-        Date date = testLogList.getSessionDate();
-        String expectedDate = new SimpleDateFormat("EEE, MMM d, ''yy", Locale.US)
-                .format(date);
-
-        assertEquals(R.string.session_date, adapter.getItemAtPosition(0).get(STRING_RESOURCE_ID));
-        assertEquals(expectedDate, holder.tvText.getText());
-    }
-
-    @SuppressLint("InflateParams")
-    @Test
     public void onBindViewHolder_DoesSetViewsForSessionLogItem() {
         adapter = new LogSetsRvAdapter(testLogList);
         LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
@@ -138,45 +119,6 @@ public class LogSetsRvAdapterTest {
                 holder.ivImage.getDrawable());
     }
 
-    @SuppressLint("InflateParams")
-    @Test
-    public void onBindViewHolder_DoesSetViewsForSessionLogItem_Ints() {
-        adapter = new LogSetsRvAdapter(testLogList);
-        LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        LogSetsRvAdapter.LogSetsViewHolder holder =
-                new LogSetsRvAdapter.LogSetsViewHolder(
-                        inflater.inflate(R.layout.session_log_listitem, null, false));
-        adapter.onBindViewHolder(holder, 5);
-
-        assertEquals("Sets Completed", holder.tvHeader.getText());
-        assertEquals(String.valueOf(testLogList.getSetsCompleted()), holder.tvText.getText());
-        assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
-                R.drawable.ic_fitness_center_white_24dp),
-                holder.ivImage.getDrawable());
-    }
-
-    @SuppressLint("InflateParams")
-    @Test
-    public void onBindViewHolder_DoesSetViewsForSessionLogItem_Percents() {
-        adapter = new LogSetsRvAdapter(testLogList);
-        LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        LogSetsRvAdapter.LogSetsViewHolder holder =
-                new LogSetsRvAdapter.LogSetsViewHolder(
-                        inflater.inflate(R.layout.session_log_listitem, null, false));
-        adapter.parent = new FrameLayout(RuntimeEnvironment.application);
-        adapter.onBindViewHolder(holder, 7);
-
-        Double rate = testLogList.getSuccessRate() * 100;
-
-        assertEquals("Success Rate", holder.tvHeader.getText());
-        assertEquals(String.format(Locale.US, "%d%%", rate.intValue()), holder.tvText.getText());
-        assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
-                R.drawable.ic_timer_white_24dp),
-                holder.ivImage.getDrawable());
-    }
-
     @Test
     public void canGetItemCount() throws Exception {
         adapter = new LogSetsRvAdapter(testLogList);
@@ -185,12 +127,6 @@ public class LogSetsRvAdapterTest {
 
     @Test
     public void canGetItemAtPosition() throws Exception {
-        adapter = new LogSetsRvAdapter(testLogList);
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put(STRING_RESOURCE_ID, R.string.session_date);
-        hashMap.put(ITEM_DATA, testLogList.getSessionDate());
-        hashMap.put(IMAGE_RESOURCE_ID, R.drawable.ic_timer_white_24dp);
-        hashMap.put(TINT_COLOR, android.R.color.holo_red_dark);
         assertEquals(hashMap, adapter.getItemAtPosition(0));
     }
 
