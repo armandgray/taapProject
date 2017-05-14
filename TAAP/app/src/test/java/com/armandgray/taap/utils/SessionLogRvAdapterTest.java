@@ -49,8 +49,10 @@ public class SessionLogRvAdapterTest {
         System.out.println("Running Set Up!");
         adapter = new SessionLogRvAdapter(null);
         mockView = mock(View.class);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(1, 1, 1, 1, 5, 30);
         testSessionLog = new SessionLog.Builder()
-                .sessionLength(new Date(1, 1, 1, 1, 5, 30))
+                .sessionLength(calendar.getTime())
                 .sessionGoal("")
                 .activeWork(new Date(0))
                 .restTime(new Date(0))
