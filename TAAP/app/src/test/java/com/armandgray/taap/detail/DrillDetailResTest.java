@@ -54,7 +54,7 @@ public class DrillDetailResTest {
     public void hasView_RvLastLog() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
         LinearLayout detailContainer = (LinearLayout) container.findViewById(R.id.detailContainer);
-        assertNotNull(detailContainer.findViewById(R.id.rvLastLog));
+        assertNotNull(detailContainer.findViewById(R.id.rvPreviousLogs));
     }
 
     @Test

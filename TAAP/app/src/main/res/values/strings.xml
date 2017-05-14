@@ -78,4 +78,6 @@
     <string name="clear_data_message">Are you want to clear your logs. This action cannot be undone!</string>
     <string name="none">None</string>
     <string name="rest_time_started">Rest Time Started</string>
+    <string name="current_log">Current Log</string>
+    <string name="previous_logs">Previous Logs</string>
 </resources>
