@@ -121,19 +121,6 @@ class DrillDetailViews {
     }
 
     void setupRvPreviousLogs(ArrayList<SessionLog> logs) {
-        SessionLog testSessionLog = new SessionLog.Builder()
-                .sessionLength(new Date())
-                .sessionGoal("")
-                .activeWork(new Date(0))
-                .restTime(new Date(0))
-                .setsCompleted(2)
-                .repsCompleted(1)
-                .successRate(0.47)
-                .successRecord(0.0)
-                .create();
-        logs.add(testSessionLog);
-        logs.add(testSessionLog);
-        logs.add(testSessionLog);
         rvPreviousLogs.setAdapter(new LogSetsRvAdapter(logs));
         rvPreviousLogs.setLayoutManager(
                 new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));

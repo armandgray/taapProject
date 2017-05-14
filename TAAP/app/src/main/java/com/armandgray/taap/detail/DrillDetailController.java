@@ -42,15 +42,14 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
         views.setupActivityInitialState();
 
         listAllLogs = new ArrayList<>();
-        addAllCursorDrillData(listAllLogs);
+        addAllCursorDrillData();
         views.setupRvPreviousLogs(listAllLogs);
     }
 
-    private void addAllCursorDrillData(ArrayList<SessionLog> list) {
+    private void addAllCursorDrillData() {
         Cursor cursor = getCursorAllLogsForDrill();
         if (cursor == null) { return; }
 
-        List<SessionLog> listAllLogs = new ArrayList<>();
         addAllLogsData(cursor, listAllLogs);
         cursor.close();
     }
