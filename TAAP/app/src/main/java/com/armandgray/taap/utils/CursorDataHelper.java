@@ -15,6 +15,7 @@ import static com.armandgray.taap.utils.StringHelper.getStringAsArray;
 public class CursorDataHelper {
 
     public static void addAllDrillsData(Cursor cursor, List<Drill> drills) {
+        if (cursor.getCount() == 0) { return; }
         while (cursor.moveToNext()) {
             Drill drillAtCurrentPosition = getDrillFromCursor(cursor);
             drills.add(drillAtCurrentPosition);
@@ -36,6 +37,7 @@ public class CursorDataHelper {
     }
 
     public static void addAllLogsData(Cursor cursor, List<SessionLog> logs) {
+        if (cursor.getCount() == 0) { return; }
         while (cursor.moveToNext()) {
             SessionLog logAtCurrentPosition = getLogAtCurrentPosition(cursor);
             logs.add(logAtCurrentPosition);
@@ -52,10 +54,7 @@ public class CursorDataHelper {
         int columnSetsCompleted = cursor.getColumnIndex(LogsTable.COLUMN_SETS_COMPLETED);
         int columnRepsCompleted = cursor.getColumnIndex(LogsTable.COLUMN_REPS_COMPLETED);
         int columnSuccess = cursor.getColumnIndex(LogsTable.COLUMN_SUCCESS);
-        int columnLogDrill = cursor.getColumnIndex(LogsTable.COLUMN_DRILL);
-        int columnDrillId = cursor.getColumnIndex(DrillsTable.DRILL_ID);
 
-        if (cursor.getInt(columnDrillId) == cursor.getInt(columnLogDrill)) { return null; }
         Drill drill = getDrillFromCursor(cursor);
         if (drill == null) { return null; }
 
