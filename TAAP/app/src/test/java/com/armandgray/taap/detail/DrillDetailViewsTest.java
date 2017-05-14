@@ -3,6 +3,8 @@ package com.armandgray.taap.detail;
 import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -94,6 +96,16 @@ public class DrillDetailViewsTest {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         TextView tvTitle = (TextView) toolbar.findViewById(R.id.tvTitle);
         assertEquals(BEAT_THE_PRO_MID_RANGE, tvTitle.getText());
+    }
+
+    @Test
+    public void doesSetupRvPreviousLogs() throws Exception {
+        RecyclerView rvPreviousLogs = (RecyclerView) activity.findViewById(R.id.rvPreviousLogs);
+        assertNotNull(rvPreviousLogs);
+        assertNotNull(rvPreviousLogs.getAdapter());
+        assertNotNull(rvPreviousLogs.getLayoutManager());
+        assertTrue(rvPreviousLogs.getLayoutManager() instanceof LinearLayoutManager);
+        assertTrue(rvPreviousLogs.getAdapter().getItemCount() > 0);
     }
 
     @Test
