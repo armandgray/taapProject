@@ -117,6 +117,7 @@ public class LogSetsRvAdapterTest {
 
     @Test
     public void canGetItemAtPosition() throws Exception {
+        adapter = new LogSetsRvAdapter(testLogList);
         assertEquals(testLogList.get(0), adapter.getItemAtPosition(0));
     }
 

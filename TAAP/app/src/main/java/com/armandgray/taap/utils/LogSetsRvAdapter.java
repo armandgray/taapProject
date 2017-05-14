@@ -34,7 +34,7 @@ public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogS
 
     @Override
     public int getItemCount() {
-        return 0;
+        return logs.size();
     }
 
     View getLayout(ViewGroup parent) {
