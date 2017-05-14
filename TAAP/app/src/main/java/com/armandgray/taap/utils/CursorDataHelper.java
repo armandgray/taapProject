@@ -22,13 +22,11 @@ public class CursorDataHelper {
     }
 
     private static Drill getDrillFromCursor(Cursor cursor) {
-        int columnLogDrill = cursor.getColumnIndex(LogsTable.COLUMN_DRILL);
         int columnDrillId = cursor.getColumnIndex(DrillsTable.DRILL_ID);
         int columnTitle = cursor.getColumnIndex(DrillsTable.COLUMN_TITLE);
         int columnImageId = cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID);
         int columnCategory = cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY);
 
-        if (cursor.getInt(columnDrillId) != cursor.getInt(columnLogDrill)) { return null; }
         Drill drill = new Drill(
                 cursor.getString(columnTitle),
                 cursor.getInt(columnImageId),
@@ -54,7 +52,10 @@ public class CursorDataHelper {
         int columnSetsCompleted = cursor.getColumnIndex(LogsTable.COLUMN_SETS_COMPLETED);
         int columnRepsCompleted = cursor.getColumnIndex(LogsTable.COLUMN_REPS_COMPLETED);
         int columnSuccess = cursor.getColumnIndex(LogsTable.COLUMN_SUCCESS);
+        int columnLogDrill = cursor.getColumnIndex(LogsTable.COLUMN_DRILL);
+        int columnDrillId = cursor.getColumnIndex(DrillsTable.DRILL_ID);
 
+        if (cursor.getInt(columnDrillId) == cursor.getInt(columnLogDrill)) { return null; }
         Drill drill = getDrillFromCursor(cursor);
         if (drill == null) { return null; }
 

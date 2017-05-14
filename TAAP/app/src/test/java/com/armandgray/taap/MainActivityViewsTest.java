@@ -213,7 +213,6 @@ public class MainActivityViewsTest {
 
     @Test
     public void doesSetupRvDrills() throws Exception {
-        Robolectric.buildActivity(SplashActivity.class).create();
         Cursor cursor = RuntimeEnvironment.application.getContentResolver()
                 .query(CONTENT_URI_DRILLS, DrillsTable.ALL_DRILL_COLUMNS,
                         null, null, null);
