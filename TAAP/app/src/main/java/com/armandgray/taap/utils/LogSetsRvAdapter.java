@@ -1,16 +1,17 @@
 package com.armandgray.taap.utils;
 
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.armandgray.taap.R;
 import com.armandgray.taap.models.SessionLog;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogSetsViewHolder> {
 
@@ -28,8 +29,14 @@ public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogS
     }
 
     @Override
-    public void onBindViewHolder(LogSetsViewHolder holder, int position) {
-
+    public void onBindViewHolder(LogSetsViewHolder viewHolder, int position) {
+        SessionLog log = getItemAtPosition(position);
+        TextView tvText = viewHolder.tvText;
+        tvText.setText(String.format(Locale.US,
+                "%dx%d @%d%%",
+                log.getSetsCompleted(),
+                log.getRepsCompleted(),
+                ((Double) (log.getSuccessRate() * 100)).intValue()));
     }
 
     @Override
@@ -41,23 +48,20 @@ public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogS
         return LayoutInflater.from(parent.getContext()).inflate(R.layout.drill_listitem, parent, false);
     }
 
-    public SessionLog getItemAtPosition(int position) {
+    @VisibleForTesting
+    SessionLog getItemAtPosition(int position) {
         if (logs == null || logs.size() <= position) { return null; }
         return logs.get(position);
     }
 
     static class LogSetsViewHolder extends RecyclerView.ViewHolder {
         View itemView;
-        TextView tvHeader;
-        ImageView ivImage;
         TextView tvText;
 
         LogSetsViewHolder(View itemView) {
             super(itemView);
 
             this.itemView = itemView;
-            tvHeader = (TextView) itemView.findViewById(R.id.tvHeader);
-            ivImage = (ImageView) itemView.findViewById(R.id.ivImage);
             tvText = (TextView) itemView.findViewById(R.id.tvText);
         }
     }

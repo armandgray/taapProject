@@ -50,8 +50,8 @@ public class LogSetsRvAdapterTest {
                 .sessionGoal("")
                 .activeWork(new Date(0))
                 .restTime(new Date(0))
-                .setsCompleted(0)
-                .repsCompleted(0)
+                .setsCompleted(2)
+                .repsCompleted(1)
                 .successRate(0.47)
                 .successRecord(0.0)
                 .create();
@@ -105,8 +105,8 @@ public class LogSetsRvAdapterTest {
                 "%dx%d @%d%%",
                 log.getSetsCompleted(),
                 log.getRepsCompleted(),
-                ((Double) log.getSuccessRate()).intValue());
-        assertEquals(expected, holder.tvHeader.getText());
+                ((Double) (log.getSuccessRate() * 100)).intValue());
+        assertEquals(expected, holder.tvText.getText());
     }
 
     @Test
