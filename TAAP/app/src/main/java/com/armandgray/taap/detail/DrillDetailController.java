@@ -74,6 +74,8 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
             return;
         }
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
+        ArrayList<SessionLog> listAllLogs = new ArrayList<>();
+        addAllCursorDrillData(listAllLogs);
         sessionLog = new SessionLog.Builder()
                 .sessionLength(getTimeElapsedAsDate(activeWorkTime + restTime, 16))
                 .sessionGoal("None")
@@ -82,10 +84,19 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
                 .setsCompleted(views.npSets.getValue())
                 .repsCompleted(views.npReps.getValue())
                 .successRate(getOverallRateFromPickers())
-                .successRecord(getOverallSuccessRecord())
+                .successRecord(getMaxSuccessRate(listAllLogs))
                 .drill(views.drill)
                 .create();
-        DetailSummaryDialog.newInstance(sessionLog).show(fragmentManager, DIALOG);
+        DetailSummaryDialog.newInstance(sessionLog, listAllLogs).show(fragmentManager, DIALOG);
+    }
+
+    private void addAllCursorDrillData(ArrayList<SessionLog> list) {
+        Cursor cursor = getCursorAllLogsForDrill();
+        if (cursor == null) { return; }
+
+        List<SessionLog> listAllLogs = new ArrayList<>();
+        addAllLogsData(cursor, listAllLogs);
+        cursor.close();
     }
 
     private double getOverallRateFromPickers() {
@@ -93,17 +104,6 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
         return reps == 0
                 ? views.npSuccesses.getValue() * 1.0 / views.npSets.getValue()
                 : views.npSuccesses.getValue() * 1.0 / (reps * views.npSets.getValue());
-    }
-
-    private double getOverallSuccessRecord() {
-        Cursor cursor = getCursorAllLogsForDrill();
-        if (cursor == null) { return 0; }
-
-        List<SessionLog> listAllLogs = new ArrayList<>();
-        addAllLogsData(cursor, listAllLogs);
-        cursor.close();
-
-        return getMaxSuccessRate(listAllLogs);
     }
 
     private Cursor getCursorAllLogsForDrill() {

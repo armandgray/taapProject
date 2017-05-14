@@ -175,7 +175,7 @@ public class DrillDetailViewsTest {
     }
 
     @Test
-    public void doesPassSessionLog_OnBtnFinishedClick() throws Exception {
+    public void doesPassSessionLogAndLogHistory_OnBtnFinishedClick() throws Exception {
         Button btnFinished = (Button) activity.findViewById(R.id.btnFinished);
         btnFinished.setVisibility(View.VISIBLE);
         btnFinished.performClick();
@@ -183,7 +183,7 @@ public class DrillDetailViewsTest {
         activity.getSupportFragmentManager().executePendingTransactions();
 
         DetailSummaryDialog dialog = (DetailSummaryDialog) activity.getSupportFragmentManager().findFragmentByTag(DIALOG);
-        // TODO add assert for each sessionLog data point here getting the Fragment
+        // TODO add assert for each sessionLog data point & HISTORY here getting the Fragment
     }
 
     @After
