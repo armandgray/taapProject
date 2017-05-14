@@ -24,6 +24,7 @@ import com.armandgray.taap.utils.RecyclerItemClickListener;
 import java.util.ArrayList;
 
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
+import static com.armandgray.taap.utils.CursorDataHelper.addAllDrillsData;
 
 class MainActivityViews {
 
@@ -156,6 +157,7 @@ class MainActivityViews {
                         null, null, null);
         if (cursor == null) { return null; }
         ArrayList<Drill> listAllDrills = new ArrayList<>();
+        addAllDrillsData(cursor, listAllDrills);
         cursor.close();
         return listAllDrills;
     }
