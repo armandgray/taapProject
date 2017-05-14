@@ -88,6 +88,7 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
     }
 
     private String getParsedTypeForQuery(String drillType) {
+        if (drillType.equals(SEARCH)) { return ""; }
         return drillType.substring(SEARCH.length(), drillType.length() - 1);
     }
 

@@ -183,6 +183,7 @@ public class MainActivityViewsTest {
 
     @Test
     public void canChangeEtSearchTextToQueryDrillList() throws Exception {
+        Robolectric.buildActivity(SplashActivity.class).create().start().resume();
         views.etSearch.setText(WALL);
 
         ArrayList<Drill> expectedList = getQueryResultList(getDrillsList(), WALL);
@@ -201,6 +202,7 @@ public class MainActivityViewsTest {
 
     @Test
     public void canSelectSpinnerSearchItemToReSortDrills() throws Exception {
+        Robolectric.buildActivity(SplashActivity.class).create().start().resume();
         views.etSearch.setText(WALL);
 
         int spinnerLastIndex = views.spinner.getAdapter().getCount() - 1;
