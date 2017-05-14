@@ -14,6 +14,29 @@ import static com.armandgray.taap.utils.StringHelper.getStringAsArray;
 
 public class CursorDataHelper {
 
+    public static void addAllDrillsData(Cursor cursor, List<Drill> drills) {
+        while (cursor.moveToNext()) {
+            Drill drillAtCurrentPosition = getDrillFromCursor(cursor);
+            drills.add(drillAtCurrentPosition);
+        }
+    }
+
+    private static Drill getDrillFromCursor(Cursor cursor) {
+        int columnLogDrill = cursor.getColumnIndex(LogsTable.COLUMN_DRILL);
+        int columnDrillId = cursor.getColumnIndex(DrillsTable.DRILL_ID);
+        int columnTitle = cursor.getColumnIndex(DrillsTable.COLUMN_TITLE);
+        int columnImageId = cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID);
+        int columnCategory = cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY);
+
+        if (cursor.getInt(columnDrillId) != cursor.getInt(columnLogDrill)) { return null; }
+        Drill drill = new Drill(
+                cursor.getString(columnTitle),
+                cursor.getInt(columnImageId),
+                getStringAsArray(cursor.getString(columnCategory)));
+        drill.setDrillId(cursor.getInt(columnDrillId));
+        return drill;
+    }
+
     public static void addAllLogsData(Cursor cursor, List<SessionLog> logs) {
         while (cursor.moveToNext()) {
             SessionLog logAtCurrentPosition = getLogAtCurrentPosition(cursor);
@@ -32,7 +55,7 @@ public class CursorDataHelper {
         int columnRepsCompleted = cursor.getColumnIndex(LogsTable.COLUMN_REPS_COMPLETED);
         int columnSuccess = cursor.getColumnIndex(LogsTable.COLUMN_SUCCESS);
 
-        Drill drill = getLogDrillFromCursor(cursor);
+        Drill drill = getDrillFromCursor(cursor);
         if (drill == null) { return null; }
 
         SessionLog sessionLog = new SessionLog.Builder()
@@ -48,22 +71,6 @@ public class CursorDataHelper {
         sessionLog.setSessionDate(new Date(cursor.getLong(columnDate)));
         sessionLog.setSessionId(cursor.getInt(columnLogId));
         return sessionLog;
-    }
-
-    private static Drill getLogDrillFromCursor(Cursor cursor) {
-        int columnLogDrill = cursor.getColumnIndex(LogsTable.COLUMN_DRILL);
-        int columnDrillId = cursor.getColumnIndex(DrillsTable.DRILL_ID);
-        int columnTitle = cursor.getColumnIndex(DrillsTable.COLUMN_TITLE);
-        int columnImageId = cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID);
-        int columnCategory = cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY);
-
-        if (cursor.getInt(columnDrillId) != cursor.getInt(columnLogDrill)) { return null; }
-        Drill drill = new Drill(
-                cursor.getString(columnTitle),
-                cursor.getInt(columnImageId),
-                getStringAsArray(cursor.getString(columnCategory)));
-        drill.setDrillId(cursor.getInt(columnDrillId));
-        return drill;
     }
 
 }
