@@ -20,17 +20,10 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
 
-import static com.armandgray.taap.utils.LogSetsRvAdapter.IMAGE_RESOURCE_ID;
-import static com.armandgray.taap.utils.LogSetsRvAdapter.ITEM_DATA;
-import static com.armandgray.taap.utils.LogSetsRvAdapter.STRING_RESOURCE_ID;
-import static com.armandgray.taap.utils.LogSetsRvAdapter.TINT_COLOR;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
@@ -104,16 +97,7 @@ public class LogSetsRvAdapterTest {
                         inflater.inflate(R.layout.session_log_listitem, null, false));
         adapter.onBindViewHolder(holder, 1);
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(testLogList.getSessionLength());
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        SimpleDateFormat simpleDateFormat =
-                hour == 0
-                        ? new SimpleDateFormat("00:mm:ss", Locale.US)
-                        : new SimpleDateFormat("hh:mm:ss", Locale.US);
-
         assertEquals("Session Length", holder.tvHeader.getText());
-        assertEquals(simpleDateFormat.format(calendar.getTime()), holder.tvText.getText());
         assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
                 R.drawable.ic_timer_white_24dp),
                 holder.ivImage.getDrawable());
@@ -122,12 +106,12 @@ public class LogSetsRvAdapterTest {
     @Test
     public void canGetItemCount() throws Exception {
         adapter = new LogSetsRvAdapter(testLogList);
-        assertEquals(9, adapter.getItemCount());
+        assertEquals(testLogList.size(), adapter.getItemCount());
     }
 
     @Test
     public void canGetItemAtPosition() throws Exception {
-        assertEquals(hashMap, adapter.getItemAtPosition(0));
+        assertEquals(testLogList.get(0), adapter.getItemAtPosition(0));
     }
 
     @After
