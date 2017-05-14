@@ -17,8 +17,6 @@ import android.view.View;
 import com.armandgray.taap.R;
 import com.armandgray.taap.models.SessionLog;
 
-import java.util.ArrayList;
-
 import static com.armandgray.taap.log.LogActivity.SESSION_LOG;
 
 public class DetailSummaryDialog extends DialogFragment {
@@ -34,15 +32,6 @@ public class DetailSummaryDialog extends DialogFragment {
         Bundle args = new Bundle();
         DetailSummaryDialog fragment = new DetailSummaryDialog();
         args.putParcelable(SESSION_LOG, sessionLog);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    public static DetailSummaryDialog newInstance(SessionLog sessionLog, ArrayList<SessionLog> logs) {
-        Bundle args = new Bundle();
-        DetailSummaryDialog fragment = new DetailSummaryDialog();
-        args.putParcelable(SESSION_LOG, sessionLog);
-        args.putParcelableArrayList(ALL_LOGS, logs);
         fragment.setArguments(args);
         return fragment;
     }
