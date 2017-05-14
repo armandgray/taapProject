@@ -15,17 +15,18 @@ import java.util.Arrays;
 
 import static com.armandgray.taap.models.Drill.DRILL_TYPES;
 import static com.armandgray.taap.models.Drill.getQueryResultList;
-import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
 
 public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillViewHolder> {
 
     public static final String SEARCH = "Search: ";
     ArrayList<Drill> drillList;
+    ArrayList<Drill> allDrillsList;
 
     DrillsRvAdapter() {}
 
     public DrillsRvAdapter(ArrayList<Drill> drillList) {
         this.drillList = drillList;
+        this.allDrillsList = drillList;
     }
 
     @Override
@@ -59,7 +60,7 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
     }
 
     public void swapRvDrillsAdapterDataOnQuery(String query) {
-        swapDataSet(getQueryResultList(getDrillsList(), query));
+        swapDataSet(getQueryResultList(allDrillsList, query));
     }
 
     public void swapRvDrillsAdapterDataOnDrillType(String drillType) {
@@ -72,12 +73,11 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
     }
 
     private ArrayList<Drill> getListFilteredOnType(String drillType) {
-        ArrayList<Drill> originalList = getDrillsList();
         if (Arrays.asList(DRILL_TYPES).contains(drillType)) {
-            return getTypedList(drillType, originalList);
+            return getTypedList(drillType);
         }
         return isSearchType(drillType) ?
-                getQueryResultList(originalList, getParsedTypeForQuery(drillType)) : originalList;
+                getQueryResultList(allDrillsList, getParsedTypeForQuery(drillType)) : allDrillsList;
     }
 
     private boolean isSearchType(String drillType) {
@@ -88,7 +88,8 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
         return drillType.substring(SEARCH.length(), drillType.length() - 1);
     }
 
-    private ArrayList<Drill> getTypedList(String drillType, ArrayList<Drill> originalList) {
+    private ArrayList<Drill> getTypedList(String drillType) {
+        ArrayList<Drill> originalList = allDrillsList;
         for (int i = 0; i < originalList.size(); i++) {
             if (!hasMatchingDrillType(drillType, originalList.get(i))) {
                 originalList.remove(i);
