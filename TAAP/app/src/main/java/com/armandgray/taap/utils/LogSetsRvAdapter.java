@@ -1,6 +1,7 @@
 package com.armandgray.taap.utils;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -21,7 +22,7 @@ public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogS
 
     @Override
     public LogSetsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        return new LogSetsViewHolder(getLayout(parent));
     }
 
     @Override
@@ -32,6 +33,15 @@ public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogS
     @Override
     public int getItemCount() {
         return 0;
+    }
+
+    View getLayout(ViewGroup parent) {
+        return LayoutInflater.from(parent.getContext()).inflate(R.layout.drill_listitem, parent, false);
+    }
+
+    public SessionLog getItemAtPosition(int position) {
+        if (logs == null || logs.size() <= position) { return null; }
+        return logs.get(position);
     }
 
     static class LogSetsViewHolder extends RecyclerView.ViewHolder {
