@@ -3,6 +3,8 @@ package com.armandgray.taap.detail;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +13,11 @@ import android.widget.TextView;
 
 import com.armandgray.taap.R;
 import com.armandgray.taap.models.Drill;
+import com.armandgray.taap.models.SessionLog;
+import com.armandgray.taap.utils.LogSetsRvAdapter;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
 
@@ -25,15 +32,14 @@ class DrillDetailViews {
     NumberPicker npReps;
     NumberPicker npSuccesses;
     Button btnFinished;
+    private RecyclerView rvPreviousLogs;
 
     DrillDetailViews(DrillDetailActivity activity, DrillDetailViewsListener listener) {
         this.activity = activity;
         this.listener = listener;
-
-        setupActivityInitialState();
     }
 
-    private void setupActivityInitialState() {
+    void setupActivityInitialState() {
         activity.setContentView(R.layout.activity_drill_detail);
         assignGlobalViews();
         setupToolbar();
@@ -49,6 +55,7 @@ class DrillDetailViews {
         npReps = (NumberPicker) activity.findViewById(R.id.npReps);
         npSuccesses = (NumberPicker) activity.findViewById(R.id.npSuccesses);
         btnFinished = (Button) activity.findViewById(R.id.btnFinished);
+        rvPreviousLogs = (RecyclerView) activity.findViewById(R.id.rvPreviousLogs);
     }
 
     private void setupToolbar() {
@@ -111,6 +118,25 @@ class DrillDetailViews {
                 listener.onBtnFinishedClick(v);
             }
         });
+    }
+
+    void setupRvPreviousLogs(ArrayList<SessionLog> logs) {
+        SessionLog testSessionLog = new SessionLog.Builder()
+                .sessionLength(new Date())
+                .sessionGoal("")
+                .activeWork(new Date(0))
+                .restTime(new Date(0))
+                .setsCompleted(2)
+                .repsCompleted(1)
+                .successRate(0.47)
+                .successRecord(0.0)
+                .create();
+        logs.add(testSessionLog);
+        logs.add(testSessionLog);
+        logs.add(testSessionLog);
+        rvPreviousLogs.setAdapter(new LogSetsRvAdapter(logs));
+        rvPreviousLogs.setLayoutManager(
+                new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
     }
 
     interface DrillDetailViewsListener {
