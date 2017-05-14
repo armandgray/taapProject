@@ -30,24 +30,22 @@ import static com.armandgray.taap.utils.SessionLogRvAdapter.IMAGE_RESOURCE_ID;
 import static com.armandgray.taap.utils.SessionLogRvAdapter.ITEM_DATA;
 import static com.armandgray.taap.utils.SessionLogRvAdapter.STRING_RESOURCE_ID;
 import static com.armandgray.taap.utils.SessionLogRvAdapter.TINT_COLOR;
-import static com.armandgray.taap.utils.SessionLogRvAdapter.TYPE_HEADER;
-import static com.armandgray.taap.utils.SessionLogRvAdapter.TYPE_ITEM;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
-public class SummaryRvAdapter {
+public class LogSetsRvAdapterTest {
 
-    private SummaryRvAdapter adapter;
+    private LogSetsRvAdapter adapter;
     private View mockView;
     private SessionLog testSessionLog;
 
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
-        adapter = new SummaryRvAdapter(null);
+        adapter = new LogSetsRvAdapter(null);
         mockView = mock(View.class);
         Calendar calendar = Calendar.getInstance();
         calendar.set(1, 1, 1, 1, 5, 30);
@@ -95,7 +93,7 @@ public class SummaryRvAdapter {
     @SuppressLint("InflateParams")
     @Test
     public void onBindViewHolder_DoesSetViewsForSessionLogHeader() {
-        adapter = new SummaryRvAdapter(testSessionLog);
+        adapter = new LogSetsRvAdapter(testSessionLog);
         LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         SessionLogRvAdapter.SessionLogViewHolder holder =
@@ -114,7 +112,7 @@ public class SummaryRvAdapter {
     @SuppressLint("InflateParams")
     @Test
     public void onBindViewHolder_DoesSetViewsForSessionLogItem() {
-        adapter = new SummaryRvAdapter(testSessionLog);
+        adapter = new LogSetsRvAdapter(testSessionLog);
         LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         SessionLogRvAdapter.SessionLogViewHolder holder =
@@ -158,7 +156,7 @@ public class SummaryRvAdapter {
     @SuppressLint("InflateParams")
     @Test
     public void onBindViewHolder_DoesSetViewsForSessionLogItem_Percents() {
-        adapter = new SummaryRvAdapter(testSessionLog);
+        adapter = new LogSetsRvAdapter(testSessionLog);
         LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         SessionLogRvAdapter.SessionLogViewHolder holder =
@@ -184,7 +182,7 @@ public class SummaryRvAdapter {
 
     @Test
     public void canGetItemAtPosition() throws Exception {
-        adapter = new SummaryRvAdapter(testSessionLog);
+        adapter = new LogSetsRvAdapter(testSessionLog);
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put(STRING_RESOURCE_ID, R.string.session_date);
         hashMap.put(ITEM_DATA, testSessionLog.getSessionDate());
