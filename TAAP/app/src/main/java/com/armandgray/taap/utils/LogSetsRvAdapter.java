@@ -54,8 +54,9 @@ public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogS
         return logs.get(position);
     }
 
-    public void addLog(SessionLog itemAtPosition) {
-
+    public void addLog(SessionLog log) {
+        this.logs.add(log);
+        notifyDataSetChanged();
     }
 
     static class LogSetsViewHolder extends RecyclerView.ViewHolder {

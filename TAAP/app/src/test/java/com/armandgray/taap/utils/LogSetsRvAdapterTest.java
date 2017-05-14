@@ -123,11 +123,13 @@ public class LogSetsRvAdapterTest {
 
     @Test
     public void canAddLogAndUpdateRv() throws Exception {
-        adapter.addLog(adapter.getItemAtPosition(0));
-
+        adapter = new LogSetsRvAdapter(testLogList);
         ArrayList<SessionLog> expectedList = new ArrayList<>();
         expectedList.addAll(adapter.logs);
         expectedList.add(adapter.getItemAtPosition(0));
+
+        adapter.addLog(adapter.getItemAtPosition(0));
+        
         assertEquals(expectedList.size(), adapter.getItemCount());
         assertEquals(expectedList, adapter.logs);
     }
