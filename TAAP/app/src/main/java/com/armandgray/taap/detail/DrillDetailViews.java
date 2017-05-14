@@ -17,7 +17,6 @@ import com.armandgray.taap.models.SessionLog;
 import com.armandgray.taap.utils.LogSetsRvAdapter;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
 
@@ -33,6 +32,8 @@ class DrillDetailViews {
     NumberPicker npSuccesses;
     Button btnFinished;
     private RecyclerView rvPreviousLogs;
+    private RecyclerView rvCurrentLog;
+    private LogSetsRvAdapter adapterPrevLogs;
 
     DrillDetailViews(DrillDetailActivity activity, DrillDetailViewsListener listener) {
         this.activity = activity;
@@ -56,6 +57,7 @@ class DrillDetailViews {
         npSuccesses = (NumberPicker) activity.findViewById(R.id.npSuccesses);
         btnFinished = (Button) activity.findViewById(R.id.btnFinished);
         rvPreviousLogs = (RecyclerView) activity.findViewById(R.id.rvPreviousLogs);
+        rvCurrentLog = (RecyclerView) activity.findViewById(R.id.rvCurrentLog);
     }
 
     private void setupToolbar() {
@@ -123,6 +125,13 @@ class DrillDetailViews {
     void setupRvPreviousLogs(ArrayList<SessionLog> logs) {
         rvPreviousLogs.setAdapter(new LogSetsRvAdapter(logs));
         rvPreviousLogs.setLayoutManager(
+                new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
+    }
+
+    void setupRvCurrentLog() {
+        adapterPrevLogs = new LogSetsRvAdapter(new ArrayList<SessionLog>());
+        rvCurrentLog.setAdapter(adapterPrevLogs);
+        rvCurrentLog.setLayoutManager(
                 new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
     }
 
