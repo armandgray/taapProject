@@ -105,7 +105,6 @@ public class DrillDetailViewsTest {
         assertNotNull(rvPreviousLogs.getAdapter());
         assertNotNull(rvPreviousLogs.getLayoutManager());
         assertTrue(rvPreviousLogs.getLayoutManager() instanceof LinearLayoutManager);
-        assertTrue(rvPreviousLogs.getAdapter().getItemCount() > 0);
     }
 
     @Test
