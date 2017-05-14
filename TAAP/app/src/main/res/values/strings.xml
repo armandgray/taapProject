@@ -28,10 +28,11 @@
 
     <string-array name="drill_types">
         <item>Sort Drills (All)</item>
+        <item>Fundamentals</item>
+        <item>Defense</item>
+        <item>Passing</item>
         <item>Shooting</item>
         <item>Ball Handling</item>
-        <item>Passing</item>
-        <item>Fundamentals</item>
     </string-array>
 
     <string name="title_activity_drill_detail">DrillDetailActivity</string>
