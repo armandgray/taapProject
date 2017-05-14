@@ -59,7 +59,7 @@ public class Drill implements Parcelable {
     @NonNull
     public static ArrayList<Drill> getQueryResultList(ArrayList<Drill> drillsList, String query) {
         ArrayList<Drill> dataList = new ArrayList<>();
-        if (drillsList != null) { dataList = drillsList; }
+        if (drillsList != null) { dataList.addAll(drillsList); }
         return getFilteredListOnQuery(query, dataList);
     }
 

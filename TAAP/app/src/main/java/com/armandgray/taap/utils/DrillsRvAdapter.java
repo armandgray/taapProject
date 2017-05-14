@@ -19,14 +19,15 @@ import static com.armandgray.taap.models.Drill.getQueryResultList;
 public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillViewHolder> {
 
     public static final String SEARCH = "Search: ";
+    private ArrayList<Drill> allDrillsList;
     ArrayList<Drill> drillList;
-    ArrayList<Drill> allDrillsList;
 
     DrillsRvAdapter() {}
 
     public DrillsRvAdapter(ArrayList<Drill> drillList) {
+        this.allDrillsList = new ArrayList<>();
+        allDrillsList.addAll(drillList);
         this.drillList = drillList;
-        this.allDrillsList = drillList;
     }
 
     @Override
@@ -73,11 +74,13 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
     }
 
     private ArrayList<Drill> getListFilteredOnType(String drillType) {
+        ArrayList<Drill> originalList = new ArrayList<>();
+        originalList.addAll(allDrillsList);
         if (Arrays.asList(DRILL_TYPES).contains(drillType)) {
-            return getTypedList(drillType);
+            return getTypedList(drillType, originalList);
         }
         return isSearchType(drillType) ?
-                getQueryResultList(allDrillsList, getParsedTypeForQuery(drillType)) : allDrillsList;
+                getQueryResultList(originalList, getParsedTypeForQuery(drillType)) : originalList;
     }
 
     private boolean isSearchType(String drillType) {
@@ -88,8 +91,7 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
         return drillType.substring(SEARCH.length(), drillType.length() - 1);
     }
 
-    private ArrayList<Drill> getTypedList(String drillType) {
-        ArrayList<Drill> originalList = allDrillsList;
+    private ArrayList<Drill> getTypedList(String drillType, ArrayList<Drill> originalList) {
         for (int i = 0; i < originalList.size(); i++) {
             if (!hasMatchingDrillType(drillType, originalList.get(i))) {
                 originalList.remove(i);
