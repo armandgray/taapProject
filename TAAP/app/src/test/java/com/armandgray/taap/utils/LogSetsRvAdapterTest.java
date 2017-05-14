@@ -97,7 +97,7 @@ public class LogSetsRvAdapterTest {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         LogSetsRvAdapter.LogSetsViewHolder holder =
                 new LogSetsRvAdapter.LogSetsViewHolder(
-                        inflater.inflate(R.layout.session_log_listitem, null, false));
+                        inflater.inflate(R.layout.log_sets_textview, null, false));
         adapter.onBindViewHolder(holder, POSITION);
 
         SessionLog log = adapter.getItemAtPosition(POSITION);

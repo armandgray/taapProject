@@ -45,7 +45,7 @@ public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogS
     }
 
     View getLayout(ViewGroup parent) {
-        return LayoutInflater.from(parent.getContext()).inflate(R.layout.drill_listitem, parent, false);
+        return LayoutInflater.from(parent.getContext()).inflate(R.layout.log_sets_textview, parent, false);
     }
 
     @VisibleForTesting
