@@ -33,7 +33,7 @@ class DrillDetailViews {
     Button btnFinished;
     private RecyclerView rvPreviousLogs;
     private RecyclerView rvCurrentLog;
-    private LogSetsRvAdapter adapterPrevLogs;
+    LogSetsRvAdapter adapterPrevLogs;
 
     DrillDetailViews(DrillDetailActivity activity, DrillDetailViewsListener listener) {
         this.activity = activity;

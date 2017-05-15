@@ -11,6 +11,7 @@ import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
 import com.armandgray.taap.detail.dialogs.TimerDialog;
 import com.armandgray.taap.models.SessionLog;
+import com.armandgray.taap.utils.LogSetsRvAdapter;
 
 import org.junit.After;
 import org.junit.Before;
@@ -235,6 +236,21 @@ public class DrillDetailControllerTest {
         assertEquals(layout.findViewById(R.id.timerDialogContainer).getId(),
                 resultDialog.findViewById(R.id.timerDialogContainer).getId());
         assertFalse(controller.drillActive);
+    }
+
+    @Test
+    public void doesAddLogAndUpdateRv_OnTogglePlay() throws Exception {
+        controller.views.adapterPrevLogs = new LogSetsRvAdapter(new ArrayList<SessionLog>());
+        ArrayList<SessionLog> expectedList = new ArrayList<>();
+        for (int i = 0; i < controller.views.adapterPrevLogs.getItemCount(); i++) {
+            expectedList.add(controller.views.adapterPrevLogs.getItemAtPosition(i));
+        }
+        expectedList.add(TEST_SESSION_LOG);
+
+        controller.views.adapterPrevLogs.addLog(TEST_SESSION_LOG);
+
+        assertEquals(expectedList.size(), controller.views.adapterPrevLogs.getItemCount());
+        assertEquals(expectedList.get(0), controller.views.adapterPrevLogs.getItemAtPosition(0));
     }
 
     @After
