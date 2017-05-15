@@ -29,10 +29,8 @@ import org.robolectric.shadows.ShadowDialog;
 
 import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
 import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
-import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
 
@@ -99,11 +97,9 @@ public class TimerDialogTest {
     public void doesFillEntireScreen_DialogGetWindow() {
         Window window = dialog.getDialog().getWindow();
 
-
+        // TODO add test for window layout params & background
         assertNotNull(window);
         assertNotNull(window.getAttributes());
-        assertEquals(1 , window.getAttributes().x);
-        assertEquals(1 , window.getAttributes().y);
     }
 
     @Test
@@ -138,7 +134,6 @@ public class TimerDialogTest {
         fab.performClick();
 
         assertFalse(dialog.isShowing());
-        assertNull(dialog);
     }
 
     @After
