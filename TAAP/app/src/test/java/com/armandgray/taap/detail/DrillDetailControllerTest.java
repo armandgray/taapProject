@@ -150,6 +150,25 @@ public class DrillDetailControllerTest {
     }
 
     @Test
+    public void doesRecordCurrentSetData_OnBtnFinishedClick() throws Exception {
+        controller.successRate = 0.5;
+        controller.views.npSets.setValue(1);
+        controller.views.npReps.setValue(1);
+        controller.views.npSuccesses.setValue(1);
+        int expectedSets = controller.setsCompleted + 1;
+        int expectedReps = controller.repsCompleted + 1;
+        double expectedRate = 0.75;
+
+        controller.views.fab.performClick();
+        ShadowDialog.getLatestDialog().dismiss();
+        controller.views.btnFinished.performClick();
+
+        assertEquals(expectedSets, controller.setsCompleted);
+        assertEquals(expectedReps, controller.repsCompleted);
+        assertEquals(expectedRate, controller.successRate);
+    }
+
+    @Test
     public void doesToastRestMessageIfDrillActive_OnTogglePausePlay() {
         controller.views.fab.performClick();
         ShadowDialog.getLatestDialog().dismiss();
