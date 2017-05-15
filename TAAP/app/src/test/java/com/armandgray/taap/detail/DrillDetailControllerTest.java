@@ -279,6 +279,17 @@ public class DrillDetailControllerTest {
         assertEquals(4, controller.views.npSets.getValue());
     }
 
+    @Test
+    public void doesNotDecrementSetsLeftIfSetsIsOne_OnTogglePlay_BeforeInactive() throws Exception {
+        controller.views.npSets.setValue(1);
+
+        controller.views.fab.performClick();
+        ShadowDialog.getLatestDialog().dismiss();
+        controller.views.fab.performClick();
+
+        assertEquals(1, controller.views.npSets.getValue());
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
