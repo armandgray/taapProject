@@ -151,10 +151,13 @@ public class DrillDetailControllerTest {
 
     @Test
     public void doesRecordCurrentSetData_OnBtnFinishedClick() throws Exception {
-        controller.successRate = 0.5;
         controller.views.npSets.setValue(1);
         controller.views.npReps.setValue(1);
         controller.views.npSuccesses.setValue(1);
+
+        controller.successRate = 0.5;
+        controller.setsCompleted = 1;
+
         int expectedSets = controller.setsCompleted + 1;
         int expectedReps = controller.repsCompleted + 1;
         double expectedRate = 0.75;
