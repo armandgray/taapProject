@@ -91,15 +91,17 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     }
 
     private void beforeActiveSetBegins(long currentTimeMillis) {
-        views.adapterPrevLogs.addLog(new SessionLog.Builder()
-                .setsCompleted(views.npSets.getValue())
-                .repsCompleted(views.npReps.getValue())
-                .successRate(getOverallRateFromPickers())
-                .create());
         new TimerDialog().show(activity.getSupportFragmentManager(), DIALOG);
         restTime += timeElapsed == currentTimeMillis ? 0 : timeElapsed;
         views.fab.setImageResource(R.drawable.ic_pause_white_24dp);
         drillActive = true;
+        if (timeElapsed != currentTimeMillis) {
+            views.adapterPrevLogs.addLog(new SessionLog.Builder()
+                    .setsCompleted(views.npSets.getValue())
+                    .repsCompleted(views.npReps.getValue())
+                    .successRate(getOverallRateFromPickers())
+                    .create());
+        }
     }
 
     private double getOverallRateFromPickers() {

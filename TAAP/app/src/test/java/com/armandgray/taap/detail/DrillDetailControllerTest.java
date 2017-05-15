@@ -251,8 +251,21 @@ public class DrillDetailControllerTest {
         }
         expectedList.add(TEST_SESSION_LOG);
 
+        controller.views.fab.performClick();
+        ShadowDialog.getLatestDialog().dismiss();
+        controller.views.npSets.setValue(TEST_SESSION_LOG.getSetsCompleted());
+        controller.views.npReps.setValue(TEST_SESSION_LOG.getRepsCompleted());
+        controller.views.npSuccesses.setValue(1);
+        controller.views.fab.performClick();
+
+        double expectedRate = 1.0 / controller.views.npReps.getValue();
         assertEquals(expectedList.size(), controller.views.adapterPrevLogs.getItemCount());
-        assertEquals(expectedList.get(0), controller.views.adapterPrevLogs.getItemAtPosition(0));
+        assertEquals(expectedList.get(0).getSetsCompleted(),
+                controller.views.adapterPrevLogs.getItemAtPosition(0).getSetsCompleted());
+        assertEquals(expectedList.get(0).getRepsCompleted(),
+                controller.views.adapterPrevLogs.getItemAtPosition(0).getRepsCompleted());
+        assertEquals(expectedRate,
+                controller.views.adapterPrevLogs.getItemAtPosition(0).getSuccessRate());
     }
 
     @After
