@@ -28,7 +28,7 @@ public class CursorDataHelper {
         return listAllDrills;
     }
 
-    public static void addAllDrillsData(Cursor cursor, List<Drill> drills) {
+    private static void addAllDrillsData(Cursor cursor, List<Drill> drills) {
         if (cursor.getCount() == 0) { return; }
         while (cursor.moveToNext()) {
             Drill drillAtCurrentPosition = getDrillFromCursor(cursor);

@@ -7,7 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.armandgray.taap.models.Drill;
 
+import java.util.List;
+
 import static com.armandgray.taap.db.DatabaseContentProvider.insertDrillToDatabase;
+import static com.armandgray.taap.utils.CursorDataHelper.getDrillsListFromDatabase;
 import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
 
 public class SplashActivity extends AppCompatActivity {
@@ -25,7 +28,8 @@ public class SplashActivity extends AppCompatActivity {
 
     @VisibleForTesting
     void insertAllDrillsToDatabase() {
-
+        List<Drill> drills = getDrillsListFromDatabase(this);
+        if (drills != null && drills.size() > 0) { return; }
         for (Drill drill : getDrillsList()) { insertDrillToDatabase(drill, this); }
     }
 }
