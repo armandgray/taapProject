@@ -301,6 +301,18 @@ public class DrillDetailControllerTest {
         assertEquals(1, controller.setsCompleted);
     }
 
+    @Test
+    public void doesIncrementRepsCompletedField_OnTogglePlay_BeforeActive() throws Exception {
+        controller.views.npSets.setValue(1);
+        controller.views.npReps.setValue(10);
+
+        controller.views.fab.performClick();
+        ShadowDialog.getLatestDialog().dismiss();
+        controller.views.fab.performClick();
+
+        assertEquals(10, controller.repsCompleted);
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");

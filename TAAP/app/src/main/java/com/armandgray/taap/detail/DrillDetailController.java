@@ -35,6 +35,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     @VisibleForTesting SessionLog sessionLog;
     private ArrayList<SessionLog> listAllLogs;
     @VisibleForTesting int setsCompleted;
+    @VisibleForTesting int repsCompleted;
 
     DrillDetailController(DrillDetailActivity activity) {
         this.activity = activity;
@@ -98,13 +99,18 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
         restTime += timeElapsed == currentTimeMillis ? 0 : timeElapsed;
         views.fab.setImageResource(R.drawable.ic_pause_white_24dp);
         if (!isFirstSet(currentTimeMillis)) {
-            setsCompleted++;
+            recordSetData();
             addSetToCurrentLogs();
         }
     }
 
     private boolean isFirstSet(long currentTimeMillis) {
         return timeElapsed == currentTimeMillis;
+    }
+
+    private void recordSetData() {
+        setsCompleted++;
+        repsCompleted += views.npReps.getValue();
     }
 
     private void addSetToCurrentLogs() {
