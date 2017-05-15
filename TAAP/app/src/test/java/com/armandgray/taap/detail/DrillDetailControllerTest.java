@@ -268,6 +268,17 @@ public class DrillDetailControllerTest {
                 controller.views.adapterPrevLogs.getItemAtPosition(0).getSuccessRate());
     }
 
+    @Test
+    public void doesDecrementSetsLeft_OnTogglePlay_BeforeInactive() throws Exception {
+        controller.views.npSets.setValue(5);
+
+        controller.views.fab.performClick();
+        ShadowDialog.getLatestDialog().dismiss();
+        controller.views.fab.performClick();
+
+        assertEquals(4, controller.views.npSets.getValue());
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
