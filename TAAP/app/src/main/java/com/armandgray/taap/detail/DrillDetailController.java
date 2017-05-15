@@ -75,18 +75,35 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
         long currentTimeMillis = System.currentTimeMillis();
         timeElapsed = currentTimeMillis - timeElapsed;
         if (drillActive) {
-            Toast.makeText(activity, activity.getString(R.string.rest_time_started),
-                    Toast.LENGTH_LONG).show();
-            activeWorkTime += timeElapsed == currentTimeMillis ? 0 : timeElapsed;
-            views.fab.setImageResource(R.drawable.ic_play_arrow_white_24dp);
-            drillActive = false;
+            beforeRestBegins(currentTimeMillis);
         } else {
-            new TimerDialog().show(activity.getSupportFragmentManager(), DIALOG);
-            restTime += timeElapsed == currentTimeMillis ? 0 : timeElapsed;
-            views.fab.setImageResource(R.drawable.ic_pause_white_24dp);
-            drillActive = true;
+            beforeActiveSetBegins(currentTimeMillis);
         }
         timeElapsed = currentTimeMillis;
+    }
+
+    private void beforeRestBegins(long currentTimeMillis) {
+        Toast.makeText(activity, activity.getString(R.string.rest_time_started),
+                Toast.LENGTH_LONG).show();
+        activeWorkTime += timeElapsed == currentTimeMillis ? 0 : timeElapsed;
+        views.fab.setImageResource(R.drawable.ic_play_arrow_white_24dp);
+        drillActive = false;
+    }
+
+    private void beforeActiveSetBegins(long currentTimeMillis) {
+        views.adapterPrevLogs.addLog(new SessionLog.Builder()
+                .setsCompleted(views.npSets.getValue())
+                .repsCompleted(views.npReps.getValue())
+                .successRate(getOverallRateFromPickers())
+                .create());
+        new TimerDialog().show(activity.getSupportFragmentManager(), DIALOG);
+        restTime += timeElapsed == currentTimeMillis ? 0 : timeElapsed;
+        views.fab.setImageResource(R.drawable.ic_pause_white_24dp);
+        drillActive = true;
+    }
+
+    private double getOverallRateFromPickers() {
+        return views.npSuccesses.getValue() * 1.0 / views.npReps.getValue();
     }
 
     @Override
@@ -110,13 +127,6 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
                 .drill(views.drill)
                 .create();
         DetailSummaryDialog.newInstance(sessionLog).show(fragmentManager, DIALOG);
-    }
-
-    private double getOverallRateFromPickers() {
-        int reps = views.npReps.getValue();
-        return reps == 0
-                ? views.npSuccesses.getValue() * 1.0 / views.npSets.getValue()
-                : views.npSuccesses.getValue() * 1.0 / (reps * views.npSets.getValue());
     }
 
     private double getMaxSuccessRate(List<SessionLog> listAllLogs) {

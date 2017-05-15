@@ -251,8 +251,6 @@ public class DrillDetailControllerTest {
         }
         expectedList.add(TEST_SESSION_LOG);
 
-        controller.views.adapterPrevLogs.addLog(TEST_SESSION_LOG);
-
         assertEquals(expectedList.size(), controller.views.adapterPrevLogs.getItemCount());
         assertEquals(expectedList.get(0), controller.views.adapterPrevLogs.getItemAtPosition(0));
     }
