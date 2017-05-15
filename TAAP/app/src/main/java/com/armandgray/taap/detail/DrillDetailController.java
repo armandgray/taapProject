@@ -125,12 +125,8 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
         views.adapterPrevLogs.addLog(new SessionLog.Builder()
                 .setsCompleted(views.npSets.getValue())
                 .repsCompleted(views.npReps.getValue())
-                .successRate(getOverallRateFromPickers())
+                .successRate(successRate)
                 .create());
-    }
-
-    private double getOverallRateFromPickers() {
-        return views.npSuccesses.getValue() * 1.0 / views.npReps.getValue();
     }
 
     @Override
@@ -147,9 +143,9 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
                 .sessionGoal("None")
                 .activeWork(getTimeElapsedAsDate(activeWorkTime, 16))
                 .restTime(getTimeElapsedAsDate(restTime, 16))
-                .setsCompleted(views.npSets.getValue())
-                .repsCompleted(views.npReps.getValue())
-                .successRate(getOverallRateFromPickers())
+                .setsCompleted(setsCompleted)
+                .repsCompleted(repsCompleted)
+                .successRate(successRate)
                 .successRecord(getMaxSuccessRate(listAllLogs))
                 .drill(views.drill)
                 .create();
@@ -157,7 +153,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     }
 
     private double getMaxSuccessRate(List<SessionLog> listAllLogs) {
-        double max = getOverallRateFromPickers();
+        double max = successRate;
         for (SessionLog log : listAllLogs) {
             if (log.getSuccessRate() > max) { max = log.getSuccessRate(); }
         }
