@@ -2,6 +2,7 @@ package com.armandgray.taap.detail;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
 import static com.armandgray.taap.db.DatabaseContentProvider.ALL_TABLE_COLUMNS;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_ALL;
 import static com.armandgray.taap.db.DatabaseContentProvider.insertDrillToDatabase;
@@ -60,7 +62,9 @@ public class DrillDetailControllerTest {
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
-        activityController = Robolectric.buildActivity(DrillDetailActivity.class);
+        Intent intent = new Intent(activity, DrillDetailActivity.class);
+        intent.putExtra(SELECTED_DRILL, TEST_SESSION_LOG.getDrill());
+        activityController = Robolectric.buildActivity(DrillDetailActivity.class).withIntent(intent);
         activity = activityController.create().start().resume().visible().get();
         controller = activity.controller;
     }
