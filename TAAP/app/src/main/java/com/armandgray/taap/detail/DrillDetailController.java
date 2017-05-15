@@ -137,6 +137,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
             Toast.makeText(activity, alert, Toast.LENGTH_SHORT).show();
             return;
         }
+        recordSetData();
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         sessionLog = new SessionLog.Builder()
                 .sessionLength(getTimeElapsedAsDate(activeWorkTime + restTime, 16))
