@@ -84,26 +84,35 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     }
 
     private void beforeRestBegins(long currentTimeMillis) {
+        drillActive = false;
+        activeWorkTime += timeElapsed == currentTimeMillis ? 0 : timeElapsed;
+        if (views.npSets.getValue() > 1 ) { views.npSets.setValue(views.npSets.getValue() - 1); }
+        views.fab.setImageResource(R.drawable.ic_play_arrow_white_24dp);
         Toast.makeText(activity, activity.getString(R.string.rest_time_started),
                 Toast.LENGTH_LONG).show();
-        activeWorkTime += timeElapsed == currentTimeMillis ? 0 : timeElapsed;
-        views.fab.setImageResource(R.drawable.ic_play_arrow_white_24dp);
-        if (views.npSets.getValue() > 1 ) { views.npSets.setValue(views.npSets.getValue() - 1); }
-        drillActive = false;
     }
 
     private void beforeActiveSetBegins(long currentTimeMillis) {
+        drillActive = true;
         new TimerDialog().show(activity.getSupportFragmentManager(), DIALOG);
         restTime += timeElapsed == currentTimeMillis ? 0 : timeElapsed;
         views.fab.setImageResource(R.drawable.ic_pause_white_24dp);
-        drillActive = true;
-        if (timeElapsed != currentTimeMillis) {
-            views.adapterPrevLogs.addLog(new SessionLog.Builder()
-                    .setsCompleted(views.npSets.getValue())
-                    .repsCompleted(views.npReps.getValue())
-                    .successRate(getOverallRateFromPickers())
-                    .create());
+        if (!isFirstSet(currentTimeMillis)) {
+            setsCompleted++;
+            addSetToCurrentLogs();
         }
+    }
+
+    private boolean isFirstSet(long currentTimeMillis) {
+        return timeElapsed == currentTimeMillis;
+    }
+
+    private void addSetToCurrentLogs() {
+        views.adapterPrevLogs.addLog(new SessionLog.Builder()
+                .setsCompleted(views.npSets.getValue())
+                .repsCompleted(views.npReps.getValue())
+                .successRate(getOverallRateFromPickers())
+                .create());
     }
 
     private double getOverallRateFromPickers() {
