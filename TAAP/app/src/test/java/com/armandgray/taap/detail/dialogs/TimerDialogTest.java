@@ -94,10 +94,11 @@ public class TimerDialogTest {
     public void doesFillEntireScreen_DialogGetWindow() {
         Window window = dialog.getDialog().getWindow();
 
+
         assertNotNull(window);
         assertNotNull(window.getAttributes());
-        assertEquals(1 , window.getAttributes().horizontalWeight);
-        assertEquals(1 , window.getAttributes().verticalWeight);
+        assertEquals(1 , window.getAttributes().x);
+        assertEquals(1 , window.getAttributes().y);
     }
 
     @Test
