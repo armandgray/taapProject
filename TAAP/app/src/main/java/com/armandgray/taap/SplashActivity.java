@@ -2,6 +2,7 @@ package com.armandgray.taap;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 
 import com.armandgray.taap.models.Drill;
@@ -15,10 +16,15 @@ public class SplashActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        for (Drill drill : getDrillsList()) { insertDrillToDatabase(drill, this); }
+        insertAllDrillsToDatabase();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
         System.out.println("Create");
+    }
+
+    @VisibleForTesting
+    void insertAllDrillsToDatabase() {
+        for (Drill drill : getDrillsList()) { insertDrillToDatabase(drill, this); }
     }
 }
