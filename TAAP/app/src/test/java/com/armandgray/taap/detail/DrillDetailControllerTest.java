@@ -122,13 +122,13 @@ public class DrillDetailControllerTest {
     }
 
     @Test
-    public void doesToastErrorIfSuccessesGreaterThanReps_OnBtnFinishedClick() throws Exception {
+    public void doesToastErrorIfSuccessesGreaterThanReps_OnTogglePausePlay_BeforeActive() throws Exception {
         controller.views.npSuccesses.setValue(100);
         Dialog resultDialog = ShadowDialog.getLatestDialog();
 
         controller.views.fab.performClick();
         ShadowDialog.getLatestDialog().dismiss();
-        controller.views.btnFinished.performClick();
+        controller.views.fab.performClick();
 
         assertNull(resultDialog);
         assertThat(ShadowToast.getTextOfLatestToast(),
