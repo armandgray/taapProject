@@ -34,6 +34,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     @VisibleForTesting long restTime;
     @VisibleForTesting SessionLog sessionLog;
     private ArrayList<SessionLog> listAllLogs;
+    @VisibleForTesting int setsCompleted;
 
     DrillDetailController(DrillDetailActivity activity) {
         this.activity = activity;
