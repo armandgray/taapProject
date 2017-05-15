@@ -104,14 +104,10 @@ public class TimerDialogTest {
 
     @Test
     public void doesHaveCustomView_TestOnCreateDialog() {
-        Bundle savedInstanceState = new Bundle();
-        AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
-        ShadowAlertDialog shadowDialog = shadowOf(resultDialog);
+        Window window = dialog.getDialog().getWindow();
 
-        assertNotNull(resultDialog);
-        assertNotNull(shadowDialog);
-        assertNotNull(shadowDialog.getView());
-        assertNotNull(shadowDialog.getView().findViewById(R.id.timerDialogContainer));
+        assertNotNull(window);
+        assertNotNull(window.findViewById(R.id.timerDialogContainer));
     }
 
     @Test
