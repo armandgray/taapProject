@@ -70,6 +70,53 @@ public class SplashActivityTest {
         cursor.close();
     }
 
+    @Test
+    public void doesCheckIfDrillsExistInDatabase() throws Exception {
+        Cursor cursor = RuntimeEnvironment.application.getContentResolver()
+                .query(CONTENT_URI_DRILLS, DrillsTable.ALL_DRILL_COLUMNS,
+                        null, null, null);
+
+        int i = 0;
+        assertNotNull(cursor);
+        assertEquals(getDrillsList().size(), cursor.getCount());
+        assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
+
+        while (cursor.moveToNext()) {
+            Drill drill = getDrillsList().get(i);
+            assertEquals(drill.getTitle(),
+                    cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
+            assertEquals(drill.getImageId(),
+                    cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
+            assertThat(drill.getCategory(), is(getStringAsArray(cursor.getString(
+                    cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)))));
+            i++;
+        }
+        cursor.close();
+
+        activity.insertAllDrillsToDatabase();
+
+        cursor = RuntimeEnvironment.application.getContentResolver()
+                .query(CONTENT_URI_DRILLS, DrillsTable.ALL_DRILL_COLUMNS,
+                        null, null, null);
+
+        i = 0;
+        assertNotNull(cursor);
+        assertEquals(getDrillsList().size(), cursor.getCount());
+        assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
+
+        while (cursor.moveToNext()) {
+            Drill drill = getDrillsList().get(i);
+            assertEquals(drill.getTitle(),
+                    cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
+            assertEquals(drill.getImageId(),
+                    cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
+            assertThat(drill.getCategory(), is(getStringAsArray(cursor.getString(
+                    cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)))));
+            i++;
+        }
+        cursor.close();
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
