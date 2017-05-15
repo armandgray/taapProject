@@ -322,12 +322,11 @@ public class DrillDetailControllerTest {
         controller.views.fab.performClick();
         ShadowDialog.getLatestDialog().dismiss();
         controller.views.fab.performClick();
+        ShadowDialog.getLatestDialog().dismiss();
 
         controller.views.npReps.setValue(10);
         controller.views.npSuccesses.setValue(10);
 
-        controller.views.fab.performClick();
-        ShadowDialog.getLatestDialog().dismiss();
         controller.views.fab.performClick();
 
         assertEquals(.75, controller.successRate);

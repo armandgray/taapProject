@@ -112,6 +112,13 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     private void recordSetData() {
         setsCompleted++;
         repsCompleted += views.npReps.getValue();
+        double currentSuccessRate = views.npSuccesses.getValue() * 1.0 / views.npReps.getValue();
+        successRate = getAverage(successRate, currentSuccessRate);
+    }
+
+    private double getAverage(double successRate, double currentSuccessRate) {
+        Double avg = (successRate * (setsCompleted - 1) + currentSuccessRate) / setsCompleted;
+        return Math.floor(avg * 100) / 100;
     }
 
     private void addSetToCurrentLogs() {
