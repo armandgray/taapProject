@@ -95,14 +95,29 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     }
 
     private void beforeActiveSetBegins(long currentTimeMillis) {
+        if (!isFirstSet(currentTimeMillis)) {
+            if (isSuccessesBiggerThanReps()) {
+                notifyUserValsAreInvalid();
+                return;
+            }
+            recordSetData();
+            addSetToCurrentLogs();
+        }
+
         drillActive = true;
         new TimerDialog().show(activity.getSupportFragmentManager(), DIALOG);
         restTime += timeElapsed == currentTimeMillis ? 0 : timeElapsed;
         views.fab.setImageResource(R.drawable.ic_pause_white_24dp);
-        if (!isFirstSet(currentTimeMillis)) {
-            recordSetData();
-            addSetToCurrentLogs();
-        }
+
+    }
+
+    private void notifyUserValsAreInvalid() {
+        String alert = activity.getString(R.string.invalid_successes);
+        Toast.makeText(activity, alert, Toast.LENGTH_SHORT).show();
+    }
+
+    private boolean isSuccessesBiggerThanReps() {
+        return views.npReps.getValue() < views.npSuccesses.getValue();
     }
 
     private boolean isFirstSet(long currentTimeMillis) {
@@ -132,11 +147,6 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     @Override
     public void onBtnFinishedClick(View v) {
         if (drillActive) { togglePausePlay(); }
-        if (views.npReps.getValue() < views.npSuccesses.getValue()) {
-            String alert = activity.getString(R.string.invalid_successes);
-            Toast.makeText(activity, alert, Toast.LENGTH_SHORT).show();
-            return;
-        }
         recordSetData();
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         sessionLog = new SessionLog.Builder()
