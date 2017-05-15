@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Chronometer;
@@ -35,17 +36,30 @@ public class TimerDialog extends DialogFragment {
         alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
-                Window window = getDialog().getWindow();
-                if (window == null) { return; }
-                window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,
-                        WindowManager.LayoutParams.MATCH_PARENT);
-                window.setBackgroundDrawable(null);
-                window.setContentView(R.layout.timer_dialog_layout);
-                Chronometer chronometer = (Chronometer) window.findViewById(R.id.chronometer);
-                chronometer.start();
+                setupDialogViews();
             }
         });
         return alertDialog;
+    }
+
+    private void setupDialogViews() {
+        Window window = getDialog().getWindow();
+        if (window == null) { return; }
+        setWindowLayout(window);
+        ((Chronometer) window.findViewById(R.id.chronometer)).start();
+        (window.findViewById(R.id.fab)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getDialog().dismiss();
+            }
+        });
+    }
+
+    private void setWindowLayout(Window window) {
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.MATCH_PARENT);
+        window.setBackgroundDrawable(null);
+        window.setContentView(R.layout.timer_dialog_layout);
     }
 
     @Override
