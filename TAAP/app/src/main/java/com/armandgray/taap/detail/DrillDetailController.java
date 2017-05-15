@@ -87,7 +87,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
                 Toast.LENGTH_LONG).show();
         activeWorkTime += timeElapsed == currentTimeMillis ? 0 : timeElapsed;
         views.fab.setImageResource(R.drawable.ic_play_arrow_white_24dp);
-        views.npSets.setValue(views.npSets.getValue() - 1);
+        if (views.npSets.getValue() > 1 ) { views.npSets.setValue(views.npSets.getValue() - 1); }
         drillActive = false;
     }
 
