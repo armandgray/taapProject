@@ -1,6 +1,5 @@
 package com.armandgray.taap;
 
-import android.database.Cursor;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
@@ -16,15 +15,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.armandgray.taap.db.DrillsTable;
-import com.armandgray.taap.models.Drill;
 import com.armandgray.taap.utils.DrillsRvAdapter;
 import com.armandgray.taap.utils.RecyclerItemClickListener;
 
-import java.util.ArrayList;
-
-import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
-import static com.armandgray.taap.utils.CursorDataHelper.addAllDrillsData;
+import static com.armandgray.taap.utils.CursorDataHelper.getDrillsListFromDatabase;
 
 class MainActivityViews {
 
@@ -145,21 +139,10 @@ class MainActivityViews {
 
     private void setupRvDrills() {
         rvDrills = (RecyclerView) activity.findViewById(R.id.rvDrills);
-        rvDrills.setAdapter(new DrillsRvAdapter(getDrillsListFromDatabase()));
+        rvDrills.setAdapter(new DrillsRvAdapter(getDrillsListFromDatabase(activity)));
         rvDrills.setLayoutManager(
                 new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
         setupRvDrillsItemClickListener();
-    }
-
-    private ArrayList<Drill> getDrillsListFromDatabase() {
-        Cursor cursor = activity.getContentResolver()
-                .query(CONTENT_URI_DRILLS, DrillsTable.ALL_DRILL_COLUMNS,
-                        null, null, null);
-        if (cursor == null) { return null; }
-        ArrayList<Drill> listAllDrills = new ArrayList<>();
-        addAllDrillsData(cursor, listAllDrills);
-        cursor.close();
-        return listAllDrills;
     }
 
     private void setupRvDrillsItemClickListener() {

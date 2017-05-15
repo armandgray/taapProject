@@ -1,5 +1,6 @@
 package com.armandgray.taap.utils;
 
+import android.content.Context;
 import android.database.Cursor;
 
 import com.armandgray.taap.db.DrillsTable;
@@ -7,12 +8,25 @@ import com.armandgray.taap.db.LogsTable;
 import com.armandgray.taap.models.Drill;
 import com.armandgray.taap.models.SessionLog;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
 import static com.armandgray.taap.utils.StringHelper.getStringAsArray;
 
 public class CursorDataHelper {
+
+    public static ArrayList<Drill> getDrillsListFromDatabase(Context context) {
+        Cursor cursor = context.getContentResolver()
+                .query(CONTENT_URI_DRILLS, DrillsTable.ALL_DRILL_COLUMNS,
+                        null, null, null);
+        if (cursor == null) { return null; }
+        ArrayList<Drill> listAllDrills = new ArrayList<>();
+        addAllDrillsData(cursor, listAllDrills);
+        cursor.close();
+        return listAllDrills;
+    }
 
     public static void addAllDrillsData(Cursor cursor, List<Drill> drills) {
         if (cursor.getCount() == 0) { return; }
