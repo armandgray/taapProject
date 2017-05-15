@@ -1,6 +1,7 @@
 package com.armandgray.taap.detail.dialogs;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.LinearLayout;
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
 import com.armandgray.taap.detail.DrillDetailActivity;
+import com.armandgray.taap.models.Drill;
 
 import org.junit.After;
 import org.junit.Before;
@@ -17,10 +19,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlertDialog;
 
+import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
 import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
 import static junit.framework.Assert.assertNotNull;
 import static org.robolectric.Shadows.shadowOf;
@@ -36,7 +40,11 @@ public class TimerDialogTest {
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
-        activityController = Robolectric.buildActivity(DrillDetailActivity.class);
+        Intent intent = new Intent(RuntimeEnvironment.application, DrillDetailActivity.class);
+        intent.putExtra(SELECTED_DRILL, new Drill("Beat-the-Pro (Mid-Range)",
+                R.drawable.ic_fitness_center_white_24dp,
+                Drill.SHOOTING_ARRAY));
+        activityController = Robolectric.buildActivity(DrillDetailActivity.class).withIntent(intent);
         activity = activityController.create().visible().get();
         dialog = new TimerDialog();
         dialog.show(activity.getSupportFragmentManager(), DIALOG);

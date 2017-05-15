@@ -24,5 +24,4 @@
         android:gravity="center"
         android:paddingBottom="24dp"
         android:textSize="60sp" />
-
 </LinearLayout>
