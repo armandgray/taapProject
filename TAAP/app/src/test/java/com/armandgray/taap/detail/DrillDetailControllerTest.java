@@ -264,7 +264,7 @@ public class DrillDetailControllerTest {
                 controller.views.adapterPrevLogs.getItemAtPosition(0).getSetsCompleted());
         assertEquals(expectedList.get(0).getRepsCompleted(),
                 controller.views.adapterPrevLogs.getItemAtPosition(0).getRepsCompleted());
-        assertEquals(expectedRate,
+        assertEquals(Math.floor(expectedRate * 100) / 100,
                 controller.views.adapterPrevLogs.getItemAtPosition(0).getSuccessRate());
     }
 
