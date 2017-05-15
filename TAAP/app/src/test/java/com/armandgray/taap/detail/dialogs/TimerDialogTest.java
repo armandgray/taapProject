@@ -1,13 +1,14 @@
 package com.armandgray.taap.detail.dialogs;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.view.Window;
-import android.widget.Chronometer;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
@@ -24,11 +25,15 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlertDialog;
+import org.robolectric.shadows.ShadowDialog;
 
 import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
 import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
@@ -118,11 +123,22 @@ public class TimerDialogTest {
         Bundle savedInstanceState = new Bundle();
         AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
         ShadowAlertDialog shadowDialog = shadowOf(resultDialog);
-        Chronometer chronometer = (Chronometer) shadowDialog.getView()
-                .findViewById(R.id.chronometer);
 
         // TODO add test for chronometer started
-        assertNotNull(chronometer);
+    }
+
+    @Test
+    public void canClickFabToDismissDialog() throws Exception {
+        Dialog dialog = ShadowDialog.getLatestDialog();
+        assertNotNull(dialog);
+        assertTrue(dialog.isShowing());
+
+        FloatingActionButton fab = (FloatingActionButton) dialog.findViewById(R.id.fab);
+        assertNotNull(fab);
+        fab.performClick();
+
+        assertFalse(dialog.isShowing());
+        assertNull(dialog);
     }
 
     @After
