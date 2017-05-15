@@ -218,7 +218,7 @@ public class DrillDetailControllerTest {
         assertEquals(1, cursor.getCount());
         assertEquals(1, listAllLogs.size());
         assertEquals(TEST_SESSION_LOG.getSuccessRate(), listAllLogs.get(0).getSuccessRate());
-        assertEquals(1.00, controller.sessionLog.getSuccessRate());
+        assertEquals(1.00, controller.successRate);
         assertEquals(max, controller.sessionLog.getSuccessRecord());
         cursor.close();
     }
