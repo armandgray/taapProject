@@ -125,14 +125,14 @@ class DrillDetailViews {
     void setupRvPreviousLogs(ArrayList<SessionLog> logs) {
         rvPreviousLogs.setAdapter(new LogSetsRvAdapter(logs));
         rvPreviousLogs.setLayoutManager(
-                new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
+                new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, true));
     }
 
     void setupRvCurrentLog() {
         adapterPrevLogs = new LogSetsRvAdapter(new ArrayList<SessionLog>());
         rvCurrentLog.setAdapter(adapterPrevLogs);
         rvCurrentLog.setLayoutManager(
-                new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
+                new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, true));
     }
 
     interface DrillDetailViewsListener {
