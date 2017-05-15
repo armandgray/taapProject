@@ -2,6 +2,7 @@ package com.armandgray.taap.settings;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -9,6 +10,7 @@ import android.widget.Button;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
+import com.armandgray.taap.SplashActivity;
 import com.armandgray.taap.db.DrillsTable;
 import com.armandgray.taap.db.LogsTable;
 
@@ -110,6 +112,13 @@ public class ConfirmClearDataDialogTest {
         assertEquals(0, logCursor.getCount());
         drillCursor.close();
         logCursor.close();
+    }
+
+    @Test
+    public void doesStartSplashActivity_OnPositiveButtonClick() throws Exception {
+        Intent expectedIntent = new Intent(activity, SplashActivity.class);
+        assertEquals(expectedIntent.toString(),
+                shadowOf(activity).getNextStartedActivity().toString());
     }
 
     @Test
