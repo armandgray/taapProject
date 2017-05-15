@@ -10,6 +10,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Chronometer;
 
 import com.armandgray.taap.R;
@@ -38,7 +40,17 @@ public class TimerDialog extends DialogFragment {
         Chronometer chronometer = (Chronometer) dialogLayout.findViewById(R.id.chronometer);
         chronometer.start();
         builder.setView(dialogLayout);
-        return builder.create();
+        AlertDialog alertDialog = builder.create();
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Window window = getDialog().getWindow();
+                if (window == null) { return; }
+                window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,
+                        WindowManager.LayoutParams.MATCH_PARENT);
+            }
+        });
+        return alertDialog;
     }
 
     @Override
