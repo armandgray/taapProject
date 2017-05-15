@@ -3,10 +3,11 @@ package com.armandgray.taap.detail.dialogs;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
+import android.view.Window;
 import android.widget.Chronometer;
-import android.widget.LinearLayout;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
@@ -26,6 +27,7 @@ import org.robolectric.shadows.ShadowAlertDialog;
 
 import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
 import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static org.robolectric.Shadows.shadowOf;
 
@@ -45,7 +47,7 @@ public class TimerDialogTest {
                 R.drawable.ic_fitness_center_white_24dp,
                 Drill.SHOOTING_ARRAY));
         activityController = Robolectric.buildActivity(DrillDetailActivity.class).withIntent(intent);
-        activity = activityController.create().visible().get();
+        activity = activityController.create().start().resume().visible().get();
         dialog = new TimerDialog();
         dialog.show(activity.getSupportFragmentManager(), DIALOG);
     }
@@ -69,23 +71,33 @@ public class TimerDialogTest {
 
     @Test
     public void existsLayout_TimerDialogLayout() {
-        LinearLayout TimerDialogLayout = (LinearLayout) View
+        CoordinatorLayout TimerDialogLayout = (CoordinatorLayout) View
                 .inflate(activity, R.layout.timer_dialog_layout, null);
         assertNotNull(TimerDialogLayout);
     }
 
     @Test
     public void existsView_Chronometer_TimerDialogLayout() {
-        LinearLayout TimerDialogLayout = (LinearLayout) View
+        CoordinatorLayout TimerDialogLayout = (CoordinatorLayout) View
                 .inflate(activity, R.layout.timer_dialog_layout, null);
         assertNotNull(TimerDialogLayout.findViewById(R.id.chronometer));
     }
 
     @Test
     public void existsView_Fab_TimerDialogLayout() {
-        LinearLayout TimerDialogLayout = (LinearLayout) View
+        CoordinatorLayout TimerDialogLayout = (CoordinatorLayout) View
                 .inflate(activity, R.layout.timer_dialog_layout, null);
         assertNotNull(TimerDialogLayout.findViewById(R.id.fab));
+    }
+
+    @Test
+    public void doesFillEntireScreen_DialogGetWindow() {
+        Window window = dialog.getDialog().getWindow();
+
+        assertNotNull(window);
+        assertNotNull(window.getAttributes());
+        assertEquals(1 , window.getAttributes().horizontalWeight);
+        assertEquals(1 , window.getAttributes().verticalWeight);
     }
 
     @Test
