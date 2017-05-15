@@ -74,6 +74,13 @@ public class TimerDialogTest {
     }
 
     @Test
+    public void existsView_Fab_TimerDialogLayout() {
+        LinearLayout TimerDialogLayout = (LinearLayout) View
+                .inflate(activity, R.layout.timer_dialog_layout, null);
+        assertNotNull(TimerDialogLayout.findViewById(R.id.fab));
+    }
+
+    @Test
     public void doesHaveCustomView_TestOnCreateDialog() {
         Bundle savedInstanceState = new Bundle();
         AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
