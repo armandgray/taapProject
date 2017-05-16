@@ -40,7 +40,7 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
         ImageView ivImage = viewHolder.ivImage;
         TextView tvTitle = viewHolder.tvTitle;
 
-        ivImage.setImageResource(drill.getImageId());
+        ivImage.setImageResource(R.drawable.ic_fast_forward_white_24dp);
         tvTitle.setText(drill.getTitle());
     }
 
