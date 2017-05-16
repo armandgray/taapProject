@@ -34,8 +34,6 @@ class LogActivityController {
     private final LogActivity activity;
     @VisibleForTesting
     private final LogActivityViews views;
-    @VisibleForTesting
-    private final SessionLog sessionLog;
     private final ArrayList<SessionLog> listAllLogs;
     private final ArrayList<SessionLog> listFundamentalLogs;
     private final ArrayList<SessionLog> listDefenseLogs;
@@ -47,7 +45,7 @@ class LogActivityController {
     LogActivityController(LogActivity activity) {
         this.activity = activity;
         this.views = new LogActivityViews(activity);
-        this.sessionLog = activity.getIntent().getParcelableExtra(SESSION_LOG);
+        SessionLog sessionLog = activity.getIntent().getParcelableExtra(SESSION_LOG);
         this.listAllLogs = new ArrayList<>();
         this.listFundamentalLogs = new ArrayList<>();
         this.listDefenseLogs = new ArrayList<>();

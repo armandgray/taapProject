@@ -87,7 +87,7 @@ class MainActivityViews {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                listener.onSpinnerItemSelected(parent, view, position, id);
+                listener.onSpinnerItemSelected(position);
             }
 
             @Override
@@ -112,7 +112,7 @@ class MainActivityViews {
         etSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                listener.onEtSearchFocusChange(v, hasFocus);
+                listener.onEtSearchFocusChange(hasFocus);
             }
         });
     }
@@ -121,7 +121,7 @@ class MainActivityViews {
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                listener.onEtSearchTextChanged(s, start, before, count);
+                listener.onEtSearchTextChanged();
             }
 
             @Override
@@ -149,7 +149,7 @@ class MainActivityViews {
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        listener.onRvDrillsItemTouch(view, position);
+                        listener.onRvDrillsItemTouch(position);
                     }
                 }));
     }
@@ -167,10 +167,10 @@ class MainActivityViews {
     interface MainViewsListener {
         void onFabClick();
         void onSortClick();
-        void onSpinnerItemSelected(AdapterView<?> parent, View view, int position, long id);
+        void onSpinnerItemSelected(int position);
         void onSearchClick();
-        void onEtSearchFocusChange(View v, boolean hasFocus);
-        void onEtSearchTextChanged(CharSequence s, int start, int before, int count);
-        void onRvDrillsItemTouch(View view, int position);
+        void onEtSearchFocusChange(boolean hasFocus);
+        void onEtSearchTextChanged();
+        void onRvDrillsItemTouch(int position);
     }
 }

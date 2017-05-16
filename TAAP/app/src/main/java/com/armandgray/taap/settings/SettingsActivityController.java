@@ -19,11 +19,10 @@ public class SettingsActivityController implements SettingsActivityViews.Setting
     public static final String SOFTWARE_LICENSES = "Software Licenses";
 
     private final SettingsActivity activity;
-    private final SettingsActivityViews views;
 
     SettingsActivityController(SettingsActivity activity) {
         this.activity = activity;
-        this.views = new SettingsActivityViews(activity, this);
+        SettingsActivityViews views = new SettingsActivityViews(activity, this);
 
         views.setupActivityInitialState();
     }

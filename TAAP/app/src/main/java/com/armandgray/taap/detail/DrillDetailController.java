@@ -75,7 +75,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     }
 
     @Override
-    public void onFabClick(View v) {
+    public void onFabClick() {
         views.btnFinished.setVisibility(View.VISIBLE);
         //noinspection deprecation
         views.fab.setBackgroundTintList(activity.getResources().getColorStateList(
@@ -154,7 +154,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     }
 
     @Override
-    public void onBtnFinishedClick(View v) {
+    public void onBtnFinishedClick() {
         if (drillActive) { togglePausePlay(); }
         placeholderRate = successRate;
         recordSetData();

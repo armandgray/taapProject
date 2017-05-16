@@ -8,14 +8,11 @@ public class LogActivity extends AppCompatActivity {
 
     public static final String SESSION_LOG = "SESSION_LOG";
 
-    @VisibleForTesting
-    private LogActivityController controller;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        controller = new LogActivityController(this);
+        LogActivityController controller = new LogActivityController(this);
     }
 
 }

@@ -110,7 +110,7 @@ class DrillDetailViews {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onFabClick(v);
+                listener.onFabClick();
             }
         });
     }
@@ -119,7 +119,7 @@ class DrillDetailViews {
         btnFinished.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onBtnFinishedClick(v);
+                listener.onBtnFinishedClick();
             }
         });
     }
@@ -139,8 +139,8 @@ class DrillDetailViews {
     }
 
     interface DrillDetailViewsListener {
-        void onFabClick(View v);
-        void onBtnFinishedClick(View v);
+        void onFabClick();
+        void onBtnFinishedClick();
     }
 
 }

@@ -6,7 +6,6 @@ import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.SpinnerAdapter;
@@ -44,7 +43,7 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
     }
 
     @Override
-    public void onSpinnerItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    public void onSpinnerItemSelected(int position) {
         if (isQueryCall) {
             isQueryCall = false;
             return;
@@ -73,7 +72,7 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
     }
 
     @Override
-    public void onEtSearchFocusChange(View v, boolean hasFocus) {
+    public void onEtSearchFocusChange(boolean hasFocus) {
         if (!hasFocus) {
             views.etSearch.setVisibility(View.GONE);
             views.spinner.setVisibility(View.VISIBLE);
@@ -82,7 +81,7 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
     }
 
     @Override
-    public void onEtSearchTextChanged(CharSequence s, int start, int before, int count) {
+    public void onEtSearchTextChanged() {
         String query = views.etSearch.getText().toString();
         ((DrillsRvAdapter) views.rvDrills.getAdapter())
                 .swapRvDrillsAdapterDataOnQuery(query);
@@ -90,7 +89,7 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
     }
 
     @Override
-    public void onRvDrillsItemTouch(View view, int position) {
+    public void onRvDrillsItemTouch(int position) {
         Intent intent = new Intent(activity, DrillDetailActivity.class);
         Drill drill = ((DrillsRvAdapter) views.rvDrills.getAdapter())
                 .getItemAtPosition(position);
