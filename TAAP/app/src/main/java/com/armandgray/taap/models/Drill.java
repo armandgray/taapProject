@@ -25,7 +25,7 @@ public class Drill implements Parcelable {
     public static final String[] PASSING_ARRAY = {PASSING};
     public static final String[] DRIVING_ARRAY = {DRIVING};
     public static final String[] DRILL_TYPES = {
-            BALL_HANDLING, SHOOTING, PASSING, FUNDAMENTALS, DEFENSE, OFFENSE, CONDITIONING};
+            BALL_HANDLING, SHOOTING, PASSING, FUNDAMENTALS, DEFENSE, OFFENSE, CONDITIONING, DRIVING};
 
     private String title;
     private int imageId;
