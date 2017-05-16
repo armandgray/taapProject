@@ -15,7 +15,6 @@ import com.armandgray.taap.log.LogActivity;
 import com.armandgray.taap.models.SessionLog;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import static com.armandgray.taap.db.DatabaseContentProvider.ALL_TABLE_COLUMNS;
@@ -38,7 +37,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     @VisibleForTesting int setsCompleted;
     @VisibleForTesting int repsCompleted;
     @VisibleForTesting double successRate;
-    private HashMap<String, Integer> placeholderMap;
+    private double placeholderRate;
 
     DrillDetailController(DrillDetailActivity activity) {
         this.activity = activity;
@@ -149,7 +148,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     @Override
     public void onBtnFinishedClick(View v) {
         if (drillActive) { togglePausePlay(); }
-        placeholderMap = new HashMap<String, Integer>();
+        placeholderRate = successRate;
         recordSetData();
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         sessionLog = new SessionLog.Builder()
@@ -178,10 +177,20 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
         togglePausePlay();
     }
 
-    void onSummaryDialogDismiss() {
+    void onDialogContinue() {
         Intent intent = new Intent(activity, LogActivity.class);
         intent.putExtra(SESSION_LOG, sessionLog);
         activity.startActivity(intent);
         activity.finish();
+    }
+
+    void onDialogDismiss() {
+        resetSetData();
+    }
+
+    private void resetSetData() {
+        setsCompleted -= 1;
+        repsCompleted -= views.npReps.getValue();
+        successRate = placeholderRate;
     }
 }

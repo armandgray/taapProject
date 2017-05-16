@@ -354,7 +354,7 @@ public class DrillDetailControllerTest {
     }
 
     @Test
-    public void doesCarryPlaceholderToRerecordSet_OnSummaryDialogCancel_WithValueChange() throws Exception {
+    public void doesResetSetData_OnSummaryDialogCancel_WithValueChange() throws Exception {
         controller.views.npSets.setValue(1);
         controller.views.npReps.setValue(1);
         controller.views.npSuccesses.setValue(1);
@@ -376,12 +376,12 @@ public class DrillDetailControllerTest {
 
         ShadowDialog.getLatestDialog().dismiss();
         controller.views.btnFinished.performClick();
-        
+
         controller.views.npSets.setValue(1);
         controller.views.npReps.setValue(2);
         controller.views.npSuccesses.setValue(1);
 
-        expectedReps = controller.repsCompleted + 2;
+        expectedReps = 2;
         expectedRate = 0.5;
 
         assertEquals(expectedSets, controller.setsCompleted);
