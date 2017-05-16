@@ -282,8 +282,7 @@ public class DrillDetailControllerTest {
 
         double expectedRate = 1.0 / controller.views.npReps.getValue();
         assertEquals(expectedList.size(), controller.views.adapterPrevLogs.getItemCount());
-        assertEquals(expectedList.get(0).getSetsCompleted(),
-                controller.views.adapterPrevLogs.getItemAtPosition(0).getSetsCompleted());
+        assertEquals(1, controller.views.adapterPrevLogs.getItemAtPosition(0).getSetsCompleted());
         assertEquals(expectedList.get(0).getRepsCompleted(),
                 controller.views.adapterPrevLogs.getItemAtPosition(0).getRepsCompleted());
         assertEquals(Math.floor(expectedRate * 100) / 100,
@@ -376,6 +375,8 @@ public class DrillDetailControllerTest {
         assertEquals(expectedRate, controller.successRate);
 
         ShadowDialog.getLatestDialog().dismiss();
+        controller.views.btnFinished.performClick();
+        
         controller.views.npSets.setValue(1);
         controller.views.npReps.setValue(2);
         controller.views.npSuccesses.setValue(1);
