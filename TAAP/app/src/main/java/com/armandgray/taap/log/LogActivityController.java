@@ -15,10 +15,9 @@ import static com.armandgray.taap.db.DatabaseContentProvider.insertLogToDatabase
 import static com.armandgray.taap.log.LogActivity.SESSION_LOG;
 import static com.armandgray.taap.models.Drill.BALL_HANDLING;
 import static com.armandgray.taap.models.Drill.CONDITIONING;
-import static com.armandgray.taap.models.Drill.DEFENSE;
+import static com.armandgray.taap.models.Drill.DEFENSE_TYPES_ARRAY;
 import static com.armandgray.taap.models.Drill.FUNDAMENTALS;
-import static com.armandgray.taap.models.Drill.OFFENSE;
-import static com.armandgray.taap.models.Drill.PASSING;
+import static com.armandgray.taap.models.Drill.OFFENSE_TYPES_ARRAY;
 import static com.armandgray.taap.models.Drill.SHOOTING;
 import static com.armandgray.taap.models.SessionLog.ACTIVE_WORK;
 import static com.armandgray.taap.models.SessionLog.REST_TIME;
@@ -72,9 +71,8 @@ class LogActivityController {
 
     private void retrieveFieldData() {
         addAll(listFundamentalLogs, listAllLogs, FUNDAMENTALS);
-        addAll(listDefenseLogs, listAllLogs, DEFENSE);
-        addAll(listOffenseLogs, listAllLogs, OFFENSE);
-        addAll(listOffenseLogs, listAllLogs, PASSING);
+        addAll(listDefenseLogs, listAllLogs, DEFENSE_TYPES_ARRAY);
+        addAll(listOffenseLogs, listAllLogs, OFFENSE_TYPES_ARRAY);
         addAll(listConditioningLogs, listAllLogs, CONDITIONING);
         addAll(listShootingLogs, listAllLogs, SHOOTING);
         addAll(listBallHandlingLogs, listAllLogs, BALL_HANDLING);
