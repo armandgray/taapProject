@@ -22,8 +22,8 @@ import static com.armandgray.taap.utils.CursorDataHelper.getDrillsListFromDataba
 
 class MainActivityViews {
 
-    final MainActivity activity;
-    final MainViewsListener listener;
+    private final MainActivity activity;
+    private final MainViewsListener listener;
 
     EditText etSearch;
     FloatingActionButton fab;

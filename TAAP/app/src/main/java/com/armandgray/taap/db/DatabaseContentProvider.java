@@ -24,25 +24,37 @@ public class DatabaseContentProvider extends ContentProvider {
     public static final String[] ALL_TABLE_COLUMNS;
     public static final Uri CONTENT_URI_ALL;
     public static final Uri CONTENT_URI_DRILLS;
-    public static final Uri CONTENT_URI_LOGS;
+    private static final Uri CONTENT_URI_LOGS;
     public static final Uri CONTENT_URI_DELETE_ALL_DATA;
-    @VisibleForTesting static final String AUTHORITY = "com.armandgray.taap.db.provider";
-    @VisibleForTesting static final String BASE_PATH_ALL = "all";
-    @VisibleForTesting static final String BASE_PATH_DRILLS = "drills";
-    @VisibleForTesting static final String BASE_PATH_LOGS = "logs";
-    @VisibleForTesting static final String BASE_PATH_DELETE_ALL_DATA = "delete_all";
-
-    @VisibleForTesting static final int ALL_DATA = 1;
-    @VisibleForTesting static final int ALL_DATA_DRILL_ID = 2;
-    @VisibleForTesting static final int DELETE_ALL = 3;
-    @VisibleForTesting static final int ALL_DRILLS = 4;
-    @VisibleForTesting static final int DRILLS_ID = 5;
-    @VisibleForTesting static final int ALL_LOGS = 6;
-    @VisibleForTesting static final int LOGS_ID = 7;
+    @VisibleForTesting
+    private static final String AUTHORITY = "com.armandgray.taap.db.provider";
+    @VisibleForTesting
+    private static final String BASE_PATH_ALL = "all";
+    @VisibleForTesting
+    private static final String BASE_PATH_DRILLS = "drills";
+    @VisibleForTesting
+    private static final String BASE_PATH_LOGS = "logs";
+    @VisibleForTesting
+    private static final String BASE_PATH_DELETE_ALL_DATA = "delete_all";
 
     @VisibleForTesting
-    static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-    static final int EXECUTION_FAILURE = -1;
+    private static final int ALL_DATA = 1;
+    @VisibleForTesting
+    private static final int ALL_DATA_DRILL_ID = 2;
+    @VisibleForTesting
+    private static final int DELETE_ALL = 3;
+    @VisibleForTesting
+    private static final int ALL_DRILLS = 4;
+    @VisibleForTesting
+    private static final int DRILLS_ID = 5;
+    @VisibleForTesting
+    private static final int ALL_LOGS = 6;
+    @VisibleForTesting
+    private static final int LOGS_ID = 7;
+
+    @VisibleForTesting
+    private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+    private static final int EXECUTION_FAILURE = -1;
 
     static {
         ArrayList<String> expectedColumns = new ArrayList<>();
@@ -67,6 +79,7 @@ public class DatabaseContentProvider extends ContentProvider {
 
 
     @VisibleForTesting
+    private
     SQLiteDatabase database;
 
     @Override
@@ -167,7 +180,7 @@ public class DatabaseContentProvider extends ContentProvider {
 
     @NonNull
     @VisibleForTesting
-    static ContentValues getDrillContentValues(Drill drill) {
+    private static ContentValues getDrillContentValues(Drill drill) {
         ContentValues drillValues = new ContentValues();
         drillValues.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
         drillValues.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
@@ -189,7 +202,7 @@ public class DatabaseContentProvider extends ContentProvider {
 
     @NonNull
     @VisibleForTesting
-    static ContentValues getLogContentValues(SessionLog testSessionLog) {
+    private static ContentValues getLogContentValues(SessionLog testSessionLog) {
         ContentValues logValues = new ContentValues();
         logValues.put(LogsTable.COLUMN_DATE, testSessionLog.getSessionDate().getTime());
         logValues.put(LogsTable.COLUMN_LENGTH, testSessionLog.getSessionLength().getTime());

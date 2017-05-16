@@ -21,7 +21,7 @@ import static com.armandgray.taap.utils.DrillsRvAdapter.SEARCH;
 
 class MainActivityController implements MainActivityViews.MainViewsListener {
 
-    final MainActivity activity;
+    private final MainActivity activity;
     final MainActivityViews views;
     private boolean isQueryCall;
 
@@ -54,7 +54,7 @@ class MainActivityController implements MainActivityViews.MainViewsListener {
                 .swapRvDrillsAdapterDataOnDrillType(drillTypes[position]);
     }
 
-    String[] getAllSpinnerItems(SpinnerAdapter adapter) {
+    private String[] getAllSpinnerItems(SpinnerAdapter adapter) {
         String[] drillTypes = new String[adapter.getCount()];
         for (int i = 0; i < adapter.getCount(); i++) {
             drillTypes[i] = (String) adapter.getItem(i);

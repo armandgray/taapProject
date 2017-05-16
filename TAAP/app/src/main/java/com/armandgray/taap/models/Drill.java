@@ -11,7 +11,7 @@ public class Drill implements Parcelable {
     public static final String ALL = "ALL";
     public static final String BALL_HANDLING = "Ball Handling";
     public static final String SHOOTING = "Shooting";
-    public static final String PASSING = "Passing";
+    private static final String PASSING = "Passing";
     public static final String DRIVING = "Driving";
     public static final String FUNDAMENTALS = "Fundamentals";
     public static final String DEFENSE = "Defense";

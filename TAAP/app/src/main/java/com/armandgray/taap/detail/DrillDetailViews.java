@@ -23,7 +23,7 @@ import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
 
 class DrillDetailViews {
 
-    public final DrillDetailActivity activity;
+    private final DrillDetailActivity activity;
     private final DrillDetailViewsListener listener;
     Drill drill;
 

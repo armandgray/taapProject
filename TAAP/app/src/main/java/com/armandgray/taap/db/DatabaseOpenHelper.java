@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
-    static final String DATABASE_NAME = "taap.db";
+    private static final String DATABASE_NAME = "taap.db";
 
     public DatabaseOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

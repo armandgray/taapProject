@@ -202,7 +202,7 @@ public class SessionLog implements Parcelable {
         dest.writeInt(this.sessionId);
     }
 
-    protected SessionLog(Parcel in) {
+    private SessionLog(Parcel in) {
         long tmpSessionDate = in.readLong();
         this.sessionDate = tmpSessionDate == -1 ? null : new Date(tmpSessionDate);
         long tmpSessionLength = in.readLong();

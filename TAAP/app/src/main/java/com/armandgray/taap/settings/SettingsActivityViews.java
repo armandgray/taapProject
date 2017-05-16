@@ -10,7 +10,7 @@ import com.armandgray.taap.R;
 
 class SettingsActivityViews {
 
-    final SettingsActivity activity;
+    private final SettingsActivity activity;
     private final SettingsViewsListener listener;
 
     SettingsActivityViews(SettingsActivity activity, SettingsViewsListener listener) {

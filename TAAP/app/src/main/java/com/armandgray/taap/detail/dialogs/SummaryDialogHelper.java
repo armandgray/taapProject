@@ -17,7 +17,7 @@ import static com.armandgray.taap.log.LogActivity.SESSION_LOG;
 class SummaryDialogHelper {
 
     @VisibleForTesting
-    final DetailSummaryDialog dialog;
+    private final DetailSummaryDialog dialog;
 
     SummaryDialogHelper(DetailSummaryDialog dialog) {
         this.dialog = dialog;

@@ -15,10 +15,10 @@ import static com.armandgray.taap.models.SessionLog.SESSION_LENGTH;
 
 public class DateTimeHelper {
 
-    public static final long ONE_DAY = 86400000L;
-    public static final long ONE_HOUR = 3600000L;
+    private static final long ONE_DAY = 86400000L;
+    private static final long ONE_HOUR = 3600000L;
 
-    public static Date getTimeElapsedAsDate(long timeElapsed) {
+    private static Date getTimeElapsedAsDate(long timeElapsed) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(timeElapsed);
         return calendar.getTime();

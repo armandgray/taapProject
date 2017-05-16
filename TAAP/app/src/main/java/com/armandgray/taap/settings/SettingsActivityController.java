@@ -11,15 +11,15 @@ import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
 
 public class SettingsActivityController implements SettingsActivityViews.SettingsViewsListener {
 
-    static final String ARMANDGRAY_COM = "http://armandgray.com";
+    private static final String ARMANDGRAY_COM = "http://armandgray.com";
     // TODO change to Taap URL
-    static final String GOOGLE_PLAY_STORE_TAAP = "https://play.google.com/store/apps/details?id=com.armandgray.taap&hl=en";
+    private static final String GOOGLE_PLAY_STORE_TAAP = "https://play.google.com/store/apps/details?id=com.armandgray.taap&hl=en";
     public static final String SELECTED_ITEM = "SELECTED_ITEM";
     public static final String TERMS_AND_CONDITIONS = "Terms & Conditions";
     public static final String SOFTWARE_LICENSES = "Software Licenses";
 
-    final SettingsActivity activity;
-    final SettingsActivityViews views;
+    private final SettingsActivity activity;
+    private final SettingsActivityViews views;
 
     SettingsActivityController(SettingsActivity activity) {
         this.activity = activity;

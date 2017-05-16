@@ -15,7 +15,8 @@ import java.util.Locale;
 
 public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogSetsViewHolder> {
 
-    @VisibleForTesting ArrayList<SessionLog> logs;
+    @VisibleForTesting
+    private ArrayList<SessionLog> logs;
     private boolean arePrevLogs;
 
     LogSetsRvAdapter() {}
@@ -54,12 +55,12 @@ public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogS
         return logs.size();
     }
 
-    View getLayout(ViewGroup parent) {
+    private View getLayout(ViewGroup parent) {
         return LayoutInflater.from(parent.getContext()).inflate(R.layout.log_sets_textview, parent, false);
     }
 
     @VisibleForTesting
-    public SessionLog getItemAtPosition(int position) {
+    private SessionLog getItemAtPosition(int position) {
         if (logs == null || logs.size() <= position) { return null; }
         return logs.get(position);
     }

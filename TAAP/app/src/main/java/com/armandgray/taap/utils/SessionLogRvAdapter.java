@@ -21,15 +21,20 @@ import static com.armandgray.taap.utils.DateTimeHelper.getDateFormattedAsString;
 
 public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapter.SessionLogViewHolder> {
 
-    static final int TYPE_HEADER = 100;
-    static final int TYPE_ITEM = 101;
-    @VisibleForTesting static final String IMAGE_RESOURCE_ID = "IMAGE_RESOURCE_ID";
-    @VisibleForTesting static final String ITEM_DATA = "ITEM_DATA";
-    @VisibleForTesting static final String STRING_RESOURCE_ID = "STRING_RESOURCE_ID";
-    @VisibleForTesting static final String TINT_COLOR = "TINT_COLOR";
+    private static final int TYPE_HEADER = 100;
+    private static final int TYPE_ITEM = 101;
+    @VisibleForTesting
+    private static final String IMAGE_RESOURCE_ID = "IMAGE_RESOURCE_ID";
+    @VisibleForTesting
+    private static final String ITEM_DATA = "ITEM_DATA";
+    @VisibleForTesting
+    private static final String STRING_RESOURCE_ID = "STRING_RESOURCE_ID";
+    @VisibleForTesting
+    private static final String TINT_COLOR = "TINT_COLOR";
 
     private SessionLog sessionLog;
-    @VisibleForTesting ViewGroup parent;
+    @VisibleForTesting
+    private ViewGroup parent;
 
     SessionLogRvAdapter() {}
 
@@ -107,11 +112,11 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
         return SessionLog.getFieldCount();
     }
 
-    View getLayout(ViewGroup parent) {
+    private View getLayout(ViewGroup parent) {
         return LayoutInflater.from(parent.getContext()).inflate(R.layout.session_log_listitem, parent, false);
     }
 
-    HashMap<String, Object> getItemAtPosition(int position) {
+    private HashMap<String, Object> getItemAtPosition(int position) {
         switch (position) {
             case 0:
                 return getHashMap(R.string.session_date, sessionLog.getSessionDate(), R.drawable.ic_timer_white_24dp, android.R.color.holo_red_dark);

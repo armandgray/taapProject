@@ -17,14 +17,14 @@ import java.util.Locale;
 class LogActivityViews {
 
     @VisibleForTesting
-    final
+    private final
     LogActivity activity;
     LinearLayout layoutTotalSessionTime;
     LinearLayout layoutTotalActiveTime;
     LinearLayout layoutTotalRestTime;
     LinearLayout layoutExercisesCompleted;
     LinearLayout layoutRepsCompleted;
-    TextView tvDate;
+    private TextView tvDate;
     LinearLayout layoutFundamentals;
     LinearLayout layoutDefense;
     LinearLayout layoutOffense;

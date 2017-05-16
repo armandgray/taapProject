@@ -20,7 +20,7 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
 
     public static final String SEARCH = "Search: ";
     private ArrayList<Drill> allDrillsList;
-    ArrayList<Drill> drillList;
+    private ArrayList<Drill> drillList;
 
     DrillsRvAdapter() {}
 
@@ -51,7 +51,7 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
         return drillList.size();
     }
 
-    View getLayout(ViewGroup parent) {
+    private View getLayout(ViewGroup parent) {
         return LayoutInflater.from(parent.getContext()).inflate(R.layout.drill_listitem, parent, false);
     }
 

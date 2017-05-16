@@ -26,17 +26,24 @@ import static com.armandgray.taap.utils.DateTimeHelper.getTimeElapsedAsDate;
 
 class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener {
 
-    final DrillDetailActivity activity;
-    final DrillDetailViews views;
-    @VisibleForTesting boolean drillActive;
+    private final DrillDetailActivity activity;
+    private final DrillDetailViews views;
+    @VisibleForTesting
+    private boolean drillActive;
     private long timeElapsed;
-    @VisibleForTesting long activeWorkTime;
-    @VisibleForTesting long restTime;
-    @VisibleForTesting SessionLog sessionLog;
+    @VisibleForTesting
+    private long activeWorkTime;
+    @VisibleForTesting
+    private long restTime;
+    @VisibleForTesting
+    private SessionLog sessionLog;
     private final ArrayList<SessionLog> listAllLogs;
-    @VisibleForTesting int setsCompleted;
-    @VisibleForTesting int repsCompleted;
-    @VisibleForTesting double successRate;
+    @VisibleForTesting
+    private int setsCompleted;
+    @VisibleForTesting
+    private int repsCompleted;
+    @VisibleForTesting
+    private double successRate;
     private double placeholderRate;
 
     DrillDetailController(DrillDetailActivity activity) {

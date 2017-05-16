@@ -10,7 +10,7 @@ public class DrillDetailActivity extends AppCompatActivity
         implements DetailSummaryDialog.DetailSummaryDialogListener,
         TimerDialog.TimerDialogListener {
 
-    DrillDetailController controller;
+    private DrillDetailController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
