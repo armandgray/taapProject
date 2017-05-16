@@ -30,16 +30,19 @@ import static com.armandgray.taap.utils.MathHelper.getPercentFormattedAsString;
 
 class LogActivityController {
 
-    @VisibleForTesting LogActivity activity;
-    @VisibleForTesting LogActivityViews views;
-    @VisibleForTesting SessionLog sessionLog;
-    ArrayList<SessionLog> listAllLogs;
-    ArrayList<SessionLog> listFundamentalLogs;
-    ArrayList<SessionLog> listDefenseLogs;
-    ArrayList<SessionLog> listOffenseLogs;
-    ArrayList<SessionLog> listConditioningLogs;
-    ArrayList<SessionLog> listShootingLogs;
-    ArrayList<SessionLog> listBallHandlingLogs;
+    @VisibleForTesting
+    final LogActivity activity;
+    @VisibleForTesting
+    final LogActivityViews views;
+    @VisibleForTesting
+    final SessionLog sessionLog;
+    final ArrayList<SessionLog> listAllLogs;
+    final ArrayList<SessionLog> listFundamentalLogs;
+    final ArrayList<SessionLog> listDefenseLogs;
+    final ArrayList<SessionLog> listOffenseLogs;
+    final ArrayList<SessionLog> listConditioningLogs;
+    final ArrayList<SessionLog> listShootingLogs;
+    final ArrayList<SessionLog> listBallHandlingLogs;
 
     LogActivityController(LogActivity activity) {
         this.activity = activity;

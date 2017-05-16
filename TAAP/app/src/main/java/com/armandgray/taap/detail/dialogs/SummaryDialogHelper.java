@@ -16,8 +16,10 @@ import static com.armandgray.taap.log.LogActivity.SESSION_LOG;
 
 class SummaryDialogHelper {
 
-    @VisibleForTesting DetailSummaryDialog dialog;
-    @VisibleForTesting SessionLog sessionLog;
+    @VisibleForTesting
+    final DetailSummaryDialog dialog;
+    @VisibleForTesting
+    private SessionLog sessionLog;
 
     SummaryDialogHelper(DetailSummaryDialog dialog) {
         this.dialog = dialog;
@@ -51,10 +53,6 @@ class SummaryDialogHelper {
             return true;
         }
         return false;
-    }
-
-    private double getDrillSuccessRecord() {
-        return 0;
     }
 
     @NonNull

@@ -33,7 +33,7 @@ import static org.mockito.Mockito.mock;
 @Config(constants = BuildConfig.class)
 public class LogSetsRvAdapterTest {
 
-    public static final int POSITION = 1;
+    private static final int POSITION = 1;
     private LogSetsRvAdapter adapter;
     private ArrayList<SessionLog> testLogList;
     private View mockView;

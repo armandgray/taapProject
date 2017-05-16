@@ -17,6 +17,7 @@ import java.util.Locale;
 class LogActivityViews {
 
     @VisibleForTesting
+    final
     LogActivity activity;
     LinearLayout layoutTotalSessionTime;
     LinearLayout layoutTotalActiveTime;
@@ -90,7 +91,7 @@ class LogActivityViews {
         setTextForDetailLayoutViews(layoutRepsCompleted, R.string.reps_completed, "0");
     }
 
-    void setTextForDetailLayoutViews(LinearLayout layout, int headerResId, String text) {
+    private void setTextForDetailLayoutViews(LinearLayout layout, int headerResId, String text) {
         TextView header = (TextView) layout.findViewById(R.id.header);
         TextView tvText = (TextView) layout.findViewById(R.id.tvText);
         header.setText(headerResId);
@@ -103,30 +104,30 @@ class LogActivityViews {
                 + "  <";
         tvDate.setText(dateString);
         setTextForRecordLayoutViews(layoutFundamentals, R.drawable.ic_key_white_48dp,
-                "00:00:00", "0%", R.string.fundamentals);
+                R.string.fundamentals);
         setTextForRecordLayoutViews(layoutDefense, R.drawable.ic_account_multiple_outline_white_48dp,
-                "00:00:00", "0%", R.string.defense);
+                R.string.defense);
         setTextForRecordLayoutViews(layoutOffense, R.drawable.ic_human_handsup_white_48dp,
-                "00:00:00", "0%", R.string.offense);
+                R.string.offense);
         setTextForRecordLayoutViews(layoutConditioning, R.drawable.ic_run_fast_white_48dp,
-                "00:00:00", "0%", R.string.conditioning);
+                R.string.conditioning);
         setTextForRecordLayoutViews(layoutShooting, R.drawable.ic_dribbble_white_48dp,
-                "00:00:00", "0%", R.string.shooting);
+                R.string.shooting);
         setTextForRecordLayoutViews(layoutBallHandling,
                 R.drawable.ic_gesture_two_double_tap_white_48dp,
-                "00:00:00", "0%", R.string.ball_handling);
+                R.string.ball_handling);
     }
 
     private void setTextForRecordLayoutViews(LinearLayout layout, int imageResId,
-                                             String time, String successRate, int headerResId) {
+                                             int headerResId) {
         ImageView ivImage = (ImageView) layout.findViewById(R.id.ivImage);
         TextView tvTime = (TextView) layout.findViewById(R.id.tvTime);
         TextView tvSuccessRate = (TextView) layout.findViewById(R.id.tvSuccessRate);
         TextView tvHeader = (TextView) layout.findViewById(R.id.tvHeader);
 
         ivImage.setImageResource(imageResId);
-        tvTime.setText(time);
-        tvSuccessRate.setText(successRate);
+        tvTime.setText("00:00:00");
+        tvSuccessRate.setText("0%");
         tvHeader.setText(headerResId);
     }
 

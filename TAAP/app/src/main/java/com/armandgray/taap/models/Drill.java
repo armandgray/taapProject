@@ -30,9 +30,9 @@ public class Drill implements Parcelable {
     public static final String[] OFFENSE_TYPES_ARRAY = { OFFENSE, PASSING, DRIVING };
 
 
-    private String title;
-    private int imageId;
-    private String[] category;
+    private final String title;
+    private final int imageId;
+    private final String[] category;
     private int drillId;
 
     public Drill(String title, int imageId, String[] category) {
@@ -91,7 +91,7 @@ public class Drill implements Parcelable {
         dest.writeInt(this.drillId);
     }
 
-    protected Drill(Parcel in) {
+    Drill(Parcel in) {
         this.title = in.readString();
         this.imageId = in.readInt();
         this.category = in.createStringArray();

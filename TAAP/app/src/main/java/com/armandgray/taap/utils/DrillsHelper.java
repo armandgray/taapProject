@@ -20,13 +20,13 @@ import static com.armandgray.taap.models.Drill.SHOOTING_ARRAY;
 
 public class DrillsHelper {
 
-    private static String[] fundamentalShooting = {FUNDAMENTALS, SHOOTING};
-    private static String[] fundamentalBallHandling = {FUNDAMENTALS, BALL_HANDLING};
-    private static String[] fundamentalDriving = {FUNDAMENTALS, DRIVING};
-    private static String[] fundamentalDefense = {FUNDAMENTALS, DEFENSE};
-    private static String[] fundamentalDefenseConditioning = {FUNDAMENTALS, DEFENSE, CONDITIONING};
-    private static String[] defenseOffense = {DEFENSE, OFFENSE};
-    private static ArrayList<Drill> drillsList;
+    private static final String[] fundamentalShooting = {FUNDAMENTALS, SHOOTING};
+    private static final String[] fundamentalBallHandling = {FUNDAMENTALS, BALL_HANDLING};
+    private static final String[] fundamentalDriving = {FUNDAMENTALS, DRIVING};
+    private static final String[] fundamentalDefense = {FUNDAMENTALS, DEFENSE};
+    private static final String[] fundamentalDefenseConditioning = {FUNDAMENTALS, DEFENSE, CONDITIONING};
+    private static final String[] defenseOffense = {DEFENSE, OFFENSE};
+    private static final ArrayList<Drill> drillsList;
 
     static {
         drillsList = new ArrayList<>();

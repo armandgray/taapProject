@@ -49,7 +49,7 @@ public class SessionLog implements Parcelable {
 
     public static class Builder {
 
-        private Date sessionDate;
+        private final Date sessionDate;
         private Date sessionLength;
         private String sessionGoal;
         private Date activeWork;
@@ -168,7 +168,8 @@ public class SessionLog implements Parcelable {
         return successRecord;
     }
 
-    public void setSuccessRecord(double successRecord) {
+    @SuppressWarnings("SameParameterValue")
+    void setSuccessRecord( double successRecord) {
         this.successRecord = successRecord;
     }
 
@@ -176,6 +177,7 @@ public class SessionLog implements Parcelable {
         return drill;
     }
 
+    @SuppressWarnings("SameReturnValue")
     public static int getFieldCount() {
         return 9;
     }

@@ -108,9 +108,9 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
     }
 
     static class DrillViewHolder extends RecyclerView.ViewHolder {
-        View itemView;
-        ImageView ivImage;
-        TextView tvTitle;
+        final View itemView;
+        final ImageView ivImage;
+        final TextView tvTitle;
 
         DrillViewHolder(View itemView) {
             super(itemView);

@@ -21,8 +21,8 @@ import static com.armandgray.taap.utils.DrillsRvAdapter.SEARCH;
 
 class MainActivityController implements MainActivityViews.MainViewsListener {
 
-    MainActivity activity;
-    MainActivityViews views;
+    final MainActivity activity;
+    final MainActivityViews views;
     private boolean isQueryCall;
 
     MainActivityController(MainActivity activity) {

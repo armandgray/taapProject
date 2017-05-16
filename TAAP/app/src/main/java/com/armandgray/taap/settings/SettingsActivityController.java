@@ -18,8 +18,8 @@ public class SettingsActivityController implements SettingsActivityViews.Setting
     public static final String TERMS_AND_CONDITIONS = "Terms & Conditions";
     public static final String SOFTWARE_LICENSES = "Software Licenses";
 
-    SettingsActivity activity;
-    SettingsActivityViews views;
+    final SettingsActivity activity;
+    final SettingsActivityViews views;
 
     SettingsActivityController(SettingsActivity activity) {
         this.activity = activity;

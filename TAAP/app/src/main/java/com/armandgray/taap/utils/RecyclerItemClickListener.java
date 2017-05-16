@@ -10,7 +10,8 @@ import android.view.View;
 public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListener {
 
     private final OnItemClickListener listener;
-    @VisibleForTesting GestureDetector gestureDetector;
+    @VisibleForTesting
+    final GestureDetector gestureDetector;
 
     public RecyclerItemClickListener(Context context, OnItemClickListener listener) {
         this.listener = listener;

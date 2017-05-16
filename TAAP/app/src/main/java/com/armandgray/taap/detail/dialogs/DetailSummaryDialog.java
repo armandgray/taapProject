@@ -23,7 +23,7 @@ public class DetailSummaryDialog extends DialogFragment {
 
     public static final String DIALOG = "DIALOG";
     public static final String ALL_LOGS = "ALL_LOGS";
-    Activity activity;
+    private final Activity activity;
     public DetailSummaryDialogListener listener;
     @VisibleForTesting
     SummaryDialogHelper helper;

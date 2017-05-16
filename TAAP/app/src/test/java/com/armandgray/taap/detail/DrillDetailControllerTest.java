@@ -51,7 +51,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 @Config(constants = BuildConfig.class)
 public class DrillDetailControllerTest {
 
-    public static final SessionLog DUMMY_SESSION_LOG = new SessionLog.Builder()
+    private static final SessionLog DUMMY_SESSION_LOG = new SessionLog.Builder()
             .successRate(1.00)
             .drill(TEST_SESSION_LOG.getDrill())
             .create();

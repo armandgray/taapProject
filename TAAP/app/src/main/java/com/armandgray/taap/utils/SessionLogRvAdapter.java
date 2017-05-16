@@ -147,8 +147,8 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
     }
 
     static class SessionLogHeaderViewHolder extends SessionLogViewHolder {
-        View itemView;
-        TextView tvText;
+        final View itemView;
+        final TextView tvText;
 
         SessionLogHeaderViewHolder(View itemView) {
             super(itemView);
@@ -159,10 +159,10 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
     }
 
     static class SessionLogViewHolder extends RecyclerView.ViewHolder {
-        View itemView;
-        TextView tvHeader;
-        ImageView ivImage;
-        TextView tvText;
+        final View itemView;
+        final TextView tvHeader;
+        final ImageView ivImage;
+        final TextView tvText;
 
         SessionLogViewHolder(View itemView) {
             super(itemView);

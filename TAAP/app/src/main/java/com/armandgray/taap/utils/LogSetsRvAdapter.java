@@ -69,8 +69,8 @@ public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogS
     }
 
     static class LogSetsViewHolder extends RecyclerView.ViewHolder {
-        View itemView;
-        TextView tvText;
+        final View itemView;
+        final TextView tvText;
 
         LogSetsViewHolder(View itemView) {
             super(itemView);
