@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class Drill implements Parcelable {
 
-    public static final String ALL = "ALL";
     public static final String BALL_HANDLING = "Ball Handling";
     public static final String SHOOTING = "Shooting";
     private static final String PASSING = "Passing";
@@ -20,10 +19,8 @@ public class Drill implements Parcelable {
     public static final String[] SHOOTING_ARRAY = {SHOOTING};
     public static final String[] DEFENSE_ARRAY = {DEFENSE};
     public static final String[] CONDITIONING_ARRAY = {CONDITIONING};
-    public static final String[] OFFENSE_ARRAY = {OFFENSE};
     public static final String[] BALL_HANDLING_ARRAY = {BALL_HANDLING};
     public static final String[] PASSING_ARRAY = {PASSING};
-    public static final String[] DRIVING_ARRAY = {DRIVING};
     public static final String[] DRILL_TYPES = { BALL_HANDLING, SHOOTING, PASSING,
             FUNDAMENTALS, DEFENSE, OFFENSE, CONDITIONING, DRIVING};
     public static final String[] DEFENSE_TYPES_ARRAY = { DEFENSE };

@@ -63,6 +63,7 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
     @Override
     public void onBindViewHolder(SessionLogViewHolder viewHolder, int position) {
         final HashMap<String, Object> sessionItem = getItemAtPosition(position);
+        if (sessionItem == null) { return; }
 
         if (atHeaderPosition(viewHolder, position)) {
             setupHeader((SessionLogHeaderViewHolder) viewHolder, sessionItem);

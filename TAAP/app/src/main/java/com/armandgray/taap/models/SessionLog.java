@@ -120,10 +120,6 @@ public class SessionLog implements Parcelable {
         }
     }
 
-    public int getSessionId() {
-        return sessionId;
-    }
-
     public void setSessionId(int sessionId) {
         this.sessionId = sessionId;
     }

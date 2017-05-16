@@ -22,8 +22,6 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
     private ArrayList<Drill> allDrillsList;
     private ArrayList<Drill> drillList;
 
-    DrillsRvAdapter() {}
-
     public DrillsRvAdapter(ArrayList<Drill> drillList) {
         this.allDrillsList = new ArrayList<>();
         allDrillsList.addAll(drillList);
@@ -108,14 +106,12 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
     }
 
     static class DrillViewHolder extends RecyclerView.ViewHolder {
-        final View itemView;
         final ImageView ivImage;
         final TextView tvTitle;
 
         DrillViewHolder(View itemView) {
             super(itemView);
 
-            this.itemView = itemView;
             ivImage = (ImageView) itemView.findViewById(R.id.ivImage);
             tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
         }

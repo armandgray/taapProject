@@ -17,6 +17,4 @@ public class DrillsTable {
                     + COLUMN_IMAGE_ID + " INTEGER,"
                     + COLUMN_CATEGORY + " TEXT"
                     + ")";
-
-    static final String SQL_DELETE = "DROP TABLE " + TABLE_DRILLS;
 }

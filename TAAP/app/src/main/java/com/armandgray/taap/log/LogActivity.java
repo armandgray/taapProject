@@ -1,7 +1,6 @@
 package com.armandgray.taap.log;
 
 import android.os.Bundle;
-import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 
 public class LogActivity extends AppCompatActivity {
@@ -12,7 +11,7 @@ public class LogActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        LogActivityController controller = new LogActivityController(this);
+        new LogActivityController(this);
     }
 
 }

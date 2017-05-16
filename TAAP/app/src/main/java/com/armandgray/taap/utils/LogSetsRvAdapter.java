@@ -38,6 +38,7 @@ public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogS
     @Override
     public void onBindViewHolder(LogSetsViewHolder viewHolder, int position) {
         SessionLog log = getItemAtPosition(position);
+        if (log == null) { return; }
         TextView tvText = viewHolder.tvText;
         int repsCompleted = arePrevLogs && log.getRepsCompleted() != 1
                 ? log.getRepsCompleted()/log.getSetsCompleted()
@@ -70,13 +71,11 @@ public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogS
     }
 
     static class LogSetsViewHolder extends RecyclerView.ViewHolder {
-        final View itemView;
         final TextView tvText;
 
         LogSetsViewHolder(View itemView) {
             super(itemView);
 
-            this.itemView = itemView;
             tvText = (TextView) itemView.findViewById(R.id.tvText);
         }
     }

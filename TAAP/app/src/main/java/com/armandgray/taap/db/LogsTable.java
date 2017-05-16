@@ -35,6 +35,4 @@ public class LogsTable {
                         + "FOREIGN KEY (" + COLUMN_DRILL + ") REFERENCES "
                             + TABLE_DRILLS + " (" + DRILL_ID + ")"
                     + ")";
-
-    static final String SQL_DELETE = "DROP TABLE " + TABLE_LOGS;
 }
