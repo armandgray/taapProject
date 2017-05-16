@@ -17,6 +17,7 @@ import com.armandgray.taap.models.SessionLog;
 import com.armandgray.taap.utils.LogSetsRvAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
 
@@ -123,16 +124,17 @@ class DrillDetailViews {
     }
 
     void setupRvPreviousLogs(ArrayList<SessionLog> logs) {
+        Collections.reverse(logs);
         rvPreviousLogs.setAdapter(new LogSetsRvAdapter(logs));
         rvPreviousLogs.setLayoutManager(
-                new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, true));
+                new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
     }
 
     void setupRvCurrentLog() {
         adapterPrevLogs = new LogSetsRvAdapter(new ArrayList<SessionLog>());
         rvCurrentLog.setAdapter(adapterPrevLogs);
         rvCurrentLog.setLayoutManager(
-                new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, true));
+                new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
     }
 
     interface DrillDetailViewsListener {
