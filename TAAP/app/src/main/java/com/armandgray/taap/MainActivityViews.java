@@ -148,7 +148,7 @@ class MainActivityViews {
         rvDrills.addOnItemTouchListener(new RecyclerItemClickListener(activity,
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
-                    public void onItemClick(View view, int position) {
+                    public void onItemClick(int position) {
                         listener.onRvDrillsItemTouch(position);
                     }
                 }));

@@ -24,6 +24,7 @@ public class DateTimeHelper {
         return calendar.getTime();
     }
 
+    @SuppressWarnings("SameParameterValue")
     public static Date getTimeElapsedAsDate(long timeElapsed, int hoursToSubtract) {
         if (hoursToSubtract == 0) { return getTimeElapsedAsDate(timeElapsed); }
         Calendar calendar = Calendar.getInstance();

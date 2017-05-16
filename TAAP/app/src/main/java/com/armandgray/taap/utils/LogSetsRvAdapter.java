@@ -19,8 +19,7 @@ public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogS
     private ArrayList<SessionLog> logs;
     private boolean arePrevLogs;
 
-    LogSetsRvAdapter() {}
-
+    @SuppressWarnings("SameParameterValue")
     public LogSetsRvAdapter(ArrayList<SessionLog> logs, boolean arePrevLogs) {
         this.logs = logs;
         this.arePrevLogs = arePrevLogs;

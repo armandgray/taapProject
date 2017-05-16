@@ -21,11 +21,8 @@ import static com.armandgray.taap.log.LogActivity.SESSION_LOG;
 public class DetailSummaryDialog extends DialogFragment {
 
     public static final String DIALOG = "DIALOG";
-    public static final String ALL_LOGS = "ALL_LOGS";
     private DetailSummaryDialogListener listener;
-    @VisibleForTesting
-    private
-    SummaryDialogHelper helper;
+    @VisibleForTesting private SummaryDialogHelper helper;
 
     public static DetailSummaryDialog newInstance(SessionLog sessionLog) {
         Bundle args = new Bundle();
