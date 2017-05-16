@@ -32,7 +32,7 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
     @VisibleForTesting
     private static final String TINT_COLOR = "TINT_COLOR";
 
-    private SessionLog sessionLog;
+    private final SessionLog sessionLog;
     @VisibleForTesting
     private ViewGroup parent;
 
