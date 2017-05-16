@@ -375,11 +375,12 @@ public class DrillDetailControllerTest {
         assertEquals(expectedRate, controller.successRate);
 
         ShadowDialog.getLatestDialog().dismiss();
-        controller.views.btnFinished.performClick();
 
         controller.views.npSets.setValue(1);
         controller.views.npReps.setValue(2);
         controller.views.npSuccesses.setValue(1);
+
+        controller.views.btnFinished.performClick();
 
         expectedReps = 2;
         expectedRate = 0.5;
