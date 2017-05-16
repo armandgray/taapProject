@@ -88,6 +88,17 @@ class LogActivityController {
         }
     }
 
+    private void addAll(ArrayList<SessionLog> targetList, ArrayList<SessionLog> sourceList, String[] categories) {
+        for (SessionLog log : sourceList) {
+            for (String category : categories) {
+                if (Arrays.asList(log.getDrill().getCategory()).contains(category)) {
+                    targetList.add(log);
+                    break;
+                }
+            }
+        }
+    }
+
     private void setViewFields() {
         Date totalTimeAsDate = getTotalTimeAsDate(listAllLogs, SESSION_LENGTH);
         String dateFormattedAsString = getDateFormattedAsString(totalTimeAsDate);
