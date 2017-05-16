@@ -15,6 +15,7 @@ import com.armandgray.taap.log.LogActivity;
 import com.armandgray.taap.models.SessionLog;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static com.armandgray.taap.db.DatabaseContentProvider.ALL_TABLE_COLUMNS;
@@ -37,6 +38,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     @VisibleForTesting int setsCompleted;
     @VisibleForTesting int repsCompleted;
     @VisibleForTesting double successRate;
+    private HashMap<String, Integer> placeholderMap;
 
     DrillDetailController(DrillDetailActivity activity) {
         this.activity = activity;
@@ -138,7 +140,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
 
     private void addSetToCurrentLogs() {
         views.adapterPrevLogs.addLog(new SessionLog.Builder()
-                .setsCompleted(views.npSets.getValue())
+                .setsCompleted(1)
                 .repsCompleted(views.npReps.getValue())
                 .successRate(successRate)
                 .create());
@@ -147,6 +149,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     @Override
     public void onBtnFinishedClick(View v) {
         if (drillActive) { togglePausePlay(); }
+        placeholderMap = new HashMap<String, Integer>();
         recordSetData();
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         sessionLog = new SessionLog.Builder()

@@ -354,6 +354,40 @@ public class DrillDetailControllerTest {
         assertEquals(.75, controller.successRate);
     }
 
+    @Test
+    public void doesCarryPlaceholderToRerecordSet_OnSummaryDialogCancel_WithValueChange() throws Exception {
+        controller.views.npSets.setValue(1);
+        controller.views.npReps.setValue(1);
+        controller.views.npSuccesses.setValue(1);
+
+        controller.successRate = 0.5;
+        controller.setsCompleted = 1;
+
+        int expectedSets = controller.setsCompleted + 1;
+        int expectedReps = controller.repsCompleted + 1;
+        double expectedRate = 0.75;
+
+        controller.views.fab.performClick();
+        ShadowDialog.getLatestDialog().dismiss();
+        controller.views.btnFinished.performClick();
+
+        assertEquals(expectedSets, controller.setsCompleted);
+        assertEquals(expectedReps, controller.repsCompleted);
+        assertEquals(expectedRate, controller.successRate);
+
+        ShadowDialog.getLatestDialog().dismiss();
+        controller.views.npSets.setValue(1);
+        controller.views.npReps.setValue(2);
+        controller.views.npSuccesses.setValue(1);
+
+        expectedReps = controller.repsCompleted + 2;
+        expectedRate = 0.5;
+
+        assertEquals(expectedSets, controller.setsCompleted);
+        assertEquals(expectedReps, controller.repsCompleted);
+        assertEquals(expectedRate, controller.successRate);
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
