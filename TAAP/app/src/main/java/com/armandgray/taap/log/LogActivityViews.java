@@ -126,7 +126,7 @@ class LogActivityViews {
         TextView tvHeader = (TextView) layout.findViewById(R.id.tvHeader);
 
         ivImage.setImageResource(imageResId);
-        tvTime.setText("00:00:00");
+        tvTime.setText(activity.getString(R.string.zero_time));
         tvSuccessRate.setText("0%");
         tvHeader.setText(headerResId);
     }

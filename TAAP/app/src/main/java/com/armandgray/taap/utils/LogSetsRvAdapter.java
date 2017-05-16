@@ -18,7 +18,7 @@ public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogS
     @VisibleForTesting ArrayList<SessionLog> logs;
     private boolean arePrevLogs;
 
-    public LogSetsRvAdapter() {}
+    LogSetsRvAdapter() {}
 
     public LogSetsRvAdapter(ArrayList<SessionLog> logs, boolean arePrevLogs) {
         this.logs = logs;
@@ -27,6 +27,7 @@ public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogS
 
     public LogSetsRvAdapter(ArrayList<SessionLog> logs) {
         this.logs = logs;
+        this.arePrevLogs = false;
     }
 
     @Override

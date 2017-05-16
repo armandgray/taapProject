@@ -18,8 +18,6 @@ class SummaryDialogHelper {
 
     @VisibleForTesting
     final DetailSummaryDialog dialog;
-    @VisibleForTesting
-    private SessionLog sessionLog;
 
     SummaryDialogHelper(DetailSummaryDialog dialog) {
         this.dialog = dialog;
@@ -38,7 +36,7 @@ class SummaryDialogHelper {
 
     void setupRvSummary(Activity activity, RecyclerView rvSummary) {
         Bundle args = dialog.getArguments();
-        sessionLog = args != null ? (SessionLog) args.get(SESSION_LOG) : null;
+        SessionLog sessionLog = args != null ? (SessionLog) args.get(SESSION_LOG) : null;
         if (isSessionLogNull(sessionLog)) return;
         rvSummary.setAdapter(new SessionLogRvAdapter(sessionLog));
         GridLayoutManager layoutManager = getGridLayoutManager(activity);
