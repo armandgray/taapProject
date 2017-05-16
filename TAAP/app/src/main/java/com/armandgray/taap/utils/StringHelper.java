@@ -31,7 +31,6 @@ public class StringHelper {
 
     public static String[] getStringAsArray(String string) {
         if (string == null || string.length() == 0) { return null; }
-        String[] array = string.split(",");
-        return array;
+        return string.split(",");
     }
 }

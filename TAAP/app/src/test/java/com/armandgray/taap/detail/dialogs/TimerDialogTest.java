@@ -24,7 +24,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowAlertDialog;
 import org.robolectric.shadows.ShadowDialog;
 
 import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
@@ -32,7 +31,6 @@ import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
-import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -114,7 +112,7 @@ public class TimerDialogTest {
     public void doesStartTimer_TestOnCreateDialog() {
         Bundle savedInstanceState = new Bundle();
         AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
-        ShadowAlertDialog shadowDialog = shadowOf(resultDialog);
+//        ShadowAlertDialog shadowDialog = shadowOf(resultDialog);
 
         // TODO add test for chronometer started
     }

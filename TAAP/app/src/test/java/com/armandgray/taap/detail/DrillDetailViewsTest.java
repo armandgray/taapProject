@@ -202,7 +202,7 @@ public class DrillDetailViewsTest {
         activityController.start().resume();
         activity.getSupportFragmentManager().executePendingTransactions();
 
-        DetailSummaryDialog dialog = (DetailSummaryDialog) activity.getSupportFragmentManager().findFragmentByTag(DIALOG);
+//        DetailSummaryDialog dialog = (DetailSummaryDialog) activity.getSupportFragmentManager().findFragmentByTag(DIALOG);
         // TODO add assert for each sessionLog data point & HISTORY here getting the Fragment
     }
 

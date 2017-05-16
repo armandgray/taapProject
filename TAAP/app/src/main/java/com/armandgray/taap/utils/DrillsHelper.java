@@ -86,7 +86,7 @@ public class DrillsHelper {
         drillsList.add(new Drill("3 Man Weave", R.drawable.ic_fitness_center_white_24dp, PASSING_ARRAY));
         drillsList.add(new Drill("5 Man Weave", R.drawable.ic_fitness_center_white_24dp, PASSING_ARRAY));
         drillsList.add(new Drill("3 Man Weave - Transition Defense", R.drawable.ic_fitness_center_white_24dp, PASSING_ARRAY));
-        drillsList.add(new Drill("5 Man Weave - Tranisiton Defense", R.drawable.ic_fitness_center_white_24dp, PASSING_ARRAY));
+        drillsList.add(new Drill("5 Man Weave - Transition Defense", R.drawable.ic_fitness_center_white_24dp, PASSING_ARRAY));
         drillsList.add(new Drill("3-2-1-0 Dribble", R.drawable.ic_fitness_center_white_24dp, PASSING_ARRAY));
         drillsList.add(new Drill("Medicine Ball Passing", R.drawable.ic_fitness_center_white_24dp, PASSING_ARRAY));
 

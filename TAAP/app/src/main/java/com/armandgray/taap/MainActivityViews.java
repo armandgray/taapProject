@@ -25,7 +25,6 @@ class MainActivityViews {
     MainActivity activity;
     MainViewsListener listener;
 
-    private String[] drillsArray = {"All", "Shooting", "Ball Handling", "Passing", "Fundamentals"};
     EditText etSearch;
     FloatingActionButton fab;
     Spinner spinner;
