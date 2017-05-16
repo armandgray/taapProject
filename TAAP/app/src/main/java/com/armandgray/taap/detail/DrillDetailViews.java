@@ -125,7 +125,7 @@ class DrillDetailViews {
 
     void setupRvPreviousLogs(ArrayList<SessionLog> logs) {
         Collections.reverse(logs);
-        rvPreviousLogs.setAdapter(new LogSetsRvAdapter(logs));
+        rvPreviousLogs.setAdapter(new LogSetsRvAdapter(logs, true));
         rvPreviousLogs.setLayoutManager(
                 new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
     }

@@ -16,8 +16,14 @@ import java.util.Locale;
 public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogSetsViewHolder> {
 
     @VisibleForTesting ArrayList<SessionLog> logs;
+    private boolean arePrevLogs;
 
-    LogSetsRvAdapter() {}
+    public LogSetsRvAdapter() {}
+
+    public LogSetsRvAdapter(ArrayList<SessionLog> logs, boolean arePrevLogs) {
+        this.logs = logs;
+        this.arePrevLogs = arePrevLogs;
+    }
 
     public LogSetsRvAdapter(ArrayList<SessionLog> logs) {
         this.logs = logs;
@@ -32,10 +38,13 @@ public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogS
     public void onBindViewHolder(LogSetsViewHolder viewHolder, int position) {
         SessionLog log = getItemAtPosition(position);
         TextView tvText = viewHolder.tvText;
+        int repsCompleted = arePrevLogs && log.getRepsCompleted() != 1
+                ? log.getRepsCompleted()/log.getSetsCompleted()
+                : log.getRepsCompleted();
         tvText.setText(String.format(Locale.US,
                 "%dx%d @%d%%",
                 log.getSetsCompleted(),
-                log.getRepsCompleted(),
+                repsCompleted,
                 ((Double) (log.getSuccessRate() * 100)).intValue()));
     }
 
