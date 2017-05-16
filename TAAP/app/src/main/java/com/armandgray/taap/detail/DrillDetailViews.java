@@ -81,7 +81,7 @@ class DrillDetailViews {
     }
 
     private void setHomeAsUpIndicatorColor() {
-        final Drawable upArrow = activity.getResources().getDrawable(R.drawable.abc_ic_ab_back_material);
+        final Drawable upArrow = activity.getResources().getDrawable(R.drawable.ic_arrow_back_white_24dp);
         upArrow.setColorFilter(activity.getResources().getColor(R.color.colorDarkGray), PorterDuff.Mode.SRC_ATOP);
         if (activity.getSupportActionBar() == null) { return; }
         activity.getSupportActionBar().setHomeAsUpIndicator(upArrow);
