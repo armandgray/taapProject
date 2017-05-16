@@ -30,6 +30,7 @@ public class DrillsHelper {
 
     static {
         drillsList = new ArrayList<>();
+        drillsList.add(new Drill("Free Throws", R.drawable.ic_fitness_center_white_24dp, fundamentalShooting));
         drillsList.add(new Drill("5 Spots Shooting (Mid-Range)", R.drawable.ic_fitness_center_white_24dp, fundamentalShooting));
         drillsList.add(new Drill("5 Spots Spin-Rip Through (Mid-Range)", R.drawable.ic_fitness_center_white_24dp, fundamentalShooting));
         drillsList.add(new Drill("5 Spots Spin-Pull Up (Mid-Range)", R.drawable.ic_fitness_center_white_24dp, fundamentalShooting));
