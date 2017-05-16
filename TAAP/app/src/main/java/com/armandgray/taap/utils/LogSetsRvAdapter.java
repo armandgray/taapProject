@@ -16,8 +16,8 @@ import java.util.Locale;
 public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogSetsViewHolder> {
 
     @VisibleForTesting
-    private ArrayList<SessionLog> logs;
-    private boolean arePrevLogs;
+    private final ArrayList<SessionLog> logs;
+    private final boolean arePrevLogs;
 
     @SuppressWarnings("SameParameterValue")
     public LogSetsRvAdapter(ArrayList<SessionLog> logs, boolean arePrevLogs) {

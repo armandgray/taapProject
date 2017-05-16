@@ -164,18 +164,8 @@ public class SessionLog implements Parcelable {
         return successRecord;
     }
 
-    @SuppressWarnings("SameParameterValue")
-    void setSuccessRecord( double successRecord) {
-        this.successRecord = successRecord;
-    }
-
     public Drill getDrill() {
         return drill;
-    }
-
-    @SuppressWarnings("SameReturnValue")
-    public static int getFieldCount() {
-        return 9;
     }
 
     @Override

@@ -19,7 +19,7 @@ import static com.armandgray.taap.models.Drill.getQueryResultList;
 public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillViewHolder> {
 
     public static final String SEARCH = "Search: ";
-    private ArrayList<Drill> allDrillsList;
+    private final ArrayList<Drill> allDrillsList;
     private ArrayList<Drill> drillList;
 
     public DrillsRvAdapter(ArrayList<Drill> drillList) {

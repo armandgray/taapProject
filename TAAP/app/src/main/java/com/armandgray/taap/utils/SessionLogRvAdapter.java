@@ -36,8 +36,6 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
     @VisibleForTesting
     private ViewGroup parent;
 
-    SessionLogRvAdapter() {}
-
     public SessionLogRvAdapter(SessionLog sessionLog) {
         this.sessionLog = sessionLog;
     }
@@ -110,7 +108,7 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
 
     @Override
     public int getItemCount() {
-        return SessionLog.getFieldCount();
+        return 9;
     }
 
     private View getLayout(ViewGroup parent) {
@@ -153,19 +151,16 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
     }
 
     static class SessionLogHeaderViewHolder extends SessionLogViewHolder {
-        final View itemView;
         final TextView tvText;
 
         SessionLogHeaderViewHolder(View itemView) {
             super(itemView);
 
-            this.itemView = itemView;
             tvText = (TextView) itemView.findViewById(R.id.tvText);
         }
     }
 
     static class SessionLogViewHolder extends RecyclerView.ViewHolder {
-        final View itemView;
         final TextView tvHeader;
         final ImageView ivImage;
         final TextView tvText;
@@ -173,7 +168,6 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
         SessionLogViewHolder(View itemView) {
             super(itemView);
 
-            this.itemView = itemView;
             tvHeader = (TextView) itemView.findViewById(R.id.tvHeader);
             ivImage = (ImageView) itemView.findViewById(R.id.ivImage);
             tvText = (TextView) itemView.findViewById(R.id.tvText);
