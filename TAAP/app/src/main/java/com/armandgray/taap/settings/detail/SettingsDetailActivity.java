@@ -40,7 +40,8 @@ public class SettingsDetailActivity extends AppCompatActivity {
     }
 
     private void setHomeAsUpIndicatorColor() {
-        final Drawable upArrow = getResources().getDrawable(R.drawable.ic_arrow_back_white_24dp);
+        @SuppressWarnings("deprecation") final Drawable upArrow = getResources().getDrawable(R.drawable.ic_arrow_back_white_24dp);
+        //noinspection deprecation
         upArrow.setColorFilter(getResources().getColor(R.color.colorDarkGray), PorterDuff.Mode.SRC_ATOP);
         if (getSupportActionBar() == null) { return; }
         getSupportActionBar().setHomeAsUpIndicator(upArrow);

@@ -70,6 +70,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     @Override
     public void onFabClick(View v) {
         views.btnFinished.setVisibility(View.VISIBLE);
+        //noinspection deprecation
         views.fab.setBackgroundTintList(activity.getResources().getColorStateList(
                 android.R.color.white));
         togglePausePlay();

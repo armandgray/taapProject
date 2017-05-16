@@ -52,6 +52,7 @@ public class DrillDetailViewsTest {
         intent.putExtra(SELECTED_DRILL, new Drill("Beat-the-Pro (Mid-Range)",
                 R.drawable.ic_fitness_center_white_24dp,
                 Drill.SHOOTING_ARRAY));
+        //noinspection deprecation
         activityController = Robolectric.buildActivity(DrillDetailActivity.class).withIntent(intent);
         activity = activityController.create().visible().get();
         toolbar = (Toolbar) activity.findViewById(R.id.toolbar);

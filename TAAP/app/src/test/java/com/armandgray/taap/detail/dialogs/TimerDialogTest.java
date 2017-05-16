@@ -1,6 +1,5 @@
 package com.armandgray.taap.detail.dialogs;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -47,6 +46,7 @@ public class TimerDialogTest {
         intent.putExtra(SELECTED_DRILL, new Drill("Beat-the-Pro (Mid-Range)",
                 R.drawable.ic_fitness_center_white_24dp,
                 Drill.SHOOTING_ARRAY));
+        //noinspection deprecation
         activityController = Robolectric.buildActivity(DrillDetailActivity.class).withIntent(intent);
         activity = activityController.create().start().resume().visible().get();
         dialog = new TimerDialog();
@@ -110,8 +110,8 @@ public class TimerDialogTest {
 
     @Test
     public void doesStartTimer_TestOnCreateDialog() {
-        Bundle savedInstanceState = new Bundle();
-        AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
+//        Bundle savedInstanceState = new Bundle();
+//        AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
 //        ShadowAlertDialog shadowDialog = shadowOf(resultDialog);
 
         // TODO add test for chronometer started

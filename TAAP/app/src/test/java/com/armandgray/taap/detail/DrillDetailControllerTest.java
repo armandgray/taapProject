@@ -64,6 +64,7 @@ public class DrillDetailControllerTest {
         System.out.println("Running Set Up!");
         Intent intent = new Intent(RuntimeEnvironment.application, DrillDetailActivity.class);
         intent.putExtra(SELECTED_DRILL, TEST_SESSION_LOG.getDrill());
+        //noinspection deprecation
         activityController = Robolectric.buildActivity(DrillDetailActivity.class).withIntent(intent);
         activity = activityController.create().start().resume().visible().get();
         controller = activity.controller;

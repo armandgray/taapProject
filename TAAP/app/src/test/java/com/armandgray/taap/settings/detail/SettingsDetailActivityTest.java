@@ -38,6 +38,7 @@ public class SettingsDetailActivityTest {
         System.out.println("Running Set Up!");
         Intent intent = new Intent(RuntimeEnvironment.application, SettingsDetailActivity.class);
         intent.putExtra(SELECTED_ITEM, TERMS_AND_CONDITIONS);
+        //noinspection deprecation
         activityController = Robolectric.buildActivity(SettingsDetailActivity.class).withIntent(intent);
         activity = activityController.create().visible().get();
     }

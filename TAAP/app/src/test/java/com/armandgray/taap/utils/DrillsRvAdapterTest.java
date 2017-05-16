@@ -81,6 +81,7 @@ public class DrillsRvAdapterTest {
         adapter.onBindViewHolder(holder, 0);
 
         assertEquals("1-Ball Pound Dribble", holder.tvTitle.getText());
+        //noinspection deprecation
         assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
                 R.drawable.ic_fitness_center_white_24dp),
                 holder.ivImage.getDrawable());

@@ -70,6 +70,7 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
 
         tvHeader.setText((Integer) sessionItem.get(STRING_RESOURCE_ID));
         ivImage.setImageResource((Integer) sessionItem.get(IMAGE_RESOURCE_ID));
+        //noinspection deprecation
         ivImage.setColorFilter(parent.getResources()
                 .getColor((Integer) sessionItem.get(TINT_COLOR)));
         setTvText(position, sessionItem, tvText);

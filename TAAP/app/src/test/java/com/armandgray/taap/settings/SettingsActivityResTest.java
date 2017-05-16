@@ -58,6 +58,7 @@ public class SettingsActivityResTest {
     public void hasDrawable_AboutTextBackground() throws Exception {
         
         TextView textView = (TextView) settingsContainer.findViewById(R.id.tvRateThisApp);
+        //noinspection deprecation
         assertEquals(activity.getResources().getDrawable(R.drawable.about_item_background), textView.getBackground());
     }
 

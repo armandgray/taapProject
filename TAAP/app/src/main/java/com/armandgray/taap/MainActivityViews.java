@@ -158,6 +158,7 @@ class MainActivityViews {
         Drawable drawable = menuItem.getIcon();
         if (drawable != null) {
             drawable.mutate();
+            //noinspection deprecation
             drawable.setColorFilter(activity.getResources().getColor(R.color.colorDarkGray),
                     PorterDuff.Mode.SRC_ATOP);
         }

@@ -133,6 +133,7 @@ public class SessionLogRvAdapterTest {
 
         assertEquals("Session Length", holder.tvHeader.getText());
         assertEquals(simpleDateFormat.format(calendar.getTime()), holder.tvText.getText());
+        //noinspection deprecation
         assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
                 R.drawable.ic_timer_white_24dp),
                 holder.ivImage.getDrawable());
@@ -152,6 +153,7 @@ public class SessionLogRvAdapterTest {
 
         assertEquals("Sets Completed", holder.tvHeader.getText());
         assertEquals(String.valueOf(testSessionLog.getSetsCompleted()), holder.tvText.getText());
+        //noinspection deprecation
         assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
                 R.drawable.ic_fitness_center_white_24dp),
                 holder.ivImage.getDrawable());
@@ -173,6 +175,7 @@ public class SessionLogRvAdapterTest {
 
         assertEquals("Success Rate", holder.tvHeader.getText());
         assertEquals(String.format(Locale.US, "%d%%", rate.intValue()), holder.tvText.getText());
+        //noinspection deprecation
         assertEquals(RuntimeEnvironment.application.getResources().getDrawable(
                 R.drawable.ic_timer_white_24dp),
                 holder.ivImage.getDrawable());

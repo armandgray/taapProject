@@ -64,6 +64,7 @@ public class LogActivityControllerTest {
         System.out.println("Running Set Up!");
         Intent intent = new Intent(RuntimeEnvironment.application, LogActivity.class);
         intent.putExtra(SESSION_LOG, TEST_SESSION_LOG);
+        //noinspection deprecation
         activityController = Robolectric.buildActivity(LogActivity.class).withIntent(intent);
         activity = activityController.create().visible().get();
         controller = activity.controller;
