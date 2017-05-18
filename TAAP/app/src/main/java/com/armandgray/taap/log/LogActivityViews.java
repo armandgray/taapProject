@@ -130,6 +130,7 @@ class LogActivityViews {
     }
 
     void setDataValueForDetailLayout(LinearLayout layout, String text) {
+
         ((TextView) layout.findViewById(R.id.tvText)).setText(text);
     }
 

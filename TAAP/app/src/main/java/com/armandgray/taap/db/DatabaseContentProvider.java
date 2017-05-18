@@ -21,6 +21,7 @@ import static com.armandgray.taap.utils.StringHelper.getArrayAsString;
 
 public class DatabaseContentProvider extends ContentProvider {
 
+
     public static final String[] ALL_TABLE_COLUMNS;
     public static final Uri CONTENT_URI_ALL;
     public static final Uri CONTENT_URI_DRILLS;

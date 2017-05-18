@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
+
     private static final int DATABASE_VERSION = 1;
     static final String DATABASE_NAME = "taap.db";
 

@@ -7,6 +7,7 @@ import com.armandgray.taap.detail.dialogs.DetailSummaryDialog;
 import com.armandgray.taap.detail.dialogs.TimerDialog;
 
 public class DrillDetailActivity extends AppCompatActivity
+
         implements DetailSummaryDialog.DetailSummaryDialogListener,
         TimerDialog.TimerDialogListener {
 

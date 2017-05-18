@@ -15,6 +15,7 @@ import static com.armandgray.taap.settings.SettingsActivityController.TERMS_AND_
 
 public class SettingsDetailActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -17,6 +17,7 @@ import static com.armandgray.taap.utils.StringHelper.getStringAsArray;
 
 public class CursorDataHelper {
 
+
     public static ArrayList<Drill> getDrillsListFromDatabase(Context context) {
         Cursor cursor = context.getContentResolver()
                 .query(CONTENT_URI_DRILLS, DrillsTable.ALL_DRILL_COLUMNS,

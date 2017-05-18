@@ -67,6 +67,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
                 .query(uri, ALL_TABLE_COLUMNS, null, selectionArgs, null);
     }
 
+
     @Override
     public void onFabClick(View v) {
         views.btnFinished.setVisibility(View.VISIBLE);

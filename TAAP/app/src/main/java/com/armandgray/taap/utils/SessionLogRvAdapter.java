@@ -33,6 +33,7 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
 
     SessionLogRvAdapter() {}
 
+
     public SessionLogRvAdapter(SessionLog sessionLog) {
         this.sessionLog = sessionLog;
     }

@@ -26,6 +26,7 @@ public class DateTimeHelper {
 
     public static Date getTimeElapsedAsDate(long timeElapsed, int hoursToSubtract) {
         if (hoursToSubtract == 0) { return getTimeElapsedAsDate(timeElapsed); }
+
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(timeElapsed - (ONE_HOUR * hoursToSubtract) + ONE_DAY);
         return calendar.getTime();

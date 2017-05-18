@@ -30,6 +30,7 @@ import static com.armandgray.taap.utils.MathHelper.getPercentFormattedAsString;
 
 class LogActivityController {
 
+
     @VisibleForTesting LogActivity activity;
     @VisibleForTesting LogActivityViews views;
     @VisibleForTesting SessionLog sessionLog;

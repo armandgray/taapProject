@@ -18,6 +18,7 @@ public class StringHelper {
         return contentsStringBuilder;
     }
 
+
     public static String getArrayAsString(String[] array) {
         if (array == null || array.length == 0) { return null; }
         StringBuilder builder = new StringBuilder();

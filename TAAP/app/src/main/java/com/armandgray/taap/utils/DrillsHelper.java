@@ -59,7 +59,8 @@ public class DrillsHelper {
         drillsList.add(new Drill("Shoot to a Partner - Form Shooting (Increasing Height)", R.drawable.ic_fitness_center_white_24dp, fundamentalShooting));
         drillsList.add(new Drill("Form Shooting", R.drawable.ic_fitness_center_white_24dp, fundamentalShooting));
         drillsList.add(new Drill("Beat the Pro - Form Shooting", R.drawable.ic_fitness_center_white_24dp, SHOOTING_ARRAY));
-        
+
+
         drillsList.add(new Drill("Chest Pass - Partner Passing", R.drawable.ic_fitness_center_white_24dp, PASSING_ARRAY));
         drillsList.add(new Drill("Bounce Pass - Partner Passing", R.drawable.ic_fitness_center_white_24dp, PASSING_ARRAY));
         drillsList.add(new Drill("Overhead Pass - Partner Passing", R.drawable.ic_fitness_center_white_24dp, PASSING_ARRAY));
