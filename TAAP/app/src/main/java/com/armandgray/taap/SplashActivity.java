@@ -27,7 +27,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     @VisibleForTesting
-    void insertAllDrillsToDatabase() {
+    private void insertAllDrillsToDatabase() {
         List<Drill> drills = getDrillsListFromDatabase(this);
         if (drills != null && drills.size() > 0) { return; }
         for (Drill drill : getDrillsList()) { insertDrillToDatabase(drill, this); }

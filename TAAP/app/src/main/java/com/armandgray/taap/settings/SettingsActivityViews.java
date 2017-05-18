@@ -10,8 +10,8 @@ import com.armandgray.taap.R;
 
 class SettingsActivityViews {
 
-    SettingsActivity activity;
-    SettingsViewsListener listener;
+    private final SettingsActivity activity;
+    private final SettingsViewsListener listener;
 
     SettingsActivityViews(SettingsActivity activity, SettingsViewsListener listener) {
         this.activity = activity;
@@ -35,7 +35,8 @@ class SettingsActivityViews {
     }
 
     private void setHomeAsUpIndicatorColor() {
-        final Drawable upArrow = activity.getResources().getDrawable(R.drawable.abc_ic_ab_back_material);
+        @SuppressWarnings("deprecation") final Drawable upArrow = activity.getResources().getDrawable(R.drawable.ic_arrow_back_white_24dp);
+        //noinspection deprecation
         upArrow.setColorFilter(activity.getResources().getColor(R.color.colorDarkGray), PorterDuff.Mode.SRC_ATOP);
         if (activity.getSupportActionBar() == null) { return; }
         activity.getSupportActionBar().setHomeAsUpIndicator(upArrow);

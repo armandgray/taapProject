@@ -49,7 +49,7 @@ public class SessionLog implements Parcelable {
 
     public static class Builder {
 
-        private Date sessionDate;
+        private final Date sessionDate;
         private Date sessionLength;
         private String sessionGoal;
         private Date activeWork;
@@ -120,10 +120,6 @@ public class SessionLog implements Parcelable {
         }
     }
 
-    public int getSessionId() {
-        return sessionId;
-    }
-
     public void setSessionId(int sessionId) {
         this.sessionId = sessionId;
     }
@@ -168,16 +164,8 @@ public class SessionLog implements Parcelable {
         return successRecord;
     }
 
-    public void setSuccessRecord(double successRecord) {
-        this.successRecord = successRecord;
-    }
-
     public Drill getDrill() {
         return drill;
-    }
-
-    public static int getFieldCount() {
-        return 9;
     }
 
     @Override
@@ -200,7 +188,7 @@ public class SessionLog implements Parcelable {
         dest.writeInt(this.sessionId);
     }
 
-    protected SessionLog(Parcel in) {
+    private SessionLog(Parcel in) {
         long tmpSessionDate = in.readLong();
         this.sessionDate = tmpSessionDate == -1 ? null : new Date(tmpSessionDate);
         long tmpSessionLength = in.readLong();

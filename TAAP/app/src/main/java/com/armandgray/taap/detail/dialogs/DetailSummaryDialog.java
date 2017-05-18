@@ -1,7 +1,6 @@
 package com.armandgray.taap.detail.dialogs;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -22,11 +21,8 @@ import static com.armandgray.taap.log.LogActivity.SESSION_LOG;
 public class DetailSummaryDialog extends DialogFragment {
 
     public static final String DIALOG = "DIALOG";
-    public static final String ALL_LOGS = "ALL_LOGS";
-    Activity activity;
-    public DetailSummaryDialogListener listener;
-    @VisibleForTesting
-    SummaryDialogHelper helper;
+    private DetailSummaryDialogListener listener;
+    @VisibleForTesting private SummaryDialogHelper helper;
 
     public static DetailSummaryDialog newInstance(SessionLog sessionLog) {
         Bundle args = new Bundle();
@@ -50,7 +46,7 @@ public class DetailSummaryDialog extends DialogFragment {
         @SuppressLint("InflateParams") View dialogLayout = LayoutInflater.from(getActivity())
                 .inflate(R.layout.detail_summary_dialog_layout, null);
         RecyclerView rvSummary = (RecyclerView) dialogLayout.findViewById(R.id.rvSummary);
-        helper.setupRvSummary(activity, rvSummary);
+        helper.setupRvSummary(getActivity(), rvSummary);
 
         return new AlertDialog.Builder(getActivity()).setView(dialogLayout)
                 .setPositiveButton(R.string.continue_string, new DialogInterface.OnClickListener() {

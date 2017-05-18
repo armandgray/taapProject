@@ -16,8 +16,8 @@ import static com.armandgray.taap.log.LogActivity.SESSION_LOG;
 
 class SummaryDialogHelper {
 
-    @VisibleForTesting DetailSummaryDialog dialog;
-    @VisibleForTesting SessionLog sessionLog;
+    @VisibleForTesting
+    private final DetailSummaryDialog dialog;
 
     SummaryDialogHelper(DetailSummaryDialog dialog) {
         this.dialog = dialog;
@@ -36,7 +36,7 @@ class SummaryDialogHelper {
 
     void setupRvSummary(Activity activity, RecyclerView rvSummary) {
         Bundle args = dialog.getArguments();
-        sessionLog = args != null ? (SessionLog) args.get(SESSION_LOG) : null;
+        SessionLog sessionLog = args != null ? (SessionLog) args.get(SESSION_LOG) : null;
         if (isSessionLogNull(sessionLog)) return;
         rvSummary.setAdapter(new SessionLogRvAdapter(sessionLog));
         GridLayoutManager layoutManager = getGridLayoutManager(activity);
@@ -51,10 +51,6 @@ class SummaryDialogHelper {
             return true;
         }
         return false;
-    }
-
-    private double getDrillSuccessRecord() {
-        return 0;
     }
 
     @NonNull

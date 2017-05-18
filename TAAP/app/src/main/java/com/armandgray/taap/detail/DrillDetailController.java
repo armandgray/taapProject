@@ -26,17 +26,24 @@ import static com.armandgray.taap.utils.DateTimeHelper.getTimeElapsedAsDate;
 
 class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener {
 
-    DrillDetailActivity activity;
-    DrillDetailViews views;
-    @VisibleForTesting boolean drillActive;
+    private final DrillDetailActivity activity;
+    private final DrillDetailViews views;
+    @VisibleForTesting
+    private boolean drillActive;
     private long timeElapsed;
-    @VisibleForTesting long activeWorkTime;
-    @VisibleForTesting long restTime;
-    @VisibleForTesting SessionLog sessionLog;
-    private ArrayList<SessionLog> listAllLogs;
-    @VisibleForTesting int setsCompleted;
-    @VisibleForTesting int repsCompleted;
-    @VisibleForTesting double successRate;
+    @VisibleForTesting
+    private long activeWorkTime;
+    @VisibleForTesting
+    private long restTime;
+    @VisibleForTesting
+    private SessionLog sessionLog;
+    private final ArrayList<SessionLog> listAllLogs;
+    @VisibleForTesting
+    private int setsCompleted;
+    @VisibleForTesting
+    private int repsCompleted;
+    @VisibleForTesting
+    private double successRate;
     private double placeholderRate;
 
     DrillDetailController(DrillDetailActivity activity) {
@@ -68,8 +75,9 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     }
 
     @Override
-    public void onFabClick(View v) {
+    public void onFabClick() {
         views.btnFinished.setVisibility(View.VISIBLE);
+        //noinspection deprecation
         views.fab.setBackgroundTintList(activity.getResources().getColorStateList(
                 android.R.color.white));
         togglePausePlay();
@@ -146,7 +154,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     }
 
     @Override
-    public void onBtnFinishedClick(View v) {
+    public void onBtnFinishedClick() {
         if (drillActive) { togglePausePlay(); }
         placeholderRate = successRate;
         recordSetData();

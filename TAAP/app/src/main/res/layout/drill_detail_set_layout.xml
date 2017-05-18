@@ -5,9 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
+    android:baselineAligned="false"
     android:orientation="horizontal"
     android:weightSum=".9"
-    tools:showIn="@layout/content_drill_detail">
+    tools:showIn="@layout/content_drill_detail"
+    tools:ignore="Overdraw">
 
     <LinearLayout
         android:layout_width="0dp"

@@ -19,10 +19,8 @@ import static com.armandgray.taap.models.Drill.getQueryResultList;
 public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillViewHolder> {
 
     public static final String SEARCH = "Search: ";
-    private ArrayList<Drill> allDrillsList;
-    ArrayList<Drill> drillList;
-
-    DrillsRvAdapter() {}
+    private final ArrayList<Drill> allDrillsList;
+    private ArrayList<Drill> drillList;
 
     public DrillsRvAdapter(ArrayList<Drill> drillList) {
         this.allDrillsList = new ArrayList<>();
@@ -42,7 +40,7 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
         ImageView ivImage = viewHolder.ivImage;
         TextView tvTitle = viewHolder.tvTitle;
 
-        ivImage.setImageResource(drill.getImageId());
+        ivImage.setImageResource(R.drawable.ic_fast_forward_white_24dp);
         tvTitle.setText(drill.getTitle());
     }
 
@@ -51,7 +49,7 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
         return drillList.size();
     }
 
-    View getLayout(ViewGroup parent) {
+    private View getLayout(ViewGroup parent) {
         return LayoutInflater.from(parent.getContext()).inflate(R.layout.drill_listitem, parent, false);
     }
 
@@ -108,14 +106,12 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
     }
 
     static class DrillViewHolder extends RecyclerView.ViewHolder {
-        View itemView;
-        ImageView ivImage;
-        TextView tvTitle;
+        final ImageView ivImage;
+        final TextView tvTitle;
 
         DrillViewHolder(View itemView) {
             super(itemView);
 
-            this.itemView = itemView;
             ivImage = (ImageView) itemView.findViewById(R.id.ivImage);
             tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
         }

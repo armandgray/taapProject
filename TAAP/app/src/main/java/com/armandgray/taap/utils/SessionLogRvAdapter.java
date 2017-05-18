@@ -21,17 +21,20 @@ import static com.armandgray.taap.utils.DateTimeHelper.getDateFormattedAsString;
 
 public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapter.SessionLogViewHolder> {
 
-    static final int TYPE_HEADER = 100;
-    static final int TYPE_ITEM = 101;
-    @VisibleForTesting static final String IMAGE_RESOURCE_ID = "IMAGE_RESOURCE_ID";
-    @VisibleForTesting static final String ITEM_DATA = "ITEM_DATA";
-    @VisibleForTesting static final String STRING_RESOURCE_ID = "STRING_RESOURCE_ID";
-    @VisibleForTesting static final String TINT_COLOR = "TINT_COLOR";
+    private static final int TYPE_HEADER = 100;
+    private static final int TYPE_ITEM = 101;
+    @VisibleForTesting
+    private static final String IMAGE_RESOURCE_ID = "IMAGE_RESOURCE_ID";
+    @VisibleForTesting
+    private static final String ITEM_DATA = "ITEM_DATA";
+    @VisibleForTesting
+    private static final String STRING_RESOURCE_ID = "STRING_RESOURCE_ID";
+    @VisibleForTesting
+    private static final String TINT_COLOR = "TINT_COLOR";
 
-    private SessionLog sessionLog;
-    @VisibleForTesting ViewGroup parent;
-
-    SessionLogRvAdapter() {}
+    private final SessionLog sessionLog;
+    @VisibleForTesting
+    private ViewGroup parent;
 
     public SessionLogRvAdapter(SessionLog sessionLog) {
         this.sessionLog = sessionLog;
@@ -58,6 +61,7 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
     @Override
     public void onBindViewHolder(SessionLogViewHolder viewHolder, int position) {
         final HashMap<String, Object> sessionItem = getItemAtPosition(position);
+        if (sessionItem == null) { return; }
 
         if (atHeaderPosition(viewHolder, position)) {
             setupHeader((SessionLogHeaderViewHolder) viewHolder, sessionItem);
@@ -70,6 +74,7 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
 
         tvHeader.setText((Integer) sessionItem.get(STRING_RESOURCE_ID));
         ivImage.setImageResource((Integer) sessionItem.get(IMAGE_RESOURCE_ID));
+        //noinspection deprecation
         ivImage.setColorFilter(parent.getResources()
                 .getColor((Integer) sessionItem.get(TINT_COLOR)));
         setTvText(position, sessionItem, tvText);
@@ -103,14 +108,14 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
 
     @Override
     public int getItemCount() {
-        return SessionLog.getFieldCount();
+        return 9;
     }
 
-    View getLayout(ViewGroup parent) {
+    private View getLayout(ViewGroup parent) {
         return LayoutInflater.from(parent.getContext()).inflate(R.layout.session_log_listitem, parent, false);
     }
 
-    HashMap<String, Object> getItemAtPosition(int position) {
+    private HashMap<String, Object> getItemAtPosition(int position) {
         switch (position) {
             case 0:
                 return getHashMap(R.string.session_date, sessionLog.getSessionDate(), R.drawable.ic_timer_white_24dp, android.R.color.holo_red_dark);
@@ -146,27 +151,23 @@ public class SessionLogRvAdapter extends RecyclerView.Adapter<SessionLogRvAdapte
     }
 
     static class SessionLogHeaderViewHolder extends SessionLogViewHolder {
-        View itemView;
-        TextView tvText;
+        final TextView tvText;
 
         SessionLogHeaderViewHolder(View itemView) {
             super(itemView);
 
-            this.itemView = itemView;
             tvText = (TextView) itemView.findViewById(R.id.tvText);
         }
     }
 
     static class SessionLogViewHolder extends RecyclerView.ViewHolder {
-        View itemView;
-        TextView tvHeader;
-        ImageView ivImage;
-        TextView tvText;
+        final TextView tvHeader;
+        final ImageView ivImage;
+        final TextView tvText;
 
         SessionLogViewHolder(View itemView) {
             super(itemView);
 
-            this.itemView = itemView;
             tvHeader = (TextView) itemView.findViewById(R.id.tvHeader);
             ivImage = (ImageView) itemView.findViewById(R.id.ivImage);
             tvText = (TextView) itemView.findViewById(R.id.tvText);

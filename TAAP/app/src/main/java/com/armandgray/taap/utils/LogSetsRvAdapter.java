@@ -15,11 +15,11 @@ import java.util.Locale;
 
 public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogSetsViewHolder> {
 
-    @VisibleForTesting ArrayList<SessionLog> logs;
-    private boolean arePrevLogs;
+    @VisibleForTesting
+    private final ArrayList<SessionLog> logs;
+    private final boolean arePrevLogs;
 
-    public LogSetsRvAdapter() {}
-
+    @SuppressWarnings("SameParameterValue")
     public LogSetsRvAdapter(ArrayList<SessionLog> logs, boolean arePrevLogs) {
         this.logs = logs;
         this.arePrevLogs = arePrevLogs;
@@ -27,6 +27,7 @@ public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogS
 
     public LogSetsRvAdapter(ArrayList<SessionLog> logs) {
         this.logs = logs;
+        this.arePrevLogs = false;
     }
 
     @Override
@@ -37,6 +38,7 @@ public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogS
     @Override
     public void onBindViewHolder(LogSetsViewHolder viewHolder, int position) {
         SessionLog log = getItemAtPosition(position);
+        if (log == null) { return; }
         TextView tvText = viewHolder.tvText;
         int repsCompleted = arePrevLogs && log.getRepsCompleted() != 1
                 ? log.getRepsCompleted()/log.getSetsCompleted()
@@ -53,12 +55,12 @@ public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogS
         return logs.size();
     }
 
-    View getLayout(ViewGroup parent) {
+    private View getLayout(ViewGroup parent) {
         return LayoutInflater.from(parent.getContext()).inflate(R.layout.log_sets_textview, parent, false);
     }
 
     @VisibleForTesting
-    public SessionLog getItemAtPosition(int position) {
+    private SessionLog getItemAtPosition(int position) {
         if (logs == null || logs.size() <= position) { return null; }
         return logs.get(position);
     }
@@ -69,13 +71,11 @@ public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogS
     }
 
     static class LogSetsViewHolder extends RecyclerView.ViewHolder {
-        View itemView;
-        TextView tvText;
+        final TextView tvText;
 
         LogSetsViewHolder(View itemView) {
             super(itemView);
 
-            this.itemView = itemView;
             tvText = (TextView) itemView.findViewById(R.id.tvText);
         }
     }

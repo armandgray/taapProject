@@ -22,10 +22,9 @@ import static com.armandgray.taap.utils.CursorDataHelper.getDrillsListFromDataba
 
 class MainActivityViews {
 
-    MainActivity activity;
-    MainViewsListener listener;
+    private final MainActivity activity;
+    private final MainViewsListener listener;
 
-    private String[] drillsArray = {"All", "Shooting", "Ball Handling", "Passing", "Fundamentals"};
     EditText etSearch;
     FloatingActionButton fab;
     Spinner spinner;
@@ -88,7 +87,7 @@ class MainActivityViews {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                listener.onSpinnerItemSelected(parent, view, position, id);
+                listener.onSpinnerItemSelected(position);
             }
 
             @Override
@@ -113,7 +112,7 @@ class MainActivityViews {
         etSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                listener.onEtSearchFocusChange(v, hasFocus);
+                listener.onEtSearchFocusChange(hasFocus);
             }
         });
     }
@@ -122,7 +121,7 @@ class MainActivityViews {
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                listener.onEtSearchTextChanged(s, start, before, count);
+                listener.onEtSearchTextChanged();
             }
 
             @Override
@@ -149,8 +148,8 @@ class MainActivityViews {
         rvDrills.addOnItemTouchListener(new RecyclerItemClickListener(activity,
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
-                    public void onItemClick(View view, int position) {
-                        listener.onRvDrillsItemTouch(view, position);
+                    public void onItemClick(int position) {
+                        listener.onRvDrillsItemTouch(position);
                     }
                 }));
     }
@@ -159,6 +158,7 @@ class MainActivityViews {
         Drawable drawable = menuItem.getIcon();
         if (drawable != null) {
             drawable.mutate();
+            //noinspection deprecation
             drawable.setColorFilter(activity.getResources().getColor(R.color.colorDarkGray),
                     PorterDuff.Mode.SRC_ATOP);
         }
@@ -167,10 +167,10 @@ class MainActivityViews {
     interface MainViewsListener {
         void onFabClick();
         void onSortClick();
-        void onSpinnerItemSelected(AdapterView<?> parent, View view, int position, long id);
+        void onSpinnerItemSelected(int position);
         void onSearchClick();
-        void onEtSearchFocusChange(View v, boolean hasFocus);
-        void onEtSearchTextChanged(CharSequence s, int start, int before, int count);
-        void onRvDrillsItemTouch(View view, int position);
+        void onEtSearchFocusChange(boolean hasFocus);
+        void onEtSearchTextChanged();
+        void onRvDrillsItemTouch(int position);
     }
 }

@@ -13,7 +13,7 @@ import com.armandgray.taap.settings.SettingsActivity;
 public class MainActivity extends AppCompatActivity {
 
     public static final String SELECTED_DRILL = "SELECTED_DRILL";
-    public MainActivityController controller;
+    private MainActivityController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

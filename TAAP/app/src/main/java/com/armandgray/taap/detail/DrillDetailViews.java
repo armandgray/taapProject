@@ -23,8 +23,8 @@ import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
 
 class DrillDetailViews {
 
-    public DrillDetailActivity activity;
-    DrillDetailViewsListener listener;
+    private final DrillDetailActivity activity;
+    private final DrillDetailViewsListener listener;
     Drill drill;
 
     FloatingActionButton fab;
@@ -81,7 +81,8 @@ class DrillDetailViews {
     }
 
     private void setHomeAsUpIndicatorColor() {
-        final Drawable upArrow = activity.getResources().getDrawable(R.drawable.abc_ic_ab_back_material);
+        @SuppressWarnings("deprecation") final Drawable upArrow = activity.getResources().getDrawable(R.drawable.ic_arrow_back_white_24dp);
+        //noinspection deprecation
         upArrow.setColorFilter(activity.getResources().getColor(R.color.colorDarkGray), PorterDuff.Mode.SRC_ATOP);
         if (activity.getSupportActionBar() == null) { return; }
         activity.getSupportActionBar().setHomeAsUpIndicator(upArrow);
@@ -109,7 +110,7 @@ class DrillDetailViews {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onFabClick(v);
+                listener.onFabClick();
             }
         });
     }
@@ -118,7 +119,7 @@ class DrillDetailViews {
         btnFinished.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onBtnFinishedClick(v);
+                listener.onBtnFinishedClick();
             }
         });
     }
@@ -138,8 +139,8 @@ class DrillDetailViews {
     }
 
     interface DrillDetailViewsListener {
-        void onFabClick(View v);
-        void onBtnFinishedClick(View v);
+        void onFabClick();
+        void onBtnFinishedClick();
     }
 
 }

@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 public class SettingsActivity extends AppCompatActivity
         implements ConfirmClearDataDialog.ClearDataListener {
 
-    SettingsActivityController controller;
+    private SettingsActivityController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
