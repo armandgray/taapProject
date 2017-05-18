@@ -20,16 +20,17 @@ import static com.armandgray.taap.models.Drill.SHOOTING_ARRAY;
 
 public class DrillsHelper {
 
-    private static String[] fundamentalShooting = {FUNDAMENTALS, SHOOTING};
-    private static String[] fundamentalBallHandling = {FUNDAMENTALS, BALL_HANDLING};
-    private static String[] fundamentalDriving = {FUNDAMENTALS, DRIVING};
-    private static String[] fundamentalDefense = {FUNDAMENTALS, DEFENSE};
-    private static String[] fundamentalDefenseConditioning = {FUNDAMENTALS, DEFENSE, CONDITIONING};
-    private static String[] defenseOffense = {DEFENSE, OFFENSE};
-    private static ArrayList<Drill> drillsList;
+    private static final String[] fundamentalShooting = {FUNDAMENTALS, SHOOTING};
+    private static final String[] fundamentalBallHandling = {FUNDAMENTALS, BALL_HANDLING};
+    private static final String[] fundamentalDriving = {FUNDAMENTALS, DRIVING};
+    private static final String[] fundamentalDefense = {FUNDAMENTALS, DEFENSE};
+    private static final String[] fundamentalDefenseConditioning = {FUNDAMENTALS, DEFENSE, CONDITIONING};
+    private static final String[] defenseOffense = {DEFENSE, OFFENSE};
+    private static final ArrayList<Drill> drillsList;
 
     static {
         drillsList = new ArrayList<>();
+        drillsList.add(new Drill("Free Throws", R.drawable.ic_fitness_center_white_24dp, fundamentalShooting));
         drillsList.add(new Drill("5 Spots Shooting (Mid-Range)", R.drawable.ic_fitness_center_white_24dp, fundamentalShooting));
         drillsList.add(new Drill("5 Spots Spin-Rip Through (Mid-Range)", R.drawable.ic_fitness_center_white_24dp, fundamentalShooting));
         drillsList.add(new Drill("5 Spots Spin-Pull Up (Mid-Range)", R.drawable.ic_fitness_center_white_24dp, fundamentalShooting));
@@ -60,7 +61,6 @@ public class DrillsHelper {
         drillsList.add(new Drill("Form Shooting", R.drawable.ic_fitness_center_white_24dp, fundamentalShooting));
         drillsList.add(new Drill("Beat the Pro - Form Shooting", R.drawable.ic_fitness_center_white_24dp, SHOOTING_ARRAY));
 
-
         drillsList.add(new Drill("Chest Pass - Partner Passing", R.drawable.ic_fitness_center_white_24dp, PASSING_ARRAY));
         drillsList.add(new Drill("Bounce Pass - Partner Passing", R.drawable.ic_fitness_center_white_24dp, PASSING_ARRAY));
         drillsList.add(new Drill("Overhead Pass - Partner Passing", R.drawable.ic_fitness_center_white_24dp, PASSING_ARRAY));
@@ -87,7 +87,7 @@ public class DrillsHelper {
         drillsList.add(new Drill("3 Man Weave", R.drawable.ic_fitness_center_white_24dp, PASSING_ARRAY));
         drillsList.add(new Drill("5 Man Weave", R.drawable.ic_fitness_center_white_24dp, PASSING_ARRAY));
         drillsList.add(new Drill("3 Man Weave - Transition Defense", R.drawable.ic_fitness_center_white_24dp, PASSING_ARRAY));
-        drillsList.add(new Drill("5 Man Weave - Tranisiton Defense", R.drawable.ic_fitness_center_white_24dp, PASSING_ARRAY));
+        drillsList.add(new Drill("5 Man Weave - Transition Defense", R.drawable.ic_fitness_center_white_24dp, PASSING_ARRAY));
         drillsList.add(new Drill("3-2-1-0 Dribble", R.drawable.ic_fitness_center_white_24dp, PASSING_ARRAY));
         drillsList.add(new Drill("Medicine Ball Passing", R.drawable.ic_fitness_center_white_24dp, PASSING_ARRAY));
 

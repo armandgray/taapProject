@@ -165,10 +165,9 @@ public class SessionLog implements Parcelable {
     }
 
     public double getSuccessRecord() {
+
         return successRecord;
     }
-
-
 
     public void setSuccessRecord(double successRecord) {
         this.successRecord = successRecord;

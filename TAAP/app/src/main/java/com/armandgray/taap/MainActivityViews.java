@@ -33,7 +33,6 @@ class MainActivityViews {
     private ImageView ivSearch;
     RecyclerView rvDrills;
 
-
     MainActivityViews(MainActivity activity, MainViewsListener listener) {
         this.activity = activity;
         this.listener = listener;

@@ -16,7 +16,6 @@ import com.armandgray.taap.R;
 
 public class TimerDialog extends DialogFragment {
 
-
     private TimerDialogListener listener;
 
     @Override

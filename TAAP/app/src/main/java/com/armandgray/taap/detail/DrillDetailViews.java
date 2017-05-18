@@ -101,7 +101,6 @@ class DrillDetailViews {
         npSuccesses.setWrapSelectorWheel(true);
     }
 
-
     private void setupInitialViewVisibility() {
         btnFinished.setVisibility(View.GONE);
     }

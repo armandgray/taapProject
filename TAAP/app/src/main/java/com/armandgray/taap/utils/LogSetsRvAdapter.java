@@ -15,7 +15,6 @@ import java.util.Locale;
 
 public class LogSetsRvAdapter extends RecyclerView.Adapter<LogSetsRvAdapter.LogSetsViewHolder> {
 
-
     @VisibleForTesting ArrayList<SessionLog> logs;
     private boolean arePrevLogs;
 

@@ -30,7 +30,6 @@ public class Drill implements Parcelable {
     public static final String[] OFFENSE_TYPES_ARRAY = { OFFENSE, PASSING, DRIVING };
 
 
-
     private String title;
     private int imageId;
     private String[] category;

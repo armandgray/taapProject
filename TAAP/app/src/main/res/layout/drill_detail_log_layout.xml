@@ -18,7 +18,6 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvCurrentLog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/current_log"
@@ -38,7 +37,6 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvPreviousLogs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/previous_logs"

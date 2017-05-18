@@ -26,7 +26,6 @@ public class SplashActivity extends AppCompatActivity {
         System.out.println("Create");
     }
 
-
     @VisibleForTesting
     void insertAllDrillsToDatabase() {
         List<Drill> drills = getDrillsListFromDatabase(this);
