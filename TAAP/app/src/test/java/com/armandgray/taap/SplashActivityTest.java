@@ -117,6 +117,11 @@ public class SplashActivityTest {
         cursor.close();
     }
 
+    @Test
+    public void doesRetrieveHttpData() throws Exception {
+
+    }
+
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
