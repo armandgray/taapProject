@@ -9,6 +9,10 @@ import com.armandgray.taap.models.Drill;
 
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
+
 import static com.armandgray.taap.db.DatabaseContentProvider.insertDrillToDatabase;
 import static com.armandgray.taap.utils.CursorDataHelper.getDrillsListFromDatabase;
 import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
@@ -31,5 +35,10 @@ public class SplashActivity extends AppCompatActivity {
         List<Drill> drills = getDrillsListFromDatabase(this);
         if (drills != null && drills.size() > 0) { return; }
         for (Drill drill : getDrillsList()) { insertDrillToDatabase(drill, this); }
+    }
+
+    public interface GitHubService {
+        @GET("users/{user}/repos")
+        Call<List<String>> listRepos(@Path("user") String user);
     }
 }
