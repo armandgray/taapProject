@@ -4,19 +4,38 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 public class User implements Parcelable, Comparator<User> {
 
+    @SerializedName("Occupation")
+    @Expose
     private final String occupation;
+    @SerializedName("FirstName")
+    @Expose
     private final String firstName;
+    @SerializedName("LastName")
+    @Expose
     private final String lastName;
+    @SerializedName("Username")
+    @Expose
     private final String username;
+    @SerializedName("Secret")
+    @Expose
     private final String secret;
+    @SerializedName("Discoverable")
+    @Expose
     private final boolean discoverable;
+    @SerializedName("Network")
+    @Expose
     private final String network;
+    @SerializedName("Status")
+    @Expose
     private final String status;
     private boolean isRemovable;
 

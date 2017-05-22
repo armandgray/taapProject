@@ -14,6 +14,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -34,10 +35,11 @@ public class SplashActivity extends AppCompatActivity {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://armandgray.com/seeme/api/")
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         GitHubService service = retrofit.create(GitHubService.class);
-        Call<List<User>> repos = service.listUsers("armandgray", "password");
+        Call<List<User>> repos = service.listUsers("armandgray@gmail.com", "Cienna13");
         Response<List<User>> execute = null;
         try {
             execute = repos.execute();
