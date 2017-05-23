@@ -20,7 +20,7 @@ func setup() {
 	respRec = httptest.NewRecorder()
 }
 
-func TestGet200OnNewDrillRoute(t *testing.T) {
+func TestGETNewDrillRoute200(t *testing.T) {
 	setup()
 	routes.NewDrillRoute(mux)
 
