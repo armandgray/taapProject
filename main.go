@@ -13,7 +13,7 @@ func main()  {
   apiUrl := "/taap/api"
 
   mux := gmux.NewRouter()
-  mux.HandleFunc(apiUrl + "/drills/new", controllers.NewDrillController).Methods("GET")
+  mux.HandleFunc(apiUrl + "/drills/new", controllers.NewDrillController).Methods("POST")
 
   n := negroni.Classic()
   n.UseHandler(mux)
