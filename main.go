@@ -3,17 +3,17 @@ package main
 import (
   "taap_project/controllers"
   "fmt"
-  "net/http"
 
   "github.com/urfave/negroni"
+  gmux "github.com/gorilla/mux"
   _ "github.com/go-sql-driver/mysql"
 )
 
 func main()  {
   apiUrl := "/taap/api"
 
-  mux := http.NewServeMux()
-  mux.HandleFunc(apiUrl + "/drills/new", controllers.NewDrillController)
+  mux := gmux.NewRouter()
+  mux.HandleFunc(apiUrl + "/drills/new", controllers.NewDrillController).Methods("GET")
 
   n := negroni.Classic()
   n.UseHandler(mux)
