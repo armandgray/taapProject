@@ -1,6 +1,7 @@
 package main
 
 import (
+  "taap_project/controllers"
   "fmt"
   "net/http"
 
@@ -9,12 +10,10 @@ import (
 )
 
 func main()  {
-	apiUrl := "/taap/api"
+  apiUrl := "/taap/api"
 
   mux := http.NewServeMux()
-  mux.HandleFunc(apiUrl + "/", func(w http.ResponseWriter, r *http.Request) {
-  	w.Write([]byte("working"))
-  	})
+  mux.HandleFunc(apiUrl + "/drills/new", controllers.NewDrillController)
 
   n := negroni.Classic()
   n.UseHandler(mux)
