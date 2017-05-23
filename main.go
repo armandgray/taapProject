@@ -1,7 +1,7 @@
 package main
 
 import (
-  "taap_project/controllers"
+  "taap_project/routes"
   "fmt"
 
   "github.com/urfave/negroni"
@@ -10,10 +10,8 @@ import (
 )
 
 func main()  {
-  apiUrl := "/taap/api"
-
   mux := gmux.NewRouter()
-  mux.HandleFunc(apiUrl + "/drills/new", controllers.NewDrillController).Methods("POST")
+  routes.NewDrillRoute(mux)
 
   n := negroni.Classic()
   n.UseHandler(mux)

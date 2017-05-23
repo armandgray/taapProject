@@ -1,6 +1,8 @@
 package main_test
 
 import (
+	"taap_project/routes"
+
 	"testing"
 	"net/http"
 	"net/http/httptest"
@@ -8,27 +10,28 @@ import (
   gmux "github.com/gorilla/mux"
 )
 
-var r *gmux.Router
+var mux *gmux.Router
 var req *http.Request
 var err error
 var respRec *httptest.ResponseRecorder
 
 func setup() {
-	r = gmux.NewRouter()
+	mux = gmux.NewRouter()
 	respRec = httptest.NewRecorder()
 }
 
-func TestGet400OnNewDrillRoute(t *testing.T) {
+func TestGet200OnNewDrillRoute(t *testing.T) {
 	setup()
+	routes.NewDrillRoute(mux)
 
-	req, err = http.NewRequest("POST", "/drills/new", nil)
+	req, err = http.NewRequest("GET", "/taap/api/drills/new", nil)
 	if err != nil {
-    t.Fatal("Creating 'POST /questions/1/SC' request failed!")
+    t.Fatal("Creating 'GET /taap/api/drills/new' request failed!")
   }
 
-  r.ServeHTTP(respRec, req)
+  mux.ServeHTTP(respRec, req)
 
-  if respRec.Code != http.StatusBadRequest {
-    t.Fatal("Server error: Returned ", respRec.Code, " instead of ", http.StatusBadRequest)
+  if respRec.Code != http.StatusOK {
+    t.Fatal("Server error: Returned ", respRec.Code, " instead of ", http.StatusOK)
   }
 }
