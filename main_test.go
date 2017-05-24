@@ -20,6 +20,22 @@ func setup() {
 	respRec = httptest.NewRecorder()
 }
 
+func TestGETSlashDrillsRoute200(t *testing.T) {
+	setup()
+	routes.AddDrillRoutes(mux)
+
+	req, err = http.NewRequest("GET", "/taap/api/drills", nil)
+	if err != nil {
+		t.Fatal("Creating 'GET /taap/api/drills' request failed!")
+	}
+
+	mux.ServeHTTP(respRec, req)
+
+	if respRec.Code != http.StatusOK {
+		t.Fatal("Server error: Returned ", respRec.Code, " instead of ", http.StatusOK)
+	}
+}
+
 func TestGETNewDrillRoute200(t *testing.T) {
 	setup()
 	routes.AddDrillRoutes(mux)

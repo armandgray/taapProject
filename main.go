@@ -11,7 +11,6 @@ import (
 
 func main() {
 	mux := gmux.NewRouter()
-	mux = mux.PathPrefix("/taap/api").Subrouter()
 	routes.AddDrillRoutes(mux)
 	routes.AddUserRoutes(mux)
 
