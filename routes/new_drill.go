@@ -12,5 +12,6 @@ func NewDrillRoute(mux *gmux.Router) {
 }
 
 func AddUserRoutes(mux *gmux.Router) {
-	mux.HandleFunc("/drills/", controllers.NewDrillController).Methods("GET")
+	apiUrl := "/taap/api"
+	mux.HandleFunc(apiUrl+"/users/new", controllers.NewDrillController).Methods("GET")
 }
