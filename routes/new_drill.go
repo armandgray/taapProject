@@ -7,11 +7,11 @@ import (
 )
 
 func AddDrillRoutes(mux *gmux.Router) {
-	apiUrl := "/taap/api"
-	mux.HandleFunc(apiUrl+"/drills/new", controllers.NewDrillController).Methods("GET")
+	mux = mux.PathPrefix("/taap/api").Subrouter()
+	mux.HandleFunc("/drills/new", controllers.NewDrillController).Methods("GET")
 }
 
 func AddUserRoutes(mux *gmux.Router) {
-	apiUrl := "/taap/api"
-	mux.HandleFunc(apiUrl+"/users/new", controllers.NewDrillController).Methods("GET")
+	mux = mux.PathPrefix("/taap/api").Subrouter()
+	mux.HandleFunc("/users/new", controllers.NewDrillController).Methods("GET")
 }
