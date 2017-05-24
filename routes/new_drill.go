@@ -6,7 +6,7 @@ import (
 	gmux "github.com/gorilla/mux"
 )
 
-func NewDrillRoute(mux *gmux.Router) {
+func AddDrillRoutes(mux *gmux.Router) {
 	apiUrl := "/taap/api"
 	mux.HandleFunc(apiUrl+"/drills/new", controllers.NewDrillController).Methods("GET")
 }

@@ -1,20 +1,21 @@
 package main
 
 import (
-  "taap_project/routes"
-  "fmt"
+	"fmt"
+	"taap_project/routes"
 
-  "github.com/urfave/negroni"
-  gmux "github.com/gorilla/mux"
-  _ "github.com/go-sql-driver/mysql"
+	_ "github.com/go-sql-driver/mysql"
+	gmux "github.com/gorilla/mux"
+	"github.com/urfave/negroni"
 )
 
-func main()  {
-  mux := gmux.NewRouter()
-  routes.NewDrillRoute(mux)
+func main() {
+	mux := gmux.NewRouter()
+	routes.AddDrillRoutes(mux)
+	routes.AddUserRoutes(mux)
 
-  n := negroni.Classic()
-  n.UseHandler(mux)
-  fmt.Println("Running...")
-  n.Run(":8181")
+	n := negroni.Classic()
+	n.UseHandler(mux)
+	fmt.Println("Running...")
+	n.Run(":8181")
 }

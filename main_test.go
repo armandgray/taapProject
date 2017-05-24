@@ -22,7 +22,7 @@ func setup() {
 
 func TestGETNewDrillRoute200(t *testing.T) {
 	setup()
-	routes.NewDrillRoute(mux)
+	routes.AddDrillRoutes(mux)
 
 	req, err = http.NewRequest("GET", "/taap/api/drills/new", nil)
 	if err != nil {
