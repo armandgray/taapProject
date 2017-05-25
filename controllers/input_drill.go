@@ -5,15 +5,13 @@ import (
 	"net/http"
 )
 
-type Page struct {
-	Alert string
-}
-
 func InputDrillController(w http.ResponseWriter, r *http.Request) {
-	templates := template.Must(template.ParseFiles("views/input_drill.html"))
-	var page Page
+	if r.FormValue("submit") != "" {
+		http.Redirect(w, r, "/taap/api/drills/new", http.StatusFound)
+	}
 
-	if err := templates.ExecuteTemplate(w, "input_drill.html", page); err != nil {
+	templates := template.Must(template.ParseFiles("views/input_drill.html"))
+	if err := templates.ExecuteTemplate(w, "input_drill.html", nil); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 
