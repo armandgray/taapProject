@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<style type="text/css">
+			#login-form div {
+				text-align: center;
+			}
+
+			#login-form input {
+				margin: .5em 1em;
+			}
+			#alert {
+				text-align: center;
+				color: red;
+				margin-top: 1em;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Input Drill</h1>
+		<form id="login-form">
+			<div>
+				Title: <input name="title" required/>
+			</div>
+			<div>
+				Category: <input name="category" required/>
+			</div>
+		</form>
+		<div id="alert">
+			{{.Alert}}
+		</div>
+	</body>
+</html>
