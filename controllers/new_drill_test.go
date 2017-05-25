@@ -2,22 +2,22 @@ package controllers_test
 
 import (
 	"net/http"
+	"net/http/httptest"
 	"testing"
 
 	gmux "github.com/gorilla/mux"
 )
 
-var mux *gmux.Router
-var req *http.Request
-var err error
-
-func setup() {
-	mux = gmux.NewRouter()
-}
-
 func TestNewDrillController(t *testing.T) {
-	req, err = http.NewRequest("GET", "/", nil)
+	mux := gmux.NewRouter()
+	respRec := httptest.NewRecorder()
+	req, err := http.NewRequest("GET", "/", nil)
 	if err != nil {
 		t.Fatal("Creating 'GET /' request failed!")
+	}
+
+	mux.ServeHTTP(respRec, req)
+	if respRec.Code != http.StatusOK {
+		t.Fatal("Server error: Returned ", respRec.Code, " instead of ", http.StatusOK)
 	}
 }
