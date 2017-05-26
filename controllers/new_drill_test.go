@@ -17,6 +17,7 @@ func TestNewDrillController(t *testing.T) {
 	req, err := http.NewRequest("GET", "/", nil)
 	if err != nil {
 		t.Fail("Creating 'GET /' request failed!")
+
 	}
 
 	mux.ServeHTTP(respRec, req)
