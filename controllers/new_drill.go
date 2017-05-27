@@ -5,5 +5,7 @@ import (
 )
 
 func NewDrillController(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("working"))
+	if r.FormValue("submit") != "" {
+		w.Write([]byte("working"))
+	}
 }

@@ -16,12 +16,11 @@ func TestNewDrillController(t *testing.T) {
 	respRec := httptest.NewRecorder()
 	req, err := http.NewRequest("GET", "/", nil)
 	if err != nil {
-		t.Fail("Creating 'GET /' request failed!")
-
+		t.Fatal("Creating 'GET /' request failed!")
 	}
 
 	mux.ServeHTTP(respRec, req)
 	if respRec.Code != http.StatusOK {
-		t.Fail("Server error: Returned ", respRec.Code, " instead of ", http.StatusOK)
+		t.Fatal("Server error: Returned ", respRec.Code, " instead of ", http.StatusOK)
 	}
 }
