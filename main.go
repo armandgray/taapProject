@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"net/http"
-	"taap_project/models"
+	"taap_project/helpers"
 	"taap_project/routes"
 
 	"github.com/go-gorp/gorp"
@@ -17,7 +17,9 @@ var db *sql.DB
 var dbmap *gorp.DbMap
 
 func main() {
-	initDatabase()
+	db, _ = sql.Open("mysql", "root:#54nFr4nc15c0@/taap")
+
+	helpers.InitDatabase()
 
 	mux := gmux.NewRouter()
 	routes.AddDrillRoutes(mux)
@@ -30,14 +32,8 @@ func main() {
 	n.Run(":8181")
 }
 
-func initDatabase() {
-	db, _ = sql.Open("mysql", "root:#54nFr4nc15c0@/taap")
-	dbmap = &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{}}
-
-	dbmap.AddTable(models.Drill{}).SetKeys(false, "Title")
-}
-
 func VerifyMySQLConnection(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
+	db, _ = sql.Open("mysql", "root:#54nFr4nc15c0@/taap")
 	if err := db.Ping(); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
