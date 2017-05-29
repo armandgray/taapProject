@@ -6,15 +6,17 @@ import (
 	"net/http"
 	"taap_project/routes"
 
+	"github.com/go-gorp/gorp"
 	_ "github.com/go-sql-driver/mysql"
 	gmux "github.com/gorilla/mux"
 	"github.com/urfave/negroni"
 )
 
 var db *sql.DB
+var dbmap *gorp.DbMap
 
 func main() {
-	db, _ = sql.Open("mysql", "root:#54nFr4nc15c0@/taap")
+	initDatabase()
 
 	mux := gmux.NewRouter()
 	routes.AddDrillRoutes(mux)
@@ -25,6 +27,12 @@ func main() {
 	n.UseHandler(mux)
 	fmt.Println("Running...")
 	n.Run(":8181")
+}
+
+func initDatabase() {
+	db, _ = sql.Open("mysql", "root:#54nFr4nc15c0@/taap")
+	dbmap = &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{}}
+
 }
 
 func VerifyMySQLConnection(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
