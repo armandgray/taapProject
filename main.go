@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"net/http"
+	"taap_project/models"
 	"taap_project/routes"
 
 	"github.com/go-gorp/gorp"
@@ -33,6 +34,7 @@ func initDatabase() {
 	db, _ = sql.Open("mysql", "root:#54nFr4nc15c0@/taap")
 	dbmap = &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{}}
 
+	dbmap.AddTable(models.Drill{}).SetKeys(false, "Title")
 }
 
 func VerifyMySQLConnection(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
