@@ -3,7 +3,6 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"net/http"
 	"taap_project/helpers"
 	"taap_project/routes"
 
@@ -26,16 +25,8 @@ func main() {
 	routes.AddUserRoutes(mux)
 
 	n := negroni.Classic()
-	n.Use(negroni.HandlerFunc(VerifyMySQLConnection))
+	n.Use(negroni.HandlerFunc(helpers.VerifyMySQLConnection))
 	n.UseHandler(mux)
 	fmt.Println("Running...")
 	n.Run(":8181")
-}
-
-func VerifyMySQLConnection(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
-	db, _ = sql.Open("mysql", "root:#54nFr4nc15c0@/taap")
-	if err := db.Ping(); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-	next(w, r)
 }

@@ -6,6 +6,7 @@ import (
 	"database/sql"
 	"github.com/go-gorp/gorp"
 	_ "github.com/go-sql-driver/mysql"
+	"net/http"
 )
 
 var db *sql.DB
@@ -16,4 +17,12 @@ func InitDatabase() {
 	dbmap = &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{}}
 
 	dbmap.AddTable(models.Drill{}).SetKeys(false, "Title")
+}
+
+func VerifyMySQLConnection(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
+	db, _ = sql.Open("mysql", "root:#54nFr4nc15c0@/taap")
+	if err := db.Ping(); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+	next(w, r)
 }
