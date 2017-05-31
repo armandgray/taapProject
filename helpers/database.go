@@ -12,7 +12,7 @@ import (
 var db *sql.DB
 var dbmap *gorp.DbMap
 
-func getDatabase() *sql.DB {
+func GetDatabase() *sql.DB {
 	return db
 }
 
