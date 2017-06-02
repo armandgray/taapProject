@@ -21,6 +21,7 @@ func InitDatabase() {
 	dbmap = &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{}}
 
 	dbmap.AddTable(models.Drill{}).SetKeys(false, "Title")
+	dbmap.AddTable(models.User{}).SetKeys(false, "Number")
 }
 
 func VerifyMySQLConnection(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
