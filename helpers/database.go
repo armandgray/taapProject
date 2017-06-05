@@ -22,6 +22,7 @@ func InitDatabase() {
 
 	dbmap.AddTable(models.Drill{}).SetKeys(false, "Title")
 	dbmap.AddTable(models.User{}).SetKeys(false, "Number")
+	dbmap.AddTable(models.SessionLog{}).SetKeys(false, "LogId")
 }
 
 func VerifyMySQLConnection(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
