@@ -16,6 +16,10 @@ func GetDatabase() *sql.DB {
 	return db
 }
 
+func GetGorpMap() *gorp.DbMap {
+	return dbmap
+}
+
 func InitDatabase() {
 	db, _ = sql.Open("mysql", "root:#54nFr4nc15c0@/taap")
 	dbmap = &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{}}
