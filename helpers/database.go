@@ -22,11 +22,13 @@ func GetGorpMap() *gorp.DbMap {
 
 func InitDatabase() {
 	db, _ = sql.Open("mysql", "root:#54nFr4nc15c0@/taap")
-	dbmap = &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{}}
+	dbmap = &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{"InnoDB", "UTF8"}}
 
 	dbmap.AddTable(models.Drill{}).SetKeys(false, "Title")
 	dbmap.AddTable(models.User{}).SetKeys(false, "Number")
 	dbmap.AddTable(models.SessionLog{}).SetKeys(false, "LogId")
+
+	dbmap.CreateTablesIfNotExists()
 }
 
 func VerifyMySQLConnection(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {

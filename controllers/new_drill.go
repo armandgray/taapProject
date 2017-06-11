@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 	"taap_project/helpers"
 	"taap_project/models"
@@ -19,6 +18,7 @@ func NewDrillController(w http.ResponseWriter, r *http.Request) {
 	drill := models.Drill{r.FormValue("title"), r.FormValue("category"), imageId}
 	if err := dbmap.Insert(&drill); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 	w.Write([]byte("Drill Added!"))
 }
