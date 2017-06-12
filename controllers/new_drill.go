@@ -13,6 +13,7 @@ func NewDrillController(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Form Submission Invalid!"))
 		return
 	}
+
 	var imageId int64
 	imageId, err := strconv.ParseInt(r.FormValue("imageId"), 10, 64)
 	if err != nil {
