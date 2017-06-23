@@ -7,7 +7,14 @@ import (
 
 func InputDrillController(w http.ResponseWriter, r *http.Request) {
 	if r.FormValue("submit") != "" {
-		http.Redirect(w, r, "/taap/api/drills/new", http.StatusFound)
+		base := "/taap/api/drills/new"
+		submit := "submit=" + r.FormValue("submit")
+		title := "&title=" + r.FormValue("title")
+		category := "&category=" + r.FormValue("category")
+		imageId := "&imageId=" + r.FormValue("imageId")
+		route := base + "?" + submit + title + category + imageId
+
+		http.Redirect(w, r, route, http.StatusFound)
 		return
 	}
 

@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 	"taap_project/helpers"
 	"taap_project/models"
@@ -9,7 +10,17 @@ import (
 )
 
 func NewDrillController(w http.ResponseWriter, r *http.Request) {
-	if r.FormValue("submit") != "Submit" {
+	submit := "submit=" + r.FormValue("submit")
+	title := "title=" + r.FormValue("title")
+	category := "category=" + r.FormValue("category")
+	image := "imageId=" + r.FormValue("imageId")
+
+	fmt.Println(submit)
+	fmt.Println(title)
+	fmt.Println(category)
+	fmt.Println(image)
+
+	if r.FormValue("submit") == "" {
 		w.Write([]byte("Form Submission Invalid!"))
 		return
 	}
