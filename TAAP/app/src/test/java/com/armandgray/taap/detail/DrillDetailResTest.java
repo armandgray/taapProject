@@ -121,6 +121,7 @@ public class DrillDetailResTest {
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
+        activity.finish();
         activityController.pause().stop().destroy();
         activity = null;
     }

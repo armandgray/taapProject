@@ -63,7 +63,8 @@ public class DateTimeHelperTest {
 
         long expectedTotal = 0L;
         for (SessionLog log : logs) { expectedTotal += log.getActiveWork().getTime(); }
-
+        long extraHoursAddedForPositiveTimesInMillis = ONE_HOUR * 8 * (logs.size() - 1);
+        expectedTotal -= extraHoursAddedForPositiveTimesInMillis;
         assertNotNull(getTotalTimeAsDate(logs));
         assertEquals(getTimeElapsedAsDate(expectedTotal) , getTotalTimeAsDate(logs));
     }
@@ -90,6 +91,10 @@ public class DateTimeHelperTest {
             expectedTotalLength += log.getSessionLength().getTime();
             expectedTotalRest += log.getRestTime().getTime();
         }
+
+        long extraHoursAddedForPositiveTimesInMillis = ONE_HOUR * 8 * (logs.size() - 1);
+        expectedTotalLength -= extraHoursAddedForPositiveTimesInMillis;
+        expectedTotalRest -= extraHoursAddedForPositiveTimesInMillis;
 
         assertNotNull(getTotalTimeAsDate(logs, SESSION_LENGTH));
         assertNotNull(getTotalTimeAsDate(logs, REST_TIME));

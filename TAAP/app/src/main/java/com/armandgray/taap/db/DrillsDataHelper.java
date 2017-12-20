@@ -1,4 +1,4 @@
-package com.armandgray.taap.utils;
+package com.armandgray.taap.db;
 
 import com.armandgray.taap.R;
 import com.armandgray.taap.models.Drill;
@@ -18,7 +18,7 @@ import static com.armandgray.taap.models.Drill.PASSING_ARRAY;
 import static com.armandgray.taap.models.Drill.SHOOTING;
 import static com.armandgray.taap.models.Drill.SHOOTING_ARRAY;
 
-public class DrillsHelper {
+public class DrillsDataHelper {
 
     private static final String[] fundamentalShooting = {FUNDAMENTALS, SHOOTING};
     private static final String[] fundamentalBallHandling = {FUNDAMENTALS, BALL_HANDLING};

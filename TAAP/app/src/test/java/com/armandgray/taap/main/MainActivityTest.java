@@ -1,11 +1,14 @@
-package com.armandgray.taap.log;
+package com.armandgray.taap.main;
 
 import android.support.design.widget.CoordinatorLayout;
+import android.view.Menu;
 import android.view.View;
-import android.widget.Toolbar;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
+import com.armandgray.taap.main.MainActivity;
+import com.armandgray.taap.main.MainActivityController;
+import com.armandgray.taap.main.MainActivityViews;
 
 import org.junit.After;
 import org.junit.Before;
@@ -23,16 +26,16 @@ import static junit.framework.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
-public class LogActivityTest {
+public class MainActivityTest {
 
-    private ActivityController<LogActivity> activityController;
-    private LogActivity activity;
+    private ActivityController<MainActivity> activityController;
+    private MainActivity activity;
 
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
         if (activity == null) {
-            activityController = Robolectric.buildActivity(LogActivity.class);
+            activityController = Robolectric.buildActivity(MainActivity.class);
             activity = activityController.create().visible().get();
         }
     }
@@ -41,14 +44,14 @@ public class LogActivityTest {
     @SuppressWarnings("all")
     public void completesActivitySetup_TestOnCreate() throws Exception {
         View decorView = activity.findViewById(android.R.id.content).getRootView();
-        CoordinatorLayout root = (CoordinatorLayout) decorView.findViewById(R.id.activityLogLayout);
+        CoordinatorLayout root = (CoordinatorLayout) decorView.findViewById(R.id.activityMainLayout);
         System.out.println(root);
         assertNotNull(activity);
-        assertEquals(R.id.activityLogLayout, root.getId());
+        assertEquals(R.id.activityMainLayout, root.getId());
         assertNotNull(activity.views);
-        assertTrue(activity.views instanceof LogActivityViews);
+        assertTrue(activity.views instanceof MainActivityViews);
         assertNotNull(activity.controller);
-        assertTrue(activity.controller instanceof LogActivityController);
+        assertTrue(activity.controller instanceof MainActivityController);
     }
 
     @After

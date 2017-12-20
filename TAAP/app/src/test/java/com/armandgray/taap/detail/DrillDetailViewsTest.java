@@ -28,7 +28,7 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowDialog;
 
-import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
+import static com.armandgray.taap.main.MainActivity.SELECTED_DRILL;
 import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
@@ -209,6 +209,7 @@ public class DrillDetailViewsTest {
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
+        activity.finish();
         activityController.pause().stop().destroy();
         activity = null;
         toolbar = null;

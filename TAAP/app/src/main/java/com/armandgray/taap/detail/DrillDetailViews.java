@@ -19,7 +19,7 @@ import com.armandgray.taap.utils.LogSetsRvAdapter;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
+import static com.armandgray.taap.main.MainActivity.SELECTED_DRILL;
 
 class DrillDetailViews {
 

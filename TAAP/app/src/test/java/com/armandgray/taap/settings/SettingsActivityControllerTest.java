@@ -11,6 +11,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
+import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DELETE_ALL_DATA;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
@@ -44,6 +45,8 @@ public class SettingsActivityControllerTest {
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
+        activity.getContentResolver().delete(CONTENT_URI_DELETE_ALL_DATA, null, null);
+        activity.finish();
         activityController.pause().stop().destroy();
         activity = null;
         controller = null;

@@ -12,8 +12,10 @@ import com.armandgray.taap.R;
 import com.armandgray.taap.models.Drill;
 import com.armandgray.taap.models.SessionLog;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -520,6 +522,13 @@ public class DatabaseContentProviderTest {
                 cursor.getDouble(cursor.getColumnIndex(LogsTable.COLUMN_SUCCESS)));
         assertEquals(sessionLog.getDrill().getDrillId(),
                 cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_DRILL)));
+    }
+
+    @After
+    public void tearDown() {
+        System.out.println("Running TearDown!");
+        RuntimeEnvironment.application.getContentResolver()
+                .delete(CONTENT_URI_DELETE_ALL_DATA, null, null);
     }
 
 }

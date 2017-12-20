@@ -39,6 +39,7 @@ public class DrillDetailActivityTest {
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
+        activity.finish();
         activityController.pause().stop().destroy();
         activityController = null;
         activity = null;

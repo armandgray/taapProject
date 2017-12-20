@@ -1,10 +1,13 @@
-package com.armandgray.taap;
+package com.armandgray.taap.splash;
 
 import android.content.Intent;
 import android.database.Cursor;
 
+import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.db.DrillsTable;
+import com.armandgray.taap.main.MainActivity;
 import com.armandgray.taap.models.Drill;
+import com.armandgray.taap.splash.SplashActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -16,8 +19,9 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
+import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DELETE_ALL_DATA;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
-import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
+import static com.armandgray.taap.db.DrillsDataHelper.getDrillsList;
 import static com.armandgray.taap.utils.StringHelper.getStringAsArray;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
@@ -125,6 +129,8 @@ public class SplashActivityTest {
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
+        activity.getContentResolver().delete(CONTENT_URI_DELETE_ALL_DATA, null, null);
+        activity.finish();
         activityController.pause().stop().destroy();
         activity = null;
     }

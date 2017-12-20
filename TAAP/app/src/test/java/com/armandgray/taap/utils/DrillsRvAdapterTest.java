@@ -22,11 +22,12 @@ import org.robolectric.annotation.Config;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static com.armandgray.taap.models.Drill.ALL;
 import static com.armandgray.taap.models.Drill.SHOOTING;
 import static com.armandgray.taap.models.Drill.getQueryResultList;
-import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
+import static com.armandgray.taap.db.DrillsDataHelper.getDrillsList;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
@@ -43,7 +44,7 @@ public class DrillsRvAdapterTest {
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
-        adapter = new DrillsRvAdapter(null);
+        adapter = new DrillsRvAdapter(new ArrayList<Drill>());
         mockView = mock(View.class);
     }
 
@@ -153,7 +154,7 @@ public class DrillsRvAdapterTest {
 
     @Test
     public void canSwapRvDrillsAdapterDataOnQuery() throws Exception {
-        ArrayList<Drill> expectedList = getQueryResultList(getDrillsList(), "3 Man Weave");
+        List<Drill> expectedList = getQueryResultList(getDrillsList(), "3 Man Weave");
 
         adapter = new DrillsRvAdapter(getDrillsList());
         adapter.swapRvDrillsAdapterDataOnQuery("3 Man Weave");

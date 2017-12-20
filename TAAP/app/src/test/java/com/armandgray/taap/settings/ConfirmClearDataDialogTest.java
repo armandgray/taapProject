@@ -10,7 +10,7 @@ import android.widget.Button;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
-import com.armandgray.taap.SplashActivity;
+import com.armandgray.taap.splash.SplashActivity;
 import com.armandgray.taap.db.DrillsTable;
 import com.armandgray.taap.db.LogsTable;
 
@@ -23,6 +23,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowAlertDialog;
 
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
@@ -116,9 +117,19 @@ public class ConfirmClearDataDialogTest {
 
     @Test
     public void doesStartSplashActivity_OnPositiveButtonClick() throws Exception {
+        Bundle savedInstanceState = new Bundle();
+        AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
+        resultDialog.show();
+
+        Button btnPositive = resultDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        btnPositive.performClick();
+
         Intent expectedIntent = new Intent(activity, SplashActivity.class);
-        assertEquals(expectedIntent.toString(),
-                shadowOf(activity).getNextStartedActivity().toString());
+        ShadowActivity shadowActivity = shadowOf(activity);
+        assertNotNull(shadowActivity);
+        Intent nextStartedActivity = shadowActivity.getNextStartedActivity();
+        assertNotNull(nextStartedActivity);
+        assertEquals(expectedIntent.toString(), nextStartedActivity.toString());
     }
 
     @Test

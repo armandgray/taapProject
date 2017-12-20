@@ -12,7 +12,7 @@ import java.util.List;
 import static com.armandgray.taap.models.Drill.BALL_HANDLING;
 import static com.armandgray.taap.models.Drill.BALL_HANDLING_ARRAY;
 import static com.armandgray.taap.models.Drill.getQueryResultList;
-import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
+import static com.armandgray.taap.db.DrillsDataHelper.getDrillsList;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;

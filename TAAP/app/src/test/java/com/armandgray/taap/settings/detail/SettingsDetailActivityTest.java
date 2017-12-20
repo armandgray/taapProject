@@ -20,6 +20,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
+import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DELETE_ALL_DATA;
 import static com.armandgray.taap.settings.SettingsActivityController.SELECTED_ITEM;
 import static com.armandgray.taap.settings.SettingsActivityController.TERMS_AND_CONDITIONS;
 import static junit.framework.Assert.assertEquals;
@@ -92,6 +93,8 @@ public class SettingsDetailActivityTest {
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
+        activity.getContentResolver().delete(CONTENT_URI_DELETE_ALL_DATA, null, null);
+        activity.finish();
         activityController.pause().stop().destroy();
         activity = null;
     }

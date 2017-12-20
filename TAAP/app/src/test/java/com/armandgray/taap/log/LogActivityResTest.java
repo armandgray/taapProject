@@ -1,5 +1,7 @@
 package com.armandgray.taap.log;
 
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -13,6 +15,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
@@ -22,16 +25,13 @@ import static junit.framework.Assert.assertNotNull;
 @Config(constants = BuildConfig.class)
 public class LogActivityResTest {
 
-    private ActivityController<LogActivity> activityController;
-    private LogActivity activity;
     private LinearLayout container;
 
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
-        activityController = Robolectric.buildActivity(LogActivity.class);
-        activity = activityController.create().visible().get();
-        ScrollView layout = (ScrollView) View.inflate(activity, R.layout.content_log, null);
+        LayoutInflater inflater = LayoutInflater.from(RuntimeEnvironment.application);
+        ScrollView layout = (ScrollView) inflater.inflate(R.layout.content_log, null);
         container = (LinearLayout) layout.findViewById(R.id.logContainer);
     }
 
@@ -131,8 +131,6 @@ public class LogActivityResTest {
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
-        activityController.pause().stop().destroy();
-        activity = null;
     }
 
 }

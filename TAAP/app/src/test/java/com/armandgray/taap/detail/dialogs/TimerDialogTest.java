@@ -27,7 +27,8 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlertDialog;
 import org.robolectric.shadows.ShadowDialog;
 
-import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
+import static com.armandgray.taap.main.MainActivity.SELECTED_DRILL;
+import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DELETE_ALL_DATA;
 import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
@@ -136,6 +137,8 @@ public class TimerDialogTest {
     public void tearDown() {
         System.out.println("Running TearDown!");
         dialog.dismiss();
+        activity.getContentResolver().delete(CONTENT_URI_DELETE_ALL_DATA, null, null);
+        activity.finish();
         activityController.pause().stop().destroy();
         activity = null;
         dialog = null;

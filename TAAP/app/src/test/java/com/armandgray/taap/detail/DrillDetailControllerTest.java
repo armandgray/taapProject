@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import static com.armandgray.taap.MainActivity.SELECTED_DRILL;
+import static com.armandgray.taap.main.MainActivity.SELECTED_DRILL;
 import static com.armandgray.taap.db.DatabaseContentProvider.ALL_TABLE_COLUMNS;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_ALL;
 import static com.armandgray.taap.db.DatabaseContentProvider.insertDrillToDatabase;
@@ -38,7 +38,7 @@ import static com.armandgray.taap.db.DatabaseContentProvider.insertLogToDatabase
 import static com.armandgray.taap.db.DatabaseContentProviderTest.TEST_SESSION_LOG;
 import static com.armandgray.taap.db.DatabaseContentProviderTest.assertCursorDataEqualsLogWithAllTableColumns;
 import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
-import static com.armandgray.taap.utils.CursorDataHelper.addAllLogsData;
+import static com.armandgray.taap.db.CursorDataHelper.addAllLogsForQuery;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
@@ -224,7 +224,7 @@ public class DrillDetailControllerTest {
 
 
         List<SessionLog> listAllLogs = new ArrayList<>();
-        addAllLogsData(cursor, listAllLogs);
+        addAllLogsForQuery(listAllLogs, cursor);
         double max = controller.sessionLog.getSuccessRate();
         for (SessionLog log : listAllLogs) {
             if (log.getSuccessRate() > max) { max = log.getSuccessRate(); }
@@ -393,6 +393,7 @@ public class DrillDetailControllerTest {
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
+        activity.finish();
         activityController.pause().stop().destroy();
         activity = null;
         controller = null;

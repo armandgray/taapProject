@@ -1,8 +1,8 @@
-package com.armandgray.taap.utils;
+package com.armandgray.taap.db;
 
 import org.junit.Test;
 
-import static com.armandgray.taap.utils.DrillsHelper.getDrillsList;
+import static com.armandgray.taap.db.DrillsDataHelper.getDrillsList;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
