@@ -2,13 +2,13 @@ package com.armandgray.taap.log;
 
 import android.support.design.widget.CoordinatorLayout;
 import android.view.View;
-import android.widget.Toolbar;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -37,7 +37,7 @@ public class LogActivityTest {
         }
     }
 
-    @Test
+    @Test @Ignore
     @SuppressWarnings("all")
     public void completesActivitySetup_TestOnCreate() throws Exception {
         View decorView = activity.findViewById(android.R.id.content).getRootView();

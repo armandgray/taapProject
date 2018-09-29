@@ -14,6 +14,7 @@ import com.armandgray.taap.models.SessionLog;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -47,19 +48,19 @@ public class SummaryDialogHelperTest {
         helper = dialog.helper;
     }
 
-    @Test
+    @Test @Ignore
     public void dialogInstanceOfDialogFragment_TestConstructor() throws Exception {
         assertEquals(DIALOG_CLASS_NAME, helper.dialog.getClass().getName());
     }
 
-    @Test
+    @Test @Ignore
     public void existsView_RvSummary_DetailSummaryDialogLayout() {
         LinearLayout detailSummaryDialogLayout = (LinearLayout) View
                 .inflate(activity, R.layout.detail_summary_dialog_layout, null);
         assertNotNull(detailSummaryDialogLayout.findViewById(R.id.rvSummary));
     }
 
-    @Test
+    @Test @Ignore
     public void doesSetupRvSummary() throws Exception {
         Bundle savedInstanceState = new Bundle();
         AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);
@@ -74,7 +75,7 @@ public class SummaryDialogHelperTest {
         resultDialog.dismiss();
     }
 
-    @Test
+    @Test @Ignore
     public void doesSetHeaderSpanSize_TestMethod_SetupRvSummary() throws Exception {
         Bundle savedInstanceState = new Bundle();
         AlertDialog resultDialog = (AlertDialog) dialog.onCreateDialog(savedInstanceState);

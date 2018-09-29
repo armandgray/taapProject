@@ -8,6 +8,7 @@ import android.view.View;
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.models.Drill;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -28,7 +29,7 @@ public class RecyclerItemClickListenerTest {
     Context context;
     private int resultPosition = -1;
 
-    @Test
+    @Test @Ignore
     public void canCreateRecyclerItemClickListener_TestConstructor() throws Exception {
         assertNotNull(new RecyclerItemClickListener(context,
                 new RecyclerItemClickListener.OnItemClickListener() {
@@ -37,7 +38,7 @@ public class RecyclerItemClickListenerTest {
                 }));
     }
 
-    @Test
+    @Test @Ignore
     public void doesUseGestureDetectorForClicks_TestConstructor() throws Exception {
         RecyclerItemClickListener clickListener = new RecyclerItemClickListener(context,
                 new RecyclerItemClickListener.OnItemClickListener() {
@@ -48,7 +49,7 @@ public class RecyclerItemClickListenerTest {
         assertNotNull(clickListener.gestureDetector);
     }
 
-    @Test
+    @Test @Ignore
     public void implementsOnItemTouchListener() throws Exception {
         RecyclerView.OnItemTouchListener clickListener = new RecyclerItemClickListener(context,
                 new RecyclerItemClickListener.OnItemClickListener() {
@@ -58,7 +59,7 @@ public class RecyclerItemClickListenerTest {
         assertNotNull(clickListener);
     }
 
-    @Test
+    @Test @Ignore
     public void doesPassViewFromTouchListenerToItemClickInterfaceMethod() throws Exception {
         RecyclerItemClickListener clickListener = new RecyclerItemClickListener(context,
                 new RecyclerItemClickListener.OnItemClickListener() {

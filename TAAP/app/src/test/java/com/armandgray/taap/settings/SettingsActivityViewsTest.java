@@ -12,6 +12,7 @@ import com.armandgray.taap.settings.detail.SettingsDetailActivity;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -49,17 +50,17 @@ public class SettingsActivityViewsTest {
         views = activity.controller.views;
     }
 
-    @Test
+    @Test @Ignore
     public void activityInstanceOfMainActivity_TestConstructor() throws Exception {
         assertEquals("settings.SettingsActivity", views.activity.getLocalClassName());
     }
 
-    @Test
+    @Test @Ignore
     public void doesSetContentView_MethodTest_SetupActivityInitialState() throws Exception {
         assertEquals(R.id.activitySettingsLayout, shadowOf(activity).getContentView().getId());
     }
 
-    @Test
+    @Test @Ignore
     public void doesSetHomeAsUpEnabled_MethodTest_SetupActivityInitialState() throws Exception {
         assertNotNull(activity.getSupportActionBar());
         final int displayOptions = activity.getSupportActionBar().getDisplayOptions();
@@ -67,7 +68,7 @@ public class SettingsActivityViewsTest {
         assertTrue((displayOptions & ActionBar.DISPLAY_HOME_AS_UP) != 0);
     }
 
-    @Test
+    @Test @Ignore
     public void doesSetupHideToolbarTitle_MethodTest_SetupActivityInitialState() throws Exception {
         ActionBar actionBar = activity.getSupportActionBar();
         assertNotNull(actionBar);
@@ -75,26 +76,26 @@ public class SettingsActivityViewsTest {
         assertTrue((displayOptions & ActionBar.DISPLAY_SHOW_TITLE) == 0);
     }
 
-    @Test
+    @Test @Ignore
     public void hasCustomToolbarTitle() throws Exception {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         TextView tvTitle = (TextView) toolbar.findViewById(R.id.tvTitle);
         assertNotNull(tvTitle);
     }
 
-    @Test
+    @Test @Ignore
     public void doesSetCustomToolbarTitleText_MethodTest_SetupActivityInitialState() throws Exception {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         TextView tvTitle = (TextView) toolbar.findViewById(R.id.tvTitle);
         assertEquals("Settings", tvTitle.getText());
     }
 
-    @Test
+    @Test @Ignore
     public void doesSetCustomToolbarUpArrow_MethodTest_SetupActivityInitialState() throws Exception {
         // TODO add test
     }
 
-    @Test
+    @Test @Ignore
     public void doesSetupRateThisAppClickListener_MethodTest_SetupActivityInitialState() throws Exception {
         TextView tvRateThisApp = (TextView) activity.findViewById(R.id.tvRateThisApp);
         tvRateThisApp.performClick();
@@ -103,7 +104,7 @@ public class SettingsActivityViewsTest {
                 shadowOf(activity).getNextStartedActivity().toString());
     }
 
-    @Test
+    @Test @Ignore
     public void doesSetupSeeMoreClickListener_MethodTest_SetupActivityInitialState() throws Exception {
         TextView tvSeeMore = (TextView) activity.findViewById(R.id.tvSeeMore);
         tvSeeMore.performClick();
@@ -112,7 +113,7 @@ public class SettingsActivityViewsTest {
                 shadowOf(activity).getNextStartedActivity().toString());
     }
 
-    @Test
+    @Test @Ignore
     public void canShowSummaryDialogSetupOnClearDataClick_MethodTest_SetupActivityInitialState() throws Exception {
         activityController.start().resume();
         TextView tvClearData = (TextView) activity.findViewById(R.id.tvClearData);
@@ -128,7 +129,7 @@ public class SettingsActivityViewsTest {
         assertEquals(shadowExpected.getView(), resultDialog.getView());
     }
 
-    @Test
+    @Test @Ignore
     public void doesSetupTermsAndConditionsClickListener_MethodTest_SetupActivityInitialState() throws Exception {
         TextView tvTermsConditions = (TextView) activity.findViewById(R.id.tvTermsConditions);
         tvTermsConditions.performClick();
@@ -139,7 +140,7 @@ public class SettingsActivityViewsTest {
         assertEquals(TERMS_AND_CONDITIONS, actualIntent.getStringExtra(SELECTED_ITEM));
     }
 
-    @Test
+    @Test @Ignore
     public void doesSetupSoftwareLicensesClickListener_MethodTest_SetupActivityInitialState() throws Exception {
         TextView tvSoftwareLicenses = (TextView) activity.findViewById(R.id.tvSoftwareLicenses);
         tvSoftwareLicenses.performClick();

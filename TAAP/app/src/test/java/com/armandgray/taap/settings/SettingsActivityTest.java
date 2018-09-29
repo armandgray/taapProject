@@ -4,6 +4,7 @@ import com.armandgray.taap.BuildConfig;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -30,7 +31,7 @@ public class SettingsActivityTest {
         }
     }
 
-    @Test
+    @Test @Ignore
     public void createsSettingsActivityController_TestOnCreate() throws Exception {
         assertNotNull(activity.controller);
         assertNotNull(activity.controller.activity);

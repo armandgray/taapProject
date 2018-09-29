@@ -22,6 +22,7 @@ import com.armandgray.taap.utils.DrillsRvAdapter;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -119,27 +120,27 @@ public class MainActivityViewsTest {
         views.setListener(testViewsListener);
     }
 
-    @Test
+    @Test @Ignore
     @SuppressWarnings("all")
     public void doesImplementActivityViewsInterface_TestConstructor() throws Exception {
         assertTrue(views instanceof ActivitySetupHelper.ActivityViewsInterface);
     }
 
-    @Test
+    @Test @Ignore
     public void doesSetRootView_TestConstructor() throws Exception {
         assertNotNull(views);
         assertNotNull(views.rootView);
         assertEquals(views.rootView, testRootView);
     }
 
-    @Test
+    @Test @Ignore
     @SuppressWarnings("all")
     public void canSetListener_MethodTest() throws Exception {
         assertNotNull(views.listener);
         assertTrue(views.listener instanceof MainViewsListener);
     }
 
-    @Test
+    @Test @Ignore
     public void doesSetupFABClickListener_MethodTest_setupActivityCoordinatorWidgets() throws Exception {
         views.setupActivityInitialState();
         views.fab.performClick();
@@ -147,14 +148,14 @@ public class MainActivityViewsTest {
         assertTrue(testFlags[0]);
     }
 
-    @Test
+    @Test @Ignore
     public void doesSetupIvSortClickListener_MethodTest() throws Exception {
         views.setupActivityInitialState();
         testRootView.findViewById(R.id.ivSort).performClick();
         assertTrue(testFlags[1]);
     }
 
-    @Test
+    @Test @Ignore
     public void doesSetupSpinnerClickListener_MethodTest() throws Exception {
         views.setupActivityInitialState();
         Spinner spinner = (Spinner) testRootView.findViewById(R.id.spDrillsSort);
@@ -168,7 +169,7 @@ public class MainActivityViewsTest {
         assertTrue(testFlags[2]);
     }
 
-    @Test
+    @Test @Ignore
     public void doesSetupSearchVisibility_HideSearchView_MethodTest() throws Exception {
         views.setupActivityInitialState();
         EditText etSearch = (EditText) testRootView.findViewById(R.id.etSearch);
@@ -176,20 +177,20 @@ public class MainActivityViewsTest {
         assertEquals(View.GONE, etSearch.getVisibility());
     }
 
-    @Test
+    @Test @Ignore
     public void doesSetupIvSearchClickListener_MethodTest() throws Exception {
         views.setupActivityInitialState();
         testRootView.findViewById(R.id.ivSearch).performClick();
         assertTrue(testFlags[3]);
     }
 
-    @Test
+    @Test @Ignore
     public void doesSetupEtSearchFocusChangeListener_MethodTest() throws Exception {
         views.setupActivityInitialState();
         // TODO
     }
 
-    @Test
+    @Test @Ignore
     public void doesSetupEtSearchTextChangeListener_MethodTest() throws Exception {
         views.setupActivityInitialState();
         EditText etSearch = (EditText) testRootView.findViewById(R.id.etSearch);
@@ -197,7 +198,7 @@ public class MainActivityViewsTest {
         assertTrue(testFlags[5]);
     }
 
-    @Test
+    @Test @Ignore
     public void doesSetupRvDrills_MethodTest() throws Exception {
         views.setupActivityInitialState();
         RecyclerView rvDrills = (RecyclerView) testRootView.findViewById(R.id.rvDrills);
@@ -205,7 +206,7 @@ public class MainActivityViewsTest {
         assertEquals(0, adapter.getItemCount());
     }
 
-    @Test
+    @Test @Ignore
     public void doesSetupRvDrillsClickListener_MethodTest() throws Exception {
         views.setupActivityInitialState();
         views.updateData(getQueryResultList(getDrillsList(), "WALL"));
@@ -224,7 +225,7 @@ public class MainActivityViewsTest {
         assertTrue(testFlags[6]);
     }
 
-    @Test
+    @Test @Ignore
     public void canSetMenuItemColor_MethodTest_UpdateData() throws Exception {
         views.setupActivityInitialState();
         Menu menu = new PopupMenu(CONTEXT, null).getMenu();
@@ -241,7 +242,7 @@ public class MainActivityViewsTest {
         assertNotNull(menuItem.getIcon().getColorFilter());
     }
 
-    @Test
+    @Test @Ignore
     public void canPassEditTextToClearFocus_MethodTest_UpdateData() throws Exception {
         views.setupActivityInitialState();
         views.updateData(MainActivityViews.ON_SEARCH_CLICK);
@@ -256,7 +257,7 @@ public class MainActivityViewsTest {
         // TODO test dispatchTouchEvent (WORKING)
     }
 
-    @Test
+    @Test @Ignore
     public void canPassListToUpdateDrills_MethodTest_UpdateData() throws Exception {
         views.setupActivityInitialState();
 
@@ -273,7 +274,7 @@ public class MainActivityViewsTest {
         }
     }
 
-    @Test
+    @Test @Ignore
     public void canPassEmptyListToUpdateDrills_MethodTest_UpdateData() throws Exception {
         views.setupActivityInitialState();
 
@@ -289,7 +290,7 @@ public class MainActivityViewsTest {
         assertEquals(0, adapter.getItemCount());
     }
 
-    @Test
+    @Test @Ignore
     public void cannotPassNonDrillListToUpdateDrills_MethodTest_UpdateData() throws Exception {
         views.setupActivityInitialState();
 
@@ -303,7 +304,7 @@ public class MainActivityViewsTest {
         assertEquals(0, rvDrills.getAdapter().getItemCount());
     }
 
-    @Test
+    @Test @Ignore
     public void canPassSpinnerDrillTypeToUpdateDrills_MethodTest_UpdateData() throws Exception {
         views.setupActivityInitialState();
 
@@ -321,7 +322,7 @@ public class MainActivityViewsTest {
         }
     }
 
-    @Test
+    @Test @Ignore
     public void canPassActionOnSortClickToShowSpinner_MethodTest_UpdateData() throws Exception {
         views.setupActivityInitialState();
         views.updateData(MainActivityViews.ON_SORT_CLICK);
@@ -332,7 +333,7 @@ public class MainActivityViewsTest {
         assertTrue(spDrillsSort.hasFocus());
     }
 
-    @Test
+    @Test @Ignore
     public void canPassActionOnFabClickToShowToast_MethodTest_UpdateData() throws Exception {
         views.setupActivityInitialState();
         views.updateData(MainActivityViews.ON_FAB_CLICK);
@@ -340,7 +341,7 @@ public class MainActivityViewsTest {
         assertEquals("Feature Coming Soon!", ShadowToast.getTextOfLatestToast());
     }
 
-    @Test
+    @Test @Ignore
     public void canFocusEditTextForActionOnSearchClick_MethodTest_UpdateData() throws Exception {
         views.setupActivityInitialState();
         EditText etSearch = (EditText) testRootView.findViewById(R.id.etSearch);
@@ -353,7 +354,7 @@ public class MainActivityViewsTest {
         assertTrue(etSearch.isFocused());
     }
 
-    @Test
+    @Test @Ignore
     public void canPassActionOnEtSearchFocusChangeToShowRestoreInitialUIState_MethodTest_UpdateData() throws Exception {
         views.setupActivityInitialState();
 
@@ -374,7 +375,7 @@ public class MainActivityViewsTest {
         Mockito.verify(mockFab, Mockito.times(1)).setVisibility(VISIBLE);
     }
 
-    @Test
+    @Test @Ignore
     public void canPassStringToQueryDrills_MethodTest_UpdateData() throws Exception {
         views.setupActivityInitialState();
         String query = "WALL";

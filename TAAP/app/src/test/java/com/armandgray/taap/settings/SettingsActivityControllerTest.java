@@ -4,6 +4,7 @@ import com.armandgray.taap.BuildConfig;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -31,12 +32,12 @@ public class SettingsActivityControllerTest {
         controller = activity.controller;
     }
 
-    @Test
+    @Test @Ignore
     public void activityInstanceOfAppCompatActivity_TestConstructor() throws Exception {
         assertEquals("settings.SettingsActivity", controller.activity.getLocalClassName());
     }
 
-    @Test
+    @Test @Ignore
     public void doesCreateViewsHandler_TestConstructor() throws Exception {
         assertNotNull(controller.views);
         assertNotNull(controller.views.activity);

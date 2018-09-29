@@ -10,6 +10,7 @@ import com.armandgray.taap.R;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -39,65 +40,65 @@ public class SettingsActivityResTest {
         settingsContainer = (LinearLayout) layout.findViewById(R.id.settingsContainer);
     }
 
-    @Test
+    @Test @Ignore
     public void hasLayout_AboutContainer() throws Exception {
         assertNotNull(View.inflate(activity, R.layout.content_settings, null));
     }
 
-    @Test
+    @Test @Ignore
     public void hasView_AboutContainer_FirstTopBorder() throws Exception {
         assertNotNull(settingsContainer.findViewById(R.id.firstTopBorder));
     }
 
-    @Test
+    @Test @Ignore
     public void hasView_AboutContainer_TvRateThisApp() throws Exception {
         
         assertNotNull(settingsContainer.findViewById(R.id.tvRateThisApp));
     }
 
-    @Test
+    @Test @Ignore
     public void hasDrawable_AboutTextBackground() throws Exception {
         
         TextView textView = (TextView) settingsContainer.findViewById(R.id.tvRateThisApp);
         assertEquals(activity.getResources().getDrawable(R.drawable.about_item_background), textView.getBackground());
     }
 
-    @Test
+    @Test @Ignore
     public void hasView_AboutContainer_TvSeeMore() throws Exception {
         assertNotNull(settingsContainer.findViewById(R.id.tvSeeMore));
     }
 
-    @Test
+    @Test @Ignore
     public void hasView_AboutContainer_LegalHeader() throws Exception {
         assertNotNull(settingsContainer.findViewById(R.id.tvLegalHeader));
     }
 
-    @Test
+    @Test @Ignore
     public void hasView_AboutContainer_SecondTopBorder() throws Exception {
         assertNotNull(settingsContainer.findViewById(R.id.secondTopBorder));
     }
 
-    @Test
+    @Test @Ignore
     public void hasView_AboutContainer_CopyRight() throws Exception {
         assertNotNull(settingsContainer.findViewById(R.id.tvClearData));
     }
 
-    @Test
+    @Test @Ignore
     public void hasView_AboutContainer_TermsAndConditions() throws Exception {
         assertNotNull(settingsContainer.findViewById(R.id.tvTermsConditions));
     }
 
-    @Test
+    @Test @Ignore
     public void hasView_AboutContainer_SoftwareLicenses() throws Exception {
         assertNotNull(settingsContainer.findViewById(R.id.tvSoftwareLicenses));
     }
 
-    @Test
+    @Test @Ignore
     public void hasView_AboutContainer_AppInfoHeader() throws Exception {
         assertNotNull(settingsContainer.findViewById(R.id.tvAppInfo));
     }
 
-    @Test
+    @Test @Ignore
     public void hasView_AboutContainer_VersionNumber() throws Exception {
         assertNotNull(settingsContainer.findViewById(R.id.tvVersionHeader));
         assertNotNull(settingsContainer.findViewById(R.id.tvVersionNumber));
