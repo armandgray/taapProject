@@ -3,7 +3,7 @@ package com.armandgray.taap.settings;
 import android.content.Intent;
 import android.net.Uri;
 
-import com.armandgray.taap.SplashActivity;
+import com.armandgray.taap.splash.SplashActivity;
 import com.armandgray.taap.settings.detail.SettingsDetailActivity;
 
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DELETE_ALL_DATA;

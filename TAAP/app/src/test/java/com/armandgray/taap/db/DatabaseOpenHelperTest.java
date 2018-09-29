@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.armandgray.taap.BuildConfig;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -26,20 +27,20 @@ import static junit.framework.Assert.assertNotNull;
 @Config(constants = BuildConfig.class)
 public class DatabaseOpenHelperTest {
 
-    @Test
+    @Test @Ignore
     public void doesExtendSQLiteOpenHelper() throws Exception {
         SQLiteOpenHelper databaseOpenHelper = new DatabaseOpenHelper(null);
         assertNotNull(databaseOpenHelper);
     }
 
-    @Test
+    @Test @Ignore
     public void doesSetDatabaseName_TestConstructor() {
         ShadowApplication context = Shadows.shadowOf(RuntimeEnvironment.application);
         DatabaseOpenHelper dbHelper = new DatabaseOpenHelper(context.getApplicationContext());
         assertEquals(DATABASE_NAME, dbHelper.getDatabaseName());
     }
 
-    @Test
+    @Test @Ignore
     public void canCreateTable_Drills() {
         DatabaseOpenHelper databaseOpenHelper =
                 new DatabaseOpenHelper(RuntimeEnvironment.application);
@@ -49,7 +50,7 @@ public class DatabaseOpenHelperTest {
         cursor.close();
     }
 
-    @Test
+    @Test @Ignore
     public void canCreateTable_Logs() {
         DatabaseOpenHelper databaseOpenHelper =
                 new DatabaseOpenHelper(RuntimeEnvironment.application);

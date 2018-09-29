@@ -19,9 +19,10 @@ import java.util.List;
 
 import static com.armandgray.taap.db.DatabaseContentProvider.ALL_TABLE_COLUMNS;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_ALL;
+import static com.armandgray.taap.db.DatabaseContentProvider.insertLogToDatabase;
 import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
 import static com.armandgray.taap.log.LogActivity.SESSION_LOG;
-import static com.armandgray.taap.utils.CursorDataHelper.addAllLogsData;
+import static com.armandgray.taap.db.CursorDataHelper.addAllLogsForQuery;
 import static com.armandgray.taap.utils.DateTimeHelper.getTimeElapsedAsDate;
 
 class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener {
@@ -55,11 +56,15 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
         Cursor cursor = getCursorAllLogsForDrill();
         if (cursor == null) { return; }
 
-        addAllLogsData(cursor, listAllLogs);
+        addAllLogsForQuery(listAllLogs, cursor);
         cursor.close();
     }
 
     private Cursor getCursorAllLogsForDrill() {
+        if (views == null || views.drill == null) {
+            return null;
+        }
+
         int drillId = views.drill.getDrillId();
         String[] selectionArgs = {String.valueOf(drillId)};
         Uri uri = Uri.parse(CONTENT_URI_ALL + "/" + drillId);
@@ -171,6 +176,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
         for (SessionLog log : listAllLogs) {
             if (log.getSuccessRate() > max) { max = log.getSuccessRate(); }
         }
+
         return max;
     }
 
@@ -179,9 +185,8 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
     }
 
     void onDialogContinue() {
-        Intent intent = new Intent(activity, LogActivity.class);
-        intent.putExtra(SESSION_LOG, sessionLog);
-        activity.startActivity(intent);
+        if (sessionLog != null) { insertLogToDatabase(sessionLog, activity); }
+        activity.startActivity(new Intent(activity, LogActivity.class));
         activity.finish();
     }
 

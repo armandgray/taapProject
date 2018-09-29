@@ -1,4 +1,4 @@
-package com.armandgray.taap.utils;
+package com.armandgray.taap.db;
 
 public class CursorDataHelperTest {
 

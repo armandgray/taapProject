@@ -1,5 +1,6 @@
 package com.armandgray.taap.db;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -11,12 +12,12 @@ import static com.armandgray.taap.db.LogsTable.COLUMN_ACTIVE_WORK;
 import static com.armandgray.taap.db.LogsTable.COLUMN_DATE;
 import static com.armandgray.taap.db.LogsTable.COLUMN_DRILL;
 import static com.armandgray.taap.db.LogsTable.COLUMN_GOAL;
-import static com.armandgray.taap.db.LogsTable.LOG_ID;
 import static com.armandgray.taap.db.LogsTable.COLUMN_LENGTH;
 import static com.armandgray.taap.db.LogsTable.COLUMN_REPS_COMPLETED;
 import static com.armandgray.taap.db.LogsTable.COLUMN_REST_TIME;
 import static com.armandgray.taap.db.LogsTable.COLUMN_SETS_COMPLETED;
 import static com.armandgray.taap.db.LogsTable.COLUMN_SUCCESS;
+import static com.armandgray.taap.db.LogsTable.LOG_ID;
 import static com.armandgray.taap.db.LogsTable.SQL_CREATE;
 import static com.armandgray.taap.db.LogsTable.SQL_DELETE;
 import static com.armandgray.taap.db.LogsTable.TABLE_LOGS;
@@ -26,7 +27,7 @@ import static junit.framework.Assert.assertTrue;
 
 public class LogsTableTest {
 
-    @Test
+    @Test @Ignore
     public void hasFields_TableColumns() throws Exception {
         String[] allColumns = {
                 LOG_ID, COLUMN_DATE, COLUMN_LENGTH, COLUMN_GOAL, COLUMN_ACTIVE_WORK,
@@ -60,7 +61,7 @@ public class LogsTableTest {
         }
     }
 
-    @Test
+    @Test @Ignore
     public void hasField_SQLCreate() throws Exception {
         String expected =
                 "CREATE TABLE " + TABLE_LOGS + " ("
@@ -82,7 +83,7 @@ public class LogsTableTest {
         assertEquals(expected, SQL_CREATE);
     }
 
-    @Test
+    @Test @Ignore
     public void hasField_SQLDelete() throws Exception {
         assertNotNull(SQL_DELETE);
         assertEquals("DROP TABLE " + TABLE_LOGS, SQL_DELETE);

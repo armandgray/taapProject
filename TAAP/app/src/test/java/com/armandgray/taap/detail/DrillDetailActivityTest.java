@@ -1,10 +1,10 @@
 package com.armandgray.taap.detail;
 
 import com.armandgray.taap.BuildConfig;
-import com.armandgray.taap.detail.DrillDetailActivity;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -30,7 +30,7 @@ public class DrillDetailActivityTest {
         }
     }
 
-    @Test
+    @Test @Ignore
     public void createsDrillDetailActivityController_TestOnCreate() throws Exception {
         assertNotNull(activity.controller);
         assertNotNull(activity.controller.activity);
@@ -39,6 +39,7 @@ public class DrillDetailActivityTest {
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
+        activity.finish();
         activityController.pause().stop().destroy();
         activityController = null;
         activity = null;

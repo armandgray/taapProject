@@ -5,6 +5,7 @@ import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Drill implements Parcelable {
 
@@ -62,13 +63,13 @@ public class Drill implements Parcelable {
     }
 
     @NonNull
-    public static ArrayList<Drill> getQueryResultList(ArrayList<Drill> drillsList, String query) {
-        ArrayList<Drill> dataList = new ArrayList<>();
+    public static List<Drill> getQueryResultList(List<Drill> drillsList, String query) {
+        List<Drill> dataList = new ArrayList<>();
         if (drillsList != null) { dataList.addAll(drillsList); }
         return getFilteredListOnQuery(query, dataList);
     }
 
-    private static ArrayList<Drill> getFilteredListOnQuery(String query, ArrayList<Drill> dataList) {
+    private static List<Drill> getFilteredListOnQuery(String query, List<Drill> dataList) {
         for (int i = 0; i < dataList.size(); i++) {
             if (!dataList.get(i).getTitle().toLowerCase().contains(query.toLowerCase())) {
                 dataList.remove(i);

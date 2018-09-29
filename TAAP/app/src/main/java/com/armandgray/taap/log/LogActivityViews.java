@@ -1,56 +1,85 @@
 package com.armandgray.taap.log;
 
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
+import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
+import android.support.v4.util.Pair;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.armandgray.taap.R;
+import com.armandgray.taap.db.LogsDataModel;
+import com.armandgray.taap.utils.ActivitySetupHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
-class LogActivityViews {
+import static com.armandgray.taap.db.LogsDataModel.LogDataContainer.TOTAL_ACTIVE_WORK;
+import static com.armandgray.taap.db.LogsDataModel.LogDataContainer.TOTAL_EXERCISES_COMPLETED;
+import static com.armandgray.taap.db.LogsDataModel.LogDataContainer.TOTAL_REPS_COMPLETED;
+import static com.armandgray.taap.db.LogsDataModel.LogDataContainer.TOTAL_REST_TIME;
+import static com.armandgray.taap.db.LogsDataModel.LogDataContainer.TOTAL_SESSION_TIME;
+import static com.armandgray.taap.models.Drill.BALL_HANDLING;
+import static com.armandgray.taap.models.Drill.CONDITIONING;
+import static com.armandgray.taap.models.Drill.DEFENSE;
+import static com.armandgray.taap.models.Drill.FUNDAMENTALS;
+import static com.armandgray.taap.models.Drill.OFFENSE;
+import static com.armandgray.taap.models.Drill.SHOOTING;
 
-    @VisibleForTesting
-    LogActivity activity;
-    LinearLayout layoutTotalSessionTime;
-    LinearLayout layoutTotalActiveTime;
-    LinearLayout layoutTotalRestTime;
-    LinearLayout layoutExercisesCompleted;
-    LinearLayout layoutRepsCompleted;
-    TextView tvDate;
-    LinearLayout layoutFundamentals;
-    LinearLayout layoutDefense;
-    LinearLayout layoutOffense;
-    LinearLayout layoutConditioning;
-    LinearLayout layoutShooting;
-    LinearLayout layoutBallHandling;
+public class LogActivityViews implements ActivitySetupHelper.ActivityViewsInterface {
 
-    LogActivityViews(LogActivity activity) {
-        this.activity = activity;
+    private static final String ZERO_TIME = "00:00:00";
+    private static final String ZERO_PERCENT = "0%";
+
+    @VisibleForTesting final View rootView;
+    @VisibleForTesting final Toolbar toolbar;
+    private LinearLayout layoutTotalSessionTime;
+    private LinearLayout layoutTotalActiveTime;
+    private LinearLayout layoutTotalRestTime;
+    private LinearLayout layoutExercisesCompleted;
+    private LinearLayout layoutRepsCompleted;
+    private TextView tvDate;
+    private LinearLayout layoutFundamentals;
+    private LinearLayout layoutDefense;
+    private LinearLayout layoutOffense;
+    private LinearLayout layoutConditioning;
+    private LinearLayout layoutShooting;
+    private LinearLayout layoutBallHandling;
+
+    LogActivityViews(@NonNull View rootView, @NonNull Toolbar toolbar) {
+        this.rootView = rootView;
+        this.toolbar = toolbar;
     }
 
-    void setupActivityInitialState() {
-        activity.setContentView(R.layout.activity_log);
-        setupToolbar();
+    @Override
+    public void setListener(Object object) {}
+
+    @Override
+    public void setupActivityCoordinatorWidgets() {
+        ((TextView) toolbar.findViewById(R.id.tvTitle)).setText(R.string.session_history);
+    }
+
+    @Override
+    public void setupActivityInitialState() {
         assignFields();
         setupDetailItems();
         setupRecordItems();
     }
 
     private void assignFields() {
-        layoutTotalSessionTime = (LinearLayout) activity.findViewById(R.id.layoutTotalSessionTime);
-        layoutTotalActiveTime = (LinearLayout) activity.findViewById(R.id.layoutTotalActiveTime);
-        layoutTotalRestTime = (LinearLayout) activity.findViewById(R.id.layoutTotalRestTime);
-        layoutExercisesCompleted = (LinearLayout) activity.findViewById(R.id.layoutExercisesCompleted);
-        layoutRepsCompleted = (LinearLayout) activity.findViewById(R.id.layoutRepsCompleted);
+        layoutTotalSessionTime = (LinearLayout) rootView.findViewById(R.id.layoutTotalSessionTime);
+        layoutTotalActiveTime = (LinearLayout) rootView.findViewById(R.id.layoutTotalActiveTime);
+        layoutTotalRestTime = (LinearLayout) rootView.findViewById(R.id.layoutTotalRestTime);
+        layoutExercisesCompleted = (LinearLayout) rootView.findViewById(R.id.layoutExercisesCompleted);
+        layoutRepsCompleted = (LinearLayout) rootView.findViewById(R.id.layoutRepsCompleted);
 
-        LinearLayout RecordsContainer = (LinearLayout) activity.findViewById(R.id.recordsContainer);
+        LinearLayout RecordsContainer = (LinearLayout) rootView.findViewById(R.id.recordsContainer);
         tvDate = (TextView) RecordsContainer.findViewById(R.id.tvDate);
         layoutFundamentals = (LinearLayout) RecordsContainer.findViewById(R.id.layoutFundamentals);
         layoutDefense = (LinearLayout) RecordsContainer.findViewById(R.id.layoutDefense);
@@ -58,27 +87,6 @@ class LogActivityViews {
         layoutConditioning = (LinearLayout) RecordsContainer.findViewById(R.id.layoutConditioning);
         layoutShooting = (LinearLayout) RecordsContainer.findViewById(R.id.layoutShooting);
         layoutBallHandling = (LinearLayout) RecordsContainer.findViewById(R.id.layoutBallHandling);
-    }
-
-    private void setupToolbar() {
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        activity.setSupportActionBar(toolbar);
-        ((TextView) toolbar.findViewById(R.id.tvTitle)).setText(R.string.session_history);
-
-        if (activity.getSupportActionBar() != null) {
-            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            activity.getSupportActionBar().setDisplayShowTitleEnabled(false);
-            setHomeAsUpIndicatorColor();
-        }
-    }
-
-    private void setHomeAsUpIndicatorColor() {
-        final Drawable upArrow = activity.getResources().getDrawable(R.drawable.ic_arrow_back_white_24dp);
-        upArrow.setColorFilter(activity.getResources().getColor(R.color.colorDarkGray), PorterDuff.Mode.SRC_ATOP);
-        if (activity.getSupportActionBar() == null) {
-            return;
-        }
-        activity.getSupportActionBar().setHomeAsUpIndicator(upArrow);
     }
 
     private void setupDetailItems() {
@@ -89,7 +97,7 @@ class LogActivityViews {
         setTextForDetailLayoutViews(layoutRepsCompleted, R.string.reps_completed, "0");
     }
 
-    void setTextForDetailLayoutViews(LinearLayout layout, int headerResId, String text) {
+    private void setTextForDetailLayoutViews(LinearLayout layout, int headerResId, String text) {
         TextView header = (TextView) layout.findViewById(R.id.header);
         TextView tvText = (TextView) layout.findViewById(R.id.tvText);
         header.setText(headerResId);
@@ -101,44 +109,62 @@ class LogActivityViews {
                 + new SimpleDateFormat("EEE, MMM d, ''yy", Locale.US).format(new Date())
                 + "  <";
         tvDate.setText(dateString);
-        setTextForRecordLayoutViews(layoutFundamentals, R.drawable.ic_key_white_48dp,
-                "00:00:00", "0%", R.string.fundamentals);
-        setTextForRecordLayoutViews(layoutDefense, R.drawable.ic_account_multiple_outline_white_48dp,
-                "00:00:00", "0%", R.string.defense);
-        setTextForRecordLayoutViews(layoutOffense, R.drawable.ic_human_handsup_white_48dp,
-                "00:00:00", "0%", R.string.offense);
-        setTextForRecordLayoutViews(layoutConditioning, R.drawable.ic_run_fast_white_48dp,
-                "00:00:00", "0%", R.string.conditioning);
-        setTextForRecordLayoutViews(layoutShooting, R.drawable.ic_dribbble_white_48dp,
-                "00:00:00", "0%", R.string.shooting);
-        setTextForRecordLayoutViews(layoutBallHandling,
-                R.drawable.ic_gesture_two_double_tap_white_48dp,
-                "00:00:00", "0%", R.string.ball_handling);
+        setTextForRecordLayoutViews(layoutFundamentals, R.drawable.ic_key_white_48dp, R.string.fundamentals);
+        setTextForRecordLayoutViews(layoutDefense, R.drawable.ic_account_multiple_outline_white_48dp, R.string.defense);
+        setTextForRecordLayoutViews(layoutOffense, R.drawable.ic_human_handsup_white_48dp, R.string.offense);
+        setTextForRecordLayoutViews(layoutConditioning, R.drawable.ic_run_fast_white_48dp, R.string.conditioning);
+        setTextForRecordLayoutViews(layoutShooting, R.drawable.ic_dribbble_white_48dp, R.string.shooting);
+        setTextForRecordLayoutViews(layoutBallHandling, R.drawable.ic_gesture_two_double_tap_white_48dp, R.string.ball_handling);
     }
 
-    private void setTextForRecordLayoutViews(LinearLayout layout, int imageResId,
-                                             String time, String successRate, int headerResId) {
+    private void setTextForRecordLayoutViews(LinearLayout layout, int imageResId, int headerResId) {
         ImageView ivImage = (ImageView) layout.findViewById(R.id.ivImage);
         TextView tvTime = (TextView) layout.findViewById(R.id.tvTime);
         TextView tvSuccessRate = (TextView) layout.findViewById(R.id.tvSuccessRate);
         TextView tvHeader = (TextView) layout.findViewById(R.id.tvHeader);
 
         ivImage.setImageResource(imageResId);
-        tvTime.setText(time);
-        tvSuccessRate.setText(successRate);
+        ivImage.setTag(imageResId);
+        tvTime.setText(ZERO_TIME);
+        tvSuccessRate.setText(ZERO_PERCENT);
         tvHeader.setText(headerResId);
     }
 
-    void setDataValueForDetailLayout(LinearLayout layout, String text) {
-        ((TextView) layout.findViewById(R.id.tvText)).setText(text);
+    @Override
+    public void updateData(Object object) {
+        if (object == null) {
+            return;
+        }
+
+        LogsDataModel.LogDataContainer logDataContainer;
+        try {
+            logDataContainer = (LogsDataModel.LogDataContainer) object;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(this.getClass().getName()
+                    + " updateData() override method must receive LogsDataModel.LogDataContainer");
+        }
+
+        HashMap<String, String> detailsDataMap = logDataContainer.getDetailsDataMap();
+        HashMap<String, Pair<String, String>> categoriesDataMap = logDataContainer.getCategoriesDataMap();
+        ((TextView) layoutTotalSessionTime.findViewById(R.id.tvText)).setText(detailsDataMap.get(TOTAL_SESSION_TIME));
+        ((TextView) layoutTotalActiveTime.findViewById(R.id.tvText)).setText(detailsDataMap.get(TOTAL_ACTIVE_WORK));
+        ((TextView) layoutTotalRestTime.findViewById(R.id.tvText)).setText(detailsDataMap.get(TOTAL_REST_TIME));
+        ((TextView) layoutRepsCompleted.findViewById(R.id.tvText)).setText(detailsDataMap.get(TOTAL_REPS_COMPLETED));
+        ((TextView) layoutExercisesCompleted.findViewById(R.id.tvText)).setText(detailsDataMap.get(TOTAL_EXERCISES_COMPLETED));
+
+        setDataValuesForRecordLayout(layoutFundamentals, categoriesDataMap.get(FUNDAMENTALS));
+        setDataValuesForRecordLayout(layoutDefense, categoriesDataMap.get(DEFENSE));
+        setDataValuesForRecordLayout(layoutOffense, categoriesDataMap.get(OFFENSE));
+        setDataValuesForRecordLayout(layoutConditioning, categoriesDataMap.get(CONDITIONING));
+        setDataValuesForRecordLayout(layoutShooting, categoriesDataMap.get(SHOOTING));
+        setDataValuesForRecordLayout(layoutBallHandling, categoriesDataMap.get(BALL_HANDLING));
     }
 
-    void setDataValuesForRecordLayout(LinearLayout layout, String time, String successRate) {
+    private void setDataValuesForRecordLayout(LinearLayout layout, Pair<String, String> data) {
         TextView tvTime = (TextView) layout.findViewById(R.id.tvTime);
         TextView tvSuccessRate = (TextView) layout.findViewById(R.id.tvSuccessRate);
 
-        tvTime.setText(time);
-        tvSuccessRate.setText(successRate);
+        tvTime.setText(data.first);
+        tvSuccessRate.setText(data.second);
     }
-
 }

@@ -14,6 +14,7 @@ import com.armandgray.taap.models.SessionLog;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -60,14 +61,14 @@ public class LogSetsRvAdapterTest {
         testLogList.add(testSessionLog);
     }
 
-    @Test
+    @Test @Ignore
     public void doesImplementAdapter() throws Exception {
         RecyclerView.Adapter<LogSetsRvAdapter.LogSetsViewHolder> adapter =
                 new LogSetsRvAdapter(testLogList);
         assertNotNull(adapter);
     }
 
-    @Test
+    @Test @Ignore
     public void onCreateViewHolder_ReturnsNewLogSetsViewHolderOfCorrectLayout() {
         TestableRvSummaryAdapter testableAdapter = new TestableRvSummaryAdapter();
         testableAdapter.setMockView(mockView);
@@ -90,7 +91,7 @@ public class LogSetsRvAdapterTest {
     }
 
     @SuppressLint("InflateParams")
-    @Test
+    @Test @Ignore
     public void onBindViewHolder_DoesSetText() {
         adapter = new LogSetsRvAdapter(testLogList);
         LayoutInflater inflater = (LayoutInflater) RuntimeEnvironment.application
@@ -109,19 +110,19 @@ public class LogSetsRvAdapterTest {
         assertEquals(expected, holder.tvText.getText());
     }
 
-    @Test
+    @Test @Ignore
     public void canGetItemCount() throws Exception {
         adapter = new LogSetsRvAdapter(testLogList);
         assertEquals(testLogList.size(), adapter.getItemCount());
     }
 
-    @Test
+    @Test @Ignore
     public void canGetItemAtPosition() throws Exception {
         adapter = new LogSetsRvAdapter(testLogList);
         assertEquals(testLogList.get(0), adapter.getItemAtPosition(0));
     }
 
-    @Test
+    @Test @Ignore
     public void canAddLogAndUpdateRv() throws Exception {
         adapter = new LogSetsRvAdapter(testLogList);
         ArrayList<SessionLog> expectedList = new ArrayList<>();

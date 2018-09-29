@@ -1,6 +1,7 @@
 package com.armandgray.taap.utils;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.armandgray.taap.models.Drill;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static com.armandgray.taap.models.Drill.DRILL_TYPES;
 import static com.armandgray.taap.models.Drill.getQueryResultList;
@@ -19,14 +21,14 @@ import static com.armandgray.taap.models.Drill.getQueryResultList;
 public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillViewHolder> {
 
     public static final String SEARCH = "Search: ";
-    private ArrayList<Drill> allDrillsList;
-    ArrayList<Drill> drillList;
+    private List<Drill> allDrillsList;
+    List<Drill> drillList;
 
     DrillsRvAdapter() {}
 
-    public DrillsRvAdapter(ArrayList<Drill> drillList) {
+    public DrillsRvAdapter(List<Drill> drillList) {
         this.allDrillsList = new ArrayList<>();
-        allDrillsList.addAll(drillList);
+        allDrillsList.addAll(drillList == null ? new ArrayList<Drill>() : drillList);
         this.drillList = drillList;
     }
 
@@ -56,7 +58,7 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
     }
 
     public Drill getItemAtPosition(int position) {
-        if (drillList == null || drillList.size() <= position) { return null; }
+        if (drillList == null || drillList.size() <= position || position < 0) { return null; }
         return drillList.get(position);
     }
 
@@ -68,13 +70,17 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
         swapDataSet(getListFilteredOnType(drillType));
     }
 
-    private void swapDataSet(ArrayList<Drill> newDataList) {
+    public void swapDataSet(List<Drill> newDataList) {
+        if (this.allDrillsList.size() == 0) {
+            this.allDrillsList = newDataList;
+        }
+
         this.drillList = newDataList;
         notifyDataSetChanged();
     }
 
-    private ArrayList<Drill> getListFilteredOnType(String drillType) {
-        ArrayList<Drill> originalList = new ArrayList<>();
+    private List<Drill> getListFilteredOnType(String drillType) {
+        List<Drill> originalList = new ArrayList<>();
         originalList.addAll(allDrillsList);
         if (Arrays.asList(DRILL_TYPES).contains(drillType)) {
             return getTypedList(drillType, originalList);
@@ -92,7 +98,7 @@ public class DrillsRvAdapter extends RecyclerView.Adapter<DrillsRvAdapter.DrillV
         return drillType.substring(SEARCH.length(), drillType.length() - 1);
     }
 
-    private ArrayList<Drill> getTypedList(String drillType, ArrayList<Drill> originalList) {
+    private List<Drill> getTypedList(String drillType, List<Drill> originalList) {
         for (int i = 0; i < originalList.size(); i++) {
             if (!hasMatchingDrillType(drillType, originalList.get(i))) {
                 originalList.remove(i);

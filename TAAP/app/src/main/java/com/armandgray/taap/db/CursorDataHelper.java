@@ -1,10 +1,8 @@
-package com.armandgray.taap.utils;
+package com.armandgray.taap.db;
 
 import android.content.Context;
 import android.database.Cursor;
 
-import com.armandgray.taap.db.DrillsTable;
-import com.armandgray.taap.db.LogsTable;
 import com.armandgray.taap.models.Drill;
 import com.armandgray.taap.models.SessionLog;
 
@@ -12,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.armandgray.taap.db.DatabaseContentProvider.ALL_TABLE_COLUMNS;
+import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_ALL;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
 import static com.armandgray.taap.utils.StringHelper.getStringAsArray;
 
@@ -50,11 +50,24 @@ public class CursorDataHelper {
         return drill;
     }
 
-    public static void addAllLogsData(Cursor cursor, List<SessionLog> logs) {
+    public static ArrayList<SessionLog> getAllLogsFromDatabase(Context context) {
+        ArrayList<SessionLog> list = new ArrayList<>();
+        Cursor cursor = context.getContentResolver().query(CONTENT_URI_ALL, ALL_TABLE_COLUMNS,
+                null, null, null);
+        if (cursor == null) {
+            return null;
+        }
+
+        addAllLogsForQuery(list, cursor);
+        cursor.close();
+        return list;
+    }
+
+    public static void addAllLogsForQuery(List<SessionLog> target, Cursor cursor) {
         if (cursor.getCount() == 0) { return; }
         while (cursor.moveToNext()) {
             SessionLog logAtCurrentPosition = getLogAtCurrentPosition(cursor);
-            logs.add(logAtCurrentPosition);
+            target.add(logAtCurrentPosition);
         }
     }
 

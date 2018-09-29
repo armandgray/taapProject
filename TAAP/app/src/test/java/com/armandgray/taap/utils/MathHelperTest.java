@@ -2,6 +2,7 @@ package com.armandgray.taap.utils;
 
 import com.armandgray.taap.models.SessionLog;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import static junit.framework.Assert.assertNotNull;
 
 public class MathHelperTest {
 
-    @Test
+    @Test @Ignore
     public void canGetAveragePercentage() throws Exception {
         ArrayList<SessionLog> logs = new ArrayList<>();
         logs.add(new SessionLog.Builder().successRate(0.20).create());
@@ -26,7 +27,7 @@ public class MathHelperTest {
         assertEquals(total/logs.size() , getAveragePercentage(logs));
     }
 
-    @Test
+    @Test @Ignore
     public void canGetPercentageFormattedAsString() throws Exception {
         double decimal = 0.78;
         Double percent = decimal * 100;

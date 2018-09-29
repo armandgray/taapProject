@@ -8,6 +8,7 @@ import com.armandgray.taap.R;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -31,88 +32,88 @@ public class DrillDetailResTest {
         activity = activityController.create().visible().get();
     }
 
-    @Test
+    @Test @Ignore
     public void hasView_IvImage() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
         assertNotNull(container.findViewById(R.id.ivImage));
     }
 
-    @Test
+    @Test @Ignore
     public void hasLayout_DetailContainer() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
         assertNotNull(container.findViewById(R.id.detailContainer));
     }
 
-    @Test
+    @Test @Ignore
     public void hasView_RvCurrentLog() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
         LinearLayout detailContainer = (LinearLayout) container.findViewById(R.id.detailContainer);
         assertNotNull(detailContainer.findViewById(R.id.rvCurrentLog));
     }
 
-    @Test
+    @Test @Ignore
     public void hasView_RvLastLog() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
         LinearLayout detailContainer = (LinearLayout) container.findViewById(R.id.detailContainer);
         assertNotNull(detailContainer.findViewById(R.id.rvPreviousLogs));
     }
 
-    @Test
+    @Test @Ignore
     public void hasView_TvGoal() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
         LinearLayout detailContainer = (LinearLayout) container.findViewById(R.id.detailContainer);
         assertNotNull(detailContainer.findViewById(R.id.tvGoal));
     }
 
-    @Test
+    @Test @Ignore
     public void hasLayout_SetsContainer() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
         assertNotNull(container.findViewById(R.id.setsContainer));
     }
 
-    @Test
+    @Test @Ignore
     public void hasView_TvSets() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
         LinearLayout setsContainer = (LinearLayout) container.findViewById(R.id.setsContainer);
         assertNotNull(setsContainer.findViewById(R.id.tvSetsLeft));
     }
 
-    @Test
+    @Test @Ignore
     public void hasView_NpSets() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
         LinearLayout setsContainer = (LinearLayout) container.findViewById(R.id.setsContainer);
         assertNotNull(setsContainer.findViewById(R.id.npSets));
     }
 
-    @Test
+    @Test @Ignore
     public void hasView_TvReps() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
         LinearLayout setsContainer = (LinearLayout) container.findViewById(R.id.setsContainer);
         assertNotNull(setsContainer.findViewById(R.id.tvReps));
     }
 
-    @Test
+    @Test @Ignore
     public void hasView_NpReps() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
         LinearLayout setsContainer = (LinearLayout) container.findViewById(R.id.setsContainer);
         assertNotNull(setsContainer.findViewById(R.id.npReps));
     }
 
-    @Test
+    @Test @Ignore
     public void hasView_TvSuccesses() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
         LinearLayout setsContainer = (LinearLayout) container.findViewById(R.id.setsContainer);
         assertNotNull(setsContainer.findViewById(R.id.tvSuccesses));
     }
 
-    @Test
+    @Test @Ignore
     public void hasView_NpSuccesses() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
         LinearLayout setsContainer = (LinearLayout) container.findViewById(R.id.setsContainer);
         assertNotNull(setsContainer.findViewById(R.id.npSuccesses));
     }
 
-    @Test
+    @Test @Ignore
     public void hasView_BtnFinished() throws Exception {
         LinearLayout container = (LinearLayout) View.inflate(activity, R.layout.content_drill_detail, null);
         assertNotNull(container.findViewById(R.id.btnFinished));
@@ -121,6 +122,7 @@ public class DrillDetailResTest {
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
+        activity.finish();
         activityController.pause().stop().destroy();
         activity = null;
     }

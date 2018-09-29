@@ -1,348 +1,103 @@
 package com.armandgray.taap.log;
 
-import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.support.v7.app.ActionBar;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
-import com.armandgray.taap.db.DrillsTable;
-import com.armandgray.taap.db.LogsTable;
-import com.armandgray.taap.models.SessionLog;
+import com.armandgray.taap.db.LogsDataModel;
+import com.armandgray.taap.utils.ActivitySetupHelper;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-
-import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
-import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_LOGS;
-import static com.armandgray.taap.db.DatabaseContentProviderTest.TEST_SESSION_LOG;
-import static com.armandgray.taap.db.DatabaseContentProviderTest.assertCursorDataEqualsDrill;
-import static com.armandgray.taap.db.DatabaseContentProviderTest.assertCursorDataEqualsLog;
-import static com.armandgray.taap.log.LogActivity.SESSION_LOG;
-import static com.armandgray.taap.models.Drill.BALL_HANDLING;
-import static com.armandgray.taap.models.Drill.CONDITIONING;
-import static com.armandgray.taap.models.Drill.DEFENSE;
-import static com.armandgray.taap.models.Drill.FUNDAMENTALS;
-import static com.armandgray.taap.models.Drill.OFFENSE;
-import static com.armandgray.taap.models.Drill.PASSING;
-import static com.armandgray.taap.models.Drill.SHOOTING;
-import static com.armandgray.taap.models.SessionLog.ACTIVE_WORK;
-import static com.armandgray.taap.models.SessionLog.REST_TIME;
-import static com.armandgray.taap.models.SessionLog.SESSION_LENGTH;
-import static com.armandgray.taap.utils.DateTimeHelper.getDateFormattedAsString;
-import static com.armandgray.taap.utils.DateTimeHelper.getTotalTimeAsDate;
-import static com.armandgray.taap.utils.MathHelper.getAveragePercentage;
+import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DELETE_ALL_DATA;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
 public class LogActivityControllerTest {
 
-    private static final String W_ALL = "wAll";
+    private static final Context CONTEXT = RuntimeEnvironment.application;
 
-    private ActivityController<LogActivity> activityController;
-    private LogActivity activity;
+    @Mock
+    private ActionBar mockActionBar;
+
+    @Rule
+    public MockitoRule mockitoRule = MockitoJUnit.rule();
+
     private LogActivityController controller;
+    private boolean[] testFlag;
+    private final ActivitySetupHelper.ActivityViewsInterface testViewsInterface =
+            new ActivitySetupHelper.ActivityViewsInterface() {
+        @Override
+        public void setListener(Object object) {
+        }
+
+        @Override
+        public void setupActivityCoordinatorWidgets() {
+            testFlag[0] = true;
+        }
+
+        @Override
+        public void setupActivityInitialState() {
+            testFlag[1] = true;
+        }
+
+        @Override
+        public void updateData(Object object) {
+            testFlag[2] = object instanceof LogsDataModel.LogDataContainer;
+        }
+    };
 
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
-        Intent intent = new Intent(RuntimeEnvironment.application, LogActivity.class);
-        intent.putExtra(SESSION_LOG, TEST_SESSION_LOG);
-        activityController = Robolectric.buildActivity(LogActivity.class).withIntent(intent);
-        activity = activityController.create().visible().get();
-        controller = activity.controller;
+        testFlag = new boolean[3];
+        controller = new LogActivityController(CONTEXT, mockActionBar, testViewsInterface);
     }
 
-    @Test
-    public void activityInstanceOfAppCompatActivity_TestConstructor() throws Exception {
-        assertEquals("log.LogActivity", controller.activity.getLocalClassName());
+    @Test @Ignore
+    @SuppressWarnings("all")
+    public void doesImplementActivityControllerInterface_TestConstructor() throws Exception {
+        assertTrue(controller instanceof ActivitySetupHelper.ActivityControllerInterface);
     }
 
-    @Test
-    public void doesCreateViewsHandler_TestConstructor() throws Exception {
-        assertNotNull(controller.views);
-    }
-
-    @Test
-    public void doesGetSessionLogFromIntent() throws Exception {
-        SessionLog expectedLog = activity.getIntent().getParcelableExtra(SESSION_LOG);
-
-        assertNotNull(controller.sessionLog);
-        assertEquals(expectedLog, controller.sessionLog);
-    }
-
-    @Test
-    public void doesInsertNonNullSessionLogIntoDatabase() throws Exception {
-        assertNotNull(controller.sessionLog);
-
-        String selectedLog = LogsTable.LOG_ID + " = " + TEST_SESSION_LOG.getSessionId();
-        Cursor logCursor = RuntimeEnvironment.application.getContentResolver()
-                .query(CONTENT_URI_LOGS, LogsTable.ALL_LOG_COLUMNS, selectedLog,
-                        null, null);
-
-        assertNotNull(logCursor);
-        assertCursorDataEqualsLog(logCursor, TEST_SESSION_LOG);
-        logCursor.close();
-    }
-
-    @Test
-    public void doesImplicitlyInsertDrillIntoDatabase() throws Exception {
-        assertNotNull(controller.sessionLog);
-
-        String selectedDrill =
-                DrillsTable.DRILL_ID + " = " + TEST_SESSION_LOG.getDrill().getDrillId();
-        Uri uri = Uri.parse(CONTENT_URI_DRILLS + "/" + TEST_SESSION_LOG.getDrill().getDrillId());
-        Cursor drillCursor = RuntimeEnvironment.application.getContentResolver()
-                .query(uri, DrillsTable.ALL_DRILL_COLUMNS, selectedDrill, null, null);
-
-        assertNotNull(drillCursor);
-        assertCursorDataEqualsDrill(drillCursor, TEST_SESSION_LOG.getDrill());
-        drillCursor.close();
-    }
-
-    @Test
-    public void doesAssignListAllLogsFromDatabase() throws Exception {
-        // TODO FIX ISSUE WITH SETUP & TEARDOWN NOT RELOADING CURSOR
-        assertNotNull(controller.listAllLogs);
-        assertEquals(1, controller.listAllLogs.size());
-        assertEquals(TEST_SESSION_LOG.getSessionId(), controller.listAllLogs.get(0).getSessionId());
-    }
-
-    @Test
-    public void doesRetrieveFieldValuesFromLogs_Fundamentals() throws Exception {
-        ArrayList<SessionLog> expectedList = new ArrayList<>();
-        for (SessionLog log : controller.listAllLogs) {
-            if (Arrays.asList(log.getDrill().getCategory()).contains(FUNDAMENTALS)) {
-                expectedList.add(log);
-            }
+    @Test @Ignore
+    public void doesSetupActivityViewController_TestConstructor() throws Exception {
+        assertNotNull(controller.viewsInterface);
+        assertEquals(testViewsInterface, controller.viewsInterface);
+        for (int i = 0; i < testFlag.length; i++) {
+            System.out.println("testFlag " + i + " is " + testFlag[i]);
+            assertTrue(testFlag[i]);
         }
 
-        assertNotNull(controller.listFundamentalLogs);
-        assertEquals(expectedList, controller.listFundamentalLogs);
-    }
-
-    @Test
-    public void doesRetrieveFieldValuesFromLogs_Defense() throws Exception {
-        ArrayList<SessionLog> expectedList = new ArrayList<>();
-        for (SessionLog log : controller.listAllLogs) {
-            if (Arrays.asList(log.getDrill().getCategory()).contains(DEFENSE)) {
-                expectedList.add(log);
-            }
-        }
-
-        assertNotNull(controller.listDefenseLogs);
-        assertEquals(expectedList, controller.listDefenseLogs);
-    }
-
-    @Test
-    public void doesRetrieveFieldValuesFromLogs_Offense() throws Exception {
-        ArrayList<SessionLog> expectedList = new ArrayList<>();
-        for (SessionLog log : controller.listAllLogs) {
-            List<String> category = Arrays.asList(log.getDrill().getCategory());
-            if (category.contains(OFFENSE) || category.contains(PASSING)) {
-                expectedList.add(log);
-            }
-        }
-
-        assertNotNull(controller.listOffenseLogs);
-        assertEquals(expectedList, controller.listOffenseLogs);
-    }
-
-    @Test
-    public void doesRetrieveFieldValuesFromLogs_Conditioning() throws Exception {
-        ArrayList<SessionLog> expectedList = new ArrayList<>();
-        for (SessionLog log : controller.listAllLogs) {
-            if (Arrays.asList(log.getDrill().getCategory()).contains(CONDITIONING)) {
-                expectedList.add(log);
-            }
-        }
-
-        assertNotNull(controller.listConditioningLogs);
-        assertEquals(expectedList, controller.listConditioningLogs);
-    }
-
-    @Test
-    public void doesRetrieveFieldValuesFromLogs_Shooting() throws Exception {
-        ArrayList<SessionLog> expectedList = new ArrayList<>();
-        for (SessionLog log : controller.listAllLogs) {
-            if (Arrays.asList(log.getDrill().getCategory()).contains(SHOOTING)) {
-                expectedList.add(log);
-            }
-        }
-
-        assertNotNull(controller.listShootingLogs);
-        assertEquals(expectedList, controller.listShootingLogs);
-    }
-
-    @Test
-    public void doesRetrieveFieldValuesFromLogs_BallHandling() throws Exception {
-        ArrayList<SessionLog> expectedList = new ArrayList<>();
-        for (SessionLog log : controller.listAllLogs) {
-            if (Arrays.asList(log.getDrill().getCategory()).contains(BALL_HANDLING)) {
-                expectedList.add(log);
-            }
-        }
-
-        assertNotNull(controller.listBallHandlingLogs);
-        assertEquals(expectedList, controller.listBallHandlingLogs);
-    }
-
-    @Test
-    public void doesSetViewValuesFromLogs_TotalSessionTime() throws Exception {
-        Date expectedTime = getTotalTimeAsDate(controller.listAllLogs, SESSION_LENGTH);
-
-        TextView tvText = (TextView) controller.views
-                .layoutTotalSessionTime.findViewById(R.id.tvText);
-
-        assertEquals(getDateFormattedAsString(expectedTime), tvText.getText());
-    }
-
-    @Test
-    public void doesSetViewValuesFromLogs_TotalActiveTime() throws Exception {
-        Date expectedTime = getTotalTimeAsDate(controller.listAllLogs, ACTIVE_WORK);
-
-        TextView tvText = (TextView) controller.views
-                .layoutTotalActiveTime.findViewById(R.id.tvText);
-
-        assertEquals(getDateFormattedAsString(expectedTime), tvText.getText());
-    }
-
-    @Test
-    public void doesSetViewValuesFromLogs_TotalRestTime() throws Exception {
-        Date expectedTime = getTotalTimeAsDate(controller.listAllLogs, REST_TIME);
-
-        TextView tvText = (TextView) controller.views
-                .layoutTotalRestTime.findViewById(R.id.tvText);
-
-        assertEquals(getDateFormattedAsString(expectedTime), tvText.getText());
-    }
-
-    @Test
-    public void doesSetViewValuesFromLogs_ExercisesCompleted() throws Exception {
-        TextView tvText = (TextView) controller.views.
-                layoutExercisesCompleted.findViewById(R.id.tvText);
-        assertEquals(String.valueOf(controller.listAllLogs.size()), tvText.getText());
-    }
-
-    @Test
-    public void doesSetViewValuesFromLogs_RepsCompleted() throws Exception {
-        int expectedNum = 0;
-        for (SessionLog log : controller.listAllLogs) {
-            expectedNum += log.getRepsCompleted() > 0
-                    ? log.getSetsCompleted() * log.getRepsCompleted()
-                    : log.getSetsCompleted();
-        }
-
-        TextView tvText = (TextView) controller.views.
-                layoutRepsCompleted.findViewById(R.id.tvText);
-        assertEquals(String.valueOf(expectedNum), tvText.getText());
-    }
-
-    @Test
-    public void doesSetViewValuesFromLogs_Fundamentals() throws Exception {
-        Double expectedSuccessRate = getAveragePercentage(controller.listFundamentalLogs);
-        expectedSuccessRate *= 100;
-        Date expectedTime = getTotalTimeAsDate(controller.listFundamentalLogs);
-
-        LinearLayout layout = controller.views.layoutFundamentals;
-        TextView tvTime = (TextView) layout.findViewById(R.id.tvTime);
-        TextView tvSuccessRate = (TextView) layout.findViewById(R.id.tvSuccessRate);
-
-        assertEquals(getDateFormattedAsString(expectedTime), tvTime.getText());
-        assertEquals(expectedSuccessRate.intValue() + "%", tvSuccessRate.getText());
-    }
-
-    @Test
-    public void doesSetViewValuesFromLogs_Defense() throws Exception {
-        Double expectedSuccessRate = getAveragePercentage(controller.listDefenseLogs);
-        expectedSuccessRate *= 100;
-        Date expectedTime = getTotalTimeAsDate(controller.listDefenseLogs);
-
-        LinearLayout layout = controller.views.layoutDefense;
-        TextView tvTime = (TextView) layout.findViewById(R.id.tvTime);
-        TextView tvSuccessRate = (TextView) layout.findViewById(R.id.tvSuccessRate);
-
-        assertEquals(getDateFormattedAsString(expectedTime), tvTime.getText());
-        assertEquals(expectedSuccessRate.intValue() + "%", tvSuccessRate.getText());
-    }
-
-    @Test
-    public void doesSetViewValuesFromLogs_Offense() throws Exception {
-        Double expectedSuccessRate = getAveragePercentage(controller.listOffenseLogs);
-        expectedSuccessRate *= 100;
-        Date expectedTime = getTotalTimeAsDate(controller.listOffenseLogs);
-
-        LinearLayout layout = controller.views.layoutOffense;
-        TextView tvTime = (TextView) layout.findViewById(R.id.tvTime);
-        TextView tvSuccessRate = (TextView) layout.findViewById(R.id.tvSuccessRate);
-
-        assertEquals(getDateFormattedAsString(expectedTime), tvTime.getText());
-        assertEquals(expectedSuccessRate.intValue() + "%", tvSuccessRate.getText());
-    }
-
-    @Test
-    public void doesSetViewValuesFromLogs_Conditioning() throws Exception {
-        Double expectedSuccessRate = getAveragePercentage(controller.listConditioningLogs);
-        expectedSuccessRate *= 100;
-        Date expectedTime = getTotalTimeAsDate(controller.listConditioningLogs);
-
-        LinearLayout layout = controller.views.layoutConditioning;
-        TextView tvTime = (TextView) layout.findViewById(R.id.tvTime);
-        TextView tvSuccessRate = (TextView) layout.findViewById(R.id.tvSuccessRate);
-
-        assertEquals(getDateFormattedAsString(expectedTime), tvTime.getText());
-        assertEquals(expectedSuccessRate.intValue() + "%", tvSuccessRate.getText());
-    }
-
-    @Test
-    public void doesSetViewValuesFromLogs_Shooting() throws Exception {
-        Double expectedSuccessRate = getAveragePercentage(controller.listShootingLogs);
-        expectedSuccessRate *= 100;
-        Date expectedTime = getTotalTimeAsDate(controller.listShootingLogs);
-
-        LinearLayout layout = controller.views.layoutShooting;
-        TextView tvTime = (TextView) layout.findViewById(R.id.tvTime);
-        TextView tvSuccessRate = (TextView) layout.findViewById(R.id.tvSuccessRate);
-
-        assertEquals(getDateFormattedAsString(expectedTime), tvTime.getText());
-        assertEquals(expectedSuccessRate.intValue() + "%", tvSuccessRate.getText());
-    }
-
-    @Test
-    public void doesSetViewValuesFromLogs_BallHandling() throws Exception {
-        Double expectedSuccessRate = getAveragePercentage(controller.listBallHandlingLogs);
-        expectedSuccessRate *= 100;
-        Date expectedTime = getTotalTimeAsDate(controller.listBallHandlingLogs);
-
-        LinearLayout layout = controller.views.layoutBallHandling;
-        TextView tvTime = (TextView) layout.findViewById(R.id.tvTime);
-        TextView tvSuccessRate = (TextView) layout.findViewById(R.id.tvSuccessRate);
-
-        assertEquals(getDateFormattedAsString(expectedTime), tvTime.getText());
-        assertEquals(expectedSuccessRate.intValue() + "%", tvSuccessRate.getText());
+        Drawable arrow = CONTEXT.getResources().getDrawable(R.drawable.ic_arrow_back_white_24dp);
+        Mockito.verify(mockActionBar, Mockito.times(1)).setDisplayHomeAsUpEnabled(true);
+        Mockito.verify(mockActionBar, Mockito.times(1)).setDisplayShowTitleEnabled(false);
+        Mockito.verify(mockActionBar, Mockito.times(1)).setHomeAsUpIndicator(arrow);
+        Mockito.verifyNoMoreInteractions(mockActionBar);
     }
 
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
-        activityController.pause().stop().destroy();
-        activity = null;
+        CONTEXT.getContentResolver().delete(CONTENT_URI_DELETE_ALL_DATA, null, null);
+        testFlag = null;
         controller = null;
     }
 
