@@ -31,7 +31,7 @@ jobs:
           command: cd TAAP && ./gradlew assembleRelease
       - run:
           name: Run Tests
-          command: cd TAAP && ./gradlew test --debug
+          command: cd TAAP && ./gradlew test
       - store_artifacts:
           path: TAAP/app/build/reports
           destination: reports
