@@ -1,3 +1,5 @@
+import java.util.function.Consumer
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
@@ -18,8 +20,25 @@ allprojects {
         jcenter()
         google()
     }
+
+    tasks.withType(Test) {
+        testLogging {
+            exceptionFormat "full"
+            events "started", "skipped", "passed", "failed"
+            showStandardStreams true
+        }
+    }
+
+    // Solution for adding sub project dependencies with forEach
+    // https://hackernoon.com/android-how-to-add-gradle-dependencies-using-foreach-c4cbcc070458
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+    rootProject.allprojects.forEach(new Consumer<Project>() {
+        @Override
+        void accept(Project project) {
+            delete project.buildDir
+        }
+    })
 }

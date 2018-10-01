@@ -18,7 +18,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(manifest = Config.NONE)
 public class StringHelperTest {
 
     @Test @Ignore

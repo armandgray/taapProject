@@ -56,7 +56,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(manifest = Config.NONE)
 public class DatabaseContentProviderTest {
 
     private static final long TIME_IN_MILLIS = 1494179392802L;

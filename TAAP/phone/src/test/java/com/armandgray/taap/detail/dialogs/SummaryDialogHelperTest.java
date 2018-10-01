@@ -29,7 +29,7 @@ import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(manifest = Config.NONE)
 public class SummaryDialogHelperTest {
 
     private static final String DIALOG_CLASS_NAME = "com.armandgray.taap.detail.dialogs.DetailSummaryDialog";

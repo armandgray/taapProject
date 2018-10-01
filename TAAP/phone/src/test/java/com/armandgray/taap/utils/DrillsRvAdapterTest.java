@@ -35,7 +35,7 @@ import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(manifest = Config.NONE)
 public class DrillsRvAdapterTest {
 
     private DrillsRvAdapter adapter;

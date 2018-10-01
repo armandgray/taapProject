@@ -26,7 +26,7 @@ import static junit.framework.Assert.assertTrue;
  */
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(manifest = Config.NONE)
 public class LogsDataModelTest {
 
     private static Context context = RuntimeEnvironment.application;

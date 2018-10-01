@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.widget.Button;
 
-import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
 import com.armandgray.taap.db.DrillsTable;
 import com.armandgray.taap.db.LogsTable;
@@ -39,7 +38,7 @@ import static junit.framework.Assert.assertNotNull;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(manifest = Config.NONE)
 public class ConfirmClearDataDialogTest {
 
     private ActivityController<SettingsActivity> activityController;

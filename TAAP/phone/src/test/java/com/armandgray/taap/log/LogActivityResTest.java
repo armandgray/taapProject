@@ -19,7 +19,7 @@ import org.robolectric.annotation.Config;
 import static junit.framework.Assert.assertNotNull;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(manifest = Config.NONE)
 public class LogActivityResTest {
 
     private LinearLayout container;

@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
 import com.armandgray.taap.models.SessionLog;
 
@@ -38,7 +37,7 @@ import static junit.framework.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(manifest = Config.NONE)
 public class SessionLogRvAdapterTest {
 
     private SessionLogRvAdapter adapter;

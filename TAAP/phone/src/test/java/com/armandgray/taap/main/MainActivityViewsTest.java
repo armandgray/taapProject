@@ -50,7 +50,7 @@ import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(manifest = Config.NONE)
 public class MainActivityViewsTest {
 
     private static final Context CONTEXT = RuntimeEnvironment.application;

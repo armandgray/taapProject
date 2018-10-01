@@ -37,7 +37,7 @@ import static junit.framework.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(manifest = Config.NONE)
 public class DrillDetailViewsTest {
 
     private static final String BEAT_THE_PRO_MID_RANGE = "Beat-the-Pro (Mid-Range)";

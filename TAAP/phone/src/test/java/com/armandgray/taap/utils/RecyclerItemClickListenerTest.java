@@ -22,7 +22,7 @@ import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(manifest = Config.NONE)
 public class RecyclerItemClickListenerTest {
 
     @Mock

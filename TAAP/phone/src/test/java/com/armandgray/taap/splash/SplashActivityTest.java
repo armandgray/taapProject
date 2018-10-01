@@ -30,7 +30,7 @@ import static org.hamcrest.Matchers.is;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(manifest = Config.NONE)
 public class SplashActivityTest {
 
     private ActivityController<SplashActivity> activityController;

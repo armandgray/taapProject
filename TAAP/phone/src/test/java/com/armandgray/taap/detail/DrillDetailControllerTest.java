@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
 import com.armandgray.taap.detail.dialogs.TimerDialog;
 import com.armandgray.taap.models.SessionLog;
@@ -49,7 +48,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, manifest = Config.NONE)
+@Config(manifest = Config.NONE)
 public class DrillDetailControllerTest {
 
     private static final SessionLog DUMMY_SESSION_LOG = new SessionLog.Builder()

@@ -34,7 +34,7 @@ import static junit.framework.Assert.assertNotNull;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(manifest = Config.NONE)
 public class DetailSummaryDialogTest {
 
     private ActivityController<DrillDetailActivity> activityController;

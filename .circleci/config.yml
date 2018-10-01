@@ -15,14 +15,14 @@ jobs:
           name: List Paths
           command: ls -lagh && cd TAAP/ && ls -lagh
       - restore_cache:
-          key: jars-{{ checksum "TAAP/build.gradle" }}-{{ checksum  "TAAP/app/build.gradle" }}
+          key: jars-{{ checksum "TAAP/build.gradle" }}-{{ checksum  "TAAP/phone/build.gradle" }}
       - run:
           name: Download Dependencies
           command: cd TAAP && ./gradlew androidDependencies
       - save_cache:
           paths:
             - ~/taapProject/TAAP/.gradle
-          key: jars-{{ checksum "TAAP/build.gradle" }}-{{ checksum  "TAAP/app/build.gradle" }}
+          key: jars-{{ checksum "TAAP/build.gradle" }}-{{ checksum  "TAAP/phone/build.gradle" }}
       - run:
           name: Build Debug
           command: cd TAAP && ./gradlew assembleDebug
@@ -31,7 +31,7 @@ jobs:
           command: cd TAAP && ./gradlew assembleRelease
       - run:
           name: Run Tests
-          command: cd TAAP && ./gradlew test --debug
+          command: cd TAAP && ./gradlew test
       - store_artifacts:
           path: TAAP/app/build/reports
           destination: reports

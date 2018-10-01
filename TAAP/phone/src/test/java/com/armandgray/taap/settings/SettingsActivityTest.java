@@ -16,7 +16,7 @@ import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DELETE_
 import static junit.framework.Assert.assertNotNull;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(manifest = Config.NONE)
 public class SettingsActivityTest {
 
     private ActivityController<SettingsActivity> activityController;

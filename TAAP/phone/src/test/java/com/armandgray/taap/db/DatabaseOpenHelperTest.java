@@ -4,16 +4,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.armandgray.taap.BuildConfig;
-
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 
 import static com.armandgray.taap.db.DatabaseOpenHelper.DATABASE_NAME;
 import static com.armandgray.taap.db.DrillsTable.ALL_DRILL_COLUMNS;
@@ -24,7 +20,7 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(manifest = Config.NONE)
 public class DatabaseOpenHelperTest {
 
     @Test @Ignore
@@ -35,8 +31,7 @@ public class DatabaseOpenHelperTest {
 
     @Test @Ignore
     public void doesSetDatabaseName_TestConstructor() {
-        ShadowApplication context = Shadows.shadowOf(RuntimeEnvironment.application);
-        DatabaseOpenHelper dbHelper = new DatabaseOpenHelper(context.getApplicationContext());
+        DatabaseOpenHelper dbHelper = new DatabaseOpenHelper(RuntimeEnvironment.application);
         assertEquals(DATABASE_NAME, dbHelper.getDatabaseName());
     }
 

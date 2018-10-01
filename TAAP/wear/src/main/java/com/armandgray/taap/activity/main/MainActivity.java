@@ -1,10 +1,12 @@
-package com.armandgray.wear;
+package com.armandgray.taap.activity.main;
 
 import android.os.Bundle;
-import android.support.wearable.activity.WearableActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-public class MainActivity extends WearableActivity {
+import com.armandgray.taap.R;
+
+public class MainActivity extends AppCompatActivity {
 
     private TextView mTextView;
 
@@ -14,8 +16,5 @@ public class MainActivity extends WearableActivity {
         setContentView(R.layout.activity_main);
 
         mTextView = (TextView) findViewById(R.id.text);
-
-        // Enables Always-on
-        setAmbientEnabled();
     }
 }
