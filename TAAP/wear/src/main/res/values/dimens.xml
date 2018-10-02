@@ -12,4 +12,13 @@
     inner_frame_layout_padding (below variable) on round screens.
     -->
     <dimen name="inner_frame_layout_padding">5dp</dimen>
+
+    <!-- Defaults/ Presets -->
+    <dimen name="button_size_normal">32dp</dimen>
+    <dimen name="text_size_huge">32sp</dimen>
+    <dimen name="text_size_large">28sp</dimen>
+    <dimen name="text_size_normal">24sp</dimen>
+    <dimen name="text_size_small">20sp</dimen>
+    <dimen name="text_size_tiny">16sp</dimen>
+    <dimen name="text_size_min">12sp</dimen>
 </resources>
