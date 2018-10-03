@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 28
         versionCode 28001060 // targetSDK/apkCode(shared: 00)/productVersion
         versionName "1.0.60"
@@ -66,6 +66,7 @@ dependencies {
 
     // Jetpack
     implementation "android.arch.lifecycle:extensions:${LIFECYCLE_VERSION}"
+    implementation "android.arch.lifecycle:reactivestreams:${LIFECYCLE_VERSION}"
     implementation "android.arch.paging:runtime:${PAGING_VERSION}"
 
     // Misc.
@@ -77,8 +78,9 @@ dependencies {
     testImplementation "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
     testImplementation "org.powermock:powermock-module-junit4:${POWERMOCK_VERSION}"
     testImplementation "org.powermock:powermock-module-junit4-rule:${POWERMOCK_VERSION}"
-    testImplementation "org.powermock:powermock-api-mockito:${POWERMOCK_VERSION}"
+    testImplementation "org.powermock:powermock-api-mockito2:${POWERMOCK_VERSION}"
     testImplementation "org.powermock:powermock-classloading-xstream:${POWERMOCK_VERSION}"
+    testImplementation "android.arch.core:core-testing:${LIFECYCLE_VERSION}"
 
     // Instrumentation Test
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

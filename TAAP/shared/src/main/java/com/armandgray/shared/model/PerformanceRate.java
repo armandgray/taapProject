@@ -24,16 +24,32 @@ public class PerformanceRate {
         this.successRate = successRate;
     }
 
+    public PerformanceRate(PerformanceRate clone) {
+        this.drill = clone.drill;
+        this.count = clone.count;
+        this.total = clone.total;
+        this.max = clone.max;
+        this.successRate = clone.successRate;
+    }
+
     public String getDrill() {
-        return drill;
+        return this.drill;
+    }
+
+    public int getCount() {
+        return this.count;
     }
 
     public int getTotal() {
-        return total;
+        return this.total;
     }
 
     public int getMax() {
-        return max;
+        return this.max;
+    }
+
+    float getSuccessRate() {
+        return this.successRate;
     }
 
     public void raiseCount() {
@@ -48,14 +64,19 @@ public class PerformanceRate {
         return (float) this.count / this.total >= this.successRate;
     }
 
+    public void clear() {
+        this.count = 0;
+        this.total = 0;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
     @NonNull
     @Override
     public String toString() {
         return String.format(Locale.getDefault(), "%d/%d", count, total);
-    }
-
-    public void clear() {
-        this.count = 0;
-        this.total = 0;
     }
 }

@@ -1,6 +1,4 @@
-package com.armandgray.taap.activity.main;
-
-import com.armandgray.taap.activity.ActiveDrillActivity;
+package com.armandgray.taap.activity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -29,7 +27,7 @@ public class ActiveDrillActivityTest {
 
     @Test
     public void stub_test_testing() {
-        // test
+        // TODO Complete Testing
         assertTrue(true);
     }
 
