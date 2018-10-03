@@ -18,6 +18,10 @@ class ShootingPerformanceRepository {
         return currentRate;
     }
 
+    LiveData<PerformanceRate> getCompletionObserver() {
+        return completion;
+    }
+
     @SuppressWarnings("ConstantConditions")
     void addMake() {
         PerformanceRate rate = currentRate.getValue();
@@ -40,12 +44,8 @@ class ShootingPerformanceRepository {
             return;
         }
 
-        completion.setValue(rate);
+        completion.setValue(new PerformanceRate(rate));
         rate.clear();
         currentRate.setValue(rate);
-    }
-
-    LiveData<PerformanceRate> getCompletionObserver() {
-        return completion;
     }
 }
