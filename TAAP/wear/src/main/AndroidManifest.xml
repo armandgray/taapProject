@@ -21,7 +21,7 @@
             android:value="true"/>
 
         <activity
-            android:name="com.armandgray.taap.activity.main.MainActivity"
+            android:name="com.armandgray.taap.activity.ActiveDrillActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -41,6 +41,9 @@
                     android:host="taap"
                     android:scheme="armandgray"/>
             </intent-filter>
+        </activity>
+        <activity
+            android:name="android.support.wear.activity.ConfirmationActivity">
         </activity>
     </application>
 </manifest>
