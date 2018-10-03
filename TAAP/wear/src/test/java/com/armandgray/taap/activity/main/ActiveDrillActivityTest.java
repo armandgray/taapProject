@@ -1,5 +1,7 @@
 package com.armandgray.taap.activity.main;
 
+import com.armandgray.taap.activity.ActiveDrillActivity;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,15 +15,15 @@ import static junit.framework.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = Config.NONE)
-public class MainActivityTest {
+public class ActiveDrillActivityTest {
 
-    private ActivityController<MainActivity> activityController;
-    private MainActivity activity;
+    private ActivityController<ActiveDrillActivity> activityController;
+    private ActiveDrillActivity activity;
 
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
-        activityController = Robolectric.buildActivity(MainActivity.class);
+        activityController = Robolectric.buildActivity(ActiveDrillActivity.class);
         activity = activityController.create().visible().get();
     }
 

@@ -13,6 +13,10 @@ public class ShootingPercentageViewModel extends ViewModel {
         return repository.getCurrentRate();
     }
 
+    public LiveData<PerformanceRate> getCompletionObserver() {
+        return repository.getCompletionObserver();
+    }
+
     public void addMake() {
         repository.addMake();
     }

@@ -7,11 +7,11 @@ import com.armandgray.shared.model.PerformanceRate;
 
 class ShootingPerformanceRepository {
 
-    private MutableLiveData<PerformanceRate> currentRate;
+    private final MutableLiveData<PerformanceRate> currentRate  = new MutableLiveData<>();
+    private final MutableLiveData<PerformanceRate> completion = new MutableLiveData<>();
 
     ShootingPerformanceRepository() {
-        this.currentRate = new MutableLiveData<>();
-        this.currentRate.setValue(new PerformanceRate("Free Throws", 10)); // TODO Remove hardcoded things
+        this.currentRate.setValue(new PerformanceRate("Free Throws", 10, .80f)); // TODO Remove hardcoded things
     }
 
     LiveData<PerformanceRate> getCurrentRate() {
@@ -20,16 +20,32 @@ class ShootingPerformanceRepository {
 
     @SuppressWarnings("ConstantConditions")
     void addMake() {
-        PerformanceRate value = currentRate.getValue();
-        value.raiseCount();
-        value.raiseTotal();
-        currentRate.setValue(value);
+        PerformanceRate rate = currentRate.getValue();
+        rate.raiseCount();
+        rate.raiseTotal();
+        currentRate.setValue(rate);
+        handleSetCompletion(rate);
     }
 
     @SuppressWarnings("ConstantConditions")
     void addMiss() {
-        PerformanceRate value = currentRate.getValue();
-        value.raiseTotal();
-        currentRate.setValue(value);
+        PerformanceRate rate = currentRate.getValue();
+        rate.raiseTotal();
+        currentRate.setValue(rate);
+        handleSetCompletion(rate);
+    }
+
+    private void handleSetCompletion(PerformanceRate rate) {
+        if (rate.getTotal() != rate.getMax()) {
+            return;
+        }
+
+        completion.setValue(rate);
+        rate.clear();
+        currentRate.setValue(rate);
+    }
+
+    LiveData<PerformanceRate> getCompletionObserver() {
+        return completion;
     }
 }
