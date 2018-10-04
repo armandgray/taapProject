@@ -44,6 +44,11 @@ public class ShootingPercentageViewModelTest {
     }
 
     @Test
+    public void testConstructor_DoesInjectDependencies() {
+        // TODO Implement test
+    }
+
+    @Test
     public void testGetCurrentRate() {
         Assert.assertThat(testViewModel.getCurrentRate(), is(notNullValue()));
     }

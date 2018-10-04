@@ -82,7 +82,6 @@ public class LogActivityControllerTest {
         assertNotNull(controller.viewsInterface);
         assertEquals(testViewsInterface, controller.viewsInterface);
         for (int i = 0; i < testFlag.length; i++) {
-            System.out.println("testFlag " + i + " is " + testFlag[i]);
             assertTrue(testFlag[i]);
         }
 

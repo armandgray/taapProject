@@ -27,6 +27,11 @@ public class ShootingPerformanceRepositoryTest {
     }
 
     @Test
+    public void testConstructor_DoesSetCurrentRate() {
+        Assert.assertThat(testRepository.getCurrentRate().getValue(), is(notNullValue()));
+    }
+
+    @Test
     public void testGetCurrentRate() {
         Assert.assertThat(testRepository.getCurrentRate(), is(notNullValue()));
         Assert.assertThat(testRepository.getCurrentRate().getValue(), is(notNullValue()));

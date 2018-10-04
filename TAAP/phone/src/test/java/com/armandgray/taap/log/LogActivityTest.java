@@ -42,7 +42,6 @@ public class LogActivityTest {
     public void completesActivitySetup_TestOnCreate() throws Exception {
         View decorView = activity.findViewById(android.R.id.content).getRootView();
         CoordinatorLayout root = (CoordinatorLayout) decorView.findViewById(R.id.activityLogLayout);
-        System.out.println(root);
         assertNotNull(activity);
         assertEquals(R.id.activityLogLayout, root.getId());
         assertNotNull(activity.views);
