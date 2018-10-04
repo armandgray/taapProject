@@ -18,6 +18,9 @@ import com.armandgray.shared.model.PerformanceRate;
 import com.armandgray.taap.R;
 import com.armandgray.taap.ui.MultiInputClickListener;
 
+import dagger.Module;
+import dagger.android.AndroidInjection;
+
 public class ActiveDrillActivity extends AppCompatActivity {
 
     private ShootingPercentageViewModel viewModel;
@@ -33,6 +36,9 @@ public class ActiveDrillActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Dagger Injection
+        AndroidInjection.inject(this);
 
         assignGlobalFields();
         setupButtons();
@@ -104,5 +110,9 @@ public class ActiveDrillActivity extends AppCompatActivity {
         intent.putExtra(ConfirmationActivity.EXTRA_ANIMATION_TYPE, animation);
         intent.putExtra(ConfirmationActivity.EXTRA_MESSAGE, rate.toString());
         startActivity(intent);
+    }
+
+    @Module
+    public static class ActivityModule {
     }
 }

@@ -33,6 +33,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':shared')
 
     // Wear
     implementation 'com.google.android.gms:play-services-wearable:16.0.0'
