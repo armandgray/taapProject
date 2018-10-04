@@ -3,6 +3,8 @@ package com.armandgray.shared.db;
 import android.arch.core.executor.testing.InstantTaskExecutorRule;
 import android.arch.lifecycle.LiveData;
 
+import com.armandgray.shared.application.TAAPAppComponent;
+import com.armandgray.shared.application.TAAPApplication;
 import com.armandgray.shared.model.PerformanceRate;
 
 import org.junit.After;
@@ -10,14 +12,22 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+import org.robolectric.annotation.Config;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
+@Config(manifest = Config.NONE)
+@PrepareForTest({ShootingPercentageViewModelTest.class, TAAPApplication.class})
+@RunWith(PowerMockRunner.class)
 public class ShootingPercentageViewModelTest {
 
     @Rule
@@ -25,6 +35,9 @@ public class ShootingPercentageViewModelTest {
 
     @Rule
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
+
+    @Mock
+    private TAAPAppComponent mockComponent;
 
     @Mock
     private ShootingPerformanceRepository mockRepository;
@@ -36,6 +49,9 @@ public class ShootingPercentageViewModelTest {
 
     @Before
     public void setUp() {
+        PowerMockito.mockStatic(TAAPApplication.class);
+        PowerMockito.when(TAAPApplication.getAppComponent()).thenReturn(mockComponent);
+
         testViewModel = new ShootingPercentageViewModel();
         testViewModel.repository = mockRepository;
 
@@ -45,7 +61,8 @@ public class ShootingPercentageViewModelTest {
 
     @Test
     public void testConstructor_DoesInjectDependencies() {
-        // TODO Implement test
+        // TODO Implement remaining tests
+        Mockito.verify(mockComponent, Mockito.times(1)).inject(testViewModel);
     }
 
     @Test
