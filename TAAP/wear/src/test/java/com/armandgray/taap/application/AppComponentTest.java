@@ -2,6 +2,8 @@ package com.armandgray.taap.application;
 
 import android.app.Application;
 
+import com.armandgray.shared.db.ShootingPercentageViewModel;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -33,8 +35,17 @@ public class AppComponentTest {
     }
 
     @Test
-    public void testAppComponent_DeclaresApplicationInjectMethod() {
-        AppComponent component = application -> {};
+    public void testAppComponent_DeclaresInjectMethods() {
+        AppComponent component = new AppComponent() {
+            @Override
+            public void inject(WearApplication application) {
+            }
+
+            @Override
+            public void inject(ShootingPercentageViewModel viewModel) {
+            }
+        };
+
         Assert.assertThat(component, is(notNullValue()));
     }
 }

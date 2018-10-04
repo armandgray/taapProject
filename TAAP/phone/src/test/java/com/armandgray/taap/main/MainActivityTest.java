@@ -41,7 +41,6 @@ public class MainActivityTest {
     public void completesActivitySetup_TestOnCreate() throws Exception {
         View decorView = activity.findViewById(android.R.id.content).getRootView();
         CoordinatorLayout root = (CoordinatorLayout) decorView.findViewById(R.id.activityMainLayout);
-        System.out.println(root);
         assertNotNull(activity);
         assertEquals(R.id.activityMainLayout, root.getId());
         assertNotNull(activity.views);

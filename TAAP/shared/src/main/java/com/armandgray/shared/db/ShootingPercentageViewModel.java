@@ -2,14 +2,20 @@ package com.armandgray.shared.db;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
-import android.support.annotation.VisibleForTesting;
 
+import com.armandgray.shared.application.TAAPApplication;
 import com.armandgray.shared.model.PerformanceRate;
+
+import javax.inject.Inject;
 
 public class ShootingPercentageViewModel extends ViewModel {
 
-    @VisibleForTesting
-    ShootingPerformanceRepository repository = new ShootingPerformanceRepository();
+    @Inject
+    ShootingPerformanceRepository repository;
+
+    ShootingPercentageViewModel() {
+        TAAPApplication.getAppComponent().inject(this);
+    }
 
     public LiveData<PerformanceRate> getCurrentRate() {
         return repository.getCurrentRate();

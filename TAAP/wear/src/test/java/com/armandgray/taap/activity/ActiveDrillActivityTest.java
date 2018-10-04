@@ -4,7 +4,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
@@ -21,8 +20,8 @@ public class ActiveDrillActivityTest {
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
-        activityController = Robolectric.buildActivity(ActiveDrillActivity.class);
-        activity = activityController.create().visible().get();
+//        activityController = Robolectric.buildActivity(ActiveDrillActivity.class);
+//        activity = activityController.create().visible().get();
     }
 
     @Test
@@ -34,9 +33,9 @@ public class ActiveDrillActivityTest {
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
-        activity.finish();
-        activityController.pause().stop().destroy();
-        activityController = null;
-        activity = null;
+//        activity.finish();
+//        activityController.pause().stop().destroy();
+//        activityController = null;
+//        activity = null;
     }
 }

@@ -2,13 +2,16 @@ package com.armandgray.taap.ui;
 
 import android.annotation.SuppressLint;
 import android.graphics.Rect;
+import android.support.annotation.VisibleForTesting;
 import android.view.MotionEvent;
 import android.view.View;
 
 public class MultiInputClickListener implements View.OnTouchListener {
 
+    @VisibleForTesting
+    boolean skipActionUp;
+
     private final OnMultiInputClickListener listener;
-    private boolean skipActionUp;
 
     public MultiInputClickListener(OnMultiInputClickListener listener) {
         this.listener = listener;

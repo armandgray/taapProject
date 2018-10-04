@@ -2,6 +2,8 @@ package com.armandgray.taap.application;
 
 import android.app.Application;
 
+import com.armandgray.shared.application.TAAPAppComponent;
+
 import javax.inject.Singleton;
 
 import dagger.BindsInstance;
@@ -14,7 +16,7 @@ import dagger.android.AndroidInjectionModule;
         ActivityBuilder.class,
         AppModule.class
 })
-interface AppComponent {
+interface AppComponent extends TAAPAppComponent {
 
     @Component.Builder
     interface Builder {

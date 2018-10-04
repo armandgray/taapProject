@@ -155,7 +155,6 @@ public class MainActivityControllerTest {
         assertNotNull(controller.viewsInterface);
         assertEquals(testViewsInterface, controller.viewsInterface);
         for (int i = 0; i < testFlags.length; i++) {
-            System.out.println("testFlags " + i + " is " + testFlags[i]);
             assertTrue(testFlags[i]);
         }
 

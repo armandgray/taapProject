@@ -18,12 +18,16 @@ import com.armandgray.shared.model.PerformanceRate;
 import com.armandgray.taap.R;
 import com.armandgray.taap.ui.MultiInputClickListener;
 
+import javax.inject.Inject;
+
 import dagger.Module;
+import dagger.Provides;
 import dagger.android.AndroidInjection;
 
 public class ActiveDrillActivity extends AppCompatActivity {
 
-    private ShootingPercentageViewModel viewModel;
+    @Inject
+    ShootingPercentageViewModel viewModel;
 
     private ConstraintLayout rootView;
     private TextView textDrill;
@@ -83,7 +87,6 @@ public class ActiveDrillActivity extends AppCompatActivity {
     }
 
     private void setupViewModel() {
-        viewModel = ViewModelProviders.of(this).get(ShootingPercentageViewModel.class);
         viewModel.getCurrentRate().observe(this, this::onPerformanceRateChange);
         viewModel.getCompletionObserver().observe(this, this::onConfirmationChange);
     }
@@ -114,5 +117,10 @@ public class ActiveDrillActivity extends AppCompatActivity {
 
     @Module
     public static class ActivityModule {
+
+        @Provides
+        ShootingPercentageViewModel provideViewModel(ActiveDrillActivity activity) {
+            return ViewModelProviders.of(activity).get(ShootingPercentageViewModel.class);
+        }
     }
 }

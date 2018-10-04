@@ -6,8 +6,9 @@ import dagger.android.HasActivityInjector;
 
 public abstract class TAAPApplication extends Application implements HasActivityInjector {
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
+    protected static TAAPAppComponent appComponent;
+
+    public static TAAPAppComponent getAppComponent() {
+        return appComponent;
     }
 }
