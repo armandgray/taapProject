@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">TAAP</string>
+    <string name="settings">Settings</string>
+    <string name="logs">Logs</string>
+    <string name="targets">Targets</string>
+    <string name="court">Court</string>
 </resources>
