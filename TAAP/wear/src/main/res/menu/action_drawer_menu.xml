@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context=".activity.ActiveDrillActivity">
+
+    <item
+        android:id="@+id/action_targets"
+        android:icon="@drawable/ic_adjust_white_24dp"
+        android:orderInCategory="101"
+        android:title="@string/targets"
+        app:showAsAction="never"/>
+</menu>

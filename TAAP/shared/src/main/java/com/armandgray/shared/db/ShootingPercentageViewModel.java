@@ -10,6 +10,11 @@ import javax.inject.Inject;
 
 public class ShootingPercentageViewModel extends ViewModel {
 
+    public static final int ACTION_TARGETS = 1000;
+    public static final int ACTION_COURT = 1001;
+    public static final int ACTION_LOGS = 1002;
+    public static final int ACTION_SETTINGS = 1003;
+
     @Inject
     ShootingPerformanceRepository repository;
 
@@ -31,6 +36,10 @@ public class ShootingPercentageViewModel extends ViewModel {
 
     public void addMiss() {
         repository.addMiss();
+    }
+
+    public void onAction(int actionId) {
+        System.out.println(actionId);
     }
 
     @Override
