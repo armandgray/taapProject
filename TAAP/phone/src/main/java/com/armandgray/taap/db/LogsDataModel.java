@@ -1,8 +1,8 @@
 package com.armandgray.taap.db;
 
 import android.content.Context;
-import android.support.annotation.VisibleForTesting;
-import android.support.v4.util.Pair;
+import androidx.annotation.VisibleForTesting;
+import androidx.core.util.Pair;
 
 import com.armandgray.taap.models.SessionLog;
 

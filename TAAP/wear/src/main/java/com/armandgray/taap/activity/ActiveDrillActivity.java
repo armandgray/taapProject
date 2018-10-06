@@ -1,12 +1,12 @@
 package com.armandgray.taap.activity;
 
 import android.annotation.SuppressLint;
-import android.arch.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
-import android.support.wear.activity.ConfirmationActivity;
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.wear.activity.ConfirmationActivity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;

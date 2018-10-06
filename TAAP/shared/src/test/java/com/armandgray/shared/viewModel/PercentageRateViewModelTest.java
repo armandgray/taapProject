@@ -1,7 +1,7 @@
 package com.armandgray.shared.viewModel;
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule;
-import android.arch.lifecycle.LiveData;
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
+import androidx.lifecycle.LiveData;
 
 import com.armandgray.shared.application.TAAPAppComponent;
 import com.armandgray.shared.application.TAAPApplication;

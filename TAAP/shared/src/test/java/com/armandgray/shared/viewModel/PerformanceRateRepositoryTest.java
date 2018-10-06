@@ -1,6 +1,6 @@
 package com.armandgray.shared.viewModel;
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule;
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 
 import com.armandgray.shared.model.PerformanceRate;
 

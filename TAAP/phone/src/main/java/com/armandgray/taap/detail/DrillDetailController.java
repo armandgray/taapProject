@@ -3,8 +3,8 @@ package com.armandgray.taap.detail;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.annotation.VisibleForTesting;
-import android.support.v4.app.FragmentManager;
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.FragmentManager;
 import android.view.View;
 import android.widget.Toast;
 
@@ -21,7 +21,6 @@ import static com.armandgray.taap.db.DatabaseContentProvider.ALL_TABLE_COLUMNS;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_ALL;
 import static com.armandgray.taap.db.DatabaseContentProvider.insertLogToDatabase;
 import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
-import static com.armandgray.taap.log.LogActivity.SESSION_LOG;
 import static com.armandgray.taap.db.CursorDataHelper.addAllLogsForQuery;
 import static com.armandgray.taap.utils.DateTimeHelper.getTimeElapsedAsDate;
 

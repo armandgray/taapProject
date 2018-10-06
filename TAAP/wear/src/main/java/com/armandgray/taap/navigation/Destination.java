@@ -1,6 +1,6 @@
 package com.armandgray.taap.navigation;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.armandgray.shared.navigation.TAAPDestination;
 import com.armandgray.taap.activity.CourtActivity;
