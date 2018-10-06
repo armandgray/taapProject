@@ -1,6 +1,6 @@
 package com.armandgray.shared.navigation;
 
-import android.arch.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
 
 import com.armandgray.shared.application.TAAPActivity;

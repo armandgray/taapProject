@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.wear.widget.drawer.WearableDrawerLayout
+<androidx.wear.widget.drawer.WearableDrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,17 +11,17 @@
 
     <include layout="@layout/content_active_drill" />
 
-    <android.support.wear.widget.drawer.WearableNavigationDrawerView
+    <androidx.wear.widget.drawer.WearableNavigationDrawerView
         android:id="@+id/top_navigation_drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary"/>
 
-    <android.support.wear.widget.drawer.WearableActionDrawerView
+    <androidx.wear.widget.drawer.WearableActionDrawerView
         android:id="@+id/bottom_action_drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDark"
         app:actionMenu="@menu/action_drawer_menu"/>
 
-</android.support.wear.widget.drawer.WearableDrawerLayout>
+</androidx.wear.widget.drawer.WearableDrawerLayout>

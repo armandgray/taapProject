@@ -1,6 +1,6 @@
 package com.armandgray.shared.navigation;
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule;
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 
 import org.junit.After;
 import org.junit.Assert;

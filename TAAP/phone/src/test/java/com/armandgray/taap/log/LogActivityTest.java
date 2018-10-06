@@ -1,6 +1,6 @@
 package com.armandgray.taap.log;
 
-import android.support.design.widget.CoordinatorLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import android.view.View;
 
 import com.armandgray.taap.BuildConfig;

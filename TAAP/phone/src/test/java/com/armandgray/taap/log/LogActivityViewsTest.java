@@ -1,8 +1,8 @@
 package com.armandgray.taap.log;
 
 import android.content.Context;
-import android.support.v4.util.Pair;
-import android.support.v7.widget.Toolbar;
+import androidx.core.util.Pair;
+import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

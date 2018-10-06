@@ -1,7 +1,7 @@
 package com.armandgray.taap.navigation;
 
-import android.support.wear.widget.drawer.WearableActionDrawerView;
-import android.support.wear.widget.drawer.WearableNavigationDrawerView;
+import androidx.wear.widget.drawer.WearableActionDrawerView;
+import androidx.wear.widget.drawer.WearableNavigationDrawerView;
 import android.view.MenuItem;
 
 import com.armandgray.shared.navigation.NavigationActivity;

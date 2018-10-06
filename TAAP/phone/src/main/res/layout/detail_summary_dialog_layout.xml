@@ -6,7 +6,7 @@
     android:background="@drawable/session_log_dialog_background"
     android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSummary"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

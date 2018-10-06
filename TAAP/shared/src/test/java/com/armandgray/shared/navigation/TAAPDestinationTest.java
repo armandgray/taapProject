@@ -1,7 +1,7 @@
 package com.armandgray.shared.navigation;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import org.junit.After;
 import org.junit.Assert;

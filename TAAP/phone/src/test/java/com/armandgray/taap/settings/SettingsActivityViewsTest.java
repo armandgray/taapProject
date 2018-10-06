@@ -2,8 +2,8 @@ package com.armandgray.taap.settings;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
 import android.widget.TextView;
 
 import com.armandgray.taap.BuildConfig;

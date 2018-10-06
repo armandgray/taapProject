@@ -1,8 +1,8 @@
 package com.armandgray.taap.log;
 
 import android.content.Context;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.app.ActionBar;
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.ActionBar;
 
 import com.armandgray.taap.db.LogsDataModel;
 import com.armandgray.taap.utils.ActivitySetupHelper;

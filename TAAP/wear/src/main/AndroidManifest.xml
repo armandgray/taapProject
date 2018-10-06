@@ -44,7 +44,7 @@
                     android:scheme="armandgray"/>
             </intent-filter>
         </activity>
-        <activity android:name="android.support.wear.activity.ConfirmationActivity"/>
+        <activity android:name="androidx.wear.activity.ConfirmationActivity"/>
         <activity
             android:name=".activity.CourtActivity"
             android:label="@string/title_activity_drill_picker">

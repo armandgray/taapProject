@@ -2,7 +2,7 @@ package com.armandgray.taap.log;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.v7.app.ActionBar;
+import androidx.appcompat.app.ActionBar;
 
 import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;

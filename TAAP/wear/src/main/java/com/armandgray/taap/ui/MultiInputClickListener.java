@@ -2,7 +2,7 @@ package com.armandgray.taap.ui;
 
 import android.annotation.SuppressLint;
 import android.graphics.Rect;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.view.MotionEvent;
 import android.view.View;
 

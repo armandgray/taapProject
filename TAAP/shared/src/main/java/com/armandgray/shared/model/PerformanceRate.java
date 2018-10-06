@@ -1,6 +1,6 @@
 package com.armandgray.shared.model;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.Locale;
 
