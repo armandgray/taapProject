@@ -1,4 +1,4 @@
-package com.armandgray.shared.db;
+package com.armandgray.shared.viewModel;
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule;
 
@@ -14,16 +14,16 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 
-public class ShootingPerformanceRepositoryTest {
+public class PerformanceRateRepositoryTest {
 
     @Rule
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
-    private ShootingPerformanceRepository testRepository;
+    private PerformanceRateRepository testRepository;
 
     @Before
     public void setUp() {
-        testRepository = new ShootingPerformanceRepository();
+        testRepository = new PerformanceRateRepository();
     }
 
     @Test

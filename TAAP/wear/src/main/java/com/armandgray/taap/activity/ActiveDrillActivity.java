@@ -6,19 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.wear.activity.ConfirmationActivity;
-import android.support.wear.widget.drawer.WearableActionDrawerView;
-import android.support.wear.widget.drawer.WearableDrawerLayout;
-import android.support.wear.widget.drawer.WearableNavigationDrawerView;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.armandgray.shared.db.ShootingPercentageViewModel;
 import com.armandgray.shared.model.PerformanceRate;
+import com.armandgray.shared.viewModel.PercentageRateViewModel;
 import com.armandgray.taap.R;
+import com.armandgray.taap.navigation.Destination;
+import com.armandgray.taap.navigation.WearNavigationActivity;
 import com.armandgray.taap.ui.MultiInputClickListener;
 
 import javax.inject.Inject;
@@ -27,24 +24,10 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.android.AndroidInjection;
 
-import static com.armandgray.shared.db.ShootingPercentageViewModel.ACTION_COURT;
-import static com.armandgray.shared.db.ShootingPercentageViewModel.ACTION_LOGS;
-import static com.armandgray.shared.db.ShootingPercentageViewModel.ACTION_SETTINGS;
-import static com.armandgray.shared.db.ShootingPercentageViewModel.ACTION_TARGETS;
-
-public class ActiveDrillActivity extends AppCompatActivity implements
-        MenuItem.OnMenuItemClickListener,
-        WearableNavigationDrawerView.OnItemSelectedListener {
+public class ActiveDrillActivity extends WearNavigationActivity {
 
     @Inject
-    ShootingPercentageViewModel viewModel;
-
-    @Inject
-    ActiveDrillDrawerAdapter drawerAdapter;
-
-    private WearableDrawerLayout wearableDrawerLayout;
-    private WearableNavigationDrawerView wearableNavigationDrawer;
-    private WearableActionDrawerView wearableActionDrawer;
+    PercentageRateViewModel percentageRateViewModel;
 
     private ConstraintLayout rootView;
     private TextView textDrill;
@@ -54,23 +37,18 @@ public class ActiveDrillActivity extends AppCompatActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_active_drill);
-
         // Dagger Injection
         AndroidInjection.inject(this);
 
-        assignGlobalFields();
-        setupNavigationDrawer();
-        setupVisualElements();
-        setupEventListeners();
-        setupViewModel();
+        // Super
+        super.onCreate(savedInstanceState);
+        super.setContentView(R.layout.activity_active_drill);
+        super.onSetupContent();
     }
 
-    private void assignGlobalFields() {
-        wearableDrawerLayout = findViewById(R.id.drawer_layout);
-        wearableNavigationDrawer = findViewById(R.id.top_navigation_drawer);
-        wearableActionDrawer = findViewById(R.id.bottom_action_drawer);
+    @Override
+    public void assignGlobalFields() {
+        super.assignGlobalFields();
 
         rootView = findViewById(R.id.rootView);
         textDrill = findViewById(R.id.textDrill);
@@ -79,27 +57,25 @@ public class ActiveDrillActivity extends AppCompatActivity implements
         buttonPlus = findViewById(R.id.buttonPlus);
     }
 
-    private void setupNavigationDrawer() {
-        wearableNavigationDrawer.setAdapter(drawerAdapter);
-        wearableNavigationDrawer.getController().peekDrawer();
-        wearableNavigationDrawer.addOnItemSelectedListener(this);
+    @Override
+    public  void setupVisualElements() {
+        super.setupVisualElements();
 
-        wearableActionDrawer.getController().peekDrawer();
-        wearableActionDrawer.setPeekOnScrollDownEnabled(true);
-        wearableActionDrawer.setOnMenuItemClickListener(this);
-    }
-
-    private void setupVisualElements() {
         textDrill.setBackgroundResource(R.drawable.bg_round_outline);
         buttonMinus.setImageResource(R.drawable.ic_remove_white_24dp);
         buttonPlus.setImageResource(R.drawable.ic_add_white_24dp);
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void setupEventListeners() {
+    @Override
+    public  void setupEventListeners() {
+        super.setupEventListeners();
+
         rootView.setOnTouchListener(onMultiInputClick());
-        buttonMinus.setOnClickListener(view -> viewModel.addMiss());
-        buttonPlus.setOnClickListener(view -> viewModel.addMake());
+        textDrill.setOnClickListener(view -> navigationViewModel
+                .onNavigate(Destination.DRILL_PICKER));
+        buttonMinus.setOnClickListener(view -> percentageRateViewModel.onMinusClick());
+        buttonPlus.setOnClickListener(view -> percentageRateViewModel.onPlusClick());
     }
 
     @NonNull
@@ -107,19 +83,22 @@ public class ActiveDrillActivity extends AppCompatActivity implements
         return new MultiInputClickListener(new MultiInputClickListener.OnMultiInputClickListener() {
             @Override
             public void onSingleInputClick(View view) {
-                viewModel.addMake();
+                percentageRateViewModel.onSingleInputClick();
             }
 
             @Override
             public void onDoubleInputClick(View view) {
-                viewModel.addMiss();
+                percentageRateViewModel.onDoubleInputClick();
             }
         });
     }
 
-    private void setupViewModel() {
-        viewModel.getCurrentRate().observe(this, this::onPerformanceRateChange);
-        viewModel.getCompletionObserver().observe(this, this::onConfirmationChange);
+    @Override
+    public  void setupViewModel() {
+        super.setupViewModel();
+
+        percentageRateViewModel.getCurrentRate().observe(this, this::onPerformanceRateChange);
+        percentageRateViewModel.getCompletionObserver().observe(this, this::onConfirmationChange);
     }
 
     private void onPerformanceRateChange(PerformanceRate rate) {
@@ -146,40 +125,13 @@ public class ActiveDrillActivity extends AppCompatActivity implements
         startActivity(intent);
     }
 
-    @Override
-    public boolean onMenuItemClick(MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case R.id.action_targets:
-                viewModel.onAction(ACTION_TARGETS);
-                return true;
-        }
-
-        return false;
-    }
-
-    @Override
-    public void onItemSelected(int position) {
-        switch (position) {
-            case 0:
-                viewModel.onAction(ACTION_COURT);
-                break;
-
-            case 1:
-                viewModel.onAction(ACTION_LOGS);
-                break;
-
-            case 2:
-                viewModel.onAction(ACTION_SETTINGS);
-                break;
-        }
-    }
-
     @Module
-    public static class ActivityModule {
+    public static class ActivityModule
+            extends WearNavigationActivity.NavigationModule<ActiveDrillActivity> {
 
         @Provides
-        ShootingPercentageViewModel provideViewModel(ActiveDrillActivity activity) {
-            return ViewModelProviders.of(activity).get(ShootingPercentageViewModel.class);
+        PercentageRateViewModel providePercentageViewModel(ActiveDrillActivity activity) {
+            return ViewModelProviders.of(activity).get(PercentageRateViewModel.class);
         }
     }
 }

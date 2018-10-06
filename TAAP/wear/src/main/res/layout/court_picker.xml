@@ -6,10 +6,10 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ActiveDrillActivity"
+    tools:context=".activity.CourtActivity"
     tools:deviceIds="wear">
 
-    <include layout="@layout/content_active_drill" />
+    <include layout="@layout/content_court" />
 
     <android.support.wear.widget.drawer.WearableNavigationDrawerView
         android:id="@+id/top_navigation_drawer"

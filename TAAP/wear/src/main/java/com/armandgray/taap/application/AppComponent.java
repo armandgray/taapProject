@@ -16,7 +16,7 @@ import dagger.android.AndroidInjectionModule;
         ActivityBuilder.class,
         AppModule.class
 })
-interface AppComponent extends TAAPAppComponent {
+public interface AppComponent extends TAAPAppComponent {
 
     @Component.Builder
     interface Builder {

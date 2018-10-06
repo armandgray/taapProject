@@ -12,10 +12,10 @@ import static junit.framework.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = Config.NONE)
-public class ActiveDrillActivityTest {
+public class CourtActivityTest {
 
-    private ActivityController<ActiveDrillActivity> activityController;
-    private ActiveDrillActivity activity;
+    private ActivityController<CourtActivity> activityController;
+    private CourtActivity activity;
 
     @Before
     public void setUp() {

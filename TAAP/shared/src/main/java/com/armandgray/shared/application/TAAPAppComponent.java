@@ -1,8 +1,8 @@
 package com.armandgray.shared.application;
 
-import com.armandgray.shared.db.ShootingPercentageViewModel;
+import com.armandgray.shared.viewModel.PercentageRateViewModel;
 
 public interface TAAPAppComponent {
 
-    void inject(ShootingPercentageViewModel viewModel);
+    void inject(PercentageRateViewModel viewModel);
 }
