@@ -1,6 +1,8 @@
 package com.armandgray.taap.application;
 
 import com.armandgray.taap.activity.ActiveDrillActivity;
+import com.armandgray.taap.activity.CourtActivity;
+import com.armandgray.taap.activity.DrillPickerActivity;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,6 +17,16 @@ public class ActivityBuilderTest {
         ActivityBuilder builder = new ActivityBuilder() {
             @Override
             ActiveDrillActivity bindActiveDrillActivity() {
+                return null;
+            }
+
+            @Override
+            CourtActivity bindCourtActivity() {
+                return null;
+            }
+
+            @Override
+            DrillPickerActivity bindDrillPickerActivity() {
                 return null;
             }
         };

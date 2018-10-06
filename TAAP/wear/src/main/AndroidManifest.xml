@@ -9,6 +9,7 @@
     <application
         android:name=".application.WearApplication"
         android:allowBackup="true"
+        android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -22,7 +23,7 @@
             android:value="true"/>
 
         <activity
-            android:name="com.armandgray.taap.activity.ActiveDrillActivity"
+            android:name=".activity.ActiveDrillActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -43,8 +44,20 @@
                     android:scheme="armandgray"/>
             </intent-filter>
         </activity>
+        <activity android:name="android.support.wear.activity.ConfirmationActivity"/>
         <activity
-            android:name="android.support.wear.activity.ConfirmationActivity">
+            android:name=".activity.CourtActivity"
+            android:label="@string/title_activity_drill_picker">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.DrillPickerActivity"
+            android:label="@string/title_activity_drill_picker">
         </activity>
     </application>
+
 </manifest>

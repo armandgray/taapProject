@@ -1,4 +1,4 @@
-package com.armandgray.taap.activity;
+package com.armandgray.shared.application;
 
 import org.junit.After;
 import org.junit.Before;
@@ -12,10 +12,10 @@ import static junit.framework.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = Config.NONE)
-public class ActiveDrillActivityTest {
+public class TAAPActivityTest {
 
-    private ActivityController<ActiveDrillActivity> activityController;
-    private ActiveDrillActivity activity;
+    private ActivityController<TAAPActivity> activityController;
+    private TAAPActivity activity;
 
     @Before
     public void setUp() {

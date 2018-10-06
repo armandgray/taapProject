@@ -1,4 +1,4 @@
-package com.armandgray.shared.db;
+package com.armandgray.shared.viewModel;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
@@ -7,13 +7,13 @@ import com.armandgray.shared.model.PerformanceRate;
 
 import javax.inject.Inject;
 
-class ShootingPerformanceRepository {
+class PerformanceRateRepository {
 
     private final MutableLiveData<PerformanceRate> currentRate  = new MutableLiveData<>();
     private final MutableLiveData<PerformanceRate> completion = new MutableLiveData<>();
 
     @Inject
-    ShootingPerformanceRepository() {
+    PerformanceRateRepository() {
         this.currentRate.setValue(new PerformanceRate("Free Throws", 10, .80f)); // TODO Remove hardcoded things
     }
 

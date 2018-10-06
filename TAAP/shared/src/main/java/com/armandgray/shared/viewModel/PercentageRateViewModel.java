@@ -1,4 +1,4 @@
-package com.armandgray.shared.db;
+package com.armandgray.shared.viewModel;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
@@ -8,17 +8,12 @@ import com.armandgray.shared.model.PerformanceRate;
 
 import javax.inject.Inject;
 
-public class ShootingPercentageViewModel extends ViewModel {
-
-    public static final int ACTION_TARGETS = 1000;
-    public static final int ACTION_COURT = 1001;
-    public static final int ACTION_LOGS = 1002;
-    public static final int ACTION_SETTINGS = 1003;
+public class PercentageRateViewModel extends ViewModel {
 
     @Inject
-    ShootingPerformanceRepository repository;
+    PerformanceRateRepository repository;
 
-    ShootingPercentageViewModel() {
+    PercentageRateViewModel() {
         TAAPApplication.getAppComponent().inject(this);
     }
 
@@ -30,16 +25,20 @@ public class ShootingPercentageViewModel extends ViewModel {
         return repository.getCompletionObserver();
     }
 
-    public void addMake() {
+    public void onPlusClick() {
         repository.addMake();
     }
 
-    public void addMiss() {
+    public void onMinusClick() {
         repository.addMiss();
     }
 
-    public void onAction(int actionId) {
-        System.out.println(actionId);
+    public void onSingleInputClick() {
+        repository.addMake();
+    }
+
+    public void onDoubleInputClick() {
+        repository.addMiss();
     }
 
     @Override

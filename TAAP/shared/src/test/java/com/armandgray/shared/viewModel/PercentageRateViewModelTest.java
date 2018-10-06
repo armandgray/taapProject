@@ -1,4 +1,4 @@
-package com.armandgray.shared.db;
+package com.armandgray.shared.viewModel;
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule;
 import android.arch.lifecycle.LiveData;
@@ -26,9 +26,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
 @Config(manifest = Config.NONE)
-@PrepareForTest({ShootingPercentageViewModelTest.class, TAAPApplication.class})
+@PrepareForTest({PercentageRateViewModelTest.class, TAAPApplication.class})
 @RunWith(PowerMockRunner.class)
-public class ShootingPercentageViewModelTest {
+public class PercentageRateViewModelTest {
 
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
@@ -40,19 +40,19 @@ public class ShootingPercentageViewModelTest {
     private TAAPAppComponent mockComponent;
 
     @Mock
-    private ShootingPerformanceRepository mockRepository;
+    private PerformanceRateRepository mockRepository;
 
     @Mock
     private LiveData<PerformanceRate> mockPerformanceRate;
 
-    private ShootingPercentageViewModel testViewModel;
+    private PercentageRateViewModel testViewModel;
 
     @Before
     public void setUp() {
         PowerMockito.mockStatic(TAAPApplication.class);
         PowerMockito.when(TAAPApplication.getAppComponent()).thenReturn(mockComponent);
 
-        testViewModel = new ShootingPercentageViewModel();
+        testViewModel = new PercentageRateViewModel();
         testViewModel.repository = mockRepository;
 
         Mockito.when(mockRepository.getCurrentRate()).thenReturn(mockPerformanceRate);
@@ -77,13 +77,25 @@ public class ShootingPercentageViewModelTest {
 
     @Test
     public void testAddMake() {
-        testViewModel.addMake();
+        testViewModel.onPlusClick();
         Mockito.verify(mockRepository, Mockito.only()).addMake();
     }
 
     @Test
     public void testAddMiss() {
-        testViewModel.addMiss();
+        testViewModel.onMinusClick();
+        Mockito.verify(mockRepository, Mockito.only()).addMiss();
+    }
+
+    @Test
+    public void testOnSingleInputClick_AddsMake() {
+        testViewModel.onSingleInputClick();
+        Mockito.verify(mockRepository, Mockito.only()).addMake();
+    }
+
+    @Test
+    public void testOnDoubleInputClick_AddsMiss() {
+        testViewModel.onDoubleInputClick();
         Mockito.verify(mockRepository, Mockito.only()).addMiss();
     }
 

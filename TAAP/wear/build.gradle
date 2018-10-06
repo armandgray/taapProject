@@ -39,6 +39,8 @@ dependencies {
     // Wear
     implementation 'com.google.android.gms:play-services-wearable:16.0.0'
     implementation "com.google.android.support:wearable:${WEAR_VERSION}"
+    implementation 'com.android.support:wear:28.0.0'
+    implementation 'com.android.support:support-v4:28.0.0'
     compileOnly "com.google.android.wearable:wearable:${WEAR_VERSION}"
 
     // Support Library
@@ -75,9 +77,15 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:${LIFECYCLE_VERSION}"
     implementation "android.arch.lifecycle:reactivestreams:${LIFECYCLE_VERSION}"
     implementation "android.arch.paging:runtime:${PAGING_VERSION}"
+    implementation "android.arch.paging:rxjava2:1.0.1"
+    implementation "android.arch.navigation:navigation-fragment:${NAVIGATION_VERSION}"
+    implementation "android.arch.navigation:navigation-ui:${NAVIGATION_VERSION}"
+    implementation "android.arch.persistence.room:runtime:${ROOM_VERSION}"
+    implementation "android.arch.persistence.room:rxjava2:${ROOM_VERSION}"
+    annotationProcessor "android.arch.persistence.room:compiler:${ROOM_VERSION}"
 
     // Misc.
-    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation "com.squareup.picasso:picasso:2.71828"
 
     // Unit Test
     testImplementation "junit:junit:${JUNIT_VERSION}"
@@ -88,10 +96,14 @@ dependencies {
     testImplementation "org.powermock:powermock-api-mockito2:${POWERMOCK_VERSION}"
     testImplementation "org.powermock:powermock-classloading-xstream:${POWERMOCK_VERSION}"
     testImplementation "android.arch.core:core-testing:${LIFECYCLE_VERSION}"
+    testImplementation "android.arch.persistence.room:testing:${ROOM_VERSION}"
+    testImplementation "android.arch.paging:common:${PAGING_VERSION}"
+    androidTestImplementation "android.arch.navigation:navigation-testing:${NAVIGATION_VERSION}"
 
     // Instrumentation Test
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.2", {
         exclude group: "com.android.support", module: "support-annotations"
     })
+    compileOnly 'com.google.android.wearable:wearable:2.3.0'
 }

@@ -1,13 +1,12 @@
 package com.armandgray.shared.application;
 
-import com.armandgray.shared.db.ShootingPercentageViewModel;
+import com.armandgray.shared.viewModel.PercentageRateViewModel;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.*;
 
 public class TAAPAppComponentTest {
 
@@ -17,7 +16,7 @@ public class TAAPAppComponentTest {
         TAAPAppComponent component = new TAAPAppComponent() {
 
             @Override
-            public void inject(ShootingPercentageViewModel viewModel) {
+            public void inject(PercentageRateViewModel viewModel) {
             }
         };
 
