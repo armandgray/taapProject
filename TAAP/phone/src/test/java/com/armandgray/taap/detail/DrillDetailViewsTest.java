@@ -1,20 +1,13 @@
 package com.armandgray.taap.detail;
 
 import android.app.Dialog;
-import android.content.Intent;
-import androidx.appcompat.app.ActionBar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
-import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
 import com.armandgray.taap.detail.dialogs.DetailSummaryDialog;
-import com.armandgray.taap.models.Drill;
 import com.armandgray.taap.models.SessionLog;
 
 import org.junit.After;
@@ -22,15 +15,17 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowDialog;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
-import static com.armandgray.taap.main.MainActivity.SELECTED_DRILL;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
@@ -49,14 +44,14 @@ public class DrillDetailViewsTest {
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
-        Intent intent = new Intent(RuntimeEnvironment.application, DrillDetailActivity.class);
-        intent.putExtra(SELECTED_DRILL, new Drill("Beat-the-Pro (Mid-Range)",
-                R.drawable.ic_fitness_center_white_24dp,
-                Drill.SHOOTING_ARRAY));
-        activityController = Robolectric.buildActivity(DrillDetailActivity.class).newIntent(intent);
-        activity = activityController.create().visible().get();
-        toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        views = activity.controller.views;
+//        Intent intent = new Intent(RuntimeEnvironment.application, DrillDetailActivity.class);
+//        intent.putExtra(SELECTED_DRILL, new Drill("Beat-the-Pro (Mid-Range)",
+//                R.drawable.ic_fitness_center_white_24dp,
+//                Drill.SHOOTING_ARRAY));
+//        activityController = Robolectric.buildActivity(DrillDetailActivity.class).newIntent(intent);
+//        activity = activityController.create().visible().get();
+//        toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+//        views = activity.controller.views;
     }
 
     @Test @Ignore
@@ -210,11 +205,11 @@ public class DrillDetailViewsTest {
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
-        activity.finish();
-        activityController.pause().stop().destroy();
-        activity = null;
-        toolbar = null;
-        views = null;
+//        activity.finish();
+//        activityController.pause().stop().destroy();
+//        activity = null;
+//        toolbar = null;
+//        views = null;
     }
 
 }

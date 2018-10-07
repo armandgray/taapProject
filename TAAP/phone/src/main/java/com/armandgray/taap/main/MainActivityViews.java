@@ -4,10 +4,6 @@ import android.app.Service;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import androidx.annotation.VisibleForTesting;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
@@ -21,17 +17,19 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
+import com.armandgray.shared.model.Drill;
+import com.armandgray.shared.ui.DrillAdapter;
+import com.armandgray.shared.ui.RecyclerItemClickListener;
 import com.armandgray.taap.R;
-import com.armandgray.taap.models.Drill;
 import com.armandgray.taap.utils.ActivitySetupHelper;
-import com.armandgray.taap.utils.DrillsRvAdapter;
-import com.armandgray.taap.utils.RecyclerItemClickListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.armandgray.taap.utils.DrillsRvAdapter.SEARCH;
+import androidx.annotation.VisibleForTesting;
+import androidx.recyclerview.widget.RecyclerView;
 
 class MainActivityViews implements ActivitySetupHelper.ActivityViewsInterface {
 
@@ -178,10 +176,10 @@ class MainActivityViews implements ActivitySetupHelper.ActivityViewsInterface {
 
     private void setupRvDrills() {
         rvDrills = (RecyclerView) rootView.findViewById(R.id.rvDrills);
-        rvDrills.setAdapter(new DrillsRvAdapter(new ArrayList<Drill>()));
-        rvDrills.setLayoutManager(
-                new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-        setupRvDrillsItemClickListener();
+//        rvDrills.setAdapter(new DrillAdapter(new ArrayList<Drill>()));
+//        rvDrills.setLayoutManager(
+//                new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+//        setupRvDrillsItemClickListener();
     }
 
     private void setupRvDrillsItemClickListener() {
@@ -189,8 +187,8 @@ class MainActivityViews implements ActivitySetupHelper.ActivityViewsInterface {
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        DrillsRvAdapter adapter = (DrillsRvAdapter) rvDrills.getAdapter();
-                        listener.onRvDrillsItemTouch(adapter.getItemAtPosition(position));
+                        DrillAdapter adapter = (DrillAdapter) rvDrills.getAdapter();
+//                        listener.onRvDrillsItemTouch(adapter.getItemAtPosition(position));
                     }
                 }));
     }
@@ -244,13 +242,13 @@ class MainActivityViews implements ActivitySetupHelper.ActivityViewsInterface {
     }
 
     private void updateData(List<Drill> drills) {
-        DrillsRvAdapter adapter = (DrillsRvAdapter) rvDrills.getAdapter();
-        adapter.swapDataSet(drills);
+        DrillAdapter adapter = (DrillAdapter) rvDrills.getAdapter();
+//        adapter.swapDataSet(drills);
     }
 
     private void updateForDrillType(String drillType) {
-        ((DrillsRvAdapter) rvDrills.getAdapter())
-                .swapRvDrillsAdapterDataOnDrillType(drillType);
+//        ((DrillAdapter) rvDrills.getAdapter())
+//                .swapRvDrillsAdapterDataOnDrillType(drillType);
     }
 
     private void updateForAction(String action) {
@@ -267,7 +265,7 @@ class MainActivityViews implements ActivitySetupHelper.ActivityViewsInterface {
             case ON_SEARCH_CLICK:
                 etSearch.setVisibility(View.VISIBLE);
                 spinner.setVisibility(View.GONE);
-                fab.setVisibility(View.GONE);
+//                fab.setVisibility(View.GONE);
                 etSearch.requestFocusFromTouch();
                 InputMethodManager inputMethodManager = (InputMethodManager) context
                         .getSystemService(Service.INPUT_METHOD_SERVICE);
@@ -280,15 +278,15 @@ class MainActivityViews implements ActivitySetupHelper.ActivityViewsInterface {
             case ON_ET_SEARCH_FOCUS_CHANGE:
                 etSearch.setVisibility(View.GONE);
                 spinner.setVisibility(View.VISIBLE);
-                fab.setVisibility(View.VISIBLE);
+//                fab.setVisibility(View.VISIBLE);
                 return;
         }
     }
 
     private void updateForSearchQuery(String query) {
-        ((DrillsRvAdapter) rvDrills.getAdapter())
-                .swapRvDrillsAdapterDataOnQuery(query);
-        addSearchQueryToSpinner(query);
+//        ((DrillAdapter) rvDrills.getAdapter())
+//                .swapRvDrillsAdapterDataOnQuery(query);
+//        addSearchQueryToSpinner(query);
     }
 
     private void addSearchQueryToSpinner(String query) {
@@ -299,7 +297,7 @@ class MainActivityViews implements ActivitySetupHelper.ActivityViewsInterface {
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
         spinnerAdapter.addAll(context.getResources().getStringArray(R.array.drill_types));
-        spinnerAdapter.add(SEARCH + query);
+//        spinnerAdapter.add(SEARCH + query);
         spinnerAdapter.notifyDataSetChanged();
         spinner.setSelection(spinnerAdapter.getCount() - 1);
     }

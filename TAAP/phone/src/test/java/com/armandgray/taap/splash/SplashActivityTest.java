@@ -1,12 +1,8 @@
 package com.armandgray.taap.splash;
 
 import android.content.Intent;
-import android.database.Cursor;
 
-import com.armandgray.taap.BuildConfig;
-import com.armandgray.taap.db.DrillsTable;
 import com.armandgray.taap.main.MainActivity;
-import com.armandgray.taap.models.Drill;
 
 import org.junit.After;
 import org.junit.Before;
@@ -15,19 +11,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DELETE_ALL_DATA;
-import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
-import static com.armandgray.taap.db.DrillsDataHelper.getDrillsList;
-import static com.armandgray.taap.utils.StringHelper.getStringAsArray;
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
 import static org.robolectric.Shadows.shadowOf;
+
+//import static com.armandgray.taap.db.DrillsDataHelper.getDrillsList;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = Config.NONE)
@@ -50,81 +41,81 @@ public class SplashActivityTest {
                 shadowOf(activity).getNextStartedActivity().toString());
     }
 
-    @Test @Ignore
-    public void doesInsertAllDrillsIntoDatabase() throws Exception {
-        Cursor cursor = RuntimeEnvironment.application.getContentResolver()
-                .query(CONTENT_URI_DRILLS, DrillsTable.ALL_DRILL_COLUMNS,
-                        null, null, null);
-
-        int i = 0;
-        assertNotNull(cursor);
-        assertEquals(getDrillsList().size(), cursor.getCount());
-        assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
-
-        while (cursor.moveToNext()) {
-            Drill drill = getDrillsList().get(i);
-            assertEquals(drill.getTitle(),
-                    cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
-            assertEquals(drill.getImageId(),
-                    cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
-            assertThat(drill.getCategory(), is(getStringAsArray(cursor.getString(
-                    cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)))));
-            i++;
-        }
-        cursor.close();
-    }
-
-    @Test @Ignore
-    public void doesCheckIfDrillsExistInDatabase() throws Exception {
-        Cursor cursor = RuntimeEnvironment.application.getContentResolver()
-                .query(CONTENT_URI_DRILLS, DrillsTable.ALL_DRILL_COLUMNS,
-                        null, null, null);
-
-        int i = 0;
-        assertNotNull(cursor);
-        assertEquals(getDrillsList().size(), cursor.getCount());
-        assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
-
-        while (cursor.moveToNext()) {
-            Drill drill = getDrillsList().get(i);
-            assertEquals(drill.getTitle(),
-                    cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
-            assertEquals(drill.getImageId(),
-                    cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
-            assertThat(drill.getCategory(), is(getStringAsArray(cursor.getString(
-                    cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)))));
-            i++;
-        }
-        cursor.close();
-
-        activity.insertAllDrillsToDatabase();
-
-        cursor = RuntimeEnvironment.application.getContentResolver()
-                .query(CONTENT_URI_DRILLS, DrillsTable.ALL_DRILL_COLUMNS,
-                        null, null, null);
-
-        i = 0;
-        assertNotNull(cursor);
-        assertEquals(getDrillsList().size(), cursor.getCount());
-        assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
-
-        while (cursor.moveToNext()) {
-            Drill drill = getDrillsList().get(i);
-            assertEquals(drill.getTitle(),
-                    cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
-            assertEquals(drill.getImageId(),
-                    cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
-            assertThat(drill.getCategory(), is(getStringAsArray(cursor.getString(
-                    cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)))));
-            i++;
-        }
-        cursor.close();
-    }
-
-    @Test @Ignore
-    public void doesRetrieveHttpData() throws Exception {
-
-    }
+//    @Test @Ignore
+//    public void doesInsertAllDrillsIntoDatabase() throws Exception {
+//        Cursor cursor = RuntimeEnvironment.application.getContentResolver()
+//                .query(CONTENT_URI_DRILLS, DrillsTable.ALL_DRILL_COLUMNS,
+//                        null, null, null);
+//
+//        int i = 0;
+//        assertNotNull(cursor);
+//        assertEquals(getDrillsList().size(), cursor.getCount());
+//        assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
+//
+//        while (cursor.moveToNext()) {
+//            Drill drill = getDrillsList().get(i);
+//            assertEquals(drill.getTitle(),
+//                    cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
+//            assertEquals(drill.getImageResId(),
+//                    cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
+//            assertThat(drill.getCategory(), is(getStringAsArray(cursor.getString(
+//                    cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)))));
+//            i++;
+//        }
+//        cursor.close();
+//    }
+//
+//    @Test @Ignore
+//    public void doesCheckIfDrillsExistInDatabase() throws Exception {
+//        Cursor cursor = RuntimeEnvironment.application.getContentResolver()
+//                .query(CONTENT_URI_DRILLS, DrillsTable.ALL_DRILL_COLUMNS,
+//                        null, null, null);
+//
+//        int i = 0;
+//        assertNotNull(cursor);
+//        assertEquals(getDrillsList().size(), cursor.getCount());
+//        assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
+//
+//        while (cursor.moveToNext()) {
+//            Drill drill = getDrillsList().get(i);
+//            assertEquals(drill.getTitle(),
+//                    cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
+//            assertEquals(drill.getImageResId(),
+//                    cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
+//            assertThat(drill.getCategory(), is(getStringAsArray(cursor.getString(
+//                    cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)))));
+//            i++;
+//        }
+//        cursor.close();
+//
+//        activity.insertAllDrillsToDatabase();
+//
+//        cursor = RuntimeEnvironment.application.getContentResolver()
+//                .query(CONTENT_URI_DRILLS, DrillsTable.ALL_DRILL_COLUMNS,
+//                        null, null, null);
+//
+//        i = 0;
+//        assertNotNull(cursor);
+//        assertEquals(getDrillsList().size(), cursor.getCount());
+//        assertEquals(DrillsTable.ALL_DRILL_COLUMNS.length, cursor.getColumnCount());
+//
+//        while (cursor.moveToNext()) {
+//            Drill drill = getDrillsList().get(i);
+//            assertEquals(drill.getTitle(),
+//                    cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
+//            assertEquals(drill.getImageResId(),
+//                    cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
+//            assertThat(drill.getCategory(), is(getStringAsArray(cursor.getString(
+//                    cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)))));
+//            i++;
+//        }
+//        cursor.close();
+//    }
+//
+//    @Test @Ignore
+//    public void doesRetrieveHttpData() throws Exception {
+//
+//    }
 
     @After
     public void tearDown() {

@@ -3,21 +3,22 @@ package com.armandgray.taap.main;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
-import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 
+import com.armandgray.shared.model.Drill;
 import com.armandgray.taap.R;
 import com.armandgray.taap.detail.DrillDetailActivity;
 import com.armandgray.taap.log.LogActivity;
-import com.armandgray.taap.models.Drill;
 import com.armandgray.taap.settings.SettingsActivity;
 import com.armandgray.taap.utils.ActivitySetupHelper;
 import com.armandgray.taap.utils.MVCActivityController;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.ActionBar;
 
 import static com.armandgray.taap.db.CursorDataHelper.getDrillsListFromDatabase;
 
@@ -78,7 +79,7 @@ class MainActivityController extends MVCActivityController
     @Override
     public void onRvDrillsItemTouch(Drill drill) {
         Intent intent = new Intent(context, DrillDetailActivity.class);
-        intent.putExtra(MainActivity.SELECTED_DRILL, drill);
+//        intent.putExtra(MainActivity.SELECTED_DRILL, drill);
         context.startActivity(intent);
     }
 

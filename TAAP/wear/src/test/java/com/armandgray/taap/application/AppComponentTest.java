@@ -2,7 +2,7 @@ package com.armandgray.taap.application;
 
 import android.app.Application;
 
-import com.armandgray.shared.viewModel.PercentageRateViewModel;
+import com.armandgray.shared.viewModel.DrillViewModel;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -42,7 +42,7 @@ public class AppComponentTest {
             }
 
             @Override
-            public void inject(PercentageRateViewModel viewModel) {
+            public void inject(DrillViewModel viewModel) {
             }
         };
 

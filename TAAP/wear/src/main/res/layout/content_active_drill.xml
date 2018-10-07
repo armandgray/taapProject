@@ -3,21 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rootView"
+    android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
     tools:showIn="@layout/activity_active_drill">
 
     <TextView
-        android:id="@+id/textDrill"
+        android:id="@+id/text_drill"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAllCaps="true"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_tiny"
         android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/textRate"
+        app:layout_constraintBottom_toTopOf="@+id/text_rate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,21 +25,21 @@
         tools:text="Free Throws"/>
 
     <ImageButton
-        android:id="@+id/buttonMinus"
+        android:id="@+id/button_minus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
         android:backgroundTint="@color/colorPrimary"
         android:contentDescription="Button Minus"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textRate"
+        app:layout_constraintEnd_toStartOf="@+id/text_rate"
         app:layout_constraintHorizontal_bias="0.35"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText"/>
 
     <TextView
-        android:id="@+id/textRate"
+        android:id="@+id/text_rate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
@@ -55,7 +54,7 @@
         tools:text="2/8"/>
 
     <ImageButton
-        android:id="@+id/buttonPlus"
+        android:id="@+id/button_plus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
@@ -64,7 +63,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.65"
-        app:layout_constraintStart_toEndOf="@+id/textRate"
+        app:layout_constraintStart_toEndOf="@+id/text_rate"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText"/>
 

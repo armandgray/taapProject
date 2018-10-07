@@ -1,8 +1,6 @@
 package com.armandgray.taap.db;
 
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
-import androidx.core.util.Pair;
 
 import com.armandgray.taap.models.SessionLog;
 
@@ -11,12 +9,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.armandgray.taap.models.Drill.BALL_HANDLING;
-import static com.armandgray.taap.models.Drill.CONDITIONING;
-import static com.armandgray.taap.models.Drill.DEFENSE;
-import static com.armandgray.taap.models.Drill.FUNDAMENTALS;
-import static com.armandgray.taap.models.Drill.OFFENSE;
-import static com.armandgray.taap.models.Drill.SHOOTING;
+import androidx.annotation.VisibleForTesting;
+import androidx.core.util.Pair;
+
 import static com.armandgray.taap.models.SessionLog.ACTIVE_WORK;
 import static com.armandgray.taap.models.SessionLog.REST_TIME;
 import static com.armandgray.taap.models.SessionLog.SESSION_LENGTH;
@@ -52,31 +47,31 @@ public class LogsDataModel {
         createLists(context);
 
         for (SessionLog log : allLogs) {
-            for (String category : log.getDrill().getCategory()) {
-                if (FUNDAMENTALS.equalsIgnoreCase(category)) {
-                    listFundamentalLogs.add(log);
-                }
-
-                if (DEFENSE.equalsIgnoreCase(category)) {
-                    listDefenseLogs.add(log);
-                }
-
-                if (OFFENSE.equalsIgnoreCase(category)) {
-                    listOffenseLogs.add(log);
-                }
-
-                if (CONDITIONING.equalsIgnoreCase(category)) {
-                    listConditioningLogs.add(log);
-                }
-
-                if (SHOOTING.equalsIgnoreCase(category)) {
-                    listShootingLogs.add(log);
-                }
-
-                if (BALL_HANDLING.equalsIgnoreCase(category)) {
-                    listBallHandlingLogs.add(log);
-                }
-            }
+//            for (String category : log.getDrill().getCategory()) {
+//                if (FUNDAMENTALS.equalsIgnoreCase(category)) {
+//                    listFundamentalLogs.add(log);
+//                }
+//
+//                if (DEFENSE.equalsIgnoreCase(category)) {
+//                    listDefenseLogs.add(log);
+//                }
+//
+//                if (OFFENSE.equalsIgnoreCase(category)) {
+//                    listOffenseLogs.add(log);
+//                }
+//
+//                if (CONDITIONING.equalsIgnoreCase(category)) {
+//                    listConditioningLogs.add(log);
+//                }
+//
+//                if (SHOOTING.equalsIgnoreCase(category)) {
+//                    listShootingLogs.add(log);
+//                }
+//
+//                if (BALL_HANDLING.equalsIgnoreCase(category)) {
+//                    listBallHandlingLogs.add(log);
+//                }
+//            }
         }
     }
 
@@ -187,12 +182,12 @@ public class LogsDataModel {
             Pair<String, String> ballHandlingDataPair = new Pair<>(
                     getDateFormattedAsString(getTotalTimeAsDate(listBallHandlingLogs)),
                     getPercentFormattedAsString(getAveragePercentage(listBallHandlingLogs)));
-            categoriesDataMap.put(FUNDAMENTALS, fundamentalsDataPair);
-            categoriesDataMap.put(DEFENSE, defenseDataPair);
-            categoriesDataMap.put(OFFENSE, offenseDataPair);
-            categoriesDataMap.put(CONDITIONING, conditioningDataPair);
-            categoriesDataMap.put(SHOOTING, shootingDataPair);
-            categoriesDataMap.put(BALL_HANDLING, ballHandlingDataPair);
+//            categoriesDataMap.put(FUNDAMENTALS, fundamentalsDataPair);
+//            categoriesDataMap.put(DEFENSE, defenseDataPair);
+//            categoriesDataMap.put(OFFENSE, offenseDataPair);
+//            categoriesDataMap.put(CONDITIONING, conditioningDataPair);
+//            categoriesDataMap.put(SHOOTING, shootingDataPair);
+//            categoriesDataMap.put(BALL_HANDLING, ballHandlingDataPair);
         }
 
         public HashMap<String, String> getDetailsDataMap() {

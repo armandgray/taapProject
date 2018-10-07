@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Defaults/ Presets -->
+    <dimen name="icon_size_max">48dp</dimen>
+    <dimen name="icon_size_4xl">44dp</dimen>
+    <dimen name="icon_size_3xl">40dp</dimen>
+    <dimen name="icon_size_2xl">36dp</dimen>
+    <dimen name="icon_size_xlarge">32dp</dimen>
+    <dimen name="icon_size_large">28dp</dimen>
+    <dimen name="icon_size_normal">24dp</dimen>
+    <dimen name="icon_size_small">20dp</dimen>
+    <dimen name="icon_size_tiny">16dp</dimen>
+    <dimen name="icon_size_min">12dp</dimen>
+    <dimen name="text_size_huge">32sp</dimen>
+    <dimen name="text_size_large">28sp</dimen>
+    <dimen name="text_size_normal">24sp</dimen>
+    <dimen name="text_size_small">20sp</dimen>
+    <dimen name="text_size_tiny">16sp</dimen>
+    <dimen name="text_size_min">12sp</dimen>
+</resources>

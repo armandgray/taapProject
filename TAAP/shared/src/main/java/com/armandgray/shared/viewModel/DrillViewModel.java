@@ -1,24 +1,31 @@
 package com.armandgray.shared.viewModel;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModel;
-
 import com.armandgray.shared.application.TAAPApplication;
+import com.armandgray.shared.model.Drill;
 import com.armandgray.shared.model.PerformanceRate;
 
 import javax.inject.Inject;
 
-public class PercentageRateViewModel extends ViewModel {
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
+
+public class DrillViewModel extends ViewModel {
 
     @Inject
-    PerformanceRateRepository repository;
+    DrillRepository repository;
 
-    PercentageRateViewModel() {
+    DrillViewModel() {
         TAAPApplication.getAppComponent().inject(this);
+        System.out.println(this);
     }
 
-    public LiveData<PerformanceRate> getCurrentRate() {
-        return repository.getCurrentRate();
+    public LiveData<Drill> getDrill() {
+        return repository.getActiveDrill();
+    }
+
+    public LiveData<PerformanceRate> getPerformance() {
+        return repository.getPerformance();
     }
 
     public LiveData<PerformanceRate> getCompletionObserver() {
@@ -41,7 +48,17 @@ public class PercentageRateViewModel extends ViewModel {
         repository.addMiss();
     }
 
+    public void onDrillSelected(Drill drill) {
+        repository.setActiveDrill(drill);
+    }
+
     @Override
     protected void onCleared() {
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "@" + Integer.toHexString(hashCode());
     }
 }

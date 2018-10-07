@@ -1,8 +1,8 @@
 package com.armandgray.shared.application;
 
-import com.armandgray.shared.viewModel.PercentageRateViewModel;
+import com.armandgray.shared.viewModel.DrillViewModel;
 
 public interface TAAPAppComponent {
 
-    void inject(PercentageRateViewModel viewModel);
+    void inject(DrillViewModel viewModel);
 }

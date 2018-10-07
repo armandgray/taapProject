@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:spinnerItemStyle">@style/spinnerItemStyle</item>
         <item name="android:spinnerDropDownItemStyle">@style/spinnerDropDownItemStyle</item>
-        <item name="android:windowBackground">@color/colorLightGray</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
         <item name="android:textColorPrimary">@color/white</item>
     </style>
 
