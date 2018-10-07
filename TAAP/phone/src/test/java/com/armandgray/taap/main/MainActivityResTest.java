@@ -1,8 +1,6 @@
 package com.armandgray.taap.main;
 
 import android.content.Context;
-import androidx.appcompat.widget.PopupMenu;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
-import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
 
 import org.junit.After;
@@ -24,6 +21,9 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import androidx.appcompat.widget.PopupMenu;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
@@ -110,7 +110,7 @@ public class MainActivityResTest {
 
     @Test @Ignore
     public void existsLayout_DrillListItem() throws Exception {
-        LinearLayout drillListItem = (LinearLayout) View.inflate(context, R.layout.drill_listitem, null);
+        LinearLayout drillListItem = (LinearLayout) View.inflate(context, R.layout.drill_cell, null);
         assertNotNull(drillListItem);
     }
 

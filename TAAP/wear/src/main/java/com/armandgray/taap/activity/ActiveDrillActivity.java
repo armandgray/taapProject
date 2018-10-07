@@ -1,18 +1,15 @@
 package com.armandgray.taap.activity;
 
 import android.annotation.SuppressLint;
-import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.wear.activity.ConfirmationActivity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.armandgray.shared.model.Drill;
 import com.armandgray.shared.model.PerformanceRate;
-import com.armandgray.shared.viewModel.PercentageRateViewModel;
+import com.armandgray.shared.viewModel.DrillViewModel;
 import com.armandgray.taap.R;
 import com.armandgray.taap.navigation.Destination;
 import com.armandgray.taap.navigation.WearNavigationActivity;
@@ -20,6 +17,10 @@ import com.armandgray.taap.ui.MultiInputClickListener;
 
 import javax.inject.Inject;
 
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.wear.activity.ConfirmationActivity;
 import dagger.Module;
 import dagger.Provides;
 import dagger.android.AndroidInjection;
@@ -27,7 +28,7 @@ import dagger.android.AndroidInjection;
 public class ActiveDrillActivity extends WearNavigationActivity {
 
     @Inject
-    PercentageRateViewModel percentageRateViewModel;
+    DrillViewModel drillViewModel;
 
     private ConstraintLayout rootView;
     private TextView textDrill;
@@ -50,11 +51,11 @@ public class ActiveDrillActivity extends WearNavigationActivity {
     public void assignGlobalFields() {
         super.assignGlobalFields();
 
-        rootView = findViewById(R.id.rootView);
-        textDrill = findViewById(R.id.textDrill);
-        buttonMinus = findViewById(R.id.buttonMinus);
-        textRate = findViewById(R.id.textRate);
-        buttonPlus = findViewById(R.id.buttonPlus);
+        rootView = findViewById(R.id.root_view);
+        textDrill = findViewById(R.id.text_drill);
+        buttonMinus = findViewById(R.id.button_minus);
+        textRate = findViewById(R.id.text_rate);
+        buttonPlus = findViewById(R.id.button_plus);
     }
 
     @Override
@@ -74,8 +75,8 @@ public class ActiveDrillActivity extends WearNavigationActivity {
         rootView.setOnTouchListener(onMultiInputClick());
         textDrill.setOnClickListener(view -> navigationViewModel
                 .onNavigate(Destination.DRILL_PICKER));
-        buttonMinus.setOnClickListener(view -> percentageRateViewModel.onMinusClick());
-        buttonPlus.setOnClickListener(view -> percentageRateViewModel.onPlusClick());
+        buttonMinus.setOnClickListener(view -> drillViewModel.onMinusClick());
+        buttonPlus.setOnClickListener(view -> drillViewModel.onPlusClick());
     }
 
     @NonNull
@@ -83,12 +84,12 @@ public class ActiveDrillActivity extends WearNavigationActivity {
         return new MultiInputClickListener(new MultiInputClickListener.OnMultiInputClickListener() {
             @Override
             public void onSingleInputClick(View view) {
-                percentageRateViewModel.onSingleInputClick();
+                drillViewModel.onSingleInputClick();
             }
 
             @Override
             public void onDoubleInputClick(View view) {
-                percentageRateViewModel.onDoubleInputClick();
+                drillViewModel.onDoubleInputClick();
             }
         });
     }
@@ -97,17 +98,21 @@ public class ActiveDrillActivity extends WearNavigationActivity {
     public  void setupViewModel() {
         super.setupViewModel();
 
-        percentageRateViewModel.getCurrentRate().observe(this, this::onPerformanceRateChange);
-        percentageRateViewModel.getCompletionObserver().observe(this, this::onConfirmationChange);
+        drillViewModel.getDrill().observe(this, this::onDrillChanged);
+        drillViewModel.getPerformance().observe(this, this::onPerformanceRateChange);
+        drillViewModel.getCompletionObserver().observe(this, this::onConfirmationChange);
+    }
+
+    private void onDrillChanged(Drill drill) {
+        if (drill != null) {
+            textDrill.setText(drill.getTitle());
+        }
     }
 
     private void onPerformanceRateChange(PerformanceRate rate) {
-        if (rate == null) {
-            return;
+        if (rate != null) {
+            textRate.setText(rate.toString());
         }
-
-        textDrill.setText(rate.getDrill());
-        textRate.setText(rate.toString());
     }
 
     private void onConfirmationChange(PerformanceRate rate) {
@@ -125,13 +130,19 @@ public class ActiveDrillActivity extends WearNavigationActivity {
         startActivity(intent);
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "@" + Integer.toHexString(hashCode());
+    }
+
     @Module
     public static class ActivityModule
             extends WearNavigationActivity.NavigationModule<ActiveDrillActivity> {
 
         @Provides
-        PercentageRateViewModel providePercentageViewModel(ActiveDrillActivity activity) {
-            return ViewModelProviders.of(activity).get(PercentageRateViewModel.class);
+        DrillViewModel provideDrillViewModel(ActiveDrillActivity activity) {
+            return ViewModelProviders.of(activity).get(DrillViewModel.class);
         }
     }
 }

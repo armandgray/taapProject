@@ -12,7 +12,7 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.armandgray.taap.R;
-import com.armandgray.taap.models.Drill;
+import com.armandgray.shared.model.Drill;
 import com.armandgray.taap.models.SessionLog;
 import com.armandgray.taap.utils.LogSetsRvAdapter;
 

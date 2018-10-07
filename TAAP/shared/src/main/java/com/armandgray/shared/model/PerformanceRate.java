@@ -1,39 +1,31 @@
 package com.armandgray.shared.model;
 
-import androidx.annotation.NonNull;
-
 import java.util.Locale;
+
+import androidx.annotation.NonNull;
 
 public class PerformanceRate {
 
-    private String drill;
+    private static final int DEFAULT_MAX = 10;
+    private static final float DEFAULT_SUCCESS_RATE = 0.75f;
+
     private int count;
     private int total;
     private int max;
     private final float successRate;
 
-    public PerformanceRate(@NonNull String drill, int max, float successRate) {
-        if (max < 1) {
-            throw new IllegalArgumentException("max < 1");
-        }
-
-        this.drill = drill;
+    PerformanceRate() {
         this.count = 0;
         this.total = 0;
-        this.max = max;
-        this.successRate = successRate;
+        this.max = DEFAULT_MAX;
+        this.successRate = DEFAULT_SUCCESS_RATE;
     }
 
     public PerformanceRate(PerformanceRate clone) {
-        this.drill = clone.drill;
         this.count = clone.count;
         this.total = clone.total;
         this.max = clone.max;
         this.successRate = clone.successRate;
-    }
-
-    public String getDrill() {
-        return this.drill;
     }
 
     public int getCount() {
@@ -67,11 +59,6 @@ public class PerformanceRate {
     public void clear() {
         this.count = 0;
         this.total = 0;
-    }
-
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
     }
 
     @NonNull

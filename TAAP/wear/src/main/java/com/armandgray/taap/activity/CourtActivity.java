@@ -17,7 +17,7 @@ public class CourtActivity extends WearNavigationActivity {
 
         // Super
         super.onCreate(savedInstanceState);
-        super.setContentView(R.layout.court_picker);
+        super.setContentView(R.layout.activity_court);
         super.onSetupContent();
     }
 

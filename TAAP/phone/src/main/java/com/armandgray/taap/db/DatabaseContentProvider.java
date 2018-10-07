@@ -7,17 +7,16 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
 
-import com.armandgray.taap.models.Drill;
+import com.armandgray.shared.model.Drill;
 import com.armandgray.taap.models.SessionLog;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static com.armandgray.taap.utils.StringHelper.getArrayAsString;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 public class DatabaseContentProvider extends ContentProvider {
 
@@ -162,7 +161,7 @@ public class DatabaseContentProvider extends ContentProvider {
         ContentValues drillValues = getDrillContentValues(drill);
         Uri uri = context.getContentResolver().insert(CONTENT_URI_DRILLS, drillValues);
         if (uri != null) {
-            drill.setDrillId(Integer.parseInt(uri.getLastPathSegment()));
+//            drill.setId(Integer.parseInt(uri.getLastPathSegment()));
         }
     }
 
@@ -171,17 +170,17 @@ public class DatabaseContentProvider extends ContentProvider {
     static ContentValues getDrillContentValues(Drill drill) {
         ContentValues drillValues = new ContentValues();
         drillValues.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
-        drillValues.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageId());
-        drillValues.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(drill.getCategory()));
+        drillValues.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageResId());
+//        drillValues.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(drill.getCategory()));
         return drillValues;
     }
 
     public static void insertLogToDatabase(SessionLog sessionLog, Context context) {
         ContentValues logValues = getLogContentValues(sessionLog);
-        if (sessionLog.getDrill().getDrillId() == 0) {
+        if (sessionLog.getDrill().getId() == 0) {
             insertDrillToDatabase(sessionLog.getDrill(), context);
         }
-        logValues.put(LogsTable.COLUMN_DRILL, sessionLog.getDrill().getDrillId());
+        logValues.put(LogsTable.COLUMN_DRILL, sessionLog.getDrill().getId());
         Uri uri = context.getContentResolver().insert(CONTENT_URI_LOGS, logValues);
         if (uri != null) {
             sessionLog.setSessionId(Integer.parseInt(uri.getLastPathSegment()));

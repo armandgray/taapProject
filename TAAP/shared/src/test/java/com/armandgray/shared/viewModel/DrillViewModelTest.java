@@ -1,8 +1,5 @@
 package com.armandgray.shared.viewModel;
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
-import androidx.lifecycle.LiveData;
-
 import com.armandgray.shared.application.TAAPAppComponent;
 import com.armandgray.shared.application.TAAPApplication;
 import com.armandgray.shared.model.PerformanceRate;
@@ -22,13 +19,16 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.robolectric.annotation.Config;
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
+import androidx.lifecycle.LiveData;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
 @Config(manifest = Config.NONE)
-@PrepareForTest({PercentageRateViewModelTest.class, TAAPApplication.class})
+@PrepareForTest({DrillViewModelTest.class, TAAPApplication.class})
 @RunWith(PowerMockRunner.class)
-public class PercentageRateViewModelTest {
+public class DrillViewModelTest {
 
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
@@ -40,22 +40,22 @@ public class PercentageRateViewModelTest {
     private TAAPAppComponent mockComponent;
 
     @Mock
-    private PerformanceRateRepository mockRepository;
+    private DrillRepository mockRepository;
 
     @Mock
     private LiveData<PerformanceRate> mockPerformanceRate;
 
-    private PercentageRateViewModel testViewModel;
+    private DrillViewModel testViewModel;
 
     @Before
     public void setUp() {
         PowerMockito.mockStatic(TAAPApplication.class);
         PowerMockito.when(TAAPApplication.getAppComponent()).thenReturn(mockComponent);
 
-        testViewModel = new PercentageRateViewModel();
+        testViewModel = new DrillViewModel();
         testViewModel.repository = mockRepository;
 
-        Mockito.when(mockRepository.getCurrentRate()).thenReturn(mockPerformanceRate);
+        Mockito.when(mockRepository.getPerformance()).thenReturn(mockPerformanceRate);
         Mockito.when(mockRepository.getCompletionObserver()).thenReturn(mockPerformanceRate);
     }
 
@@ -67,7 +67,7 @@ public class PercentageRateViewModelTest {
 
     @Test
     public void testGetCurrentRate() {
-        Assert.assertThat(testViewModel.getCurrentRate(), is(notNullValue()));
+        Assert.assertThat(testViewModel.getPerformance(), is(notNullValue()));
     }
 
     @Test
@@ -103,6 +103,12 @@ public class PercentageRateViewModelTest {
     public void testOnCleared() {
         testViewModel.onCleared();
         // Nothing
+    }
+
+    @Test
+    public void testToString() {
+        Assert.assertThat(testViewModel.toString(),
+                is("DrillViewModel@" + Integer.toHexString(testViewModel.hashCode())));
     }
 
     @After

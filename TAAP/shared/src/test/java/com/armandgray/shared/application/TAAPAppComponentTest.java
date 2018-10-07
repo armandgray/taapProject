@@ -1,6 +1,6 @@
 package com.armandgray.shared.application;
 
-import com.armandgray.shared.viewModel.PercentageRateViewModel;
+import com.armandgray.shared.viewModel.DrillViewModel;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,7 +16,7 @@ public class TAAPAppComponentTest {
         TAAPAppComponent component = new TAAPAppComponent() {
 
             @Override
-            public void inject(PercentageRateViewModel viewModel) {
+            public void inject(DrillViewModel viewModel) {
             }
         };
 

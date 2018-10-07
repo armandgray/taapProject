@@ -3,7 +3,7 @@ package com.armandgray.taap.db;
 import android.content.Context;
 import android.database.Cursor;
 
-import com.armandgray.taap.models.Drill;
+import com.armandgray.shared.model.Drill;
 import com.armandgray.taap.models.SessionLog;
 
 import java.util.ArrayList;
@@ -13,7 +13,6 @@ import java.util.List;
 import static com.armandgray.taap.db.DatabaseContentProvider.ALL_TABLE_COLUMNS;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_ALL;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
-import static com.armandgray.taap.utils.StringHelper.getStringAsArray;
 
 public class CursorDataHelper {
 
@@ -42,12 +41,13 @@ public class CursorDataHelper {
         int columnImageId = cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID);
         int columnCategory = cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY);
 
-        Drill drill = new Drill(
-                cursor.getString(columnTitle),
-                cursor.getInt(columnImageId),
-                getStringAsArray(cursor.getString(columnCategory)));
-        drill.setDrillId(cursor.getInt(columnDrillId));
-        return drill;
+//        Drill drill = new Drill(
+//                cursor.getString(columnTitle),
+//                cursor.getInt(columnImageId),
+//                getStringAsArray(cursor.getString(columnCategory)));
+//        drill.setId(cursor.getInt(columnDrillId));
+//        return drill;
+        return null;
     }
 
     public static ArrayList<SessionLog> getAllLogsFromDatabase(Context context) {

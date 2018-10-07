@@ -64,7 +64,7 @@ class DrillDetailController implements DrillDetailViews.DrillDetailViewsListener
             return null;
         }
 
-        int drillId = views.drill.getDrillId();
+        int drillId = views.drill.getId();
         String[] selectionArgs = {String.valueOf(drillId)};
         Uri uri = Uri.parse(CONTENT_URI_ALL + "/" + drillId);
         return activity.getContentResolver()

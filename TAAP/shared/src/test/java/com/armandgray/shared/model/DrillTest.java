@@ -1,27 +1,99 @@
 package com.armandgray.shared.model;
 
+import com.armandgray.shared.R;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Collections;
+import java.util.List;
+
+import static com.armandgray.shared.model.Drill.Category.SHOOTING_FUNDAMENTALS;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.notNullValue;
 
 public class DrillTest {
 
     private static final String TEST_TITLE = "TEST_TITLE";
+    private static final int TEST_IMAGE_RES_ID = 3;
+    private static final List<Drill.Category> TEST_CATEGORY;
+
+    static {
+        TEST_CATEGORY = Collections.singletonList(Drill.Category.SHOOTING);
+    }
 
     private Drill testDrill;
 
     @Before
     public void setUp() {
-        testDrill = new Drill(TEST_TITLE);
+        testDrill = new Drill(TEST_TITLE, TEST_IMAGE_RES_ID, TEST_CATEGORY);
     }
 
     @Test
-    public void getTitle() {
+    public void testGetId() {
+        Assert.assertThat(testDrill.getId(), is(TEST_TITLE.hashCode()));
+    }
+
+    @Test
+    public void testGetTitle() {
         Assert.assertThat(testDrill.getTitle(), is(TEST_TITLE));
+    }
+
+    @Test
+    public void testGetImageResId() {
+        Assert.assertThat(testDrill.getImageResId(), is(TEST_IMAGE_RES_ID));
+    }
+
+    @Test
+    public void testGetCategory() {
+        Assert.assertThat(testDrill.getCategory(), is(TEST_CATEGORY));
+    }
+
+    @Test
+    public void testGetPerformance() {
+        Assert.assertThat(testDrill.getPerformance(), is(notNullValue()));
+    }
+
+    @Test
+    public void testIsActive() {
+        Assert.assertThat(testDrill.isActive(), is(false));
+    }
+
+    @Test
+    public void testSetActive() {
+        testDrill.setActive(true);
+        Assert.assertThat(testDrill.isActive(), is(true));
+    }
+
+    @Test
+    public void testToString() {
+        Assert.assertThat(testDrill.toString(), is(String.format("Drill{%s:%s}",
+                TEST_TITLE, TEST_CATEGORY.toString())));
+    }
+
+    @Test
+    public void testCategoryAsList() {
+        List<Drill.Category> actual = Drill.Category.asList(Drill.Category.SHOOTING);
+        Assert.assertThat(actual.size(), is(1));
+        Assert.assertThat(actual.contains(Drill.Category.SHOOTING), is(true));
+    }
+
+    @Test
+    public void testDefaultsGetDefault() {
+        Drill actual = Drill.Defaults.getDefault();
+        String expectedTitle = "Free Throws";
+        Assert.assertThat(actual.getId(), is(expectedTitle.hashCode()));
+        Assert.assertThat(actual.getTitle(), is(expectedTitle));
+        Assert.assertThat(actual.getImageResId(), is(R.drawable.ic_dribbble_white_48dp));
+        Assert.assertThat(actual.getCategory(), is(SHOOTING_FUNDAMENTALS));
+        Assert.assertThat(actual.getPerformance(), is(notNullValue()));
+    }
+
+    @Test
+    public void testDefaultsGetDefaults() {
+        Assert.assertThat(Drill.Defaults.getDefaults().size(), is(19));
     }
 
     @After

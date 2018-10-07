@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TAAP</string>
+    <string name="active">Active</string>
 </resources>

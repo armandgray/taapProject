@@ -3,6 +3,8 @@ package com.armandgray.taap.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.armandgray.shared.model.Drill;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -197,7 +199,7 @@ public class SessionLog implements Parcelable {
         dest.writeInt(this.repsCompleted);
         dest.writeDouble(this.successRate);
         dest.writeDouble(this.successRecord);
-        dest.writeParcelable(this.drill, flags);
+//        dest.writeParcelable(this.drill, flags);
         dest.writeInt(this.sessionId);
     }
 

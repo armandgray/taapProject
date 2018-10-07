@@ -1,7 +1,5 @@
 package com.armandgray.taap.navigation;
 
-import androidx.wear.widget.drawer.WearableActionDrawerView;
-import androidx.wear.widget.drawer.WearableNavigationDrawerView;
 import android.view.MenuItem;
 
 import com.armandgray.shared.navigation.NavigationActivity;
@@ -14,6 +12,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import androidx.wear.widget.drawer.WearableActionDrawerView;
+import androidx.wear.widget.drawer.WearableNavigationDrawerView;
 import dagger.Module;
 
 public abstract class WearNavigationActivity extends NavigationActivity implements
@@ -37,7 +37,7 @@ public abstract class WearNavigationActivity extends NavigationActivity implemen
 
     @Override
     public void setupVisualElements() {
-        drawerAdapter.updateItems(WearNavigationDefaults.getNavigationDrawerActions(this));
+        drawerAdapter.updateItems(WearNavigationActivity.Defaults.getDefaults(this));
         wearableNavigationDrawer.setAdapter(drawerAdapter);
         wearableNavigationDrawer.setCurrentItem(0, true);
         wearableNavigationDrawer.getController().peekDrawer();
@@ -78,12 +78,13 @@ public abstract class WearNavigationActivity extends NavigationActivity implemen
             extends NavigationActivity.NavigationModule<A> {
     }
 
-    static final class WearNavigationDefaults {
+    static final class Defaults {
 
-        private WearNavigationDefaults() {
+        private Defaults() {
+            // Helper
         }
 
-        static List<NavigationDrawerItem<Destination<?>>> getNavigationDrawerActions(
+        static List<NavigationDrawerItem<Destination<?>>> getDefaults(
                 WearNavigationActivity activity) {
             List<NavigationDrawerItem<Destination<?>>> actions = new ArrayList<>();
             actions.add(new NavigationDrawerItem<>(Destination.COURT,

@@ -2,6 +2,8 @@ package com.armandgray.taap.models;
 
 import android.os.Parcelable;
 
+import com.armandgray.shared.model.Drill;
+
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -23,7 +25,7 @@ public class SessionLogTest {
                 .repsCompleted(3)
                 .successRate(0.23)
                 .successRecord(0.55)
-                .drill(new Drill("", 0, Drill.SHOOTING_ARRAY))
+                .drill(new Drill("", 0, Drill.Category.SHOOTING_ONLY))
                 .create();
         assertNotNull(sessionLog);
         assertNotNull(sessionLog.getSessionId());

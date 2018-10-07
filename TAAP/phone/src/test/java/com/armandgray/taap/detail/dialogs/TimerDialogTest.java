@@ -2,35 +2,28 @@ package com.armandgray.taap.detail.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.fragment.app.DialogFragment;
 import android.view.View;
 import android.view.Window;
 
-import com.armandgray.taap.BuildConfig;
 import com.armandgray.taap.R;
 import com.armandgray.taap.detail.DrillDetailActivity;
-import com.armandgray.taap.models.Drill;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlertDialog;
 import org.robolectric.shadows.ShadowDialog;
 
-import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DELETE_ALL_DATA;
-import static com.armandgray.taap.detail.dialogs.DetailSummaryDialog.DIALOG;
-import static com.armandgray.taap.main.MainActivity.SELECTED_DRILL;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.fragment.app.DialogFragment;
+
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
@@ -47,14 +40,14 @@ public class TimerDialogTest {
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
-        Intent intent = new Intent(RuntimeEnvironment.application, DrillDetailActivity.class);
-        intent.putExtra(SELECTED_DRILL, new Drill("Beat-the-Pro (Mid-Range)",
-                R.drawable.ic_fitness_center_white_24dp,
-                Drill.SHOOTING_ARRAY));
-        activityController = Robolectric.buildActivity(DrillDetailActivity.class).newIntent(intent);
-        activity = activityController.create().start().resume().visible().get();
-        dialog = new TimerDialog();
-        dialog.show(activity.getSupportFragmentManager(), DIALOG);
+//        Intent intent = new Intent(RuntimeEnvironment.application, DrillDetailActivity.class);
+//        intent.putExtra(SELECTED_DRILL, new Drill("Beat-the-Pro (Mid-Range)",
+//                R.drawable.ic_fitness_center_white_24dp,
+//                Drill.Category.SHOOTING_ONLY));
+//        activityController = Robolectric.buildActivity(DrillDetailActivity.class).newIntent(intent);
+//        activity = activityController.create().start().resume().visible().get();
+//        dialog = new TimerDialog();
+//        dialog.show(activity.getSupportFragmentManager(), DIALOG);
     }
 
     @Test @Ignore
@@ -137,12 +130,12 @@ public class TimerDialogTest {
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
-        dialog.dismiss();
-        activity.getContentResolver().delete(CONTENT_URI_DELETE_ALL_DATA, null, null);
-        activity.finish();
-        activityController.pause().stop().destroy();
-        activity = null;
-        dialog = null;
+//        dialog.dismiss();
+//        activity.getContentResolver().delete(CONTENT_URI_DELETE_ALL_DATA, null, null);
+//        activity.finish();
+//        activityController.pause().stop().destroy();
+//        activity = null;
+//        dialog = null;
     }
 
 }

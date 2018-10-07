@@ -1,10 +1,5 @@
 package com.armandgray.taap.log;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
-import androidx.core.util.Pair;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,17 +14,16 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.util.Pair;
+
 import static com.armandgray.taap.db.LogsDataModel.LogDataContainer.TOTAL_ACTIVE_WORK;
 import static com.armandgray.taap.db.LogsDataModel.LogDataContainer.TOTAL_EXERCISES_COMPLETED;
 import static com.armandgray.taap.db.LogsDataModel.LogDataContainer.TOTAL_REPS_COMPLETED;
 import static com.armandgray.taap.db.LogsDataModel.LogDataContainer.TOTAL_REST_TIME;
 import static com.armandgray.taap.db.LogsDataModel.LogDataContainer.TOTAL_SESSION_TIME;
-import static com.armandgray.taap.models.Drill.BALL_HANDLING;
-import static com.armandgray.taap.models.Drill.CONDITIONING;
-import static com.armandgray.taap.models.Drill.DEFENSE;
-import static com.armandgray.taap.models.Drill.FUNDAMENTALS;
-import static com.armandgray.taap.models.Drill.OFFENSE;
-import static com.armandgray.taap.models.Drill.SHOOTING;
 
 public class LogActivityViews implements ActivitySetupHelper.ActivityViewsInterface {
 
@@ -151,12 +145,12 @@ public class LogActivityViews implements ActivitySetupHelper.ActivityViewsInterf
         ((TextView) layoutRepsCompleted.findViewById(R.id.tvText)).setText(detailsDataMap.get(TOTAL_REPS_COMPLETED));
         ((TextView) layoutExercisesCompleted.findViewById(R.id.tvText)).setText(detailsDataMap.get(TOTAL_EXERCISES_COMPLETED));
 
-        setDataValuesForRecordLayout(layoutFundamentals, categoriesDataMap.get(FUNDAMENTALS));
-        setDataValuesForRecordLayout(layoutDefense, categoriesDataMap.get(DEFENSE));
-        setDataValuesForRecordLayout(layoutOffense, categoriesDataMap.get(OFFENSE));
-        setDataValuesForRecordLayout(layoutConditioning, categoriesDataMap.get(CONDITIONING));
-        setDataValuesForRecordLayout(layoutShooting, categoriesDataMap.get(SHOOTING));
-        setDataValuesForRecordLayout(layoutBallHandling, categoriesDataMap.get(BALL_HANDLING));
+//        setDataValuesForRecordLayout(layoutFundamentals, categoriesDataMap.get(FUNDAMENTALS));
+//        setDataValuesForRecordLayout(layoutDefense, categoriesDataMap.get(DEFENSE));
+//        setDataValuesForRecordLayout(layoutOffense, categoriesDataMap.get(OFFENSE));
+//        setDataValuesForRecordLayout(layoutConditioning, categoriesDataMap.get(CONDITIONING));
+//        setDataValuesForRecordLayout(layoutShooting, categoriesDataMap.get(SHOOTING));
+//        setDataValuesForRecordLayout(layoutBallHandling, categoriesDataMap.get(BALL_HANDLING));
     }
 
     private void setDataValuesForRecordLayout(LinearLayout layout, Pair<String, String> data) {
