@@ -46,7 +46,7 @@ public class DrillPickerActivity extends TAAPActivity {
     }
 
     @Override
-    protected void setupVisualElements() {
+    protected void setupVisualElements(boolean showActionDrawer) {
         drillAdapter.updateData(Drill.Defaults.getDefaults());
         recyclerPicker.setAdapter(drillAdapter);
         recyclerPicker.setEdgeItemsCenteringEnabled(true);
@@ -64,6 +64,9 @@ public class DrillPickerActivity extends TAAPActivity {
 
     @Override
     protected void setupViewModel() {
+        drillViewModel.getDrills().observe(this, drillAdapter::updateData);
+        drillViewModel.getActiveDrill().observe(this,
+                drill -> recyclerPicker.smoothScrollToPosition(drillAdapter.indexOf(drill)));
     }
 
     @NonNull
@@ -75,7 +78,9 @@ public class DrillPickerActivity extends TAAPActivity {
     @Module
     public static class ActivityModule {
 
+        @SuppressWarnings("unused")
         @Provides
+        @NonNull
         DrillViewModel provideDrillViewModel(DrillPickerActivity activity) {
             return ViewModelProviders.of(activity).get(DrillViewModel.class);
         }

@@ -2,7 +2,9 @@ package com.armandgray.shared.viewModel;
 
 import com.armandgray.shared.application.TAAPApplication;
 import com.armandgray.shared.model.Drill;
-import com.armandgray.shared.model.PerformanceRate;
+import com.armandgray.shared.model.Performance;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -17,18 +19,21 @@ public class DrillViewModel extends ViewModel {
 
     DrillViewModel() {
         TAAPApplication.getAppComponent().inject(this);
-        System.out.println(this);
     }
 
-    public LiveData<Drill> getDrill() {
+    public LiveData<List<Drill>> getDrills() {
+        return repository.getDrills();
+    }
+
+    public LiveData<Drill> getActiveDrill() {
         return repository.getActiveDrill();
     }
 
-    public LiveData<PerformanceRate> getPerformance() {
+    public LiveData<Performance> getPerformance() {
         return repository.getPerformance();
     }
 
-    public LiveData<PerformanceRate> getCompletionObserver() {
+    public LiveData<Performance> getCompletionObserver() {
         return repository.getCompletionObserver();
     }
 

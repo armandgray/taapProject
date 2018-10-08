@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<com.otaliastudios.zoom.ZoomImageView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root_view"
+    android:id="@+id/zoom_image_court"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:showIn="@layout/activity_court">
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    android:scrollbars="vertical|horizontal"
+    app:horizontalPanEnabled="true"
+    app:maxZoom="3.0"
+    app:maxZoomType="zoom"
+    app:minZoom="0.7"
+    app:minZoomType="zoom"
+    app:overPinchable="true"
+    app:overScrollHorizontal="true"
+    app:overScrollVertical="true"
+    app:srcCompat="@drawable/ncaa_basketball_full_court_hardwood"
+    app:verticalPanEnabled="true"
+    app:zoomEnabled="true"
+    tools:showIn="@layout/activity_court"/>

@@ -2,7 +2,8 @@ package com.armandgray.shared.viewModel;
 
 import com.armandgray.shared.application.TAAPAppComponent;
 import com.armandgray.shared.application.TAAPApplication;
-import com.armandgray.shared.model.PerformanceRate;
+import com.armandgray.shared.model.Drill;
+import com.armandgray.shared.model.Performance;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -19,6 +20,8 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.robolectric.annotation.Config;
 
+import java.util.List;
+
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.LiveData;
 
@@ -30,6 +33,9 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 @RunWith(PowerMockRunner.class)
 public class DrillViewModelTest {
 
+    @SuppressWarnings("ConstantConditions")
+    private static final Drill TEST_DRILL = new Drill("TEST_TITLE", 3, null);
+
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
 
@@ -37,13 +43,19 @@ public class DrillViewModelTest {
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
     @Mock
-    private TAAPAppComponent mockComponent;
+    TAAPAppComponent mockComponent;
 
     @Mock
-    private DrillRepository mockRepository;
+    DrillRepository mockRepository;
 
     @Mock
-    private LiveData<PerformanceRate> mockPerformanceRate;
+    LiveData<Performance> mockPerformanceRate;
+
+    @Mock
+    LiveData<List<Drill>> mockDrills;
+
+    @Mock
+    LiveData<Drill> mockActiveDrill;
 
     private DrillViewModel testViewModel;
 
@@ -55,6 +67,8 @@ public class DrillViewModelTest {
         testViewModel = new DrillViewModel();
         testViewModel.repository = mockRepository;
 
+        Mockito.when(mockRepository.getDrills()).thenReturn(mockDrills);
+        Mockito.when(mockRepository.getActiveDrill()).thenReturn(mockActiveDrill);
         Mockito.when(mockRepository.getPerformance()).thenReturn(mockPerformanceRate);
         Mockito.when(mockRepository.getCompletionObserver()).thenReturn(mockPerformanceRate);
     }
@@ -63,6 +77,16 @@ public class DrillViewModelTest {
     public void testConstructor_DoesInjectDependencies() {
         // TODO Implement remaining tests
         Mockito.verify(mockComponent, Mockito.times(1)).inject(testViewModel);
+    }
+
+    @Test
+    public void testGetDrills() {
+        Assert.assertThat(testViewModel.getDrills(), is(notNullValue()));
+    }
+
+    @Test
+    public void testGetActiveDrill() {
+        Assert.assertThat(testViewModel.getActiveDrill(), is(notNullValue()));
     }
 
     @Test
@@ -97,6 +121,12 @@ public class DrillViewModelTest {
     public void testOnDoubleInputClick_AddsMiss() {
         testViewModel.onDoubleInputClick();
         Mockito.verify(mockRepository, Mockito.only()).addMiss();
+    }
+
+    @Test
+    public void testOnDrillSelected_DoesSetActiveDrill() {
+        testViewModel.onDrillSelected(TEST_DRILL);
+        Mockito.verify(mockRepository, Mockito.times(1)).setActiveDrill(TEST_DRILL);
     }
 
     @Test

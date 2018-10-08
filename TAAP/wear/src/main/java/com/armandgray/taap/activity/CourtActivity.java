@@ -4,11 +4,14 @@ import android.os.Bundle;
 
 import com.armandgray.taap.R;
 import com.armandgray.taap.navigation.WearNavigationActivity;
+import com.otaliastudios.zoom.ZoomImageView;
 
 import dagger.Module;
 import dagger.android.AndroidInjection;
 
 public class CourtActivity extends WearNavigationActivity {
+
+    private ZoomImageView zoomImageCourt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +27,16 @@ public class CourtActivity extends WearNavigationActivity {
     @Override
     public void assignGlobalFields() {
         super.assignGlobalFields();
+
+        zoomImageCourt = findViewById(R.id.zoom_image_court);
     }
 
     @Override
-    public void setupVisualElements() {
-        super.setupVisualElements();
+    public void setupVisualElements(boolean showActionDrawer) {
+        super.setupVisualElements(showActionDrawer);
+
+        zoomImageCourt.setImageDrawable(
+                getDrawable(R.drawable.ncaa_basketball_full_court_hardwood));
     }
 
     @Override

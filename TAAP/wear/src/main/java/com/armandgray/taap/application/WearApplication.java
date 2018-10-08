@@ -16,9 +16,9 @@ public class WearApplication extends TAAPApplication {
 
     @Override
     public void onCreate() {
-        super.onCreate();
-
         initDagger();
+
+        super.onCreate();
     }
 
     private void initDagger() {

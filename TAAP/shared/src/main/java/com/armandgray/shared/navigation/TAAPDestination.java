@@ -1,8 +1,9 @@
 package com.armandgray.shared.navigation;
 
-import androidx.annotation.NonNull;
-
 import java.util.Locale;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public abstract class TAAPDestination<T> {
 
@@ -14,6 +15,17 @@ public abstract class TAAPDestination<T> {
 
     protected Class<T> getDestinationClass() {
         return destinationClass;
+    }
+
+    @Override
+    public int hashCode() {
+        return getDestinationClass().hashCode();
+    }
+
+    @Override
+    public boolean equals(@Nullable Object that) {
+        return that instanceof TAAPDestination
+                && this.destinationClass == ((TAAPDestination) that).destinationClass;
     }
 
     @NonNull

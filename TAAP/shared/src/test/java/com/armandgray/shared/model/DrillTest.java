@@ -1,7 +1,5 @@
 package com.armandgray.shared.model;
 
-import com.armandgray.shared.R;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -10,7 +8,6 @@ import org.junit.Test;
 import java.util.Collections;
 import java.util.List;
 
-import static com.armandgray.shared.model.Drill.Category.SHOOTING_FUNDAMENTALS;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
@@ -33,7 +30,7 @@ public class DrillTest {
 
     @Test
     public void testGetId() {
-        Assert.assertThat(testDrill.getId(), is(TEST_TITLE.hashCode()));
+        Assert.assertThat(testDrill.getId(), is(0));
     }
 
     @Test
@@ -62,6 +59,34 @@ public class DrillTest {
     }
 
     @Test
+    public void testSetId() {
+        int expected = 12;
+        testDrill.setId(expected);
+        Assert.assertThat(testDrill.getId(), is(expected));
+    }
+
+    @Test
+    public void testSetTitle() {
+        String expected = "12";
+        testDrill.setTitle(expected);
+        Assert.assertThat(testDrill.getTitle(), is(expected));
+    }
+
+    @Test
+    public void testSetImageResId() {
+        int expected = 12;
+        testDrill.setImageResId(expected);
+        Assert.assertThat(testDrill.getImageResId(), is(expected));
+    }
+
+    @Test
+    public void testSetCategory() {
+        int expected = 12;
+        testDrill.setId(expected);
+        Assert.assertThat(testDrill.getId(), is(expected));
+    }
+
+    @Test
     public void testSetActive() {
         testDrill.setActive(true);
         Assert.assertThat(testDrill.isActive(), is(true));
@@ -81,14 +106,15 @@ public class DrillTest {
     }
 
     @Test
-    public void testDefaultsGetDefault() {
-        Drill actual = Drill.Defaults.getDefault();
-        String expectedTitle = "Free Throws";
-        Assert.assertThat(actual.getId(), is(expectedTitle.hashCode()));
-        Assert.assertThat(actual.getTitle(), is(expectedTitle));
-        Assert.assertThat(actual.getImageResId(), is(R.drawable.ic_dribbble_white_48dp));
-        Assert.assertThat(actual.getCategory(), is(SHOOTING_FUNDAMENTALS));
-        Assert.assertThat(actual.getPerformance(), is(notNullValue()));
+    public void testCategoryConverter_ToCategories() {
+        Assert.assertThat(Drill.Category.Converter.toCategories("[\"SHOOTING\",\"FUNDAMENTALS\"]"),
+                is(Drill.Category.SHOOTING_FUNDAMENTALS));
+    }
+
+    @Test
+    public void testCategoryConverter_ToString() {
+        Assert.assertThat(Drill.Category.Converter.toString(Drill.Category.SHOOTING_FUNDAMENTALS),
+                is("[\"SHOOTING\",\"FUNDAMENTALS\"]"));
     }
 
     @Test

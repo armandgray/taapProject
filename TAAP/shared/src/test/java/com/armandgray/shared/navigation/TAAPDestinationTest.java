@@ -1,7 +1,6 @@
 package com.armandgray.shared.navigation;
 
 import android.app.Activity;
-import androidx.annotation.NonNull;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -23,6 +22,17 @@ public class TAAPDestinationTest {
     @Test
     public void testGetDestinationClass() {
         Assert.assertThat(testDestination.getDestinationClass(), equalTo(Activity.class));
+    }
+
+    @Test
+    public void testHashCode() {
+        Assert.assertThat(testDestination.hashCode(), is(Activity.class.hashCode()));
+    }
+
+    @Test
+    public void testEquals() {
+        TAAPDestination<Activity> expected = new TAAPDestination<Activity>(Activity.class) {};
+        Assert.assertThat(testDestination, is(expected));
     }
 
     @Test

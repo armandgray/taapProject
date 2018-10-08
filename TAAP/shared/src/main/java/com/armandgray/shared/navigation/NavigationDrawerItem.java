@@ -1,16 +1,19 @@
 package com.armandgray.shared.navigation;
 
 import android.graphics.drawable.Drawable;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+
 
 public class NavigationDrawerItem<D extends TAAPDestination<?>> {
 
-    private static final Set<NavigationDrawerItem> ITEMS = new HashSet<>();
+    @VisibleForTesting
+    static final Set<NavigationDrawerItem> ITEMS = new HashSet<>();
 
     @Nullable
     private final Drawable drawable;
@@ -45,14 +48,15 @@ public class NavigationDrawerItem<D extends TAAPDestination<?>> {
     @NonNull
     @Override
     public String toString() {
-        return String.format("NavAction{%s}", destination);
+        return String.format("NavigationDrawerItem{%s}", destination);
     }
 
     @Nullable
-    public static <D extends TAAPDestination<?>> NavigationDrawerItem<?> getAction(D destination) {
-        for (NavigationDrawerItem<?> action : ITEMS) {
-            if (action.destination == destination) {
-                return action;
+    public static <D extends TAAPDestination<?>> NavigationDrawerItem<?> getItem(D destination) {
+        for (NavigationDrawerItem<?> item : ITEMS) {
+            System.out.println(item + " , " + destination);
+            if (item.destination.equals(destination)) {
+                return item;
             }
         }
 

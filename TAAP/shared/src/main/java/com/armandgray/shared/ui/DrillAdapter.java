@@ -16,6 +16,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -44,14 +45,20 @@ public class DrillAdapter extends RecyclerView.Adapter<DrillAdapter.DrillViewHol
         return list.size();
     }
 
-    public void updateData(List<Drill> drills) {
-        this.list.clear();
-        this.list.addAll(drills);
-        notifyDataSetChanged();
+    public void updateData(@Nullable List<Drill> drills) {
+        if (drills != null) {
+            this.list.clear();
+            this.list.addAll(drills);
+            notifyDataSetChanged();
+        }
     }
 
     public Drill getItem(int position) {
         return list.get(position);
+    }
+
+    public int indexOf(@Nullable Drill drill) {
+        return drill == null ? 0 : list.indexOf(drill);
     }
 
     static class DrillViewHolder extends RecyclerView.ViewHolder {

@@ -36,16 +36,18 @@ public abstract class WearNavigationActivity extends NavigationActivity implemen
     }
 
     @Override
-    public void setupVisualElements() {
+    public void setupVisualElements(boolean showActionDrawer) {
         drawerAdapter.updateItems(WearNavigationActivity.Defaults.getDefaults(this));
         wearableNavigationDrawer.setAdapter(drawerAdapter);
         wearableNavigationDrawer.setCurrentItem(0, true);
         wearableNavigationDrawer.getController().peekDrawer();
         wearableNavigationDrawer.addOnItemSelectedListener(this);
 
-        wearableActionDrawer.getController().peekDrawer();
         wearableActionDrawer.setPeekOnScrollDownEnabled(true);
         wearableActionDrawer.setOnMenuItemClickListener(this);
+        if (showActionDrawer) {
+            wearableActionDrawer.getController().peekDrawer();
+        }
     }
 
     @Override
@@ -102,7 +104,7 @@ public abstract class WearNavigationActivity extends NavigationActivity implemen
 
         private static void moveCurrentToTop(List<NavigationDrawerItem<Destination<?>>> actions,
                                              WearNavigationActivity activity) {
-            NavigationDrawerItem<?> genericItem = NavigationDrawerItem.getAction(
+            NavigationDrawerItem<?> genericItem = NavigationDrawerItem.getItem(
                     Destination.getDestination(activity.getClass()));
             if (genericItem != null) {
                 NavigationDrawerItem<Destination<?>> item = actions.get(actions.indexOf(genericItem));

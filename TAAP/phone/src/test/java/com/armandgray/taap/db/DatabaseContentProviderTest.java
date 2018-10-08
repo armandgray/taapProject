@@ -342,7 +342,7 @@ public class DatabaseContentProviderTest {
 //    @Test @Ignore
 //    public void canQueryDatabaseForAllColumnsUsingContentProvider() {
 //        insertLogToDatabase(TEST_SESSION_LOG, RuntimeEnvironment.application);
-//        insertDrillToDatabase(TEST_SESSION_LOG.getDrill(), RuntimeEnvironment.application);
+//        insertDrillToDatabase(TEST_SESSION_LOG.getActiveDrill(), RuntimeEnvironment.application);
 //
 //        Cursor cursor = RuntimeEnvironment.application.getContentResolver()
 //                .query(CONTENT_URI_ALL, ALL_TABLE_COLUMNS, null, null, null);
@@ -355,9 +355,9 @@ public class DatabaseContentProviderTest {
 //    @Test @Ignore
 //    public void canQueryDatabaseOnSingleDrill_ForAllColumnsUsingContentProvider() {
 //        insertLogToDatabase(TEST_SESSION_LOG, RuntimeEnvironment.application);
-//        insertDrillToDatabase(TEST_SESSION_LOG.getDrill(), RuntimeEnvironment.application);
+//        insertDrillToDatabase(TEST_SESSION_LOG.getActiveDrill(), RuntimeEnvironment.application);
 //
-//        int drillId = TEST_SESSION_LOG.getDrill().getId();
+//        int drillId = TEST_SESSION_LOG.getActiveDrill().getId();
 //        String[] selectionArgs = {String.valueOf(drillId)};
 //        Uri uri = Uri.parse(CONTENT_URI_ALL + "/" + drillId);
 //        Cursor cursor = RuntimeEnvironment.application.getContentResolver()
@@ -453,7 +453,7 @@ public class DatabaseContentProviderTest {
 //                cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_REPS_COMPLETED)));
 //        assertEquals(sessionLog.getSuccessRate(),
 //                cursor.getDouble(cursor.getColumnIndex(LogsTable.COLUMN_SUCCESS)));
-//        assertEquals(sessionLog.getDrill().getId(),
+//        assertEquals(sessionLog.getActiveDrill().getId(),
 //                cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_DRILL)));
 //    }
 //
@@ -461,13 +461,13 @@ public class DatabaseContentProviderTest {
 //        assertEquals(1, cursor.getCount());
 //        assertTrue(cursor.moveToFirst());
 //        assertThat(ALL_TABLE_COLUMNS, is(cursor.getColumnNames()));
-//        assertEquals(sessionLog.getDrill().getId(),
+//        assertEquals(sessionLog.getActiveDrill().getId(),
 //                cursor.getInt(cursor.getColumnIndex(DrillsTable.DRILL_ID)));
-//        assertEquals(sessionLog.getDrill().getTitle(),
+//        assertEquals(sessionLog.getActiveDrill().getTitle(),
 //                cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
-//        assertEquals(sessionLog.getDrill().getImageResId(),
+//        assertEquals(sessionLog.getActiveDrill().getImageResId(),
 //                cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
-//        assertThat(sessionLog.getDrill().getCategory(), is(getStringAsArray(cursor.getString(
+//        assertThat(sessionLog.getActiveDrill().getCategory(), is(getStringAsArray(cursor.getString(
 //                cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)))));
 //        assertEquals(sessionLog.getSessionId(),
 //                cursor.getInt(cursor.getColumnIndex(LogsTable.LOG_ID)));
@@ -487,7 +487,7 @@ public class DatabaseContentProviderTest {
 //                cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_REPS_COMPLETED)));
 //        assertEquals(sessionLog.getSuccessRate(),
 //                cursor.getDouble(cursor.getColumnIndex(LogsTable.COLUMN_SUCCESS)));
-//        assertEquals(sessionLog.getDrill().getId(),
+//        assertEquals(sessionLog.getActiveDrill().getId(),
 //                cursor.getInt(cursor.getColumnIndex(LogsTable.COLUMN_DRILL)));
 //    }
 

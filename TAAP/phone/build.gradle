@@ -5,7 +5,7 @@ android {
 
     defaultConfig {
         applicationId "com.armandgray.taap"
-        minSdkVersion 23
+        minSdkVersion 24
         targetSdkVersion 28
         versionCode 28022060 // targetSDK/apkCode(phone: 02)/productVersion
         versionName "2.0.60"
