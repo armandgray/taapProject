@@ -1,12 +1,13 @@
 package com.armandgray.shared.navigation;
 
-import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
 
 import com.armandgray.shared.application.TAAPActivity;
 
 import javax.inject.Inject;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProviders;
 import dagger.Module;
 import dagger.Provides;
 import io.reactivex.annotations.Nullable;
@@ -43,6 +44,7 @@ public abstract class NavigationActivity extends TAAPActivity implements Navigat
 
         @SuppressWarnings("WeakerAccess")
         @Provides
+        @NonNull
         public NavigationViewModel provideNavigationViewModel(A activity) {
             return ViewModelProviders.of(activity).get(NavigationViewModel.class);
         }

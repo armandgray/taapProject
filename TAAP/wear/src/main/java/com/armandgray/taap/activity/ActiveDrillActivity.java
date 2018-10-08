@@ -8,7 +8,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.armandgray.shared.model.Drill;
-import com.armandgray.shared.model.PerformanceRate;
+import com.armandgray.shared.model.Performance;
 import com.armandgray.shared.viewModel.DrillViewModel;
 import com.armandgray.taap.R;
 import com.armandgray.taap.navigation.Destination;
@@ -18,6 +18,7 @@ import com.armandgray.taap.ui.MultiInputClickListener;
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.wear.activity.ConfirmationActivity;
@@ -59,8 +60,8 @@ public class ActiveDrillActivity extends WearNavigationActivity {
     }
 
     @Override
-    public  void setupVisualElements() {
-        super.setupVisualElements();
+    public  void setupVisualElements(boolean showActionDrawer) {
+        super.setupVisualElements(true);
 
         textDrill.setBackgroundResource(R.drawable.bg_round_outline);
         buttonMinus.setImageResource(R.drawable.ic_remove_white_24dp);
@@ -98,24 +99,24 @@ public class ActiveDrillActivity extends WearNavigationActivity {
     public  void setupViewModel() {
         super.setupViewModel();
 
-        drillViewModel.getDrill().observe(this, this::onDrillChanged);
+        drillViewModel.getActiveDrill().observe(this, this::onDrillChanged);
         drillViewModel.getPerformance().observe(this, this::onPerformanceRateChange);
         drillViewModel.getCompletionObserver().observe(this, this::onConfirmationChange);
     }
 
-    private void onDrillChanged(Drill drill) {
+    private void onDrillChanged(@Nullable Drill drill) {
         if (drill != null) {
             textDrill.setText(drill.getTitle());
         }
     }
 
-    private void onPerformanceRateChange(PerformanceRate rate) {
+    private void onPerformanceRateChange(@Nullable Performance rate) {
         if (rate != null) {
             textRate.setText(rate.toString());
         }
     }
 
-    private void onConfirmationChange(PerformanceRate rate) {
+    private void onConfirmationChange(@Nullable Performance rate) {
         if (rate == null) {
             return;
         }
@@ -141,6 +142,7 @@ public class ActiveDrillActivity extends WearNavigationActivity {
             extends WearNavigationActivity.NavigationModule<ActiveDrillActivity> {
 
         @Provides
+        @NonNull
         DrillViewModel provideDrillViewModel(ActiveDrillActivity activity) {
             return ViewModelProviders.of(activity).get(DrillViewModel.class);
         }

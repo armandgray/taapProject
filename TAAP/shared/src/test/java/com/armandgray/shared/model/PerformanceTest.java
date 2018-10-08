@@ -10,16 +10,15 @@ import org.junit.rules.ExpectedException;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 
-public class PerformanceRateTest {
+public class PerformanceTest {
 
-    @Rule
-    public ExpectedException exceptionGrabber = ExpectedException.none();
+    private static final int TEST_DRILL_ID = 0;
     
-    private PerformanceRate testRate;
+    private Performance testRate;
     
     @Before
     public void setUp() {
-        testRate = new PerformanceRate();
+        testRate = new Performance(TEST_DRILL_ID);
     }
 
     @Test
@@ -32,7 +31,7 @@ public class PerformanceRateTest {
 
     @Test
     public void testCloneConstructor_ReturnsShallowCopy() throws IllegalArgumentException {
-        PerformanceRate clone = new PerformanceRate(testRate);
+        Performance clone = new Performance(testRate);
         Assert.assertThat(clone, is(not(testRate)));
         Assert.assertThat(clone.getCount(), is(testRate.getCount()));
         Assert.assertThat(clone.getTotal(), is(testRate.getTotal()));

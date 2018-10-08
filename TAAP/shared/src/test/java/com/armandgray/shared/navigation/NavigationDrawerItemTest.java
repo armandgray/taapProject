@@ -25,7 +25,7 @@ public class NavigationDrawerItemTest {
     @Mock
     Drawable mockDrawable;
 
-    private TAAPDestination<?> testDestination =
+    private TAAPDestination<TAAPDestination> testDestination =
             new TAAPDestination<TAAPDestination>(TAAPDestination.class) {
                 @Override
                 protected Class<TAAPDestination> getDestinationClass() {
@@ -33,15 +33,9 @@ public class NavigationDrawerItemTest {
                 }
             };
 
-    private TAAPDestination<?> testUnequalDestination =
-            new TAAPDestination<TAAPDestination>(TAAPDestination.class) {
-                @Override
-                protected Class<TAAPDestination> getDestinationClass() {
-                    return TAAPDestination.class;
-                }
-            };
-
-    private NavigationDrawerItem<TAAPDestination<?>> testItem;
+    private NavigationDrawerItem<TAAPDestination<TAAPDestination>> testItem;
+    private TestTAAPDestination<?> testUnequalDestination =
+            new TestTAAPDestination<>(TestTAAPDestination.class);
 
     @SuppressWarnings("unchecked")
     @Before
@@ -80,21 +74,29 @@ public class NavigationDrawerItemTest {
 
     @Test
     public void testToString() {
-        Assert.assertThat(testItem.toString(), is("NavAction{Destination{TAAPDestination}}"));
+        Assert.assertThat(testItem.toString(), is("NavigationDrawerItem{Destination{TAAPDestination}}"));
     }
 
     @Test
-    public void testGetAction_ReturnsExistingAction() {
-        Assert.assertThat(NavigationDrawerItem.getAction(testDestination), is(testItem));
+    public void testGetItem_ReturnsExistingItem() {
+        Assert.assertThat(NavigationDrawerItem.getItem(testDestination), is(testItem));
     }
 
     @Test
-    public void testGetAction_ReturnsNullForNonRegisteredDestinations() {
-        Assert.assertThat(NavigationDrawerItem.getAction(testUnequalDestination), is(nullValue()));
+    public void testGetItem_ReturnsNullForNonRegisteredDestinations() {
+        Assert.assertThat(NavigationDrawerItem.getItem(testUnequalDestination), is(nullValue()));
     }
 
     @After
     public void tearDown() {
         testItem = null;
+        NavigationDrawerItem.ITEMS.clear();
+    }
+
+    class TestTAAPDestination<T> extends TAAPDestination<T> {
+
+        TestTAAPDestination(Class<T> destinationClass) {
+            super(destinationClass);
+        }
     }
 }

@@ -47,7 +47,7 @@ public class LogsDataModel {
         createLists(context);
 
         for (SessionLog log : allLogs) {
-//            for (String category : log.getDrill().getCategory()) {
+//            for (String category : log.getActiveDrill().getCategory()) {
 //                if (FUNDAMENTALS.equalsIgnoreCase(category)) {
 //                    listFundamentalLogs.add(log);
 //                }

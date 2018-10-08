@@ -1,71 +1,120 @@
 package com.armandgray.shared.viewModel;
 
+import android.annotation.SuppressLint;
+
+import com.armandgray.shared.db.DatabaseManager;
+import com.armandgray.shared.db.DrillDatabase;
 import com.armandgray.shared.model.Drill;
-import com.armandgray.shared.model.PerformanceRate;
+import com.armandgray.shared.model.Performance;
+
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import io.reactivex.Observable;
+import io.reactivex.schedulers.Schedulers;
 
 @Singleton
 class DrillRepository {
 
+    @VisibleForTesting
+    final MutableLiveData<Performance> performance = new MutableLiveData<>();
+
+    @VisibleForTesting
+    final MutableLiveData<Performance> completion = new MutableLiveData<>();
+
+    private final MutableLiveData<List<Drill>> drills = new MutableLiveData<>();
     private final MutableLiveData<Drill> activeDrill = new MutableLiveData<>();
-    private final MutableLiveData<PerformanceRate> performance = new MutableLiveData<>();
-    private final MutableLiveData<PerformanceRate> completion = new MutableLiveData<>();
+
+    @Inject
+    DatabaseManager databaseManager;
+
+    @Inject
+    DrillDatabase database;
 
     @SuppressWarnings("ConstantConditions")
     @Inject
     DrillRepository() {
-        Drill defaultDrill = Drill.Defaults.getDefault();
-        this.activeDrill.setValue(defaultDrill);
-        this.performance.setValue(defaultDrill.getPerformance());
+        List<Drill> list = Drill.Defaults.getDefaults();
+        drills.setValue(list);
+        activeDrill.setValue(list.get(0));
+        performance.setValue(list.get(0).getPerformance());
+    }
+
+    public LiveData<List<Drill>> getDrills() {
+        return drills;
     }
 
     LiveData<Drill> getActiveDrill() {
         return activeDrill;
     }
 
-    LiveData<PerformanceRate> getPerformance() {
+    LiveData<Performance> getPerformance() {
         return performance;
     }
 
-    LiveData<PerformanceRate> getCompletionObserver() {
+    LiveData<Performance> getCompletionObserver() {
         return completion;
     }
 
-    @SuppressWarnings("ConstantConditions")
     void addMake() {
-        PerformanceRate rate = performance.getValue();
-        rate.raiseCount();
-        rate.raiseTotal();
-        performance.setValue(rate);
-        handleSetCompletion(rate);
-    }
-
-    @SuppressWarnings("ConstantConditions")
-    void addMiss() {
-        PerformanceRate rate = performance.getValue();
-        rate.raiseTotal();
-        performance.setValue(rate);
-        handleSetCompletion(rate);
-    }
-
-    private void handleSetCompletion(PerformanceRate rate) {
-        if (rate.getTotal() != rate.getMax()) {
+        Performance performance = this.performance.getValue();
+        if (performance == null) {
             return;
         }
 
-        completion.setValue(new PerformanceRate(rate));
-        rate.clear();
-        performance.setValue(rate);
+        performance.raiseCount();
+        performance.raiseTotal();
+        this.performance.setValue(performance);
+        if (performance.getTotal() == performance.getMax()) {
+            handleSetCompletion(performance);
+        }
+    }
+
+    void addMiss() {
+        Performance performance = this.performance.getValue();
+        if (performance == null) {
+            return;
+        }
+
+        performance.raiseTotal();
+        this.performance.setValue(performance);
+        if (performance.getTotal() == performance.getMax()) {
+            handleSetCompletion(performance);
+        }
     }
 
     void setActiveDrill(Drill drill) {
+        Performance performance = this.performance.getValue();
+        if (performance == null) {
+            return;
+        }
+
         activeDrill.setValue(drill);
+        handleSetCompletion(performance);
+    }
+
+    private void handleSetCompletion(Performance performance) {
+        //noinspection ConstantConditions
+        this.performance.setValue(new Performance(activeDrill.getValue().getId()));
+        if (performance.getTotal() > 0) {
+            completion.setValue(performance);
+            storePerformance(performance);
+        }
+    }
+
+    @SuppressLint("CheckResult")
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    private void storePerformance(Performance rate) {
+        Observable.just(rate)
+                .doOnNext(performance -> performance.setEndTime(System.currentTimeMillis()))
+                .subscribeOn(Schedulers.io())
+                .subscribe(database.performanceDao()::insertPerformance);
     }
 
     @NonNull
