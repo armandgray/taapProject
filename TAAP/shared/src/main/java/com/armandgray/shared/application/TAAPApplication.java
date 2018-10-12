@@ -2,7 +2,7 @@ package com.armandgray.shared.application;
 
 import android.app.Application;
 
-import com.armandgray.shared.db.DatabaseManager;
+import com.armandgray.shared.db.DatabaseManagerImpl;
 
 import javax.inject.Inject;
 
@@ -13,7 +13,7 @@ public abstract class TAAPApplication extends Application implements HasActivity
     protected static TAAPAppComponent appComponent;
 
     @Inject
-    DatabaseManager databaseManager;
+    DatabaseManagerImpl databaseManager;
 
     @Override
     public void onCreate() {

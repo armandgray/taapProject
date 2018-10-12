@@ -2,7 +2,11 @@ package com.armandgray.taap.application;
 
 import com.armandgray.taap.activity.ActiveDrillActivity;
 import com.armandgray.taap.activity.CourtActivity;
-import com.armandgray.taap.activity.DrillPickerActivity;
+import com.armandgray.taap.ui.DrillPickerDialog;
+import com.armandgray.taap.activity.LogsActivity;
+import com.armandgray.taap.ui.PreferenceSeekBarDialog;
+import com.armandgray.taap.ui.PreferencesDialog;
+import com.armandgray.taap.activity.SettingsActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -19,6 +23,22 @@ abstract class ActivityBuilder {
     abstract CourtActivity bindCourtActivity();
 
     @SuppressWarnings("unused")
-    @ContributesAndroidInjector(modules = DrillPickerActivity.ActivityModule.class)
-    abstract DrillPickerActivity bindDrillPickerActivity();
+    @ContributesAndroidInjector(modules = SettingsActivity.ActivityModule.class)
+    abstract SettingsActivity bindSettingsActivity();
+
+    @SuppressWarnings("unused")
+    @ContributesAndroidInjector(modules = LogsActivity.ActivityModule.class)
+    abstract LogsActivity bindLogsActivity();
+
+    @SuppressWarnings("unused")
+    @ContributesAndroidInjector(modules = PreferencesDialog.ActivityModule.class)
+    abstract PreferencesDialog bindTargetsActivity();
+
+    @SuppressWarnings("unused")
+    @ContributesAndroidInjector(modules = DrillPickerDialog.ActivityModule.class)
+    abstract DrillPickerDialog bindDrillPickerActivity();
+
+    @SuppressWarnings("unused")
+    @ContributesAndroidInjector(modules = PreferenceSeekBarDialog.ActivityModule.class)
+    abstract PreferenceSeekBarDialog bindPreferenceSeekBarDialog();
 }

@@ -3,7 +3,11 @@ package com.armandgray.shared.model;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 
 import java.util.Collections;
 import java.util.List;
@@ -15,22 +19,38 @@ public class DrillTest {
 
     private static final String TEST_TITLE = "TEST_TITLE";
     private static final int TEST_IMAGE_RES_ID = 3;
-    private static final List<Drill.Category> TEST_CATEGORY;
+    private static final List<Drill.Type> TEST_TYPE;
 
     static {
-        TEST_CATEGORY = Collections.singletonList(Drill.Category.SHOOTING);
+        TEST_TYPE = Collections.singletonList(Drill.Type.SHOOTING);
     }
+
+    @Rule
+    public MockitoRule mockitoRule = MockitoJUnit.rule();
+
+    @Mock
+    UXPreference mockPreference;
 
     private Drill testDrill;
 
     @Before
-    public void setUp() {
-        testDrill = new Drill(TEST_TITLE, TEST_IMAGE_RES_ID, TEST_CATEGORY);
+    public void setUp() throws Exception {
+        testDrill = new Drill(TEST_TITLE, TEST_IMAGE_RES_ID, TEST_TYPE);
     }
 
     @Test
     public void testGetId() {
-        Assert.assertThat(testDrill.getId(), is(0));
+        Assert.assertThat(testDrill.getId(), is(TEST_TITLE.hashCode()));
+    }
+
+    @Test
+    public void testGetReps() {
+        Assert.assertThat(testDrill.getReps(), is(10));
+    }
+
+    @Test
+    public void testGetGoal() {
+        Assert.assertThat(testDrill.getGoal(), is(0.7));
     }
 
     @Test
@@ -44,13 +64,16 @@ public class DrillTest {
     }
 
     @Test
-    public void testGetCategory() {
-        Assert.assertThat(testDrill.getCategory(), is(TEST_CATEGORY));
+    public void testGetType() {
+        Assert.assertThat(testDrill.getType(), is(TEST_TYPE));
     }
 
     @Test
-    public void testGetPerformance() {
-        Assert.assertThat(testDrill.getPerformance(), is(notNullValue()));
+    public void testGetPreference() {
+        Assert.assertThat(testDrill.getPreference(), is(notNullValue()));
+        Assert.assertThat(testDrill.getPreference().getTitle(), is(TEST_TITLE));
+        Assert.assertThat(testDrill.getPreference().getCategory(),
+                is(UXPreference.Category.REPS_BASED));
     }
 
     @Test
@@ -80,10 +103,16 @@ public class DrillTest {
     }
 
     @Test
-    public void testSetCategory() {
+    public void testSetType() {
         int expected = 12;
         testDrill.setId(expected);
         Assert.assertThat(testDrill.getId(), is(expected));
+    }
+
+    @Test
+    public void testSetPreference() {
+        testDrill.setPreference(mockPreference);
+        Assert.assertThat(testDrill.getPreference(), is(mockPreference));
     }
 
     @Test
@@ -95,25 +124,25 @@ public class DrillTest {
     @Test
     public void testToString() {
         Assert.assertThat(testDrill.toString(), is(String.format("Drill{%s:%s}",
-                TEST_TITLE, TEST_CATEGORY.toString())));
+                TEST_TITLE, TEST_TYPE.toString())));
     }
 
     @Test
-    public void testCategoryAsList() {
-        List<Drill.Category> actual = Drill.Category.asList(Drill.Category.SHOOTING);
+    public void testTypesAsList() {
+        List<Drill.Type> actual = Drill.Type.asList(Drill.Type.SHOOTING);
         Assert.assertThat(actual.size(), is(1));
-        Assert.assertThat(actual.contains(Drill.Category.SHOOTING), is(true));
+        Assert.assertThat(actual.contains(Drill.Type.SHOOTING), is(true));
     }
 
     @Test
-    public void testCategoryConverter_ToCategories() {
-        Assert.assertThat(Drill.Category.Converter.toCategories("[\"SHOOTING\",\"FUNDAMENTALS\"]"),
-                is(Drill.Category.SHOOTING_FUNDAMENTALS));
+    public void testTypeConverter_ToTypes() {
+        Assert.assertThat(Drill.Type.Converter.toTypes("[\"SHOOTING\",\"FUNDAMENTALS\"]"),
+                is(Drill.Type.SHOOTING_FUNDAMENTALS));
     }
 
     @Test
-    public void testCategoryConverter_ToString() {
-        Assert.assertThat(Drill.Category.Converter.toString(Drill.Category.SHOOTING_FUNDAMENTALS),
+    public void testTypeConverter_ToString() {
+        Assert.assertThat(Drill.Type.Converter.toString(Drill.Type.SHOOTING_FUNDAMENTALS),
                 is("[\"SHOOTING\",\"FUNDAMENTALS\"]"));
     }
 

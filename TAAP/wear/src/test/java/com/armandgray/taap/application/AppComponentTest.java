@@ -3,6 +3,10 @@ package com.armandgray.taap.application;
 import android.app.Application;
 
 import com.armandgray.shared.viewModel.DrillViewModel;
+import com.armandgray.shared.viewModel.LogsViewModel;
+import com.armandgray.shared.viewModel.PerformanceViewModel;
+import com.armandgray.shared.viewModel.PreferencesViewModel;
+import com.armandgray.shared.viewModel.SettingsViewModel;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -42,7 +46,27 @@ public class AppComponentTest {
             }
 
             @Override
+            public void inject(PerformanceViewModel viewModel) {
+
+            }
+
+            @Override
             public void inject(DrillViewModel viewModel) {
+            }
+
+            @Override
+            public void inject(SettingsViewModel viewModel) {
+
+            }
+
+            @Override
+            public void inject(LogsViewModel viewModel) {
+
+            }
+
+            @Override
+            public void inject(PreferencesViewModel viewModel) {
+
             }
         };
 

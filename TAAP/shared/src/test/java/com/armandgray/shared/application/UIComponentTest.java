@@ -3,9 +3,7 @@ package com.armandgray.shared.application;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
@@ -14,45 +12,42 @@ import static org.hamcrest.CoreMatchers.is;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = Config.NONE)
-public class TAAPActivityTest {
+public class UIComponentTest {
 
-    @Rule
-    public ExpectedException exceptionGrabber = ExpectedException.none();
-
-    private TAAPActivity testActivity;
+    private UIComponent testUIComponent;
     private boolean[] setupContentFlags;
 
     @Before
     public void setUp() {
         System.out.println("Running Set Up!");
         setupContentFlags = new boolean[4];
-        testActivity = new TAAPActivity() {
+        testUIComponent = new UIComponent() {
             @Override
-            protected void assignGlobalFields() {
+            public void assignGlobalFields() {
                 setupContentFlags[0] = true;
             }
 
             @Override
-            protected void setupVisualElements(boolean showActionDrawer) {
+            public void setupVisualElements() {
                 setupContentFlags[1] = true;
             }
 
             @Override
-            protected void setupEventListeners() {
+            public void setupEventListeners() {
                 setupContentFlags[2] = true;
             }
 
             @Override
-            protected void setupViewModel() {
+            public void setupViewModel() {
                 setupContentFlags[3] = true;
             }
         };
     }
 
     @Test
-    public void testOnSetupContent_CallsAbstractMethods() {
-        testActivity.onSetupContent();
-        for (boolean flag : setupContentFlags) {
+    public void testOnSetupContent_CallsInterfaceMethods() {
+        testUIComponent.onSetupContent();
+        for (boolean flag : setupContentFlags)   {
             Assert.assertThat(flag, is(true));
         }
     }
@@ -60,6 +55,6 @@ public class TAAPActivityTest {
     @After
     public void tearDown() {
         System.out.println("Running TearDown!");
-        testActivity = null;
+        testUIComponent = null;
     }
 }

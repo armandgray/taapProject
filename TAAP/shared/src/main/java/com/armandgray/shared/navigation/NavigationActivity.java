@@ -2,17 +2,19 @@ package com.armandgray.shared.navigation;
 
 import android.content.Intent;
 
-import com.armandgray.shared.application.TAAPActivity;
+import com.armandgray.shared.application.UIComponent;
 
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import dagger.Module;
 import dagger.Provides;
 import io.reactivex.annotations.Nullable;
 
-public abstract class NavigationActivity extends TAAPActivity implements Navigator {
+public abstract class NavigationActivity extends AppCompatActivity
+        implements UIComponent, Navigator {
 
     @Inject
     public NavigationViewModel navigationViewModel;

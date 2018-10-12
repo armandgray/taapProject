@@ -249,7 +249,7 @@ public class MainActivityViewsTest {
 //        DrillAdapter adapter = (DrillAdapter) rvDrills.getAdapter();
 //        assertEquals(drillList.size(), adapter.getItemCount());
 //        for (int i = 0; i < adapter.getItemCount(); i++) {
-//            assertTrue(drillList.get(i).getTitle().equals(adapter.getItemAtPosition(i).getTitle()));
+//            assertTrue(drillList.get(i).getDrillCategory().equals(adapter.getItemAtPosition(i).getDrillCategory()));
 //        }
 //    }
 //
@@ -297,7 +297,7 @@ public class MainActivityViewsTest {
 //
 //        assertEquals(drillList.size(), adapter.getItemCount());
 //        for (int i = 0; i < adapter.getItemCount(); i++) {
-//            assertTrue(drillList.get(i).getTitle().equals(adapter.getItemAtPosition(i).getTitle()));
+//            assertTrue(drillList.get(i).getDrillCategory().equals(adapter.getItemAtPosition(i).getDrillCategory()));
 //        }
 //    }
 //
@@ -371,7 +371,7 @@ public class MainActivityViewsTest {
 //        DrillAdapter adapter = (DrillAdapter) rvDrills.getAdapter();
 //        assertEquals(drillList.size(), adapter.getItemCount());
 //        for (int i = 0; i < adapter.getItemCount(); i++) {
-//            assertTrue(drillList.get(i).getTitle().equals(adapter.getItemAtPosition(i).getTitle()));
+//            assertTrue(drillList.get(i).getDrillCategory().equals(adapter.getItemAtPosition(i).getDrillCategory()));
 //        }
 //    }
 

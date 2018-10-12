@@ -8,14 +8,17 @@
 
     <ImageView
         android:id="@+id/image_icon"
-        android:layout_width="@dimen/icon_size_3xl"
-        android:layout_height="@dimen/icon_size_3xl"
+        android:layout_width="@dimen/icon_size_normal"
+        android:layout_height="@dimen/icon_size_normal"
         android:layout_marginStart="8dp"
         android:contentDescription="Drill Image Icon"
+        android:paddingTop="1dp"
+        android:paddingStart="2dp"
+        android:paddingEnd="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_add_white_24dp"
+        app:srcCompat="@drawable/ic_drills_free_throw"
         tools:ignore="HardcodedText"/>
 
     <TextView

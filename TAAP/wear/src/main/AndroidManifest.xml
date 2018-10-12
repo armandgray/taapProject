@@ -47,17 +47,22 @@
         <activity android:name="androidx.wear.activity.ConfirmationActivity"/>
         <activity
             android:name=".activity.CourtActivity"
-            android:label="@string/title_activity_drill_picker">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
+            android:label="@string/title_activity_drill_picker"/>
         <activity
-            android:name=".activity.DrillPickerActivity"
-            android:label="@string/title_activity_drill_picker">
-        </activity>
+            android:name=".ui.DrillPickerDialog"
+            android:label="@string/title_activity_drill_picker"/>
+        <activity
+            android:name=".activity.LogsActivity"
+            android:label="@string/title_activity_logs"/>
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:label="@string/title_activity_settings"/>
+        <activity
+            android:name=".ui.PreferencesDialog"
+            android:label="@string/title_dialog_preferences"/>
+        <activity
+            android:name=".ui.PreferenceSeekBarDialog"
+            android:label="@string/title_dialog_preference_seek_bar"/>
     </application>
 
 </manifest>

@@ -16,9 +16,6 @@ import androidx.room.PrimaryKey;
                 childColumns = "drill_id")*/)
 public class Performance {
 
-    private static final int DEFAULT_MAX = 10;
-    private static final float DEFAULT_SUCCESS_RATE = 0.75f;
-
     @PrimaryKey(autoGenerate = true)
     private int id;
 
@@ -26,8 +23,12 @@ public class Performance {
     private int drillId;
 
     private int count;
+
     private int total;
-    private int max;
+
+    private int reps;
+
+    private double goal;
 
     @ColumnInfo(name = "start_time")
     private long startTime;
@@ -35,16 +36,17 @@ public class Performance {
     @ColumnInfo(name = "end_time")
     private long endTime;
 
-    @ColumnInfo(name = "success_rate")
-    private float successRate;
+    // VisibleForRoom
+    public Performance() {
+    }
 
-    public Performance(int drillId) {
-        this.drillId = drillId;
+    public Performance(Drill drill) {
+        this.drillId = drill.getId();
         this.count = 0;
         this.total = 0;
-        this.max = DEFAULT_MAX;
+        this.reps = drill.getReps();
+        this.goal = drill.getGoal();
         this.startTime = System.currentTimeMillis();
-        this.successRate = DEFAULT_SUCCESS_RATE;
     }
 
     public Performance(Performance clone) {
@@ -52,10 +54,10 @@ public class Performance {
         this.drillId = clone.drillId;
         this.count = clone.count;
         this.total = clone.total;
-        this.max = clone.max;
+        this.reps = clone.reps;
         this.startTime = clone.startTime;
         this.endTime = clone.endTime;
-        this.successRate = clone.successRate;
+        this.goal = clone.goal;
     }
 
     public int getId() {
@@ -74,8 +76,8 @@ public class Performance {
         return this.total;
     }
 
-    public int getMax() {
-        return this.max;
+    public int getReps() {
+        return this.reps;
     }
 
     public long getStartTime() {
@@ -86,8 +88,8 @@ public class Performance {
         return endTime;
     }
 
-    public float getSuccessRate() {
-        return this.successRate;
+    public double getGoal() {
+        return this.goal;
     }
 
     public void raiseCount() {
@@ -99,7 +101,7 @@ public class Performance {
     }
 
     public boolean isSuccess() {
-        return (float) this.count / this.total >= this.successRate;
+        return (double) this.count / this.total >= this.goal;
     }
 
     public void setId(int id) {
@@ -118,8 +120,8 @@ public class Performance {
         this.total = total;
     }
 
-    public void setMax(int max) {
-        this.max = max;
+    public void setReps(int reps) {
+        this.reps = reps;
     }
 
     public void setStartTime(long startTime) {
@@ -130,8 +132,8 @@ public class Performance {
         this.endTime = endTime;
     }
 
-    public void setSuccessRate(float successRate) {
-        this.successRate = successRate;
+    public void setGoal(double goal) {
+        this.goal = goal;
     }
 
     public void clear() {

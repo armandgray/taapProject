@@ -13,4 +13,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_targets">TargetsActivity</string>
+    <string name="title_activity_logs">LogsActivity</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_dialog_preferences">PreferencesDialog</string>
+    <string name="title_dialog_preference_seek_bar">PreferenceSeekBarDialog</string>
+    <string name="set_reps">Set Reps</string>
+    <string name="set_goal">Set Goal</string>
 </resources>

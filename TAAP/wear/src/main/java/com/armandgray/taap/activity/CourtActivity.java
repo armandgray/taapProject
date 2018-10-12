@@ -32,8 +32,8 @@ public class CourtActivity extends WearNavigationActivity {
     }
 
     @Override
-    public void setupVisualElements(boolean showActionDrawer) {
-        super.setupVisualElements(showActionDrawer);
+    public void setupVisualElements() {
+        super.setupVisualElements();
 
         zoomImageCourt.setImageDrawable(
                 getDrawable(R.drawable.ncaa_basketball_full_court_hardwood));

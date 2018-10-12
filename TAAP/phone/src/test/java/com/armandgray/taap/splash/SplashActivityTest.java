@@ -54,11 +54,11 @@ public class SplashActivityTest {
 //
 //        while (cursor.moveToNext()) {
 //            Drill drill = getDrillsList().get(i);
-//            assertEquals(drill.getTitle(),
+//            assertEquals(drill.getDrillCategory(),
 //                    cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
 //            assertEquals(drill.getImageResId(),
 //                    cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
-//            assertThat(drill.getCategory(), is(getStringAsArray(cursor.getString(
+//            assertThat(drill.getDrillCategory(), is(getStringAsArray(cursor.getString(
 //                    cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)))));
 //            i++;
 //        }
@@ -78,11 +78,11 @@ public class SplashActivityTest {
 //
 //        while (cursor.moveToNext()) {
 //            Drill drill = getDrillsList().get(i);
-//            assertEquals(drill.getTitle(),
+//            assertEquals(drill.getDrillCategory(),
 //                    cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
 //            assertEquals(drill.getImageResId(),
 //                    cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
-//            assertThat(drill.getCategory(), is(getStringAsArray(cursor.getString(
+//            assertThat(drill.getDrillCategory(), is(getStringAsArray(cursor.getString(
 //                    cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)))));
 //            i++;
 //        }
@@ -101,11 +101,11 @@ public class SplashActivityTest {
 //
 //        while (cursor.moveToNext()) {
 //            Drill drill = getDrillsList().get(i);
-//            assertEquals(drill.getTitle(),
+//            assertEquals(drill.getDrillCategory(),
 //                    cursor.getString(cursor.getColumnIndex(DrillsTable.COLUMN_TITLE)));
 //            assertEquals(drill.getImageResId(),
 //                    cursor.getInt(cursor.getColumnIndex(DrillsTable.COLUMN_IMAGE_ID)));
-//            assertThat(drill.getCategory(), is(getStringAsArray(cursor.getString(
+//            assertThat(drill.getDrillCategory(), is(getStringAsArray(cursor.getString(
 //                    cursor.getColumnIndex(DrillsTable.COLUMN_CATEGORY)))));
 //            i++;
 //        }

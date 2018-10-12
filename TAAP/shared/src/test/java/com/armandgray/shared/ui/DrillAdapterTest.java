@@ -25,7 +25,7 @@ public class DrillAdapterTest {
 
     static {
         TEST_DRILL = new Drill(FREE_THROWS, R.drawable.ic_add_white_24dp,
-                Drill.Category.SHOOTING_ONLY);
+                Drill.Type.SHOOTING_ONLY);
     }
 
     private DrillAdapter adapter;

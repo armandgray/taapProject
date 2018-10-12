@@ -3,6 +3,7 @@ package com.armandgray.taap.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 import com.armandgray.shared.model.Drill;
 import com.armandgray.shared.model.Performance;
 import com.armandgray.shared.viewModel.DrillViewModel;
+import com.armandgray.shared.viewModel.PerformanceViewModel;
+import com.armandgray.shared.viewModel.PreferencesViewModel;
 import com.armandgray.taap.R;
 import com.armandgray.taap.navigation.Destination;
 import com.armandgray.taap.navigation.WearNavigationActivity;
@@ -27,6 +30,12 @@ import dagger.Provides;
 import dagger.android.AndroidInjection;
 
 public class ActiveDrillActivity extends WearNavigationActivity {
+
+    @Inject
+    PerformanceViewModel performanceViewModel;
+
+    @Inject
+    PreferencesViewModel preferencesViewModel;
 
     @Inject
     DrillViewModel drillViewModel;
@@ -60,24 +69,26 @@ public class ActiveDrillActivity extends WearNavigationActivity {
     }
 
     @Override
-    public  void setupVisualElements(boolean showActionDrawer) {
-        super.setupVisualElements(true);
+    public void setupVisualElements() {
+        super.setupVisualElements();
 
-        textDrill.setBackgroundResource(R.drawable.bg_round_outline);
+        super.wearableActionDrawer.getController().peekDrawer();
+
+        textDrill.setBackgroundResource(R.drawable.bg_round_corners_outline);
         buttonMinus.setImageResource(R.drawable.ic_remove_white_24dp);
         buttonPlus.setImageResource(R.drawable.ic_add_white_24dp);
     }
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
-    public  void setupEventListeners() {
+    public void setupEventListeners() {
         super.setupEventListeners();
 
         rootView.setOnTouchListener(onMultiInputClick());
         textDrill.setOnClickListener(view -> navigationViewModel
-                .onNavigate(Destination.DRILL_PICKER));
-        buttonMinus.setOnClickListener(view -> drillViewModel.onMinusClick());
-        buttonPlus.setOnClickListener(view -> drillViewModel.onPlusClick());
+                .onNavigate(Destination.DRILL_PICKER_DIALOG));
+        buttonMinus.setOnClickListener(view -> performanceViewModel.onMinusClick());
+        buttonPlus.setOnClickListener(view -> performanceViewModel.onPlusClick());
     }
 
     @NonNull
@@ -85,23 +96,23 @@ public class ActiveDrillActivity extends WearNavigationActivity {
         return new MultiInputClickListener(new MultiInputClickListener.OnMultiInputClickListener() {
             @Override
             public void onSingleInputClick(View view) {
-                drillViewModel.onSingleInputClick();
+                performanceViewModel.onSingleInputClick();
             }
 
             @Override
             public void onDoubleInputClick(View view) {
-                drillViewModel.onDoubleInputClick();
+                performanceViewModel.onDoubleInputClick();
             }
         });
     }
 
     @Override
-    public  void setupViewModel() {
+    public void setupViewModel() {
         super.setupViewModel();
 
-        drillViewModel.getActiveDrill().observe(this, this::onDrillChanged);
-        drillViewModel.getPerformance().observe(this, this::onPerformanceRateChange);
-        drillViewModel.getCompletionObserver().observe(this, this::onConfirmationChange);
+        performanceViewModel.getActiveDrill().observe(this, this::onDrillChanged);
+        performanceViewModel.getPerformance().observe(this, this::onPerformanceChange);
+        performanceViewModel.getCompletionObserver().observe(this, this::onConfirmationChange);
     }
 
     private void onDrillChanged(@Nullable Drill drill) {
@@ -110,25 +121,42 @@ public class ActiveDrillActivity extends WearNavigationActivity {
         }
     }
 
-    private void onPerformanceRateChange(@Nullable Performance rate) {
-        if (rate != null) {
-            textRate.setText(rate.toString());
+    private void onPerformanceChange(@Nullable Performance performance) {
+        if (performance != null) {
+            textRate.setText(performance.toString());
         }
     }
 
-    private void onConfirmationChange(@Nullable Performance rate) {
-        if (rate == null) {
+    private void onConfirmationChange(@Nullable Performance performance) {
+        if (performance == null) {
             return;
         }
 
-        int animation = rate.isSuccess()
+        int animation = performance.isSuccess()
                 ? ConfirmationActivity.SUCCESS_ANIMATION
                 : ConfirmationActivity.FAILURE_ANIMATION;
 
         Intent intent = new Intent(this, ConfirmationActivity.class);
         intent.putExtra(ConfirmationActivity.EXTRA_ANIMATION_TYPE, animation);
-        intent.putExtra(ConfirmationActivity.EXTRA_MESSAGE, rate.toString());
+        intent.putExtra(ConfirmationActivity.EXTRA_MESSAGE, performance.toString());
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.action_targets:
+                Drill drill = drillViewModel.getActiveDrill().getValue();
+                if (drill == null) {
+                    return false;
+                }
+
+                preferencesViewModel.setSelectedPreference(drill.getPreference());
+                navigationViewModel.onNavigate(Destination.PREFERENCES_DIALOG);
+                return true;
+        }
+
+        return false;
     }
 
     @NonNull
@@ -140,6 +168,19 @@ public class ActiveDrillActivity extends WearNavigationActivity {
     @Module
     public static class ActivityModule
             extends WearNavigationActivity.NavigationModule<ActiveDrillActivity> {
+
+        @Provides
+        @NonNull
+        PerformanceViewModel providePerformanceViewModel(ActiveDrillActivity activity) {
+            return ViewModelProviders.of(activity).get(PerformanceViewModel.class);
+        }
+
+
+        @Provides
+        @NonNull
+        PreferencesViewModel providePreferencesViewModel(ActiveDrillActivity activity) {
+            return ViewModelProviders.of(activity).get(PreferencesViewModel.class);
+        }
 
         @Provides
         @NonNull

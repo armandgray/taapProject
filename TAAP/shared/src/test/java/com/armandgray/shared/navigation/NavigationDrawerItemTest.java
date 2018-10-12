@@ -17,8 +17,6 @@ import static org.hamcrest.CoreMatchers.nullValue;
 
 public class NavigationDrawerItemTest {
 
-    private static final String DESTINATION_STRING = "DESTINATION_STRING";
-
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
 
@@ -41,6 +39,11 @@ public class NavigationDrawerItemTest {
     @Before
     public void setUp() {
         testItem = new NavigationDrawerItem<>(testDestination, mockDrawable);
+    }
+
+    @Test
+    public void testConstructor_AddsNewItemsToGlobalSet() {
+        Assert.assertThat(NavigationDrawerItem.ITEMS.contains(testItem), is(true));
     }
 
     @Test

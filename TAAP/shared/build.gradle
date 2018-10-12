@@ -82,7 +82,6 @@ dependencies {
 
     // Misc.
     implementation "com.squareup.picasso:picasso:2.71828"
-//    implementation "androidx.exifinterface:exifinterface:${SUPPORT_VERSION}" // Updating Picasso Dependency Version
 
     // Unit Test
     testImplementation "junit:junit:${JUNIT_VERSION}"

@@ -1,35 +1,43 @@
 package com.armandgray.taap.navigation;
 
-import androidx.annotation.NonNull;
-
 import com.armandgray.shared.navigation.TAAPDestination;
-import com.armandgray.taap.activity.CourtActivity;
 import com.armandgray.taap.activity.ActiveDrillActivity;
-import com.armandgray.taap.activity.DrillPickerActivity;
+import com.armandgray.taap.activity.CourtActivity;
+import com.armandgray.taap.ui.DrillPickerDialog;
+import com.armandgray.taap.activity.LogsActivity;
+import com.armandgray.taap.ui.PreferenceSeekBarDialog;
+import com.armandgray.taap.ui.PreferencesDialog;
+import com.armandgray.taap.activity.SettingsActivity;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
+
 public class Destination<T> extends TAAPDestination<T> {
 
-    public static final Destination<DrillPickerActivity> DRILL_PICKER;
+    public static final Destination<DrillPickerDialog> DRILL_PICKER_DIALOG;
+    public static final Destination<PreferencesDialog> PREFERENCES_DIALOG;
+    public static final Destination<PreferenceSeekBarDialog> SEEK_BAR_DIALOG;
 
     static final Destination<ActiveDrillActivity> ACTIVE_DRILL;
-    static final Destination<ActiveDrillActivity> TARGETS;
     static final Destination<CourtActivity> COURT;
-    static final Destination<ActiveDrillActivity> LOGS;
-    static final Destination<ActiveDrillActivity> SETTINGS;
+    static final Destination<LogsActivity> LOGS;
+    static final Destination<SettingsActivity> SETTINGS;
 
-    private static final Set<Destination> DESTINATIONS;
+    @VisibleForTesting
+    static final Set<Destination> DESTINATIONS;
 
     static {
         DESTINATIONS = new HashSet<>();
-        DRILL_PICKER = new Destination<>(DrillPickerActivity.class);
+        DRILL_PICKER_DIALOG = new Destination<>(DrillPickerDialog.class);
         ACTIVE_DRILL = new Destination<>(ActiveDrillActivity.class);
-        TARGETS = new Destination<>(ActiveDrillActivity.class);
+        PREFERENCES_DIALOG = new Destination<>(PreferencesDialog.class);
+        SEEK_BAR_DIALOG = new Destination<>(PreferenceSeekBarDialog.class);
         COURT = new Destination<>(CourtActivity.class);
-        LOGS = new Destination<>(ActiveDrillActivity.class);
-        SETTINGS = new Destination<>(ActiveDrillActivity.class);
+        LOGS = new Destination<>(LogsActivity.class);
+        SETTINGS = new Destination<>(SettingsActivity.class);
     }
 
     private Destination(Class<T> destinationClass) {

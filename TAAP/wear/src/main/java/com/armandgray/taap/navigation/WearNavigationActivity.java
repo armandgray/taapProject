@@ -23,11 +23,12 @@ public abstract class WearNavigationActivity extends NavigationActivity implemen
     @Inject
     protected NavigationViewModel navigationViewModel;
 
+    protected WearableActionDrawerView wearableActionDrawer;
+
     @Inject
     NavigationDrawerAdapter drawerAdapter;
 
     private WearableNavigationDrawerView wearableNavigationDrawer;
-    private WearableActionDrawerView wearableActionDrawer;
 
     @Override
     public void assignGlobalFields() {
@@ -36,7 +37,7 @@ public abstract class WearNavigationActivity extends NavigationActivity implemen
     }
 
     @Override
-    public void setupVisualElements(boolean showActionDrawer) {
+    public void setupVisualElements() {
         drawerAdapter.updateItems(WearNavigationActivity.Defaults.getDefaults(this));
         wearableNavigationDrawer.setAdapter(drawerAdapter);
         wearableNavigationDrawer.setCurrentItem(0, true);
@@ -45,9 +46,6 @@ public abstract class WearNavigationActivity extends NavigationActivity implemen
 
         wearableActionDrawer.setPeekOnScrollDownEnabled(true);
         wearableActionDrawer.setOnMenuItemClickListener(this);
-        if (showActionDrawer) {
-            wearableActionDrawer.getController().peekDrawer();
-        }
     }
 
     @Override
@@ -61,18 +59,12 @@ public abstract class WearNavigationActivity extends NavigationActivity implemen
 
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case R.id.action_targets:
-                super.navigationViewModel.onNavigate(Destination.TARGETS);
-                return true;
-        }
-
         return false;
     }
 
     @Override
     public void onItemSelected(int position) {
-        super.navigationViewModel.onNavigate(drawerAdapter.getItemDestination(position));
+        navigationViewModel.onNavigate(drawerAdapter.getItemDestination(position));
     }
 
     @Module

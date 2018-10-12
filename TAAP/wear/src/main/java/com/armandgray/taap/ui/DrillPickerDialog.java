@@ -1,9 +1,10 @@
-package com.armandgray.taap.activity;
+package com.armandgray.taap.ui;
 
 import android.os.Bundle;
 
-import com.armandgray.shared.application.TAAPActivity;
+import com.armandgray.shared.application.UIComponent;
 import com.armandgray.shared.model.Drill;
+import com.armandgray.shared.navigation.NavigationActivity;
 import com.armandgray.shared.ui.DrillAdapter;
 import com.armandgray.shared.ui.RecyclerItemClickListener;
 import com.armandgray.shared.viewModel.DrillViewModel;
@@ -19,15 +20,15 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.android.AndroidInjection;
 
-public class DrillPickerActivity extends TAAPActivity {
+public class DrillPickerDialog extends NavigationActivity implements UIComponent {
 
     @Inject
     DrillViewModel drillViewModel;
-
     @Inject
     DrillAdapter drillAdapter;
 
     private WearableRecyclerView recyclerPicker;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,17 +37,17 @@ public class DrillPickerActivity extends TAAPActivity {
 
         // Super
         super.onCreate(savedInstanceState);
-        super.setContentView(R.layout.activity_drill_picker);
-        super.onSetupContent();
+        super.setContentView(R.layout.dialog_drill_picker);
+        onSetupContent();
     }
 
     @Override
-    protected void assignGlobalFields() {
+    public void assignGlobalFields() {
         recyclerPicker = findViewById(R.id.recycler_picker);
     }
 
     @Override
-    protected void setupVisualElements(boolean showActionDrawer) {
+    public void setupVisualElements() {
         drillAdapter.updateData(Drill.Defaults.getDefaults());
         recyclerPicker.setAdapter(drillAdapter);
         recyclerPicker.setEdgeItemsCenteringEnabled(true);
@@ -54,16 +55,19 @@ public class DrillPickerActivity extends TAAPActivity {
     }
 
     @Override
-    protected void setupEventListeners() {
+    public void setupEventListeners() {
         recyclerPicker.addOnItemTouchListener(new RecyclerItemClickListener(this,
                 (view, position) -> {
                     drillViewModel.onDrillSelected(drillAdapter.getItem(position));
                     onBackPressed();
+                    finish();
                 }));
     }
 
     @Override
-    protected void setupViewModel() {
+    public void setupViewModel() {
+        super.setupViewModel();
+
         drillViewModel.getDrills().observe(this, drillAdapter::updateData);
         drillViewModel.getActiveDrill().observe(this,
                 drill -> recyclerPicker.smoothScrollToPosition(drillAdapter.indexOf(drill)));
@@ -76,12 +80,12 @@ public class DrillPickerActivity extends TAAPActivity {
     }
 
     @Module
-    public static class ActivityModule {
+    public static class ActivityModule
+            extends NavigationActivity.NavigationModule<DrillPickerDialog> {
 
-        @SuppressWarnings("unused")
         @Provides
         @NonNull
-        DrillViewModel provideDrillViewModel(DrillPickerActivity activity) {
+        DrillViewModel provideViewModel(DrillPickerDialog activity) {
             return ViewModelProviders.of(activity).get(DrillViewModel.class);
         }
     }

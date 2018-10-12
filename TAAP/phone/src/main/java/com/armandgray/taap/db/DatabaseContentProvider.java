@@ -171,7 +171,7 @@ public class DatabaseContentProvider extends ContentProvider {
         ContentValues drillValues = new ContentValues();
         drillValues.put(DrillsTable.COLUMN_TITLE, drill.getTitle());
         drillValues.put(DrillsTable.COLUMN_IMAGE_ID, drill.getImageResId());
-//        drillValues.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(drill.getCategory()));
+//        drillValues.put(DrillsTable.COLUMN_CATEGORY, getArrayAsString(drill.getDrillCategory()));
         return drillValues;
     }
 
