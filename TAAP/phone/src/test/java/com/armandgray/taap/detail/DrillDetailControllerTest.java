@@ -62,7 +62,7 @@ public class DrillDetailControllerTest {
     public void setUp() {
         System.out.println("Running Set Up!");
 //        Intent intent = new Intent(RuntimeEnvironment.application, DrillDetailActivity.class);
-//        intent.putExtra(SELECTED_DRILL, TEST_SESSION_LOG.getActiveDrill());
+//        intent.putExtra(SELECTED_DRILL, TEST_SESSION_LOG.getDrillCategory());
 //        activityController = Robolectric.buildActivity(DrillDetailActivity.class).newIntent(intent);
 //        activity = activityController.create().start().resume().visible().get();
 //        controller = activity.controller;

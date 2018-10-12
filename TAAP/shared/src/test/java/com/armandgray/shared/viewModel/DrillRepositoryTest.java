@@ -4,6 +4,7 @@ import com.armandgray.shared.db.DrillDatabase;
 import com.armandgray.shared.db.PerformanceDao;
 import com.armandgray.shared.model.Drill;
 import com.armandgray.shared.model.Performance;
+import com.armandgray.shared.model.UXPreference;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -14,8 +15,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
+import org.mockito.stubbing.Answer;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
+import io.reactivex.functions.Consumer;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -34,22 +37,42 @@ public class DrillRepositoryTest {
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
     @Mock
-    DrillDatabase mockDatabase;
+    private DrillDatabase mockDatabase;
 
     @Mock
-    PerformanceDao mockPerformanceDao;
+    private PerformanceDao mockPerformanceDao;
+
+    @Mock
+    private PreferencesRepository mockPreferencesRepository;
+
+    @Mock
+    private UXPreference mockPreference;
 
     private DrillRepository testRepository;
+    private Consumer<UXPreference> testConsumer;
 
     @SuppressWarnings("ConstantConditions")
     @Before
     public void setUp() {
-        testRepository = new DrillRepository();
+        Mockito.doAnswer((Answer<Void>) invocation -> {
+            testConsumer = invocation.getArgument(0);
+            return null;
+        }).when(mockPreferencesRepository).addPreferenceConsumer(Mockito.any());
+
+        Mockito.when(mockPreference.getCategory()).thenReturn(UXPreference.Category.REPS_BASED);
+
+        testRepository = new DrillRepository(mockPreferencesRepository);
         testRepository.database = mockDatabase;
         testRepository.completion.setValue(null);
         testRepository.getPerformance().getValue().clear();
 
         Mockito.when(mockDatabase.performanceDao()).thenReturn(mockPerformanceDao);
+    }
+
+    @Test
+    public void testConstructor_DoesAddPreferenceConsumer() {
+        Mockito.verify(mockPreferencesRepository, Mockito.times(1))
+                .addPreferenceConsumer(Mockito.any());
     }
 
     @Test
@@ -63,8 +86,94 @@ public class DrillRepositoryTest {
     }
 
     @Test
-    public void testConstructor_DoesSetCurrentRate() {
+    public void testConstructor_DoesSetPerformance() {
         Assert.assertThat(testRepository.getPerformance().getValue(), is(notNullValue()));
+    }
+
+    @Test
+    public void testAddPreferenceConsumer_DoesUpdatePerformance() throws Exception {
+        Performance previous = testRepository.getPerformance().getValue();
+        testConsumer.accept(mockPreference);
+        Assert.assertThat(testRepository.getPerformance().getValue(), is(not(previous)));
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    @Test
+    public void testAddPreferenceConsumer_DoesNothing_IfCategoryIsNotDrill() throws Exception {
+        Mockito.when(mockPreference.getCategory()).thenReturn(UXPreference.Category.DATA);
+        Performance previous = testRepository.getPerformance().getValue();
+        testConsumer.accept(mockPreference);
+        Assert.assertThat(testRepository.getPerformance().getValue(), is(previous));
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    @Test
+    public void testAddPreferenceConsumer_DoesNothing_IfActiveDrillIsNull() throws Exception {
+        testRepository.activeDrill.setValue(null);
+        Performance previous = testRepository.getPerformance().getValue();
+        testConsumer.accept(mockPreference);
+        Assert.assertThat(testRepository.getPerformance().getValue(), is(previous));
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    @Test
+    public void testAddPreferenceConsumer_DoesUseActiveDrill() throws Exception {
+        int expected = testRepository.getActiveDrill().getValue().getId();
+        testConsumer.accept(mockPreference);
+        Assert.assertThat(testRepository.getPerformance().getValue().getDrillId(), is(expected));
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    @Test
+    public void testAddPreferenceConsumer_DoesCopyCount() throws Exception {
+        int expected = 14;
+        testRepository.getPerformance().getValue().setCount(expected);
+        testConsumer.accept(mockPreference);
+        Assert.assertThat(testRepository.getPerformance().getValue().getCount(), is(expected));
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    @Test
+    public void testAddPreferenceConsumer_DoesCopyTotal() throws Exception {
+        int expected = 6;
+        testRepository.getPerformance().getValue().setTotal(expected);
+        testConsumer.accept(mockPreference);
+        Assert.assertThat(testRepository.getPerformance().getValue().getTotal(), is(expected));
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    @Test
+    public void testAddPreferenceConsumer_DoesCopyStartTime() throws Exception {
+        long expected = 14;
+        testRepository.getPerformance().getValue().setStartTime(expected);
+        testConsumer.accept(mockPreference);
+        Assert.assertThat(testRepository.getPerformance().getValue().getStartTime(), is(expected));
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    @Test
+    public void testAddPreferenceConsumer_DoesNotCopyFromNull() throws Exception {
+        testRepository.performance.setValue(null);
+        testConsumer.accept(mockPreference);
+        Assert.assertThat(testRepository.getPerformance().getValue().getTotal(), is(0));
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    @Test
+    public void testAddPreferenceConsumer_DoesAssignCompletionObserver() throws Exception {
+        // Arrange
+        int expected = 5;
+        Drill testDrill = new Drill("TEST_TITLE", 3, null);
+        testDrill.getPreference().getValues().forEach(value -> value.setValue(expected));
+        testRepository.setActiveDrill(testDrill);
+        testRepository.getPerformance().getValue().setTotal(expected);
+        testRepository.getPerformance().getValue().setCount(expected);
+
+        // Act
+        testConsumer.accept(mockPreference);
+
+        // Assert
+        Assert.assertThat(testRepository.getCompletionObserver().getValue(), is(notNullValue()));
     }
 
     @Test
@@ -273,10 +382,10 @@ public class DrillRepositoryTest {
     }
 
     @Test
-    public void testSetActiveDrill_DoesNothing_IfPerformanceIsNull() {
+    public void testSetActiveDrill_DoesSetPerformance_IfPerformanceIsNull() {
         testRepository.performance.setValue(null);
         testRepository.setActiveDrill(TEST_DRILL);
-        Assert.assertThat(testRepository.getActiveDrill().getValue(), is(not(TEST_DRILL)));
+        Assert.assertThat(testRepository.getPerformance().getValue(), is(notNullValue()));
     }
 
     @Test

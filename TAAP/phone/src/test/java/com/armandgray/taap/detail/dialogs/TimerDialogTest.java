@@ -43,7 +43,7 @@ public class TimerDialogTest {
 //        Intent intent = new Intent(RuntimeEnvironment.application, DrillDetailActivity.class);
 //        intent.putExtra(SELECTED_DRILL, new Drill("Beat-the-Pro (Mid-Range)",
 //                R.drawable.ic_fitness_center_white_24dp,
-//                Drill.Category.SHOOTING_ONLY));
+//                Drill.UserPreferenceCategory.SHOOTING_ONLY));
 //        activityController = Robolectric.buildActivity(DrillDetailActivity.class).newIntent(intent);
 //        activity = activityController.create().start().resume().visible().get();
 //        dialog = new TimerDialog();

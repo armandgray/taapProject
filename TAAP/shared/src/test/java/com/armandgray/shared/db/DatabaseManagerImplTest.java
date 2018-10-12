@@ -8,7 +8,7 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-public class DatabaseManagerTest {
+public class DatabaseManagerImplTest {
 
     @Before
     public void setUp() {

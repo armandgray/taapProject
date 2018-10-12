@@ -3,7 +3,6 @@ package com.armandgray.shared.viewModel;
 import com.armandgray.shared.application.TAAPAppComponent;
 import com.armandgray.shared.application.TAAPApplication;
 import com.armandgray.shared.model.Drill;
-import com.armandgray.shared.model.Performance;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -49,9 +48,6 @@ public class DrillViewModelTest {
     DrillRepository mockRepository;
 
     @Mock
-    LiveData<Performance> mockPerformanceRate;
-
-    @Mock
     LiveData<List<Drill>> mockDrills;
 
     @Mock
@@ -69,8 +65,6 @@ public class DrillViewModelTest {
 
         Mockito.when(mockRepository.getDrills()).thenReturn(mockDrills);
         Mockito.when(mockRepository.getActiveDrill()).thenReturn(mockActiveDrill);
-        Mockito.when(mockRepository.getPerformance()).thenReturn(mockPerformanceRate);
-        Mockito.when(mockRepository.getCompletionObserver()).thenReturn(mockPerformanceRate);
     }
 
     @Test
@@ -87,40 +81,6 @@ public class DrillViewModelTest {
     @Test
     public void testGetActiveDrill() {
         Assert.assertThat(testViewModel.getActiveDrill(), is(notNullValue()));
-    }
-
-    @Test
-    public void testGetCurrentRate() {
-        Assert.assertThat(testViewModel.getPerformance(), is(notNullValue()));
-    }
-
-    @Test
-    public void testGetCompletionObserver() {
-        Assert.assertThat(testViewModel.getCompletionObserver(), is(notNullValue()));
-    }
-
-    @Test
-    public void testAddMake() {
-        testViewModel.onPlusClick();
-        Mockito.verify(mockRepository, Mockito.only()).addMake();
-    }
-
-    @Test
-    public void testAddMiss() {
-        testViewModel.onMinusClick();
-        Mockito.verify(mockRepository, Mockito.only()).addMiss();
-    }
-
-    @Test
-    public void testOnSingleInputClick_AddsMake() {
-        testViewModel.onSingleInputClick();
-        Mockito.verify(mockRepository, Mockito.only()).addMake();
-    }
-
-    @Test
-    public void testOnDoubleInputClick_AddsMiss() {
-        testViewModel.onDoubleInputClick();
-        Mockito.verify(mockRepository, Mockito.only()).addMiss();
     }
 
     @Test

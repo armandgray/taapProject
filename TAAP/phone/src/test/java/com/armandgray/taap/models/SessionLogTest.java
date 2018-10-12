@@ -25,7 +25,7 @@ public class SessionLogTest {
                 .repsCompleted(3)
                 .successRate(0.23)
                 .successRecord(0.55)
-                .drill(new Drill("", 0, Drill.Category.SHOOTING_ONLY))
+                .drill(new Drill("", 0, Drill.Type.SHOOTING_ONLY))
                 .create();
         assertNotNull(sessionLog);
         assertNotNull(sessionLog.getSessionId());

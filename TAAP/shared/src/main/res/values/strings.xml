@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">TAAP</string>
     <string name="active">Active</string>
+    <string name="done">Done</string>
+    <string name="cancel">Cancel</string>
+    <string name="reset">Reset</string>
 </resources>

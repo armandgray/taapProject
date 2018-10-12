@@ -3,7 +3,7 @@ package com.armandgray.shared.application;
 import android.app.Activity;
 import android.app.Application;
 
-import com.armandgray.shared.db.DatabaseManager;
+import com.armandgray.shared.db.DatabaseManagerImpl;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -35,7 +35,7 @@ public class TAAPApplicationTest {
     TAAPAppComponent mockAppComponent;
 
     @Mock
-    DatabaseManager mockDatabaseManager;
+    DatabaseManagerImpl mockDatabaseManager;
 
     private TAAPApplication testApplication;
 

@@ -2,7 +2,11 @@ package com.armandgray.taap.application;
 
 import com.armandgray.taap.activity.ActiveDrillActivity;
 import com.armandgray.taap.activity.CourtActivity;
-import com.armandgray.taap.activity.DrillPickerActivity;
+import com.armandgray.taap.ui.DrillPickerDialog;
+import com.armandgray.taap.activity.LogsActivity;
+import com.armandgray.taap.ui.PreferenceSeekBarDialog;
+import com.armandgray.taap.ui.PreferencesDialog;
+import com.armandgray.taap.activity.SettingsActivity;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,7 +30,27 @@ public class ActivityBuilderTest {
             }
 
             @Override
-            DrillPickerActivity bindDrillPickerActivity() {
+            DrillPickerDialog bindDrillPickerActivity() {
+                return null;
+            }
+
+            @Override
+            PreferenceSeekBarDialog bindPreferenceSeekBarDialog() {
+                return null;
+            }
+
+            @Override
+            SettingsActivity bindSettingsActivity() {
+                return null;
+            }
+
+            @Override
+            LogsActivity bindLogsActivity() {
+                return null;
+            }
+
+            @Override
+            PreferencesDialog bindTargetsActivity() {
                 return null;
             }
         };

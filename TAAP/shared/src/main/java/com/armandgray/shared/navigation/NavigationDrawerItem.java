@@ -54,7 +54,6 @@ public class NavigationDrawerItem<D extends TAAPDestination<?>> {
     @Nullable
     public static <D extends TAAPDestination<?>> NavigationDrawerItem<?> getItem(D destination) {
         for (NavigationDrawerItem<?> item : ITEMS) {
-            System.out.println(item + " , " + destination);
             if (item.destination.equals(destination)) {
                 return item;
             }

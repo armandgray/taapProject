@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.armandgray.shared.R;
 import com.armandgray.shared.model.Drill;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +79,7 @@ public class DrillAdapter extends RecyclerView.Adapter<DrillAdapter.DrillViewHol
         }
 
         public void setUp(@NonNull Drill drill) {
-            Picasso.get().load(drill.getImageResId()).into(imageIcon);
+            imageIcon.setImageResource(drill.getImageResId());
             textTitle.setText(drill.getTitle());
             textActive.setVisibility(drill.isActive() ? View.VISIBLE : View.GONE);
         }
