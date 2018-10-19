@@ -67,7 +67,7 @@ public class PreferenceSeekBarDialog extends NavigationActivity implements UICom
         seekBar.setOnSeekBarChangeListener(onSeekBarValueChanged());
 
         buttonReset.setOnClickListener(view -> {
-            UXPreference.Value value = preferencesViewModel.getSelectedValue().getValue();
+            UXPreference.Value value = preferencesViewModel.getActiveValue().getValue();
             if (value != null) {
                 int defaultValue = value.getItem().getDefault();
                 seekBar.setProgress(defaultValue);
@@ -76,10 +76,10 @@ public class PreferenceSeekBarDialog extends NavigationActivity implements UICom
         });
 
         buttonDone.setOnClickListener(view -> {
-            UXPreference.Value value = preferencesViewModel.getSelectedValue().getValue();
+            UXPreference.Value value = preferencesViewModel.getActiveValue().getValue();
             if (value != null) {
                 value.setValue(Integer.parseInt(textValue.getText().toString().replace("%", "")));
-                preferencesViewModel.setSelectedValue(value);
+                preferencesViewModel.setActiveValue(value);
                 preferencesViewModel.onPreferenceUpdated();
             }
 
@@ -95,7 +95,7 @@ public class PreferenceSeekBarDialog extends NavigationActivity implements UICom
 
     private SeekBarValueListener onSeekBarValueChanged() {
         return value -> {
-            UXPreference.Value preference = preferencesViewModel.getSelectedValue().getValue();
+            UXPreference.Value preference = preferencesViewModel.getActiveValue().getValue();
             if (preference == null) {
                 return;
             }
@@ -120,7 +120,7 @@ public class PreferenceSeekBarDialog extends NavigationActivity implements UICom
     public void setupViewModel() {
         super.setupViewModel();
 
-        preferencesViewModel.getSelectedValue().observe(this, this::onSelectionChanged);
+        preferencesViewModel.getActiveValue().observe(this, this::onSelectionChanged);
     }
 
     private void onSelectionChanged(@Nullable UXPreference.Value value) {

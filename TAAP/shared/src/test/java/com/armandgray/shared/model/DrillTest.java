@@ -33,7 +33,7 @@ public class DrillTest {
     private Drill testDrill;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         testDrill = new Drill(TEST_TITLE, TEST_IMAGE_RES_ID, TEST_TYPE);
     }
 

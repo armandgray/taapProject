@@ -22,7 +22,8 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
-import androidx.lifecycle.LiveData;
+import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -42,16 +43,16 @@ public class DrillViewModelTest {
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
     @Mock
-    TAAPAppComponent mockComponent;
+    private TAAPAppComponent mockComponent;
 
     @Mock
-    DrillRepository mockRepository;
+    private DrillRepository mockRepository;
 
     @Mock
-    LiveData<List<Drill>> mockDrills;
+    private Observable<List<Drill>> mockDrillsObservable;
 
     @Mock
-    LiveData<Drill> mockActiveDrill;
+    private Observable<Drill> mockActiveDrillObservable;
 
     private DrillViewModel testViewModel;
 
@@ -63,8 +64,9 @@ public class DrillViewModelTest {
         testViewModel = new DrillViewModel();
         testViewModel.repository = mockRepository;
 
-        Mockito.when(mockRepository.getDrills()).thenReturn(mockDrills);
-        Mockito.when(mockRepository.getActiveDrill()).thenReturn(mockActiveDrill);
+        Mockito.when(mockRepository.getDrillsObservable()).thenReturn(mockDrillsObservable);
+        Mockito.when(mockRepository.getActiveDrillObservable())
+                .thenReturn(mockActiveDrillObservable);
     }
 
     @Test
@@ -79,8 +81,22 @@ public class DrillViewModelTest {
     }
 
     @Test
+    public void testGetDrills_DoesSubscribeToObservable() {
+        testViewModel.getDrills();
+        Mockito.verify(mockRepository, Mockito.times(1)).getDrillsObservable();
+        // TODO implement subscribe testing
+    }
+
+    @Test
     public void testGetActiveDrill() {
         Assert.assertThat(testViewModel.getActiveDrill(), is(notNullValue()));
+    }
+
+    @Test
+    public void testGetActiveDrill_DoesSubscribeToObservable() {
+        testViewModel.getActiveDrill();
+        Mockito.verify(mockRepository, Mockito.times(1)).getActiveDrillObservable();
+        // TODO implement subscribe testing
     }
 
     @Test
@@ -91,14 +107,39 @@ public class DrillViewModelTest {
 
     @Test
     public void testOnCleared() {
+        testViewModel.disposables.add(new Disposable() {
+            @Override
+            public void dispose() {
+
+            }
+
+            @Override
+            public boolean isDisposed() {
+                return false;
+            }
+        });
+
+        Assert.assertThat(testViewModel.disposables.size(), is(1));
         testViewModel.onCleared();
-        // Nothing
+        Assert.assertThat(testViewModel.disposables.size(), is(0));
     }
 
     @Test
     public void testToString() {
         Assert.assertThat(testViewModel.toString(),
                 is("DrillViewModel@" + Integer.toHexString(testViewModel.hashCode())));
+    }
+
+    @Test
+    public void testDrillObserver() {
+        // TODO Implement Test
+//        DrillViewModel.DrillObserver observer = testViewModel.new DrillViewModel.DrillObserver() {
+//            @Override
+//            public void onNext(Object o) {
+//            }
+//        };
+//
+//        Assert.assertThat(observer, is(notNullValue()));
     }
 
     @After

@@ -62,7 +62,7 @@ public class PreferencesDialog extends NavigationActivity implements UIComponent
         recyclerPreferences.addOnItemTouchListener(new RecyclerItemClickListener(this,
                 (view, position) -> {
                     navigationViewModel.onNavigate(Destination.SEEK_BAR_DIALOG);
-                    preferencesViewModel.setSelectedValue(preferencesAdapter
+                    preferencesViewModel.setActiveValue(preferencesAdapter
                             .getPreference(position));
                 }));
     }
@@ -71,7 +71,7 @@ public class PreferencesDialog extends NavigationActivity implements UIComponent
     public void setupViewModel() {
         super.setupViewModel();
 
-        preferencesViewModel.getSelectedPreference().observe(this, this::onSelectionChanged);
+        preferencesViewModel.getActivePreference().observe(this, this::onSelectionChanged);
     }
 
     private void onSelectionChanged(@Nullable UXPreference preference) {

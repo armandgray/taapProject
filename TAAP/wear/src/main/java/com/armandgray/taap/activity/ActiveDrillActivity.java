@@ -161,7 +161,7 @@ public class ActiveDrillActivity extends WearNavigationActivity {
                     return false;
                 }
 
-                preferencesViewModel.setSelectedPreference(drill.getPreference());
+                preferencesViewModel.setActivePreference(drill.getPreference());
                 navigationViewModel.onNavigate(Destination.PREFERENCES_DIALOG);
                 return true;
         }

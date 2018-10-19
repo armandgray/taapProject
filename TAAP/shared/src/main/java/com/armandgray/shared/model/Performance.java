@@ -36,8 +36,8 @@ public class Performance {
     @ColumnInfo(name = "end_time")
     private long endTime;
 
-    // VisibleForRoom
     public Performance() {
+        // Default Constructor For Room Object Creation
     }
 
     public Performance(Drill drill) {

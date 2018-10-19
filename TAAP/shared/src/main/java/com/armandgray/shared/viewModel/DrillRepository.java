@@ -17,38 +17,43 @@ import javax.inject.Singleton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
+import io.reactivex.subjects.BehaviorSubject;
+import io.reactivex.subjects.PublishSubject;
 
 @Singleton
 class DrillRepository {
 
     private static final String TAG = "DRILL_REPOSITORY";
 
-    @VisibleForTesting
-    final MutableLiveData<Performance> performance = new MutableLiveData<>();
-
-    @VisibleForTesting
-    final MutableLiveData<Performance> completion = new MutableLiveData<>();
-
-    @VisibleForTesting
-    final MutableLiveData<Drill> activeDrill = new MutableLiveData<>();
-
-    private final CompositeDisposable disposables = new CompositeDisposable();
-    private final MutableLiveData<List<Drill>> drills = new MutableLiveData<>();
     private final DatabaseManager databaseManager;
+
+    @VisibleForTesting
+    final BehaviorSubject<List<Drill>> drillsSubject = BehaviorSubject.create();
+
+    @VisibleForTesting
+    final BehaviorSubject<Drill> activeDrillSubject = BehaviorSubject.create();
+
+    @VisibleForTesting
+    final BehaviorSubject<Performance> performanceSubject = BehaviorSubject.create();
+
+    @VisibleForTesting
+    final PublishSubject<Performance> completionSubject = PublishSubject.create();
+
+    @SuppressWarnings("FieldCanBeLocal")
+    private final CompositeDisposable disposables = new CompositeDisposable();
 
     @SuppressWarnings("ConstantConditions")
     @Inject
-    DrillRepository(PreferencesRepository preferencesRepository, DatabaseManager databaseManager,
-                    SchedulerProvider schedulers) {
-        preferencesRepository.addPreferenceConsumer(this::preferenceConsumer);
+    DrillRepository(PreferencesRepository preferencesRepository,
+                    DatabaseManager databaseManager, SchedulerProvider schedulers) {
+        disposables.add(preferencesRepository.getPreferenceUpdateObservable()
+                .subscribe(this::preferenceConsumer));
 
         this.databaseManager = databaseManager;
         this.databaseManager.stateSubject
@@ -60,6 +65,26 @@ class DrillRepository {
         // TODO Move call out of Drill Repository
         // Call used for side-effect: Triggers Database Creation/Opening
         this.databaseManager.getDrillDao().drill(Drill.Defaults.getDefault().getId()).subscribe();
+    }
+
+    private void preferenceConsumer(UXPreference preference) {
+        if (!preference.getCategory().isDrillCategory() || activeDrillSubject.getValue() == null) {
+            return;
+        }
+
+        Performance performance = performanceSubject.getValue();
+        Drill drill = activeDrillSubject.getValue();
+        Performance update = new Performance(drill);
+
+        databaseManager.getDrillDao().update(drill).subscribe();
+
+        if (performance != null) {
+            update.setCount(performance.getCount());
+            update.setTotal(performance.getTotal());
+            update.setStartTime(performance.getStartTime());
+        }
+
+        setPerformanceValue(update);
     }
 
     private Function<DatabaseManager.State, ObservableSource<List<Drill>>> toDrillList() {
@@ -107,45 +132,29 @@ class DrillRepository {
     void updateDrillSubscribers(List<Drill> list) {
         @SuppressWarnings("ConstantConditions")
         Drill drill = list.stream().filter(Drill.Defaults.getDefault()::equals).findFirst().get();
-        drills.setValue(list);
-        activeDrill.setValue(drill);
-        performance.setValue(new Performance(drill));
+        drillsSubject.onNext(list);
+        activeDrillSubject.onNext(drill);
+        performanceSubject.onNext(new Performance(drill));
     }
 
-    private void preferenceConsumer(UXPreference preference) {
-        if (!preference.getCategory().isDrillCategory() || getActiveDrill().getValue() == null) {
-            return;
-        }
-
-        Performance performance = getPerformance().getValue();
-        Performance update = new Performance(getActiveDrill().getValue());
-        if (performance != null) {
-            update.setCount(performance.getCount());
-            update.setTotal(performance.getTotal());
-            update.setStartTime(performance.getStartTime());
-        }
-
-        setPerformanceValue(update);
+    Observable<List<Drill>> getDrillsObservable() {
+        return drillsSubject;
     }
 
-    public LiveData<List<Drill>> getDrills() {
-        return drills;
+    Observable<Drill> getActiveDrillObservable() {
+        return activeDrillSubject;
     }
 
-    LiveData<Drill> getActiveDrill() {
-        return activeDrill;
+    Observable<Performance> getPerformanceObservable() {
+        return performanceSubject;
     }
 
-    LiveData<Performance> getPerformance() {
-        return performance;
-    }
-
-    LiveData<Performance> getCompletionObserver() {
-        return completion;
+    Observable<Performance> getCompletionObservable() {
+        return completionSubject;
     }
 
     void addMake() {
-        Performance performance = this.performance.getValue();
+        Performance performance = this.performanceSubject.getValue();
         if (performance == null) {
             return;
         }
@@ -156,7 +165,7 @@ class DrillRepository {
     }
 
     void addMiss() {
-        Performance performance = this.performance.getValue();
+        Performance performance = this.performanceSubject.getValue();
         if (performance == null) {
             return;
         }
@@ -166,7 +175,7 @@ class DrillRepository {
     }
 
     private void setPerformanceValue(Performance performance) {
-        this.performance.setValue(performance);
+        performanceSubject.onNext(performance);
         if (performance.getTotal() >= performance.getReps()) {
             handleSetCompletion(performance);
         }
@@ -174,27 +183,27 @@ class DrillRepository {
 
     private void handleSetCompletion(Performance performance) {
         //noinspection ConstantConditions
-        this.performance.setValue(new Performance(activeDrill.getValue()));
+        performanceSubject.onNext(new Performance(activeDrillSubject.getValue()));
         if (performance.getTotal() > 0) {
-            completion.setValue(performance);
+            completionSubject.onNext(performance);
             storePerformance(performance);
         }
     }
 
     void setActiveDrill(@NonNull Drill drill) {
-        activeDrill.setValue(drill);
-        if (this.performance.getValue() == null) {
-            this.performance.setValue(new Performance(drill));
+        activeDrillSubject.onNext(drill);
+        if (performanceSubject.getValue() == null) {
+            performanceSubject.onNext(new Performance(drill));
         } else {
-            handleSetCompletion(this.performance.getValue());
+            handleSetCompletion(performanceSubject.getValue());
         }
 
     }
 
     @SuppressLint("CheckResult")
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    private void storePerformance(Performance rate) {
-        // TODO Implement
+    private void storePerformance(Performance performance) {
+        databaseManager.getPerformanceDao().insert(performance).subscribe();
     }
 
     @NonNull

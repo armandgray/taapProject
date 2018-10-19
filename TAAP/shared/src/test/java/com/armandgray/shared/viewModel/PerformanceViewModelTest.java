@@ -21,7 +21,8 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import org.robolectric.annotation.Config;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
-import androidx.lifecycle.LiveData;
+import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -47,10 +48,10 @@ public class PerformanceViewModelTest {
     DrillRepository mockRepository;
 
     @Mock
-    LiveData<Performance> mockPerformance;
+    Observable<Performance> mockPerformanceObservable;
 
     @Mock
-    LiveData<Drill> mockActiveDrill;
+    Observable<Drill> mockActiveDrillObservable;
 
     private PerformanceViewModel testViewModel;
 
@@ -62,9 +63,12 @@ public class PerformanceViewModelTest {
         testViewModel = new PerformanceViewModel();
         testViewModel.repository = mockRepository;
 
-        Mockito.when(mockRepository.getActiveDrill()).thenReturn(mockActiveDrill);
-        Mockito.when(mockRepository.getPerformance()).thenReturn(mockPerformance);
-        Mockito.when(mockRepository.getCompletionObserver()).thenReturn(mockPerformance);
+        Mockito.when(mockRepository.getActiveDrillObservable())
+                .thenReturn(mockActiveDrillObservable);
+        Mockito.when(mockRepository.getPerformanceObservable())
+                .thenReturn(mockPerformanceObservable);
+        Mockito.when(mockRepository.getCompletionObservable())
+                .thenReturn(mockPerformanceObservable);
     }
 
     @Test
@@ -79,13 +83,34 @@ public class PerformanceViewModelTest {
     }
 
     @Test
+    public void testGetActiveDrill_DoesSubscribeToObservable() {
+        testViewModel.getActiveDrill();
+        Mockito.verify(mockRepository, Mockito.times(1)).getActiveDrillObservable();
+        // TODO implement subscribe testing
+    }
+
+    @Test
     public void testGetPerformance() {
         Assert.assertThat(testViewModel.getPerformance(), is(notNullValue()));
     }
 
     @Test
+    public void testGetPerformance_DoesSubscribeToObservable() {
+        testViewModel.getPerformance();
+        Mockito.verify(mockRepository, Mockito.times(1)).getPerformanceObservable();
+        // TODO implement subscribe testing
+    }
+
+    @Test
     public void testGetCompletionObserver() {
         Assert.assertThat(testViewModel.getCompletionObserver(), is(notNullValue()));
+    }
+
+    @Test
+    public void testGetCompletionObserver_DoesSubscribeToObservable() {
+        testViewModel.getCompletionObserver();
+        Mockito.verify(mockRepository, Mockito.times(1)).getCompletionObservable();
+        // TODO implement subscribe testing
     }
 
     @Test
@@ -114,8 +139,36 @@ public class PerformanceViewModelTest {
 
     @Test
     public void testOnCleared() {
+        testViewModel.disposables.add(new Disposable() {
+            @Override
+            public void dispose() {
+
+            }
+
+            @Override
+            public boolean isDisposed() {
+                return false;
+            }
+        });
+
+        Assert.assertThat(testViewModel.disposables.size(), is(1));
         testViewModel.onCleared();
-        // Nothing
+        Assert.assertThat(testViewModel.disposables.size(), is(0));
+    }
+
+    @Test
+    public void testPerformanceObserver() {
+        // TODO Implement Test
+//        PerformanceViewModel.PerformanceObserver observer = testViewModel
+//                .new PerformanceViewModel.PerformanceObserver() {
+//
+//            @Override
+//            public void onNext(Object o) {
+//
+//            }
+//        };
+//
+//        Assert.assertThat(observer, is(notNullValue()));
     }
 
     @Test
