@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -115,6 +116,16 @@ public class Drill {
         this.isActive = active;
     }
 
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object that) {
+        return that instanceof Drill && this.id == ((Drill) that).id;
+    }
+
     @NonNull
     @Override
     public String toString() {
@@ -152,7 +163,14 @@ public class Drill {
 
     public static class Defaults extends ArrayList<Drill> {
 
-        private static final Defaults DEFAULTS = new Defaults();
+        private static final Drill DEFAULT;
+        private static final Defaults DEFAULTS;
+
+        static {
+            DEFAULT = new Drill("Free Throws", R.drawable.ic_dribbble_white_48dp, Type.SHOOTING_FUNDAMENTALS);
+            DEFAULTS = new Defaults();
+        }
+
 
         private Defaults() {
             int drawable = R.drawable.ic_dribbble_white_48dp;
@@ -160,7 +178,7 @@ public class Drill {
             List<Type> shootingOnly = Type.SHOOTING_ONLY;
 
             // Fundamentals
-            this.add(new Drill("Free Throws", drawable, fundamentals));
+            this.add(DEFAULT);
             this.add(new Drill("Left Finesse", drawable, fundamentals));
             this.add(new Drill("Top Finesse", drawable, fundamentals));
             this.add(new Drill("Right Finesse", drawable, fundamentals));
@@ -184,8 +202,14 @@ public class Drill {
             this.add(new Drill("Right-Corner NBA", drawable, shootingOnly));
         }
 
+        @NonNull
         public static List<Drill> getDefaults() {
             return DEFAULTS;
+        }
+
+        @NonNull
+        public static Drill getDefault() {
+            return DEFAULT;
         }
     }
 }

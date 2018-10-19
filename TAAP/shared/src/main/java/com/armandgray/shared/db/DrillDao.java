@@ -5,17 +5,15 @@ import com.armandgray.shared.model.Drill;
 import java.util.List;
 
 import androidx.room.Dao;
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import io.reactivex.Flowable;
+import io.reactivex.Single;
 
 @Dao
-public interface DrillDao {
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertDrill(Drill drill);
+public interface DrillDao extends BaseDao<Drill> {
 
     @Query("SELECT * FROM drills")
-    Flowable<List<Drill>> getDrills();
+    Single<List<Drill>> all();
+
+    @Query("SELECT * FROM drills WHERE id == :id")
+    Single<Drill> drill(int id);
 }

@@ -47,7 +47,7 @@ public abstract class NavigationActivity extends AppCompatActivity
         @SuppressWarnings("WeakerAccess")
         @Provides
         @NonNull
-        public NavigationViewModel provideNavigationViewModel(A activity) {
+        protected NavigationViewModel provideNavigationViewModel(A activity) {
             return ViewModelProviders.of(activity).get(NavigationViewModel.class);
         }
     }

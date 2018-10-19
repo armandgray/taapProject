@@ -9,7 +9,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -22,7 +21,7 @@ public class DrillTest {
     private static final List<Drill.Type> TEST_TYPE;
 
     static {
-        TEST_TYPE = Collections.singletonList(Drill.Type.SHOOTING);
+        TEST_TYPE = Drill.Type.SHOOTING_ONLY;
     }
 
     @Rule
@@ -119,6 +118,18 @@ public class DrillTest {
     public void testSetActive() {
         testDrill.setActive(true);
         Assert.assertThat(testDrill.isActive(), is(true));
+    }
+
+    @Test
+    public void testHashCode() {
+        Drill expected = new Drill(TEST_TITLE, 2, Drill.Type.SHOOTING_ONLY);
+        Assert.assertThat(testDrill.hashCode(), is(expected.hashCode()));
+    }
+
+    @Test
+    public void testEqual() {
+        Drill expected = new Drill(TEST_TITLE, 2, Drill.Type.SHOOTING_ONLY);
+        Assert.assertThat(testDrill, is(expected));
     }
 
     @Test

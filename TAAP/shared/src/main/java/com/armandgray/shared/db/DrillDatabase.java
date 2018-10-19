@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 @Database(entities = { Drill.class, Performance.class }, version = 1)
 public abstract class DrillDatabase extends RoomDatabase {
 
-    public static final String DATABASE_NAME = "drill-database";
+    static final String DATABASE_NAME = "drill-database";
 
     public abstract DrillDao drillDao();
 
