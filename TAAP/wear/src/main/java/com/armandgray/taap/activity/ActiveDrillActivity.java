@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.armandgray.shared.model.Drill;
@@ -45,6 +46,7 @@ public class ActiveDrillActivity extends WearNavigationActivity {
     private ImageButton buttonMinus;
     private TextView textRate;
     private ImageButton buttonPlus;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,7 @@ public class ActiveDrillActivity extends WearNavigationActivity {
         buttonMinus = findViewById(R.id.button_minus);
         textRate = findViewById(R.id.text_rate);
         buttonPlus = findViewById(R.id.button_plus);
+        progressBar = findViewById(R.id.progress_bar);
     }
 
     @Override
@@ -116,9 +119,16 @@ public class ActiveDrillActivity extends WearNavigationActivity {
     }
 
     private void onDrillChanged(@Nullable Drill drill) {
-        if (drill != null) {
-            textDrill.setText(drill.getTitle());
+        if (drill == null) {
+            return;
         }
+
+        textDrill.setText(drill.getTitle());
+        textDrill.setVisibility(View.VISIBLE);
+        buttonMinus.setVisibility(View.VISIBLE);
+        textRate.setVisibility(View.VISIBLE);
+        buttonPlus.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     private void onPerformanceChange(@Nullable Performance performance) {

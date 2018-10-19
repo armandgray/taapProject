@@ -1,13 +1,15 @@
 package com.armandgray.shared.viewModel;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 
-import com.armandgray.shared.db.DatabaseManagerImpl;
-import com.armandgray.shared.db.DrillDatabase;
+import com.armandgray.shared.db.DatabaseManager;
 import com.armandgray.shared.model.Drill;
 import com.armandgray.shared.model.Performance;
 import com.armandgray.shared.model.UXPreference;
+import com.armandgray.shared.rx.SchedulerProvider;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,16 +20,16 @@ import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import io.reactivex.Observable;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.ObservableSource;
+import io.reactivex.Observer;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
 
 @Singleton
 class DrillRepository {
 
-    @Inject
-    DatabaseManagerImpl databaseManager;
-
-    @Inject
-    DrillDatabase database;
+    private static final String TAG = "DRILL_REPOSITORY";
 
     @VisibleForTesting
     final MutableLiveData<Performance> performance = new MutableLiveData<>();
@@ -38,16 +40,73 @@ class DrillRepository {
     @VisibleForTesting
     final MutableLiveData<Drill> activeDrill = new MutableLiveData<>();
 
+    private final CompositeDisposable disposables = new CompositeDisposable();
     private final MutableLiveData<List<Drill>> drills = new MutableLiveData<>();
+    private final DatabaseManager databaseManager;
 
     @SuppressWarnings("ConstantConditions")
     @Inject
-    DrillRepository(PreferencesRepository preferencesRepository) {
+    DrillRepository(PreferencesRepository preferencesRepository, DatabaseManager databaseManager,
+                    SchedulerProvider schedulers) {
         preferencesRepository.addPreferenceConsumer(this::preferenceConsumer);
 
-        List<Drill> list = Drill.Defaults.getDefaults();
-        Drill drill = list.get(0);
+        this.databaseManager = databaseManager;
+        this.databaseManager.stateSubject
+                .switchMap(toDrillList())
+                .subscribeOn(schedulers.io())
+                .observeOn(schedulers.ui())
+                .subscribe(onDrillListRetrieved());
 
+        // TODO Move call out of Drill Repository
+        // Call used for side-effect: Triggers Database Creation/Opening
+        this.databaseManager.getDrillDao().drill(Drill.Defaults.getDefault().getId()).subscribe();
+    }
+
+    private Function<DatabaseManager.State, ObservableSource<List<Drill>>> toDrillList() {
+        return state -> state != DatabaseManager.State.CREATED
+                ? databaseManager.getDrillDao().all().toObservable()
+                : Observable.just(new ArrayList<Drill>());
+    }
+
+    private Observer<List<Drill>> onDrillListRetrieved() {
+        return new Observer<List<Drill>>() {
+            private Disposable disposable;
+
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+                disposable = d;
+            }
+
+            @Override
+            public void onNext(List<Drill> list) {
+                if (list.size() == 0) {
+                    Log.e(TAG, "Drill Population: Retrieved Empty List (Check State)");
+                    return;
+                }
+
+                updateDrillSubscribers(list);
+                onComplete();
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                Log.e(TAG, String.format("Drill Population Failed: %s",
+                        e.getMessage()));
+            }
+
+            @Override
+            public void onComplete() {
+                if (disposable != null) {
+                    disposable.dispose();
+                }
+            }
+        };
+    }
+
+    @VisibleForTesting
+    void updateDrillSubscribers(List<Drill> list) {
+        @SuppressWarnings("ConstantConditions")
+        Drill drill = list.stream().filter(Drill.Defaults.getDefault()::equals).findFirst().get();
         drills.setValue(list);
         activeDrill.setValue(drill);
         performance.setValue(new Performance(drill));
@@ -135,10 +194,7 @@ class DrillRepository {
     @SuppressLint("CheckResult")
     @SuppressWarnings("ResultOfMethodCallIgnored")
     private void storePerformance(Performance rate) {
-        Observable.just(rate)
-                .doOnNext(performance -> performance.setEndTime(System.currentTimeMillis()))
-                .subscribeOn(Schedulers.io())
-                .subscribe(database.performanceDao()::insertPerformance);
+        // TODO Implement
     }
 
     @NonNull

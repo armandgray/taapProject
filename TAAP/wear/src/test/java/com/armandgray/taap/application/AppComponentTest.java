@@ -2,6 +2,7 @@ package com.armandgray.taap.application;
 
 import android.app.Application;
 
+import com.armandgray.shared.db.DatabaseManager;
 import com.armandgray.shared.viewModel.DrillViewModel;
 import com.armandgray.shared.viewModel.LogsViewModel;
 import com.armandgray.shared.viewModel.PerformanceViewModel;
@@ -43,6 +44,11 @@ public class AppComponentTest {
         AppComponent component = new AppComponent() {
             @Override
             public void inject(WearApplication application) {
+            }
+
+            @Override
+            public DatabaseManager.Component.Builder databaseBuilder() {
+                return null;
             }
 
             @Override

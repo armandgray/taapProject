@@ -18,6 +18,11 @@ android {
         }
     }
 
+    // used by Room, to test migrations
+    sourceSets {
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -78,6 +83,7 @@ dependencies {
     implementation "android.arch.work:work-firebase:${WORK_MANAGER_VERSION}"
     implementation "androidx.room:room-runtime:${ROOM_VERSION}"
     implementation "androidx.room:room-rxjava2:${ROOM_VERSION}"
+    implementation "androidx.arch.core:core-runtime:${ARCH_VERSION}"
     annotationProcessor "androidx.room:room-compiler:${ROOM_VERSION}"
 
     // Misc.

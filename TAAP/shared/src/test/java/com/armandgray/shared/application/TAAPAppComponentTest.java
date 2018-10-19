@@ -1,10 +1,10 @@
 package com.armandgray.shared.application;
 
-import com.armandgray.shared.viewModel.LogsViewModel;
-import com.armandgray.shared.navigation.NavigationViewModel;
-import com.armandgray.shared.viewModel.PreferencesViewModel;
+import com.armandgray.shared.db.DatabaseManager;
 import com.armandgray.shared.viewModel.DrillViewModel;
+import com.armandgray.shared.viewModel.LogsViewModel;
 import com.armandgray.shared.viewModel.PerformanceViewModel;
+import com.armandgray.shared.viewModel.PreferencesViewModel;
 import com.armandgray.shared.viewModel.SettingsViewModel;
 
 import org.junit.Assert;
@@ -19,6 +19,11 @@ public class TAAPAppComponentTest {
     @Test
     public void testAppComponent_DeclaresInjectMethods() {
         TAAPAppComponent component = new TAAPAppComponent() {
+
+            @Override
+            public DatabaseManager.Component.Builder databaseBuilder() {
+                return null;
+            }
 
             @Override
             public void inject(PerformanceViewModel viewModel) {
@@ -41,6 +46,14 @@ public class TAAPAppComponentTest {
             }
         };
 
+        Assert.assertThat(component, is(notNullValue()));
+    }
+
+    @Test
+    public void testAppComponent_DeclaresInjectableSubComponentInterface() {
+        TAAPAppComponent.InjectableSubComponent component = parentComponent -> {
+
+                };
         Assert.assertThat(component, is(notNullValue()));
     }
 }
