@@ -25,22 +25,29 @@ public class Drill {
     @PrimaryKey
     private int id;
 
+    @SuppressWarnings("NullableProblems")
     @NonNull
     private String title;
 
     @ColumnInfo(name = "image_res_id")
     private int imageResId;
 
+    @SuppressWarnings("NullableProblems")
     @TypeConverters(Type.Converter.class)
     @NonNull
     private List<Type> type;
 
+    @SuppressWarnings("NullableProblems")
     @TypeConverters(UXPreference.Converter.class)
     @NonNull
     private UXPreference preference;
 
     @Ignore
     private boolean isActive;
+
+    public Drill() {
+        // Default Constructor For Room Object Creation
+    }
 
     public Drill(@NonNull String title, int imageResId, @NonNull List<Type> type) {
         this.id = title.hashCode();

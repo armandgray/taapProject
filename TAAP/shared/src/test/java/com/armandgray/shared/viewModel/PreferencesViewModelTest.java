@@ -21,7 +21,8 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import org.robolectric.annotation.Config;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
-import androidx.lifecycle.LiveData;
+import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -47,10 +48,10 @@ public class PreferencesViewModelTest {
     PreferencesRepository mockRepository;
 
     @Mock
-    LiveData<UXPreference> mockPreferenceLiveData;
+    Observable<UXPreference> mockPreferenceObservable;
 
     @Mock
-    LiveData<UXPreference.Value> mockPreferenceValueLiveData;
+    Observable<UXPreference.Value> mockPreferenceValueObservable;
 
     @Mock
     UXPreference mockPreference;
@@ -68,8 +69,8 @@ public class PreferencesViewModelTest {
         testViewModel = new PreferencesViewModel();
         testViewModel.repository = mockRepository;
 
-        Mockito.when(mockRepository.getSelectedPreference()).thenReturn(mockPreferenceLiveData);
-        Mockito.when(mockRepository.getSelectedValue()).thenReturn(mockPreferenceValueLiveData);
+        Mockito.when(mockRepository.getActivePreferenceObservable()).thenReturn(mockPreferenceObservable);
+        Mockito.when(mockRepository.getActiveValueObservable()).thenReturn(mockPreferenceValueObservable);
     }
 
     @Test
@@ -79,25 +80,39 @@ public class PreferencesViewModelTest {
     }
 
     @Test
-    public void testGetSelectedPreference() {
-        Assert.assertThat(testViewModel.getSelectedPreference(), is(notNullValue()));
+    public void testGetActivePreference() {
+        Assert.assertThat(testViewModel.getActivePreference(), is(notNullValue()));
     }
 
     @Test
-    public void testSetSelectedPreference() {
-        testViewModel.setSelectedPreference(mockPreference);
-        Mockito.verify(mockRepository, Mockito.times(1)).setSelectedPreference(mockPreference);
+    public void testGetActivePreference_DoesSubscribeToObservable() {
+        testViewModel.getActivePreference();
+        Mockito.verify(mockRepository, Mockito.times(1)).getActivePreferenceObservable();
+        // TODO implement subscribe testing
     }
 
     @Test
-    public void testGetSelectedValue() {
-        Assert.assertThat(testViewModel.getSelectedValue(), is(notNullValue()));
+    public void testSetActivePreference() {
+        testViewModel.setActivePreference(mockPreference);
+        Mockito.verify(mockRepository, Mockito.times(1)).setActivePreference(mockPreference);
     }
 
     @Test
-    public void testSetSelectedValue() {
-        testViewModel.setSelectedValue(mockPreferenceValue);
-        Mockito.verify(mockRepository, Mockito.times(1)).setSelectedValue(mockPreferenceValue);
+    public void testGetActiveValue() {
+        Assert.assertThat(testViewModel.getActiveValue(), is(notNullValue()));
+    }
+
+    @Test
+    public void testGetActiveValue_DoesSubscribeToObservable() {
+        testViewModel.getActiveValue();
+        Mockito.verify(mockRepository, Mockito.times(1)).getActiveValueObservable();
+        // TODO implement subscribe testing
+    }
+
+    @Test
+    public void testSetActiveValue() {
+        testViewModel.setActiveValue(mockPreferenceValue);
+        Mockito.verify(mockRepository, Mockito.times(1)).setActiveValue(mockPreferenceValue);
     }
 
     @Test
@@ -108,14 +123,39 @@ public class PreferencesViewModelTest {
 
     @Test
     public void testOnCleared() {
+        testViewModel.disposables.add(new Disposable() {
+            @Override
+            public void dispose() {
+
+            }
+
+            @Override
+            public boolean isDisposed() {
+                return false;
+            }
+        });
+
+        Assert.assertThat(testViewModel.disposables.size(), is(1));
         testViewModel.onCleared();
-        // Nothing
+        Assert.assertThat(testViewModel.disposables.size(), is(0));
     }
 
     @Test
     public void testToString() {
         Assert.assertThat(testViewModel.toString(),
                 is("PreferencesViewModel@" + Integer.toHexString(testViewModel.hashCode())));
+    }
+
+    @Test
+    public void testPreferenceObserver() {
+        // TODO Implement Test
+//        PreferenceViewModel.PreferenceObserver observer = testViewModel.new PreferenceViewModel.PreferenceObserver() {
+//            @Override
+//            public void onNext(Object o) {
+//            }
+//        };
+//
+//        Assert.assertThat(observer, is(notNullValue()));
     }
 
     @After

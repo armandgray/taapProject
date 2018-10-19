@@ -5,48 +5,50 @@ import com.armandgray.shared.model.UXPreference;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
+import androidx.annotation.VisibleForTesting;
+import io.reactivex.Observable;
+import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.PublishSubject;
 
 @Singleton
 class PreferencesRepository {
 
-    private final CompositeDisposable disposable = new CompositeDisposable();
+    @VisibleForTesting
+    final BehaviorSubject<UXPreference> activePreferenceSubject = BehaviorSubject.create();
 
-    private final MutableLiveData<UXPreference> selectedPreference = new MutableLiveData<>();
-    private final MutableLiveData<UXPreference.Value> selectedValue = new MutableLiveData<>();
-    private final PublishSubject<UXPreference> preferenceSubject = PublishSubject.create();
+    @VisibleForTesting
+    final BehaviorSubject<UXPreference.Value> activeValueSubject = BehaviorSubject.create();
+
+    @VisibleForTesting
+    final PublishSubject<UXPreference> preferenceUpdateSubject = PublishSubject.create();
 
     @Inject
     PreferencesRepository() {
     }
 
-    LiveData<UXPreference> getSelectedPreference() {
-        return selectedPreference;
+    Observable<UXPreference> getActivePreferenceObservable() {
+        return activePreferenceSubject;
     }
 
-    void setSelectedPreference(UXPreference preference) {
-        this.selectedPreference.setValue(preference);
+    void setActivePreference(UXPreference preference) {
+        this.activePreferenceSubject.onNext(preference);
     }
 
-    LiveData<UXPreference.Value> getSelectedValue() {
-        return selectedValue;
+    Observable<UXPreference.Value> getActiveValueObservable() {
+        return activeValueSubject;
     }
 
-    void setSelectedValue(UXPreference.Value value) {
-        this.selectedValue.setValue(value);
+    void setActiveValue(UXPreference.Value value) {
+        this.activeValueSubject.onNext(value);
     }
 
-    void addPreferenceConsumer(Consumer<UXPreference> consumer) {
-        disposable.add(preferenceSubject.subscribe(consumer));
+    Observable<UXPreference> getPreferenceUpdateObservable() {
+        return preferenceUpdateSubject;
     }
 
     void onPreferenceUpdated() {
-        if (selectedPreference.getValue() != null) {
-            preferenceSubject.onNext(selectedPreference.getValue());
+        if (activePreferenceSubject.getValue() != null) {
+            preferenceUpdateSubject.onNext(activePreferenceSubject.getValue());
         }
     }
 }
