@@ -1,10 +1,11 @@
 package com.armandgray.shared.navigation;
 
+import com.armandgray.shared.application.TAAPViewModel;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-public class NavigationViewModel extends ViewModel {
+public class NavigationViewModel extends TAAPViewModel {
 
     private MutableLiveData<TAAPDestination> destination = new MutableLiveData<>();
 

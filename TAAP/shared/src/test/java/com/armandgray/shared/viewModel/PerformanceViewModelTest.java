@@ -22,7 +22,6 @@ import org.robolectric.annotation.Config;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -135,25 +134,6 @@ public class PerformanceViewModelTest {
     public void testOnDoubleInputClick_AddsMiss() {
         testViewModel.onDoubleInputClick();
         Mockito.verify(mockRepository, Mockito.only()).addMiss();
-    }
-
-    @Test
-    public void testOnCleared() {
-        testViewModel.disposables.add(new Disposable() {
-            @Override
-            public void dispose() {
-
-            }
-
-            @Override
-            public boolean isDisposed() {
-                return false;
-            }
-        });
-
-        Assert.assertThat(testViewModel.disposables.size(), is(1));
-        testViewModel.onCleared();
-        Assert.assertThat(testViewModel.disposables.size(), is(0));
     }
 
     @Test

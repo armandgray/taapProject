@@ -1,28 +1,40 @@
 package com.armandgray.shared.viewModel;
 
 import com.armandgray.shared.application.TAAPApplication;
+import com.armandgray.shared.application.TAAPViewModel;
+import com.armandgray.shared.model.WorkoutInfo;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
-public class LogsViewModel extends ViewModel {
+public class LogsViewModel extends TAAPViewModel {
 
     @Inject
-    DrillRepository repository;
+    LogsRepository repository;
+
+    private MutableLiveData<List<WorkoutInfo>> recentWorkoutsLiveData;
 
     LogsViewModel() {
         TAAPApplication.getAppComponent().inject(this);
     }
 
-    @Override
-    protected void onCleared() {
-    }
+    public LiveData<List<WorkoutInfo>> getRecentWorkouts() {
+        if (recentWorkoutsLiveData == null) {
+            recentWorkoutsLiveData = new MutableLiveData<>();
 
-    @NonNull
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + "@" + Integer.toHexString(hashCode());
+            repository.getRecentWorkoutObservable()
+                    .subscribe(new ViewModelObserver<List<WorkoutInfo>>() {
+                        @Override
+                        public void onNext(List<WorkoutInfo> logs) {
+                            recentWorkoutsLiveData.setValue(logs);
+                        }
+                    });
+        }
+
+        return recentWorkoutsLiveData;
     }
 }

@@ -1,10 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:showIn="@layout/activity_logs">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:contentDescription="Image Icon Location"
+            android:tint="@color/colorPrimary"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_location_white_24dp"
+            tools:ignore="HardcodedText"/>
+
+        <TextView
+            android:id="@+id/text_last_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/colorDarkGray"
+            android:textSize="@dimen/text_size_min"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="@+id/image_location"
+            app:layout_constraintStart_toStartOf="@+id/image_location"
+            app:layout_constraintTop_toBottomOf="@+id/image_location"
+            tools:text="Today - YMCA Embarcadero"/>
+
+        <TextView
+            android:id="@+id/text_last_performance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_large"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_last_location"
+            tools:text="64%"/>
+
+        <TextView
+            android:id="@+id/text_last_length"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/image_time"
+            app:layout_constraintStart_toEndOf="@+id/image_time"
+            app:layout_constraintTop_toTopOf="@+id/image_time"
+            tools:text="1:45"/>
+
+        <ImageView
+            android:id="@+id/image_time"
+            android:layout_width="@dimen/icon_size_normal"
+            android:layout_height="@dimen/icon_size_normal"
+            android:layout_marginTop="4dp"
+            android:contentDescription="Image Icon Time"
+            android:tint="@color/white"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/text_last_performance"
+            app:layout_constraintTop_toBottomOf="@+id/text_last_performance"
+            app:srcCompat="@drawable/ic_timer_white_24dp"
+            tools:ignore="HardcodedText"/>
+
+        <TextView
+            android:id="@+id/text_last_reps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/image_reps"
+            app:layout_constraintStart_toEndOf="@+id/image_reps"
+            app:layout_constraintTop_toTopOf="@+id/image_reps"
+            tools:text="279"/>
+
+        <ImageView
+            android:id="@+id/image_reps"
+            android:layout_width="@dimen/icon_size_normal"
+            android:layout_height="@dimen/icon_size_normal"
+            android:layout_marginTop="4dp"
+            android:contentDescription="Image Icon Reps"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/image_time"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/image_time"
+            app:layout_constraintTop_toBottomOf="@+id/image_time"
+            app:srcCompat="@drawable/ic_human_handsup_white_48dp"
+            tools:ignore="HardcodedText"/>
+
+        <ImageView
+            android:id="@+id/image_last_types"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/bg_circular_outline"
+            android:contentDescription="Image Last Workout Types"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/text_last_performance"
+            app:layout_constraintTop_toTopOf="@+id/text_last_performance"
+            app:srcCompat="@drawable/accept_deny_dialog_positive_bg"
+            tools:ignore="HardcodedText"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_logs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="72dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_reps"/>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/text_no_logs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_logs_found"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

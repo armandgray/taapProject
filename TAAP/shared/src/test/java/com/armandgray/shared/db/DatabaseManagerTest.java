@@ -3,13 +3,13 @@ package com.armandgray.shared.db;
 import com.armandgray.shared.application.TAAPAppComponent;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.lang.annotation.Annotation;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.*;
 
 public class DatabaseManagerTest {
 
@@ -87,11 +87,13 @@ public class DatabaseManagerTest {
         Assert.assertThat(scope, is(notNullValue()));
     }
 
+    @Ignore
     @Test
     public void testManagerModule_ProvideDatabase_ReturnsDatabase() {
         // TODO implement test
     }
 
+    @Ignore
     @Test
     public void testManagerModule_ProvideDatabase_OnDatabaseLifecycleChanged() {
         // TODO implement test

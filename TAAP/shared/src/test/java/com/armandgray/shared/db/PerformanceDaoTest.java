@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import java.util.List;
 
-import io.reactivex.Completable;
 import io.reactivex.Single;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -20,27 +19,12 @@ public class PerformanceDaoTest {
         PerformanceDao dao = new PerformanceDao() {
 
             @Override
-            public Completable insert(Performance performance) {
-                return null;
-            }
-
-            @Override
             public Single<List<Long>> insert(Performance... arr) {
                 return null;
             }
 
             @Override
-            public Completable update(Performance performance) {
-                return null;
-            }
-
-            @Override
             public Single<Integer> update(Performance... arr) {
-                return null;
-            }
-
-            @Override
-            public Completable delete(Performance performance) {
                 return null;
             }
 
@@ -51,6 +35,11 @@ public class PerformanceDaoTest {
 
             @Override
             public Single<List<Performance>> all() {
+                return null;
+            }
+
+            @Override
+            public Single<List<DaoLog>> logsBetween(long startTime, long endTime) {
                 return null;
             }
         };

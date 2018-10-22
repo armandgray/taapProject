@@ -3,17 +3,25 @@ package com.armandgray.shared.model;
 import java.util.Locale;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "performances",
-        indices = {@Index(name = "drill", value = "drill_id", unique = true)}/*,
+        indices = {@Index(name = "drill", value = "drill_id", unique = true)},
         foreignKeys = @ForeignKey(
                 entity = Drill.class,
                 parentColumns = "id",
-                childColumns = "drill_id")*/)
+                childColumns = "drill_id",
+                onUpdate = CASCADE,
+                onDelete = CASCADE))
 public class Performance {
 
     @PrimaryKey(autoGenerate = true)
@@ -30,6 +38,10 @@ public class Performance {
 
     private double goal;
 
+    @Nullable
+    @TypeConverters(WorkoutLocation.Converter.class)
+    private WorkoutLocation location;
+
     @ColumnInfo(name = "start_time")
     private long startTime;
 
@@ -40,24 +52,28 @@ public class Performance {
         // Default Constructor For Room Object Creation
     }
 
-    public Performance(Drill drill) {
+    @Ignore
+    public Performance(@NonNull Drill drill) {
         this.drillId = drill.getId();
         this.count = 0;
         this.total = 0;
         this.reps = drill.getReps();
         this.goal = drill.getGoal();
+        this.location = new WorkoutLocation("Today - YMCA Embarcadero");
         this.startTime = System.currentTimeMillis();
     }
 
-    public Performance(Performance clone) {
+    @Ignore
+    public Performance(@NonNull Performance clone) {
         this.id = clone.id;
         this.drillId = clone.drillId;
         this.count = clone.count;
         this.total = clone.total;
         this.reps = clone.reps;
+        this.goal = clone.goal;
+        this.location = clone.location;
         this.startTime = clone.startTime;
         this.endTime = clone.endTime;
-        this.goal = clone.goal;
     }
 
     public int getId() {
@@ -80,16 +96,22 @@ public class Performance {
         return this.reps;
     }
 
+    public double getGoal() {
+        return this.goal;
+    }
+
+    @SuppressWarnings("WeakerAccess") // VisibleForRoom
+    @Nullable
+    public WorkoutLocation getLocation() {
+        return this.location;
+    }
+
     public long getStartTime() {
         return startTime;
     }
 
     public long getEndTime() {
         return endTime;
-    }
-
-    public double getGoal() {
-        return this.goal;
     }
 
     public void raiseCount() {
@@ -124,16 +146,20 @@ public class Performance {
         this.reps = reps;
     }
 
+    public void setGoal(double goal) {
+        this.goal = goal;
+    }
+
+    public void setLocation(@NonNull WorkoutLocation location) {
+        this.location = location;
+    }
+
     public void setStartTime(long startTime) {
         this.startTime = startTime;
     }
 
     public void setEndTime(long endTime) {
         this.endTime = endTime;
-    }
-
-    public void setGoal(double goal) {
-        this.goal = goal;
     }
 
     public void clear() {

@@ -71,7 +71,7 @@ public class PreferenceSeekBarDialog extends NavigationActivity implements UICom
             if (value != null) {
                 int defaultValue = value.getItem().getDefault();
                 seekBar.setProgress(defaultValue);
-                textValue.setText(String.valueOf(defaultValue));
+                onSeekBarValueChanged().onValueChanged(defaultValue);
             }
         });
 

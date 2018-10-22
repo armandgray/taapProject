@@ -1,5 +1,6 @@
 package com.armandgray.shared.viewModel;
 
+import com.armandgray.shared.application.TAAPRepository;
 import com.armandgray.shared.model.UXPreference;
 
 import javax.inject.Inject;
@@ -11,7 +12,7 @@ import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.PublishSubject;
 
 @Singleton
-class PreferencesRepository {
+class PreferencesRepository extends TAAPRepository {
 
     @VisibleForTesting
     final BehaviorSubject<UXPreference> activePreferenceSubject = BehaviorSubject.create();
