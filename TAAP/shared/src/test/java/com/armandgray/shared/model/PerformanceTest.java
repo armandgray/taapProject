@@ -93,7 +93,7 @@ public class PerformanceTest {
 
     @Test
     public void testGetEndTime() {
-        Assert.assertThat(testPerformance.getEndTime(), is(0L));
+        Assert.assertThat(testPerformance.getEndTime() <= System.currentTimeMillis(), is(true));
     }
 
     @Test
@@ -192,6 +192,12 @@ public class PerformanceTest {
         double expected = 12.01;
         testPerformance.setGoal(expected);
         Assert.assertThat(testPerformance.getGoal(), is(expected));
+    }
+
+    @Test
+    public void testCaptureEndTime() {
+        testPerformance.captureEndTime();
+        Assert.assertThat(testPerformance.getEndTime() <= System.currentTimeMillis(), is(true));
     }
 
     @Test

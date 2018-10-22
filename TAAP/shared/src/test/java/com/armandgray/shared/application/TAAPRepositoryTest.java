@@ -2,7 +2,7 @@ package com.armandgray.shared.application;
 
 import android.util.Log;
 
-import com.armandgray.shared.helpers.StringHelpers;
+import com.armandgray.shared.helpers.StringHelper;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -23,7 +23,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
 @Config(manifest = Config.NONE)
-@PrepareForTest({TAAPRepositoryTest.class, StringHelpers.class, Log.class})
+@PrepareForTest({TAAPRepositoryTest.class, StringHelper.class, Log.class})
 @RunWith(PowerMockRunner.class)
 public class TAAPRepositoryTest {
 
@@ -36,8 +36,8 @@ public class TAAPRepositoryTest {
     public void setUp() {
         PowerMockito.mockStatic(Log.class);
 
-        PowerMockito.mockStatic(StringHelpers.class);
-        PowerMockito.when(StringHelpers.toLogTag(Mockito.anyString())).thenReturn(TAAP_REPOSITORY);
+        PowerMockito.mockStatic(StringHelper.class);
+        PowerMockito.when(StringHelper.toLogTag(Mockito.anyString())).thenReturn(TAAP_REPOSITORY);
 
         testRepository = new TAAPRepository() {
         };

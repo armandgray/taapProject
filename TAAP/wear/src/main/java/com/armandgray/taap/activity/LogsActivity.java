@@ -14,6 +14,7 @@ import com.armandgray.taap.R;
 import com.armandgray.taap.navigation.WearNavigationActivity;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -104,7 +105,8 @@ public class LogsActivity extends WearNavigationActivity {
 
         progressBar.setVisibility(View.GONE);
 
-        if (workouts.size() == 0) {
+        // TODO Investigate getTypes being empty (Possible dummy value from DB when empty)
+        if (workouts.size() == 0 || workouts.get(0).getTypes().size() == 0) {
             textNoLogs.setVisibility(View.VISIBLE);
             return;
         }
@@ -125,8 +127,10 @@ public class LogsActivity extends WearNavigationActivity {
     private void displayData(@NonNull List<WorkoutInfo> workouts) {
         WorkoutInfo lastWorkout = workouts.get(workouts.size() - 1);
         WorkoutLocation location = lastWorkout.getLocation();
+        String locationInfo = lastWorkout.getDay() + String.format(Locale.getDefault(), " - %s",
+                location == null ? "" : location.getTitle());
 
-        textLastLocation.setText(location == null ? "" : location.getTitle());
+        textLastLocation.setText(locationInfo);
         textLastPerformance.setText(lastWorkout.getOverallPerformance());
         textLastLength.setText(lastWorkout.getLength());
         textLastReps.setText(String.valueOf(lastWorkout.getOverallReps()));

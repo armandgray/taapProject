@@ -148,7 +148,7 @@ public class LogActivityViewsTest {
 //        views.setupActivityInitialState();
 //
 //        String dateString = ">  ";
-//        dateString += new SimpleDateFormat("EEE, MMM d, ''yy", Locale.US).format(new Date()) + "  <";
+//        dateString += new SimpleDateFormat("EEE, MMM d, ''yy", Locale.US).simpleFormat(new Date()) + "  <";
 //        TextView tvDate = (TextView) views.rootView.findViewById(R.id.tvDate);
 //        assertNotNull(tvDate);
 //        assertEquals(dateString, tvDate.getText());

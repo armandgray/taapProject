@@ -1,8 +1,10 @@
 package com.armandgray.shared.model;
 
 import com.armandgray.shared.db.PerformanceDao;
+import com.armandgray.shared.helpers.DateHelper;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -26,6 +28,12 @@ public class WorkoutInfo {
     @NonNull
     private final String length;
 
+    @NonNull
+    private final String day;
+
+    @NonNull
+    private final String shortDay;
+
     public WorkoutInfo(@NonNull List<PerformanceDao.DaoLog> logs) {
         this.types = parseTypes(logs);
         this.location = parseLocation(logs);
@@ -33,6 +41,8 @@ public class WorkoutInfo {
         this.overallPerformance = parseOverallPerformance(logs, overallReps);
         this.overallReps = overallReps;
         this.length = parseLength(logs);
+        this.day = parseDay(logs, false);
+        this.shortDay = parseDay(logs, true);
     }
 
     @NonNull
@@ -68,10 +78,19 @@ public class WorkoutInfo {
 
     @NonNull
     private String parseLength(@NonNull List<PerformanceDao.DaoLog> logs) {
-        int size = logs.size();
-        return size != 0 ? String.valueOf(
-                logs.get(0).getPerformance().getStartTime() - logs.get(size - 1)
-                        .getPerformance().getEndTime()) : "0:00";
+        return DateHelper.format(new Date(logs.stream()
+                .map(PerformanceDao.DaoLog::getPerformance)
+                .map(performance -> performance.getEndTime() - performance.getStartTime())
+                .reduce(0L, (length, next) -> length + next)));
+    }
+
+    private String parseDay(@NonNull List<PerformanceDao.DaoLog> logs, boolean shortFormat) {
+        if (logs.size() == 0) {
+            return "";
+        }
+
+        Date date = new Date(logs.get(0).getPerformance().getStartTime());
+        return shortFormat ? DateHelper.getShortSimpleDay(date) : DateHelper.getSimpleDay(date);
     }
 
     @NonNull
@@ -104,5 +123,15 @@ public class WorkoutInfo {
         String workoutLocation = location != null ? location.toString() : "N/A";
         return String.format(Locale.getDefault(), "Log{@%s: %s, %s, %s}",
                 workoutLocation, overallPerformance, length, types);
+    }
+
+    @NonNull
+    public String getShortDay() {
+        return shortDay;
+    }
+
+    @NonNull
+    public String getDay() {
+        return day;
     }
 }

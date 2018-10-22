@@ -1,8 +1,8 @@
 package com.armandgray.shared.helpers;
 
-public class StringHelpers {
+public class StringHelper {
 
-    private StringHelpers() {
+    private StringHelper() {
         // Strict Helper Class
     }
 

@@ -2,7 +2,7 @@ package com.armandgray.shared.application;
 
 import android.util.Log;
 
-import com.armandgray.shared.helpers.StringHelpers;
+import com.armandgray.shared.helpers.StringHelper;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
@@ -13,8 +13,9 @@ import io.reactivex.disposables.Disposable;
 public abstract class TAAPViewModel extends ViewModel {
 
     @SuppressWarnings("WeakerAccess")
-    protected final String TAG = StringHelpers.toLogTag(getClass().getSimpleName());
+    protected final String TAG = StringHelper.toLogTag(getClass().getSimpleName());
 
+    @SuppressWarnings("WeakerAccess")
     protected final CompositeDisposable disposables = new CompositeDisposable();
 
     @NonNull

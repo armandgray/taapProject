@@ -12,7 +12,6 @@ import java.util.Locale;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.junit.Assert.*;
 
 public class WorkoutInfoTest {
 
@@ -58,6 +57,16 @@ public class WorkoutInfoTest {
 
     @Test
     public void testGetLength() {
+        // TODO implement
+    }
+
+    @Test
+    public void testGetDay() {
+        // TODO implement
+    }
+
+    @Test
+    public void testGetShortDay() {
         // TODO implement
     }
 

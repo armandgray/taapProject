@@ -68,7 +68,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
         }
 
         public void setUp(@NonNull WorkoutInfo workout) {
-            textDate.setText(workout.getLocation() != null ? workout.getLocation().getTitle() : "");
+            textDate.setText(workout.getShortDay());
             imageType.setImageResource(workout.getTypes().get(0).getImageResId());
             textPerformance.setText(workout.getOverallPerformance());
             textReps.setText(String.valueOf(workout.getOverallReps()));

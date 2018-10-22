@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "b110f56ab0397b9ccfd6da41260df20a",
+    "identityHash": "a647a2978662ce087e320d98db949e14",
     "entities": [
       {
         "tableName": "drills",
@@ -122,16 +122,7 @@
           ],
           "autoGenerate": true
         },
-        "indices": [
-          {
-            "name": "drill",
-            "unique": true,
-            "columnNames": [
-              "drill_id"
-            ],
-            "createSql": "CREATE UNIQUE INDEX `drill` ON `${TABLE_NAME}` (`drill_id`)"
-          }
-        ],
+        "indices": [],
         "foreignKeys": [
           {
             "table": "drills",
@@ -150,7 +141,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"b110f56ab0397b9ccfd6da41260df20a\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"a647a2978662ce087e320d98db949e14\")"
     ]
   }
 }

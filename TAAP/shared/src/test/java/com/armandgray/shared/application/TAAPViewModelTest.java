@@ -2,7 +2,7 @@ package com.armandgray.shared.application;
 
 import android.util.Log;
 
-import com.armandgray.shared.helpers.StringHelpers;
+import com.armandgray.shared.helpers.StringHelper;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -23,7 +23,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
 @Config(manifest = Config.NONE)
-@PrepareForTest({TAAPViewModel.class, StringHelpers.class, Log.class})
+@PrepareForTest({TAAPViewModel.class, StringHelper.class, Log.class})
 @RunWith(PowerMockRunner.class)
 public class TAAPViewModelTest {
 
@@ -36,8 +36,8 @@ public class TAAPViewModelTest {
     public void setUp() {
         PowerMockito.mockStatic(Log.class);
         
-        PowerMockito.mockStatic(StringHelpers.class);
-        PowerMockito.when(StringHelpers.toLogTag(Mockito.anyString())).thenReturn(TAAP_VIEW_MODEL);
+        PowerMockito.mockStatic(StringHelper.class);
+        PowerMockito.when(StringHelper.toLogTag(Mockito.anyString())).thenReturn(TAAP_VIEW_MODEL);
 
         testViewModel = new TAAPViewModel() {
         };

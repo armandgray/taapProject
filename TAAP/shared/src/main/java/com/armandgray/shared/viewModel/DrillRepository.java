@@ -1,6 +1,5 @@
 package com.armandgray.shared.viewModel;
 
-import android.annotation.SuppressLint;
 import android.util.Log;
 
 import com.armandgray.shared.application.TAAPRepository;
@@ -173,16 +172,13 @@ class DrillRepository extends TAAPRepository {
         //noinspection ConstantConditions
         performanceSubject.onNext(new Performance(activeDrillSubject.getValue()));
         if (performance.getTotal() > 0) {
-            performance.setEndTime(System.currentTimeMillis());
+            performance.captureEndTime();
             completionSubject.onNext(performance);
             storePerformance(performance);
         }
     }
 
-    @SuppressLint("CheckResult")
-    @SuppressWarnings("ResultOfMethodCallIgnored")
     private void storePerformance(Performance performance) {
-        System.out.println(performance.hashCode());
         databaseManager.getPerformanceDao().insert(performance).subscribe();
     }
 }

@@ -23,7 +23,7 @@ public interface PerformanceDao extends BaseDao<Performance> {
             + "WHERE start_time BETWEEN :startTime AND :endTime")
     Single<List<DaoLog>> logsBetween(long startTime, long endTime);
 
-    class DaoLog {
+    class DaoLog implements Comparable<DaoLog> {
 
         private List<Drill.Type> type;
 
@@ -50,6 +50,11 @@ public interface PerformanceDao extends BaseDao<Performance> {
         @Override
         public String toString() {
             return String.format(Locale.getDefault(), "DaoLog{%s, %s}", type, performance);
+        }
+
+        @Override
+        public int compareTo(DaoLog that) {
+            return that == null ? 1 : this.performance.compareTo(that.performance);
         }
     }
 }

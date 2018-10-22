@@ -8,21 +8,19 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
-import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "performances",
-        indices = {@Index(name = "drill", value = "drill_id", unique = true)},
         foreignKeys = @ForeignKey(
                 entity = Drill.class,
                 parentColumns = "id",
                 childColumns = "drill_id",
                 onUpdate = CASCADE,
                 onDelete = CASCADE))
-public class Performance {
+public class Performance implements Comparable<Performance> {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
@@ -59,8 +57,9 @@ public class Performance {
         this.total = 0;
         this.reps = drill.getReps();
         this.goal = drill.getGoal();
-        this.location = new WorkoutLocation("Today - YMCA Embarcadero");
-        this.startTime = System.currentTimeMillis();
+        this.location = new WorkoutLocation("YMCA Embarcadero");
+        captureStartTime();
+        captureEndTime();
     }
 
     @Ignore
@@ -162,10 +161,23 @@ public class Performance {
         this.endTime = endTime;
     }
 
+    private void captureStartTime() {
+        this.startTime = System.currentTimeMillis();
+    }
+
+    public void captureEndTime() {
+        this.endTime = System.currentTimeMillis();
+    }
+
     public void clear() {
         this.count = 0;
         this.total = 0;
-        this.startTime = System.currentTimeMillis();
+        captureStartTime();
+    }
+
+    @Override
+    public int compareTo(Performance that) {
+        return that == null ? 1 : Long.compare(that.startTime, this.startTime);
     }
 
     @NonNull
