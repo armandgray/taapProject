@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import java.util.List;
 
-import io.reactivex.Completable;
 import io.reactivex.Single;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -20,27 +19,12 @@ public class DrillDaoTest {
         DrillDao dao = new DrillDao() {
 
             @Override
-            public Completable insert(Drill drill) {
-                return null;
-            }
-
-            @Override
             public Single<List<Long>> insert(Drill... arr) {
                 return null;
             }
 
             @Override
-            public Completable update(Drill drill) {
-                return null;
-            }
-
-            @Override
             public Single<Integer> update(Drill... arr) {
-                return null;
-            }
-
-            @Override
-            public Completable delete(Drill drill) {
                 return null;
             }
 

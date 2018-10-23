@@ -5,10 +5,12 @@ import com.armandgray.shared.R;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.notNullValue;
 
 public class PerformanceTest {
 
@@ -20,184 +22,207 @@ public class PerformanceTest {
                 Drill.Type.SHOOTING_ONLY);
     }
     
-    private Performance testRate;
+    private Performance testPerformance;
     
     @Before
     public void setUp() {
-        testRate = new Performance(TEST_DRILL);
+        testPerformance = new Performance(TEST_DRILL);
     }
 
     @Test
-    public void testCloneConstructor_Defaults() throws IllegalArgumentException {
-        Assert.assertThat(testRate.getDrillId(), is(TEST_DRILL.getId()));
-        Assert.assertThat(testRate.getCount(), is(0));
-        Assert.assertThat(testRate.getTotal(), is(0));
-        Assert.assertThat(testRate.getReps(), is(TEST_DRILL.getReps()));
-        Assert.assertThat(testRate.getGoal(), is(TEST_DRILL.getGoal()));
-        Assert.assertThat(testRate.getStartTime() <= System.currentTimeMillis(), is(true));
+    public void testConstructor_Defaults() throws IllegalArgumentException {
+        Assert.assertThat(testPerformance.getDrillId(), is(TEST_DRILL.getId()));
+        Assert.assertThat(testPerformance.getCount(), is(0));
+        Assert.assertThat(testPerformance.getTotal(), is(0));
+        Assert.assertThat(testPerformance.getReps(), is(TEST_DRILL.getReps()));
+        Assert.assertThat(testPerformance.getGoal(), is(TEST_DRILL.getGoal()));
+        // TODO Replace with real test
+        Assert.assertThat(testPerformance.getLocation(), is(notNullValue()));
+        Assert.assertThat(testPerformance.getStartTime() <= System.currentTimeMillis(), is(true));
     }
 
     @Test
     public void testCloneConstructor_ReturnsShallowCopy() throws IllegalArgumentException {
-        Performance clone = new Performance(testRate);
-        Assert.assertThat(clone, is(not(testRate)));
-        Assert.assertThat(clone.getDrillId(), is(testRate.getDrillId()));
-        Assert.assertThat(clone.getCount(), is(testRate.getCount()));
-        Assert.assertThat(clone.getTotal(), is(testRate.getTotal()));
-        Assert.assertThat(clone.getReps(), is(testRate.getReps()));
-        Assert.assertThat(clone.getGoal(), is(testRate.getGoal()));
-        Assert.assertThat(clone.getStartTime(), is(testRate.getStartTime()));
+        Performance clone = new Performance(testPerformance);
+        Assert.assertThat(clone, is(not(testPerformance)));
+        Assert.assertThat(clone.getDrillId(), is(testPerformance.getDrillId()));
+        Assert.assertThat(clone.getCount(), is(testPerformance.getCount()));
+        Assert.assertThat(clone.getTotal(), is(testPerformance.getTotal()));
+        Assert.assertThat(clone.getReps(), is(testPerformance.getReps()));
+        Assert.assertThat(clone.getGoal(), is(testPerformance.getGoal()));
+        Assert.assertThat(clone.getLocation(), is(testPerformance.getLocation()));
+        Assert.assertThat(clone.getStartTime(), is(testPerformance.getStartTime()));
+        Assert.assertThat(clone.getEndTime(), is(testPerformance.getEndTime()));
     }
 
     @Test
     public void testGetId() {
-        Assert.assertThat(testRate.getId(), is(0));
+        Assert.assertThat(testPerformance.getId(), is(0));
     }
 
     @Test
     public void testGetDrillId() {
-        Assert.assertThat(testRate.getDrillId(), is(TEST_DRILL.getId()));
+        Assert.assertThat(testPerformance.getDrillId(), is(TEST_DRILL.getId()));
     }
     
     @Test
     public void testGetCount() {
-        Assert.assertThat(testRate.getCount(), is(0));
+        Assert.assertThat(testPerformance.getCount(), is(0));
     }
     
     @Test
     public void testGetTotal() {
-        Assert.assertThat(testRate.getTotal(), is(0));
+        Assert.assertThat(testPerformance.getTotal(), is(0));
     }
 
     @Test
     public void testGetReps() {
-        Assert.assertThat(testRate.getReps(), is(10));
+        Assert.assertThat(testPerformance.getReps(), is(10));
+    }
+
+    @Ignore
+    @Test
+    public void testGetLocation() {
+        Assert.assertThat(testPerformance.getLocation(), is(notNullValue()));
     }
 
     @Test
     public void testGetStartTime() {
-        Assert.assertThat(testRate.getStartTime() <= System.currentTimeMillis(), is(true));
+        Assert.assertThat(testPerformance.getStartTime() <= System.currentTimeMillis(), is(true));
     }
 
     @Test
     public void testGetEndTime() {
-        Assert.assertThat(testRate.getEndTime(), is(0L));
+        Assert.assertThat(testPerformance.getEndTime() <= System.currentTimeMillis(), is(true));
     }
 
     @Test
     public void testGetGoal() {
-        Assert.assertThat(testRate.getGoal(), is(0.7));
+        Assert.assertThat(testPerformance.getGoal(), is(0.7));
     }
 
     @Test
     public void testRaiseCount() {
-        testRate.raiseCount();
-        Assert.assertThat(testRate.getCount(), is(1));
+        testPerformance.raiseCount();
+        Assert.assertThat(testPerformance.getCount(), is(1));
     }
 
     @Test
     public void testRaiseTotal() {
-        testRate.raiseTotal();
-        Assert.assertThat(testRate.getTotal(), is(1));
+        testPerformance.raiseTotal();
+        Assert.assertThat(testPerformance.getTotal(), is(1));
     }
 
     @Test
     public void testIsSuccess() {
-        testRate.raiseCount();
-        testRate.raiseCount();
-        testRate.raiseCount();
-        testRate.raiseTotal();
-        testRate.raiseTotal();
-        testRate.raiseTotal();
-        testRate.raiseTotal();
-        Assert.assertThat(testRate.isSuccess(), is(true));
+        testPerformance.raiseCount();
+        testPerformance.raiseCount();
+        testPerformance.raiseCount();
+        testPerformance.raiseTotal();
+        testPerformance.raiseTotal();
+        testPerformance.raiseTotal();
+        testPerformance.raiseTotal();
+        Assert.assertThat(testPerformance.isSuccess(), is(true));
     }
 
     @Test
     public void testIsNotSuccess() {
-        testRate.raiseTotal();
-        Assert.assertThat(testRate.isSuccess(), is(false));
+        testPerformance.raiseTotal();
+        Assert.assertThat(testPerformance.isSuccess(), is(false));
     }
 
     @Test
     public void testSetId() {
         int expected = 12;
-        testRate.setId(expected);
-        Assert.assertThat(testRate.getId(), is(expected));
+        testPerformance.setId(expected);
+        Assert.assertThat(testPerformance.getId(), is(expected));
     }
 
     @Test
     public void testSetDrillId() {
         int expected = 12;
-        testRate.setDrillId(expected);
-        Assert.assertThat(testRate.getDrillId(), is(expected));
+        testPerformance.setDrillId(expected);
+        Assert.assertThat(testPerformance.getDrillId(), is(expected));
     }
 
     @Test
     public void testSetCount() {
         int expected = 12;
-        testRate.setCount(expected);
-        Assert.assertThat(testRate.getCount(), is(expected));
+        testPerformance.setCount(expected);
+        Assert.assertThat(testPerformance.getCount(), is(expected));
     }
 
     @Test
     public void testSetTotal() {
         int expected = 12;
-        testRate.setTotal(expected);
-        Assert.assertThat(testRate.getTotal(), is(expected));
+        testPerformance.setTotal(expected);
+        Assert.assertThat(testPerformance.getTotal(), is(expected));
     }
 
     @Test
     public void testSetReps() {
         int expected = 12;
-        testRate.setReps(expected);
-        Assert.assertThat(testRate.getReps(), is(expected));
+        testPerformance.setReps(expected);
+        Assert.assertThat(testPerformance.getReps(), is(expected));
+    }
+
+    @Test
+    public void testSetLocation() {
+        WorkoutLocation expected = new WorkoutLocation("TEST");
+        testPerformance.setLocation(expected);
+        Assert.assertThat(testPerformance.getLocation(), is(expected));
     }
 
     @Test
     public void testSetStartTime() {
         long expected = 12;
-        testRate.setStartTime(expected);
-        Assert.assertThat(testRate.getStartTime(), is(expected));
+        testPerformance.setStartTime(expected);
+        Assert.assertThat(testPerformance.getStartTime(), is(expected));
     }
 
     @Test
     public void testSetEndTime() {
         long expected = 12;
-        testRate.setEndTime(expected);
-        Assert.assertThat(testRate.getEndTime(), is(expected));
+        testPerformance.setEndTime(expected);
+        Assert.assertThat(testPerformance.getEndTime(), is(expected));
     }
 
     @Test
     public void testSetGoal() {
         double expected = 12.01;
-        testRate.setGoal(expected);
-        Assert.assertThat(testRate.getGoal(), is(expected));
+        testPerformance.setGoal(expected);
+        Assert.assertThat(testPerformance.getGoal(), is(expected));
+    }
+
+    @Test
+    public void testCaptureEndTime() {
+        testPerformance.captureEndTime();
+        Assert.assertThat(testPerformance.getEndTime() <= System.currentTimeMillis(), is(true));
     }
 
     @Test
     public void testClear() {
         // Arrange
-        testRate.raiseCount();
-        testRate.raiseTotal();
-        Assert.assertThat(testRate.getCount(), is(not(0)));
-        Assert.assertThat(testRate.getTotal(), is(not(0)));
+        testPerformance.raiseCount();
+        testPerformance.raiseTotal();
+        Assert.assertThat(testPerformance.getCount(), is(not(0)));
+        Assert.assertThat(testPerformance.getTotal(), is(not(0)));
 
         // Act
-        testRate.clear();
+        testPerformance.clear();
 
         // Assert
-        Assert.assertThat(testRate.getCount(), is(0));
-        Assert.assertThat(testRate.getTotal(), is(0));
+        Assert.assertThat(testPerformance.getCount(), is(0));
+        Assert.assertThat(testPerformance.getTotal(), is(0));
     }
 
     @Test
     public void testToString() {
-        Assert.assertThat(testRate.toString(), is("0/0"));
+        Assert.assertThat(testPerformance.toString(), is("0/0"));
     }
 
     @After
     public void tearDown() {
-        testRate = null;
+        testPerformance = null;
     }
 }

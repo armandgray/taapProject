@@ -33,7 +33,6 @@ public class Drill {
     private int imageResId;
 
     @SuppressWarnings("NullableProblems")
-    @TypeConverters(Type.Converter.class)
     @NonNull
     private List<Type> type;
 
@@ -49,6 +48,7 @@ public class Drill {
         // Default Constructor For Room Object Creation
     }
 
+    @Ignore
     public Drill(@NonNull String title, int imageResId, @NonNull List<Type> type) {
         this.id = title.hashCode();
         this.title = title;
@@ -141,11 +141,21 @@ public class Drill {
 
     public enum Type {
 
-        SHOOTING,
-        FUNDAMENTALS;
+        SHOOTING(R.drawable.ic_dribbble_white_48dp),
+        FUNDAMENTALS(R.drawable.ic_key_white_48dp);
 
         public static final List<Type> SHOOTING_ONLY = asList(SHOOTING);
         public static final List<Type> SHOOTING_FUNDAMENTALS = asList(SHOOTING, FUNDAMENTALS);
+
+        private final int imageResId;
+
+        Type(int imageResId) {
+            this.imageResId = imageResId;
+        }
+
+        public int getImageResId() {
+            return imageResId;
+        }
 
         public static List<Type> asList(Type... types) {
             return Arrays.asList(types);

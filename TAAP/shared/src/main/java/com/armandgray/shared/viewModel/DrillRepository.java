@@ -1,8 +1,8 @@
 package com.armandgray.shared.viewModel;
 
-import android.annotation.SuppressLint;
 import android.util.Log;
 
+import com.armandgray.shared.application.TAAPRepository;
 import com.armandgray.shared.db.DatabaseManager;
 import com.armandgray.shared.model.Drill;
 import com.armandgray.shared.model.Performance;
@@ -19,17 +19,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
-import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.PublishSubject;
 
 @Singleton
-class DrillRepository {
-
-    private static final String TAG = "DRILL_REPOSITORY";
+class DrillRepository extends TAAPRepository {
 
     private final DatabaseManager databaseManager;
 
@@ -64,7 +60,8 @@ class DrillRepository {
 
         // TODO Move call out of Drill Repository
         // Call used for side-effect: Triggers Database Creation/Opening
-        this.databaseManager.getDrillDao().drill(Drill.Defaults.getDefault().getId()).subscribe();
+        Drill drill = Drill.Defaults.getDefault();
+        this.databaseManager.getDrillDao().drill(drill.getId()).onErrorReturnItem(drill).subscribe();
     }
 
     private void preferenceConsumer(UXPreference preference) {
@@ -93,14 +90,8 @@ class DrillRepository {
                 : Observable.just(new ArrayList<Drill>());
     }
 
-    private Observer<List<Drill>> onDrillListRetrieved() {
-        return new Observer<List<Drill>>() {
-            private Disposable disposable;
-
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {
-                disposable = d;
-            }
+    private RepositoryObserver<List<Drill>> onDrillListRetrieved() {
+        return new RepositoryObserver<List<Drill>>() {
 
             @Override
             public void onNext(List<Drill> list) {
@@ -110,20 +101,6 @@ class DrillRepository {
                 }
 
                 updateDrillSubscribers(list);
-                onComplete();
-            }
-
-            @Override
-            public void onError(@NonNull Throwable e) {
-                Log.e(TAG, String.format("Drill Population Failed: %s",
-                        e.getMessage()));
-            }
-
-            @Override
-            public void onComplete() {
-                if (disposable != null) {
-                    disposable.dispose();
-                }
             }
         };
     }
@@ -181,15 +158,6 @@ class DrillRepository {
         }
     }
 
-    private void handleSetCompletion(Performance performance) {
-        //noinspection ConstantConditions
-        performanceSubject.onNext(new Performance(activeDrillSubject.getValue()));
-        if (performance.getTotal() > 0) {
-            completionSubject.onNext(performance);
-            storePerformance(performance);
-        }
-    }
-
     void setActiveDrill(@NonNull Drill drill) {
         activeDrillSubject.onNext(drill);
         if (performanceSubject.getValue() == null) {
@@ -200,15 +168,17 @@ class DrillRepository {
 
     }
 
-    @SuppressLint("CheckResult")
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    private void storePerformance(Performance performance) {
-        databaseManager.getPerformanceDao().insert(performance).subscribe();
+    private void handleSetCompletion(Performance performance) {
+        //noinspection ConstantConditions
+        performanceSubject.onNext(new Performance(activeDrillSubject.getValue()));
+        if (performance.getTotal() > 0) {
+            performance.captureEndTime();
+            completionSubject.onNext(performance);
+            storePerformance(performance);
+        }
     }
 
-    @NonNull
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + "@" + Integer.toHexString(hashCode());
+    private void storePerformance(Performance performance) {
+        databaseManager.getPerformanceDao().insert(performance).subscribe();
     }
 }

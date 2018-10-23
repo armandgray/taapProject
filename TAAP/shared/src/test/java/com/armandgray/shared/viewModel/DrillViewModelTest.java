@@ -23,7 +23,6 @@ import java.util.List;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -103,25 +102,6 @@ public class DrillViewModelTest {
     public void testOnDrillSelected_DoesSetActiveDrill() {
         testViewModel.onDrillSelected(TEST_DRILL);
         Mockito.verify(mockRepository, Mockito.times(1)).setActiveDrill(TEST_DRILL);
-    }
-
-    @Test
-    public void testOnCleared() {
-        testViewModel.disposables.add(new Disposable() {
-            @Override
-            public void dispose() {
-
-            }
-
-            @Override
-            public boolean isDisposed() {
-                return false;
-            }
-        });
-
-        Assert.assertThat(testViewModel.disposables.size(), is(1));
-        testViewModel.onCleared();
-        Assert.assertThat(testViewModel.disposables.size(), is(0));
     }
 
     @Test

@@ -11,7 +11,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Completable;
 import io.reactivex.Single;
 
 public class DatabaseManagerImpl implements DatabaseManager {
@@ -74,28 +73,13 @@ public class DatabaseManagerImpl implements DatabaseManager {
         }
 
         @Override
-        public Completable insert(Drill drill) {
-            return database.drillDao().insert(drill).subscribeOn(schedulers.io());
-        }
-
-        @Override
         public Single<List<Long>> insert(Drill... arr) {
             return database.drillDao().insert(arr).subscribeOn(schedulers.io());
         }
 
         @Override
-        public Completable update(Drill drill) {
-            return database.drillDao().update(drill).subscribeOn(schedulers.io());
-        }
-
-        @Override
         public Single<Integer> update(Drill... arr) {
             return database.drillDao().update(arr).subscribeOn(schedulers.io());
-        }
-
-        @Override
-        public Completable delete(Drill drill) {
-            return database.drillDao().delete(drill).subscribeOn(schedulers.io());
         }
 
         @Override
@@ -122,8 +106,10 @@ public class DatabaseManagerImpl implements DatabaseManager {
         }
 
         @Override
-        public Completable insert(Performance performance) {
-            return database.performanceDao().insert(performance).subscribeOn(schedulers.io());
+        public Single<List<DaoLog>> logsBetween(long startTime, long endTime) {
+            return database.performanceDao()
+                    .logsBetween(startTime, endTime)
+                    .subscribeOn(schedulers.io());
         }
 
         @Override
@@ -132,18 +118,8 @@ public class DatabaseManagerImpl implements DatabaseManager {
         }
 
         @Override
-        public Completable update(Performance performance) {
-            return database.performanceDao().update(performance).subscribeOn(schedulers.io());
-        }
-
-        @Override
         public Single<Integer> update(Performance... arr) {
             return database.performanceDao().update(arr).subscribeOn(schedulers.io());
-        }
-
-        @Override
-        public Completable delete(Performance performance) {
-            return database.performanceDao().delete(performance).subscribeOn(schedulers.io());
         }
 
         @Override

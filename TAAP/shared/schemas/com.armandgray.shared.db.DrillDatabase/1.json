@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "59b20f02ee746d1ffea915bb8b4cb52f",
+    "identityHash": "a647a2978662ce087e320d98db949e14",
     "entities": [
       {
         "tableName": "drills",
@@ -59,7 +59,7 @@
       },
       {
         "tableName": "performances",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `drill_id` INTEGER NOT NULL, `count` INTEGER NOT NULL, `total` INTEGER NOT NULL, `reps` INTEGER NOT NULL, `goal` REAL NOT NULL, `start_time` INTEGER NOT NULL, `end_time` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `drill_id` INTEGER NOT NULL, `count` INTEGER NOT NULL, `total` INTEGER NOT NULL, `reps` INTEGER NOT NULL, `goal` REAL NOT NULL, `location` TEXT, `start_time` INTEGER NOT NULL, `end_time` INTEGER NOT NULL, FOREIGN KEY(`drill_id`) REFERENCES `drills`(`id`) ON UPDATE CASCADE ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -98,6 +98,12 @@
             "notNull": true
           },
           {
+            "fieldPath": "location",
+            "columnName": "location",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
             "fieldPath": "startTime",
             "columnName": "start_time",
             "affinity": "INTEGER",
@@ -116,22 +122,26 @@
           ],
           "autoGenerate": true
         },
-        "indices": [
+        "indices": [],
+        "foreignKeys": [
           {
-            "name": "drill",
-            "unique": true,
-            "columnNames": [
+            "table": "drills",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
               "drill_id"
             ],
-            "createSql": "CREATE UNIQUE INDEX `drill` ON `${TABLE_NAME}` (`drill_id`)"
+            "referencedColumns": [
+              "id"
+            ]
           }
-        ],
-        "foreignKeys": []
+        ]
       }
     ],
+    "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"59b20f02ee746d1ffea915bb8b4cb52f\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"a647a2978662ce087e320d98db949e14\")"
     ]
   }
 }

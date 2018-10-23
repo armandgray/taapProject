@@ -24,6 +24,7 @@ public class DrillPickerDialog extends NavigationActivity implements UIComponent
 
     @Inject
     DrillViewModel drillViewModel;
+
     @Inject
     DrillAdapter drillAdapter;
 

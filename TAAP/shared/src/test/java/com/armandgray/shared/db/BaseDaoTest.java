@@ -5,12 +5,10 @@ import org.junit.Test;
 
 import java.util.List;
 
-import io.reactivex.Completable;
 import io.reactivex.Single;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.*;
 
 public class BaseDaoTest {
 
@@ -19,27 +17,12 @@ public class BaseDaoTest {
 
         BaseDao dao = new BaseDao() {
             @Override
-            public Completable insert(Object o) {
-                return null;
-            }
-
-            @Override
             public Single<List<Long>> insert(Object[] arr) {
                 return null;
             }
 
             @Override
-            public Completable update(Object o) {
-                return null;
-            }
-
-            @Override
             public Single<Integer> update(Object[] arr) {
-                return null;
-            }
-
-            @Override
-            public Completable delete(Object o) {
                 return null;
             }
 

@@ -20,4 +20,5 @@
     <string name="title_dialog_preference_seek_bar">PreferenceSeekBarDialog</string>
     <string name="set_reps">Set Reps</string>
     <string name="set_goal">Set Goal</string>
+    <string name="no_logs_found">No Logs Found</string>
 </resources>
