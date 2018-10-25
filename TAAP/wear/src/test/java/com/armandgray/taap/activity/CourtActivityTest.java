@@ -19,7 +19,7 @@ public class CourtActivityTest {
 
     @Before
     public void setUp() {
-        System.out.println("Running Set Up!");
+
     }
 
     @Test
@@ -30,6 +30,6 @@ public class CourtActivityTest {
 
     @After
     public void tearDown() {
-        System.out.println("Running TearDown!");
+
     }
 }

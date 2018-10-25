@@ -66,7 +66,7 @@ public class LogActivityControllerTest {
 
     @Before
     public void setUp() {
-        System.out.println("Running Set Up!");
+
         testFlag = new boolean[3];
         controller = new LogActivityController(CONTEXT, mockActionBar, testViewsInterface);
     }
@@ -94,7 +94,7 @@ public class LogActivityControllerTest {
 
     @After
     public void tearDown() {
-        System.out.println("Running TearDown!");
+
         CONTEXT.getContentResolver().delete(CONTENT_URI_DELETE_ALL_DATA, null, null);
         testFlag = null;
         controller = null;

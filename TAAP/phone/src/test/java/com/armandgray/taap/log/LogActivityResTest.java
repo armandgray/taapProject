@@ -26,7 +26,7 @@ public class LogActivityResTest {
 
     @Before
     public void setUp() {
-        System.out.println("Running Set Up!");
+
         LayoutInflater inflater = LayoutInflater.from(RuntimeEnvironment.application);
         ScrollView layout = (ScrollView) inflater.inflate(R.layout.content_log, null);
         container = (LinearLayout) layout.findViewById(R.id.logContainer);
@@ -127,7 +127,7 @@ public class LogActivityResTest {
 
     @After
     public void tearDown() {
-        System.out.println("Running TearDown!");
+
     }
 
 }

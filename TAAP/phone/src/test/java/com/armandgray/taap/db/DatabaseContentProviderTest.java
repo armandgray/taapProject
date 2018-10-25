@@ -493,7 +493,7 @@ public class DatabaseContentProviderTest {
 
     @After
     public void tearDown() {
-        System.out.println("Running TearDown!");
+
         RuntimeEnvironment.application.getContentResolver()
                 .delete(CONTENT_URI_DELETE_ALL_DATA, null, null);
     }

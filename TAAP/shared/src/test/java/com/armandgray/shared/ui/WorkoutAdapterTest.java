@@ -50,7 +50,7 @@ public class WorkoutAdapterTest {
 
     @Before
     public void setUp() {
-        System.out.println("Running Set Up!");
+
         adapter = new WorkoutAdapter();
         mockView = mock(View.class);
     }
@@ -64,7 +64,7 @@ public class WorkoutAdapterTest {
 
     @After
     public void tearDown() {
-        System.out.println("Running TearDown!");
+
         adapter = null;
         holder = null;
         mockView = null;

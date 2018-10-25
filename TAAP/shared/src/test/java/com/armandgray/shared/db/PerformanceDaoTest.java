@@ -59,6 +59,10 @@ public class PerformanceDaoTest {
             public Single<List<DaoLog>> logsBetween(long startTime, long endTime) {
                 return null;
             }
+
+            @Override
+            public void deleteAll() {
+            }
         };
 
         Assert.assertThat(dao, is(notNullValue()));
@@ -99,6 +103,12 @@ public class PerformanceDaoTest {
     @Test
     public void testDaoLog_CompareTo_ReturnsOneIfPassedNull() {
         Assert.assertThat(testDaoLog.compareTo(null), is(1));
+    }
+
+    @Ignore
+    @Test
+    public void testDaoWrapper() {
+
     }
 
     @After

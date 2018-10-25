@@ -25,13 +25,16 @@ public class LogsRepositoryTest {
     private DatabaseManager mockDatabaseManager;
 
     @Mock
+    private PreferencesRepository mockPreferencesRepository;
+
+    @Mock
     private SchedulerProvider mockSchedulers;
 
     private LogsRepository testRepository;
 
     @Before
     public void setUp() {
-        this.testRepository = new LogsRepository();
+        this.testRepository = new LogsRepository(mockPreferencesRepository);
     }
 
     @Ignore

@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.armandgray.shared.R;
-
 import com.armandgray.shared.model.UXPreference;
 
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.recyclerview.widget.RecyclerView;
 
-class PreferencesAdapter extends RecyclerView.Adapter<PreferencesAdapter.PreferencesViewHolder> {
+public class PreferencesAdapter extends RecyclerView.Adapter<PreferencesAdapter.PreferencesViewHolder> {
 
     private final List<UXPreference.Value> list = new ArrayList<>();
 
@@ -73,10 +72,10 @@ class PreferencesAdapter extends RecyclerView.Adapter<PreferencesAdapter.Prefere
         }
 
         public void setUp(@NonNull UXPreference.Value value) {
-            String text = "Set " + value.getItem().getText();
+            UXPreference.Item item = value.getItem();
             imageIcon.setBackgroundResource(R.drawable.bg_circular_outline);
-            imageIcon.setImageResource(value.getItem().getImageResId());
-            textTitle.setText(text);
+            imageIcon.setImageResource(item.getImageResId());
+            textTitle.setText(item.getText());
         }
     }
 }

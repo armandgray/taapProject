@@ -39,7 +39,7 @@ public class DrillTest {
 
     @Test
     public void testGetId() {
-        Assert.assertThat(testDrill.getId(), is(TEST_TITLE.hashCode()));
+        Assert.assertThat(testDrill.getId(), is(0));
     }
 
     @Test
@@ -76,11 +76,6 @@ public class DrillTest {
     }
 
     @Test
-    public void testIsActive() {
-        Assert.assertThat(testDrill.isActive(), is(false));
-    }
-
-    @Test
     public void testSetId() {
         int expected = 12;
         testDrill.setId(expected);
@@ -112,12 +107,6 @@ public class DrillTest {
     public void testSetPreference() {
         testDrill.setPreference(mockPreference);
         Assert.assertThat(testDrill.getPreference(), is(mockPreference));
-    }
-
-    @Test
-    public void testSetActive() {
-        testDrill.setActive(true);
-        Assert.assertThat(testDrill.isActive(), is(true));
     }
 
     @Test

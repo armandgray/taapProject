@@ -41,7 +41,7 @@ public class LogSetsRvAdapterTest {
 
     @Before
     public void setUp() {
-        System.out.println("Running Set Up!");
+
         adapter = new LogSetsRvAdapter(null);
         mockView = mock(View.class);
         Calendar calendar = Calendar.getInstance();
@@ -137,7 +137,7 @@ public class LogSetsRvAdapterTest {
 
     @After
     public void tearDown() {
-        System.out.println("Running TearDown!");
+
         adapter = null;
         mockView = null;
         testLogList = null;

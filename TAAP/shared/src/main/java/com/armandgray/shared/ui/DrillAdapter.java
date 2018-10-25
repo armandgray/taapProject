@@ -67,21 +67,16 @@ public class DrillAdapter extends RecyclerView.Adapter<DrillAdapter.DrillViewHol
         @VisibleForTesting
         final TextView textTitle;
 
-        @VisibleForTesting
-        final TextView textActive;
-
         DrillViewHolder(View itemView) {
             super(itemView);
 
             imageIcon = itemView.findViewById(R.id.image_icon);
             textTitle = itemView.findViewById(R.id.text_title);
-            textActive = itemView.findViewById(R.id.text_active);
         }
 
         public void setUp(@NonNull Drill drill) {
             imageIcon.setImageResource(drill.getImageResId());
             textTitle.setText(drill.getTitle());
-            textActive.setVisibility(drill.isActive() ? View.VISIBLE : View.GONE);
         }
     }
 }

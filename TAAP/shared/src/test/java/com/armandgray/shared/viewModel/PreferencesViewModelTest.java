@@ -8,6 +8,7 @@ import com.armandgray.shared.model.UXPreference;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -126,6 +127,7 @@ public class PreferencesViewModelTest {
                 is("PreferencesViewModel@" + Integer.toHexString(testViewModel.hashCode())));
     }
 
+    @Ignore
     @Test
     public void testPreferenceObserver() {
         // TODO Implement Test

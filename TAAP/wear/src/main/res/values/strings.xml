@@ -21,4 +21,5 @@
     <string name="set_reps">Set Reps</string>
     <string name="set_goal">Set Goal</string>
     <string name="no_logs_found">No Logs Found</string>
+    <string name="title_activity_preference_toggle_dialog">PreferenceToggleDialog</string>
 </resources>

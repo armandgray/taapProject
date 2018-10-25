@@ -8,16 +8,18 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "performances",
+        indices = @Index("drill_title"),
         foreignKeys = @ForeignKey(
                 entity = Drill.class,
-                parentColumns = "id",
-                childColumns = "drill_id",
+                parentColumns = "title",
+                childColumns = "drill_title",
                 onUpdate = CASCADE,
                 onDelete = CASCADE))
 public class Performance implements Comparable<Performance> {
@@ -25,8 +27,10 @@ public class Performance implements Comparable<Performance> {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    @ColumnInfo(name = "drill_id")
-    private int drillId;
+    @SuppressWarnings("NullableProblems")
+    @ColumnInfo(name = "drill_title")
+    @NonNull
+    private String drillTitle;
 
     private int count;
 
@@ -52,7 +56,7 @@ public class Performance implements Comparable<Performance> {
 
     @Ignore
     public Performance(@NonNull Drill drill) {
-        this.drillId = drill.getId();
+        this.drillTitle = drill.getTitle();
         this.count = 0;
         this.total = 0;
         this.reps = drill.getReps();
@@ -65,7 +69,7 @@ public class Performance implements Comparable<Performance> {
     @Ignore
     public Performance(@NonNull Performance clone) {
         this.id = clone.id;
-        this.drillId = clone.drillId;
+        this.drillTitle = clone.drillTitle;
         this.count = clone.count;
         this.total = clone.total;
         this.reps = clone.reps;
@@ -79,8 +83,9 @@ public class Performance implements Comparable<Performance> {
         return id;
     }
 
-    public int getDrillId() {
-        return drillId;
+    @NonNull
+    public String getDrillTitle() {
+        return drillTitle;
     }
 
     public int getCount() {
@@ -118,6 +123,10 @@ public class Performance implements Comparable<Performance> {
     }
 
     public void raiseTotal() {
+        if (this.total == 0) {
+            captureStartTime();
+        }
+
         this.total++;
     }
 
@@ -129,8 +138,8 @@ public class Performance implements Comparable<Performance> {
         this.id = id;
     }
 
-    public void setDrillId(int drillId) {
-        this.drillId = drillId;
+    public void setDrillTitle(@NonNull String drillTitle) {
+        this.drillTitle = drillTitle;
     }
 
     public void setCount(int count) {
@@ -172,7 +181,6 @@ public class Performance implements Comparable<Performance> {
     public void clear() {
         this.count = 0;
         this.total = 0;
-        captureStartTime();
     }
 
     @Override
@@ -183,6 +191,7 @@ public class Performance implements Comparable<Performance> {
     @NonNull
     @Override
     public String toString() {
-        return String.format(Locale.getDefault(), "%d/%d", count, total);
+        return String.format(Locale.getDefault(), "Performance(%d){%s: %d/%d for %dms}",
+                id, drillTitle, count, total, endTime % startTime);
     }
 }

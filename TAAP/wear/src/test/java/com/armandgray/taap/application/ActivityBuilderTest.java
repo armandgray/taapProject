@@ -5,6 +5,7 @@ import com.armandgray.taap.activity.CourtActivity;
 import com.armandgray.taap.ui.DrillPickerDialog;
 import com.armandgray.taap.activity.LogsActivity;
 import com.armandgray.taap.ui.PreferenceSeekBarDialog;
+import com.armandgray.taap.ui.PreferenceToggleDialog;
 import com.armandgray.taap.ui.PreferencesDialog;
 import com.armandgray.taap.activity.SettingsActivity;
 
@@ -36,6 +37,11 @@ public class ActivityBuilderTest {
 
             @Override
             PreferenceSeekBarDialog bindPreferenceSeekBarDialog() {
+                return null;
+            }
+
+            @Override
+            PreferenceToggleDialog bindPreferenceToggleDialog() {
                 return null;
             }
 

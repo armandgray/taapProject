@@ -40,7 +40,6 @@ public class SummaryDialogHelperTest {
 
     @Before
     public void setUp() {
-        System.out.println("Running Set Up!");
         activityController = Robolectric.buildActivity(DrillDetailActivity.class);
         activity = activityController.create().start().resume().visible().get();
         dialog = DetailSummaryDialog.newInstance(new SessionLog.Builder().create());
@@ -89,7 +88,6 @@ public class SummaryDialogHelperTest {
 
     @After
     public void tearDown() {
-        System.out.println("Running TearDown!");
         activity.getContentResolver().delete(CONTENT_URI_DELETE_ALL_DATA, null, null);
         activity.finish();
         activityController.pause().stop().destroy();

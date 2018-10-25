@@ -3,6 +3,7 @@ package com.armandgray.shared.db;
 import com.armandgray.shared.model.Drill;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -45,5 +46,11 @@ public class DrillDaoTest {
         };
 
         Assert.assertThat(dao, is(notNullValue()));
+    }
+
+    @Ignore
+    @Test
+    public void testDaoWrapper() {
+
     }
 }

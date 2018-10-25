@@ -37,7 +37,6 @@ public class SettingsDetailActivityTest {
 
     @Before
     public void setUp() {
-        System.out.println("Running Set Up!");
         Intent intent = new Intent(RuntimeEnvironment.application, SettingsDetailActivity.class);
         intent.putExtra(SELECTED_ITEM, TERMS_AND_CONDITIONS);
         activityController = Robolectric.buildActivity(SettingsDetailActivity.class).newIntent(intent);
@@ -93,7 +92,7 @@ public class SettingsDetailActivityTest {
 
     @After
     public void tearDown() {
-        System.out.println("Running TearDown!");
+
         activity.getContentResolver().delete(CONTENT_URI_DELETE_ALL_DATA, null, null);
         activity.finish();
         activityController.pause().stop().destroy();

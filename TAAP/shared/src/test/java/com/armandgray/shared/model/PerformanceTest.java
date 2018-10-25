@@ -8,6 +8,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.Locale;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -21,31 +23,36 @@ public class PerformanceTest {
         TEST_DRILL = new Drill(FREE_THROWS, R.drawable.ic_add_white_24dp,
                 Drill.Type.SHOOTING_ONLY);
     }
-    
+
+    private long preTestCurrentTime;
     private Performance testPerformance;
     
     @Before
     public void setUp() {
+        preTestCurrentTime = System.currentTimeMillis();
         testPerformance = new Performance(TEST_DRILL);
     }
 
     @Test
     public void testConstructor_Defaults() throws IllegalArgumentException {
-        Assert.assertThat(testPerformance.getDrillId(), is(TEST_DRILL.getId()));
+        Assert.assertThat(testPerformance.getDrillTitle(), is(TEST_DRILL.getTitle()));
         Assert.assertThat(testPerformance.getCount(), is(0));
         Assert.assertThat(testPerformance.getTotal(), is(0));
         Assert.assertThat(testPerformance.getReps(), is(TEST_DRILL.getReps()));
         Assert.assertThat(testPerformance.getGoal(), is(TEST_DRILL.getGoal()));
         // TODO Replace with real test
         Assert.assertThat(testPerformance.getLocation(), is(notNullValue()));
+        Assert.assertThat(testPerformance.getStartTime() >= preTestCurrentTime, is(true));
+        Assert.assertThat(testPerformance.getEndTime() >= preTestCurrentTime, is(true));
         Assert.assertThat(testPerformance.getStartTime() <= System.currentTimeMillis(), is(true));
+        Assert.assertThat(testPerformance.getEndTime() <= System.currentTimeMillis(), is(true));
     }
 
     @Test
     public void testCloneConstructor_ReturnsShallowCopy() throws IllegalArgumentException {
         Performance clone = new Performance(testPerformance);
         Assert.assertThat(clone, is(not(testPerformance)));
-        Assert.assertThat(clone.getDrillId(), is(testPerformance.getDrillId()));
+        Assert.assertThat(clone.getDrillTitle(), is(testPerformance.getDrillTitle()));
         Assert.assertThat(clone.getCount(), is(testPerformance.getCount()));
         Assert.assertThat(clone.getTotal(), is(testPerformance.getTotal()));
         Assert.assertThat(clone.getReps(), is(testPerformance.getReps()));
@@ -61,8 +68,8 @@ public class PerformanceTest {
     }
 
     @Test
-    public void testGetDrillId() {
-        Assert.assertThat(testPerformance.getDrillId(), is(TEST_DRILL.getId()));
+    public void testGetDrillTitle() {
+        Assert.assertThat(testPerformance.getDrillTitle(), is(TEST_DRILL.getTitle()));
     }
     
     @Test
@@ -88,11 +95,13 @@ public class PerformanceTest {
 
     @Test
     public void testGetStartTime() {
+        Assert.assertThat(testPerformance.getStartTime() >= preTestCurrentTime, is(true));
         Assert.assertThat(testPerformance.getStartTime() <= System.currentTimeMillis(), is(true));
     }
 
     @Test
     public void testGetEndTime() {
+        Assert.assertThat(testPerformance.getEndTime() >= preTestCurrentTime, is(true));
         Assert.assertThat(testPerformance.getEndTime() <= System.currentTimeMillis(), is(true));
     }
 
@@ -111,6 +120,15 @@ public class PerformanceTest {
     public void testRaiseTotal() {
         testPerformance.raiseTotal();
         Assert.assertThat(testPerformance.getTotal(), is(1));
+    }
+
+    @Test
+    public void testRaiseTotal_CapturesStartTimeOnFirstIncrement() throws InterruptedException {
+        long preExpectation = System.currentTimeMillis();
+        Thread.sleep(10L);
+        testPerformance.raiseTotal();
+        Assert.assertThat(testPerformance.getStartTime() >= preExpectation, is(true));
+        Assert.assertThat(testPerformance.getStartTime() <= System.currentTimeMillis(), is(true));
     }
 
     @Test
@@ -139,10 +157,10 @@ public class PerformanceTest {
     }
 
     @Test
-    public void testSetDrillId() {
-        int expected = 12;
-        testPerformance.setDrillId(expected);
-        Assert.assertThat(testPerformance.getDrillId(), is(expected));
+    public void testSetDrillTitle() {
+        String expected = "12";
+        testPerformance.setDrillTitle(expected);
+        Assert.assertThat(testPerformance.getDrillTitle(), is(expected));
     }
 
     @Test
@@ -195,8 +213,11 @@ public class PerformanceTest {
     }
 
     @Test
-    public void testCaptureEndTime() {
+    public void testCaptureEndTime() throws InterruptedException {
+        long preExpectation = System.currentTimeMillis();
+        Thread.sleep(10L);
         testPerformance.captureEndTime();
+        Assert.assertThat(testPerformance.getEndTime() >= preExpectation, is(true));
         Assert.assertThat(testPerformance.getEndTime() <= System.currentTimeMillis(), is(true));
     }
 
@@ -216,9 +237,19 @@ public class PerformanceTest {
         Assert.assertThat(testPerformance.getTotal(), is(0));
     }
 
+    @Ignore
+    @Test
+    public void testCompareTo() {
+
+    }
+
     @Test
     public void testToString() {
-        Assert.assertThat(testPerformance.toString(), is("0/0"));
+        Assert.assertThat(testPerformance.toString(), is(String.format(Locale.getDefault(),
+                "Performance(%d){%s: %d/%d for %dms}", testPerformance.getId(),
+                testPerformance.getDrillTitle(), testPerformance.getCount(),
+                testPerformance.getTotal(),
+                testPerformance.getEndTime() % testPerformance.getStartTime())));
     }
 
     @After

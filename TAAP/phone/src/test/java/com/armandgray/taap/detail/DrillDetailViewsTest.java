@@ -43,7 +43,7 @@ public class DrillDetailViewsTest {
 
     @Before
     public void setUp() {
-        System.out.println("Running Set Up!");
+
 //        Intent intent = new Intent(RuntimeEnvironment.application, DrillDetailActivity.class);
 //        intent.putExtra(SELECTED_DRILL, new Drill("Beat-the-Pro (Mid-Range)",
 //                R.drawable.ic_fitness_center_white_24dp,
@@ -204,7 +204,7 @@ public class DrillDetailViewsTest {
 
     @After
     public void tearDown() {
-        System.out.println("Running TearDown!");
+
 //        activity.finish();
 //        activityController.pause().stop().destroy();
 //        activity = null;

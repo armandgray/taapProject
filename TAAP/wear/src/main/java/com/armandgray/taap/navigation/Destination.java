@@ -3,11 +3,12 @@ package com.armandgray.taap.navigation;
 import com.armandgray.shared.navigation.TAAPDestination;
 import com.armandgray.taap.activity.ActiveDrillActivity;
 import com.armandgray.taap.activity.CourtActivity;
-import com.armandgray.taap.ui.DrillPickerDialog;
 import com.armandgray.taap.activity.LogsActivity;
-import com.armandgray.taap.ui.PreferenceSeekBarDialog;
-import com.armandgray.taap.ui.PreferencesDialog;
 import com.armandgray.taap.activity.SettingsActivity;
+import com.armandgray.taap.ui.DrillPickerDialog;
+import com.armandgray.taap.ui.PreferenceSeekBarDialog;
+import com.armandgray.taap.ui.PreferenceToggleDialog;
+import com.armandgray.taap.ui.PreferencesDialog;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,6 +21,7 @@ public class Destination<T> extends TAAPDestination<T> {
     public static final Destination<DrillPickerDialog> DRILL_PICKER_DIALOG;
     public static final Destination<PreferencesDialog> PREFERENCES_DIALOG;
     public static final Destination<PreferenceSeekBarDialog> SEEK_BAR_DIALOG;
+    public static final Destination<PreferenceToggleDialog> TOGGLE_DIALOG;
 
     static final Destination<ActiveDrillActivity> ACTIVE_DRILL;
     static final Destination<CourtActivity> COURT;
@@ -35,6 +37,7 @@ public class Destination<T> extends TAAPDestination<T> {
         ACTIVE_DRILL = new Destination<>(ActiveDrillActivity.class);
         PREFERENCES_DIALOG = new Destination<>(PreferencesDialog.class);
         SEEK_BAR_DIALOG = new Destination<>(PreferenceSeekBarDialog.class);
+        TOGGLE_DIALOG = new Destination<>(PreferenceToggleDialog.class);
         COURT = new Destination<>(CourtActivity.class);
         LOGS = new Destination<>(LogsActivity.class);
         SETTINGS = new Destination<>(SettingsActivity.class);

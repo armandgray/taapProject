@@ -24,7 +24,8 @@
 
         <activity
             android:name=".activity.ActiveDrillActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -44,25 +45,29 @@
                     android:scheme="armandgray"/>
             </intent-filter>
         </activity>
-        <activity android:name="androidx.wear.activity.ConfirmationActivity"/>
+        <activity
+            android:name="androidx.wear.activity.ConfirmationActivity"/>
         <activity
             android:name=".activity.CourtActivity"
-            android:label="@string/title_activity_drill_picker"/>
-        <activity
-            android:name=".ui.DrillPickerDialog"
-            android:label="@string/title_activity_drill_picker"/>
+            android:launchMode="singleTask"/>
         <activity
             android:name=".activity.LogsActivity"
-            android:label="@string/title_activity_logs"/>
+            android:launchMode="singleTask"/>
         <activity
             android:name=".activity.SettingsActivity"
-            android:label="@string/title_activity_settings"/>
+            android:launchMode="singleTask"/>
+        <activity
+            android:name=".ui.DrillPickerDialog"
+            android:launchMode="singleTask"/>
         <activity
             android:name=".ui.PreferencesDialog"
-            android:label="@string/title_dialog_preferences"/>
+            android:launchMode="singleTask"/>
         <activity
             android:name=".ui.PreferenceSeekBarDialog"
-            android:label="@string/title_dialog_preference_seek_bar"/>
+            android:launchMode="singleTask"/>
+        <activity
+            android:name=".ui.PreferenceToggleDialog"
+            android:launchMode="singleTask"/>
     </application>
 
 </manifest>

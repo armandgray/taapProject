@@ -1,6 +1,7 @@
 package com.armandgray.taap.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.armandgray.shared.application.UIComponent;
@@ -61,9 +62,26 @@ public class PreferencesDialog extends NavigationActivity implements UIComponent
     public void setupEventListeners() {
         recyclerPreferences.addOnItemTouchListener(new RecyclerItemClickListener(this,
                 (view, position) -> {
-                    navigationViewModel.onNavigate(Destination.SEEK_BAR_DIALOG);
-                    preferencesViewModel.setActiveValue(preferencesAdapter
-                            .getPreference(position));
+                    UXPreference.Value preference = preferencesAdapter.getPreference(position);
+                    switch (preference.getItem().getTypeConstant()) {
+                        case UXPreference.Constants.NUMBER_RANGE:
+                            navigationViewModel.onNavigate(Destination.SEEK_BAR_DIALOG);
+                            preferencesViewModel.setActiveValue(preference);
+                            return;
+
+                        case UXPreference.Constants.TOGGLE:
+                            navigationViewModel.onNavigate(Destination.TOGGLE_DIALOG);
+                            preferencesViewModel.setActiveValue(preference);
+                            return;
+
+                        case UXPreference.Constants.TRIGGERED:
+                            preferencesViewModel.onPreferenceTriggered(preference);
+                            finish();
+                            return;
+
+                        default:
+                            Log.e(TAG, "Recycler Item Contains Unsupported TypeConstant");
+                    }
                 }));
     }
 

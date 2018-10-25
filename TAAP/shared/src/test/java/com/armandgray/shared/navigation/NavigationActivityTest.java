@@ -22,7 +22,7 @@ public class NavigationActivityTest {
 
     @Before
     public void setUp() {
-        System.out.println("Running Set Up!");
+
     }
 
     @Test
@@ -43,6 +43,6 @@ public class NavigationActivityTest {
 
     @After
     public void tearDown() {
-        System.out.println("Running TearDown!");
+
     }
 }
