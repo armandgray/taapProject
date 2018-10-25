@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.armandgray.shared.util.VibrateUtil;
 import com.armandgray.shared.model.Drill;
 import com.armandgray.shared.model.Performance;
 import com.armandgray.shared.model.UXPreference;
@@ -40,6 +41,9 @@ public class ActiveDrillActivity extends WearNavigationActivity {
     @Inject
     DrillViewModel drillViewModel;
 
+    @Inject
+    VibrateUtil vibrator;
+
     private ConstraintLayout rootView;
     private TextView textDrill;
     private ImageButton buttonMinus;
@@ -50,6 +54,7 @@ public class ActiveDrillActivity extends WearNavigationActivity {
     private ProgressBar progressBar;
 
     private boolean enableScreenTaps;
+    private int vibrationLength;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +131,7 @@ public class ActiveDrillActivity extends WearNavigationActivity {
 
         performanceViewModel.getActiveDrill().observe(this, this::onDrillChanged);
         performanceViewModel.getPerformance().observe(this, this::onPerformanceChange);
-        performanceViewModel.getCompletionObserver().observe(this, this::onConfirmationChange);
+        performanceViewModel.getCompletionObserver().observe(this, this::onSetCompletion);
         performanceViewModel.getPreferenceObserver().observe(this, this::onPreferenceChange);
     }
 
@@ -151,10 +156,12 @@ public class ActiveDrillActivity extends WearNavigationActivity {
                 performance.getCount(), performance.getTotal());
     }
 
-    private void onConfirmationChange(@Nullable Performance performance) {
+    private void onSetCompletion(@Nullable Performance performance) {
         if (performance == null) {
             return;
         }
+
+        vibrator.vibrate(vibrationLength);
 
         int animation = performance.isSuccess()
                 ? ConfirmationActivity.SUCCESS_ANIMATION
@@ -178,6 +185,7 @@ public class ActiveDrillActivity extends WearNavigationActivity {
         buttonMinus.setVisibility(minusEnabled ? View.VISIBLE : View.GONE);
 
         enableScreenTaps = preference.isEnabled(UXPreference.Item.SCREEN_TAPS);
+        vibrationLength = preference.getValue(UXPreference.Item.VIBRATE, true);
     }
 
     @Override

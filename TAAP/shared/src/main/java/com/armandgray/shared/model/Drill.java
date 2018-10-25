@@ -62,13 +62,13 @@ public class Drill {
 
     @SuppressWarnings("WeakerAccess") // VisibleForRoom
     public int getReps() {
-        int scaleFactor = UXPreference.Item.REPS.getScaleFactor();
+        int scaleFactor = UXPreference.Item.REPS.getScale().getFactor();
         return this.preference.getValue(UXPreference.Item.REPS) / scaleFactor;
     }
 
     @SuppressWarnings("WeakerAccess") // VisibleForRoom
     public double getGoal() {
-        int scaleFactor = UXPreference.Item.GOAL.getScaleFactor();
+        int scaleFactor = UXPreference.Item.GOAL.getScale().getFactor();
         return (double) this.preference.getValue(UXPreference.Item.GOAL) / scaleFactor;
     }
 

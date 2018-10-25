@@ -64,17 +64,17 @@ public class PreferencesDialog extends NavigationActivity implements UIComponent
                 (view, position) -> {
                     UXPreference.Value preference = preferencesAdapter.getPreference(position);
                     switch (preference.getItem().getTypeConstant()) {
-                        case UXPreference.Constants.NUMBER_RANGE:
+                        case NUMBER_RANGE:
                             navigationViewModel.onNavigate(Destination.SEEK_BAR_DIALOG);
                             preferencesViewModel.setActiveValue(preference);
                             return;
 
-                        case UXPreference.Constants.TOGGLE:
+                        case TOGGLE:
                             navigationViewModel.onNavigate(Destination.TOGGLE_DIALOG);
                             preferencesViewModel.setActiveValue(preference);
                             return;
 
-                        case UXPreference.Constants.TRIGGERED:
+                        case TRIGGERED:
                             preferencesViewModel.onPreferenceTriggered(preference);
                             finish();
                             return;

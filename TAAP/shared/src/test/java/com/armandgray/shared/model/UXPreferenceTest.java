@@ -196,7 +196,7 @@ public class UXPreferenceTest {
 
     @Test
     public void testGetTypeConstant() {
-        Assert.assertThat(testItem.getTypeConstant(), is(UXPreference.Constants.TOGGLE));
+        Assert.assertThat(testItem.getTypeConstant(), is(UXPreference.TypeConstant.TOGGLE));
     }
 
     @Test
@@ -226,8 +226,8 @@ public class UXPreferenceTest {
 
     @Test
     public void testGetScaleFactor() {
-        Assert.assertThat(UXPreference.Item.GOAL.getScaleFactor(),
-                is(UXPreference.Constants.PERCENT_SCALE));
+        Assert.assertThat(UXPreference.Item.GOAL.getScale(),
+                is(UXPreference.Scale.PERCENT_SCALE));
     }
 
     @Test
@@ -259,57 +259,65 @@ public class UXPreferenceTest {
     }
 
     /**
-     * Inner Class - Constants
+     * Inner Class - TypeConstant
      */
 
     @Test
-    public void testConstants_TRIGGERED() {
-        Assert.assertThat(UXPreference.Constants.TRIGGERED, is(0));
+    public void testTypeConstant_Instances() {
+        UXPreference.TypeConstant[] constants = UXPreference.TypeConstant.values();
+        Assert.assertThat(constants.length, is(4));
+        Assert.assertThat(Arrays.asList(constants), containsInAnyOrder(
+                UXPreference.TypeConstant.NONE,
+                UXPreference.TypeConstant.TRIGGERED,
+                UXPreference.TypeConstant.NUMBER_RANGE,
+                UXPreference.TypeConstant.TOGGLE));
+    }
+
+    /**
+     * Inner Class - Scale
+     */
+
+    @Test
+    public void testScale_Instances() {
+        UXPreference.Scale[] scales = UXPreference.Scale.values();
+        Assert.assertThat(scales.length, is(6));
+        Assert.assertThat(Arrays.asList(scales), containsInAnyOrder(
+                UXPreference.Scale.NONE,
+                UXPreference.Scale.TENTHS_OF_SECONDS_SCALE,
+                UXPreference.Scale.SECONDS_SCALE,
+                UXPreference.Scale.MINUTES_SCALE,
+                UXPreference.Scale.INT_SCALE,
+                UXPreference.Scale.PERCENT_SCALE));
     }
 
     @Test
-    public void testConstants_NUMBER_RANGE() {
-        Assert.assertThat(UXPreference.Constants.NUMBER_RANGE, is(1));
+    public void testScale_NONE_SCALE() {
+        Assert.assertThat(UXPreference.Scale.NONE.getFactor(), is(0));
     }
 
     @Test
-    public void testConstants_TOGGLE() {
-        Assert.assertThat(UXPreference.Constants.TOGGLE, is(2));
+    public void testScale_TENTHS_OF_SECONDS_SCALE() {
+        Assert.assertThat(UXPreference.Scale.TENTHS_OF_SECONDS_SCALE.getFactor(), is(100));
+    }
+    
+    @Test
+    public void testScale_SECONDS_SCALE() {
+        Assert.assertThat(UXPreference.Scale.SECONDS_SCALE.getFactor(), is(1000));
     }
 
     @Test
-    public void testConstants_SECONDS_SCALE() {
-        Assert.assertThat(UXPreference.Constants.SECONDS_SCALE, is(1000));
+    public void testScale_MINUTES_SCALE() {
+        Assert.assertThat(UXPreference.Scale.MINUTES_SCALE.getFactor(), is(60 * 1000));
     }
 
     @Test
-    public void testConstants_MINUTES_SCALE() {
-        Assert.assertThat(UXPreference.Constants.MINUTES_SCALE, is(60 * 1000));
+    public void testScale_INT_SCALE() {
+        Assert.assertThat(UXPreference.Scale.INT_SCALE.getFactor(), is(1));
     }
 
     @Test
-    public void testConstants_INT_SCALE() {
-        Assert.assertThat(UXPreference.Constants.INT_SCALE, is(1));
-    }
-
-    @Test
-    public void testConstants_PERCENT_SCALE() {
-        Assert.assertThat(UXPreference.Constants.PERCENT_SCALE, is(100));
-    }
-
-    @Test
-    public void testConstants_DEFAULT_REPS() {
-        Assert.assertThat(UXPreference.Constants.DEFAULT_REPS, is(10));
-    }
-
-    @Test
-    public void testConstants_DEFAULT_GOAL() {
-        Assert.assertThat(UXPreference.Constants.DEFAULT_GOAL, is(70));
-    }
-
-    @Test
-    public void testConstants_DEFAULT_TIME() {
-        Assert.assertThat(UXPreference.Constants.DEFAULT_TIME, is(60));
+    public void testScale_PERCENT_SCALE() {
+        Assert.assertThat(UXPreference.Scale.PERCENT_SCALE.getFactor(), is(100));
     }
 
     /**
