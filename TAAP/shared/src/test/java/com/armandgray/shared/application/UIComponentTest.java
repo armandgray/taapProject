@@ -19,7 +19,7 @@ public class UIComponentTest {
 
     @Before
     public void setUp() {
-        System.out.println("Running Set Up!");
+
         setupContentFlags = new boolean[4];
         testUIComponent = new UIComponent() {
             @Override
@@ -54,7 +54,7 @@ public class UIComponentTest {
 
     @After
     public void tearDown() {
-        System.out.println("Running TearDown!");
+
         testUIComponent = null;
     }
 }

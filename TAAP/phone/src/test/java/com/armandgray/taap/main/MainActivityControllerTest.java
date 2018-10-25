@@ -112,7 +112,7 @@ public class MainActivityControllerTest {
 
     @Before
     public void setUp() {
-        System.out.println("Running Set Up!");
+
         testFlags = new boolean[4];
         updateDataFlags = new boolean[8];
 //        controller = new MainActivityController(CONTEXT, mockActionBar, testViewsInterface);
@@ -248,7 +248,7 @@ public class MainActivityControllerTest {
 
     @After
     public void tearDown() {
-        System.out.println("Running TearDown!");
+
         CONTEXT.getContentResolver().delete(CONTENT_URI_DELETE_ALL_DATA, null, null);
         testFlags = null;
         updateDataFlags = null;

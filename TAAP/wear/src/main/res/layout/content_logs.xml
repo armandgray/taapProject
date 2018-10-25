@@ -14,8 +14,8 @@
 
         <ImageView
             android:id="@+id/image_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/icon_size_small"
+            android:layout_height="@dimen/icon_size_small"
             android:layout_marginTop="28dp"
             android:contentDescription="Image Icon Location"
             android:tint="@color/colorPrimary"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/text_size_min"
+            android:textSize="@dimen/text_size_very_tiny"
             android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="@+id/image_location"
             app:layout_constraintStart_toStartOf="@+id/image_location"
@@ -104,8 +104,8 @@
 
         <ImageView
             android:id="@+id/image_last_types"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="@dimen/image_last_types_size"
+            android:layout_height="@dimen/image_last_types_size"
             android:background="@drawable/bg_circular_outline"
             android:contentDescription="Image Last Workout Types"
             android:padding="10dp"
@@ -146,6 +146,7 @@
             android:textStyle="bold"
             android:visibility="gone"
             android:scrollbars="none"
+            android:textSize="@dimen/text_size_small"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

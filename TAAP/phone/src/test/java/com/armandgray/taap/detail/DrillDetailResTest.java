@@ -27,7 +27,7 @@ public class DrillDetailResTest {
 
     @Before
     public void setUp() {
-        System.out.println("Running Set Up!");
+
         activityController = Robolectric.buildActivity(DrillDetailActivity.class);
         activity = activityController.create().visible().get();
     }
@@ -121,7 +121,7 @@ public class DrillDetailResTest {
 
     @After
     public void tearDown() {
-        System.out.println("Running TearDown!");
+
         activity.finish();
         activityController.pause().stop().destroy();
         activity = null;

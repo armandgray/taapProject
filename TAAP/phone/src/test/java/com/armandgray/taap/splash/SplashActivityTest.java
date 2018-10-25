@@ -29,7 +29,6 @@ public class SplashActivityTest {
 
     @Before
     public void setUp() {
-        System.out.println("Running Set Up!");
         activityController = Robolectric.buildActivity(SplashActivity.class);
         activity = activityController.create().visible().get();
     }
@@ -119,7 +118,6 @@ public class SplashActivityTest {
 
     @After
     public void tearDown() {
-        System.out.println("Running TearDown!");
         activity.getContentResolver().delete(CONTENT_URI_DELETE_ALL_DATA, null, null);
         activity.finish();
         activityController.pause().stop().destroy();

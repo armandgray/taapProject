@@ -82,7 +82,7 @@ public class MainActivityViewsTest {
 
     @Before
     public void setUp() {
-        System.out.println("Running Set Up!");
+
         testFlags = new boolean[7];
         LayoutInflater inflater = LayoutInflater.from(RuntimeEnvironment.application);
         testRootView = inflater.inflate(R.layout.content_main, null);
@@ -377,7 +377,7 @@ public class MainActivityViewsTest {
 
     @After
     public void tearDown() {
-        System.out.println("Running TearDown!");
+
         mockFab = null;
         views = null;
         testRootView = null;

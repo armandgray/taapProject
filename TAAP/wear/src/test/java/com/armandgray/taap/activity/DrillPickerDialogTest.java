@@ -21,7 +21,7 @@ public class DrillPickerDialogTest {
 
     @Before
     public void setUp() {
-        System.out.println("Running Set Up!");
+
     }
 
     @Test
@@ -32,6 +32,6 @@ public class DrillPickerDialogTest {
 
     @After
     public void tearDown() {
-        System.out.println("Running TearDown!");
+
     }
 }

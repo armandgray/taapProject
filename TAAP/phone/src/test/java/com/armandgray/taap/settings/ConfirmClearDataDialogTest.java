@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import androidx.fragment.app.DialogFragment;
 import android.widget.Button;
 
 import com.armandgray.taap.R;
@@ -25,6 +24,8 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowAlertDialog;
+
+import androidx.fragment.app.DialogFragment;
 
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_DRILLS;
 import static com.armandgray.taap.db.DatabaseContentProvider.CONTENT_URI_LOGS;
@@ -47,7 +48,6 @@ public class ConfirmClearDataDialogTest {
 
     @Before
     public void setUp() {
-        System.out.println("Running Set Up!");
         activityController = Robolectric.buildActivity(SettingsActivity.class);
         activity = activityController.create().visible().get();
         dialog = new ConfirmClearDataDialog();
@@ -145,7 +145,6 @@ public class ConfirmClearDataDialogTest {
 
     @After
     public void tearDown() {
-        System.out.println("Running TearDown!");
         activityController.pause().stop().destroy();
         activity = null;
         dialog = null;

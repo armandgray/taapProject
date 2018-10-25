@@ -35,7 +35,7 @@ public class DrillAdapterTest {
 
     @Before
     public void setUp() {
-        System.out.println("Running Set Up!");
+
         adapter = new DrillAdapter();
         mockView = mock(View.class);
     }
@@ -49,7 +49,7 @@ public class DrillAdapterTest {
 
     @After
     public void tearDown() {
-        System.out.println("Running TearDown!");
+
         adapter = null;
         holder = null;
         mockView = null;

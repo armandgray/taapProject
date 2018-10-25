@@ -1,23 +1,28 @@
 package com.armandgray.taap.activity;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
-import com.armandgray.shared.viewModel.SettingsViewModel;
+import com.armandgray.shared.model.UXPreference;
+import com.armandgray.shared.ui.RecyclerItemClickListener;
 import com.armandgray.taap.R;
+import com.armandgray.taap.navigation.Destination;
 import com.armandgray.taap.navigation.WearNavigationActivity;
 
 import javax.inject.Inject;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.wear.widget.WearableRecyclerView;
 import dagger.Module;
-import dagger.Provides;
 import dagger.android.AndroidInjection;
 
 public class SettingsActivity extends WearNavigationActivity {
 
     @Inject
-    SettingsViewModel settingsViewModel;
+    SettingsAdapter settingsAdapter;
+
+    private TextView textTitle;
+    private WearableRecyclerView recyclerSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,31 +38,41 @@ public class SettingsActivity extends WearNavigationActivity {
     @Override
     public void assignGlobalFields() {
         super.assignGlobalFields();
+
+        textTitle = findViewById(R.id.text_title);
+        recyclerSettings = findViewById(R.id.recycler_settings);
     }
 
     @Override
     public void setupVisualElements() {
         super.setupVisualElements();
+
+        textTitle.setBackgroundResource(R.drawable.bg_round_corners_outline);
+        recyclerSettings.setAdapter(settingsAdapter);
+        recyclerSettings.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
     public void setupEventListeners() {
         super.setupEventListeners();
+
+        recyclerSettings.addOnItemTouchListener(new RecyclerItemClickListener(this,
+                (view, position) -> {
+                    UXPreference preference = settingsAdapter.getSetting(position).getPreference();
+                    preferencesViewModel.setActivePreference(preference);
+                    navigationViewModel.onNavigate(Destination.PREFERENCES_DIALOG);
+                }));
     }
 
     @Override
     public void setupViewModel() {
         super.setupViewModel();
+
+        preferencesViewModel.getSettings().observe(this, settingsAdapter::updateData);
     }
 
     @Module
     public static class ActivityModule
             extends WearNavigationActivity.NavigationModule<SettingsActivity> {
-
-        @Provides
-        @NonNull
-        SettingsViewModel provideViewModel(SettingsActivity activity) {
-            return ViewModelProviders.of(activity).get(SettingsViewModel.class);
-        }
     }
 }

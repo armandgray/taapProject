@@ -4,6 +4,7 @@ import com.armandgray.shared.application.TAAPApplication;
 import com.armandgray.shared.application.TAAPViewModel;
 import com.armandgray.shared.model.Drill;
 import com.armandgray.shared.model.Performance;
+import com.armandgray.shared.model.UXPreference;
 
 import javax.inject.Inject;
 
@@ -16,6 +17,7 @@ public class PerformanceViewModel extends TAAPViewModel {
     private MutableLiveData<Drill> activeDrillLiveData;
     private MutableLiveData<Performance> performanceLiveData;
     private MutableLiveData<Performance> completionLiveData;
+    private MutableLiveData<UXPreference> preferenceLiveData;
 
     @Inject
     DrillRepository repository;
@@ -69,6 +71,21 @@ public class PerformanceViewModel extends TAAPViewModel {
         return completionLiveData;
     }
 
+    public LiveData<UXPreference> getPreferenceObserver() {
+        if (preferenceLiveData == null) {
+            preferenceLiveData = new MutableLiveData<>();
+
+            repository.getPreferenceObservable().subscribe(new ViewModelObserver<UXPreference>() {
+                @Override
+                public void onNext(@NonNull UXPreference preference) {
+                    preferenceLiveData.setValue(preference);
+                }
+            });
+        }
+
+        return preferenceLiveData;
+    }
+
     public void onPlusClick() {
         repository.addMake();
     }
@@ -83,5 +100,9 @@ public class PerformanceViewModel extends TAAPViewModel {
 
     public void onDoubleInputClick() {
         repository.addMiss();
+    }
+
+    public void clearPerformance() {
+        repository.clearPerformance();
     }
 }

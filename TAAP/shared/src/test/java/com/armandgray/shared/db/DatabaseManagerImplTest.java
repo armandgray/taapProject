@@ -5,7 +5,6 @@ import com.armandgray.shared.application.TAAPAppComponent;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -30,10 +29,13 @@ public class DatabaseManagerImplTest {
     DatabaseManager.Component.Builder mockBuilder;
 
     @Mock
-    DatabaseManagerImpl.DrillDaoWrapper mockDrillDaoWrapper;
+    DrillDao.DrillDaoWrapper mockDrillDaoWrapper;
 
     @Mock
-    DatabaseManagerImpl.PerformanceDaoWrapper mockPerformanceDaoWrapper;
+    PerformanceDao.PerformanceDaoWrapper mockPerformanceDaoWrapper;
+
+    @Mock
+    SettingsDao.SettingsDaoWrapper mockSettingsDaoWrapper;
 
     private DatabaseManagerImpl testDatabaseManager;
 
@@ -42,6 +44,7 @@ public class DatabaseManagerImplTest {
         testDatabaseManager = new DatabaseManagerImpl();
         testDatabaseManager.drillDaoWrapper = mockDrillDaoWrapper;
         testDatabaseManager.performanceDaoWrapper = mockPerformanceDaoWrapper;
+        testDatabaseManager.settingsDaoWrapper = mockSettingsDaoWrapper;
 
         Mockito.when(mockAppComponent.databaseBuilder()).thenReturn(mockBuilder);
         Mockito.when(mockBuilder.databaseManager(testDatabaseManager)).thenReturn(mockBuilder);
@@ -72,19 +75,13 @@ public class DatabaseManagerImplTest {
         Assert.assertThat(testDatabaseManager.getPerformanceDao(), is(mockPerformanceDaoWrapper));
     }
 
-    @Ignore
     @Test
-    public void testDrillDaoWrapper() {
-        // TODO implement test
-    }
-
-    @Ignore
-    @Test
-    public void testPerformanceDaoWrapper() {
-        // TODO implement test
+    public void testGetSettingsDao() {
+        Assert.assertThat(testDatabaseManager.getSettingsDao(), is(mockSettingsDaoWrapper));
     }
 
     @After
     public void tearDown() {
+        testDatabaseManager = null;
     }
 }

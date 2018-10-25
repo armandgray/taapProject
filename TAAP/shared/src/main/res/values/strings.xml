@@ -4,4 +4,7 @@
     <string name="done">Done</string>
     <string name="cancel">Cancel</string>
     <string name="reset">Reset</string>
+    <string name="voice_recognition">Voice Recognition</string>
+    <string name="active_drill">Active Drill</string>
+    <string name="enabled">Enabled</string>
 </resources>

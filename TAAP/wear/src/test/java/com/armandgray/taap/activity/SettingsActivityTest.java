@@ -19,7 +19,7 @@ public class SettingsActivityTest {
 
     @Before
     public void setUp() {
-        System.out.println("Running Set Up!");
+
     }
 
     @Test
@@ -30,6 +30,6 @@ public class SettingsActivityTest {
 
     @After
     public void tearDown() {
-        System.out.println("Running TearDown!");
+
     }
 }

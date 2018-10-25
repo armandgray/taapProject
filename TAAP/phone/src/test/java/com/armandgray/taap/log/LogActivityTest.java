@@ -30,7 +30,7 @@ public class LogActivityTest {
 
     @Before
     public void setUp() {
-        System.out.println("Running Set Up!");
+
         if (activity == null) {
             activityController = Robolectric.buildActivity(LogActivity.class);
             activity = activityController.create().visible().get();
@@ -52,7 +52,7 @@ public class LogActivityTest {
 
     @After
     public void tearDown() {
-        System.out.println("Running TearDown!");
+
         activity.getContentResolver().delete(CONTENT_URI_DELETE_ALL_DATA, null, null);
         activity.finish();
         activityController.pause().stop().destroy();

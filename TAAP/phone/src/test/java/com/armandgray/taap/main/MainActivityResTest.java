@@ -40,7 +40,7 @@ public class MainActivityResTest {
     @Before
     @SuppressWarnings("ConstantConditions")
     public void setUp() {
-        System.out.println("Running Set Up!");
+
         LayoutInflater inflater = LayoutInflater.from(context);
         container = (RelativeLayout) inflater.inflate(R.layout.content_main, null);
         menuMain = new PopupMenu(context, null).getMenu();
@@ -116,7 +116,7 @@ public class MainActivityResTest {
 
     @After
     public void tearDown() {
-        System.out.println("Running TearDown!");
+
         menuMain = null;
         container = null;
     }

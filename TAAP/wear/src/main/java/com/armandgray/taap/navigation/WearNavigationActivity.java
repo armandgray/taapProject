@@ -1,10 +1,11 @@
 package com.armandgray.taap.navigation;
 
 import android.view.MenuItem;
+import android.view.View;
 
 import com.armandgray.shared.navigation.NavigationActivity;
 import com.armandgray.shared.navigation.NavigationDrawerItem;
-import com.armandgray.shared.navigation.NavigationViewModel;
+import com.armandgray.shared.viewModel.PreferencesViewModel;
 import com.armandgray.taap.R;
 
 import java.util.ArrayList;
@@ -12,16 +13,19 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.wear.widget.drawer.WearableActionDrawerView;
 import androidx.wear.widget.drawer.WearableNavigationDrawerView;
 import dagger.Module;
+import dagger.Provides;
 
 public abstract class WearNavigationActivity extends NavigationActivity implements
         MenuItem.OnMenuItemClickListener,
         WearableNavigationDrawerView.OnItemSelectedListener {
 
     @Inject
-    protected NavigationViewModel navigationViewModel;
+    protected PreferencesViewModel preferencesViewModel;
 
     protected WearableActionDrawerView wearableActionDrawer;
 
@@ -46,6 +50,7 @@ public abstract class WearNavigationActivity extends NavigationActivity implemen
 
         wearableActionDrawer.setPeekOnScrollDownEnabled(true);
         wearableActionDrawer.setOnMenuItemClickListener(this);
+        wearableActionDrawer.setVisibility(View.GONE);
     }
 
     @Override
@@ -64,12 +69,23 @@ public abstract class WearNavigationActivity extends NavigationActivity implemen
 
     @Override
     public void onItemSelected(int position) {
-        navigationViewModel.onNavigate(drawerAdapter.getItemDestination(position));
+        Destination<?> destination = drawerAdapter.getItemDestination(position);
+        if (destination == Destination.SETTINGS) {
+
+        }
+
+        navigationViewModel.onNavigate(destination);
     }
 
     @Module
     public static abstract class NavigationModule<A extends WearNavigationActivity>
             extends NavigationActivity.NavigationModule<A> {
+
+        @Provides
+        @NonNull
+        protected PreferencesViewModel providePreferencesViewModel(A activity) {
+            return ViewModelProviders.of(activity).get(PreferencesViewModel.class);
+        }
     }
 
     static final class Defaults {

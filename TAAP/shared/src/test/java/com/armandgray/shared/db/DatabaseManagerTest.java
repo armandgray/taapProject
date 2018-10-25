@@ -27,6 +27,11 @@ public class DatabaseManagerTest {
             }
 
             @Override
+            public SettingsDao getSettingsDao() {
+                return null;
+            }
+
+            @Override
             public void inject(TAAPAppComponent parentComponent) {
 
             }
@@ -38,8 +43,8 @@ public class DatabaseManagerTest {
     @Test
     public void testDatabaseManager_DefinesStateEnum() {
         Assert.assertThat(DatabaseManager.State.CREATED, is(notNullValue()));
-        Assert.assertThat(DatabaseManager.State.OPEN, is(notNullValue()));
-        Assert.assertThat(DatabaseManager.State.POPULATED, is(notNullValue()));
+        Assert.assertThat(DatabaseManager.State.POPULATING, is(notNullValue()));
+        Assert.assertThat(DatabaseManager.State.READY, is(notNullValue()));
     }
 
     @Test

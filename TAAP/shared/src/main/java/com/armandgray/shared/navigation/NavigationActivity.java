@@ -3,6 +3,7 @@ package com.armandgray.shared.navigation;
 import android.content.Intent;
 
 import com.armandgray.shared.application.UIComponent;
+import com.armandgray.shared.helpers.StringHelper;
 
 import javax.inject.Inject;
 
@@ -16,8 +17,10 @@ import io.reactivex.annotations.Nullable;
 public abstract class NavigationActivity extends AppCompatActivity
         implements UIComponent, Navigator {
 
+    protected final String TAG = StringHelper.toLogTag(getClass().getSimpleName());
+
     @Inject
-    public NavigationViewModel navigationViewModel;
+    protected NavigationViewModel navigationViewModel;
 
     @Override
     public void setupViewModel() {

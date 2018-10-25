@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.armandgray.shared.application.TAAPAppComponent;
 import com.armandgray.shared.model.Drill;
+import com.armandgray.shared.model.Setting;
 import com.armandgray.shared.rx.SchedulerProvider;
 
 import java.lang.annotation.Documented;
@@ -25,14 +26,15 @@ import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.subjects.BehaviorSubject;
 
-import static com.armandgray.shared.db.DrillDatabase.DATABASE_NAME;
+import static com.armandgray.shared.db.GlobalDatabase.DATABASE_NAME;
 
 public interface DatabaseManager
         extends TAAPAppComponent.InjectableSubComponent<TAAPAppComponent> {
 
-    enum State {CREATED, OPEN, POPULATED}
+    enum State {CREATED, POPULATING, READY}
 
     String TAG = "DATABASE_MANAGER";
 
@@ -41,6 +43,8 @@ public interface DatabaseManager
     DrillDao getDrillDao();
 
     PerformanceDao getPerformanceDao();
+
+    SettingsDao getSettingsDao();
 
     @DatabaseScope
     @Subcomponent(modules = ManagerModule.class)
@@ -72,18 +76,17 @@ public interface DatabaseManager
 
         private static final int POPULATE_RETRY_TIMES = 3;
 
-        private final CompositeDisposable disposables = new CompositeDisposable();
-        private DrillDatabase drillDatabase;
+        private GlobalDatabase globalDatabase;
 
         @Provides
         @DatabaseScope
         @NonNull
-        DrillDatabase provideDatabase(Context context, SchedulerProvider schedulers) {
-            drillDatabase = Room.databaseBuilder(context, DrillDatabase.class, DATABASE_NAME)
+        GlobalDatabase provideDatabase(Context context, SchedulerProvider schedulers) {
+            globalDatabase = Room.databaseBuilder(context, GlobalDatabase.class, DATABASE_NAME)
                     .addCallback(onDatabaseLifecycleChanged(schedulers))
                     .build();
 
-            return drillDatabase;
+            return globalDatabase;
         }
 
         private RoomDatabase.Callback onDatabaseLifecycleChanged(
@@ -101,7 +104,8 @@ public interface DatabaseManager
                     super.onCreate(db);
 
                     stateSubject.onNext(State.CREATED);
-                    populateDefaults(schedulers);
+                    populateDrillDefaults(schedulers);
+                    populateSettingsDefaults(schedulers);
                 }
 
                 @Override
@@ -110,7 +114,7 @@ public interface DatabaseManager
 
                     synchronized (stateSubject) {
                         if (!stateSubject.hasComplete() && stateSubject.getValue() == null) {
-                            stateSubject.onNext(State.OPEN);
+                            stateSubject.onNext(State.READY);
                             stateSubject.onComplete();
                         }
                     }
@@ -119,36 +123,63 @@ public interface DatabaseManager
         }
 
         @SuppressWarnings("SimplifyStreamApiCallChains")
-        private void populateDefaults(SchedulerProvider schedulers) {
+        private void populateDrillDefaults(SchedulerProvider schedulers) {
             Single.just(Drill.Defaults.getDefaults())
                     .map(list -> list.stream().toArray(Drill[]::new))
                     .subscribeOn(schedulers.io())
                     .retry(POPULATE_RETRY_TIMES)
-                    .subscribe(new SingleObserver<Drill[]>() {
-                        @Override
-                        public void onSubscribe(Disposable d) {
-                            disposables.add(d);
-                        }
-
+                    .subscribe(new DatabasePopulationObserver<Drill[]>() {
                         @Override
                         public void onSuccess(Drill[] drills) {
-                            drillDatabase.drillDao()
-                                    .insert(drills)
-                                    .doFinally(() -> {
-                                        synchronized (stateSubject) {
-                                            stateSubject.onNext(State.POPULATED);
-                                            stateSubject.onComplete();
-                                        }
-                                    })
+                            globalDatabase.drillDao().insert(drills)
+                                    .doFinally(onPopulated())
                                     .subscribe();
                         }
+                    });
+        }
 
+        @SuppressWarnings("SimplifyStreamApiCallChains")
+        private void populateSettingsDefaults(SchedulerProvider schedulers) {
+            Single.just(Setting.Defaults.getDefaults())
+                    .map(list -> list.stream().toArray(Setting[]::new))
+                    .subscribeOn(schedulers.io())
+                    .retry(POPULATE_RETRY_TIMES)
+                    .subscribe(new DatabasePopulationObserver<Setting[]>() {
                         @Override
-                        public void onError(Throwable e) {
-                            Log.e(DatabaseManager.TAG, String.format("Drill Population Failed: %s",
-                                    e.getMessage()));
+                        public void onSuccess(Setting[] settings) {
+                            globalDatabase.settingsDao().insert(settings)
+                                    .doFinally(onPopulated())
+                                    .subscribe();
                         }
                     });
+        }
+
+        private Action onPopulated() {
+            return () -> {
+                synchronized (stateSubject) {
+                    if (stateSubject.getValue() == State.POPULATING) {
+                        stateSubject.onNext(State.READY);
+                        stateSubject.onComplete();
+                    } else {
+                        stateSubject.onNext(State.POPULATING);
+                    }
+                }
+            };
+        }
+    }
+
+    abstract class DatabasePopulationObserver<T> implements SingleObserver<T> {
+
+        private static final CompositeDisposable disposables = new CompositeDisposable();
+
+        @Override
+        public void onSubscribe(Disposable d) {
+            disposables.add(d);
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            Log.e(DatabaseManager.TAG, String.format("Population Failed: %s", e.getMessage()));
         }
     }
 }

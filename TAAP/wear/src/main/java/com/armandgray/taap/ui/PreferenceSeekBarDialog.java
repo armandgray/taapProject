@@ -1,6 +1,5 @@
 package com.armandgray.taap.ui;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -30,6 +29,7 @@ public class PreferenceSeekBarDialog extends NavigationActivity implements UICom
     PreferencesViewModel preferencesViewModel;
 
     private TextView textTitle;
+    private TextView textDescription;
     private SeekBar seekBar;
     private ImageView buttonReset;
     private TextView textValue;
@@ -50,6 +50,7 @@ public class PreferenceSeekBarDialog extends NavigationActivity implements UICom
     @Override
     public void assignGlobalFields() {
         textTitle = findViewById(R.id.text_title);
+        textDescription = findViewById(R.id.text_description);
         seekBar = findViewById(R.id.seek_bar);
         buttonReset = findViewById(R.id.button_reset);
         textValue = findViewById(R.id.text_value);
@@ -69,7 +70,8 @@ public class PreferenceSeekBarDialog extends NavigationActivity implements UICom
         buttonReset.setOnClickListener(view -> {
             UXPreference.Value value = preferencesViewModel.getActiveValue().getValue();
             if (value != null) {
-                int defaultValue = value.getItem().getDefault();
+                UXPreference.Item item = value.getItem();
+                int defaultValue = applyMinOffset(item.getDefault(), item);
                 seekBar.setProgress(defaultValue);
                 onSeekBarValueChanged().onValueChanged(defaultValue);
             }
@@ -78,7 +80,8 @@ public class PreferenceSeekBarDialog extends NavigationActivity implements UICom
         buttonDone.setOnClickListener(view -> {
             UXPreference.Value value = preferencesViewModel.getActiveValue().getValue();
             if (value != null) {
-                value.setValue(Integer.parseInt(textValue.getText().toString().replace("%", "")));
+                String stringValue = textValue.getText().toString().replaceAll("[^\\d]", "");
+                value.setValue(Integer.parseInt(stringValue));
                 preferencesViewModel.setActiveValue(value);
                 preferencesViewModel.onPreferenceUpdated();
             }
@@ -100,6 +103,7 @@ public class PreferenceSeekBarDialog extends NavigationActivity implements UICom
                 return;
             }
 
+            value += preference.getItem().getMin();
             int scale = preference.getItem().getScaleFactor();
             switch (scale) {
                 case UXPreference.Constants.INT_SCALE:
@@ -108,6 +112,14 @@ public class PreferenceSeekBarDialog extends NavigationActivity implements UICom
 
                 case UXPreference.Constants.PERCENT_SCALE:
                     this.textValue.setText(String.format(Locale.getDefault(), "%d%%", value));
+                    break;
+
+                case UXPreference.Constants.SECONDS_SCALE:
+                    this.textValue.setText(String.format(Locale.getDefault(), "%ds", value));
+                    break;
+
+                case UXPreference.Constants.MINUTES_SCALE:
+                    this.textValue.setText(String.format(Locale.getDefault(), "%dm", value));
                     break;
 
                 default:
@@ -126,17 +138,15 @@ public class PreferenceSeekBarDialog extends NavigationActivity implements UICom
     private void onSelectionChanged(@Nullable UXPreference.Value value) {
         if (value != null) {
             UXPreference.Item item = value.getItem();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                // TODO Find issue with min affecting max on seekBark
-                seekBar.setMin(item.getMin());
-                seekBar.setMax(item.getMax() + item.getMin());
-            } else {
-                seekBar.setMax(item.getMax());
-            }
-
-            seekBar.setProgress(value.getValue());
+            seekBar.setMax(applyMinOffset(item.getMax(), item));
+            seekBar.setProgress(applyMinOffset(value.getValue(),  item));
             textTitle.setText(item.name());
+            textDescription.setText(item.getDescription());
         }
+    }
+
+    private int applyMinOffset(int value, UXPreference.Item item) {
+        return value - item.getMin();
     }
 
     @Module

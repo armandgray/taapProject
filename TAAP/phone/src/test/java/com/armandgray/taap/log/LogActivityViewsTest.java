@@ -40,7 +40,7 @@ public class LogActivityViewsTest {
 
     @Before
     public void setUp() {
-        System.out.println("Running Set Up!");
+
         LayoutInflater inflater = LayoutInflater.from(RuntimeEnvironment.application);
         testRootView = inflater.inflate(R.layout.content_log, null);
         Toolbar toolbar = new Toolbar(context);
@@ -402,7 +402,7 @@ public class LogActivityViewsTest {
 
     @After
     public void tearDown() {
-        System.out.println("Running TearDown!");
+
         testRootView = null;
         views = null;
     }

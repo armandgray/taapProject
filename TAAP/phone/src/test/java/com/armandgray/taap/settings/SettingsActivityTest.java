@@ -1,7 +1,5 @@
 package com.armandgray.taap.settings;
 
-import com.armandgray.taap.BuildConfig;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -24,7 +22,6 @@ public class SettingsActivityTest {
 
     @Before
     public void setUp() {
-        System.out.println("Running Set Up!");
         if (activity == null) {
             activityController = Robolectric.buildActivity(SettingsActivity.class);
             activity = activityController.create().visible().get();
@@ -39,7 +36,6 @@ public class SettingsActivityTest {
 
     @After
     public void tearDown() {
-        System.out.println("Running TearDown!");
         activity.getContentResolver().delete(CONTENT_URI_DELETE_ALL_DATA, null, null);
         activity.finish();
         activityController.pause().stop().destroy();

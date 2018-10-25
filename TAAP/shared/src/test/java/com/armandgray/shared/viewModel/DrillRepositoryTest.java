@@ -125,16 +125,19 @@ public class DrillRepositoryTest {
                 .subscribe(Mockito.any(Consumer.class));
     }
 
+    @Ignore
     @Test
     public void testConstructor_DoesSetDrills() {
         // TODO Implement test
     }
 
+    @Ignore
     @Test
     public void testConstructor_DoesSetActiveDrill() {
         // TODO Implement test
     }
 
+    @Ignore
     @Test
     public void testConstructor_DoesSetPerformance() {
         // TODO Implement test
@@ -174,7 +177,7 @@ public class DrillRepositoryTest {
     public void testAddPreferenceConsumer_DoesUseActiveDrill() throws Exception {
         int expected = testRepository.activeDrillSubject.getValue().getId();
         testConsumer.accept(mockPreference);
-        Assert.assertThat(testRepository.performanceSubject.getValue().getDrillId(), is(expected));
+        Assert.assertThat(testRepository.performanceSubject.getValue().getDrillTitle(), is(expected));
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -514,13 +517,14 @@ public class DrillRepositoryTest {
     @SuppressWarnings("ConstantConditions")
     @Test
     public void testSetActiveDrill_DoesChangePerformanceDrillId() {
-        Assert.assertThat(testRepository.performanceSubject.getValue().getDrillId(),
+        Assert.assertThat(testRepository.performanceSubject.getValue().getDrillTitle(),
                 is(not(TEST_DRILL.getId())));
         testRepository.setActiveDrill(TEST_DRILL);
-        Assert.assertThat(testRepository.performanceSubject.getValue().getDrillId(),
+        Assert.assertThat(testRepository.performanceSubject.getValue().getDrillTitle(),
                 is(TEST_DRILL.getId()));
     }
 
+    @Ignore
     @Test
     public void testToString() {
         Assert.assertThat(testRepository.toString(),

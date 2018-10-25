@@ -15,7 +15,7 @@ public class WearApplicationTest {
 
     @Before
     public void setUp() {
-        System.out.println("Running Set Up!");
+
     }
 
     @Test
@@ -26,6 +26,6 @@ public class WearApplicationTest {
 
     @After
     public void tearDown() {
-        System.out.println("Running TearDown!");
+
     }
 }

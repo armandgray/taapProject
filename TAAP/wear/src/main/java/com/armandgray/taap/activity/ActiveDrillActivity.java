@@ -11,13 +11,15 @@ import android.widget.TextView;
 
 import com.armandgray.shared.model.Drill;
 import com.armandgray.shared.model.Performance;
+import com.armandgray.shared.model.UXPreference;
 import com.armandgray.shared.viewModel.DrillViewModel;
 import com.armandgray.shared.viewModel.PerformanceViewModel;
-import com.armandgray.shared.viewModel.PreferencesViewModel;
 import com.armandgray.taap.R;
 import com.armandgray.taap.navigation.Destination;
 import com.armandgray.taap.navigation.WearNavigationActivity;
 import com.armandgray.taap.ui.MultiInputClickListener;
+
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -36,9 +38,6 @@ public class ActiveDrillActivity extends WearNavigationActivity {
     PerformanceViewModel performanceViewModel;
 
     @Inject
-    PreferencesViewModel preferencesViewModel;
-
-    @Inject
     DrillViewModel drillViewModel;
 
     private ConstraintLayout rootView;
@@ -46,7 +45,11 @@ public class ActiveDrillActivity extends WearNavigationActivity {
     private ImageButton buttonMinus;
     private TextView textRate;
     private ImageButton buttonPlus;
+    private ImageButton buttonClear;
+    private View loadingMask;
     private ProgressBar progressBar;
+
+    private boolean enableScreenTaps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,8 @@ public class ActiveDrillActivity extends WearNavigationActivity {
         buttonMinus = findViewById(R.id.button_minus);
         textRate = findViewById(R.id.text_rate);
         buttonPlus = findViewById(R.id.button_plus);
+        buttonClear = findViewById(R.id.button_clear);
+        loadingMask = findViewById(R.id.loading_mask);
         progressBar = findViewById(R.id.progress_bar);
     }
 
@@ -76,6 +81,7 @@ public class ActiveDrillActivity extends WearNavigationActivity {
         super.setupVisualElements();
 
         super.wearableActionDrawer.getController().peekDrawer();
+        super.wearableActionDrawer.setVisibility(View.VISIBLE);
 
         textDrill.setBackgroundResource(R.drawable.bg_round_corners_outline);
         buttonMinus.setImageResource(R.drawable.ic_remove_white_24dp);
@@ -92,6 +98,7 @@ public class ActiveDrillActivity extends WearNavigationActivity {
                 .onNavigate(Destination.DRILL_PICKER_DIALOG));
         buttonMinus.setOnClickListener(view -> performanceViewModel.onMinusClick());
         buttonPlus.setOnClickListener(view -> performanceViewModel.onPlusClick());
+        buttonClear.setOnClickListener(view -> performanceViewModel.clearPerformance());
     }
 
     @NonNull
@@ -99,12 +106,16 @@ public class ActiveDrillActivity extends WearNavigationActivity {
         return new MultiInputClickListener(new MultiInputClickListener.OnMultiInputClickListener() {
             @Override
             public void onSingleInputClick(View view) {
-                performanceViewModel.onSingleInputClick();
+                if (enableScreenTaps) {
+                    performanceViewModel.onSingleInputClick();
+                }
             }
 
             @Override
             public void onDoubleInputClick(View view) {
-                performanceViewModel.onDoubleInputClick();
+                if (enableScreenTaps) {
+                    performanceViewModel.onDoubleInputClick();
+                }
             }
         });
     }
@@ -116,6 +127,7 @@ public class ActiveDrillActivity extends WearNavigationActivity {
         performanceViewModel.getActiveDrill().observe(this, this::onDrillChanged);
         performanceViewModel.getPerformance().observe(this, this::onPerformanceChange);
         performanceViewModel.getCompletionObserver().observe(this, this::onConfirmationChange);
+        performanceViewModel.getPreferenceObserver().observe(this, this::onPreferenceChange);
     }
 
     private void onDrillChanged(@Nullable Drill drill) {
@@ -124,17 +136,19 @@ public class ActiveDrillActivity extends WearNavigationActivity {
         }
 
         textDrill.setText(drill.getTitle());
-        textDrill.setVisibility(View.VISIBLE);
-        buttonMinus.setVisibility(View.VISIBLE);
-        textRate.setVisibility(View.VISIBLE);
-        buttonPlus.setVisibility(View.VISIBLE);
+        loadingMask.setVisibility(View.INVISIBLE);
         progressBar.setVisibility(View.INVISIBLE);
     }
 
     private void onPerformanceChange(@Nullable Performance performance) {
         if (performance != null) {
-            textRate.setText(performance.toString());
+            textRate.setText(getPerformanceText(performance));
         }
+    }
+
+    private String getPerformanceText(@NonNull Performance performance) {
+        return String.format(Locale.getDefault(), "%d/%d",
+                performance.getCount(), performance.getTotal());
     }
 
     private void onConfirmationChange(@Nullable Performance performance) {
@@ -148,8 +162,22 @@ public class ActiveDrillActivity extends WearNavigationActivity {
 
         Intent intent = new Intent(this, ConfirmationActivity.class);
         intent.putExtra(ConfirmationActivity.EXTRA_ANIMATION_TYPE, animation);
-        intent.putExtra(ConfirmationActivity.EXTRA_MESSAGE, performance.toString());
+        intent.putExtra(ConfirmationActivity.EXTRA_MESSAGE, getPerformanceText(performance));
         startActivity(intent);
+    }
+
+    private void onPreferenceChange(UXPreference preference) {
+        if (preference.getCategory() != UXPreference.Category.WORKOUT) {
+            return;
+        }
+
+        boolean clearEnabled = preference.isEnabled(UXPreference.Item.CLEAR);
+        buttonClear.setVisibility(clearEnabled ? View.VISIBLE : View.GONE);
+
+        boolean minusEnabled = preference.isEnabled(UXPreference.Item.MINUS);
+        buttonMinus.setVisibility(minusEnabled ? View.VISIBLE : View.GONE);
+
+        enableScreenTaps = preference.isEnabled(UXPreference.Item.SCREEN_TAPS);
     }
 
     @Override
@@ -183,13 +211,6 @@ public class ActiveDrillActivity extends WearNavigationActivity {
         @NonNull
         PerformanceViewModel providePerformanceViewModel(ActiveDrillActivity activity) {
             return ViewModelProviders.of(activity).get(PerformanceViewModel.class);
-        }
-
-
-        @Provides
-        @NonNull
-        PreferencesViewModel providePreferencesViewModel(ActiveDrillActivity activity) {
-            return ViewModelProviders.of(activity).get(PreferencesViewModel.class);
         }
 
         @Provides

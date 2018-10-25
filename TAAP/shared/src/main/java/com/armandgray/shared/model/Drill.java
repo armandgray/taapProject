@@ -17,12 +17,11 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverter;
-import androidx.room.TypeConverters;
 
 @Entity(tableName = "drills", indices = {@Index(value = "title", unique = true)})
 public class Drill {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
 
     @SuppressWarnings("NullableProblems")
@@ -37,12 +36,8 @@ public class Drill {
     private List<Type> type;
 
     @SuppressWarnings("NullableProblems")
-    @TypeConverters(UXPreference.Converter.class)
     @NonNull
     private UXPreference preference;
-
-    @Ignore
-    private boolean isActive;
 
     public Drill() {
         // Default Constructor For Room Object Creation
@@ -50,7 +45,6 @@ public class Drill {
 
     @Ignore
     public Drill(@NonNull String title, int imageResId, @NonNull List<Type> type) {
-        this.id = title.hashCode();
         this.title = title;
         this.imageResId = imageResId;
         this.type = type;
@@ -92,10 +86,6 @@ public class Drill {
         return preference;
     }
 
-    public boolean isActive() {
-        return this.isActive;
-    }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -103,7 +93,6 @@ public class Drill {
     public void setTitle(@NonNull String title) {
         this.title = title;
     }
-
 
     @SuppressWarnings("WeakerAccess") // VisibleForRoom
     public void setImageResId(int imageResId) {
@@ -118,19 +107,14 @@ public class Drill {
         this.preference = preference;
     }
 
-    @SuppressWarnings("WeakerAccess") // VisibleForRoom
-    public void setActive(boolean active) {
-        this.isActive = active;
-    }
-
     @Override
     public int hashCode() {
-        return id;
+        return title.hashCode();
     }
 
     @Override
     public boolean equals(@Nullable Object that) {
-        return that instanceof Drill && this.id == ((Drill) that).id;
+        return that instanceof Drill && this.title.equals(((Drill) that).title);
     }
 
     @NonNull

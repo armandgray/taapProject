@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "a647a2978662ce087e320d98db949e14",
+    "identityHash": "30c768c447c50b23d167f788988dcdc0",
     "entities": [
       {
         "tableName": "drills",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `title` TEXT NOT NULL, `image_res_id` INTEGER NOT NULL, `type` TEXT NOT NULL, `preference` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `image_res_id` INTEGER NOT NULL, `type` TEXT NOT NULL, `preference` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -43,7 +43,7 @@
           "columnNames": [
             "id"
           ],
-          "autoGenerate": false
+          "autoGenerate": true
         },
         "indices": [
           {
@@ -59,7 +59,7 @@
       },
       {
         "tableName": "performances",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `drill_id` INTEGER NOT NULL, `count` INTEGER NOT NULL, `total` INTEGER NOT NULL, `reps` INTEGER NOT NULL, `goal` REAL NOT NULL, `location` TEXT, `start_time` INTEGER NOT NULL, `end_time` INTEGER NOT NULL, FOREIGN KEY(`drill_id`) REFERENCES `drills`(`id`) ON UPDATE CASCADE ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `drill_title` TEXT NOT NULL, `count` INTEGER NOT NULL, `total` INTEGER NOT NULL, `reps` INTEGER NOT NULL, `goal` REAL NOT NULL, `location` TEXT, `start_time` INTEGER NOT NULL, `end_time` INTEGER NOT NULL, FOREIGN KEY(`drill_title`) REFERENCES `drills`(`title`) ON UPDATE CASCADE ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -68,9 +68,9 @@
             "notNull": true
           },
           {
-            "fieldPath": "drillId",
-            "columnName": "drill_id",
-            "affinity": "INTEGER",
+            "fieldPath": "drillTitle",
+            "columnName": "drill_title",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -122,17 +122,26 @@
           ],
           "autoGenerate": true
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_performances_drill_title",
+            "unique": false,
+            "columnNames": [
+              "drill_title"
+            ],
+            "createSql": "CREATE  INDEX `index_performances_drill_title` ON `${TABLE_NAME}` (`drill_title`)"
+          }
+        ],
         "foreignKeys": [
           {
             "table": "drills",
             "onDelete": "CASCADE",
             "onUpdate": "CASCADE",
             "columns": [
-              "drill_id"
+              "drill_title"
             ],
             "referencedColumns": [
-              "id"
+              "title"
             ]
           }
         ]
@@ -141,7 +150,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"a647a2978662ce087e320d98db949e14\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"30c768c447c50b23d167f788988dcdc0\")"
     ]
   }
 }

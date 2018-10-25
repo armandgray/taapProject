@@ -16,28 +16,25 @@
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_tiny"
         android:textStyle="italic"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/text_rate"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6"
+        app:layout_constraintVertical_bias="0.25"
         tools:text="Free Throws"/>
 
     <ImageButton
         android:id="@+id/button_minus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/icon_size_normal"
+        android:layout_height="@dimen/icon_size_normal"
         android:background="@null"
         android:backgroundTint="@color/colorPrimary"
         android:contentDescription="Button Minus"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/text_rate"
         app:layout_constraintEnd_toStartOf="@+id/text_rate"
-        app:layout_constraintHorizontal_bias="0.35"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_rate"
         tools:ignore="HardcodedText"/>
 
     <TextView
@@ -47,39 +44,61 @@
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_large"
         android:textStyle="bold"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_bias="0.55"
         tools:text="2/8"/>
 
     <ImageButton
+        android:id="@+id/button_clear"
+        android:layout_width="@dimen/icon_size_tiny"
+        android:layout_height="@dimen/icon_size_tiny"
+        android:background="@null"
+        android:contentDescription="Button Clear Icon"
+        android:tint="@color/colorGray"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/button_minus"
+        app:layout_constraintStart_toStartOf="@+id/button_minus"
+        app:layout_constraintTop_toTopOf="@+id/text_rate"
+        app:layout_constraintVertical_bias="0.4"
+        app:srcCompat="@drawable/ic_refresh_white_24dp"
+        tools:ignore="HardcodedText"/>
+
+    <ImageButton
         android:id="@+id/button_plus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/icon_size_normal"
+        android:layout_height="@dimen/icon_size_normal"
         android:background="@null"
         android:backgroundTint="@color/colorPrimary"
         android:contentDescription="Button Plus"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/text_rate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toEndOf="@+id/text_rate"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_rate"
         tools:ignore="HardcodedText"/>
+
+    <View
+        android:id="@+id/loading_mask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:translationZ="1dp"
+        android:background="@color/black"/>
 
     <ProgressBar
         android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/icon_size_normal"
+        android:layout_height="@dimen/icon_size_normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:translationZ="2dp"
         app:layout_constraintVertical_bias="0.5"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

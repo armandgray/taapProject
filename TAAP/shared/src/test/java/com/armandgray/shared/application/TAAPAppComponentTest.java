@@ -5,7 +5,6 @@ import com.armandgray.shared.viewModel.DrillViewModel;
 import com.armandgray.shared.viewModel.LogsViewModel;
 import com.armandgray.shared.viewModel.PerformanceViewModel;
 import com.armandgray.shared.viewModel.PreferencesViewModel;
-import com.armandgray.shared.viewModel.SettingsViewModel;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -31,10 +30,6 @@ public class TAAPAppComponentTest {
 
             @Override
             public void inject(DrillViewModel viewModel) {
-            }
-
-            @Override
-            public void inject(SettingsViewModel viewModel) {
             }
 
             @Override

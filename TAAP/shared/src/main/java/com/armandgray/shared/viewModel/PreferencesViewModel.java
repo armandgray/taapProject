@@ -2,10 +2,14 @@ package com.armandgray.shared.viewModel;
 
 import com.armandgray.shared.application.TAAPApplication;
 import com.armandgray.shared.application.TAAPViewModel;
+import com.armandgray.shared.model.Setting;
 import com.armandgray.shared.model.UXPreference;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -16,6 +20,7 @@ public class PreferencesViewModel extends TAAPViewModel {
 
     private MutableLiveData<UXPreference> activePreferenceLiveData;
     private MutableLiveData<UXPreference.Value> activeValueLiveData;
+    private MutableLiveData<List<Setting>> settingsLiveData;
 
     PreferencesViewModel() {
         TAAPApplication.getAppComponent().inject(this);
@@ -61,7 +66,26 @@ public class PreferencesViewModel extends TAAPViewModel {
         repository.setActiveValue(value);
     }
 
+    public LiveData<List<Setting>> getSettings() {
+        if (settingsLiveData == null) {
+            settingsLiveData = new MutableLiveData<>();
+
+            repository.getSettingsObservable().subscribe(new ViewModelObserver<List<Setting>>() {
+                @Override
+                public void onNext(List<Setting> settings) {
+                    settingsLiveData.setValue(settings);
+                }
+            });
+        }
+
+        return settingsLiveData;
+    }
+
     public void onPreferenceUpdated() {
         repository.onPreferenceUpdated();
+    }
+
+    public void onPreferenceTriggered(@NonNull UXPreference.Value value) {
+        repository.onPreferenceTriggered(value);
     }
 }
