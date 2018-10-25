@@ -104,21 +104,25 @@ public class PreferenceSeekBarDialog extends NavigationActivity implements UICom
             }
 
             value += preference.getItem().getMin();
-            int scale = preference.getItem().getScaleFactor();
-            switch (scale) {
-                case UXPreference.Constants.INT_SCALE:
+            switch (preference.getItem().getScale()) {
+                case INT_SCALE:
                     this.textValue.setText(String.valueOf(value));
                     break;
 
-                case UXPreference.Constants.PERCENT_SCALE:
+                case PERCENT_SCALE:
                     this.textValue.setText(String.format(Locale.getDefault(), "%d%%", value));
                     break;
 
-                case UXPreference.Constants.SECONDS_SCALE:
+                case TENTHS_OF_SECONDS_SCALE:
+                    this.textValue.setText(String.format(Locale.getDefault(),
+                            "%.1fs", (float) value / 10));
+                    break;
+
+                case SECONDS_SCALE:
                     this.textValue.setText(String.format(Locale.getDefault(), "%ds", value));
                     break;
 
-                case UXPreference.Constants.MINUTES_SCALE:
+                case MINUTES_SCALE:
                     this.textValue.setText(String.format(Locale.getDefault(), "%dm", value));
                     break;
 
