@@ -9,15 +9,15 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.armandgray.shared.util.VibrateUtil;
 import com.armandgray.shared.model.Drill;
 import com.armandgray.shared.model.Performance;
 import com.armandgray.shared.model.UXPreference;
+import com.armandgray.shared.util.VibrateUtil;
 import com.armandgray.shared.viewModel.DrillViewModel;
 import com.armandgray.shared.viewModel.PerformanceViewModel;
 import com.armandgray.taap.R;
 import com.armandgray.taap.navigation.Destination;
-import com.armandgray.taap.navigation.WearNavigationActivity;
+import com.armandgray.taap.application.WearDelegateActivity;
 import com.armandgray.taap.ui.MultiInputClickListener;
 
 import java.util.Locale;
@@ -33,7 +33,7 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.android.AndroidInjection;
 
-public class ActiveDrillActivity extends WearNavigationActivity {
+public class ActiveDrillActivity extends WearDelegateActivity {
 
     @Inject
     PerformanceViewModel performanceViewModel;
@@ -213,7 +213,7 @@ public class ActiveDrillActivity extends WearNavigationActivity {
 
     @Module
     public static class ActivityModule
-            extends WearNavigationActivity.NavigationModule<ActiveDrillActivity> {
+            extends WearDelegateActivity.NavigationModule<ActiveDrillActivity> {
 
         @Provides
         @NonNull

@@ -80,6 +80,12 @@ public class DatabaseManagerImplTest {
         Assert.assertThat(testDatabaseManager.getSettingsDao(), is(mockSettingsDaoWrapper));
     }
 
+    @Test
+    public void testToString() {
+        Assert.assertThat(testDatabaseManager.toString(),
+                is("DatabaseManagerImpl@" + Integer.toHexString(testDatabaseManager.hashCode())));
+    }
+
     @After
     public void tearDown() {
         testDatabaseManager = null;

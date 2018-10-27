@@ -168,8 +168,8 @@ public class UXPreference {
     public enum Item {
 
         // Location
-        GYM_LOCATION("Gym", "Enable Gym Location Updates for Logging Purposes", TypeConstant.TOGGLE, 1, R.drawable.ic_location_white_24dp),
-        COURT_LOCATION("Court", "Enable Auto Court Location Updates for Drills", TypeConstant.TOGGLE, 1, R.drawable.ic_gps_fixed_white_24dp),
+        GYM_LOCATION("Gym", "Enable Gym Location Updates for Logging Purposes", TypeConstant.TOGGLE, 0, R.drawable.ic_location_white_24dp),
+        COURT_LOCATION("Court", "Enable Auto Court Location Updates for Drills", TypeConstant.TOGGLE, 0, R.drawable.ic_gps_fixed_white_24dp),
 
         // Voice
         CLAP("Clap", "Enable Double/Single Clap for Make/Miss", TypeConstant.TOGGLE, 1, R.drawable.ic_thumbs_up_down_white_24dp),
@@ -179,7 +179,7 @@ public class UXPreference {
         BREAK_LIMIT("Break Limit", "Set Break Limit For New Workouts", TypeConstant.NUMBER_RANGE, R.drawable.ic_control_point_duplicate_white_24dp, 30, 15, 60, Scale.MINUTES_SCALE), // in mins
         TIMEOUT("Timeout", "Set Timeout For Single Set", TypeConstant.NUMBER_RANGE, R.drawable.ic_clock_white_24dp, 30, 10, 60, Scale.SECONDS_SCALE), // in secs
         VIBRATE("Vibrate", "Set Vibration Length On Set Completions", TypeConstant.NUMBER_RANGE, R.drawable.ic_vibration_white_24dp, 5, 0, 30, Scale.TENTHS_OF_SECONDS_SCALE), // in tenths_secs
-        SCREEN_TAPS("Taps", "Enable Single/Double Finger Taps for Make/Miss", TypeConstant.TOGGLE, 0, R.drawable.ic_gesture_two_double_tap_white_48dp),
+        SCREEN_TAPS("Taps", "Enable Single/Double Finger Taps for Make/Miss", TypeConstant.TOGGLE, 1, R.drawable.ic_gesture_two_double_tap_white_48dp),
         AUTO("Auto Tracking", "Enable Auto Drill Tracking", TypeConstant.TOGGLE, 1, R.drawable.ic_flash_auto_white_24dp),
         MINUS("Minus", "Enable Minus Icon For Miss", TypeConstant.TOGGLE, 0, R.drawable.ic_remove_white_24dp),
         CLEAR("Clear", "Enable Clear Current Performance", TypeConstant.TOGGLE, 1, R.drawable.ic_refresh_white_24dp),

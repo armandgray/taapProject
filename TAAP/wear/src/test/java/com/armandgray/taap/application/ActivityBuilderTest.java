@@ -2,6 +2,8 @@ package com.armandgray.taap.application;
 
 import com.armandgray.taap.activity.ActiveDrillActivity;
 import com.armandgray.taap.activity.CourtActivity;
+import com.armandgray.taap.activity.LocationActivity;
+import com.armandgray.taap.permission.PermissionRationaleDialog;
 import com.armandgray.taap.ui.DrillPickerDialog;
 import com.armandgray.taap.activity.LogsActivity;
 import com.armandgray.taap.ui.PreferenceSeekBarDialog;
@@ -31,6 +33,11 @@ public class ActivityBuilderTest {
             }
 
             @Override
+            LocationActivity bindLocationActivity() {
+                return null;
+            }
+
+            @Override
             DrillPickerDialog bindDrillPickerActivity() {
                 return null;
             }
@@ -42,6 +49,11 @@ public class ActivityBuilderTest {
 
             @Override
             PreferenceToggleDialog bindPreferenceToggleDialog() {
+                return null;
+            }
+
+            @Override
+            PermissionRationaleDialog bindPermissionRationaleDialog() {
                 return null;
             }
 

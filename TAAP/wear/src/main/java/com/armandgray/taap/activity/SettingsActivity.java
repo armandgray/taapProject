@@ -7,7 +7,7 @@ import com.armandgray.shared.model.UXPreference;
 import com.armandgray.shared.ui.RecyclerItemClickListener;
 import com.armandgray.taap.R;
 import com.armandgray.taap.navigation.Destination;
-import com.armandgray.taap.navigation.WearNavigationActivity;
+import com.armandgray.taap.application.WearDelegateActivity;
 
 import javax.inject.Inject;
 
@@ -16,7 +16,7 @@ import androidx.wear.widget.WearableRecyclerView;
 import dagger.Module;
 import dagger.android.AndroidInjection;
 
-public class SettingsActivity extends WearNavigationActivity {
+public class SettingsActivity extends WearDelegateActivity {
 
     @Inject
     SettingsAdapter settingsAdapter;
@@ -73,6 +73,6 @@ public class SettingsActivity extends WearNavigationActivity {
 
     @Module
     public static class ActivityModule
-            extends WearNavigationActivity.NavigationModule<SettingsActivity> {
+            extends WearDelegateActivity.NavigationModule<SettingsActivity> {
     }
 }

@@ -2,6 +2,7 @@ package com.armandgray.taap.activity;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -22,6 +23,7 @@ public class CourtActivityTest {
 
     }
 
+    @Ignore
     @Test
     public void stub_test_testing() {
         // TODO Complete Testing

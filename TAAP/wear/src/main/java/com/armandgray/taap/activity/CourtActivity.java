@@ -3,13 +3,13 @@ package com.armandgray.taap.activity;
 import android.os.Bundle;
 
 import com.armandgray.taap.R;
-import com.armandgray.taap.navigation.WearNavigationActivity;
+import com.armandgray.taap.application.WearDelegateActivity;
 import com.otaliastudios.zoom.ZoomImageView;
 
 import dagger.Module;
 import dagger.android.AndroidInjection;
 
-public class CourtActivity extends WearNavigationActivity {
+public class CourtActivity extends WearDelegateActivity {
 
     private ZoomImageView zoomImageCourt;
 
@@ -51,6 +51,6 @@ public class CourtActivity extends WearNavigationActivity {
 
     @Module
     public static class ActivityModule
-            extends WearNavigationActivity.NavigationModule<CourtActivity> {
+            extends WearDelegateActivity.NavigationModule<CourtActivity> {
     }
 }

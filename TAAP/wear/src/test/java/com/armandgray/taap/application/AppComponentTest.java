@@ -3,7 +3,11 @@ package com.armandgray.taap.application;
 import android.app.Application;
 
 import com.armandgray.shared.db.DatabaseManager;
+import com.armandgray.shared.location.LocationManager;
+import com.armandgray.shared.permission.PermissionManager;
+import com.armandgray.shared.permission.PermissionViewModel;
 import com.armandgray.shared.viewModel.DrillViewModel;
+import com.armandgray.shared.viewModel.LocationViewModel;
 import com.armandgray.shared.viewModel.LogsViewModel;
 import com.armandgray.shared.viewModel.PerformanceViewModel;
 import com.armandgray.shared.viewModel.PreferencesViewModel;
@@ -51,6 +55,16 @@ public class AppComponentTest {
             }
 
             @Override
+            public LocationManager.Component.Builder locationBuilder() {
+                return null;
+            }
+
+            @Override
+            public PermissionManager.Component.Builder permissionBuilder() {
+                return null;
+            }
+
+            @Override
             public void inject(PerformanceViewModel viewModel) {
             }
 
@@ -64,6 +78,16 @@ public class AppComponentTest {
 
             @Override
             public void inject(PreferencesViewModel viewModel) {
+            }
+
+            @Override
+            public void inject(LocationViewModel viewModel) {
+
+            }
+
+            @Override
+            public void inject(PermissionViewModel viewModel) {
+
             }
         };
 

@@ -1,4 +1,4 @@
-package com.armandgray.taap.navigation;
+package com.armandgray.shared.permission;
 
 import org.junit.After;
 import org.junit.Before;
@@ -12,10 +12,10 @@ import static junit.framework.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = Config.NONE)
-public class WearNavigationActivityTest {
+public class PermissionActivityTest {
 
-    private ActivityController<WearNavigationActivity> activityController;
-    private WearNavigationActivity activity;
+    private ActivityController<PermissionActivity> activityController;
+    private PermissionActivity activity;
 
     @Before
     public void setUp() {

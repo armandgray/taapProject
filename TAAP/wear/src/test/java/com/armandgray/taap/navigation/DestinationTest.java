@@ -19,7 +19,7 @@ public class DestinationTest {
 
     @Test
     public void testDestination_Instances() {
-        Assert.assertThat(Destination.DESTINATIONS.size(), is(8));
+        Assert.assertThat(Destination.DESTINATIONS.size(), is(9));
         Assert.assertThat(Destination.DESTINATIONS, containsInAnyOrder(
                 Destination.DRILL_PICKER_DIALOG,
                 Destination.PREFERENCES_DIALOG,
@@ -28,7 +28,8 @@ public class DestinationTest {
                 Destination.ACTIVE_DRILL,
                 Destination.COURT,
                 Destination.LOGS,
-                Destination.SETTINGS));
+                Destination.SETTINGS,
+                Destination.LOCATION));
     }
 
     @Test
