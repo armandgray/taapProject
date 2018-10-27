@@ -10,6 +10,7 @@ import com.armandgray.shared.model.UXPreference;
 import com.armandgray.shared.navigation.NavigationActivity;
 import com.armandgray.shared.viewModel.PreferencesViewModel;
 import com.armandgray.taap.R;
+import com.armandgray.taap.application.WearDelegateDialog;
 
 import javax.inject.Inject;
 
@@ -20,7 +21,7 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.android.AndroidInjection;
 
-public class PreferenceToggleDialog extends NavigationActivity implements UIComponent {
+public class PreferenceToggleDialog extends WearDelegateDialog implements UIComponent {
 
     @Inject
     PreferencesViewModel preferencesViewModel;

@@ -2,20 +2,18 @@ package com.armandgray.shared.navigation;
 
 import android.content.Intent;
 
-import com.armandgray.shared.application.UIComponent;
 import com.armandgray.shared.helpers.StringHelper;
+import com.armandgray.shared.permission.PermissionActivity;
 
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import dagger.Module;
 import dagger.Provides;
 import io.reactivex.annotations.Nullable;
 
-public abstract class NavigationActivity extends AppCompatActivity
-        implements UIComponent, Navigator {
+public abstract class NavigationActivity extends PermissionActivity implements Navigator {
 
     protected final String TAG = StringHelper.toLogTag(getClass().getSimpleName());
 
@@ -24,6 +22,8 @@ public abstract class NavigationActivity extends AppCompatActivity
 
     @Override
     public void setupViewModel() {
+        super.setupViewModel();
+
         observeDestinationActivity();
     }
 
@@ -45,7 +45,8 @@ public abstract class NavigationActivity extends AppCompatActivity
     }
 
     @Module
-    public static abstract class NavigationModule<A extends NavigationActivity> {
+    public static abstract class NavigationModule<A extends NavigationActivity>
+            extends PermissionActivity.PermissionModule<A> {
 
         @SuppressWarnings("WeakerAccess")
         @Provides

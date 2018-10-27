@@ -1,12 +1,17 @@
-package com.armandgray.taap.navigation;
+package com.armandgray.taap.application;
 
+import android.content.Intent;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.armandgray.shared.navigation.NavigationActivity;
 import com.armandgray.shared.navigation.NavigationDrawerItem;
+import com.armandgray.shared.permission.DangerousPermission;
 import com.armandgray.shared.viewModel.PreferencesViewModel;
 import com.armandgray.taap.R;
+import com.armandgray.taap.navigation.Destination;
+import com.armandgray.taap.navigation.NavigationDrawerAdapter;
+import com.armandgray.taap.permission.PermissionRationaleDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +25,7 @@ import androidx.wear.widget.drawer.WearableNavigationDrawerView;
 import dagger.Module;
 import dagger.Provides;
 
-public abstract class WearNavigationActivity extends NavigationActivity implements
+public abstract class WearDelegateActivity extends NavigationActivity implements
         MenuItem.OnMenuItemClickListener,
         WearableNavigationDrawerView.OnItemSelectedListener {
 
@@ -42,7 +47,7 @@ public abstract class WearNavigationActivity extends NavigationActivity implemen
 
     @Override
     public void setupVisualElements() {
-        drawerAdapter.updateItems(WearNavigationActivity.Defaults.getDefaults(this));
+        drawerAdapter.updateItems(WearDelegateActivity.Defaults.getDefaults(this));
         wearableNavigationDrawer.setAdapter(drawerAdapter);
         wearableNavigationDrawer.setCurrentItem(0, true);
         wearableNavigationDrawer.getController().peekDrawer();
@@ -63,24 +68,28 @@ public abstract class WearNavigationActivity extends NavigationActivity implemen
     }
 
     @Override
+    public void showRationale(DangerousPermission permission, boolean wasRevoked) {
+        Intent intent = new Intent(this, PermissionRationaleDialog.class);
+        intent.putExtra(PERMISSION_KEY, permission);
+        intent.putExtra(REVOKED_KEY, wasRevoked);
+        startActivityForResult(intent, permission.getCode());
+    }
+
+    @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
         return false;
     }
 
     @Override
     public void onItemSelected(int position) {
-        Destination<?> destination = drawerAdapter.getItemDestination(position);
-        if (destination == Destination.SETTINGS) {
-
-        }
-
-        navigationViewModel.onNavigate(destination);
+        navigationViewModel.onNavigate(drawerAdapter.getItemDestination(position));
     }
 
     @Module
-    public static abstract class NavigationModule<A extends WearNavigationActivity>
+    public static abstract class NavigationModule<A extends WearDelegateActivity>
             extends NavigationActivity.NavigationModule<A> {
 
+        @SuppressWarnings("WeakerAccess")
         @Provides
         @NonNull
         protected PreferencesViewModel providePreferencesViewModel(A activity) {
@@ -95,7 +104,7 @@ public abstract class WearNavigationActivity extends NavigationActivity implemen
         }
 
         static List<NavigationDrawerItem<Destination<?>>> getDefaults(
-                WearNavigationActivity activity) {
+                WearDelegateActivity activity) {
             List<NavigationDrawerItem<Destination<?>>> actions = new ArrayList<>();
             actions.add(new NavigationDrawerItem<>(Destination.COURT,
                     activity.getDrawable(R.drawable.ic_dribbble_white_48dp)));
@@ -105,20 +114,10 @@ public abstract class WearNavigationActivity extends NavigationActivity implemen
                     activity.getDrawable(R.drawable.ic_settings_white_24dp)));
             actions.add(new NavigationDrawerItem<>(Destination.ACTIVE_DRILL,
                     activity.getDrawable(R.drawable.ic_dumbbell_white_24dp)));
+            actions.add(new NavigationDrawerItem<>(Destination.LOCATION,
+                    activity.getDrawable(R.drawable.ic_location_white_24dp)));
 
-            moveCurrentToTop(actions, activity);
             return actions;
-        }
-
-        private static void moveCurrentToTop(List<NavigationDrawerItem<Destination<?>>> actions,
-                                             WearNavigationActivity activity) {
-            NavigationDrawerItem<?> genericItem = NavigationDrawerItem.getItem(
-                    Destination.getDestination(activity.getClass()));
-            if (genericItem != null) {
-                NavigationDrawerItem<Destination<?>> item = actions.get(actions.indexOf(genericItem));
-                actions.remove(item);
-                actions.add(0, item);
-            }
         }
     }
 }

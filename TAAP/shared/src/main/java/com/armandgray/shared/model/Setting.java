@@ -109,14 +109,14 @@ public class Setting implements Comparable<Setting> {
         }
 
         private Defaults() {
-            this.add(new Setting("Voice",
-                    R.drawable.ic_dribbble_white_48dp, UXPreference.Category.VOICE));
             this.add(new Setting("Workout",
                     R.drawable.ic_dumbbell_white_24dp, UXPreference.Category.WORKOUT));
-            this.add(new Setting("Data",
-                    R.drawable.ic_data_usage_white_24dp, UXPreference.Category.DATA));
+            this.add(new Setting("Voice",
+                    R.drawable.ic_dribbble_white_48dp, UXPreference.Category.VOICE));
             this.add(new Setting("Location",
                     R.drawable.ic_location_white_24dp, UXPreference.Category.LOCATION));
+            this.add(new Setting("Data",
+                    R.drawable.ic_data_usage_white_24dp, UXPreference.Category.DATA));
         }
 
         @NonNull

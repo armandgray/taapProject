@@ -10,6 +10,7 @@ import com.armandgray.shared.navigation.NavigationActivity;
 import com.armandgray.shared.ui.RecyclerItemClickListener;
 import com.armandgray.shared.viewModel.PreferencesViewModel;
 import com.armandgray.taap.R;
+import com.armandgray.taap.application.WearDelegateDialog;
 import com.armandgray.taap.navigation.Destination;
 
 import javax.inject.Inject;
@@ -23,7 +24,7 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.android.AndroidInjection;
 
-public class PreferencesDialog extends NavigationActivity implements UIComponent {
+public class PreferencesDialog extends WearDelegateDialog implements UIComponent {
 
     @Inject
     PreferencesViewModel preferencesViewModel;

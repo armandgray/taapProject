@@ -1,9 +1,6 @@
 package com.armandgray.taap.navigation;
 
 import android.graphics.drawable.Drawable;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.wear.widget.drawer.WearableNavigationDrawerView;
 
 import com.armandgray.shared.navigation.NavigationDrawerItem;
 
@@ -12,7 +9,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-class NavigationDrawerAdapter
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.wear.widget.drawer.WearableNavigationDrawerView;
+
+public class NavigationDrawerAdapter
         extends WearableNavigationDrawerView.WearableNavigationDrawerAdapter {
 
     private final List<NavigationDrawerItem<Destination<?>>> items = new ArrayList<>();
@@ -32,7 +33,7 @@ class NavigationDrawerAdapter
         return items.get(position).getDrawable();
     }
 
-    Destination<?> getItemDestination(int position) {
+    public Destination<?> getItemDestination(int position) {
         return items.get(position).getDestination();
     }
 
@@ -41,7 +42,7 @@ class NavigationDrawerAdapter
         return items.size();
     }
 
-    void updateItems(@NonNull List<NavigationDrawerItem<Destination<?>>> items) {
+    public void updateItems(@NonNull List<NavigationDrawerItem<Destination<?>>> items) {
         this.items.clear();
         this.items.addAll(items);
         notifyDataSetChanged();

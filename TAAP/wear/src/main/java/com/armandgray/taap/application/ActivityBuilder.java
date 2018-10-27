@@ -3,7 +3,9 @@ package com.armandgray.taap.application;
 import com.armandgray.taap.activity.ActiveDrillActivity;
 import com.armandgray.taap.activity.CourtActivity;
 import com.armandgray.taap.activity.LogsActivity;
+import com.armandgray.taap.activity.LocationActivity;
 import com.armandgray.taap.activity.SettingsActivity;
+import com.armandgray.taap.permission.PermissionRationaleDialog;
 import com.armandgray.taap.ui.DrillPickerDialog;
 import com.armandgray.taap.ui.PreferenceSeekBarDialog;
 import com.armandgray.taap.ui.PreferenceToggleDialog;
@@ -22,6 +24,10 @@ abstract class ActivityBuilder {
     @SuppressWarnings("unused")
     @ContributesAndroidInjector(modules = CourtActivity.ActivityModule.class)
     abstract CourtActivity bindCourtActivity();
+
+    @SuppressWarnings("unused")
+    @ContributesAndroidInjector(modules = LocationActivity.ActivityModule.class)
+    abstract LocationActivity bindLocationActivity();
 
     @SuppressWarnings("unused")
     @ContributesAndroidInjector(modules = SettingsActivity.ActivityModule.class)
@@ -46,4 +52,8 @@ abstract class ActivityBuilder {
     @SuppressWarnings("unused")
     @ContributesAndroidInjector(modules = PreferenceToggleDialog.ActivityModule.class)
     abstract PreferenceToggleDialog bindPreferenceToggleDialog();
+
+    @SuppressWarnings("unused")
+    @ContributesAndroidInjector(modules = PermissionRationaleDialog.ActivityModule.class)
+    abstract PermissionRationaleDialog bindPermissionRationaleDialog();
 }

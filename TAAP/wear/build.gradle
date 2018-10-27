@@ -38,10 +38,9 @@ dependencies {
 
     // Wear
     implementation "androidx.wear:wear:1.0.0"
-    implementation "androidx.legacy:legacy-support-v4:1.0.0"
-    implementation "com.google.android.gms:play-services-wearable:16.0.1"
-    implementation "com.google.android.support:wearable:${WEARABLE_VERSION}"
     implementation 'com.android.support:wear:28.0.0'
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+    implementation "com.google.android.support:wearable:${WEARABLE_VERSION}"
     compileOnly "com.google.android.wearable:wearable:${WEARABLE_VERSION}"
 
     // Support Library
@@ -53,6 +52,12 @@ dependencies {
     implementation "androidx.legacy:legacy-support-v4:${SUPPORT_VERSION}"
     implementation "com.google.android.material:material:${SUPPORT_VERSION}"
     implementation "androidx.constraintlayout:constraintlayout:2.0.0-alpha2"
+
+    // Google Play
+    implementation "com.google.android.gms:play-services-wearable:${GOOGLE_PLAY_VERSION}"
+    implementation "com.google.android.gms:play-services-places:${GOOGLE_PLAY_VERSION}"
+    implementation "com.google.android.gms:play-services-maps:${GOOGLE_PLAY_VERSION}"
+    implementation "com.google.android.gms:play-services-location:${GOOGLE_PLAY_VERSION}"
 
     // Api
     implementation "com.squareup.retrofit2:retrofit:${RETROFIT_VERSION}"

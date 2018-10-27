@@ -5,6 +5,10 @@ import android.content.Context;
 
 import com.armandgray.shared.db.DatabaseManager;
 import com.armandgray.shared.db.DatabaseManagerImpl;
+import com.armandgray.shared.location.LocationManager;
+import com.armandgray.shared.location.LocationManagerImpl;
+import com.armandgray.shared.permission.PermissionManager;
+import com.armandgray.shared.permission.PermissionManagerImpl;
 import com.armandgray.shared.rx.SchedulerProvider;
 import com.google.gson.Gson;
 
@@ -34,6 +38,24 @@ public abstract class TAAPAppModule {
     @NonNull
     protected SchedulerProvider provideSchedulerProvider() {
         return SchedulerProvider.DEFAULT;
+    }
+
+    @Provides
+    @Singleton
+    @NonNull
+    protected LocationManager provideLocationManager() {
+        LocationManager locationManager = new LocationManagerImpl();
+        locationManager.inject(TAAPApplication.getAppComponent());
+        return locationManager;
+    }
+
+    @Provides
+    @Singleton
+    @NonNull
+    protected PermissionManager providePermissionManager() {
+        PermissionManager permissionManager = new PermissionManagerImpl();
+        permissionManager.inject(TAAPApplication.getAppComponent());
+        return permissionManager;
     }
 
     /** Android APIs */

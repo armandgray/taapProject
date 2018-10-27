@@ -20,4 +20,20 @@ public class StringHelper {
 
         return builder.deleteCharAt(builder.length() - 1).toString();
     }
+
+    public static String toSpacedUpperCamel(String s) {
+        if (s == null || s.length() == 0) {
+            return s;
+        }
+
+        s = s.toLowerCase().replaceAll("_", " ");
+
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            builder.append(i == 0 || s.charAt(i - 1) == ' ' ? Character.toUpperCase(ch) : ch);
+        }
+
+        return builder.toString();
+    }
 }

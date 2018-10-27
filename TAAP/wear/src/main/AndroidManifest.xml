@@ -2,10 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.armandgray.taap">
 
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-
     <uses-feature android:name="android.hardware.type.watch"/>
+
+    <!-- Normal Permissions -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <application
         android:name=".application.WearApplication"
@@ -46,8 +46,7 @@
                     android:scheme="armandgray"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name="androidx.wear.activity.ConfirmationActivity"/>
+        <activity android:name="androidx.wear.activity.ConfirmationActivity"/>
         <activity
             android:name=".activity.CourtActivity"
             android:launchMode="singleTask"/>
@@ -69,6 +68,14 @@
         <activity
             android:name=".ui.PreferenceToggleDialog"
             android:launchMode="singleTask"/>
+        <activity
+            android:name=".activity.LocationActivity"
+            android:launchMode="singleTask">
+        </activity>
+        <activity
+            android:name=".permission.PermissionRationaleDialog"
+            android:label="@string/title_activity_permission_rationale_dialog">
+        </activity>
     </application>
 
 </manifest>

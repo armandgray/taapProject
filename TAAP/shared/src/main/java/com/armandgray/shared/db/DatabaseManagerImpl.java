@@ -1,15 +1,18 @@
 package com.armandgray.shared.db;
 
-import android.content.Context;
-
 import com.armandgray.shared.application.TAAPAppComponent;
 
 import javax.inject.Inject;
 
+import androidx.annotation.NonNull;
+
 public class DatabaseManagerImpl implements DatabaseManager {
 
     @Inject
-    Context context;
+    GlobalDatabase database;
+
+    @Inject
+    SharedPreferencesDao sharedPreferencesDao;
 
     @Inject
     DrillDao.DrillDaoWrapper drillDaoWrapper;
@@ -19,9 +22,6 @@ public class DatabaseManagerImpl implements DatabaseManager {
 
     @Inject
     SettingsDao.SettingsDaoWrapper settingsDaoWrapper;
-
-    @Inject
-    GlobalDatabase database;
 
     public DatabaseManagerImpl() {
     }
@@ -33,7 +33,13 @@ public class DatabaseManagerImpl implements DatabaseManager {
                 .managerModule(new ManagerModule())
                 .build();
 
+        DatabaseManager.State.setDatabaseComponent(component);
         component.inject(this);
+    }
+
+    @Override
+    public SharedPreferencesDao getSharedPreferencesDao() {
+        return sharedPreferencesDao;
     }
 
     @Override
@@ -49,5 +55,11 @@ public class DatabaseManagerImpl implements DatabaseManager {
     @Override
     public SettingsDao getSettingsDao() {
         return settingsDaoWrapper;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "@" + Integer.toHexString(hashCode());
     }
 }

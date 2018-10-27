@@ -11,7 +11,7 @@ import com.armandgray.shared.model.WorkoutInfo;
 import com.armandgray.shared.ui.WorkoutAdapter;
 import com.armandgray.shared.viewModel.LogsViewModel;
 import com.armandgray.taap.R;
-import com.armandgray.taap.navigation.WearNavigationActivity;
+import com.armandgray.taap.application.WearDelegateActivity;
 
 import java.util.List;
 import java.util.Locale;
@@ -27,7 +27,7 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.android.AndroidInjection;
 
-public class LogsActivity extends WearNavigationActivity {
+public class LogsActivity extends WearDelegateActivity {
 
     @Inject
     LogsViewModel logsViewModel;
@@ -141,7 +141,7 @@ public class LogsActivity extends WearNavigationActivity {
 
     @Module
     public static class ActivityModule
-            extends WearNavigationActivity.NavigationModule<LogsActivity> {
+            extends WearDelegateActivity.NavigationModule<LogsActivity> {
 
         @Provides
         @NonNull
