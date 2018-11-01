@@ -23,6 +23,8 @@ public interface PermissionManager
 
     String TAG = StringHelper.toLogTag(PermissionManager.class.getSimpleName());
 
+    boolean hasPermission(DangerousPermission permission);
+
     Observable<Boolean> usePermission(DangerousPermission permission);
 
     Observable<DangerousPermission> getPermissionRequestObservable();

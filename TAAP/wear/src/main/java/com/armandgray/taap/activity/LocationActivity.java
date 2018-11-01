@@ -1,5 +1,6 @@
 package com.armandgray.taap.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,8 +16,11 @@ import com.armandgray.taap.application.WearDelegateActivity;
 import com.google.android.gms.location.places.GeoDataClient;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlaceDetectionClient;
+import com.google.android.gms.location.places.PlaceLikelihood;
+import com.google.android.gms.location.places.PlaceLikelihoodBufferResponse;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.tasks.Task;
 
 import javax.inject.Inject;
 
@@ -39,6 +43,7 @@ public class LocationActivity extends WearDelegateActivity {
     private TextView textAvailability;
     private ProgressBar progressBar;
 
+    @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Dagger Injection
@@ -48,15 +53,6 @@ public class LocationActivity extends WearDelegateActivity {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_location);
         super.onSetupContent();
-
-//        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-//
-//        try {
-//            startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
-//        } catch (GooglePlayServicesRepairableException
-//                | GooglePlayServicesNotAvailableException e) {
-//            e.printStackTrace();
-//        }
     }
 
     @Override
@@ -89,7 +85,24 @@ public class LocationActivity extends WearDelegateActivity {
 
     private void onAvailabilityChange(LocationManager.Availability availability) {
         progressBar.setVisibility(View.INVISIBLE);
-        textAvailability.setText(StringHelper.toSpacedUpperCamel(availability.toString()));
+        if (availability != LocationManager.Availability.SUCCESS) {
+            textAvailability.setText(StringHelper.toSpacedUpperCamel(availability.toString()));
+            return;
+
+        }
+
+        @SuppressLint("MissingPermission")
+        Task<PlaceLikelihoodBufferResponse> places = placeDetectionClient.getCurrentPlace(null);
+        places.addOnCompleteListener(task -> {
+            PlaceLikelihoodBufferResponse likelyPlaces = task.getResult();
+            System.out.println(likelyPlaces);
+            for (PlaceLikelihood placeLikelihood : likelyPlaces) {
+                System.out.println(String.format("Place '%s' has likelihood: %g",
+                        placeLikelihood.getPlace().getName(),
+                        placeLikelihood.getLikelihood()));
+            }
+            likelyPlaces.release();
+        });
     }
 
     @Override

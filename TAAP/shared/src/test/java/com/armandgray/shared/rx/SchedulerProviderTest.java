@@ -7,7 +7,6 @@ import io.reactivex.Scheduler;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.*;
 
 public class SchedulerProviderTest {
 
@@ -41,6 +40,11 @@ public class SchedulerProviderTest {
 
             @Override
             public Scheduler single() {
+                return null;
+            }
+
+            @Override
+            public Scheduler looper() {
                 return null;
             }
         };

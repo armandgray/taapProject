@@ -49,7 +49,7 @@ public class DrillDetailViewsTest {
 //                R.drawable.ic_fitness_center_white_24dp,
 //                Drill.SHOOTING_ARRAY));
 //        activityController = Robolectric.buildActivity(DrillDetailActivity.class).newIntent(intent);
-//        activity = activityController.create().visible().get();
+//        activity = activityController.createBehavior().visible().get();
 //        toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
 //        views = activity.controller.views;
     }

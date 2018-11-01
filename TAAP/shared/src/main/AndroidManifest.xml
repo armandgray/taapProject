@@ -7,7 +7,7 @@
         android:name="android.hardware.location"
         android:required="false"/>
 
-    <!-- TODO Implement Voice -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-feature
         android:name="android.hardware.microphone"
         android:required="false"/>
@@ -15,6 +15,15 @@
     <!-- TODO Implement Sharing -->
     <uses-feature
         android:name="android.hardware.wifi"
+        android:required="false"/>
+
+    <!-- Sensors -->
+    <uses-feature
+        android:name="android.hardware.sensor.accelerometer"
+        android:required="false"/>
+
+    <uses-feature
+        android:name="android.hardware.sensor.linear_acceleration"
         android:required="false"/>
 
     <!-- Normal Permissions -->

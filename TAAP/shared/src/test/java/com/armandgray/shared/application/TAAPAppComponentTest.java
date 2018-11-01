@@ -4,11 +4,13 @@ import com.armandgray.shared.db.DatabaseManager;
 import com.armandgray.shared.location.LocationManager;
 import com.armandgray.shared.permission.PermissionManager;
 import com.armandgray.shared.permission.PermissionViewModel;
+import com.armandgray.shared.sensors.GeneralSensorManager;
 import com.armandgray.shared.viewModel.DrillViewModel;
 import com.armandgray.shared.viewModel.LocationViewModel;
 import com.armandgray.shared.viewModel.LogsViewModel;
 import com.armandgray.shared.viewModel.PerformanceViewModel;
 import com.armandgray.shared.viewModel.PreferencesViewModel;
+import com.armandgray.shared.voice.VoiceManager;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -34,6 +36,16 @@ public class TAAPAppComponentTest {
 
             @Override
             public PermissionManager.Component.Builder permissionBuilder() {
+                return null;
+            }
+
+            @Override
+            public GeneralSensorManager.Component.Builder sensorBuilder() {
+                return null;
+            }
+
+            @Override
+            public VoiceManager.Component.Builder voiceBuilder() {
                 return null;
             }
 

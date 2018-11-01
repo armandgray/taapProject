@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.lang.annotation.Annotation;
 
+import androidx.annotation.Nullable;
 import io.reactivex.Observable;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -17,6 +18,11 @@ public class PermissionManagerTest {
     @Test
     public void testPermissionManager() {
         PermissionManager testManager = new PermissionManager() {
+            @Override
+            public boolean hasPermission(DangerousPermission permission) {
+                return false;
+            }
+
             @Override
             public Observable<Boolean> usePermission(DangerousPermission permission) {
                 return null;
@@ -54,6 +60,34 @@ public class PermissionManagerTest {
     @Test
     public void testPermissionManager_DefinesInterfaceTag() {
         Assert.assertThat(PermissionManager.TAG, is(notNullValue()));
+    }
+
+    /**
+     * Inner Class - PermissionResolver
+     */
+
+    @Test
+    public void testPermissionResolver() {
+        PermissionManager.PermissionResolver testResolver =
+                new PermissionManager.PermissionResolver() {
+                    @Override
+                    public void onRequestPermission(DangerousPermission permission) {
+
+                    }
+
+                    @Override
+                    public void onRequestPermissionWithRationale(
+                            @Nullable DangerousPermission permission) {
+
+                    }
+
+                    @Override
+                    public void showRationale(DangerousPermission permission, boolean wasRevoked) {
+
+                    }
+                };
+
+        Assert.assertThat(testResolver, is(notNullValue()));
     }
 
     /**

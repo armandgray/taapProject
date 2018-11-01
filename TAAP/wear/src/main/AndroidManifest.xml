@@ -57,25 +57,23 @@
             android:name=".activity.SettingsActivity"
             android:launchMode="singleTask"/>
         <activity
-            android:name=".ui.DrillPickerDialog"
+            android:name=".activity.LocationActivity"
             android:launchMode="singleTask"/>
+        <activity
+            android:name=".ui.DrillPickerDialog"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".ui.PreferencesDialog"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTop"/>
         <activity
             android:name=".ui.PreferenceSeekBarDialog"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTop"/>
         <activity
             android:name=".ui.PreferenceToggleDialog"
-            android:launchMode="singleTask"/>
-        <activity
-            android:name=".activity.LocationActivity"
-            android:launchMode="singleTask">
-        </activity>
+            android:launchMode="singleTop"/>
         <activity
             android:name=".permission.PermissionRationaleDialog"
-            android:label="@string/title_activity_permission_rationale_dialog">
-        </activity>
+            android:launchMode="singleTop"/>
     </application>
 
 </manifest>

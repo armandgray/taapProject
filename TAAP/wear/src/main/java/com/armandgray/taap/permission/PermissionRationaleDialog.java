@@ -1,5 +1,6 @@
 package com.armandgray.taap.permission;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,6 +22,10 @@ import dagger.android.AndroidInjection;
 
 public class PermissionRationaleDialog extends AppCompatActivity implements UIComponent {
 
+    // TODO Remove hack for single instance
+    @SuppressLint("StaticFieldLeak")
+    private static PermissionRationaleDialog instance;
+
     private DangerousPermission permission;
     private boolean wasRevoked = true;
 
@@ -33,11 +38,20 @@ public class PermissionRationaleDialog extends AppCompatActivity implements UICo
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (instance != null) {
+            instance.onNewIntent(getIntent());
+            finish();
+            return;
+        }
+
+        instance = this;
+
         // Dagger Injection
         AndroidInjection.inject(this);
 
         // Super
-        super.onCreate(savedInstanceState);
         super.setContentView(R.layout.dialog_permission_rationale);
         onSetupContent();
     }
@@ -49,6 +63,19 @@ public class PermissionRationaleDialog extends AppCompatActivity implements UICo
         if (isResponseDeferred) {
             finish();
         }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        instance = null;
     }
 
     @Override
@@ -93,7 +120,12 @@ public class PermissionRationaleDialog extends AppCompatActivity implements UICo
         intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         Uri uri = Uri.fromParts("package", getPackageName(), null);
         intent.setData(uri);
-        startActivity(intent);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        } else {
+            finish();
+        }
     }
 
     @Override

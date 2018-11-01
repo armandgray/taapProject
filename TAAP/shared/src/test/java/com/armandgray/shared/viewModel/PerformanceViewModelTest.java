@@ -61,7 +61,7 @@ public class PerformanceViewModelTest {
         PowerMockito.when(TAAPApplication.getAppComponent()).thenReturn(mockComponent);
 
         testViewModel = new PerformanceViewModel();
-        testViewModel.repository = mockRepository;
+        testViewModel.drillRepository = mockRepository;
 
         Mockito.when(mockRepository.getActiveDrillObservable())
                 .thenReturn(mockActiveDrillObservable);

@@ -64,7 +64,7 @@ public class DrillDetailControllerTest {
 //        Intent intent = new Intent(RuntimeEnvironment.application, DrillDetailActivity.class);
 //        intent.putExtra(SELECTED_DRILL, TEST_SESSION_LOG.getDrillCategory());
 //        activityController = Robolectric.buildActivity(DrillDetailActivity.class).newIntent(intent);
-//        activity = activityController.create().start().resume().visible().get();
+//        activity = activityController.createBehavior().start().resume().visible().get();
 //        controller = activity.controller;
     }
 

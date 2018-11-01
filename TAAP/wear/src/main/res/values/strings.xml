@@ -24,4 +24,11 @@
     <string name="title_activity_preference_toggle_dialog">PreferenceToggleDialog</string>
     <string name="title_activity_places">PlacesActivity</string>
     <string name="title_activity_permission_rationale_dialog">PermissionRationaleDialog</string>
+    <string name="missing_hardware">Missing Hardware</string>
+    <string name="shot">Shot</string>
+    <string name="clap">Clap</string>
+    <string name="double_clap">Double Clap</string>
+    <string name="speech">Speech</string>
+    <string name="permission">Permission</string>
+    <string name="timeout">Timeout</string>
 </resources>

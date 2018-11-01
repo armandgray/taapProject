@@ -10,13 +10,11 @@ import com.armandgray.shared.rx.SchedulerProvider;
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 import io.reactivex.Observable;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.subjects.PublishSubject;
 
 public class PermissionManagerImpl implements PermissionManager {
-
-    private static final int RATIONALE_TIMEOUT = 10000;
 
     @Inject
     Context context;
@@ -27,14 +25,18 @@ public class PermissionManagerImpl implements PermissionManager {
     @Inject
     DatabaseManager databaseManager;
 
-    CompositeDisposable disposables = new CompositeDisposable();
+    @VisibleForTesting
+    final PublishSubject<Boolean> rationaleResultSubject;
 
-    private final PublishSubject<DangerousPermission> rationaleRequestSubject = PublishSubject.create();
-    private final PublishSubject<Boolean> rationaleResultSubject = PublishSubject.create();
-    private final PublishSubject<DangerousPermission> permissionRequestSubject = PublishSubject.create();
-    private final PublishSubject<DangerousPermission> permissionResultSubject = PublishSubject.create();
+    private final PublishSubject<DangerousPermission> rationaleRequestSubject;
+    private final PublishSubject<DangerousPermission> permissionRequestSubject;
+    private final PublishSubject<DangerousPermission> permissionResultSubject;
 
     public PermissionManagerImpl() {
+        rationaleRequestSubject = PublishSubject.create();
+        rationaleResultSubject = PublishSubject.create();
+        permissionRequestSubject = PublishSubject.create();
+        permissionResultSubject = PublishSubject.create();
     }
 
     @Override
@@ -45,6 +47,12 @@ public class PermissionManagerImpl implements PermissionManager {
                 .build();
 
         component.inject(this);
+    }
+
+    @Override
+    public boolean hasPermission(DangerousPermission permission) {
+        String key = permission.getKey();
+        return context.checkSelfPermission(key) == PackageManager.PERMISSION_GRANTED;
     }
 
     @Override
@@ -81,12 +89,7 @@ public class PermissionManagerImpl implements PermissionManager {
         }
 
         showPermissionRationaleDialog(permission);
-        return rationaleResponseToRequestObservable(permission);
-    }
-
-    private boolean hasPermission(DangerousPermission permission) {
-        String key = permission.getKey();
-        return context.checkSelfPermission(key) == PackageManager.PERMISSION_GRANTED;
+        return rationaleResultToRequestObservable(permission);
     }
 
     private boolean hasRequestedPermission(DangerousPermission permission) {
@@ -97,7 +100,7 @@ public class PermissionManagerImpl implements PermissionManager {
         rationaleRequestSubject.onNext(permission);
     }
 
-    private Observable<Boolean> rationaleResponseToRequestObservable(DangerousPermission permission) {
+    private Observable<Boolean> rationaleResultToRequestObservable(DangerousPermission permission) {
         return rationaleResultSubject.concatMap(userAllowed -> {
             boolean hasPermission = hasPermission(permission);
             if (hasPermission || !userAllowed) {
@@ -117,8 +120,7 @@ public class PermissionManagerImpl implements PermissionManager {
         return permissionResultSubject
                 .filter(result -> result == permission)
                 .map(this::hasPermission)
-                .subscribeOn(schedulers.io())
-                .observeOn(schedulers.ui());
+                .compose(schedulers.asyncTask());
     }
 
     @NonNull

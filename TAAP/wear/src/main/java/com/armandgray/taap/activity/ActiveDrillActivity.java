@@ -3,21 +3,27 @@ package com.armandgray.taap.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.armandgray.shared.model.Drill;
 import com.armandgray.shared.model.Performance;
 import com.armandgray.shared.model.UXPreference;
+import com.armandgray.shared.sensors.LinearAccelerationAction;
 import com.armandgray.shared.util.VibrateUtil;
 import com.armandgray.shared.viewModel.DrillViewModel;
 import com.armandgray.shared.viewModel.PerformanceViewModel;
+import com.armandgray.shared.voice.VoiceEvent;
 import com.armandgray.taap.R;
-import com.armandgray.taap.navigation.Destination;
 import com.armandgray.taap.application.WearDelegateActivity;
+import com.armandgray.taap.navigation.Destination;
 import com.armandgray.taap.ui.MultiInputClickListener;
 
 import java.util.Locale;
@@ -35,6 +41,7 @@ import dagger.android.AndroidInjection;
 
 public class ActiveDrillActivity extends WearDelegateActivity {
 
+    public static final int RESET_DISPLAY_DELAY = 1000;
     @Inject
     PerformanceViewModel performanceViewModel;
 
@@ -50,6 +57,8 @@ public class ActiveDrillActivity extends WearDelegateActivity {
     private TextView textRate;
     private ImageButton buttonPlus;
     private ImageButton buttonClear;
+    private ImageView imageBackgroundFeature;
+    private TextView textBackgroundFeature;
     private View loadingMask;
     private ProgressBar progressBar;
 
@@ -68,6 +77,20 @@ public class ActiveDrillActivity extends WearDelegateActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        performanceViewModel.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        performanceViewModel.onPause();
+    }
+
+    @Override
     public void assignGlobalFields() {
         super.assignGlobalFields();
 
@@ -77,6 +100,8 @@ public class ActiveDrillActivity extends WearDelegateActivity {
         textRate = findViewById(R.id.text_rate);
         buttonPlus = findViewById(R.id.button_plus);
         buttonClear = findViewById(R.id.button_clear);
+        imageBackgroundFeature = findViewById(R.id.image_background_feature);
+        textBackgroundFeature = findViewById(R.id.text_background_feature);
         loadingMask = findViewById(R.id.loading_mask);
         progressBar = findViewById(R.id.progress_bar);
     }
@@ -132,7 +157,10 @@ public class ActiveDrillActivity extends WearDelegateActivity {
         performanceViewModel.getActiveDrill().observe(this, this::onDrillChanged);
         performanceViewModel.getPerformance().observe(this, this::onPerformanceChange);
         performanceViewModel.getCompletionObserver().observe(this, this::onSetCompletion);
-        performanceViewModel.getPreferenceObserver().observe(this, this::onPreferenceChange);
+        performanceViewModel.getFeatureStatus().observe(this, this::onFeatureStatusChanged);
+
+        performanceViewModel.getAutoTrackingEvent().observe(this, this::onAutoTrackingEvent);
+        performanceViewModel.getVoiceEvent().observe(this, this::onVoiceEvent);
     }
 
     private void onDrillChanged(@Nullable Drill drill) {
@@ -173,19 +201,143 @@ public class ActiveDrillActivity extends WearDelegateActivity {
         startActivity(intent);
     }
 
-    private void onPreferenceChange(UXPreference preference) {
-        if (preference.getCategory() != UXPreference.Category.WORKOUT) {
-            return;
+    private void onFeatureStatusChanged(PerformanceViewModel.FeatureStatus featureStatus) {
+        Log.d(TAG, "onFeatureStatusChanged: " + featureStatus);
+        buttonClear.setVisibility(featureStatus.isClearEnabled() ? View.VISIBLE : View.GONE);
+        buttonMinus.setVisibility(featureStatus.isIconsEnabled() ? View.VISIBLE : View.GONE);
+        buttonPlus.setVisibility(featureStatus.isIconsEnabled() ? View.VISIBLE : View.GONE);
+        enableScreenTaps = featureStatus.isScreenTapsEnabled();
+        vibrationLength = featureStatus.getVibrationLength();
+
+        if (featureStatus.isVoice()) {
+            if (featureStatus.isVoiceEnabled()) {
+                // Attempt Voice Registration (Should do nothing if disabled)
+                performanceViewModel.registerVoiceRecognition(false);
+            } else {
+                onVoiceEvent(VoiceEvent.INACTIVE);
+                performanceViewModel.unregisterVoiceRecognition();
+            }
+        }
+    }
+
+    private void onAutoTrackingEvent(@Nullable LinearAccelerationAction gesture) {
+        switch (gesture != null ? gesture : LinearAccelerationAction.NONE) {
+            case ACTIVE:
+                onAutoTrackingActive();
+                return;
+
+            case INACTIVE:
+                onAutoTrackingInactive();
+                return;
+
+            case MISSING_HARDWARE:
+                onAutoTrackingMissingHardware();
+                return;
+
+            case HORIZONTAL_FLING_AWAY:
+                onAutoTrackingHorizontalFlingAway();
+                return;
+
+            default:
+                Log.d(TAG, "onAutoTrackingEvent: Unhandled Gesture: " + gesture);
+        }
+    }
+
+    private void onAutoTrackingActive() {
+        imageBackgroundFeature.setImageResource(UXPreference.Item.AUTO.getImageResId());
+    }
+
+    private void onAutoTrackingInactive() {
+        imageBackgroundFeature.setImageResource(android.R.color.transparent);
+    }
+
+    private void onAutoTrackingMissingHardware() {
+        textBackgroundFeature.setText(getString(R.string.missing_hardware));
+    }
+
+    private void onAutoTrackingHorizontalFlingAway() {
+        textBackgroundFeature.setText(getString(R.string.shot));
+        imageBackgroundFeature.setImageResource(R.drawable.ic_settings_voice_white_24dp);
+        performanceViewModel.registerVoiceRecognition(true);
+    }
+
+    private void onVoiceEvent(@Nullable VoiceEvent voiceEvent) {
+        switch (voiceEvent != null ? voiceEvent : VoiceEvent.NONE) {
+            case ACTIVE:
+                onVoiceEventActive();
+                return;
+
+            case MISSING_PERMISSION:
+                onVoiceEventMissingPermission();
+                return;
+
+            // Break
+            case TIMEOUT:
+                onVoiceEventTimeout();
+                break;
+
+            case INACTIVE:
+                onVoiceEventInactive();
+                break;
+
+            case CLAP:
+                onVoiceEventClap();
+                break;
+
+            case DOUBLE_CLAP:
+                onVoiceEventDoubleClap();
+                break;
+
+            case SPEECH:
+                onVoiceEventSpeech();
+                break;
+
+            default:
+                Log.d(TAG, "onVoiceEvent: Unhandled VoiceEvent: " + voiceEvent);
         }
 
-        boolean clearEnabled = preference.isEnabled(UXPreference.Item.CLEAR);
-        buttonClear.setVisibility(clearEnabled ? View.VISIBLE : View.GONE);
+        // Attempt Voice Registration (Should do nothing if disabled)
+        performanceViewModel.registerVoiceRecognition(false);
+    }
 
-        boolean minusEnabled = preference.isEnabled(UXPreference.Item.MINUS);
-        buttonMinus.setVisibility(minusEnabled ? View.VISIBLE : View.GONE);
+    private void onVoiceEventMissingPermission() {
+        imageBackgroundFeature.setImageResource(R.drawable.ic_settings_voice_white_24dp);
+        textBackgroundFeature.setText(getString(R.string.permission));
+    }
 
-        enableScreenTaps = preference.isEnabled(UXPreference.Item.SCREEN_TAPS);
-        vibrationLength = preference.getValue(UXPreference.Item.VIBRATE, true);
+    private void onVoiceEventTimeout() {
+        textBackgroundFeature.setText(getString(R.string.timeout));
+    }
+
+    private void onVoiceEventActive() {
+        imageBackgroundFeature.setImageResource(R.drawable.ic_settings_voice_white_24dp);
+        textBackgroundFeature.setText("");
+    }
+
+    private void onVoiceEventInactive() {
+        imageBackgroundFeature.setImageResource(android.R.color.transparent);
+    }
+
+    private void onVoiceEventClap() {
+        textBackgroundFeature.setText(getString(R.string.clap));
+        performanceViewModel.onSingleClap();
+        resetDisplayWithDelay();
+    }
+
+    private void onVoiceEventDoubleClap() {
+        textBackgroundFeature.setText(getString(R.string.double_clap));
+        performanceViewModel.onDoubleClap();
+        resetDisplayWithDelay();
+    }
+
+    private void onVoiceEventSpeech() {
+        textBackgroundFeature.setText(getString(R.string.speech));
+        resetDisplayWithDelay();
+    }
+
+    private void resetDisplayWithDelay() {
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(() -> textBackgroundFeature.setText(""), RESET_DISPLAY_DELAY);
     }
 
     @Override

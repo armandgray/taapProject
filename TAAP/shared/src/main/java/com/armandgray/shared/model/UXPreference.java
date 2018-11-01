@@ -3,6 +3,7 @@ package com.armandgray.shared.model;
 import android.annotation.SuppressLint;
 
 import com.armandgray.shared.R;
+import com.armandgray.shared.permission.DangerousPermission;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -130,10 +131,10 @@ public class UXPreference {
     public enum Category {
 
         // Settings
-        VOICE(Item.CALL_OUT, Item.CLAP, Item.PERMISSION),
+        VOICE(DangerousPermission.MICROPHONE, Item.CALL_OUT, Item.CLAP, Item.VOICE_TIMEOUT, Item.RESET),
         DATA(Item.RESET),
-        LOCATION(Item.GYM_LOCATION, Item.COURT_LOCATION, Item.PERMISSION),
-        WORKOUT(Item.AUTO, Item.TIMEOUT, Item.MINUS, Item.SCREEN_TAPS, Item.CLEAR, Item.VIBRATE,
+        LOCATION(DangerousPermission.LOCATION, Item.GYM_LOCATION, Item.COURT_LOCATION, Item.RESET),
+        WORKOUT(Item.AUTO, Item.TIMEOUT, Item.ICONS, Item.SCREEN_TAPS, Item.CLEAR, Item.VIBRATE,
                 Item.BREAK_LIMIT, Item.RESET),
 
         // Drill
@@ -145,17 +146,34 @@ public class UXPreference {
 
         private final boolean isDrill;
 
+        @NonNull
+        private final DangerousPermission permission;
+
         Category(Item... items) {
-            this(false, items);
+            this(DangerousPermission.NONE, false, items);
+        }
+
+        Category(DangerousPermission permission, Item... items) {
+            this(permission, false, items);
         }
 
         Category(boolean isDrill, Item... items) {
-            this.isDrill = isDrill;
+            this(DangerousPermission.NONE, isDrill, items);
+        }
+
+        Category(DangerousPermission permission, boolean isDrill, Item... items) {
             this.items = Arrays.asList(items);
+            this.isDrill = isDrill;
+            this.permission = permission;
         }
 
         public boolean isDrillCategory() {
             return this.isDrill;
+        }
+
+        @NonNull
+        public DangerousPermission getPermission() {
+            return permission;
         }
 
         @NonNull
@@ -168,21 +186,22 @@ public class UXPreference {
     public enum Item {
 
         // Location
-        GYM_LOCATION("Gym", "Enable Gym Location Updates for Logging Purposes", TypeConstant.TOGGLE, 0, R.drawable.ic_location_white_24dp),
-        COURT_LOCATION("Court", "Enable Auto Court Location Updates for Drills", TypeConstant.TOGGLE, 0, R.drawable.ic_gps_fixed_white_24dp),
+        GYM_LOCATION("Gym", "Enable Gym Location Updates for Logging Purposes", TypeConstant.TOGGLE, 0, R.drawable.ic_location_white_24dp, "Feature May Impact Battery"),
+        COURT_LOCATION("Court", "Enable Auto Court Location Updates for Drills", TypeConstant.TOGGLE, 0, R.drawable.ic_gps_fixed_white_24dp, "Feature May Impact Battery"),
 
         // Voice
-        CLAP("Clap", "Enable Double/Single Clap for Make/Miss", TypeConstant.TOGGLE, 1, R.drawable.ic_thumbs_up_down_white_24dp),
-        CALL_OUT("Call Out", "Enable Calling Out Make/Miss", TypeConstant.TOGGLE, 1, R.drawable.ic_settings_voice_white_24dp),
+        CLAP("Clap", "Enable Double/Single Clap for Make/Miss", TypeConstant.TOGGLE, 1, R.drawable.ic_thumbs_up_down_white_24dp, "Performs Best With AutoTracking"),
+        CALL_OUT("Call Out", "Enable Calling Out Make/Miss", TypeConstant.TOGGLE, 1, R.drawable.ic_settings_voice_white_24dp, "Performs Best With AutoTracking"),
+        VOICE_TIMEOUT("Timeout", "Set Timeout For Voice Recognition", TypeConstant.NUMBER_RANGE, R.drawable.ic_clock_white_24dp, 5, 1, 30, Scale.SECONDS_SCALE), // in secs
 
         // Workout
         BREAK_LIMIT("Break Limit", "Set Break Limit For New Workouts", TypeConstant.NUMBER_RANGE, R.drawable.ic_control_point_duplicate_white_24dp, 30, 15, 60, Scale.MINUTES_SCALE), // in mins
         TIMEOUT("Timeout", "Set Timeout For Single Set", TypeConstant.NUMBER_RANGE, R.drawable.ic_clock_white_24dp, 30, 10, 60, Scale.SECONDS_SCALE), // in secs
         VIBRATE("Vibrate", "Set Vibration Length On Set Completions", TypeConstant.NUMBER_RANGE, R.drawable.ic_vibration_white_24dp, 5, 0, 30, Scale.TENTHS_OF_SECONDS_SCALE), // in tenths_secs
-        SCREEN_TAPS("Taps", "Enable Single/Double Finger Taps for Make/Miss", TypeConstant.TOGGLE, 1, R.drawable.ic_gesture_two_double_tap_white_48dp),
-        AUTO("Auto Tracking", "Enable Auto Drill Tracking", TypeConstant.TOGGLE, 1, R.drawable.ic_flash_auto_white_24dp),
-        MINUS("Minus", "Enable Minus Icon For Miss", TypeConstant.TOGGLE, 0, R.drawable.ic_remove_white_24dp),
-        CLEAR("Clear", "Enable Clear Current Performance", TypeConstant.TOGGLE, 1, R.drawable.ic_refresh_white_24dp),
+        SCREEN_TAPS("Taps", "Enable Single/Double Finger Taps for Make/Miss", TypeConstant.TOGGLE, 1, R.drawable.ic_gesture_two_double_tap_white_48dp, ""),
+        AUTO("Auto Tracking", "Enable Auto Drill Tracking", TypeConstant.TOGGLE, 1, R.drawable.ic_flash_auto_white_24dp, "Feature May Impact Battery"),
+        ICONS("Icons", "Enable Plus/Minus Icon For Make/Miss", TypeConstant.TOGGLE, 0, R.drawable.ic_remove_white_24dp, ""),
+        CLEAR("Clear", "Enable Clear Current Performance", TypeConstant.TOGGLE, 1, R.drawable.ic_refresh_white_24dp, ""),
 
         // Drill
         REPS("Reps", "Set Target Reps For Completion", TypeConstant.NUMBER_RANGE, R.drawable.ic_human_handsup_white_48dp, 10, 1, 50, Scale.INT_SCALE), // in int
@@ -190,9 +209,8 @@ public class UXPreference {
         TIME("Time", "Set Target Time For Completion", TypeConstant.NUMBER_RANGE, R.drawable.ic_timer_white_24dp, 60, 0, 600, Scale.INT_SCALE), // in seconds
 
         // Misc
-        PERMISSION("Permission", "Provide App Permissions", R.drawable.ic_assignment_white_24dp),
         RESET("Reset", "Reset To Default Settings", R.drawable.ic_delete_sweep_white_24dp),
-        TEST("Test", "test", TypeConstant.NONE, 0, R.drawable.ic_delete_sweep_white_24dp);
+        TEST("Test", "test", TypeConstant.NONE, 0, R.drawable.ic_delete_sweep_white_24dp, "");
 
         @NonNull
         private final String text;
@@ -200,6 +218,7 @@ public class UXPreference {
         @NonNull
         private final String description;
 
+        @NonNull
         private final TypeConstant typeConstant;
 
         private final int imageResId;
@@ -210,19 +229,29 @@ public class UXPreference {
 
         private final int maxValue;
 
+        @NonNull
         private final Scale scale;
 
+        @NonNull
+        private final String warning;
+
         Item(@NonNull String text, @NonNull String description, int imageResId) {
-            this(text, description, TypeConstant.TRIGGERED, imageResId, 0, 0, 0, Scale.NONE);
+            this(text, description, TypeConstant.TRIGGERED, imageResId, 0, 0, 0, Scale.NONE, "");
         }
 
-        Item(@NonNull String text, @NonNull String description,
-             TypeConstant typeConstant, int enabled, int imageResId) {
-            this(text, description, typeConstant, imageResId, enabled, 0, 0, Scale.NONE);
+        Item(@NonNull String text, @NonNull String description, @NonNull TypeConstant typeConstant,
+             int enabled, int imageResId, @NonNull String warning) {
+            this(text, description, typeConstant, imageResId, enabled, 0, 0, Scale.NONE, warning);
         }
 
-        Item(@NonNull String text, @NonNull String description, TypeConstant typeConstant,
-             int imageResId, int value, int minValue, int maxValue, Scale scale) {
+        Item(@NonNull String text, @NonNull String description, @NonNull TypeConstant typeConstant,
+             int imageResId, int value, int minValue, int maxValue, @NonNull Scale scale) {
+            this(text, description, typeConstant, imageResId, value, minValue, maxValue, scale, "");
+        }
+
+        Item(@NonNull String text, @NonNull String description, @NonNull TypeConstant typeConstant,
+             int imageResId, int value, int minValue, int maxValue, @NonNull Scale scale,
+             @NonNull String warning) {
             this.text = text;
             this.description = description;
             this.typeConstant = typeConstant;
@@ -231,6 +260,7 @@ public class UXPreference {
             this.minValue = minValue;
             this.maxValue = maxValue;
             this.scale = scale;
+            this.warning = warning;
         }
 
         @NonNull
@@ -243,6 +273,7 @@ public class UXPreference {
             return description;
         }
 
+        @NonNull
         public TypeConstant getTypeConstant() {
             return typeConstant;
         }
@@ -259,6 +290,10 @@ public class UXPreference {
             return defaultValue * (scaleValue ? scale.getFactor() : 1);
         }
 
+        public boolean isDefaultEnabled() {
+            return typeConstant == TypeConstant.TOGGLE && defaultValue == 0;
+        }
+
         public int getMin() {
             return minValue;
         }
@@ -267,8 +302,18 @@ public class UXPreference {
             return maxValue;
         }
 
+        @NonNull
         public Scale getScale() {
             return scale;
+        }
+
+        @NonNull
+        public String getWarning() {
+            return warning;
+        }
+
+        public boolean hasWarning() {
+            return warning.length() != 0;
         }
 
         @NonNull

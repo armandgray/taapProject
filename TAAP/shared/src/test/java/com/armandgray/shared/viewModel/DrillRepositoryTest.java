@@ -93,6 +93,11 @@ public class DrillRepositoryTest {
         public Scheduler single() {
             return testScheduler;
         }
+
+        @Override
+        public Scheduler looper() {
+            return testScheduler;
+        }
     };
 
     @SuppressWarnings("ConstantConditions")
