@@ -26,9 +26,9 @@ public class UXPreferenceTest {
     @Before
     public void setUp() {
         testPreference = new UXPreference(TEST_TITLE, UXPreference.Category.REPS_BASED);
-        testValue = new UXPreference.Value(UXPreference.Item.MINUS);
+        testValue = new UXPreference.Value(UXPreference.Item.ICONS);
         testCategory = UXPreference.Category.REPS_BASED;
-        testItem = UXPreference.Item.MINUS;
+        testItem = UXPreference.Item.ICONS;
     }
 
     @Test
@@ -75,7 +75,7 @@ public class UXPreferenceTest {
 
     @Test
     public void testValue_GetItem() {
-        Assert.assertThat(testValue.getItem(), is(UXPreference.Item.MINUS));
+        Assert.assertThat(testValue.getItem(), is(UXPreference.Item.ICONS));
     }
 
     @Test
@@ -169,29 +169,29 @@ public class UXPreferenceTest {
                 UXPreference.Item.COURT_LOCATION,
                 UXPreference.Item.CLAP,
                 UXPreference.Item.CALL_OUT,
+                UXPreference.Item.VOICE_TIMEOUT,
                 UXPreference.Item.BREAK_LIMIT,
                 UXPreference.Item.TIMEOUT,
+                UXPreference.Item.VIBRATE,
                 UXPreference.Item.SCREEN_TAPS,
                 UXPreference.Item.AUTO,
-                UXPreference.Item.MINUS,
-                UXPreference.Item.VIBRATE,
+                UXPreference.Item.ICONS,
                 UXPreference.Item.CLEAR,
                 UXPreference.Item.REPS,
                 UXPreference.Item.GOAL,
                 UXPreference.Item.TIME,
-                UXPreference.Item.PERMISSION,
                 UXPreference.Item.RESET,
                 UXPreference.Item.TEST));
     }
 
     @Test
     public void testGetText() {
-        Assert.assertThat(testItem.getText(), is("Minus"));
+        Assert.assertThat(testItem.getText(), is("Icons"));
     }
 
     @Test
     public void testGetDescription() {
-        Assert.assertThat(testItem.getDescription(), is("Enable Minus Icon For Miss"));
+        Assert.assertThat(testItem.getDescription(), is("Enable Plus/Minus Icon For Make/Miss"));
     }
 
     @Test
@@ -206,7 +206,7 @@ public class UXPreferenceTest {
 
     @Test
     public void testGetDefault() {
-        Assert.assertThat(testItem.getDescription(), is("Enable Minus Icon For Miss"));
+        Assert.assertThat(testItem.getDefault(), is(0));
     }
 
     @Test
@@ -231,6 +231,16 @@ public class UXPreferenceTest {
     }
 
     @Test
+    public void testHasWarning() {
+        Assert.assertThat(UXPreference.Item.AUTO.hasWarning(), is(true));
+    }
+
+    @Test
+    public void testGetWarning() {
+        Assert.assertThat(UXPreference.Item.AUTO.getWarning(), is("Feature May Impact Battery"));
+    }
+
+    @Test
     public void testItem_ToString_NumberFormat() {
         UXPreference.Item item = UXPreference.Item.REPS;
         Assert.assertThat(item.toString(), is(String.format(Locale.getDefault(),
@@ -240,7 +250,7 @@ public class UXPreferenceTest {
 
     @Test
     public void testItem_ToString_Toggle() {
-        UXPreference.Item item = UXPreference.Item.MINUS;
+        UXPreference.Item item = UXPreference.Item.ICONS;
         Assert.assertThat(item.toString(), is(String.format(Locale.getDefault(),
                 "Item{%s: %s}", item.name(), "Enabled")));
     }

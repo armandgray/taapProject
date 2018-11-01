@@ -12,10 +12,8 @@ import io.reactivex.disposables.Disposable;
 
 public abstract class TAAPViewModel extends ViewModel {
 
-    @SuppressWarnings("WeakerAccess")
     protected final String TAG = StringHelper.toLogTag(getClass().getSimpleName());
 
-    @SuppressWarnings("WeakerAccess")
     protected final CompositeDisposable disposables = new CompositeDisposable();
 
     @NonNull

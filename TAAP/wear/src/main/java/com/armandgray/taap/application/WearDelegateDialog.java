@@ -11,6 +11,7 @@ public abstract class WearDelegateDialog extends NavigationActivity {
     @Override
     public void showRationale(DangerousPermission permission, boolean wasRevoked) {
         Intent intent = new Intent(this, PermissionRationaleDialog.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.putExtra(PERMISSION_KEY, permission);
         intent.putExtra(REVOKED_KEY, wasRevoked);
         startActivityForResult(intent, permission.getCode());

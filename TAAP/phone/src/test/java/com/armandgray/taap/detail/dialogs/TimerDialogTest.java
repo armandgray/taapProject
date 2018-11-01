@@ -44,7 +44,7 @@ public class TimerDialogTest {
 //                R.drawable.ic_fitness_center_white_24dp,
 //                Drill.UserPreferenceCategory.SHOOTING_ONLY));
 //        activityController = Robolectric.buildActivity(DrillDetailActivity.class).newIntent(intent);
-//        activity = activityController.create().start().resume().visible().get();
+//        activity = activityController.createBehavior().start().resume().visible().get();
 //        dialog = new TimerDialog();
 //        dialog.show(activity.getSupportFragmentManager(), DIALOG);
     }

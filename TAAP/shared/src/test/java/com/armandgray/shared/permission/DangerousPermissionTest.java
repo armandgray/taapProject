@@ -15,10 +15,12 @@ public class DangerousPermissionTest {
     @Test
     public void testDangerousPermission_Instances() {
         DangerousPermission[] values = DangerousPermission.values();
-        Assert.assertThat(values.length, is(2));
+        Assert.assertThat(values.length, is(4));
         Assert.assertThat(Arrays.asList(values), containsInAnyOrder(
                 DangerousPermission.ERROR,
-                DangerousPermission.LOCATION));
+                DangerousPermission.NONE,
+                DangerousPermission.LOCATION,
+                DangerousPermission.MICROPHONE));
     }
 
     @Test
@@ -45,7 +47,6 @@ public class DangerousPermissionTest {
 
     @Test
     public void testGetPermission() {
-        Assert.assertThat(DangerousPermission.getPermission(1),
-                is(DangerousPermission.LOCATION));
+        Assert.assertThat(DangerousPermission.getPermission(1), is(DangerousPermission.LOCATION));
     }
 }

@@ -9,7 +9,9 @@ import androidx.annotation.NonNull;
 public enum DangerousPermission {
 
     ERROR("", "", "", 0),
-    LOCATION("Location Access", "Location access used for Auto Tracking & Gyms", Manifest.permission.ACCESS_FINE_LOCATION, 1);
+    NONE("", "", "", 0),
+    LOCATION("Location Access", "Location access used for Auto Tracking & Gyms", Manifest.permission.ACCESS_FINE_LOCATION, 1),
+    MICROPHONE("Microphone Access", "Microphone access used for Call Out & Clap", Manifest.permission.RECORD_AUDIO, 2);
 
     @NonNull
     private final String title;

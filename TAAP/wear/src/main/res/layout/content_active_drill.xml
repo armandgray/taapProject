@@ -82,23 +82,52 @@
         app:layout_constraintTop_toTopOf="@+id/text_rate"
         tools:ignore="HardcodedText"/>
 
+    <ImageView
+        android:id="@+id/image_background_feature"
+        android:layout_width="@dimen/icon_size_small"
+        android:layout_height="@dimen/icon_size_small"
+        android:layout_marginTop="6dp"
+        android:contentDescription="Image Icon Background Feature"
+        android:tint="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_rate"
+        tools:ignore="HardcodedText"/>
+
+    <TextView
+        android:id="@+id/text_background_feature"
+        android:layout_width="76dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_size_tiny"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="@+id/image_background_feature"
+        app:layout_constraintStart_toEndOf="@+id/image_background_feature"
+        app:layout_constraintTop_toTopOf="@+id/image_background_feature"
+        tools:text="@string/shot"/>
+
     <View
         android:id="@+id/loading_mask"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:translationZ="1dp"
-        android:background="@color/black"/>
+        android:background="@color/black"
+        android:translationZ="1dp"/>
 
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="@dimen/icon_size_large"
         android:layout_height="@dimen/icon_size_large"
+        android:translationZ="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:translationZ="2dp"
         app:layout_constraintVertical_bias="0.5"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

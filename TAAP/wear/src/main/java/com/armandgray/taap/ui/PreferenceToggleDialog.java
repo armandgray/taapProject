@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.armandgray.shared.application.UIComponent;
 import com.armandgray.shared.model.UXPreference;
@@ -78,6 +79,9 @@ public class PreferenceToggleDialog extends WearDelegateDialog implements UIComp
         checkboxEnabled.setChecked(value.isEnabled());
         preferencesViewModel.setActiveValue(value);
         preferencesViewModel.onPreferenceUpdated();
+        if (value.isEnabled() && value.getItem().hasWarning()) {
+            Toast.makeText(this, value.getItem().getWarning(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

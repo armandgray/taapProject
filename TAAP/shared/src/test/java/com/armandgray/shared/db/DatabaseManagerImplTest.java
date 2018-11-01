@@ -20,13 +20,13 @@ public class DatabaseManagerImplTest {
     public MockitoRule mockitoRule = MockitoJUnit.rule();
 
     @Mock
-    TAAPAppComponent mockAppComponent;
+    private TAAPAppComponent mockAppComponent;
 
     @Mock
-    DatabaseManager.Component mockComponent;
+    private DatabaseManager.Component mockComponent;
 
     @Mock
-    DatabaseManager.Component.Builder mockBuilder;
+    private DatabaseManager.Component.Builder mockBuilder;
 
     @Mock
     DrillDao.DrillDaoWrapper mockDrillDaoWrapper;

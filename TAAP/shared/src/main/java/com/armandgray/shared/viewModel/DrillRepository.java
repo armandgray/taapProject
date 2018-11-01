@@ -7,7 +7,13 @@ import com.armandgray.shared.db.DatabaseManager;
 import com.armandgray.shared.model.Drill;
 import com.armandgray.shared.model.Performance;
 import com.armandgray.shared.model.UXPreference;
+import com.armandgray.shared.permission.DangerousPermission;
+import com.armandgray.shared.permission.PermissionManager;
 import com.armandgray.shared.rx.SchedulerProvider;
+import com.armandgray.shared.sensors.GeneralSensorManager;
+import com.armandgray.shared.sensors.LinearAccelerationAction;
+import com.armandgray.shared.voice.VoiceEvent;
+import com.armandgray.shared.voice.VoiceManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +27,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
+import io.reactivex.ObservableTransformer;
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
@@ -31,6 +38,19 @@ import io.reactivex.subjects.PublishSubject;
 class DrillRepository extends TAAPRepository {
 
     private static int singleSetTimeout = UXPreference.Item.TIMEOUT.getDefault(true);
+    private static boolean enableAutoTracking = UXPreference.Item.AUTO.isDefaultEnabled();
+    private static boolean enableCallOut = UXPreference.Item.CALL_OUT.isDefaultEnabled();
+    private static boolean enableClap = UXPreference.Item.CLAP.isDefaultEnabled();
+    private static int voiceTimeout = UXPreference.Item.VOICE_TIMEOUT.getDefault(true);
+
+    @Inject
+    GeneralSensorManager generalSensorManager;
+
+    @Inject
+    VoiceManager voiceManager;
+
+    @Inject
+    PermissionManager permissionManager;
 
     @VisibleForTesting
     final BehaviorSubject<List<Drill>> drillsSubject = BehaviorSubject.create();
@@ -43,9 +63,6 @@ class DrillRepository extends TAAPRepository {
 
     @VisibleForTesting
     final PublishSubject<Performance> completionSubject = PublishSubject.create();
-
-    @VisibleForTesting
-    final PublishSubject<UXPreference> preferenceSubject = PublishSubject.create();
 
     private final DatabaseManager databaseManager;
     private final SchedulerProvider schedulers;
@@ -60,7 +77,7 @@ class DrillRepository extends TAAPRepository {
         this.databaseManager = databaseManager;
         this.schedulers = schedulers;
 
-        disposables.add(preferencesRepository.getPreferenceUpdateObservable()
+        super.disposables.add(preferencesRepository.getPreferenceUpdateObservable()
                 .subscribe(this::preferenceConsumer));
 
         this.databaseManager.stateSubject
@@ -87,16 +104,20 @@ class DrillRepository extends TAAPRepository {
             public void onError(Throwable e) {
                 Log.e(TAG, "Database Force Open Call Failed");
             }
-        });;
+        });
     }
 
     private void preferenceConsumer(UXPreference preference) {
         switch (preference.getCategory()) {
             case WORKOUT:
-                preferenceSubject.onNext(preference);
-
                 singleSetTimeout = preference.getValue(UXPreference.Item.TIMEOUT, true);
+                enableAutoTracking = preference.isEnabled(UXPreference.Item.AUTO);
                 return;
+
+            case VOICE:
+                enableCallOut = preference.isEnabled(UXPreference.Item.CALL_OUT);
+                enableClap = preference.isEnabled(UXPreference.Item.CLAP);
+                voiceTimeout = preference.getValue(UXPreference.Item.VOICE_TIMEOUT, true);
 
             default:
                 onDrillPreferenceChanged(preference);
@@ -184,8 +205,57 @@ class DrillRepository extends TAAPRepository {
         return completionSubject;
     }
 
-    Observable<UXPreference> getPreferenceObservable() {
-        return preferenceSubject;
+    Observable<LinearAccelerationAction> getAutoTrackingObservable() {
+        // TODO Fix enabling race condition with preference update
+        return enableAutoTracking
+                ? generalSensorManager.getAutoTrackingObservable()
+                : Observable.just(LinearAccelerationAction.NONE);
+    }
+
+    Observable<VoiceEvent> getVoiceEventObservable() {
+        // Disable Non-Triggered Events while Auto Tracking
+        return !enableAutoTracking
+                ? getTriggeredVoiceEventObservable()
+                : Observable.just(VoiceEvent.NONE);
+    }
+
+    Observable<VoiceEvent> getTriggeredVoiceEventObservable() {
+        if (!enableCallOut && !enableClap) {
+            return Observable.just(VoiceEvent.NONE);
+        }
+
+        DangerousPermission permission = DangerousPermission.MICROPHONE;
+        Observable<Boolean> permissionObservable = permissionManager.usePermission(permission);
+
+        if (enableClap && enableCallOut) {
+            // TODO implement amb for first event
+            return permissionObservable
+                    .concatMap(concatPermissionOverVoiceEvent(voiceManager.getClapObservable()))
+                    .compose(schedulers.asyncTask());
+        } else if (enableCallOut) {
+            return permissionObservable
+                    .concatMap(concatPermissionOverVoiceEvent(voiceManager.getCallOutObservable()))
+                    .compose(schedulers.asyncTask());
+        } else {
+            return permissionObservable
+                    .concatMap(concatPermissionOverVoiceEvent(voiceManager.getClapObservable()))
+                    .subscribeOn(schedulers.looper())
+                    .observeOn(schedulers.ui());
+        }
+    }
+
+    private ObservableTransformer<VoiceEvent, VoiceEvent> applyVoiceTimeout() {
+        return observable -> observable
+                .timeout(voiceTimeout, TimeUnit.MILLISECONDS)
+                .onErrorReturnItem(VoiceEvent.TIMEOUT);
+    }
+
+    private Function<Boolean, ObservableSource<VoiceEvent>> concatPermissionOverVoiceEvent(
+            Observable<VoiceEvent> observable) {
+        return hasPermission -> {
+            VoiceEvent missingPermission = VoiceEvent.MISSING_PERMISSION;
+            return hasPermission ? observable : Observable.just(missingPermission);
+        };
     }
 
     void addMake() {
@@ -277,6 +347,6 @@ class DrillRepository extends TAAPRepository {
             public void onError(Throwable e) {
                 Log.e(TAG, "Performance Insertion Failed: " + performance);
             }
-        });;
+        });
     }
 }

@@ -319,7 +319,7 @@ public class DatabaseContentProviderTest {
 //                .successRate(0.93)
 //                .successRecord(1.00)
 //                .drill(TEST_DRILL)
-//                .create();
+//                .createBehavior();
 //        ContentValues updatedValues = getLogContentValues(updatedLog);
 //        Uri uri = Uri.parse(CONTENT_URI_LOGS + "/" + TEST_SESSION_LOG.getSessionId());
 //        contentResolver.update(uri, updatedValues, selectedLog, null);

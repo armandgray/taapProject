@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.armandgray.shared.application.TAAPRepository;
 import com.armandgray.shared.db.DatabaseManager;
-import com.armandgray.shared.db.SettingsDao;
 import com.armandgray.shared.model.Setting;
 import com.armandgray.shared.model.UXPreference;
 import com.armandgray.shared.rx.SchedulerProvider;
@@ -50,8 +49,7 @@ class PreferencesRepository extends TAAPRepository {
 
         this.databaseManager.stateSubject
                 .switchMap(toSettingsList())
-                .subscribeOn(schedulers.io())
-                .observeOn(schedulers.ui())
+                .compose(schedulers.asyncTask())
                 .subscribe(onSettingsRetrieved());
     }
 
@@ -134,7 +132,7 @@ class PreferencesRepository extends TAAPRepository {
         preferenceUpdateSubject.onNext(preference);
     }
 
-    private void onResetPreference(UXPreference preference) {
+    private void onResetPreference(@NonNull UXPreference preference) {
         if (preference.getCategory().equals(UXPreference.Category.DATA)) {
             databaseManager.getPerformanceDao().deleteAll();
             return;
@@ -148,27 +146,29 @@ class PreferencesRepository extends TAAPRepository {
         storeSetting(preference);
     }
 
-    private void storeSetting(UXPreference preference) {
+    private void storeSetting(@NonNull UXPreference preference) {
         if (!preference.getCategory().isDrillCategory()) {
-            SettingsDao settingsDao = databaseManager.getSettingsDao();
-            Setting setting = settingsDao.findSetting(preference);
-            settingsDao.update(setting).subscribe(
-                    new SingleObserver<Integer>() {
-                        @Override
-                        public void onSubscribe(Disposable d) {
-                            disposables.add(d);
-                        }
-
-                        @Override
-                        public void onSuccess(Integer integer) {
-                            Log.d(TAG, "Setting Update Success: " + setting);
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            Log.e(TAG, "Setting Update Failed: " + setting);
-                        }
-                    });
+            updateDatabaseSetting(databaseManager.getSettingsDao().findSetting(preference));
         }
+    }
+
+    private void updateDatabaseSetting(Setting setting) {
+        databaseManager.getSettingsDao().update(setting).subscribe(
+                new SingleObserver<Integer>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        disposables.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(Integer integer) {
+                        Log.d(TAG, "Setting Update Success: " + setting);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "Setting Update Failed: " + setting);
+                    }
+                });
     }
 }

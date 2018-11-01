@@ -1,10 +1,19 @@
 package com.armandgray.shared.rx;
 
+import android.os.HandlerThread;
+
+import io.reactivex.ObservableTransformer;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public interface SchedulerProvider {
+
+    default <U> ObservableTransformer<U, U> asyncTask() {
+        return observable -> observable
+                .subscribeOn(io())
+                .observeOn(ui());
+    }
 
     Scheduler ui();
 
@@ -21,7 +30,11 @@ public interface SchedulerProvider {
 
     Scheduler single();
 
+    Scheduler looper();
+
     SchedulerProvider DEFAULT = new SchedulerProvider() {
+
+        private HandlerThread handlerThread;
 
         @Override
         public Scheduler ui() {
@@ -51,6 +64,16 @@ public interface SchedulerProvider {
         @Override
         public Scheduler single() {
             return Schedulers.single();
+        }
+
+        @Override
+        public Scheduler looper() {
+            if (handlerThread == null) {
+                handlerThread = new HandlerThread("TAAP-Scheduler-Thread");
+                handlerThread.start();
+            }
+
+            return AndroidSchedulers.from(handlerThread.getLooper());
         }
     };
 }
