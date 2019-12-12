@@ -48,8 +48,16 @@ import static java.util.Objects.requireNonNull;
 @Singleton
 class PreferencesRepository extends TAAPRepository {
 
-    private static final List<String> EXPORT_EXCLUSIONS =
-            ImmutableList.of("getClass", "getStartTime", "getEndTime");
+    private static final List<String> EXPORT_INCLUSION = ImmutableList.of(
+            "getId",
+            "getDate",
+            "getDrillTitle",
+            "getLength",
+            "getGoal",
+            "getRate",
+            "getCount",
+            "getTotal",
+            "getLocation");
     private static final String GET = "get";
 
     @VisibleForTesting
@@ -233,10 +241,9 @@ class PreferencesRepository extends TAAPRepository {
 
     private List<Method> collectPerformanceGetters() {
         return Stream.of(Performance.class.getMethods())
-                .filter(method -> !EXPORT_EXCLUSIONS.contains(method.getName()))
-                .filter(method -> method.getName().startsWith(GET))
+                .filter(method -> EXPORT_INCLUSION.contains(method.getName()))
                 .sorted(Comparator.comparing(
-                        method -> new StringBuilder(method.getName()).reverse().toString(),
+                        method -> EXPORT_INCLUSION.indexOf(method.getName()),
                         Comparator.naturalOrder()))
                 .collect(Collectors.toList());
     }

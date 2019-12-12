@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "beaf17673acef28857af35f5c116959c",
+    "identityHash": "94ae5bcca0a8a9f7bc34adc913cb71ad",
     "entities": [
       {
         "tableName": "drills",
@@ -59,7 +59,7 @@
       },
       {
         "tableName": "performances",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `drill_title` TEXT NOT NULL, `count` INTEGER NOT NULL, `total` INTEGER NOT NULL, `reps` INTEGER NOT NULL, `goal` REAL NOT NULL, `location` TEXT, `start_time` INTEGER NOT NULL, `end_time` INTEGER NOT NULL, FOREIGN KEY(`drill_title`) REFERENCES `drills`(`title`) ON UPDATE CASCADE ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `drill_title` TEXT NOT NULL, `date` TEXT, `count` INTEGER NOT NULL, `total` INTEGER NOT NULL, `reps` INTEGER NOT NULL, `goal` REAL NOT NULL, `location` TEXT, `start_time` INTEGER NOT NULL, `end_time` INTEGER NOT NULL, FOREIGN KEY(`drill_title`) REFERENCES `drills`(`title`) ON UPDATE CASCADE ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -72,6 +72,12 @@
             "columnName": "drill_title",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": false
           },
           {
             "fieldPath": "count",
@@ -197,7 +203,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"beaf17673acef28857af35f5c116959c\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"94ae5bcca0a8a9f7bc34adc913cb71ad\")"
     ]
   }
 }
