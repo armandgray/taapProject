@@ -124,6 +124,10 @@ public class Performance implements Comparable<Performance> {
         return endTime % startTime;
     }
 
+    public float getRate() {
+        return (float) count / total;
+    }
+
     public void raiseCount() {
         this.count++;
     }
@@ -199,7 +203,7 @@ public class Performance implements Comparable<Performance> {
     public String toString() {
         String length = new SimpleDateFormat("mm:ss.SSS", Locale.getDefault())
                 .format(new Date(getLength()));
-        return String.format(Locale.getDefault(), "Performance(%d){%s: %d/%d (%d) for %s}",
-                id, drillTitle, count, total, reps, length);
+        return String.format(Locale.getDefault(), "Performance(%d){%s: %d/%d(%.2f) for %s}",
+                id, drillTitle, count, total, getRate(), length);
     }
 }
