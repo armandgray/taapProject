@@ -34,6 +34,7 @@ public class Performance implements Comparable<Performance> {
     @NonNull
     private String drillTitle;
 
+    @NonNull
     private String date;
 
     private int count;
@@ -96,6 +97,7 @@ public class Performance implements Comparable<Performance> {
         return drillTitle;
     }
 
+    @NonNull
     public String getDate() {
         return date;
     }
@@ -162,7 +164,7 @@ public class Performance implements Comparable<Performance> {
         this.drillTitle = drillTitle;
     }
 
-    public void setDate(String date) {
+    public void setDate(@NonNull String date) {
         this.date = date;
     }
 
