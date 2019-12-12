@@ -1,5 +1,6 @@
 package com.armandgray.shared.application;
 
+import com.armandgray.shared.api.NetworkManager;
 import com.armandgray.shared.db.DatabaseManager;
 import com.armandgray.shared.location.LocationManager;
 import com.armandgray.shared.permission.PermissionManager;
@@ -21,6 +22,8 @@ public interface TAAPAppComponent {
     PermissionManager.Component.Builder permissionBuilder();
 
     GeneralSensorManager.Component.Builder sensorBuilder();
+
+    NetworkManager.Component.Builder networkBuilder();
 
     VoiceManager.Component.Builder voiceBuilder();
 

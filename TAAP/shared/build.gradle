@@ -34,6 +34,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/INDEX.LIST'
+    }
 }
 
 dependencies {
@@ -93,7 +98,10 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:${ROOM_VERSION}"
 
     // Misc.
-    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation "com.squareup.picasso:picasso:2.71828"
+    implementation "io.grpc:grpc-okhttp:1.16.1"
+    implementation group: 'com.google.cloud', name: 'google-cloud-speech', version: '0.68.0-beta'
+    implementation group: 'com.opencsv', name: 'opencsv', version: '4.1'
 
     // Unit Test
     testImplementation "junit:junit:${JUNIT_VERSION}"
@@ -108,7 +116,7 @@ dependencies {
     testImplementation "androidx.paging:paging-common:${PAGING_VERSION}"
 
     // Instrumentation Test
-    androidTestImplementation 'androidx.test:runner:1.1.0-beta01'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation("androidx.test.espresso:espresso-core:3.1.0-beta01", {
         exclude group: "com.android.support", module: "support-annotations"
     })
