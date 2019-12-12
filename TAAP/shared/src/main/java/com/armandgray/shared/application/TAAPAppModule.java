@@ -3,6 +3,8 @@ package com.armandgray.shared.application;
 import android.app.Application;
 import android.content.Context;
 
+import com.armandgray.shared.api.NetworkManager;
+import com.armandgray.shared.api.NetworkManagerImpl;
 import com.armandgray.shared.db.DatabaseManager;
 import com.armandgray.shared.db.DatabaseManagerImpl;
 import com.armandgray.shared.location.LocationManager;
@@ -69,6 +71,15 @@ public abstract class TAAPAppModule {
         GeneralSensorManager generalSensorManager = new GeneralSensorManagerImpl();
         generalSensorManager.inject(TAAPApplication.getAppComponent());
         return generalSensorManager;
+    }
+
+    @Provides
+    @Singleton
+    @NonNull
+    protected NetworkManager provideNetworkManager() {
+        NetworkManager networkManager = new NetworkManagerImpl();
+        networkManager.inject(TAAPApplication.getAppComponent());
+        return networkManager;
     }
 
     @Provides
