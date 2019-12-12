@@ -34,6 +34,8 @@ public class Performance implements Comparable<Performance> {
     @NonNull
     private String drillTitle;
 
+    private String date;
+
     private int count;
 
     private int total;
@@ -58,8 +60,11 @@ public class Performance implements Comparable<Performance> {
 
     @Ignore
     public Performance(@NonNull Drill drill) {
+        String today = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(new Date());
+
         this.drillTitle = drill.getTitle();
         this.count = 0;
+        this.date = today;
         this.total = 0;
         this.reps = drill.getReps();
         this.goal = drill.getGoal();
@@ -72,6 +77,7 @@ public class Performance implements Comparable<Performance> {
     public Performance(@NonNull Performance clone) {
         this.id = clone.id;
         this.drillTitle = clone.drillTitle;
+        this.date = clone.date;
         this.count = clone.count;
         this.total = clone.total;
         this.reps = clone.reps;
@@ -88,6 +94,10 @@ public class Performance implements Comparable<Performance> {
     @NonNull
     public String getDrillTitle() {
         return drillTitle;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public int getCount() {
@@ -150,6 +160,10 @@ public class Performance implements Comparable<Performance> {
 
     public void setDrillTitle(@NonNull String drillTitle) {
         this.drillTitle = drillTitle;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public void setCount(int count) {
