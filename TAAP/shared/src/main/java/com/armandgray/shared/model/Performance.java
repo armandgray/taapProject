@@ -61,7 +61,7 @@ public class Performance implements Comparable<Performance> {
 
     @Ignore
     public Performance(@NonNull Drill drill) {
-        String today = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(new Date());
+        String today = new SimpleDateFormat("yyyy-MM-dd hh:mm aa", Locale.getDefault()).format(new Date());
 
         this.drillTitle = drill.getTitle();
         this.count = 0;
