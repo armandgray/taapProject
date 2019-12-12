@@ -90,8 +90,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-common-java8:${LIFECYCLE_VERSION}"
     implementation "androidx.paging:paging-runtime:${PAGING_VERSION}"
     implementation "androidx.paging:paging-rxjava2:${PAGING_VERSION}"
-    implementation "android.arch.work:work-runtime:${WORK_MANAGER_VERSION}"
-    implementation "android.arch.work:work-firebase:${WORK_MANAGER_VERSION}"
     implementation "androidx.room:room-runtime:${ROOM_VERSION}"
     implementation "androidx.room:room-rxjava2:${ROOM_VERSION}"
     implementation "androidx.arch.core:core-runtime:${ARCH_VERSION}"
@@ -120,5 +118,4 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.1.0-beta01", {
         exclude group: "com.android.support", module: "support-annotations"
     })
-    androidTestImplementation "android.arch.work:work-testing:${WORK_MANAGER_VERSION}"
 }

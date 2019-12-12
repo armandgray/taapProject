@@ -1,5 +1,7 @@
 package com.armandgray.shared.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 import androidx.annotation.NonNull;
@@ -118,6 +120,10 @@ public class Performance implements Comparable<Performance> {
         return endTime;
     }
 
+    public long getLength() {
+        return endTime % startTime;
+    }
+
     public void raiseCount() {
         this.count++;
     }
@@ -191,7 +197,9 @@ public class Performance implements Comparable<Performance> {
     @NonNull
     @Override
     public String toString() {
-        return String.format(Locale.getDefault(), "Performance(%d){%s: %d/%d for %dms}",
-                id, drillTitle, count, total, endTime % startTime);
+        String length = new SimpleDateFormat("mm:ss.SSS", Locale.getDefault())
+                .format(new Date(getLength()));
+        return String.format(Locale.getDefault(), "Performance(%d){%s: %d/%d (%d) for %s}",
+                id, drillTitle, count, total, reps, length);
     }
 }

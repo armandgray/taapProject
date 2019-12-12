@@ -1,31 +1,56 @@
 package com.armandgray.shared.viewModel;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.armandgray.shared.application.TAAPRepository;
 import com.armandgray.shared.db.DatabaseManager;
+import com.armandgray.shared.model.Performance;
 import com.armandgray.shared.model.Setting;
 import com.armandgray.shared.model.UXPreference;
 import com.armandgray.shared.rx.SchedulerProvider;
+import com.google.common.collect.ImmutableList;
+import com.opencsv.CSVWriter;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
+import androidx.core.content.FileProvider;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.SingleObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.ReplaySubject;
 
+import static java.util.Objects.requireNonNull;
+
 @Singleton
 class PreferencesRepository extends TAAPRepository {
+
+    private static final List<String> EXPORT_EXCLUSIONS =
+            ImmutableList.of("getClass", "getStartTime", "getEndTime");
+    private static final String GET = "get";
 
     @VisibleForTesting
     @NonNull
@@ -39,11 +64,13 @@ class PreferencesRepository extends TAAPRepository {
     @NonNull
     final ReplaySubject<UXPreference> preferenceUpdateSubject = ReplaySubject.create();
 
+    private final Context context;
     private final DatabaseManager databaseManager;
     private final SchedulerProvider schedulers;
 
     @Inject
-    PreferencesRepository(DatabaseManager databaseManager, SchedulerProvider schedulers) {
+    PreferencesRepository(Context context, DatabaseManager databaseManager, SchedulerProvider schedulers) {
+        this.context = context;
         this.databaseManager = databaseManager;
         this.schedulers = schedulers;
 
@@ -124,12 +151,121 @@ class PreferencesRepository extends TAAPRepository {
 
         UXPreference preference = activePreferenceSubject.getValue();
         switch (value.getItem()) {
+            case EXPORT:
+                onExportPreference();
+                return;
+
             case RESET:
                 onResetPreference(preference);
                 break;
         }
 
         preferenceUpdateSubject.onNext(preference);
+    }
+
+    private void onExportPreference() {
+        requireNonNull(databaseManager.getPerformanceDao()
+                .all()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(performances -> {
+                    try {
+                        exportCSV(performances);
+                    } catch (IOException | IllegalStateException e) {
+                        String message = e instanceof IllegalStateException ? e.getMessage() : "";
+                        onExportFailure(e, message);
+                    }
+                }, e -> onExportFailure(e, "Unable to access stored data")));
+    }
+
+    private void onExportFailure(Throwable e, String message) {
+        Toast.makeText(
+                context,
+                message.isEmpty() ? "Export Failed Unexpectedly! " : message,
+                Toast.LENGTH_LONG).show();
+        Log.e(TAG, e.getMessage());
+    }
+
+    private void exportCSV(List<Performance> performances) throws IOException, IllegalStateException {
+        if (performances.isEmpty()) {
+            throw new IllegalStateException("No performance data found");
+        }
+
+        File file = getFile();
+        writeCSV(performances, file);
+        exportFile(file);
+    }
+
+    private File getFile() throws IOException {
+        File file = new File(context.getFilesDir(), "exports/performances.csv");
+        if (!file.getParentFile().exists() && !file.getParentFile().mkdir()) {
+            throw new IllegalStateException("Unable to structure export file");
+        }
+
+        if (!file.exists() && !file.createNewFile()) {
+            throw new IllegalStateException("Unable to create export file");
+        }
+
+        return file;
+    }
+
+    private void writeCSV(List<Performance> performances, File file) throws IOException {
+        List<Method> getters = collectPerformanceGetters();
+        CSVWriter writer = new CSVWriter(new FileWriter(file));
+        // Write Columns
+        writer.writeNext(getters.stream()
+                .map(method -> method.getName().substring(GET.length()))
+                .toArray(String[]::new));
+        // Write Rows
+        for (Performance performance : performances) {
+            writer.writeNext(getters.stream()
+                    .map(getter -> {
+                        try {
+                            return String.valueOf(getter.invoke(performance));
+                        } catch (IllegalAccessException | InvocationTargetException e) {
+                            throw new UnsupportedOperationException("Data retrieval failed");
+                        }
+                    })
+                    .toArray(String[]::new));
+        }
+
+        writer.close();
+    }
+
+    private List<Method> collectPerformanceGetters() {
+        return Stream.of(Performance.class.getMethods())
+                .filter(method -> !EXPORT_EXCLUSIONS.contains(method.getName()))
+                .filter(method -> method.getName().startsWith(GET))
+                .sorted(Comparator.comparing(
+                        method -> new StringBuilder(method.getName()).reverse().toString(),
+                        Comparator.naturalOrder()))
+                .collect(Collectors.toList());
+    }
+
+    private void exportFile(File file) {
+        Uri uri = FileProvider.getUriForFile(context, "com.armandgray.wear.fileprovider", file);
+        Intent intent = createExportIntent(uri);
+        grantExportActivityPermissions(uri, intent);
+        if (intent.resolveActivity(context.getPackageManager()) == null) {
+            throw new UnsupportedOperationException("Unable to find an app to handle export");
+        }
+
+        context.startActivity(intent);
+    }
+
+    private Intent createExportIntent(Uri uri) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/csv");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "TAAP Performance Export");
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        return intent;
+    }
+
+    private void grantExportActivityPermissions(Uri uri, Intent intent) {
+        List<ResolveInfo> resInfoList = context.getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        for (ResolveInfo resolveInfo : resInfoList) {
+            String packageName = resolveInfo.activityInfo.packageName;
+            context.grantUriPermission(packageName, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        }
     }
 
     private void onResetPreference(@NonNull UXPreference preference) {

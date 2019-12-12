@@ -132,7 +132,7 @@ public class UXPreference {
 
         // Settings
         VOICE(DangerousPermission.MICROPHONE, Item.CALL_OUT, Item.CLAP, Item.VOICE_TIMEOUT, Item.RESET),
-        DATA(Item.RESET),
+        DATA(Item.EXPORT, Item.RESET),
         LOCATION(DangerousPermission.LOCATION, Item.GYM_LOCATION, Item.COURT_LOCATION, Item.RESET),
         WORKOUT(Item.AUTO, Item.TIMEOUT, Item.ICONS, Item.SCREEN_TAPS, Item.CLEAR, Item.VIBRATE,
                 Item.BREAK_LIMIT, Item.RESET),
@@ -153,7 +153,7 @@ public class UXPreference {
             this(DangerousPermission.NONE, false, items);
         }
 
-        Category(DangerousPermission permission, Item... items) {
+        Category(@NonNull DangerousPermission permission, Item... items) {
             this(permission, false, items);
         }
 
@@ -161,7 +161,7 @@ public class UXPreference {
             this(DangerousPermission.NONE, isDrill, items);
         }
 
-        Category(DangerousPermission permission, boolean isDrill, Item... items) {
+        Category(@NonNull DangerousPermission permission, boolean isDrill, Item... items) {
             this.items = Arrays.asList(items);
             this.isDrill = isDrill;
             this.permission = permission;
@@ -209,6 +209,7 @@ public class UXPreference {
         TIME("Time", "Set Target Time For Completion", TypeConstant.NUMBER_RANGE, R.drawable.ic_timer_white_24dp, 60, 0, 600, Scale.INT_SCALE), // in seconds
 
         // Misc
+        EXPORT("Export", "Export Performance Data", R.drawable.ic_share_white_24dp),
         RESET("Reset", "Reset To Default Settings", R.drawable.ic_delete_sweep_white_24dp),
         TEST("Test", "test", TypeConstant.NONE, 0, R.drawable.ic_delete_sweep_white_24dp, "");
 

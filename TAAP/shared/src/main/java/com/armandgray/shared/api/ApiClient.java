@@ -2,13 +2,18 @@ package com.armandgray.shared.api;
 
 import com.armandgray.shared.model.TAAPResponse;
 
+import javax.inject.Inject;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
+import static com.armandgray.shared.api.NetworkManager.*;
+
 /**
  * Created by armandgray on 7/12/18
  */
+@NetworkScope
 public class ApiClient {
 
     static final String BASE_URL = "https://api.flickr.com/services/rest/";
@@ -17,17 +22,9 @@ public class ApiClient {
 
     private final ApiServiceGenerator generator;
 
-    private ApiClient(ApiServiceGenerator generator) {
+    @Inject
+    ApiClient(ApiServiceGenerator generator) {
         this.generator = generator;
-    }
-
-    // Object is Dependency Injection Candidate (ie. under Dagger2)
-    static ApiClient get(ApiServiceGenerator generator) {
-        if (instance == null) {
-            instance = new ApiClient(generator);
-        }
-
-        return instance;
     }
 
     // Nullable not propagated up
