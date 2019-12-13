@@ -15,7 +15,6 @@ import com.armandgray.shared.sensors.LinearAccelerationAction;
 import com.armandgray.shared.voice.VoiceEvent;
 import com.armandgray.shared.voice.VoiceManager;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -80,31 +79,11 @@ class DrillRepository extends TAAPRepository {
         super.disposables.add(preferencesRepository.getPreferenceUpdateObservable()
                 .subscribe(this::preferenceConsumer));
 
-        this.databaseManager.stateSubject
-                .switchMap(toDrillList())
-                .subscribeOn(schedulers.io())
-                .observeOn(schedulers.ui())
+        DatabaseManager.Wrapper.getDatabaseReady()
+                .andThen(databaseManager.getDrillDao().all())
+                .toObservable()
+                .compose(schedulers.asyncTask())
                 .subscribe(onDrillsRetrieved());
-
-        // TODO Move call out of Drill Repository
-        // Call used for side-effect: Triggers Database Creation/Opening
-        Drill drill = Drill.Defaults.getDefault();
-        this.databaseManager.getDrillDao().drill(drill.getId()).onErrorReturnItem(drill).subscribe(new SingleObserver<Drill>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-                disposables.add(d);
-            }
-
-            @Override
-            public void onSuccess(Drill drill) {
-                Log.d(TAG, "Database Force Open Call Success");
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.e(TAG, "Database Force Open Call Failed");
-            }
-        });
     }
 
     private void preferenceConsumer(UXPreference preference) {
@@ -159,22 +138,10 @@ class DrillRepository extends TAAPRepository {
         setPerformanceValue(update);
     }
 
-    private Function<DatabaseManager.State, ObservableSource<List<Drill>>> toDrillList() {
-        return state -> state == DatabaseManager.State.READY
-                ? databaseManager.getDrillDao().all().toObservable()
-                : Observable.just(new ArrayList<Drill>());
-    }
-
     private RepositoryObserver<List<Drill>> onDrillsRetrieved() {
         return new RepositoryObserver<List<Drill>>() {
-
             @Override
             public void onNext(List<Drill> list) {
-                if (list.size() == 0) {
-                    Log.d(TAG, "Drill Population: Retrieved Empty List (Check State)");
-                    return;
-                }
-
                 updateDrillSubscribers(list);
             }
         };

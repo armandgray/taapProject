@@ -1,7 +1,5 @@
 package com.armandgray.shared.application;
 
-import android.util.Log;
-
 import com.armandgray.shared.helpers.StringHelper;
 
 import androidx.annotation.NonNull;
@@ -31,7 +29,7 @@ public abstract class TAAPRepository {
 
         @Override
         public void onError(@NonNull Throwable e) {
-            Log.e(TAG, "RepositoryObserver: onError: " + e.getMessage());
+            throw new RuntimeException();
         }
 
         @Override

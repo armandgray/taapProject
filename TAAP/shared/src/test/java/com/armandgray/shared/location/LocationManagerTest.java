@@ -68,7 +68,7 @@ public class LocationManagerTest {
     }
 
     /**
-     * Inner Class - State
+     * Inner Class - Wrapper
      */
 
     @Test

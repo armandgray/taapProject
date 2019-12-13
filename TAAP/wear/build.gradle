@@ -5,9 +5,9 @@ android {
 
     defaultConfig {
         applicationId "com.armandgray.wear"
-        minSdkVersion 25
-        targetSdkVersion 28
-        versionCode 28011060 // targetSDK/apkCode(wear: 01)/productVersion
+        minSdkVersion 27
+        targetSdkVersion 27
+        versionCode 27011060 // targetSDK/apkCode(wear: 01)/productVersion
         versionName "1.0.60"
         vectorDrawables.useSupportLibrary true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
