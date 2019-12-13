@@ -33,7 +33,7 @@ public class SharedPreferencesDaoImplTest {
 
     @Before
     public void setUp() {
-        DatabaseManager.State.setDatabaseComponent(mockDatabaseComponent);
+        DatabaseManager.Wrapper.setDatabaseComponent(mockDatabaseComponent);
         testPermissionsSet = new HashSet<>();
 
         testDao = new SharedPreferencesDaoImpl();
@@ -67,6 +67,6 @@ public class SharedPreferencesDaoImplTest {
     public void tearDown() {
         testDao = null;
         testPermissionsSet = null;
-        DatabaseManager.State.setDatabaseComponent(null);
+        DatabaseManager.Wrapper.setDatabaseComponent(null);
     }
 }

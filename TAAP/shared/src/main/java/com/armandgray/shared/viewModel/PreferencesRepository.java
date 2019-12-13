@@ -22,7 +22,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,11 +34,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.core.content.FileProvider;
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.ReplaySubject;
 
@@ -82,28 +79,17 @@ class PreferencesRepository extends TAAPRepository {
         this.databaseManager = databaseManager;
         this.schedulers = schedulers;
 
-        this.databaseManager.stateSubject
-                .switchMap(toSettingsList())
+        DatabaseManager.Wrapper.getDatabaseReady()
+                .andThen(databaseManager.getSettingsDao().all())
+                .toObservable()
                 .compose(schedulers.asyncTask())
                 .subscribe(onSettingsRetrieved());
     }
 
-    private Function<DatabaseManager.State, ObservableSource<List<Setting>>> toSettingsList() {
-        return state -> state == DatabaseManager.State.READY
-                ? databaseManager.getSettingsDao().all().toObservable()
-                : Observable.just(new ArrayList<Setting>());
-    }
-
     private RepositoryObserver<List<Setting>> onSettingsRetrieved() {
         return new RepositoryObserver<List<Setting>>() {
-
             @Override
             public void onNext(List<Setting> list) {
-                if (list.size() == 0) {
-                    Log.d(TAG, "Settings Population: Retrieved Empty List (Check State)");
-                    return;
-                }
-
                 updateSettingsSubscribers(list);
             }
         };

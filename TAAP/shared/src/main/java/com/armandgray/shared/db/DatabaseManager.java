@@ -23,14 +23,11 @@ import dagger.BindsInstance;
 import dagger.Module;
 import dagger.Provides;
 import dagger.Subcomponent;
-import io.reactivex.Single;
-import io.reactivex.SingleObserver;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.subjects.BehaviorSubject;
+import io.reactivex.Completable;
+import io.reactivex.schedulers.Schedulers;
 
 import static com.armandgray.shared.db.GlobalDatabase.DATABASE_NAME;
+import static java.util.Objects.requireNonNull;
 
 /**
  * @see DatabaseManagerImpl
@@ -38,10 +35,15 @@ import static com.armandgray.shared.db.GlobalDatabase.DATABASE_NAME;
 public interface DatabaseManager
         extends TAAPAppComponent.InjectableSubComponent<TAAPAppComponent> {
 
-    enum State {
-        CREATED, POPULATING, READY;
+    final class Wrapper {
+
+        private static Completable databaseReady = Completable.complete();
 
         private static DatabaseManager.Component databaseComponent;
+
+        public static Completable getDatabaseReady() {
+            return databaseReady;
+        }
 
         static void setDatabaseComponent(@NonNull DatabaseManager.Component component) {
             databaseComponent = component;
@@ -53,8 +55,6 @@ public interface DatabaseManager
     }
 
     String TAG = StringHelper.toLogTag(DatabaseManager.class.getSimpleName());
-
-    BehaviorSubject<State> stateSubject = BehaviorSubject.create();
 
     SharedPreferencesDao getSharedPreferencesDao();
 
@@ -94,15 +94,15 @@ public interface DatabaseManager
     @Module
     class ManagerModule {
 
-        private static final int POPULATE_RETRY_TIMES = 3;
-
         private GlobalDatabase globalDatabase;
 
         @Provides
         @DatabaseScope
         @NonNull
         SharedPreferencesDao provideSharedPreferencesDao() {
-            return new SharedPreferencesDaoImpl();
+            SharedPreferencesDaoImpl sharedPreferencesDao = new SharedPreferencesDaoImpl();
+            Wrapper.databaseComponent().inject(sharedPreferencesDao);
+            return sharedPreferencesDao;
         }
 
         @Provides
@@ -112,6 +112,12 @@ public interface DatabaseManager
             globalDatabase = Room.databaseBuilder(context, GlobalDatabase.class, DATABASE_NAME)
                     .addCallback(onDatabaseLifecycleChanged(schedulers))
                     .build();
+
+            // Hack DB open by forcing an initial access.
+            requireNonNull(globalDatabase.drillDao()
+                    .all()
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(drills -> Log.d(TAG, drills.toString())));
 
             return globalDatabase;
         }
@@ -123,90 +129,23 @@ public interface DatabaseManager
                 /**
                  * Method is only called the first time the database is created. Not called on
                  * subsequent launches/ .build() calls unless the underlying database is deleted.
-                 *
-                 * @param db The Database
                  */
                 @Override
                 public void onCreate(@NonNull SupportSQLiteDatabase db) {
                     super.onCreate(db);
 
-                    stateSubject.onNext(State.CREATED);
-                    populateDrillDefaults(schedulers);
-                    populateSettingsDefaults(schedulers);
-                }
-
-                @Override
-                public void onOpen(@NonNull SupportSQLiteDatabase db) {
-                    super.onOpen(db);
-
-                    synchronized (stateSubject) {
-                        if (!stateSubject.hasComplete() && stateSubject.getValue() == null) {
-                            stateSubject.onNext(State.READY);
-                            stateSubject.onComplete();
-                        }
-                    }
+                    Wrapper.databaseReady = Wrapper.databaseReady
+                            .andThen(globalDatabase.drillDao()
+                                    .insert(Drill.Defaults.getDefaults().toArray(new Drill[0]))
+                                    .subscribeOn(schedulers.io())
+                                    .ignoreElement());
+                    Wrapper.databaseReady = Wrapper.databaseReady
+                            .andThen(globalDatabase.settingsDao()
+                                    .insert(Setting.Defaults.getDefaults().toArray(new Setting[0]))
+                                    .subscribeOn(schedulers.io())
+                                    .ignoreElement());
                 }
             };
-        }
-
-        @SuppressWarnings("SimplifyStreamApiCallChains")
-        private void populateDrillDefaults(SchedulerProvider schedulers) {
-            Single.just(Drill.Defaults.getDefaults())
-                    .map(list -> list.stream().toArray(Drill[]::new))
-                    .subscribeOn(schedulers.io())
-                    .retry(POPULATE_RETRY_TIMES)
-                    .subscribe(new DatabasePopulationObserver<Drill[]>() {
-                        @Override
-                        public void onSuccess(Drill[] drills) {
-                            globalDatabase.drillDao().insert(drills)
-                                    .doFinally(onPopulated())
-                                    .subscribe();
-                        }
-                    });
-        }
-
-        @SuppressWarnings("SimplifyStreamApiCallChains")
-        private void populateSettingsDefaults(SchedulerProvider schedulers) {
-            Single.just(Setting.Defaults.getDefaults())
-                    .map(list -> list.stream().toArray(Setting[]::new))
-                    .subscribeOn(schedulers.io())
-                    .retry(POPULATE_RETRY_TIMES)
-                    .subscribe(new DatabasePopulationObserver<Setting[]>() {
-                        @Override
-                        public void onSuccess(Setting[] settings) {
-                            globalDatabase.settingsDao().insert(settings)
-                                    .doFinally(onPopulated())
-                                    .subscribe();
-                        }
-                    });
-        }
-
-        private Action onPopulated() {
-            return () -> {
-                synchronized (stateSubject) {
-                    if (stateSubject.getValue() == State.POPULATING) {
-                        stateSubject.onNext(State.READY);
-                        stateSubject.onComplete();
-                    } else {
-                        stateSubject.onNext(State.POPULATING);
-                    }
-                }
-            };
-        }
-    }
-
-    abstract class DatabasePopulationObserver<T> implements SingleObserver<T> {
-
-        private static final CompositeDisposable disposables = new CompositeDisposable();
-
-        @Override
-        public void onSubscribe(Disposable d) {
-            disposables.add(d);
-        }
-
-        @Override
-        public void onError(Throwable e) {
-            Log.e(DatabaseManager.TAG, String.format("Population Failed: %s", e.getMessage()));
         }
     }
 }

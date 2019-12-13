@@ -33,7 +33,7 @@ public class DatabaseManagerImpl implements DatabaseManager {
                 .managerModule(new ManagerModule())
                 .build();
 
-        DatabaseManager.State.setDatabaseComponent(component);
+        Wrapper.setDatabaseComponent(component);
         component.inject(this);
     }
 

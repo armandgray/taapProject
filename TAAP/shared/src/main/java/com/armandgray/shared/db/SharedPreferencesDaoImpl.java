@@ -13,10 +13,6 @@ public class SharedPreferencesDaoImpl implements SharedPreferencesDao {
     @Inject
     SharedPreferencesWrapper sharedPreferencesWrapper;
 
-    SharedPreferencesDaoImpl() {
-        DatabaseManager.State.databaseComponent().inject(this);
-    }
-
     @Override
     public boolean hasRequestedPermission(DangerousPermission permission) {
         return sharedPreferencesWrapper.getRequestedPermissions().contains(permission.getKey());

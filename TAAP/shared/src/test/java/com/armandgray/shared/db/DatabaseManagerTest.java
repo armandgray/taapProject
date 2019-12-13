@@ -71,28 +71,28 @@ public class DatabaseManagerTest {
     }
 
     /**
-     * Inner Class - State
+     * Inner Class - Wrapper
      */
 
     @Test
     public void testStateEnum_Instances() {
-        DatabaseManager.State[] values = DatabaseManager.State.values();
+        DatabaseManager.Wrapper[] values = DatabaseManager.Wrapper.values();
         Assert.assertThat(values.length, is(3));
         Assert.assertThat(Arrays.asList(values), containsInAnyOrder(
-                DatabaseManager.State.CREATED,
-                DatabaseManager.State.POPULATING,
-                DatabaseManager.State.READY));
+                DatabaseManager.Wrapper.CREATED,
+                DatabaseManager.Wrapper.POPULATING,
+                DatabaseManager.Wrapper.READY));
     }
 
     @Test
     public void testStateEnum_DatabaseComponent() {
-        Assert.assertThat(DatabaseManager.State.databaseComponent(), is(nullValue()));
+        Assert.assertThat(DatabaseManager.Wrapper.databaseComponent(), is(nullValue()));
     }
 
     @Test
     public void testStateEnum_SetDatabaseComponent() {
-        DatabaseManager.State.setDatabaseComponent(mockDatabaseComponent);
-        Assert.assertThat(DatabaseManager.State.databaseComponent(), is(mockDatabaseComponent));
+        DatabaseManager.Wrapper.setDatabaseComponent(mockDatabaseComponent);
+        Assert.assertThat(DatabaseManager.Wrapper.databaseComponent(), is(mockDatabaseComponent));
     }
 
     /**
@@ -173,6 +173,6 @@ public class DatabaseManagerTest {
     @SuppressWarnings("ConstantConditions")
     @After
     public void tearDown() {
-        DatabaseManager.State.setDatabaseComponent(null);
+        DatabaseManager.Wrapper.setDatabaseComponent(null);
     }
 }
