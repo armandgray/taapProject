@@ -69,7 +69,7 @@ public class Performance implements Comparable<Performance> {
         this.total = 0;
         this.reps = drill.getReps();
         this.goal = drill.getGoal();
-        this.location = new WorkoutLocation("YMCA Embarcadero");
+        this.location = new WorkoutLocation("None");
         captureStartTime();
         captureEndTime();
     }

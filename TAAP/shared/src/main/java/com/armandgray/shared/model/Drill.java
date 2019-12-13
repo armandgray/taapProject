@@ -126,10 +126,16 @@ public class Drill {
     public enum Type {
 
         SHOOTING(R.drawable.ic_dribbble_white_48dp),
+        MID_RANGE(R.drawable.ic_looks_two_white_24dp),
+        THREE_RANGE(R.drawable.ic_looks_three_white_24dp),
+        NBA_RANGE(R.drawable.ic_looks_white_24dp),
         FUNDAMENTALS(R.drawable.ic_key_white_48dp);
 
         public static final List<Type> SHOOTING_ONLY = asList(SHOOTING);
         public static final List<Type> SHOOTING_FUNDAMENTALS = asList(SHOOTING, FUNDAMENTALS);
+        public static final List<Type> SHOOTING_15FT = asList(SHOOTING, MID_RANGE);
+        public static final List<Type> SHOOTING_THREES = asList(SHOOTING, THREE_RANGE);
+        public static final List<Type> SHOOTING_NBA = asList(SHOOTING, NBA_RANGE);
 
         private final int imageResId;
 
@@ -168,39 +174,39 @@ public class Drill {
         private static final Defaults DEFAULTS;
 
         static {
-            DEFAULT = new Drill("Free Throws", R.drawable.ic_dribbble_white_48dp, Type.SHOOTING_FUNDAMENTALS);
+            DEFAULT = new Drill("Free Throws", R.drawable.ic_vertical_align_bottom_white_24dp, Type.SHOOTING_FUNDAMENTALS);
             DEFAULTS = new Defaults();
         }
 
 
         private Defaults() {
-            int drawable = R.drawable.ic_dribbble_white_48dp;
-            List<Type> fundamentals = Type.SHOOTING_FUNDAMENTALS;
-            List<Type> shootingOnly = Type.SHOOTING_ONLY;
-
             // Fundamentals
             this.add(DEFAULT);
-            this.add(new Drill("Left Finesse", drawable, fundamentals));
-            this.add(new Drill("Top Finesse", drawable, fundamentals));
-            this.add(new Drill("Right Finesse", drawable, fundamentals));
+            this.add(new Drill("Left Finesse", R.drawable.ic_dribbble_white_48dp, Type.SHOOTING_FUNDAMENTALS));
+            this.add(new Drill("Top Finesse", R.drawable.ic_dribbble_white_48dp, Type.SHOOTING_FUNDAMENTALS));
+            this.add(new Drill("Right Finesse", R.drawable.ic_dribbble_white_48dp, Type.SHOOTING_FUNDAMENTALS));
+            // AdHoc
+            this.add(new Drill("1-Man Shooting 15ft", R.drawable.ic_looks_one_white_24dp, Type.SHOOTING_15FT));
+            this.add(new Drill("1-Man Shooting 3s", R.drawable.ic_looks_two_white_24dp, Type.SHOOTING_NBA));
+            this.add(new Drill("1-Man Shooting NBA", R.drawable.ic_looks_white_24dp, Type.SHOOTING_NBA));
             // 15fts
-            this.add(new Drill("Left-Corner 15ft", drawable, shootingOnly));
-            this.add(new Drill("Left-Wing 15ft", drawable, shootingOnly));
-            this.add(new Drill("Top 15ft", drawable, shootingOnly));
-            this.add(new Drill("Right-Wing 15ft", drawable, shootingOnly));
-            this.add(new Drill("Right-Corner 15ft", drawable, shootingOnly));
+            this.add(new Drill("Left-Corner 15ft", R.drawable.ic_looks_two_white_24dp, Type.SHOOTING_15FT));
+            this.add(new Drill("Left-Wing 15ft", R.drawable.ic_looks_two_white_24dp, Type.SHOOTING_15FT));
+            this.add(new Drill("Top 15ft", R.drawable.ic_looks_two_white_24dp, Type.SHOOTING_15FT));
+            this.add(new Drill("Right-Wing 15ft", R.drawable.ic_looks_two_white_24dp, Type.SHOOTING_15FT));
+            this.add(new Drill("Right-Corner 15ft", R.drawable.ic_looks_two_white_24dp, Type.SHOOTING_15FT));
             // 3s
-            this.add(new Drill("Left-Corner 3s", drawable, shootingOnly));
-            this.add(new Drill("Left-Wing 3s", drawable, shootingOnly));
-            this.add(new Drill("Top 15ft", drawable, shootingOnly));
-            this.add(new Drill("Right-Wing 3s", drawable, shootingOnly));
-            this.add(new Drill("Right-Corner 3s", drawable, shootingOnly));
+            this.add(new Drill("Left-Corner 3s", R.drawable.ic_looks_three_white_24dp, Type.SHOOTING_THREES));
+            this.add(new Drill("Left-Wing 3s", R.drawable.ic_looks_three_white_24dp, Type.SHOOTING_THREES));
+            this.add(new Drill("Top 3s", R.drawable.ic_looks_three_white_24dp, Type.SHOOTING_THREES));
+            this.add(new Drill("Right-Wing 3s", R.drawable.ic_looks_three_white_24dp, Type.SHOOTING_THREES));
+            this.add(new Drill("Right-Corner 3s", R.drawable.ic_looks_three_white_24dp, Type.SHOOTING_THREES));
             // NBA
-            this.add(new Drill("Left-Corner NBA", drawable, shootingOnly));
-            this.add(new Drill("Left-Wing NBA", drawable, shootingOnly));
-            this.add(new Drill("Top 15ft", drawable, shootingOnly));
-            this.add(new Drill("Right-Wing NBA", drawable, shootingOnly));
-            this.add(new Drill("Right-Corner NBA", drawable, shootingOnly));
+            this.add(new Drill("Left-Corner NBA", R.drawable.ic_looks_white_24dp, Type.SHOOTING_NBA));
+            this.add(new Drill("Left-Wing NBA", R.drawable.ic_looks_white_24dp, Type.SHOOTING_NBA));
+            this.add(new Drill("Top NBA", R.drawable.ic_looks_white_24dp, Type.SHOOTING_NBA));
+            this.add(new Drill("Right-Wing NBA", R.drawable.ic_looks_white_24dp, Type.SHOOTING_NBA));
+            this.add(new Drill("Right-Corner NBA", R.drawable.ic_looks_white_24dp, Type.SHOOTING_NBA));
         }
 
         @NonNull
